@@ -1,0 +1,111 @@
+<app-page-title [Title]="'Grid View'" [pageTitle]="'Events'"></app-page-title>
+
+<div>
+  <div class="flex flex-wrap items-center gap-5">
+    <h6 class="grow">Event Listings (<span>{{gridData.length}}</span>)</h6>
+    <div class="flex items-center gap-2 shrink-0">
+      <div class="dropdown shrink-0">
+        <button x-ref="button" domixDropdownToggle [dropdownMenu]="dropdown3" type="button" title="dropdown-button" class="btn btn-sub-gray btn-icon btn-icon-text">
+          <lucide-angular name="SlidersHorizontal" class="size-4"></lucide-angular>
+        </button>
+
+        <div class="!fixed p-2 !w-52 dropdown-menu dropdown-right" #dropdown3>
+          <ul>
+            <li>
+              <a href="javascript: void(0);" x-on:click="init , sort(null) " class="dropdown-item">
+                No Sorting
+              </a>
+            </li>
+            <li>
+              <a href="javascript: void(0);" (click)="sort('desc')" class="dropdown-item">
+                Alphabetical (A -> Z)
+              </a>
+            </li>
+            <li>
+              <a href="javascript: void(0);" (click)="sort('asc')" class="dropdown-item">
+                Reverse Alphabetical (Z -> A)
+              </a>
+            </li>
+            <li>
+              <a href="javascript: void(0);" (click)="statusSort()" class="dropdown-item">
+                Status
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <button class="btn btn-primary shrink-0" data-modal-target="" (click)="addEventModal(null,null)">
+        <lucide-angular name="plus" class="inline-block size-4"></lucide-angular><span class="align-baseline">Add New
+          Event</span>
+      </button>
+    </div>
+  </div>
+
+  <div class="grid grid-cols-1 mt-5 md:grid-cols-2 xl:grid-cols-3 gap-x-space">
+
+    <ng-container *ngFor="let event of displayedData; let i = index">
+      <div class="card">
+        <div class="card-body">
+          <div class="flex items-center gap-3">
+            <img [src]="event.image" alt="" class="rounded-full size-12 shrink-0">
+            <div class="grow">
+              <h6 class="mb-1"><a href="javascript:void(0);">{{event.username}}</a></h6>
+              <p class="text-sm text-gray-500 dark:text-dark-500">{{formatDateTime(event.date, event.time)}}
+              </p>
+            </div>
+            <div class="dropdown shrink-0">
+              <button type="button" title="dropdown-button" class="flex items-center text-gray-500 dark:text-dark-500" domixDropdownToggle [dropdownMenu]="dropdown2">
+                <i class="ri-more-fill"></i>
+              </button>
+              <div class="!fixed p-2 dropdown-menu" #dropdown2>
+                <ul>
+                  <li>
+                    <a routerLink="/apps-event-overview" class="cursor-pointer dropdown-item">
+                      <i class="align-middle ltr:mr-2 rtl:ml-2 ri-eye-line"></i> <span>Overview</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="javascript: void(0);" (click)="addEventModal(event,i)" class="dropdown-item">
+                      <i class="align-middle ltr:mr-2 rtl:ml-2 ri-pencil-line"></i> <span>Edit</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="javascript: void(0);" (click)="deleteEvent(i)" class="dropdown-item">
+                      <i class="align-middle ltr:mr-2 rtl:ml-2 ri-delete-bin-line"></i> <span>Delete</span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="mt-5">
+            <img [src]="event.mainImage" alt="" class="object-cover w-full h-48 rounded-md">
+          </div>
+          <div class="flex gap-3 mt-5">
+            <div>
+              <div class="flex flex-col items-center justify-center mx-auto mb-2.5 border bg-red-500/20 rounded-md border-red-500/20 size-16 text-red-500">
+                <p class="mb-0.5">{{getWeekday(event.date)}}</p>
+                <h3 class="leading-none">{{getWeekday(event.date,true)}}</h3>
+              </div>
+              <button type="button" (click)="bookEventModal(event)" class="btn btn-primary">Book</button>
+            </div>
+            <div>
+              <h6 class="mb-1"><a href="javascript:void(0);" class="text-current link link-primary">{{event.name}}</a>
+              </h6>
+              <p class="mb-2 text-gray-500 dark:text-dark-500"><span>{{formatDate(event.date)}}</span><span class="ltr:pl-2 rtl:pr-2 ltr:ml-1.5 rtl:mr-1.5 ltr:border-l rtl:border-r border-gray-200 dark:border-dark-800">{{event.location}}</span>
+              </p>
+              <p class="mb-1 text-gray-500 dark:text-dark-500">Contributors</p>
+              <div class="flex mx-3 -space-x-3 grow rtl:space-x-reverse">
+                <ng-container *ngFor="let contributor of event.contributors">
+                  <a href="javascript:void(0);" class="transition duration-300 ease-linear hover:z-10" title="avatar link"><img class="border-2 border-white rounded-full size-8 dark:border-dark-900" [src]="contributor.image" alt=""></a>
+                </ng-container>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+  <app-domix-pagination [currentPage]="currentPage" [totalPages]="totalPages" [showingStart]="showingStart" [showingEnd]="showingEnd" [totalResults]="gridData.length" (pageChanged)="onPageChange($event)">
+  </app-domix-pagination>
+</div>

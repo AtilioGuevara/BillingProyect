@@ -1,0 +1,116 @@
+<app-page-title [Title]="'Form Wizard'" [pageTitle]="'Basic Wizard'"></app-page-title>
+
+<div class="grid grid-cols-12">
+  <div class="col-span-12 card">
+    <div class="card-header">
+      <h6 class="card-title">Multi Step Form</h6>
+    </div>
+    <div class="card-body">
+      <div>
+        <div class="w-full lg:max-w-[600px] mx-auto">
+          <div x-cloak class="card">
+            <div class="card-body">
+              <!-- Complate section -->
+              <div *ngIf="step === 'complete'">
+                <div class="flex items-center justify-between text-center">
+                  <div>
+                    <lucide-angular name="CircleCheckBig" class="mx-auto my-4 text-green-500 fill-green-500/10 size-8">
+                    </lucide-angular>
+                    <h4 class="mb-2">Registration Success</h4>
+
+                    <div class="mb-8 text-gray-500 md:mx-10 dark:text-dark-500">
+                      Thank you. We have sent you an email to info&#64;srbthemes.com. Please click the link in the
+                      message to activate your account.
+                    </div>
+
+                    <button (click)="step = 1" class="btn btn-sub-gray">
+                      <lucide-angular name="home" class="inline-block -mt-1 ltr:mr-1 rtl:ml-1 size-4"></lucide-angular>
+                      Back to home
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+
+              <!-- Top Navigation -->
+              <div class="py-4 border-b border-gray-200 dark:border-dark-800" *ngIf="step !== 'complete'">
+                <h6 class="mb-1 text-xs text-gray-500 uppercase dark:text-dark-500">Step: {{step}} of 3</h6>
+                <div class="flex flex-col md:flex-row md:items-center md:justify-between">
+                  <div class="flex-1">
+                    <div *ngIf="step === 1">
+                      <h5>Your Profile</h5>
+                    </div>
+
+                    <div *ngIf="step === 2">
+                      <h5>Your Password</h5>
+                    </div>
+
+                    <div *ngIf="step === 3">
+                      <h5>Tell me about yourself</h5>
+                    </div>
+                  </div>
+
+                  <div class="flex items-center md:w-64">
+                    <div class="w-full bg-gray-200 rounded-full dark:bg-dark-800 rtl:ml-2 ltr:mr-2">
+                      <div class="h-2 text-xs leading-none text-center text-white bg-green-500 rounded-full" [ngStyle]="{'width': (step / 3 * 100) + '%'}"></div>
+                    </div>
+                    <h6 class="w-10 text-xs text-gray-500 dark:text-dark-500"> {{ getWidthPercentage() }} </h6>
+                  </div>
+                </div>
+              </div>
+              <!-- /Top Navigation -->
+
+              <!-- Step Content -->
+              <div class="pt-10 pb-5" *ngIf="step !== 'complete'">
+                <div *ngIf="step === 1">
+                  <app-profile-step (currantStepIsVaild)="currantStepIsVaild($event)"></app-profile-step>
+                </div>
+                <div *ngIf="step === 2">
+                  <app-password-step (currantStepIsVaild)="currantStepIsVaild($event)"></app-password-step>
+                </div>
+                <div *ngIf="step === 3">
+                  <app-additional-info-step (currantStepIsVaild)="currantStepIsVaild($event)">
+                  </app-additional-info-step>
+                </div>
+                <div *ngIf="step === 4">
+                  <app-complete-step></app-complete-step>
+                </div>
+              </div>
+
+              <!-- Bottom Navigation -->
+              <div *ngIf="step !== 'complete'">
+                <div class="max-w-3xl">
+                  <div class="flex justify-between">
+                    <div class="w-1/2">
+                      <button *ngIf="step > 1" (click)="prev()" class="btn btn-sub-gray">
+                        <lucide-angular name="MoveLeft" class="mr-1 ltr:inline-block rtl:hidden size-4">
+                        </lucide-angular>
+                        <lucide-angular name="MoveRight" class="ml-1 rtl:inline-block ltr:hidden size-4">
+                        </lucide-angular>
+                        Previous
+                      </button>
+                    </div>
+
+                    <div class="w-1/2 text-right">
+                      <button *ngIf="step < 3" (click)="next()" class="btn btn-primary">
+                        Next
+                        <lucide-angular name="MoveRight" class="ml-1 ltr:inline-block rtl:hidden size-4">
+                        </lucide-angular>
+                        <lucide-angular name="MoveLeft" class="mr-1 rtl:inline-block ltr:hidden size-4">
+                        </lucide-angular>
+                      </button>
+
+                      <button *ngIf="step === 3" (click)="complete()" class="btn btn-green">Complete</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>

@@ -1,0 +1,153 @@
+<app-page-title [pageTitle]="'Ecommerce'" [Title]="'Shop Cart'"></app-page-title>
+
+<div class="grid grid-cols-12 gap-5">
+  <div class="col-span-12 xl:col-span-8">
+    <div class="flex items-center gap-5 mb-5">
+      <h6 class="card-title grow">Shopping Cart</h6>
+      <div class="flex items-center justify-center shrink-0">
+        <p class="text-gray-500 dark:text-dark-500 shrink-0">
+          <span class="font-semibold text-red-500">
+            {{ _minutes }}:{{ _seconds}}
+          </span>
+          left until the end of the process
+        </p>
+      </div>
+    </div>
+
+    <ng-container *ngFor="let product of formArray.controls;let i = index;">
+      <div [formGroup]="product">
+        <div class="card">
+          <div class="card-body">
+            <button class="float-end" (click)="removeProductDetail(product.get('pId')?.value ,i)">
+              <i class="link size-4 link-red ri-close-line"></i>
+            </button>
+            <div class="gap-5 sm:flex">
+              <div class="w-full sm:w-[300px] flex-shrink-0 bg-gray-100 dark:bg-dark-850 rounded-md">
+                <img [src]="product.get('image')?.value" alt="">
+              </div>
+              <div class="mt-5 sm:mt-0">
+                <span class="badge badge-gray">{{product.get('category')?.value}}</span>
+                <h6 class="mt-2 mb-3"><a href="javascript:void(0);">{{product.get('productName')?.value}}</a>
+                </h6>
+                <div class="grid grid-cols-2 gap-space">
+                  <div>
+                    <h6>Select Colors</h6>
+                    <div class="flex items-center gap-2 mt-2 grow">
+                      <ng-container *ngFor="let color of product.get('colores')?.value">
+                        <a href="javascript: void(0);" class="flex items-center justify-center text-white border-2 border-white rounded-full dark:border-dark-900 outline-1 outline size-6 group/item bg-{{color}}-500 outline-{{color}}-500/20
+                        {{color === 'gray' ? 'dark:outline-gray-800' : ''}}" (click)="updateColor(product.get('pId')?.value,color)">
+                          <lucide-angular name="check" *ngIf="color === product.get('selectedColor')?.value"></lucide-angular>
+                        </a>
+                      </ng-container>
+                    </div>
+                  </div>
+                  <div>
+                    <h6>Select Size</h6>
+                    <div class="flex items-center gap-2 mt-3 font-medium shrink-0">
+                      <ng-container *ngFor="let size of product.get('size')?.value">
+                        <a href="javascript:void(0);" class="text-gray-500 dark:text-dark-500 [&.active]:text-green-500" [ngClass]="{'active': product.get('selectedSize')?.value === size}" (click)="updateSize(product.get('pId')?.value,size)">{{size}}</a>
+                      </ng-container>
+                    </div>
+                  </div>
+                </div>
+                <h5 class="flex items-center gap-2 mt-4">
+                  <span>
+                    {{product.get('displayedPrice')?.value}}
+                  </span>
+                  <small class="font-normal text-gray-500 line-through">
+                    $29.49
+                  </small>
+                </h5>
+
+                <div class="mt-5">
+                  <div class="flex items-center w-32 p-1 text-center border border-gray-200 rounded-md dark:border-dark-800">
+                    <button class="flex items-center justify-center rounded-md text-primary-500 minus size-8" (click)="decrementCount(i)">
+                      <i class="size-4 ri-subtract-line"></i>
+                    </button>
+                    <input type="text" formControlName="qty" class="h-8 p-0 text-center border-0 form-input" readonly>
+                    <button class="flex items-center justify-center rounded-md text-primary-500 plus size-8" (click)="incrementCount(i)">
+                      <i class="size-4 ri-add-line"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+
+  <div class="col-span-12 xl:col-span-4" *ngIf="summary">
+    <div class="sticky mb-5 top-24">
+      <div class="card">
+        <div class="card-header">
+          <h6 class="card-title">Order Summary</h6>
+        </div>
+        <div class="card-body">
+          <div class="mb-4">
+            <label for="discountCode" class="form-label">Discount Code</label>
+            <input type="text" id="discountCode" class="form-input" placeholder="Enter coupon code">
+          </div>
+          <table class="table flush">
+            <tr>
+              <td class="font-semibold">Sub Amount</td>
+              <td>$<span> {{summary.subtotal }}</span></td>
+            </tr>
+            <tr>
+              <td class="font-semibold">Vat Amount (6%)</td>
+              <td>$<span>{{summary.vat}}</span></td>
+            </tr>
+            <tr>
+              <td class="font-semibold">Discount (10%)</td>
+              <td>-$<span>{{summary.discount}}</span></td>
+            </tr>
+            <tr>
+              <td class="font-semibold">Shipping Charge</td>
+              <td>$<span>{{summary.shippingCharge}}</span></td>
+            </tr>
+            <tr class="border-t border-gray-200 dark:border-dark-800">
+              <td class="font-semibold">Total Amount</td>
+              <td>$<span>{{summary.total}}</span></td>
+            </tr>
+          </table>
+          <div class="my-4">
+            <a href="javascript:void(0);" [routerLink]="['/apps-ecommerce-checkout']" class="w-full btn btn-primary">Checkout Now</a>
+          </div>
+          <p class="text-center text-gray-500 dark:text-dark-500">By clicking the "checkout order" button, you agree to
+            the terms of the public offers.</p>
+        </div>
+      </div>
+      <div class="flex gap-4 mb-5">
+        <div class="flex items-center justify-center bg-gray-100 rounded-md size-12 dark:bg-dark-850 shrink-0">
+          <lucide-angular name="truck" class="text-gray-500 fill-gray-200 dark:text-dark-500 dark:fill-dark-850"></lucide-angular>
+        </div>
+        <div>
+          <h6 class="mb-1">Free delivery on May 24 </h6>
+          <p class="text-gray-500 dark:text-dark-500">To the address, by courier - with fitting, free of charge for
+            purchases over $500.</p>
+        </div>
+      </div>
+      <div class="flex gap-4 mb-5">
+        <div class="flex items-center justify-center bg-gray-100 rounded-md size-12 dark:bg-dark-850 shrink-0">
+          <lucide-angular name="shield-check" class="text-gray-500 dark:text-dark-500 fill-gray-200 dark:fill-dark-850"></lucide-angular>
+        </div>
+        <div>
+          <h6 class="mb-1">Safety</h6>
+          <p class="text-gray-500 dark:text-dark-500">The security of payments is guaranteed through the use of the SSL
+            protocol. Your bank card details are securely protected during online transactions.</p>
+        </div>
+      </div>
+      <div class="flex gap-4">
+        <div class="flex items-center justify-center bg-gray-100 rounded-md size-12 dark:bg-dark-850 shrink-0">
+          <lucide-angular name="percent" class="text-gray-500 dark:text-dark-500 fill-gray-200 dark:fill-dark-850"></lucide-angular>
+        </div>
+        <div>
+          <h6 class="mb-1">5% discount</h6>
+          <p class="text-gray-500 dark:text-dark-500">When paying online, you receive a 5% discount on your next
+            purchase.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

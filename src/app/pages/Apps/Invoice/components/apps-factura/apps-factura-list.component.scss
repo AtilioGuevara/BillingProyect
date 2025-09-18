@@ -1,0 +1,25 @@
+.factura-list {
+  background: #fff;
+  border-radius: 1rem;
+  box-shadow: 0 2px 8px rgba(44, 62, 80, 0.08);
+  padding: 2rem;
+  max-width: 700px;
+  margin: 2rem auto;
+  color: #232946;
+}
+.factura-list h2 {
+  color: #1a237e;
+  margin-bottom: 1.5rem;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+th, td {
+  padding: 0.75rem;
+  border-bottom: 1px solid #e0e0e0;
+}
+th {
+  background: #5f2a99;
+  color: #fff;
+}

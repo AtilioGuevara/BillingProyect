@@ -1,0 +1,68 @@
+<div id="addAppointmentModal" class="modal">
+  <div class="modal-wrap modal-center">
+    <div class="modal-header">
+      <h6 class="modal-title">{{!config ? 'Add' : 'Edit' }} Appointment</h6>
+      <button data-modal-close="addAppointmentModal" class="link link-red" (click)="close()">
+        <lucide-angular name="x" class="size-5"></lucide-angular>
+      </button>
+    </div>
+    <div class="modal-content" [formGroup]="fromGroup">
+      <form action="javascript: void(0);">
+        <div class="grid grid-cols-12 gap-space">
+          <div class="col-span-12">
+            <label for="TreatmentTypeInput" class="form-label">Appointment Name <span
+                class="text-red-500">*</span></label>
+            <input type="text" id="TreatmentTypeInput" class="form-input" placeholder="Enter Appointment name"
+              formControlName="treatmentType">
+            <span *ngIf="fromGroup.get('treatmentType')?.hasError('required')" class="text-red-500"> This Filed is
+              Required</span>
+          </div>
+          <div class="col-span-6">
+            <label for="ReasonCondition Input" class="form-label">Reason Condition <span
+                class="text-red-500">*</span></label>
+            <input type="text" id="ReasonCondition Input" class="form-input" placeholder="Reason"
+              formControlName="reasonCondition">
+            <span *ngIf="fromGroup.get('reasonCondition ')?.hasError('required')" class="text-red-500"> This Filed is
+              Required</span>
+          </div>
+          <div class="col-span-6">
+            <label for="Notes Input" class="form-label">Notes <span class="text-red-500">*</span></label>
+            <input type="text" id="Notes Input" class="form-input" placeholder="Enter Notes " formControlName="notes">
+            <span *ngIf="fromGroup.get('notes')?.hasError('required')" class="text-red-500"> This Filed is
+              Required</span>
+          </div>
+          <div class="col-span-12">
+            <label for="DoctorNameInput" class="form-label">Prescribing Doctor <span
+                class="text-red-500">*</span></label>
+            <ng-select class="filter-ng-select" [items]="doctorOptions" bindLabel="label" bindValue="value"
+              placeholder="Select doctor Type" formControlName="doctor">
+            </ng-select>
+            <span *ngIf="fromGroup.get('doctor')?.hasError('required')" class="text-red-500"> This Filed is
+              Required</span>
+          </div>
+          <div class="col-span-12">
+            <label for="StatusNameInput" class="form-label">Prescribing Status <span
+                class="text-red-500">*</span></label>
+            <ng-select class="filter-ng-select" [items]="statusOptions" bindLabel="label" bindValue="value"
+              placeholder="Select status Type" formControlName="status">
+            </ng-select>
+            <span *ngIf="fromGroup.get('status')?.hasError('required')" class="text-red-500"> This Filed is
+              Required</span>
+          </div>
+          <div class="col-span-12">
+            <div class="flex items-center justify-end gap-2">
+              <button type="button" class="btn btn-active-red" (click)="close()">
+                <lucide-angular name="x" class="inline-block size-4"></lucide-angular> <span
+                  class="align-baseline">Close</span>
+              </button>
+              <a href="javascript: void(0);" class="btn btn-primary" (click)="closeEventModal()">
+                <lucide-angular name="Plus" class="inline-block mb-1 align-middle size-4"></lucide-angular>
+                {{!config ? 'Add' : 'Edit' }} Appointment
+              </a>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

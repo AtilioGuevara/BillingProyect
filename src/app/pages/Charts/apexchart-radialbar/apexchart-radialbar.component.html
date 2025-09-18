@@ -1,0 +1,78 @@
+<app-page-title [Title]="'Radialbar Charts'" [pageTitle]="'Apexcharts'"></app-page-title>
+
+<div class="grid grid-cols-12 gap-x-space">
+  <div class="col-span-12 md:col-span-6 card">
+    <div class="card-header">
+      <h6 class="card-title">Basic</h6>
+    </div>
+    <div class="card-body">
+      <app-domix-charts [series]="radialChart.series" [chartOptions]="radialChart.chartOptions">
+      </app-domix-charts>
+    </div>
+  </div>
+
+  <div class="col-span-12 md:col-span-6 card">
+    <div class="card-header">
+      <h6 class="card-title">Multiple</h6>
+    </div>
+    <div class="card-body">
+      <app-domix-charts [series]="radialBarChart.series" [chartOptions]="radialBarChart.chartOptions">
+      </app-domix-charts>
+    </div>
+  </div>
+
+  <div class="col-span-12 md:col-span-6 card">
+    <div class="card-header">
+      <h6 class="card-title">Custom Angle Circle</h6>
+    </div>
+    <div class="card-body">
+      <app-domix-charts [series]="customAngleRadialbarChart.series"
+        [chartOptions]="customAngleRadialbarChart.chartOptions">
+      </app-domix-charts>
+    </div>
+  </div>
+
+  <div class="col-span-12 md:col-span-6 card">
+    <div class="card-header">
+      <h6 class="card-title">Gradient</h6>
+    </div>
+    <div class="card-body">
+      <app-domix-charts [series]="gradientRadialbarChart.series" [chartOptions]="gradientRadialbarChart.chartOptions">
+      </app-domix-charts>
+    </div>
+  </div>
+
+  <div class="col-span-12 md:col-span-6 card">
+    <div class="card-header">
+      <h6 class="card-title">Radialbars with Image</h6>
+    </div>
+    <div class="card-body">
+      <app-domix-charts [series]="imageRadialbarChart.series" [chartOptions]="imageRadialbarChart.chartOptions">
+      </app-domix-charts>
+    </div>
+  </div>
+
+  <div class="col-span-12 md:col-span-6 card">
+    <div class="card-header">
+      <h6 class="card-title">Stroked Gauge</h6>
+    </div>
+    <div class="card-body">
+      <div dir="ltr">
+        <app-domix-charts [series]="strokedGaugeRadialbarChart.series"
+          [chartOptions]="strokedGaugeRadialbarChart.chartOptions" class="!min-h-full">
+        </app-domix-charts>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-span-12 md:col-span-6 card">
+    <div class="card-header">
+      <h6 class="card-title">Semi Circle Gauge</h6>
+    </div>
+    <div class="card-body">
+      <app-domix-charts [series]="semiGaugeRadialbarChart.series" [chartOptions]="semiGaugeRadialbarChart.chartOptions">
+      </app-domix-charts>
+    </div>
+  </div>
+
+</div>

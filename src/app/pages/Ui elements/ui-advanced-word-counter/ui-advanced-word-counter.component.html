@@ -1,0 +1,19 @@
+<app-page-title [pageTitle]="'Ui'" [Title]="'Counter'"></app-page-title>
+
+<div class="grid grid-cols-12 gap-x-space">
+    <div class="col-span-12 card">
+        <div class="card-header">
+            <h6 class="card-title">Simple Word Counter</h6>
+        </div>
+        <div class="card-body">
+            <textarea name="search" id="words" rows="10" [(ngModel)]="search" (input)="onInputChange()" class="h-auto form-input"></textarea>
+            <p class="mt-4">
+                Word counts: <span class="font-semibold text-blue-500">{{ wordCount }}</span>
+            </p>
+            <p>
+                Character count: <span class="font-semibold text-blue-500">{{ charCount }}</span>
+                (without spaces)
+            </p>
+        </div>
+    </div>
+</div>

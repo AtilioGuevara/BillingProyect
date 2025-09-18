@@ -1,0 +1,163 @@
+<app-page-title [Title]="'Charts'" [pageTitle]="'Widgets'"></app-page-title>
+
+<div class="grid grid-cols-12 gap-x-space">
+  <div class="col-span-12 xl:col-span-6 2xl:col-span-4 card">
+    <div class="card-body">
+      <div class="flex gap-3 mb-3">
+        <div
+          class="flex items-center justify-center text-red-500 border-2 border-red-400 rounded-full ring-1 ring-offset-2 dark:ring-offset-dark-900 ring-red-500/20 size-12">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="activity"
+            class="lucide lucide-activity fill-red-500/10">
+            <path
+              d="M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.49 12H2">
+            </path>
+          </svg>
+        </div>
+        <div>
+          <p class="mb-1 text-gray-500 dark:text-dark-500">Ads Revenue</p>
+          <h5>$<span class="counters" [countUp]="145" [options]="{decimalPlaces:0}">0</span>M
+          </h5>
+        </div>
+      </div>
+      <app-domix-charts [series]="adsRevenueChart.series" [chartOptions]="adsRevenueChart.chartOptions">
+      </app-domix-charts>
+
+    </div>
+  </div>
+
+  <div class="col-span-12 xl:col-span-6 2xl:col-span-4 card">
+    <div class="card-body">
+      <div class="flex gap-3 mb-3">
+        <div
+          class="flex items-center justify-center border-2 rounded-full text-primary-500 ring-1 ring-offset-2 dark:ring-offset-dark-900 ring-primary-500/20 size-12 border-primary-500">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+            data-lucide="circle-arrow-up" class="lucide lucide-circle-arrow-up fill-primary-500/10">
+            <circle cx="12" cy="12" r="10"></circle>
+            <path d="m16 12-4-4-4 4"></path>
+            <path d="M12 16V8"></path>
+          </svg>
+        </div>
+        <div>
+          <p class="mb-1 text-gray-500 dark:text-dark-500">Sales Revenue</p>
+          <h5>$<span class="counters" [countUp]="145" [options]="{decimalPlaces:0}">0</span>M
+          </h5>
+        </div>
+      </div>
+      <app-domix-charts [series]="lineChart.series" [chartOptions]="lineChart.chartOptions">
+      </app-domix-charts>
+    </div>
+  </div>
+
+  <div class="col-span-12 xl:col-span-6 2xl:col-span-4 card">
+    <div class="card-body">
+      <div class="flex gap-3 mb-3">
+        <div
+          class="flex items-center justify-center text-purple-500 border-2 border-purple-400 rounded-full ring-1 ring-offset-2 dark:ring-offset-dark-900 ring-purple-500/20 size-12">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="aperture"
+            class="lucide lucide-aperture fill-purple-500/10">
+            <circle cx="12" cy="12" r="10"></circle>
+            <path d="m14.31 8 5.74 9.94"></path>
+            <path d="M9.69 8h11.48"></path>
+            <path d="m7.38 12 5.74-9.94"></path>
+            <path d="M9.69 16 3.95 6.06"></path>
+            <path d="M14.31 16H2.83"></path>
+            <path d="m16.62 12-5.74 9.94"></path>
+          </svg>
+        </div>
+        <div>
+          <p class="mb-1 text-gray-500 dark:text-dark-500">Ads Revenue</p>
+          <h5>$<span class="counters" [countUp]="145" [options]="{decimalPlaces:0}">0</span>M
+          </h5>
+        </div>
+      </div>
+      <app-domix-charts [series]="adsRevenueChart2.series" [chartOptions]="adsRevenueChart2.chartOptions">
+      </app-domix-charts>
+    </div>
+  </div>
+
+
+  <div class="col-span-12 md:col-span-6 2xl:col-span-4">
+    <div class="card">
+      <div class="flex items-center gap-3 card-header">
+        <h6 class="card-title grow">Total Sales</h6>
+        <div class="dropdown">
+          <button domixDropdownToggle [dropdownMenu]="dropdown1" type="button"
+            class="flex px-2 py-1 text-xs border-gray-200 dark:border-dark-800 link link-red btn">
+            Last Week
+            <svg :class="{ 'transform rotate-180': open }" class="transition-transform duration-300 size-4"
+              viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd"
+                d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                clip-rule="evenodd" />
+            </svg>
+          </button>
+
+          <div #dropdown1 class="!fixed p-2 dropdown-menu hidden" dropdown-position="right">
+            <a href="javascript:void(0);" class="dropdown-item">
+              Last Week
+            </a>
+
+            <a href="javascript:void(0);" class="dropdown-item">
+              Last Month
+            </a>
+            <a href="javascript:void(0);" class="dropdown-item">
+              Last Years
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <app-domix-charts [series]="labelColumnChart.series" [chartOptions]="labelColumnChart.chartOptions">
+        </app-domix-charts>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-span-12 md:col-span-6 2xl:col-span-3">
+    <div class="card">
+      <div class="flex items-center gap-3 card-header">
+        <h6 class="card-title grow">Total View Performance</h6>
+        <div class="dropdown">
+          <button domixDropdownToggle [dropdownMenu]="dropdown2" type="button" class="flex link link-primary">
+            <lucide-angular name="ellipsis" class="size-5"></lucide-angular>
+          </button>
+
+          <div #dropdown2 class="!fixed p-2 dropdown-menu hidden" dropdown-position="right">
+            <a href="javascript:void(0);" class="dropdown-item">
+              Last Week
+            </a>
+
+            <a href="javascript:void(0);" class="dropdown-item">
+              Last Month
+            </a>
+            <a href="javascript:void(0);" class="dropdown-item">
+              Last Years
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <app-domix-charts [series]="semiDonutChart.series" [chartOptions]="semiDonutChart.chartOptions">
+        </app-domix-charts>
+        <div class="mt-3 text-center">
+          <p class="mb-3 text-gray-500 dark:text-dark-500">Ensure your information is kept updated to enhance
+            performance.</p>
+          <a href="javascript: void(0);" class="btn btn-primary">Guide Views <i
+              class="ml-1 align-bottom ri-arrow-right-s-line"></i></a>
+        </div>
+      </div>
+      <div class="flex items-center justify-center gap-3 text-sm card-footer">
+        <a href="javascript: void(0);" class="text-gray-500 dark:text-dark-500"><i
+            class="align-bottom ri-circle-fill text-primary-500"></i> View Count: <span
+            class="font-medium text-gray-800 dark:text-dark-100">148</span></a>
+        <a href="javascript: void(0);" class="text-gray-500 dark:text-dark-500"><i
+            class="text-pink-400 align-bottom ri-circle-fill"></i>
+          Percentage: <span class="font-medium text-gray-800 dark:text-dark-100">59%</span></a>
+      </div>
+    </div>
+  </div>
+
+</div>

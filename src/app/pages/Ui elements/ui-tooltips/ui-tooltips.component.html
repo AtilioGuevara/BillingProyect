@@ -1,0 +1,155 @@
+<app-page-title [pageTitle]="'Ui'" [Title]="'Tooltip'"></app-page-title>
+
+<div class="grid grid-cols-12 gap-x-space">
+    <div class="col-span-12 md:col-span-6 card">
+        <div class="card-header">
+            <h6 class="card-title">Default Behaviour Tooltip</h6>
+        </div>
+        <div class="card-body">
+            <div class="flex flex-wrap items-center gap-2">
+                <div>
+                    <button class="btn btn-primary" tooltipStr="Hover Tooltip">Hover for Button!</button>
+                </div>
+                <div>
+                    <div tooltip [tooltipStr]="'Click Tooltip'" #myTooltip="tooltipStr"></div>
+                    <button class="btn btn-primary" (click)="toggleTooltip()">Click Me</button>
+                </div>
+                <div x-data="{ tooltip: 'Mouseenter Tooltip' }">
+                    <button class="btn btn-primary" tooltipStr="Mouseenter Tooltip">Mouseenter</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- <div class="col-span-12 md:col-span-6 card">
+        <div class="card-header">
+            <h6 class="card-title">Follow Cursor</h6>
+        </div>
+        <div class="card-body">
+            <div class="flex flex-wrap items-center gap-2">
+                <div x-data="{ tooltip: 'I am a Tooltip' }">
+                    <button class="btn btn-green" x-tooltip.cursor="tooltip">Default</button>
+                </div>
+                <div x-data="{ tooltip: 'I am a Tooltip' }">
+                    <button class="btn btn-green" x-tooltip.cursor.x="tooltip">Horizontal</button>
+                </div>
+                <div x-data="{ tooltip: 'I am a Tooltip' }">
+                    <button class="btn btn-green" x-tooltip.cursor.initial="tooltip">Initial</button>
+                </div>
+            </div>
+        </div>
+    </div> -->
+
+    <!-- <div class="col-span-12 md:col-span-6 card">
+        <div class="card-header">
+            <h6 class="card-title">Arrowless Tooltip</h6>
+        </div>
+        <div class="card-body">
+            <div class="flex flex-wrap items-center gap-2">
+                <div x-data="{ tooltip: 'I am a Tooltip' }">
+                    <button class="btn btn-purple" x-tooltip.arrowless="tooltip">Arrowless</button>
+                </div>
+            </div>
+        </div>
+    </div> -->
+
+    <div class="col-span-12 md:col-span-6 card">
+        <div class="card-header">
+            <h6 class="card-title">No Flip Tooltip</h6>
+        </div>
+        <div class="card-body">
+            <div class="flex flex-wrap items-center gap-2">
+                <div>
+                    <button class="btn btn-primary" tooltipStr="I am a Tooltip" [placement]="'left'" >No Flip</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-span-12 md:col-span-6 card">
+        <div class="card-header">
+            <h6 class="card-title">Custom HTML Input with Tooltip</h6>
+        </div>
+        <div class="card-body">
+            <div>
+                <input type="text" class="form-input" value="Hello world" #inputElement>
+
+                <ng-template #myTemplate>
+                    <div style="color: red;">
+                        {{inputElement.value}}
+                    </div>
+                </ng-template>
+
+
+                <button class="mt-3 btn btn-primary" [tooltipTemplate]="myTemplate" placement="top">
+                    Dynamic HTML Content
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-span-12 md:col-span-6 card">
+        <div class="card-header">
+            <h6 class="card-title">Animation Tooltip</h6>
+        </div>
+        <div class="card-body">
+            <div class="flex flex-wrap items-center gap-2">
+                <div>
+                    <button class="btn btn-purple" tooltipStr="I am a Tooltip" [placement]="'top'" [animationDuration]="200">Scale</button>
+                </div>
+                <div>
+                    <button class="btn btn-purple" tooltipStr="I am a Tooltip" [placement]="'top'" [animationDuration]="200">Scale-subtle</button>
+                </div>
+                <div>
+                    <button class="btn btn-purple" tooltipStr="I am a Tooltip" [placement]="'top'" [animationDuration]="200">scale-extreme</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-span-12 card">
+        <div class="card-header">
+            <h6 class="card-title">Placement Tooltip</h6>
+        </div>
+        <div class="card-body">
+            <div class="grid grid-cols-1 gap-2 sm:grid-cols-2 md:grid-cols-3">
+                <div>
+                    <button class="w-full btn btn-purple" tooltipStr="I am a Tooltip" [placement]="'top'">Top</button>
+                </div>
+                <div>
+                    <button class="w-full btn btn-purple" tooltipStr="I am a Tooltip" [placement]="'top-left'">Top Start</button>
+                </div>
+                <div>
+                    <button class="w-full btn btn-purple" tooltipStr="I am a Tooltip">Top End</button>
+                </div>
+                <div>
+                    <button class="w-full btn btn-purple" tooltipStr="I am a Tooltip" [placement]="'right'">Right</button>
+                </div>
+                <div>
+                    <button class="w-full btn btn-purple" tooltipStr="I am a Tooltip" [placement]="'right'">Right Start</button>
+                </div>
+                <div>
+                    <button class="w-full btn btn-purple" tooltipStr="I am a Tooltip" [placement]="'right'">Right End</button>
+                </div>
+                <div>
+                    <button class="w-full btn btn-purple" tooltipStr="I am a Tooltip" [placement]="'bottom'">Bottom</button>
+                </div>
+                <div>
+                    <button class="w-full btn btn-purple" tooltipStr="I am a Tooltip" [placement]="'bottom-left'">Bottom Start</button>
+                </div>
+                <div>
+                    <button class="w-full btn btn-purple" tooltipStr="I am a Tooltip" [placement]="'bottom-left'">Bottom End</button>
+                </div>
+                <div>
+                    <button class="w-full btn btn-purple" tooltipStr="I am a Tooltip" [placement]="'left'">Left</button>
+                </div>
+                <div>
+                    <button class="w-full btn btn-purple" tooltipStr="I am a Tooltip" [placement]="'left'">Left Start</button>
+                </div>
+                <div>
+                    <button class="w-full btn btn-purple" tooltipStr="I am a Tooltip" [placement]="'left'">Left End</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

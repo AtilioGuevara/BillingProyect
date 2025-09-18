@@ -1,0 +1,548 @@
+<app-page-title [Title]="'Ecommerce'" [pageTitle]="'Dashboards'"></app-page-title>
+
+<div class="grid grid-cols-12 gap-x-space">
+  <div class="relative order-1 col-span-12 2xl:col-span-8 card">
+    <div class="card-body">
+      <h6 class="mb-2 card-title">Welcome Back Shopia Mia</h6>
+      <p class="text-gray-500 dark:text-dark-500">You have earned 49% more than last month which is greate thing.</p>
+
+      <div class="grid grid-cols-12 mt-12 mb-5 md:mb-0">
+        <div class="col-span-6 border-gray-200 md:col-span-4 lg:col-span-2 ltr:border-r rtl:border-l dark:border-dark-800">
+          <h6 class="mb-1.5">$<span class="counters" [countUp]="4878" [options]="{decimalPlaces:0}">0</span>
+            <lucide-angular name="trending-up" class="inline-block ml-1 text-green-500 size-4"></lucide-angular>
+          </h6>
+          <p class="text-gray-500 dark:text-dark-500">Today's Sales</p>
+        </div>
+        <div class="col-span-6 md:col-span-4 lg:col-span-3 ltr:pl-5 rtl:pr-5">
+          <h6 class="mb-1.5"><span class="counters" [countUp]="49" [options]="{decimalPlaces:0}">0</span>%
+            <lucide-angular name="trending-up" class="inline-block ml-1 text-green-500 size-4"></lucide-angular>
+          </h6>
+          <p class="text-gray-500 dark:text-dark-500">Overall Performance</p>
+        </div>
+      </div>
+      <div class="absolute bottom-0 ltr:right-0 rtl:left-0 lg:block">
+        <div class="absolute inset-0 ltr:bg-gradient-to-r rtl:bg-gradient-to-l from-white dark:from-dark-900"></div>
+        <img src="assets/images/dashboards/ecommerce/pattern.png" alt="" class="h-32">
+      </div>
+      <img src="assets/images/dashboards/ecommerce/img-01.png" alt="" class="mx-auto md:absolute bottom-2 ltr:right-5 rtl:left-5">
+    </div>
+  </div>
+  <div class="order-2 col-span-12 md:col-span-6 xl:col-span-3 2xl:col-span-2 card">
+    <div class="card-body">
+      <p class="mb-1 text-gray-500 dark:text-dark-500">Expense</p>
+      <h6 class="text-16">$<span class="counters" [countUp]="18725" [options]="{decimalPlaces:0}">0</span></h6>
+      <p class="mb-4 text-sm text-gray-500 dark:text-dark-500"><span class="font-medium text-green-500">2.87</span> This
+        month</p>
+      <div dir="ltr">
+        <app-domix-charts [series]="donutChart.series" [chartOptions]="donutChart.chartOptions" class="!min-h-full">
+        </app-domix-charts>
+      </div>
+    </div>
+  </div>
+  <div class="order-3 col-span-12 md:col-span-6 xl:col-span-3 2xl:col-span-2 card">
+    <div class="card-body">
+      <div class="flex items-center justify-center mb-4 text-orange-500 rounded-md bg-orange-500/10 size-12">
+        <lucide-angular name="shopping-cart" class="size-5"></lucide-angular>
+      </div>
+      <p class="mb-3 text-gray-500 dark:text-dark-500">Sales Profit</p>
+      <h6 class="mb-1 text-16">$<span class="counters" [countUp]="25874" [options]="{decimalPlaces:0}">0</span></h6>
+      <p class="text-sm text-gray-500 dark:text-dark-500"><span class="font-medium text-green-500">2.87</span> This
+        month</p>
+    </div>
+  </div>
+  <div class="order-6 col-span-12 2xl:order-4 2xl:row-span-2 2xl:col-span-8 card">
+    <div class="flex flex-col md:items-center md:flex-row gap-space card-header">
+      <h6 class="card-title grow">Product Sales</h6>
+      <div class="flex items-center gap-2 shrink-0">
+        <button type="button" class="py-1.5 px-3 btn btn-primary">All</button>
+        <button type="button" class="py-1.5 px-3 btn btn-outline-gray border-gray-200 dark:border-dark-800">Weekly</button>
+        <button type="button" class="py-1.5 px-3 btn btn-outline-gray border-gray-200 dark:border-dark-800">Monthly</button>
+        <button type="button" class="py-1.5 px-3 btn btn-outline-gray border-gray-200 dark:border-dark-800">Yearly</button>
+      </div>
+    </div>
+    <div class="card-body">
+      <app-domix-charts [series]="basicChart.series" [chartOptions]="basicChart.chartOptions">
+      </app-domix-charts>
+    </div>
+  </div>
+
+  <div class="order-4 col-span-12 md:col-span-6 xl:col-span-3 2xl:col-span-2 2xl:order-5 card">
+    <div class="card-body">
+      <div class="flex gap-2">
+        <lucide-angular name="video" class="size-5 fill-primary-500/10 text-primary-500"></lucide-angular>
+        <div>
+          <h6 class="mb-1">Daily Meeting</h6>
+          <p class="text-xs text-gray-500 dark:text-dark-500">10+ Person</p>
+        </div>
+      </div>
+      <div class="flex mt-5 -space-x-3 rtl:space-x-reverse">
+        <a href="javascript:void(0);" class="transition duration-300 ease-linear hover:z-10" title="Leal Bureau" tooltipStr="Leal Bureau"><img class="border-2 border-white rounded-full dark:border-dark-900 size-7" src="assets/images/avatar/user-20.png" alt=""></a>
+        <a href="javascript:void(0);" class="transition duration-300 ease-linear hover:z-10" title="Julie Seltzer" tooltipStr="Julie Seltzer"><img class="border-2 border-white rounded-full dark:border-dark-900 size-7" src="assets/images/avatar/user-18.png" alt=""></a>
+        <a href="javascript:void(0);" class="transition duration-300 ease-linear hover:z-10" title="Julie Seltzer" tooltipStr="Julie Seltzer"><img class="border-2 border-white rounded-full dark:border-dark-900 size-7" src="assets/images/avatar/user-8.png" alt=""></a>
+        <a href="javascript:void(0);" title="4" class="flex items-center justify-center text-xs transition duration-300 ease-linear bg-gray-100 rounded-full dark:bg-dark-850 hover:z-10 size-7">4+</a>
+      </div>
+      <p class="mt-3 mb-2 text-gray-500 dark:text-dark-500">They will product the meeting</p>
+      <button type="button" class="w-full btn btn-primary">Click to meeting</button>
+    </div>
+  </div>
+  <div class="order-5 col-span-12 md:col-span-6 xl:col-span-3 2xl:col-span-2 2xl:order-6 card">
+    <div class="card-body">
+      <p class="mb-3 text-gray-500 dark:text-dark-500">Net Profit</p>
+      <h6 class="mb-1 text-16">$<span class="counters" [countUp]="245" [options]="{decimalPlaces:0}">0</span>M</h6>
+      <app-domix-charts [series]="netProfitChart.series" [chartOptions]="netProfitChart.chartOptions">
+      </app-domix-charts>
+    </div>
+  </div>
+
+  <div class="order-7 col-span-12 2xl:col-span-4 card">
+    <div class="card-body">
+      <div x-init="calculatePosition()" class="dropdown float-end">
+        <button type="button" domixDropdownToggle [dropdownMenu]="dropdown4" class="flex px-3 py-1.5 text-xs border-gray-200 font-medium dark:border-dark-800 link link-primary btn">
+          Recent
+          <svg :class="{ 'transform rotate-180': open }" class="transition-transform duration-300 ltr:ml-1 rtl:mr-1 size-4" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+          </svg>
+        </button>
+        <div #dropdown4 class="!fixed p-2 dropdown-menu hidden" dropdown-position="right">
+          <ul>
+            <li>
+              <a href="javascript:void(0);" class="dropdown-item">
+                <span>Recent</span>
+              </a>
+            </li>
+            <li>
+              <a href="javascript:void(0);" class="dropdown-item">
+                <span>Weekly</span>
+              </a>
+            </li>
+            <li>
+              <a href="javascript:void(0);" class="dropdown-item">
+                <span>Monthly</span>
+              </a>
+            </li>
+            <li>
+              <a href="javascript:void(0);" class="dropdown-item">
+                <span>Yearly</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <h5 class="flex items-center gap-2 mb-1.5">8,956 <span class="leading-4 badge badge-sub-green">
+          <lucide-angular name="trending-up" class="inline-block text-green-500 ltr:mr-1 rtl:ml-1 size-4">
+          </lucide-angular>
+          2.87
+        </span></h5>
+      <p class="mb-8 text-gray-500 dark:text-dark-500">Orders this month</p>
+      <div class="progress-bar progress-2">
+        <div class="w-1/2 text-white bg-green-500 progress-bar-wrap"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="order-8 col-span-12 2xl:col-span-8 2xl:row-span-2 card">
+    <div class="flex items-center gap-3 card-header">
+      <h6 class="card-title grow">Product Stock</h6>
+      <div class="dropdown shrink-0">
+        <button domixDropdownToggle [dropdownMenu]="dropdown1" type="button" class="flex px-3 py-1.5 text-xs border-gray-200 font-medium dark:border-dark-800 link link-primary btn">
+          Recent
+          <svg :class="{ 'transform rotate-180': open }" class="transition-transform duration-300 ltr:ml-1 rtl:mr-1 size-4" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+          </svg>
+        </button>
+        <div #dropdown1 class="!fixed p-2 dropdown-menu hidden" dropdown-position="right">
+          <ul>
+            <li>
+              <a href="javascript: void(0);" class="dropdown-item">
+                <span>Recent</span>
+              </a>
+            </li>
+            <li>
+              <a href="javascript: void(0);" class="dropdown-item">
+                <span>Weekly</span>
+              </a>
+            </li>
+            <li>
+              <a href="javascript: void(0);" class="dropdown-item">
+                <span>Monthly</span>
+              </a>
+            </li>
+            <li>
+              <a href="javascript: void(0);" class="dropdown-item">
+                <span>Yearly</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="pt-0 card-body">
+      <div class="overflow-x-auto table-box">
+        <table class="table whitespace-nowrap">
+          <thead>
+            <tr class="text-gray-500 bg-gray-100 dark:bg-dark-850 dark:text-dark-500">
+              <th (click)="sort('productsID')" class="cursor-pointer !font-medium">
+                Product Code
+                <span *ngIf="sortBy === 'productsID'">{{ sortDirection === 'asc' ? '↑' : '↓' }}</span>
+              </th>
+              <th (click)="sort('productName')" class="cursor-pointer !font-medium">
+                Item
+                <span *ngIf="sortBy === 'productName'">{{ sortDirection === 'asc' ? '↑' : '↓' }}</span>
+              </th>
+              <th (click)="sort('stock')" class="cursor-pointer !font-medium">
+                Qty Left
+                <span *ngIf="sortBy === 'stock'">{{ sortDirection === 'asc' ? '↑' : '↓' }}</span>
+              </th>
+              <th (click)="sort('status')" class="cursor-pointer !font-medium">
+                Status
+                <span *ngIf="sortBy === 'status'">{{ sortDirection === 'asc' ? '↑' : '↓' }}</span>
+              </th>
+              <th (click)="sort('price')" class="cursor-pointer !font-medium">
+                Price
+                <span *ngIf="sortBy === 'price'">{{ sortDirection === 'asc' ? '↑' : '↓' }}</span>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let product of displayedProducts">
+              <td>{{ product.productsID }}</td>
+              <td><a href="javascript:void(0);" routerLink="/apps-ecommerce-product-overview">{{ product.productName }}</a></td>
+              <td>{{ product.stock }}</td>
+              <td>
+                <span class="badge" [ngClass]="{
+                  'badge-purple': product.status === 'In Stock',
+                  'badge-yellow': product.status === 'Low Stock',
+                  'badge-red': product.status === 'Out of Stock'
+                }">{{ product.status }}</span>
+              </td>
+              <td>{{ product.price }}</td>
+            </tr>
+            <tr *ngIf="displayedProducts.length === 0">
+              <td colspan="5" class="!p-8">
+                <svg xmlns="http://www.w3.org/2000/svg" class="mx-auto size-12" viewBox="0 0 48 48">
+                  <linearGradient id="SVGID_1__h35ynqzIJzH4_gr1" x1="34.598" x2="15.982" y1="15.982" y2="34.598" gradientUnits="userSpaceOnUse">
+                    <stop offset="0" stop-color="#60e8fe"></stop>
+                    <stop offset=".033" stop-color="#6ae9fe"></stop>
+                    <stop offset=".197" stop-color="#97f0fe"></stop>
+                    <stop offset=".362" stop-color="#bdf5ff"></stop>
+                    <stop offset=".525" stop-color="#dafaff"></stop>
+                    <stop offset=".687" stop-color="#eefdff"></stop>
+                    <stop offset=".846" stop-color="#fbfeff"></stop>
+                    <stop offset="1" stop-color="#fff"></stop>
+                  </linearGradient>
+                  <path fill="url(#SVGID_1__h35ynqzIJzH4_gr1)" d="M40.036,33.826L31.68,25.6c0.847-1.739,1.335-3.684,1.335-5.748c0-7.27-5.894-13.164-13.164-13.164S6.688,12.582,6.688,19.852c0,7.27,5.894,13.164,13.164,13.164c2.056,0,3.995-0.485,5.728-1.326l3.914,4.015l4.331,4.331c1.715,1.715,4.496,1.715,6.211,0C41.751,38.321,41.751,35.541,40.036,33.826z">
+                  </path>
+                  <path fill="none" stroke="#10cfe3" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="3" d="M31.95,25.739l8.086,8.086c1.715,1.715,1.715,4.496,0,6.211l0,0c-1.715,1.715-4.496,1.715-6.211,0l-4.331-4.331">
+                  </path>
+                  <path fill="none" stroke="#10cfe3" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="3" d="M7.525,24.511c-1.771-4.694-0.767-10.196,3.011-13.975c3.847-3.847,9.48-4.817,14.228-2.912"></path>
+                  <path fill="none" stroke="#10cfe3" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="3" d="M30.856,12.603c3.376,5.114,2.814,12.063-1.688,16.565c-4.858,4.858-12.565,5.129-17.741,0.814">
+                  </path>
+                </svg>
+                <p class="mt-2 text-center text-gray-500 dark:text-dark-500">No matching records found</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="grid items-center grid-cols-12 gap-space mt-space" *ngIf="displayedProducts.length > 0">
+        <div class="col-span-12 text-center lg:col-span-6 lg:ltr:text-left lg:rtl:text-right">
+          <p class="text-gray-500 dark:text-dark-500">
+            Showing <b>{{ showingStart }}</b> to <b>{{ showingEnd }}</b> of <b>{{ products.length }}</b> entries</p>
+        </div>
+        <div class="col-span-12 lg:col-span-6">
+          <div class="flex justify-center gap-2 lg:justify-end pagination pagination-primary">
+            <button (click)="prevPage()" [disabled]="currentPage === 1" class="pagination-pre">
+              <lucide-angular name="ChevronLeft" class="mr-1 ltr:inline-block rtl:hidden !size-4">
+              </lucide-angular>
+              <lucide-angular name="ChevronRight" class="ml-1 rtl:inline-block ltr:hidden !size-4">
+              </lucide-angular>
+              Prev
+            </button>
+            <ng-container *ngFor="let page of [].constructor(totalPages); let i = index">
+              <button (click)="gotoPage(i + 1)" [class.active]="i + 1 === currentPage" class="pagination-item">
+                <span>{{ i + 1 }}</span>
+              </button>
+            </ng-container>
+            <button (click)="nextPage()" [disabled]="currentPage === totalPages" class="pagination-next">
+              Next
+              <lucide-angular name="ChevronRight" class="ml-1 ltr:inline-block rtl:hidden !size-4">
+              </lucide-angular>
+              <lucide-angular name="ChevronLeft" class="mr-1 rtl:inline-block ltr:hidden !size-4">
+              </lucide-angular>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="order-9 col-span-12 xl:col-span-6 2xl:col-span-4 card">
+    <div class="flex items-center gap-3 card-header">
+      <h6 class="card-title grow">Top Location</h6>
+      <div class="dropdown shrink-0">
+        <button title="dropdown-button" domixDropdownToggle [dropdownMenu]="dropdown5" type="button" class="flex items-center text-gray-500 dark:text-dark-500">
+          <lucide-angular name="ellipsis" class="size-5"></lucide-angular>
+        </button>
+        <div #dropdown5 class="!fixed p-2 dropdown-menu hidden" dropdown-position="right">
+          <ul>
+            <li>
+              <a href="javascript:void(0);" class="dropdown-item">
+                <span>Weekly</span>
+              </a>
+            </li>
+            <li>
+              <a href="javascript:void(0);" class="dropdown-item">
+                <span>Monthly</span>
+              </a>
+            </li>
+            <li>
+              <a href="javascript:void(0);" class="dropdown-item">
+                <span>Yearly</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="card-body">
+        <div id="dashboardMap" dir="ltr" class="h-52"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="order-10 col-span-12 xl:col-span-6 2xl:col-span-4 card">
+    <div class="flex items-center gap-5 card-header">
+      <h6 class="card-title grow">Top selling Products</h6>
+      <a href="javascript:void(0);" class="underline link link-primary">View All <i class="ri-arrow-right-line"></i></a>
+    </div>
+    <ngx-simplebar [options]="options">
+      <div class="card-body">
+        <div class="h-[180px] -mx-space px-space">
+          <div class="space-y-4">
+            <div class="flex flex-col gap-3 md:flex-row md:items-center" *ngFor="let product of products2">
+              <div class="bg-gray-100 rounded-md size-16 dark:bg-dark-850 shrink-0">
+                <img [src]="product.image" alt="{{ product.name }}">
+              </div>
+              <div class="grow">
+                <h6><a href="javascript:void(0);" [href]="product.link">{{ product.name }}</a></h6>
+                <div class="text-orange-400">
+                  <i *ngFor="let star of getStars(product.rating)" class="ri-star-fill"></i>
+                  <i *ngIf="product.rating % 1 !== 0" class="ri-star-half-fill"></i>
+                </div>
+                <h6>{{ product.price }}</h6>
+              </div>
+              <div class="flex gap-1 md:flex-col md:items-end shrink-0">
+                <button type="button" class="btn btn-sm btn-sub-green"><i class="ri-pencil-line"></i> Edit</button>
+                <button type="button" class="btn btn-sm btn-sub-red"><i class="ri-close-line"></i> Delete</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ngx-simplebar>
+  </div>
+
+  <div class="order-11 col-span-12 2xl:col-span-4 card">
+    <div class="flex items-center gap-3 card-header">
+      <h6 class="card-title grow">Top Countries</h6>
+      <div class="dropdown shrink-0">
+        <button domixDropdownToggle [dropdownMenu]="dropdown2" type="button" class="flex px-3 py-1.5 text-xs border-gray-200 font-medium dark:border-dark-800 link link-primary btn">
+          Recent
+          <svg :class="{ 'transform rotate-180': open }" class="transition-transform duration-300 ltr:ml-1 rtl:mr-1 size-4" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+          </svg>
+        </button>
+        <div #dropdown2 class="!fixed p-2 dropdown-menu hidden" dropdown-position="right">
+          <ul>
+            <li>
+              <a href="javascript: void(0);" class="dropdown-item">
+                <span>Recent</span>
+              </a>
+            </li>
+            <li>
+              <a href="javascript: void(0);" class="dropdown-item">
+                <span>Weekly</span>
+              </a>
+            </li>
+            <li>
+              <a href="javascript: void(0);" class="dropdown-item">
+                <span>Monthly</span>
+              </a>
+            </li>
+            <li>
+              <a href="javascript: void(0);" class="dropdown-item">
+                <span>Yearly</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="flex flex-col gap-4">
+        <div>
+          <div class="flex items-center gap-3 mb-2">
+            <h6 class="text-xs grow">Brazil</h6>
+            <h6 class="text-xs font-semibold text-red-500">91%</h6>
+          </div>
+          <div class="progress-bar progress-1">
+            <div class="w-[91%] text-white progress-bar-wrap bg-primary-500"></div>
+          </div>
+        </div>
+        <div>
+          <div class="flex items-center gap-3 mb-2">
+            <h6 class="text-xs grow">Russia</h6>
+            <h6 class="text-xs font-semibold text-red-500">77%</h6>
+          </div>
+          <div class="progress-bar progress-1">
+            <div class="w-[77%] text-white progress-bar-wrap bg-green-500"></div>
+          </div>
+        </div>
+        <div>
+          <div class="flex items-center gap-3 mb-2">
+            <h6 class="text-xs grow">China</h6>
+            <h6 class="text-xs font-semibold text-red-500">54%</h6>
+          </div>
+          <div class="progress-bar progress-1">
+            <div class="w-[54%] text-white progress-bar-wrap bg-purple-500"></div>
+          </div>
+        </div>
+        <div>
+          <div class="flex items-center gap-3 mb-2">
+            <h6 class="text-xs grow">Turkey</h6>
+            <h6 class="text-xs font-semibold text-red-500">26%</h6>
+          </div>
+          <div class="progress-bar progress-1">
+            <div class="w-[26%] text-white progress-bar-wrap bg-orange-500"></div>
+          </div>
+        </div>
+        <div>
+          <div class="flex items-center gap-3 mb-2">
+            <h6 class="text-xs grow">Philippines</h6>
+            <h6 class="text-xs font-semibold text-red-500">40%</h6>
+          </div>
+          <div class="progress-bar progress-1">
+            <div class="w-[40%] text-white progress-bar-wrap bg-yellow-500"></div>
+          </div>
+        </div>
+        <div>
+          <div class="flex items-center gap-3 mb-2">
+            <h6 class="text-xs grow">Denmark</h6>
+            <h6 class="text-xs font-semibold text-red-500">58%</h6>
+          </div>
+          <div class="progress-bar progress-1">
+            <div class="w-[58%] text-white progress-bar-wrap bg-sky-500"></div>
+          </div>
+        </div>
+        <div>
+          <div class="flex items-center gap-3 mb-2">
+            <h6 class="text-xs grow">New Zealand</h6>
+            <h6 class="text-xs font-semibold text-red-500">19%</h6>
+          </div>
+          <div class="progress-bar progress-1">
+            <div class="w-[19%] text-white progress-bar-wrap bg-red-500"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="order-12 col-span-12 xl:col-span-6 2xl:col-span-4 card">
+    <div class="flex items-center gap-3 card-header">
+      <h6 class="card-title grow">Traffic</h6>
+      <div class="dropdown shrink-0">
+        <button domixDropdownToggle [dropdownMenu]="dropdown3" type="button" class="flex px-3 py-1.5 text-xs border-gray-200 font-medium dark:border-dark-800 link link-primary btn">
+          Recent
+          <svg :class="{ 'transform rotate-180': open }" class="transition-transform duration-300 ltr:ml-1 rtl:mr-1 size-4" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+          </svg>
+        </button>
+        <div #dropdown3 class="!fixed p-2 dropdown-menu hidden" dropdown-position="right">
+          <ul>
+            <li>
+              <a href="javascript: void(0);" class="dropdown-item">
+                <span>Recent</span>
+              </a>
+            </li>
+            <li>
+              <a href="javascript: void(0);" class="dropdown-item">
+                <span>Weekly</span>
+              </a>
+            </li>
+            <li>
+              <a href="javascript: void(0);" class="dropdown-item">
+                <span>Monthly</span>
+              </a>
+            </li>
+            <li>
+              <a href="javascript: void(0);" class="dropdown-item">
+                <span>Yearly</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <app-domix-charts [series]="trafficChart.series" [chartOptions]="trafficChart.chartOptions">
+      </app-domix-charts>
+    </div>
+  </div>
+
+  <div class="col-span-12 xl:col-span-6 2xl:col-span-4 order-13 card">
+    <div class="flex items-center gap-3 card-header">
+      <h6 class="card-title grow">My Message</h6>
+      <a href="javascript: void(0);" class="flex px-3 py-1.5 text-xs border-gray-200 font-medium dark:border-dark-800 link link-primary btn">
+        <i class="ri-add-line ltr:mr-1 rtl:ml-1"></i> New Chat
+      </a>
+    </div>
+    <div class="card-body">
+      <div>
+        <ul class="tabs-pills *:grow bg-gray-100 rounded-md dark:bg-dark-850">
+          <li (click)="openTab = 1">
+            <a href="javascript: void(0);" [ngClass]="{'active': openTab === 1, 'text-gray-500 hover:text-primary-500 dark:text-dark-500 dark:hover:text-primary-500': openTab !== 1}" class="nav-item [&.active]:bg-primary-500 [&.active]:text-primary-50">
+              New Message
+            </a>
+          </li>
+          <li (click)="openTab = 2">
+            <a href="javascript: void(0);" [ngClass]="{'active': openTab === 2, 'text-gray-500 hover:text-primary-500 dark:text-dark-500 dark:hover:text-primary-500': openTab !== 2}" class="nav-item [&.active]:bg-primary-500 [&.active]:text-primary-50">
+              All Message
+            </a>
+          </li>
+        </ul>
+        <div class="mt-4">
+          <div *ngIf="openTab === 1">
+            <div class="space-y-4">
+              <a href="javascript: void(0);" class="flex gap-3" *ngFor="let message of newMessages">
+                <div class="rounded-full size-10 shrink-0">
+                  <img [src]="message.avatar" alt="" class="rounded-full">
+                </div>
+                <div class="overflow-hidden grow">
+                  <h6 class="mb-0.5">{{ message.name }}</h6>
+                  <p class="text-xs text-gray-500 truncate dark:text-dark-500">{{ message.text }}</p>
+                </div>
+                <p class="text-xs shrink-0">{{ message.time }}</p>
+              </a>
+            </div>
+          </div>
+          <div *ngIf="openTab === 2">
+            <div class="space-y-4">
+              <a href="javascript: void(0);" class="flex gap-3" *ngFor="let message of allMessages">
+                <div class="rounded-full size-10 shrink-0">
+                  <img [src]="message.avatar" alt="" class="rounded-full">
+                </div>
+                <div class="overflow-hidden grow">
+                  <h6 class="mb-0.5">{{ message.name }}</h6>
+                  <p class="text-xs text-gray-500 truncate dark:text-dark-500">{{ message.text }}</p>
+                </div>
+                <p class="text-xs shrink-0">{{ message.time }}</p>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

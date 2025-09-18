@@ -1,0 +1,188 @@
+<div class="card sticky top-[90px]" x-data="{ 
+            openTab: 1,
+            activeClasses: 'bg-gray-100 text-gray-800 dark:bg-dark-850 dark:text-dark-50',
+            inactiveClasses: 'hover:text-primary-500'
+        }">
+    <div class="card-header">
+        <h6 class="mb-3">Order ID: #SRB1542</h6>
+        <ul class="flex p-1 border border-gray-200 dark:border-dark-800 rounded-md *:grow">
+            <li>
+                <button type="button" class="relative block px-3 py-1 w-full rounded-md link text-13"
+                    [ngClass]="isActive(1) ? activeClasses : inactiveClasses" (click)="setTab(1)">
+                    Dine IN
+                </button>
+            </li>
+            <li>
+                <button type="button" class="relative block px-3 py-1 w-full rounded-md link text-13"
+                    [ngClass]="isActive(2) ? activeClasses : inactiveClasses" (click)="setTab(2)">
+                    Takeaway
+                </button>
+            </li>
+            <li>
+                <button type="button" class="relative block px-3 py-1 w-full rounded-md link text-13"
+                    [ngClass]="isActive(3) ? activeClasses : inactiveClasses" (click)="setTab(3)">
+                    Delivery
+                </button>
+            </li>
+        </ul>
+    </div>
+    <!-- Tab: Dine In -->
+    <div *ngIf="openTab === 1">
+        <div class="card-body">
+            <h6 class="mb-3">Customer Information</h6>
+            <div class="mb-2">
+                <label for="customerNameInput" class="form-label">Customer Name</label>
+                <input type="text" id="customerNameInput" class="form-input" placeholder="Enter customer name">
+            </div>
+            <div class="mb-2">
+                <label for="contactNumberInput" class="form-label">Contact Number</label>
+                <input type="text" id="contactNumberInput" class="form-input" placeholder="Enter contact number">
+            </div>
+            <div>
+                <label for="tableLocation" class="form-label">Table Location</label>
+                <ng-select [items]="TableData" bindLabel="text" bindValue="value" placeholder="Select table">
+                </ng-select>
+            </div>
+        </div>
+        <ng-container *ngTemplateOutlet="sharedCart"></ng-container>
+    </div>
+
+    <!-- Tab: Takeaway -->
+    <div *ngIf="openTab === 2">
+        <div class="card-body">
+            <h6 class="mb-3">Customer Information</h6>
+            <div class="mb-2">
+                <label for="takeawayCustomerName" class="form-label">Customer Name</label>
+                <input type="text" id="takeawayCustomerName" class="form-input" placeholder="Enter customer name">
+            </div>
+            <div class="mb-2">
+                <label for="takeawayContactNumber" class="form-label">Contact Number</label>
+                <input type="text" id="takeawayContactNumber" class="form-input" placeholder="Enter contact number">
+            </div>
+            <div class="mb-2">
+                <label for="takeawayTime" class="form-label">Pickup Time</label>
+                <input type="time" id="takeawayTime" class="form-input" mwlFlatpickr
+                    [flatpickrOptions]="timePickerOptions" placeholder="Select pickup time">
+            </div>
+        </div>
+        <ng-container *ngTemplateOutlet="sharedCart"></ng-container>
+    </div>
+
+    <!-- Tab: Delivery -->
+    <div *ngIf="openTab === 3">
+        <div class="card-body">
+            <h6 class="mb-3">Customer Information</h6>
+            <div class="mb-2">
+                <label for="deliveryCustomerName" class="form-label">Customer Name</label>
+                <input id="deliveryCustomerName" type="text" class="form-input" placeholder="Enter customer name">
+            </div>
+            <div class="mb-2">
+                <label for="deliveryContactNumber" class="form-label">Contact Number</label>
+                <input id="deliveryContactNumber" type="text" class="form-input" placeholder="Enter contact number">
+            </div>
+            <div class="mb-2">
+                <label for="deliveryAddress" class="form-label">Delivery Address</label>
+                <textarea id="deliveryAddress" rows="2" class="form-input h-auto"
+                    placeholder="Enter full delivery address"></textarea>
+            </div>
+            <div class="mb-2">
+                <label for="deliveryTime" class="form-label">Delivery Time</label>
+                <input id="deliveryTime" mwlFlatpickr [flatpickrOptions]="{dateFormat: 'Y-m-d'}" type="datetime-local"
+                    class="form-input" placeholder="Select delivery time">
+            </div>
+            <div class="mb-2">
+                <label for="deliveryNotes" class="form-label">Delivery Instructions</label>
+                <textarea id="deliveryNotes" rows="2" class="form-input h-auto"
+                    placeholder="Any special instructions for delivery"></textarea>
+            </div>
+        </div>
+        <ng-container *ngTemplateOutlet="sharedCart"></ng-container>
+    </div>
+
+    <!-- Shared Cart Template -->
+    <ng-template #sharedCart>
+        <div class="card-body border-t border-gray-200 dark:border-dark-800">
+            <div class="flex items-center justify-between gap-3 mb-4">
+                <h6 class="grow">Order Items:</h6>
+                <a href="javascript:void(0);" class="link link-red underline shrink-0" (click)="clearCart()">Clear all
+                    items</a>
+            </div>
+            <div class="*:border-gray-200 *:dark:border-dark-800 *:mb-3 *:border-dashed" *ngIf="cartItems.length > 0">
+                <div class="relative [*:not(:last-child)]:border-b [*:not(:last-child)]:pb-3"
+                    *ngFor="let item of cartItems; trackBy: trackByCartItem">
+                    <div class="flex items-center justify-between mb-2">
+                        <h6 class="line-clamp-1 capitalize">{{ item.name }}</h6>
+                        <button (click)="removeFromCart(item.id)" class="text-red-500 hover:text-red-700">
+                            <lucide-angular name="x" class="size-4"></lucide-angular>
+                        </button>
+                    </div>
+                    <div class="*:flex *:items-center space-y-1">
+                        <p><span class="text-gray-500 dark:text-dark-500 ltr:mr-auto rtl:ml-auto">Items:</span>
+                            <span>{{ item.quantity }}</span>
+                        </p>
+                        <p *ngIf="item.size">
+                            <span class="text-gray-500 dark:text-dark-500 ltr:mr-auto rtl:ml-auto">Cup Size:</span>
+                            <span>{{ item.size | uppercase }}</span>
+                        </p>
+                        <p *ngIf="item.sugarLevel">
+                            <span class="text-gray-500 dark:text-dark-500 ltr:mr-auto rtl:ml-auto">Sugar Level:</span>
+                            <span>{{ item.sugarLevel | titlecase }}</span>
+                        </p>
+                        <p><span class="text-gray-500 dark:text-dark-500 ltr:mr-auto rtl:ml-auto">Amount:</span>
+                            <span>${{ item.price | number:'1.2-2' }}</span>
+                        </p>
+                        <p><span class="text-gray-500 dark:text-dark-500 ltr:mr-auto rtl:ml-auto">Total Amount:</span>
+                            <span>${{ item.total | number:'1.2-2' }}</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div *ngIf="cartItems.length === 0" class="text-center py-8">
+                <p class="text-gray-500 dark:text-dark-500">No items in cart</p>
+            </div>
+
+            <div class="alert alert-sky mb-4">
+                <div class="flex items-start gap-2">
+                    <span>Notes:</span>
+                    <div class="grow">
+                        <textarea [(ngModel)]="customerInfo.notes"
+                            class="form-input h-auto bg-transparent border-0 p-0 resize-none w-full" rows="2"
+                            maxlength="50" placeholder="Add special notes for this order..."></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <h6 class="mb-2">Order Summary:</h6>
+            <div class="space-y-1">
+                <p>Total Items: <strong>{{ cartItemCount }}</strong></p>
+                <p>Sub Total: <strong>${{ cartTotal.toFixed(2) }}</strong></p>
+                <p *ngIf="openTab === 3">Delivery Fee: <strong>$3.50</strong></p>
+                <p>Tax (5.6%): <strong>${{ tax.toFixed(2) }}</strong></p>
+                <p>Total: <strong>${{ grandTotal.toFixed(2) }}</strong></p>
+            </div>
+        </div>
+
+        <!-- Payment Method -->
+        <div class="card-body pt-0">
+            <h6 class="mb-2">Payment Method:</h6>
+            <div
+                class="flex items-center gap-3 mt-3 font-medium *:py-1.5 *:px-4 *:bg-gray-100 *:dark:bg-dark-850 *:inline-flex *:items-center *:justify-center *:rounded-md">
+                <a href="javascript:void(0);" (click)="setActiveLink('cash')"
+                    [ngClass]="activeLink === 'cash' ? 'bg-green-500/15 text-green-500' : 'text-gray-500 dark:text-dark-500'">
+                    <lucide-angular name="coins" class="size-4 mr-1"></lucide-angular> Cash
+                </a>
+                <a href="javascript:void(0);" (click)="setActiveLink('card')"
+                    [ngClass]="activeLink === 'card' ? 'bg-green-500/15 text-green-500' : 'text-gray-500 dark:text-dark-500'">
+                    <lucide-angular name="credit-card" class="size-4 mr-1"></lucide-angular> Card
+                </a>
+                <a href="javascript:void(0);" (click)="setActiveLink('online')"
+                    [ngClass]="activeLink === 'online' ? 'bg-green-500/15 text-green-500' : 'text-gray-500 dark:text-dark-500'">
+                    <lucide-angular name="globe" class="size-4 mr-1"></lucide-angular> Online
+                </a>
+            </div>
+            <button class="btn btn-primary w-full mt-5">Place Order</button>
+        </div>
+    </ng-template>
+
+</div>

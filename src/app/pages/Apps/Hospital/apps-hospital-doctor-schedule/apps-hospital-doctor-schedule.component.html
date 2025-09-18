@@ -1,0 +1,73 @@
+<app-page-title [pageTitle]="'Apps'" [Title]="'Doctor Schedule'"></app-page-title>
+
+
+<div class="dropdown" domixDropdownToggle [dropdownMenu]="dropdownMenu">
+  <button type="button" class="btn btn-primary">
+    {{ months[selectedMonth] }} {{ selectedYear }}
+  </button>
+
+  <div #dropdownMenu class="!fixed p-2 dropdown-menu">
+    <a *ngFor="let month of months; let i = index" (click)="selectMonth(i)" class="dropdown-item">
+      {{ month }}
+    </a>
+  </div>
+</div>
+
+<ngx-simplebar>
+  <div class="mt-5">
+    <div class="flex gap-5">
+      <ng-container *ngFor="let date of dates">
+        <a [ngClass]="{'active-date': selectedDate === date.selectedDateString} " class="flex items-center justify-center text-center border border-gray-200 rounded-md dark:border-dark-800 size-16 shrink-0" (click)="getApptDateWise(date.selectedDateString)">
+          <div>
+            <h5>{{ date.day }}</h5>
+            <p>{{ date.name }}</p>
+          </div>
+        </a>
+      </ng-container>
+    </div>
+  </div>
+</ngx-simplebar>
+
+
+<div *ngIf="selectedAppointments.length > 0" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-x-space mt-space">
+  <div *ngFor="let appointment of selectedAppointments">
+    <div class="relative card before:absolute ltr:before:-left-0.5 rtl:before:-right-0.5 before:rounded-full before:top-5 before:h-12 before:w-[2px]" class="before:bg-{{appointment.color}}">
+      <div class="card-body">
+        <div class="flex items-center gap-2 mb-5">
+          <h3 class="flex items-center justify-center border border-gray-200 rounded-md dark:border-dark-800 size-12">{{appointment.day}}</h3>
+          <div>
+            <h6 class="mb-0.5">{{appointment.monthYear}}</h6>
+          </div>
+        </div>
+        <h6>{{appointment.name}}</h6>
+        <p class="mb-2 text-gray-500 dark:text-dark-500">{{appointment.specialty}}</p>
+        <small class="text-gray-500 dark:text-dark-500">Notes:</small>
+        <p class="mb-2">{{appointment.notes}}</p>
+        <div class="flex items-center gap-1 font-semibold"><i class="text-lg font-normal text-gray-500 dark:text-dark-500 ri-time-line"></i><span>{{appointment.time}}</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- <div *ngIf="selectedAppointments.length > 0"
+  class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-x-space mt-space">
+  <div *ngFor="let appointment of selectedAppointments" class="relative card">
+    <div class="card-body">
+      <div class="flex items-center gap-2 mb-5">
+        <h3 class="flex items-center justify-center border border-gray-200 rounded-md size-12">
+          {{ appointment.displayDate}}</h3>
+        <div>
+          <h6 class="mb-0.5">{{ appointment.formattedDate }}</h6>
+          <p class="text-xs text-gray-500">{{ appointment.monthYear }}</p>
+        </div>
+      </div>
+      <h6>{{ appointment.name }}</h6>
+      <p class="mb-2 text-gray-500">{{ appointment.specialty }}</p>
+      <small class="text-gray-500">Notes:</small>
+      <p class="mb-2">{{ appointment.notes }}</p>
+      <h6><i
+          class="text-lg font-normal text-gray-500 align-baseline ri-time-line"></i><span>{{ appointment.time }}</span>
+      </h6>
+    </div>
+  </div>
+</div> -->

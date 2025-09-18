@@ -1,0 +1,184 @@
+<app-page-title [Title]="'Contact'" [pageTitle]="'CRM'"></app-page-title>
+
+<div>
+  <div class="card">
+    <div class="card-header">
+      <div class="flex flex-wrap justify-between gap-5">
+        <div>
+          <div class="relative group/form">
+            <input type="text" class="ltr:pl-9 rtl:pr-9 form-input ltr:group-[&.right]/form:pr-9 rtl:group-[&.right]/form:pl-9 ltr:group-[&.right]/form:pl-4 rtl:group-[&.right]/form:pr-4" placeholder="Search for ..." [(ngModel)]="searchText" (ngModelChange)="updateDisplayedData()">
+            <div class="absolute inset-y-0 flex items-center text-gray-500 dark:text-dark-500 ltr:left-3 rtl:right-3 ltr:group-[&.right]/form:right-3 rtl:group-[&.right]/form:left-3 ltr:group-[&.right]/form:left-auto rtl:group-[&.right]/form:right-auto focus:outline-hidden">
+              <lucide-angular name="search" class="size-4"></lucide-angular>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="flex flex-wrap gap-2">
+            <button class="btn btn-red btn-icon " *ngIf="checkedRows.length" (click)="deleteSelectedItem()">
+              <lucide-angular name="trash" class="inline-block size-4"></lucide-angular>
+            </button>
+            <button type="button" class="btn btn-sub-gray">
+              <lucide-angular name="download" class="inline-block size-4"></lucide-angular>
+              <span class="align-baseline">Export</span>
+            </button>
+            <button type="button" class="btn btn-primary" (click)="openCreateModal(null,null)">
+              <lucide-angular name="plus" class="inline-block size-4"></lucide-angular>
+              <span class="align-baseline">Add Contact</span>
+            </button>
+            <div class="dropdown shrink-0">
+              <button type="button" domixDropdownToggle [dropdownMenu]="dropdown1" title="dropdown-button" class="btn btn-sub-gray">
+                <lucide-angular name="filter" class="inline-block ltr:mr-1 rtl:ml-1 align-center size-4">
+                </lucide-angular> Sort
+                By
+              </button>
+
+              <div #dropdown1 class="!fixed p-2 dropdown-menu !w-64" dropdown-position="right">
+                <ul>
+                  <li>
+                    <a href="javascript: void(0);" class="dropdown-item">
+                      No Sorting
+                    </a>
+                  </li>
+                  <li>
+                    <a href="javascript: void(0);" (click)="sort('desc')" class="dropdown-item">
+                      Alphabetical (A -> Z)
+                    </a>
+                  </li>
+                  <li>
+                    <a href="javascript: void(0);" (click)="sort('asc')" class="dropdown-item">
+                      Reverse Alphabetical (Z -> A)
+                    </a>
+                  </li>
+                  <li>
+                    <a href="javascript: void(0);" (click)="statusSort()" class="dropdown-item">
+                      Status
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div>
+        <div class="overflow-x-auto">
+          <table class="table whitespace-nowrap">
+            <tbody>
+              <tr class="text-gray-500 bg-gray-100 dark:bg-dark-850 dark:text-dark-500">
+                <th *ngFor="let col of columnDefs" class="!font-medium cursor-pointer">
+                  <div class="flex items-center gap-space">
+                    <div class="!font-medium" *ngIf="col.headerCheckbox">
+                      <div class="input-check-group">
+                        <label for="checkboxAll" class="hidden input-check-label"></label>
+                        <input id="checkboxAll" class="input-check input-check-primary" type="checkbox" [(ngModel)]="headerCheckBox" (change)="headerCheckBoxChange()" />
+                      </div>
+                    </div>
+                    <div (click)="onSortChange(col)">
+                      {{col.headerName}} <span *ngIf="col.sortable">
+                        {{ col.sortDiraction === 'asc' ? '↑' : '↓' }}</span>
+                    </div>
+                  </div>
+                </th>
+              </tr>
+              <ng-container *ngIf="displayedData.length > 0">
+                <ng-container *ngFor="let contact of displayedData; let i = index">
+                  <tr>
+                    <td>
+                      <div class="flex items-center gap-space">
+                        <div class="!font-medium">
+                          <div class="input-check-group">
+                            <label for="checkboxAll" class="hidden input-check-label"></label>
+                            <input id="checkboxAll" class="input-check input-check-primary" type="checkbox" [checked]="contact.checked" (change)="onRowCheckboxChange(i)" />
+                          </div>
+                        </div>
+                        <a href="javascript:void(0);" class="link link-primary">{{ contact.contactID }}</a>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="flex items-center gap-2">
+                        <img [src]="contact.image" alt="" class="rounded-full shrink-0 size-9">
+                        <div class="overflow-hidden grow">
+                          <h6 class="truncate"><a href="javascript:void(0);" class="text-current link link-primary">{{contact.contactName}}</a></h6>
+                          <p class="text-sm text-gray-500 truncate dark:text-dark-500">{{contact.phoneNumber}}
+                          </p>
+                        </div>
+                      </div>
+                    </td>
+                    <td>{{contact.company}}</td>
+                    <td>{{contact.role}}</td>
+                    <td>{{contact.email}}</td>
+                    <td><a href="javascript:void(0);" class="badge badge-gray">{{contact.website}}</a></td>
+                    <td>
+                      <span class="badge" [ngClass]="{
+                                              'badge-pink': contact.status === 'Customer',
+                                              'badge-yellow': contact.status === 'Personal',
+                                              'badge-sky': contact.status === 'Employee',
+                                              'badge-purple': contact.status === 'Marketing'
+                                          }">{{contact.status}}</span>
+                    </td>
+                    <td>
+                      <div class="dropdown">
+                        <button x-ref="button" type="button" domixDropdownToggle [dropdownMenu]="dropdown2" title="dropdown-button" class="flex items-center text-gray-500 dark:text-dark-500">
+                          <i class="ri-more-2-fill"></i>
+                        </button>
+                        <div #dropdown2 class="!fixed p-2 dropdown-menu" dropdown-position="right">
+                          <ul>
+                            <li>
+                              <a href="javascript: void(0);" (click)="openContactOverviewModal(contact , i)" class="dropdown-item">
+                                <i class="align-middle ltr:mr-2 rtl:ml-2 ri-eye-line"></i> <span>Overview</span>
+                              </a>
+                            </li>
+                            <li>
+                              <a href="javascript: void(0);" (click)="openCreateModal(contact,i)" class="dropdown-item">
+                                <i class="align-middle ltr:mr-2 rtl:ml-2 ri-pencil-line"></i> <span>Edit</span>
+                              </a>
+                            </li>
+                            <li>
+                              <a href="javascript: void(0);" (click)="deleteModal(i)" class="dropdown-item">
+                                <i class="align-middle ltr:mr-2 rtl:ml-2 ri-delete-bin-line"></i> <span>Delete</span>
+                              </a>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                </ng-container>
+              </ng-container>
+              <ng-container *ngIf="displayedData.length == 0">
+                <td colspan="10" class="!p-8">
+                  <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" class="mx-auto size-12" viewBox="0 0 48 48">
+                    <linearGradient id="SVGID_1__h35ynqzIJzH4_gr1" x1="34.598" x2="15.982" y1="15.982" y2="34.598" gradientUnits="userSpaceOnUse">
+                      <stop offset="0" stop-color="#60e8fe"></stop>
+                      <stop offset=".033" stop-color="#6ae9fe"></stop>
+                      <stop offset=".197" stop-color="#97f0fe"></stop>
+                      <stop offset=".362" stop-color="#bdf5ff"></stop>
+                      <stop offset=".525" stop-color="#dafaff"></stop>
+                      <stop offset=".687" stop-color="#eefdff"></stop>
+                      <stop offset=".846" stop-color="#fbfeff"></stop>
+                      <stop offset="1" stop-color="#fff"></stop>
+                    </linearGradient>
+                    <path fill="url(#SVGID_1__h35ynqzIJzH4_gr1)" d="M40.036,33.826L31.68,25.6c0.847-1.739,1.335-3.684,1.335-5.748c0-7.27-5.894-13.164-13.164-13.164	S6.688,12.582,6.688,19.852c0,7.27,5.894,13.164,13.164,13.164c2.056,0,3.995-0.485,5.728-1.326l3.914,4.015l4.331,4.331	c1.715,1.715,4.496,1.715,6.211,0C41.751,38.321,41.751,35.541,40.036,33.826z">
+                    </path>
+                    <path fill="none" stroke="#10cfe3" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="3" d="M31.95,25.739l8.086,8.086c1.715,1.715,1.715,4.496,0,6.211l0,0c-1.715,1.715-4.496,1.715-6.211,0	l-4.331-4.331">
+                    </path>
+                    <path fill="none" stroke="#10cfe3" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="3" d="M7.525,24.511c-1.771-4.694-0.767-10.196,3.011-13.975c3.847-3.847,9.48-4.817,14.228-2.912">
+                    </path>
+                    <path fill="none" stroke="#10cfe3" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="3" d="M30.856,12.603c3.376,5.114,2.814,12.063-1.688,16.565c-4.858,4.858-12.565,5.129-17.741,0.814">
+                    </path>
+                  </svg>
+                  <p class="mt-2 text-center text-gray-500 dark:text-dark-500">No matching records found</p>
+                </td>
+              </ng-container>
+            </tbody>
+          </table>
+        </div>
+        <app-domix-pagination [currentPage]="currentPage" [totalPages]="totalPages" [showingStart]="showingStart" [showingEnd]="showingEnd" [totalResults]="displayedData.length" (pageChanged)="onPageChange($event)">
+        </app-domix-pagination>
+      </div>
+    </div>
+  </div>
+
+</div>

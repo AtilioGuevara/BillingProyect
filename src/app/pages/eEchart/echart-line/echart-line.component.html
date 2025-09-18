@@ -1,0 +1,80 @@
+<app-page-title [Title]="'Line Charts'" [pageTitle]="'Echarts'"></app-page-title>
+
+<div class="grid grid-cols-12 gap-x-space">
+  <div class="col-span-12 md:col-span-6 card">
+    <div class="card-header">
+      <h6 class="card-title">Basic</h6>
+    </div>
+    <div class="card-body">
+      <app-domix-echart [chartData]="basicLineChartOptions"></app-domix-echart>
+    </div>
+  </div>
+
+  <div class="col-span-12 md:col-span-6 card">
+    <div class="card-header">
+      <h6 class="card-title">Smooth Line</h6>
+    </div>
+    <div class="card-body">
+      <app-domix-echart [chartData]="smoothLineChartData"></app-domix-echart>
+    </div>
+  </div>
+
+  <div class="col-span-12 md:col-span-6 card">
+    <div class="card-header">
+      <h6 class="card-title">Stacked Line Chart</h6>
+    </div>
+    <div class="card-body">
+      <app-domix-echart [chartData]="lineChartData"></app-domix-echart>
+    </div>
+  </div>
+
+  <div class="col-span-12 md:col-span-6 card">
+    <div class="card-header">
+      <h6 class="card-title">Line Y Category</h6>
+    </div>
+    <div class="card-body">
+      <app-domix-echart [chartData]="categoryLineChartData"></app-domix-echart>
+    </div>
+  </div>
+
+  <div class="col-span-12 md:col-span-6 card">
+    <div class="card-header">
+      <h6 class="card-title">Step Line</h6>
+    </div>
+    <div class="card-body">
+      <app-domix-echart [chartData]="stepLineChartData"></app-domix-echart>
+    </div>
+  </div>
+
+  <div class="col-span-12 md:col-span-6 card">
+    <div class="card-header">
+      <h6 class="card-title">Style Line</h6>
+    </div>
+    <div class="card-body">
+      <app-domix-echart [chartData]="lineChartOptions"></app-domix-echart>
+    </div>
+  </div>
+
+  <div class="col-span-12 md:col-span-6 card">
+    <div class="card-header">
+      <h6 class="card-title">Two Value-Axes in Polar</h6>
+    </div>
+    <div class="card-body">
+      <app-domix-echart [chartData]="polarLineChartData"></app-domix-echart>
+    </div>
+  </div>
+
+  <div class="col-span-12 md:col-span-6 card">
+    <div class="card-header">
+      <h6 class="card-title">Two Value-Axes in Polar</h6>
+    </div>
+    <div class="card-body">
+      <app-domix-echart [chartData]="polarChartData"></app-domix-echart>
+    </div>
+  </div>
+
+</div>
+<div class="mb-5 text-center">
+  <a href="https://echarts.apache.org/examples/en/index.html#chart-type-line" target="_blank" class="btn btn-primary">More Example
+    <lucide-angular name="MoveRight" class="inline-block ml-1 size-4"></lucide-angular></a>
+</div>

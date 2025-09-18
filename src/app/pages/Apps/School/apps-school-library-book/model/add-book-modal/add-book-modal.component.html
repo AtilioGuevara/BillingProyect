@@ -1,0 +1,79 @@
+<div id="addBookModal" class="modal">
+  <div class="modal-wrap modal-center">
+    <div class="modal-header">
+      <h6>Add Book</h6>
+      <button data-modal-close="" class="link link-red" (click)="closeaAddBookModal()">
+        <lucide-angular name="x" class="size-5"></lucide-angular>
+      </button>
+    </div>
+    <div class="modal-content">
+      <form [formGroup]="fromGroup" (ngSubmit)="closeaAddBookModal()">
+        <div class="grid grid-cols-12 gap-space">
+          <div class="col-span-12">
+            <div class="text-center">
+              <div>
+                <label for="logo"
+                  class="flex items-center justify-center p-2 mx-auto overflow-hidden bg-gray-100 border border-gray-200 rounded cursor-pointer dark:bg-dark-850 dark:border-dark-800 size-32">
+                  <img *ngIf="fromGroup.get('image')?.value" [src]="fromGroup.get('image')?.value"
+                    class="object-cover w-full h-full">
+                  <span *ngIf="!fromGroup.get('image')?.value"
+                    class="flex flex-col items-center text-gray-500 dark:text-dark-500">
+                    <lucide-angular name="upload"></lucide-angular>
+                    <span class="block mt-2">Upload Images</span>
+                  </span>
+                </label>
+                <span *ngIf="fromGroup.get('image')?.hasError('required')" class="text-red-500">This Field is
+                  required</span>
+                <div class="hidden mt-4">
+                  <label class="block">
+                    <span class="sr-only">Choose profile photo</span>
+                    <input type="file" name="logo" id="logo" (change)="onFileChange($event)"
+                      class="block w-full text-sm file:rounded-md focus:outline-0 text-slate-500 file:mr-4 file:py-2 file:px-4 file:border-0 file:text-sm file:font-semibold file:bg-violet-50 file:text-violet-700 hover:file:bg-violet-100"
+                      formControlName="image" />
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div class="text-center">
+              <span *ngIf="fromGroup.get('image')?.hasError('required')" class="text-red-500">Image is required</span>
+            </div>
+          </div>
+
+          <!-- Book Title -->
+          <div class="col-span-12">
+            <label for="bookTitleInput" class="form-label">Book Title</label>
+            <input type="text" id="bookTitleInput" class="form-input" placeholder="Enter book title"
+              formControlName="title">
+            <span *ngIf="fromGroup.get('title')?.hasError('required')" class="text-red-500">Field is required</span>
+          </div>
+
+          <!-- Author -->
+          <div class="col-span-12">
+            <label for="writerNameInput" class="form-label">Writer Name</label>
+            <input type="text" id="writerNameInput" class="form-input" placeholder="Enter writer name"
+              formControlName="author">
+            <span *ngIf="fromGroup.get('author')?.hasError('required')" class="text-red-500">Field is required</span>
+          </div>
+
+          <!-- Price -->
+          <div class="col-span-12">
+            <label for="priceInput" class="form-label">Price</label>
+            <input type="text" id="priceInput" class="form-input" placeholder="$00.00" formControlName="price">
+            <span *ngIf="fromGroup.get('price')?.hasError('required')" class="text-red-500">Field is required</span>
+          </div>
+
+          <!-- Action Buttons -->
+          <div class="col-span-12">
+            <div class="flex justify-end gap-2">
+              <button type="button" class="btn btn-active-red" (click)="closeaAddBookModal()">
+                <lucide-angular name="x" class="inline-block size-4"></lucide-angular>
+                <span class="align-baseline">Close</span>
+              </button>
+              <button type="submit" class="btn btn-primary">Add Book</button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,169 @@
+<app-navbar></app-navbar>
+
+<app-sidebar></app-sidebar>
+<div class="relative min-h-screen">
+  <div class="page-wrapper pt-[calc(theme('spacing.topbar')_*_1.2)] group-data-[layout=horizontal]:pt-[calc(theme('spacing.topbar')_*_1.9)]">
+
+    <app-page-title [Title]="'Grid View'" [pageTitle]="'Projects'"></app-page-title>
+
+    <div>
+      <div class="flex flex-wrap items-center gap-5 mb-5">
+        <div class="shrink-0">
+          <h6 class="card-title">My Projects (<span>{{gridData.length}}</span>)</h6>
+        </div>
+        <div class="md:mx-auto">
+          <div class="relative w-full md:w-80 group/form">
+            <input type="text" class="ltr:pl-9 rtl:pr-9 form-input ltr:group-[&.right]/form:pr-9 rtl:group-[&.right]/form:pl-9 ltr:group-[&.right]/form:pl-4 rtl:group-[&.right]/form:pr-4" placeholder="Search for projects..." [(ngModel)]="searchText" (ngModelChange)="updateDisplayedData()" />
+            <div class="absolute inset-y-0 flex items-center text-gray-500 dark:text-dark-500 ltr:left-3 rtl:right-3 ltr:group-[&.right]/form:right-3 rtl:group-[&.right]/form:left-3 ltr:group-[&.right]/form:left-auto rtl:group-[&.right]/form:right-auto focus:outline-hidden">
+              <lucide-angular name="search" class="size-4"></lucide-angular>
+            </div>
+          </div>
+        </div>
+        <div class="shrink-0">
+          <button type="button" data-modal-target="addProjectModal" class="btn btn-primary" (click)="openaddProjectModal(null,null)">
+            <lucide-angular name="circle-plus" class="inline-block ltr:mr-1 rtl:ml-1 size-4"></lucide-angular>
+            <span class="align-middle">Add
+              Project</span>
+          </button>
+        </div>
+      </div>
+      <ul class="overflow-x-auto tabs">
+        <li>
+          <a href="javascript: void(0);" [ngClass]="selectedStatus === status.AllProjects ? 'active' : ''" (click)="setSelectedCatogry( status.AllProjects) " class="nav-item [&.active]:after:opacity-100 [&.active]:after:w-full [&.active]:text-primary-500">
+            All Projects
+          </a>
+        </li>
+        <li>
+          <a href="javascript: void(0);" [ngClass]="selectedStatus === status.Active ? 'active' : ''" (click)="setSelectedCatogry( status.Active) " class="nav-item [&.active]:after:opacity-100 [&.active]:after:w-full [&.active]:text-primary-500">
+            Active
+          </a>
+        </li>
+        <li>
+          <a href="javascript: void(0);" [ngClass]="selectedStatus === status.Pending ? 'active' : ''" (click)="setSelectedCatogry( status.Pending) " class="nav-item [&.active]:after:opacity-100 [&.active]:after:w-full [&.active]:text-primary-500">
+            Pending
+          </a>
+        </li>
+        <li>
+          <a href="javascript: void(0);" [ngClass]="selectedStatus === status.OnHold ? 'active' : ''" (click)="setSelectedCatogry( status.OnHold) " class="nav-item [&.active]:after:opacity-100 [&.active]:after:w-full [&.active]:text-primary-500">
+            On Hold
+          </a>
+        </li>
+        <li>
+          <a href="javascript: void(0);" [ngClass]="selectedStatus === status.Completed ? 'active' : ''" (click)="setSelectedCatogry( status.Completed) " class="nav-item [&.active]:after:opacity-100 [&.active]:after:w-full [&.active]:text-primary-500">
+            Completed
+          </a>
+        </li>
+      </ul>
+
+      <div class="grid grid-cols-1 mt-5 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-5">
+        <ng-container *ngIf="displayedData.length">
+          <ng-container *ngFor="let project of displayedData; let i = index">
+            <div class="card">
+              <div class="card-body">
+                <div class="dropdown float-end">
+                  <button type="button" title="dropdown-button" domixDropdownToggle [dropdownMenu]="dropdown1" class="flex items-center text-gray-500 dark:text-dark-500">
+                    <i class="ri-more-fill"></i>
+                  </button>
+                  <div class="!fixed p-2 dropdown-menu" dropdown-position="right" #dropdown1>
+                    <ul>
+                      <li>
+                        <a href="javascript: void(0);" class="dropdown-item">
+                          <i class="align-middle ltr:mr-2 rtl:ml-2 ri-eye-line"></i>
+                          <span>Overview</span>
+                        </a>
+                      </li>
+                      <li>
+                        <a href="javascript: void(0);" data-modal-target="addProjectModal" (click)="openaddProjectModal(project,i)" class="dropdown-item">
+                          <i class="align-middle ltr:mr-2 rtl:ml-2 ri-pencil-line"></i>
+                          <span>Edit</span>
+                        </a>
+                      </li>
+                      <li>
+                        <a href="javascript: void(0);" data-modal-target="deleteModal" (click)="opendeleteModal(i)" class="dropdown-item">
+                          <i class="align-middle ltr:mr-2 rtl:ml-2 ri-delete-bin-line"></i>
+                          <span>Delete</span>
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="p-2 mb-3 border border-gray-200 rounded-md dark:border-dark-800 size-12">
+                  <img [src]="project.projectImage" alt="">
+                </div>
+                <h6 class="mb-1">{{project.projectName}}</h6>
+                <p class="text-gray-500 dark:text-dark-500">{{project.clientName}}</p>
+                <div class="grid grid-cols-2 mt-3 divide-x divide-gray-200 rtl:divide-x-reverse dark:divide-dark-800">
+                  <div class="p-2 text-center">
+                    <h6 class="mb-1">{{project.dueDate}}</h6>
+                    <p class="text-gray-500 dark:text-dark-500">Due Date</p>
+                  </div>
+                  <div class="p-2 text-center">
+                    <h6 class="mb-1">{{project.totalAmount}}</h6>
+                    <p class="text-gray-500 dark:text-dark-500">Total Amount</p>
+                  </div>
+                </div>
+                <div class="mt-5">
+                  <p class="mb-2 text-gray-500 dark:text-dark-500">Project <span>{{project.progress}}</span>
+                    completed</p>
+                  <div class="progress-bar progress-1">
+                    <div class="text-white progress-bar-wrap ltr:bg-gradient-to-r rtl:bg-gradient-to-l from-primary-500 to-pink-500 via-purple-500" [ngStyle]="{ 'width': project.progress + '%' }"></div>
+                  </div>
+                </div>
+                <div class="flex items-center gap-2 mt-5">
+                  <p class="text-gray-500 dark:text-dark-500">Assigned To:</p>
+                  <div class="flex -space-x-3 grow">
+                    <ng-container *ngFor="let assignee of project.assignees">
+                      <a href="javascript: void(0);" class="transition duration-300 ease-linear hover:z-10" title="avatar link">
+                        <img class="border-2 border-white rounded-full dark:border-dark-900 size-8" [src]="assignee.image" alt="">
+                      </a>
+                    </ng-container>
+                  </div>
+                  <div class="shrink-0">
+                    <span class="badge" [ngClass]="{
+                                  'badge-purple': project.status === 'Active',
+                                  'badge-orange': project.status === 'On Hold',
+                                  'badge-yellow': project.status === 'Pending',
+                                  'badge-green': project.status === 'Completed'
+                              }">{{project.status}}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </ng-container>
+        </ng-container>
+      </div>
+
+      <ng-container *ngIf="displayedData.length == 0">
+        <div class="p-8">
+          <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" class="mx-auto size-12" viewBox="0 0 48 48">
+            <linearGradient id="SVGID_1__h35ynqzIJzH4_gr1" x1="34.598" x2="15.982" y1="15.982" y2="34.598" gradientUnits="userSpaceOnUse">
+              <stop offset="0" stop-color="#60e8fe"></stop>
+              <stop offset=".033" stop-color="#6ae9fe"></stop>
+              <stop offset=".197" stop-color="#97f0fe"></stop>
+              <stop offset=".362" stop-color="#bdf5ff"></stop>
+              <stop offset=".525" stop-color="#dafaff"></stop>
+              <stop offset=".687" stop-color="#eefdff"></stop>
+              <stop offset=".846" stop-color="#fbfeff"></stop>
+              <stop offset="1" stop-color="#fff"></stop>
+            </linearGradient>
+            <path fill="url(#SVGID_1__h35ynqzIJzH4_gr1)" d="M40.036,33.826L31.68,25.6c0.847-1.739,1.335-3.684,1.335-5.748c0-7.27-5.894-13.164-13.164-13.164	S6.688,12.582,6.688,19.852c0,7.27,5.894,13.164,13.164,13.164c2.056,0,3.995-0.485,5.728-1.326l3.914,4.015l4.331,4.331	c1.715,1.715,4.496,1.715,6.211,0C41.751,38.321,41.751,35.541,40.036,33.826z">
+            </path>
+            <path fill="none" stroke="#10cfe3" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="3" d="M31.95,25.739l8.086,8.086c1.715,1.715,1.715,4.496,0,6.211l0,0c-1.715,1.715-4.496,1.715-6.211,0	l-4.331-4.331">
+            </path>
+            <path fill="none" stroke="#10cfe3" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="3" d="M7.525,24.511c-1.771-4.694-0.767-10.196,3.011-13.975c3.847-3.847,9.48-4.817,14.228-2.912">
+            </path>
+            <path fill="none" stroke="#10cfe3" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="3" d="M30.856,12.603c3.376,5.114,2.814,12.063-1.688,16.565c-4.858,4.858-12.565,5.129-17.741,0.814">
+            </path>
+          </svg>
+          <p class="mt-2 text-center text-gray-500 dark:text-dark-500">No matching records found</p>
+        </div>
+      </ng-container>
+      <app-domix-pagination [currentPage]="currentPage" [totalPages]="totalPages" [showingStart]="showingStart" [showingEnd]="showingEnd" [totalResults]="gridData.length" (pageChanged)="onPageChange($event)">
+      </app-domix-pagination>
+    </div>
+
+  </div>
+
+  <app-footer></app-footer>
+
+</div>

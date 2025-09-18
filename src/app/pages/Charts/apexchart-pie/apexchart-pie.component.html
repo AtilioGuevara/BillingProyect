@@ -1,0 +1,80 @@
+<app-page-title [Title]="'Pie/Donuts Charts'" [pageTitle]="'Apexcharts'"></app-page-title>
+
+<div class="grid grid-cols-12 gap-x-space">
+  <div class="col-span-12 md:col-span-6 card">
+    <div class="card-header">
+      <h6 class="card-title">Simple Pie</h6>
+    </div>
+    <div class="card-body">
+      <app-domix-charts [series]="pieChart.series" [chartOptions]="pieChart.chartOptions">
+      </app-domix-charts>
+    </div>
+  </div>
+
+  <div class="col-span-12 md:col-span-6 card">
+    <div class="card-header">
+      <h6 class="card-title">Simple Donut</h6>
+    </div>
+    <div class="card-body">
+      <app-domix-charts [series]="donutChart.series" [chartOptions]="donutChart.chartOptions">
+      </app-domix-charts>
+    </div>
+  </div>
+
+  <div class="col-span-12 md:col-span-6 card">
+    <div class="card-header">
+      <h6 class="card-title">Donut Update</h6>
+    </div>
+    <div class="card-body">
+      <div class="flex flex-wrap items-center gap-2 mb-3">
+        <!-- <button @click="add" class="btn btn-sub-primary">Add</button>
+          <button @click="remove" class="btn btn-sub-primary">Remove</button>
+          <button @click="randomize" class="btn btn-sub-primary">Randomize</button>
+          <button @click="reset" class="btn btn-sub-primary">Reset</button> -->
+      </div>
+      <app-domix-charts [series]="updateDonutChart.series" [chartOptions]="updateDonutChart.chartOptions">
+      </app-domix-charts>
+    </div>
+  </div>
+
+  <div class="col-span-12 md:col-span-6 card">
+    <div class="card-header">
+      <h6 class="card-title">Monochrome Pie</h6>
+    </div>
+    <div class="card-body">
+      <app-domix-charts [series]="monochromePieChart.series" [chartOptions]="monochromePieChart.chartOptions">
+      </app-domix-charts>
+    </div>
+  </div>
+
+  <div class="col-span-12 md:col-span-6 card">
+    <div class="card-header">
+      <h6 class="card-title">Gradient Donut</h6>
+    </div>
+    <div class="card-body">
+      <app-domix-charts [series]="gradientDonutChart.series" [chartOptions]="gradientDonutChart.chartOptions">
+      </app-domix-charts>
+    </div>
+  </div>
+
+  <div class="col-span-12 md:col-span-6 card">
+    <div class="card-header">
+      <h6 class="card-title">Semi Donut</h6>
+    </div>
+    <div class="card-body">
+      <app-domix-charts [series]="semiDonutChart.series" [chartOptions]="semiDonutChart.chartOptions">
+      </app-domix-charts>
+    </div>
+  </div>
+
+  <div class="col-span-12 md:col-span-6 card">
+    <div class="card-header">
+      <h6 class="card-title">Donut with Pattern</h6>
+    </div>
+    <div class="card-body">
+      <app-domix-charts [series]="patternDonutChart.series" [chartOptions]="patternDonutChart.chartOptions">
+      </app-domix-charts>
+    </div>
+  </div>
+
+</div>

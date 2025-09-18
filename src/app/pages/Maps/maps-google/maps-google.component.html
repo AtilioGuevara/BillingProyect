@@ -1,0 +1,52 @@
+<app-page-title [Title]="'Google Maps'" [pageTitle]="'Maps'"></app-page-title>
+
+<div class="grid grid-cols-12 gap-x-space">
+  <div class="col-span-12 card">
+    <div class="card-header">
+      <h6 class="card-title">Basic</h6>
+    </div>
+    <div class="card-body">
+      <google-map [latitude]="latitude" [longitude]="longitude" [options]="mapOptions" [zoom]="15" width="100%"
+        height="300px">
+        <map-marker *ngFor="let marker of markers" [position]="marker.position"></map-marker>
+      </google-map>
+    </div>
+  </div>
+
+
+  <div class="col-span-12 card">
+    <div class="card-header">
+      <h6 class="card-title">Track your Location</h6>
+    </div>
+    <div class="card-body">
+      <google-map height="300px" width="100%">
+
+      </google-map>
+    </div>
+  </div>
+
+
+  <div class="col-span-12 card">
+    <div class="card-header">
+      <h6 class="card-title">Map with LatLang</h6>
+    </div>
+    <div class="card-body">
+      <google-map height="300px" width="100%">
+
+      </google-map>
+    </div>
+  </div>
+
+
+  <div class="col-span-12 card">
+    <div class="card-header">
+      <h6 class="card-title">POI Click Events</h6>
+    </div>
+    <div class="card-body">
+      <google-map height="300px" width="100%">
+
+      </google-map>
+    </div>
+  </div>
+
+</div>

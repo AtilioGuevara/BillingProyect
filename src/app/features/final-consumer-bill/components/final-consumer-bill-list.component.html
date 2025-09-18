@@ -1,0 +1,22 @@
+<div class="card shadow-lg p-4 bg-white">
+  <h2 class="text-2xl font-bold mb-4 text-purple-700">Listado de Facturas Consumidor Final</h2>
+  <div *ngIf="loading" class="text-blue-900">Cargando...</div>
+  <div *ngIf="errorMsg" class="text-red-600">{{ errorMsg }}</div>
+  <table *ngIf="bills.length" class="table-auto w-full mt-4">
+    <thead class="bg-purple-700 text-white">
+      <tr>
+        <th>Código</th>
+        <th>Control</th>
+        <th>Total con IVA</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let bill of bills">
+        <td>{{ bill.generationCode }}</td>
+        <td>{{ bill.controlNumber }}</td>
+        <td>{{ bill.totalWithIva | currency:'USD' }}</td>
+      </tr>
+    </tbody>
+  </table>
+  <div *ngIf="!bills.length && !loading" class="text-blue-900">No hay facturas registradas.</div>
+</div>

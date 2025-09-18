@@ -1,0 +1,279 @@
+<app-page-title [pageTitle]="'Ui'" [Title]="'Buttons'"></app-page-title>
+
+<div class="grid grid-cols-12 gap-x-space">
+    <div class="col-span-12 card">
+        <div class="card-header">
+            <h6 class="card-title">Base Buttons</h6>
+        </div>
+        <div class="card-body">
+            <div class="flex flex-wrap gap-4">
+                <div *ngFor="let button of  baseButtons">
+                    <button class="{{button.color}} btn">
+                        {{button.text}}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div><!--Base Buttons-->
+
+    <div class="col-span-12 card">
+        <div class="card-header">
+            <h6 class="card-title">Outline Buttons</h6>
+        </div>
+        <div class="card-body">
+            <div class="flex flex-wrap gap-4">
+                <div *ngFor="let button of outlineButtons">
+                    <button class="{{button.color}} btn">
+                        {{button.text}}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div><!--Outline Buttons-->
+
+    <div class="col-span-12 card">
+        <div class="card-header">
+            <h6 class="card-title">Soft Buttons</h6>
+        </div>
+        <div class="card-body">
+            <div class="flex flex-wrap gap-4">
+                <div *ngFor="let button of softButtons">
+                    <button class="{{button.color}} btn">
+                        {{button.text}}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div><!--Soft Buttons-->
+
+    <div class="col-span-12 card">
+        <div class="card-header">
+            <h6 class="card-title">3D Buttons</h6>
+        </div>
+        <div class="card-body">
+            <div class="flex flex-wrap gap-4">
+                <div *ngFor="let button of DButtons">
+                    <button class="{{button.color}} btn">
+                        {{button.text}}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div><!--3D Buttons-->
+
+    <div class="col-span-12 card">
+        <div class="card-header">
+            <h6 class="card-title">Outline Dashed Style</h6>
+        </div>
+        <div class="card-body">
+            <div class="flex flex-wrap gap-4">
+                <!-- <template x-for="(button, index) in outlineDashedButtons" :key="index">
+                    <button :class="button.color + ' btn border-dashed '" x-text="button.text">
+                    </button>
+                </template> -->
+                <div *ngFor="let button of outlineDashedButtons">
+                    <button class="{{button.color}} btn border-dashed">
+                        {{button.text}}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div><!--Outline Dashed Style-->
+
+    <div class="col-span-12 card">
+        <div class="card-header">
+            <h6 class="card-title">Active Style</h6>
+        </div>
+        <div class="card-body">
+            <div class="flex flex-wrap gap-4">
+                <div *ngFor="let button of activeStyleButtons">
+                    <button class="{{button.color}} btn">
+                        {{button.text}}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div><!--Active Style-->
+
+    <div class="col-span-12 xl:col-span-6 card">
+        <div class="card-header">
+            <h6 class="card-title">Icon with Text</h6>
+        </div>
+        <div class="card-body">
+            <div class="flex flex-wrap gap-4">
+                <button class="btn btn-primary btn-icon-text">
+                    <lucide-angular name="facebook" class="size-4"></lucide-angular> Facebook
+                </button>
+                <button class="btn btn-pink btn-icon-text">
+                    <lucide-angular name="instagram" class="size-4"></lucide-angular> Instagram
+                </button>
+            </div>
+        </div>
+    </div><!--Icon with Text-->
+
+    <div class="col-span-12 xl:col-span-6 card">
+        <div class="card-header">
+            <h6 class="card-title">Icon Overlay with Text</h6>
+        </div>
+        <div class="card-body">
+            <div class="flex flex-wrap gap-4">
+                <button class="btn btn-purple btn-icon-overlay">
+                    <span class="icon"><lucide-angular name="twitch" class="size-4"></lucide-angular></span> Twitch
+                </button>
+                <button class="btn btn-sky btn-icon-overlay">
+                    <span class="icon"><lucide-angular name="twitter" class="size-4"></lucide-angular></span> Twitter
+                </button>
+                <button class="btn btn-red btn-icon-overlay right">
+                    <span class="icon"><lucide-angular name="twitter" class="size-4"></lucide-angular></span> Twitter
+                </button>
+            </div>
+        </div>
+    </div><!--Icon overlay with Text-->
+
+    <div class="col-span-12 card">
+        <div class="card-header">
+            <h6 class="card-title">Button Size</h6>
+        </div>
+        <div class="card-body">
+            <div class="flex flex-wrap items-center gap-4">
+                <button class="btn btn-primary btn-xs">
+                    Extra Small
+                </button>
+                <button class="btn btn-primary btn-sm">
+                    Small
+                </button>
+                <button class="btn btn-primary btn-md">
+                    Medium
+                </button>
+                <button class="btn btn-primary">
+                    Default
+                </button>
+                <button class="btn btn-primary btn-lg">
+                    Large
+                </button>
+            </div>
+        </div>
+    </div><!--Icon with Text-->
+
+    <div class="col-span-12 xl:col-span-6 card">
+        <div class="card-header">
+            <h6 class="card-title">Loading Buttons</h6>
+        </div>
+        <div class="card-body">
+            <div class="flex flex-wrap gap-4">
+                <div>
+                    <button (click)="handleClick(0)" [disabled]="loadingButtons[0]" class="btn btn-primary btn-icon-text">
+                        <span *ngIf="!isActive[0]">Active</span>
+                        <span *ngIf="isActive[0]">Unactive</span>
+                        <svg *ngIf="loadingButtons[0]" class="text-white size-4 animate-spin" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                            <circle class="opacity-0" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                        </svg>
+                    </button>
+                </div>
+                <div>
+                    <button (click)="handleClick(1)" [disabled]="loadingButtons[1]" class="btn btn-purple btn-icon-text">
+                        <span *ngIf="!isActive[1]">Launching</span>
+                        <span *ngIf="isActive[1]">Welcome to Domiex 😍</span>
+                        <svg *ngIf="loadingButtons[1]" class="text-white size-4 animate-spin" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                            <circle class="opacity-0" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                        </svg>
+                    </button>
+                </div>
+                <div>
+                    <button (click)="handleClick(2)" [disabled]="loadingButtons[2]" class="btn btn-pink btn-icon-text">
+                        <span class="flex items-center gap-2" *ngIf="!isActive[2]"><i class="ri-user-add-line"></i> Follow</span>
+                        <span class="flex items-center gap-2" *ngIf="isActive[2]"><i class="ri-user-unfollow-line"></i> UnFollow</span>
+                        <svg *ngIf="loadingButtons[2]" class="text-white size-4 animate-spin" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                            <circle class="opacity-0" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="col-span-12 xl:col-span-6 card">
+        <div class="card-header">
+            <h6 class="card-title">Rounded Buttons</h6>
+        </div>
+        <div class="card-body">
+            <div class="flex flex-wrap gap-4">
+                <button class="rounded-full btn btn-primary">Primary</button>
+                <button class="rounded-full btn btn-sub-primary">Primary</button>
+                <button class="rounded-full btn btn-outline-primary">Primary</button>
+                <button class="border-dashed rounded-full btn btn-dashed-primary">Primary</button>
+            </div>
+        </div>
+    </div><!--Rounded Buttons-->
+
+    <div class="col-span-12 xl:col-span-6 card">
+        <div class="card-header">
+            <h6 class="card-title">Hover Effect</h6>
+        </div>
+        <div class="card-body">
+            <div class="flex flex-wrap gap-4">
+                <div *ngFor="let button of hoverEffectButtons">
+                    <button class="{{button.color}} btn">
+                        {{button.text}}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div><!--Hover Effect-->
+
+    <div class="col-span-12 xl:col-span-6 card">
+        <div class="card-header">
+            <h6 class="card-title">Icon Buttons</h6>
+        </div>
+        <div class="card-body">
+            <div class="flex flex-wrap gap-4">
+                <button class="btn btn-red btn-icon"><lucide-angular name="trash" class="size-4"></lucide-angular></button>
+                <button class="btn btn-outline-green btn-icon"><lucide-angular name="wrench" class="size-4"></lucide-angular></button>
+                <button class="btn btn-sub-sky btn-icon"><lucide-angular name="user" class="size-4"></lucide-angular></button>
+            </div>
+        </div>
+    </div><!--Icon Buttons-->
+
+    <div class="col-span-12 xl:col-span-6 card">
+        <div class="card-header">
+            <h6 class="card-title">Hover Effect Buttons</h6>
+        </div>
+        <div class="card-body">
+            <div class="flex flex-wrap gap-4">
+                <button class="relative text-white group/effect bg-primary-500 border-primary-500 hover:bg-primary-600 hover:text-white hover:border-primary-600 focus:bg-primary-600 focus:text-white focus:border-primary-600 btn">
+                    <span class="absolute inset-0 overflow-hidden rounded-xl">
+                        <span class="absolute inset-0 rounded-xl bg-[image:radial-gradient(75%_100%_at_50%_0%,rgba(56,189,248,0.6)_0%,rgba(56,189,248,0)_75%)] opacity-0 transition-opacity duration-500 group-hover/effect:opacity-100">
+                        </span>
+                    </span>
+                    <span>Lets get started</span>
+                </button>
+                <button class="relative text-white bg-gray-700 border-gray-700 group/effect hover:bg-gray-800 hover:text-white hover:border-gray-800 focus:bg-gray-800 focus:text-white focus:border-gray-800 btn">
+                    <span class="absolute inset-0 overflow-hidden rounded-xl">
+                        <span class="absolute inset-0 rounded-xl bg-[image:radial-gradient(75%_100%_at_50%_0%,rgba(56,189,248,0.6)_0%,rgba(56,189,248,0)_75%)] opacity-0 transition-opacity duration-500 group-hover/effect:opacity-100">
+                        </span>
+                    </span>
+                    <span>Lets get started</span>
+                </button>
+            </div>
+        </div>
+    </div><!--Disabled Buttons-->
+
+    <div class="col-span-12 xl:col-span-6 card">
+        <div class="card-header">
+            <h6 class="card-title">Disabled Buttons</h6>
+        </div>
+        <div class="card-body">
+            <div class="flex flex-wrap gap-4">
+                <button class="btn btn-primary" disabled>Disabled</button>
+                <button class="btn btn-sub-primary" disabled>Disabled</button>
+                <button class="btn btn-outline-primary" disabled>Disabled</button>
+                <button class="border-dashed btn btn-dashed-primary" disabled>Disabled</button>
+            </div>
+        </div>
+    </div><!--Disabled Buttons-->
+
+</div>

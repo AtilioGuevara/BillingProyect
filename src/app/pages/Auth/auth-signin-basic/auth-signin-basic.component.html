@@ -1,0 +1,92 @@
+<div class="relative flex items-center justify-center min-h-screen py-12 from-sky-100 dark:from-sky-500/15 ltr:bg-gradient-to-l rtl:bg-gradient-to-r via-green-50 dark:via-green-500/10 to-pink-50 dark:to-pink-500/10">
+  <div class="container bg-lime-800">
+    <div class="grid grid-cols-12">
+      <div class="col-span-12 md:col-span-10 lg:col-span-6 xl:col-span-4 md:col-start-2 lg:col-start-4 xl:col-start-5 mb-0 card">
+        <div class="md:p-10 card-body">
+          <div class="mb-5 text-center">
+            <a href="javascript: void(0);">
+              <img src="assets/images/main-logo.png" alt="" class="h-8 mx-auto dark:hidden">
+              <img src="assets/images/logo-white.png" alt="" class="hidden h-8 mx-auto dark:inline-block"></a>
+          </div>
+          <h4 class="mb-2 font-bold leading-relaxed text-center text-transparent drop-shadow-lg ltr:bg-gradient-to-r rtl:bg-gradient-to-l from-primary-500 vie-purple-500 to-pink-500 bg-clip-text">
+            Welcome Back, Sofia!</h4>
+          <p class="mb-5 text-center text-gray-500">Don't have an account? <a href="javascript:void(0);" routerLink="/auth-signup-basic" class="cursor-pointer font-medium link link-primary">Sign Up</a></p>
+          <form [formGroup]="signInForm" (ngSubmit)="onSubmit()">
+            <!-- Alert Section -->
+            <div *ngIf="alert.isVisible" [ngClass]="alert.type" class="relative py-3 text-sm rounded-md ltr:pl-5 rtl:pr-5 ltr:pr-7 rtl:pl-7">
+              <span>{{ alert.message }}</span>
+              <a href="javascript:void(0);" (click)="alert.isVisible = false" class="absolute text-lg transition duration-200 ease-linear ltr:right-5 rtl:left-5 top-2">
+                <i class="ri-close-fill"></i>
+              </a>
+            </div>
+
+            <!-- Input Fields -->
+            <div class="grid grid-cols-12 gap-5 mt-5">
+              <div class="col-span-12">
+                <label for="emailOrUsername" class="form-label">Email Or Username</label>
+                <input type="text" id="emailOrUsername" formControlName="emailOrUsername" class="w-full form-input" placeholder="Enter your email or username">
+              </div>
+
+              <div class="col-span-12">
+                <div>
+                  <label for="password" class="block mb-2 text-sm">Password</label>
+                  <div class="relative">
+                    <input [type]="showPassword ? 'text' : 'password'" id="password" formControlName="password" class="w-full ltr:pr-8 rtl:pl-8 form-input" placeholder="Enter your password">
+                    <button type="button" (click)="togglePasswordVisibility()" class="absolute inset-y-0 flex items-center text-gray-500 ltr:right-3 rtl:left-3 focus:outline-hidden">
+                      <lucide-angular name="Eye" *ngIf="!showPassword" class="size-5"></lucide-angular>
+                      <lucide-angular name="EyeOff" *ngIf="showPassword" class="size-5"></lucide-angular>
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-span-12">
+                <div class="flex items-center">
+                  <div class="input-check-group grow">
+                    <input id="checkboxBasic1" class="input-check" type="checkbox" formControlName="rememberMe" />
+                    <label for="checkboxBasic1" class="input-check-label">Remember me</label>
+                  </div>
+                  <a routerLink="/auth-forgot-password-basic" class="cursor-pointer block text-sm font-medium text-right underline transition duration-300 ease-linear shrink-0 text-primary-500 hover:text-primary-600">Forgot
+                    Password?</a>
+                </div>
+              </div>
+
+              <div class="col-span-12">
+                <button type="submit" class="w-full btn btn-primary">Sign In</button>
+              </div>
+            </div>
+          </form>
+          <div class="relative my-5 text-center text-gray-500 dark:text-dark-500 before:absolute before:border-gray-200 dark:before:border-dark-800 before:border-dashed before:w-full ltr:before:left-0 rtl:before:right-0 before:top-2.5 before:border-b">
+            <p class="relative inline-block px-2 bg-white dark:bg-dark-900">OR</p>
+          </div>
+
+          <div class="space-y-2">
+            <button type="button" class="w-full border-gray-200 btn hover:bg-gray-50 dark:border-dark-800 dark:hover:bg-dark-850 hover:text-primary-500"><img src="assets/images/others/google.png" alt="" class="inline-block h-4 ltr:mr-1 rtl:ml-1"> SignIn Vie
+              Google</button>
+            <button type="button" class="w-full border-gray-200 btn hover:bg-gray-50 dark:border-dark-800 dark:hover:bg-dark-850 hover:text-primary-500">
+              <lucide-angular name="facebook" class="inline-block ltr:mr-1 rtl:ml-1 size-4 text-primary-500"></lucide-angular>SignIn Vie
+              Facebook</button>
+          </div>
+
+          <div class="flex items-center gap-3 mt-5">
+            <div class="grow">
+              <h6 class="mb-1">Admin</h6>
+              <p class="text-gray-500">Email: admin&#64;srbthemes.com</p>
+              <p class="text-gray-500">Password: admin&#64;123</p>
+            </div>
+            <button class="shrink-0 btn btn-sub-gray">Login</button>
+          </div>
+
+          <div class="flex items-center gap-3 mt-3">
+            <div class="grow">
+              <h6 class="mb-1">Users</h6>
+              <p class="text-gray-500">Email: user&#64;srbthemes.com</p>
+              <p class="text-gray-500">Password: user&#64;123</p>
+            </div>
+            <button class="shrink-0 btn btn-sub-gray">Login</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,30 @@
+<div [formGroup]="formGroup">
+    <div class="mb-5 text-center">
+        <div class="relative w-32 h-32 mx-auto mb-4 bg-gray-500 border rounded-full shadow-inset dark:border-dark-800">
+            <img id="image" class="object-cover w-full h-32 rounded-full" [src]="formGroup.get('img')?.value"/>
+        </div>
+
+        <label for="fileInput" type="button" class="items-center justify-between inline-block px-4 py-2 font-medium text-left text-gray-500 border border-gray-200 rounded-lg shadow-xs cursor-pointer dark:border-dark-800 dark:text-dark-500 inine-flex focus:outline-hidden hover:bg-gray-100 dark:hover:bg-dark-850">
+            <lucide-angular name="camera" class="inline-flex -mt-1 shrink-0 ltr:mr-1 rtl:ml-1 size-5"></lucide-angular>
+            <div>
+                Browse Photo
+            </div>
+        </label>
+
+        <div class="mt-1 text-xs text-center text-gray-500 dark:text-dark-500">Click to add profile picture</div>
+        <p class="mt-1 text-xs text-red-500" *ngIf="formGroup.get('img')?.hasError('required')" >This filed is required</p>
+        <input name="photo" id="fileInput" accept="image/*" class="hidden" type="file" (change)="handleImageChange($event)">
+    </div>
+
+    <div class="mb-5">
+        <label for="firstname" class="form-label">Firstname</label>
+        <input type="text" class="form-input" id="firstname" placeholder="Enter your firstname..." formControlName="firstname">
+        <p class="mt-1 text-xs text-red-500" *ngIf="formGroup.get('firstname')?.hasError('required')" >This filed is required</p>
+    </div>
+
+    <div class="mb-5">
+        <label for="email" class="form-label">Email</label>
+        <input type="email" class="form-input" id="email" placeholder="Enter your email address..." formControlName="email">
+        <p class="mt-1 text-xs text-red-500" *ngIf="formGroup.get('email')?.hasError('required')" >This filed is required</p>
+    </div>
+</div>

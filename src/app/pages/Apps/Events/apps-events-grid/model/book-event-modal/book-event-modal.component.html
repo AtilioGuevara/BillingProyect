@@ -1,0 +1,68 @@
+<div id="bookEventModal" class="modal">
+  <div class="modal-wrap modal-center modal-lg">
+    <div class="modal-header">
+      <h6>{{config.name}}</h6>
+      <button data-modal-close="bookEventModal" class="link link-red ltr:float-end rtl:float-start" (click)="closeEventModal()">
+        <lucide-angular name="x" class="size-5"></lucide-angular>
+      </button>
+    </div>
+    <div class="modal-content">
+      <div class="flex items-center gap-3 mb-4">
+        <img [src]="config.image" alt="" class="rounded-full size-12 shrink-0">
+        <div class="grow">
+          <h6 class="mb-1"><a href="javascript:void(0);">{{config.username}}</a></h6>
+          <p class="text-sm text-gray-500 dark:text-dark-500">{{config.date}}, {{config.time}}</p>
+        </div>
+      </div>
+      <div class="mt-5">
+        <img [src]="config.mainImage" alt="" class="object-cover w-full h-48 rounded-md">
+      </div>
+      <div class="flex gap-3 mt-5">
+        <div>
+          <div class="flex flex-col items-center justify-center mx-auto text-red-500 border rounded-md bg-red-500/15 border-red-500/20 size-16">
+            <p class="mb-0.5">{{getWeekday(config.date)}}</p>
+            <h3 class="leading-none">{{getWeekday(config.date,true)}}</h3>
+          </div>
+        </div>
+        <div>
+          <h6 class="mb-1"><a href="javascript:void(0);" class="text-current link link-primary">{{config.name}}</a>
+          </h6>
+          <p class="mb-2 text-gray-500 dark:text-dark-500"><span></span>{{config.date}}<span class="ltr:pl-2 rtl:pr-2 ltr:ml-1.5 rtl:mr-1.5 ltr:border-l rtl:border-r border-gray-200 dark:border-dark-800">{{config.location}}</span>
+          </p>
+          <p class="mb-1 text-gray-500 dark:text-dark-500">Contributors</p>
+          <div class="flex -space-x-3 grow rtl:space-x-reverse">
+            <ng-container *ngFor="let contributor of config.contributors" :key="index">
+              <a href="javascript:void(0);" class="transition duration-300 ease-linear hover:z-10"><img class="border-2 border-white rounded-full size-8 dark:border-dark-900" [src]="contributor.image" alt=""></a>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+      <form>
+        <div class="grid grid-cols-12 gap-5">
+          <div class="col-span-12">
+            <label for="fullNameInput" class="form-label">Full Name</label>
+            <input type="text" id="fullNameInput" class="form-input" placeholder="Enter full name">
+          </div>
+          <div class="col-span-6">
+            <label for="totalTicketInput" class="form-label">Total Tickets</label>
+            <input type="number" id="totalTicketInput" class="form-input" placeholder="0" x-model="totalTickets" x-bind:value="totalTickets">
+          </div>
+
+          <div class="col-span-6">
+            <label for="pricePerTicketInput" class="form-label">Price per Ticket</label>
+            <input type="number" id="pricePerTicketInput" class="form-input" placeholder="$0.00" value="499" x-model="pricePerTicket">
+          </div>
+
+          <div class="col-span-6">
+            <label for="totalAmountInput" class="form-label">Total Amount</label>
+            <input type="text" id="totalAmountInput" class="form-input" x-model="totalAmount" placeholder="$0.00" readonly>
+          </div>
+
+          <div class="col-span-12 text-right">
+            <button type="submit" data-modal-close="bookEventModal" class="btn btn-primary" (click)="closeEventModal()">Book Now</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

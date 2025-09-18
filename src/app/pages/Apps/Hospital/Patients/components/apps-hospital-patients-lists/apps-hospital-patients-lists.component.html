@@ -1,0 +1,92 @@
+<app-page-title [pageTitle]="'Apps'" [Title]="'List View'"></app-page-title>
+
+<div class="justify-between sm:flex">
+  <div>
+    <div class="relative group/form">
+      <input type="email" class="ltr:pl-9 rtl:pr-9 form-input ltr:group-[&.right]/form:pr-9 rtl:group-[&.right]/form:pl-9 ltr:group-[&.right]/form:pl-4 rtl:group-[&.right]/form:pr-4" placeholder="Search for patients..." [(ngModel)]="searchQuery" (input)="onSearch()">
+      <div class="absolute inset-y-0 flex items-center text-gray-500 dark:text-dark-500 ltr:left-3 rtl:right-3 ltr:group-[&.right]/form:right-3 rtl:group-[&.right]/form:left-3 ltr:group-[&.right]/form:left-auto rtl:group-[&.right]/form:right-auto focus:outline-hidden">
+        <lucide-angular name="search" class="size-4"></lucide-angular>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div class="flex flex-wrap items-center justify-end gap-2 mt-2 sm:mt-0">
+      <!-- <button type="button" class="btn btn-sub-gray" data-drawer-target="filterSidebar">
+        <lucide-angular name="sliders-horizontal" class="inline-block ltr:mr-1 rtl:ml-1 size-4"></lucide-angular>Filters
+      </button> -->
+      <a routerLink="/apps-hospital-patients-create" class="cursor-pointer btn btn-primary">
+        <lucide-angular name="circle-plus" class="inline-block ltr:mr-1 rtl:ml-1 size-4"></lucide-angular>Add Patient
+      </a>
+    </div>
+  </div>
+</div>
+
+<div>
+  <div class="grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-4 gap-x-space mt-space">
+    <ng-container *ngFor="let patient of displayedPatientList; let index = index ">
+      <div class="relative card">
+        <div class="card-body">
+          <div class="dropdown dropdown-right ltr:float-right rtl:float-left">
+            <button title="dropdown-button" type="button" class="flex items-center text-gray-500 dark:text-dark-500" domixDropdownToggle [dropdownMenu]="dropdown1">
+              <i class="ri-more-fill"></i>
+            </button>
+            <div class="!fixed dropdown-menu p-2" #dropdown1>
+              <ul>
+                <li>
+                  <a (click)="openPatientOverViewModal(patient)" class="dropdown-item">
+                    <i class="align-middle ltr:mr-2 rtl:ml-2 ri-eye-line"></i> <span>Overview</span>
+                  </a>
+                </li>
+                <li>
+                  <!-- (click)="editPatient(product)"  -->
+                  <a class="dropdown-item" (click)="editPatient(patient)">
+                    <i class="align-middle ltr:mr-2 rtl:ml-2 ri-pencil-line"></i> <span>Edit</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="javascript: void(0);" (click)="delProduct(index)" class="dropdown-item">
+                    <i class="align-middle ltr:mr-2 rtl:ml-2 ri-delete-bin-line"></i> <span>Delete</span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="flex items-center gap-3">
+            <img [src]="patient.image" class="rounded-md size-20 shrink-0">
+            <div class="grow">
+              <h6 class="mb-1.5"><a href="javascript:void(0);" (click)="openPatientOverViewModal(patient)">{{patient.firstName}} {{patient.middleName }}
+                  {{patient.lastName }} </a></h6>
+              <p class="mb-1 text-gray-500 dark:text-dark-500"><i class="ltr:mr-1 rtl:ml-1 ri-mail-line"></i> <span class="align-middle">{{patient.email}}</span></p>
+              <p class="text-gray-500 dark:text-dark-500"><i class="ltr:mr-1 rtl:ml-1 ri-phone-line"></i> <span class="align-middle">{{patient.phoneNumber}} </span></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+    <ng-container *ngIf="!allPatientList.length">
+      <div class="col-span-12 p-8">
+        <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" class="mx-auto size-12" viewBox="0 0 48 48">
+          <linearGradient id="SVGID_1__h35ynqzIJzH4_gr1" x1="34.598" x2="15.982" y1="15.982" y2="34.598" gradientUnits="userSpaceOnUse">
+            <stop offset="0" stop-color="#60e8fe"></stop>
+            <stop offset=".033" stop-color="#6ae9fe"></stop>
+            <stop offset=".197" stop-color="#97f0fe"></stop>
+            <stop offset=".362" stop-color="#bdf5ff"></stop>
+            <stop offset=".525" stop-color="#dafaff"></stop>
+            <stop offset=".687" stop-color="#eefdff"></stop>
+            <stop offset=".846" stop-color="#fbfeff"></stop>
+            <stop offset="1" stop-color="#fff"></stop>
+          </linearGradient>
+          <path fill="url(#SVGID_1__h35ynqzIJzH4_gr1)" d="M40.036,33.826L31.68,25.6c0.847-1.739,1.335-3.684,1.335-5.748c0-7.27-5.894-13.164-13.164-13.164	S6.688,12.582,6.688,19.852c0,7.27,5.894,13.164,13.164,13.164c2.056,0,3.995-0.485,5.728-1.326l3.914,4.015l4.331,4.331	c1.715,1.715,4.496,1.715,6.211,0C41.751,38.321,41.751,35.541,40.036,33.826z">
+          </path>
+          <path fill="none" stroke="#10cfe3" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="3" d="M31.95,25.739l8.086,8.086c1.715,1.715,1.715,4.496,0,6.211l0,0c-1.715,1.715-4.496,1.715-6.211,0	l-4.331-4.331">
+          </path>
+          <path fill="none" stroke="#10cfe3" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="3" d="M7.525,24.511c-1.771-4.694-0.767-10.196,3.011-13.975c3.847-3.847,9.48-4.817,14.228-2.912"></path>
+          <path fill="none" stroke="#10cfe3" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="3" d="M30.856,12.603c3.376,5.114,2.814,12.063-1.688,16.565c-4.858,4.858-12.565,5.129-17.741,0.814"></path>
+        </svg>
+        <p class="mt-2 text-center text-gray-500 dark:text-dark-500">No matching records found</p>
+      </div>
+    </ng-container>
+  </div>
+  <app-domix-pagination [currentPage]="currentPage" [totalPages]="totalPages" [showingStart]="showingStart" [showingEnd]="showingEnd" [totalResults]="filteredPatientList.length" (pageChanged)="onPageChange($event)">
+  </app-domix-pagination>
+</div>

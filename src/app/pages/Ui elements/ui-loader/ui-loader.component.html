@@ -1,0 +1,204 @@
+<app-page-title [pageTitle]="'Ui'" [Title]="'Loader'"></app-page-title>
+
+<div class="grid grid-cols-1 md:grid-cols-2 gap-x-space">
+  <div class="card">
+    <div class="card-header">
+      <h6 class="card-title">Spin Loader</h6>
+    </div>
+    <div class="card-body">
+      <div class="flex flex-wrap items-center gap-4">
+        <span class="spin loader-spin loader-primary"></span>
+        <span class="spin loader-spin loader-purple"></span>
+        <span class="spin loader-spin loader-green"></span>
+        <span class="spin loader-spin loader-red"></span>
+        <span class="spin loader-spin loader-yellow"></span>
+        <span class="spin loader-spin loader-sky"></span>
+        <span class="spin loader-spin loader-pink"></span>
+        <span class="spin loader-spin loader-gray"></span>
+        <span class="spin loader-spin border-gray-500/15"></span>
+      </div>
+    </div>
+  </div>
+  <!--spin-->
+
+  <div class="card">
+    <div class="card-header">
+      <h6 class="card-title">Modern Spin Loader</h6>
+    </div>
+    <div class="card-body">
+      <div class="flex flex-wrap items-center gap-4">
+        <span class="spin modern-spin loader-primary"></span>
+        <span class="spin modern-spin loader-purple"></span>
+        <span class="spin modern-spin loader-green"></span>
+        <span class="spin modern-spin loader-red"></span>
+        <span class="spin modern-spin loader-yellow"></span>
+        <span class="spin modern-spin loader-sky"></span>
+        <span class="spin modern-spin loader-pink"></span>
+        <span class="spin modern-spin loader-gray"></span>
+        <span class="spin loader-spin border-gray-500/15"></span>
+      </div>
+    </div>
+  </div>
+  <!--modern spin-->
+
+  <div class="card">
+    <div class="card-header">
+      <h6 class="card-title">Bounce Loader</h6>
+    </div>
+    <div class="card-body">
+      <div class="flex flex-wrap items-center gap-4">
+        <span class="spin animate-bounce loader-primary"></span>
+        <span class="spin animate-bounce loader-purple"></span>
+        <span class="spin animate-bounce loader-green"></span>
+        <span class="spin animate-bounce loader-red"></span>
+        <span class="spin animate-bounce loader-yellow"></span>
+        <span class="spin animate-bounce loader-sky"></span>
+        <span class="spin animate-bounce loader-pink"></span>
+        <span class="spin animate-bounce loader-gray"></span>
+        <span class="spin loader-spin border-gray-500/15"></span>
+      </div>
+    </div>
+  </div>
+  <!--modern spin-->
+
+  <div class="card">
+    <div class="card-header">
+      <h6 class="card-title">Ping Loader</h6>
+    </div>
+    <div class="card-body">
+      <div class="flex flex-wrap items-center gap-6">
+        <span class="rounded-full spin size-4 animate-ping loader-primary"></span>
+        <span class="rounded-full spin size-4 animate-ping loader-purple"></span>
+        <span class="rounded-full spin size-4 animate-ping loader-green"></span>
+        <span class="rounded-full spin size-4 animate-ping loader-red"></span>
+        <span class="rounded-full spin size-4 animate-ping loader-yellow"></span>
+        <span class="rounded-full spin size-4 animate-ping loader-sky"></span>
+        <span class="rounded-full spin size-4 animate-ping loader-pink"></span>
+        <span class="rounded-full spin size-4 animate-ping loader-gray"></span>
+        <span class="rounded-full spin size-4 animate-ping border-gray-500/15"></span>
+      </div>
+    </div>
+  </div>
+  <!--ping-->
+
+  <div class="card">
+    <div class="card-header">
+      <h6 class="card-title">Pulse Loader</h6>
+    </div>
+    <div class="card-body">
+      <div class="flex flex-wrap items-center gap-4">
+        <span class="spin pulse-primary animate-pulse"></span>
+        <span class="spin pulse-purple animate-pulse"></span>
+        <span class="spin pulse-green animate-pulse"></span>
+        <span class="spin pulse-red animate-pulse"></span>
+        <span class="spin pulse-yellow animate-pulse"></span>
+        <span class="spin pulse-sky animate-pulse"></span>
+        <span class="spin pulse-pink animate-pulse"></span>
+        <span class="spin pulse-gray animate-pulse"></span>
+        <span class="spin animate-pulse bg-gray-500/10 border-0"></span>
+      </div>
+    </div>
+  </div>
+  <!--pulse-->
+
+  <div class="card">
+    <div class="card-header">
+      <h6 class="card-title">Gradient Loader</h6>
+    </div>
+    <div class="card-body">
+      <div class="flex flex-wrap items-center gap-4">
+        <span
+          class="inline-block border-4 rounded-full border-primary-500 size-8 animate-spin border-l-green-500 border-r-red-500 border-b-yellow-500"></span>
+        <span
+          class="inline-block border-4 rounded-full border-primary-500 size-8 animate-spin border-l-pink-500 border-r-sky-500 border-b-purple-500"></span>
+        <span
+          class="inline-block border-4 rounded-full border-primary-200 size-8 animate-spin border-l-green-200 border-r-red-200 border-b-yellow-200"></span>
+      </div>
+    </div>
+  </div>
+  <!--gradient-->
+
+  <div class="card">
+    <div class="card-header">
+      <h6 class="card-title">Button</h6>
+    </div>
+    <div class="card-body">
+      <div class="flex flex-wrap gap-4">
+        <div class="relative">
+          <button
+            class="flex items-center gap-2 text-white bg-primary-500 border-primary-500 btn hover:bg-primary-600 hover:text-white hover:border-primary-600 focus:bg-primary-600 focus:text-white focus:border-primary-600">
+            <lucide-angular name="facebook" class="size-4"></lucide-angular> Facebook
+          </button>
+          <div class="absolute top-0 right-0 w-3 h-3 -mt-1 -mr-1 bg-red-500 rounded-full animate-ping"></div>
+          <div class="absolute top-0 right-0 w-3 h-3 -mt-1 -mr-1 bg-red-500 rounded-full"></div>
+        </div>
+        <div class="relative">
+          <button
+            class="flex items-center gap-2 text-white bg-purple-500 border-purple-500 btn hover:bg-purple-600 hover:text-white hover:border-purple-600 focus:bg-purple-600 focus:text-white focus:border-purple-600">
+            <lucide-angular name="BellRing" class="size-4"></lucide-angular> Notification
+          </button>
+          <div class="absolute top-0 right-0 w-3 h-3 -mt-1 -mr-1 bg-green-500 rounded-full animate-ping"></div>
+          <div class="absolute top-0 right-0 w-3 h-3 -mt-1 -mr-1 bg-green-500 rounded-full"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--button-->
+
+  <div class="card">
+    <div class="card-header">
+      <h6 class="card-title">Ovel Shaped Spinner</h6>
+    </div>
+    <div class="flex flex-wrap items-center gap-3 card-body">
+      <div class="relative">
+        <div class="border-t-4 border-b-4 border-gray-200 rounded-full dark:border-dark-800 size-8"></div>
+        <div class="absolute top-0 left-0 border-t-4 border-b-4 rounded-full border-primary-500 size-8 animate-spin">
+        </div>
+      </div>
+      <div class="relative">
+        <div class="border-t-4 border-b-4 border-gray-200 rounded-full dark:border-dark-800 size-8"></div>
+        <div class="absolute top-0 left-0 border-t-4 border-b-4 border-purple-500 rounded-full size-8 animate-spin">
+        </div>
+      </div>
+      <div class="relative">
+        <div class="border-t-4 border-b-4 border-gray-200 rounded-full dark:border-dark-800 size-8"></div>
+        <div class="absolute top-0 left-0 border-t-4 border-b-4 border-green-500 rounded-full size-8 animate-spin">
+        </div>
+      </div>
+      <div class="relative">
+        <div class="border-t-4 border-b-4 border-gray-200 rounded-full dark:border-dark-800 size-8"></div>
+        <div class="absolute top-0 left-0 border-t-4 border-b-4 border-red-500 rounded-full size-8 animate-spin">
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--button-->
+
+  <div class="card">
+    <div class="card-header">
+      <h6 class="card-title">Loading dots</h6>
+    </div>
+    <div class="flex flex-wrap items-center gap-3 card-body">
+      <div class='flex items-center justify-center space-x-1'>
+        <span class='sr-only'>Loading...</span>
+        <div class='size-3 bg-gray-900 dark:bg-dark-300 rounded-full animate-bounce [animation-delay:-0.3s]'></div>
+        <div class='size-3 bg-gray-900 dark:bg-dark-300 rounded-full animate-bounce [animation-delay:-0.15s]'></div>
+        <div class='bg-gray-900 rounded-full dark:bg-dark-300 size-3 animate-bounce'></div>
+      </div>
+      <div class='flex items-center justify-center space-x-1'>
+        <span class='sr-only'>Loading...</span>
+        <div class='size-3 bg-primary-500 rounded-full animate-bounce [animation-delay:-0.3s]'></div>
+        <div class='size-3 bg-primary-500 rounded-full animate-bounce [animation-delay:-0.15s]'></div>
+        <div class='rounded-full bg-primary-500 size-3 animate-bounce'></div>
+      </div>
+
+      <div class='flex items-center justify-center space-x-1'>
+        <span class='sr-only'>Loading...</span>
+        <div class='size-3 bg-green-500 rounded-full animate-bounce [animation-delay:-0.3s]'></div>
+        <div class='size-3 bg-primary-500 rounded-full animate-bounce [animation-delay:-0.15s]'></div>
+        <div class='bg-purple-500 rounded-full size-3 animate-bounce'></div>
+      </div>
+    </div>
+  </div>
+  <!--button-->
+</div>

@@ -1,0 +1,36 @@
+<div id="callModal" class="modal" >
+  <div class="modal-wrap modal-xs modal-br">
+    <div class="modal-content">
+      <div>
+        <div class="flex items-center gap-2">
+          <div class="rounded-full size-10 shrink-0">
+            <img alt="" [src]="config.image" class="rounded-full ">
+            <span *ngIf="!config.avatar" class="text-sm">{{config.avatarText}}</span>
+          </div>
+          <div>
+            <h6>{{config.name}}</h6>
+            <p class="text-sm text-gray-500 dark:text-dark-500">
+              {{ isCalling ? 'Calling ...' : formatDuration(callDuration) }}</p>
+          </div>
+        </div>
+        <div class="flex items-center gap-3 mt-5">
+          <button type="button" class="btn btn-active-gray shrink-0 btn-icon-text btn-icon">
+            <lucide-angular name="mic" class="size-5"></lucide-angular>
+          </button>
+          <button type="button" class="btn btn-active-gray shrink-0 btn-icon-text btn-icon">
+            <lucide-angular name="pause" class="size-5"></lucide-angular>
+          </button>
+          <button type="button" class="btn btn-active-gray shrink-0 btn-icon-text btn-icon">
+            <lucide-angular name="disc" class="size-5"></lucide-angular>
+          </button>
+          <button type="button" data-modal-close="callModal" class="btn btn-active-red shrink-0 btn-icon-text btn-icon">
+            <lucide-angular name="phone" class="size-5"></lucide-angular>
+          </button>
+          <button type="button" class="btn btn-active-gray shrink-0 btn-icon-text btn-icon">
+            <lucide-angular name="settings" class="size-5"></lucide-angular>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

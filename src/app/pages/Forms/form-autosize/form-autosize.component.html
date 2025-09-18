@@ -1,0 +1,22 @@
+<app-page-title [Title]="'Area Charts'" [pageTitle]="'Apexcharts'"></app-page-title>
+
+
+<div class="grid grid-cols-12">
+    <div class="col-span-12 card">
+        <div class="card-header">
+            <h6 class="card-title">Autosize Textarea</h6>
+        </div>
+        <div class="card-body">
+            <div #container>
+                <div>
+                    <textarea class="h-auto form-input" rows="3" placeholder="Message..." maxlength="255" (input)="updateTextarea($event)" #textarea></textarea>
+                </div>
+                <div class="mt-1 leading-none ltr:text-right rtl:text-left">
+                    <span class="text-xs text-gray-500 dark:text-dark-500">
+                        {{ charCount }} / 255
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

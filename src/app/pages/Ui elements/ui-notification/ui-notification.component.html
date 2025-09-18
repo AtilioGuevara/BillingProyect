@@ -1,0 +1,132 @@
+<app-page-title [pageTitle]="'Ui'" [Title]="'Notifaction'"></app-page-title>
+
+<div class="grid grid-cols-12 gap-x-space">
+    <div class="col-span-12 card">
+        <div class="card-header">
+            <h6 class="card-title">Basic Notification</h6>
+        </div>
+        <div class="card-body">
+            <div class="flex flex-wrap items-center gap-2">
+                <button (click)="addNotice('success', '🔥 Your success message - make it short')" class="btn btn-green">
+                    Success
+                </button>
+                <button (click)="addNotice('info', 'Your Info message - make it short')" class="btn btn-sky">
+                    Info
+                </button>
+                <button (click)="addNotice('warning', '🪄 Your Warning message - make it short')" class="btn btn-yellow">
+                    Warning
+                </button>
+                <button (click)="addNotice('error', '😵 Your critical message - make it short!')" class="btn btn-red">
+                    Error
+                </button>
+            </div>
+
+            <ng-container *ngIf="notices.length">
+                <div class="fixed flex flex-col-reverse items-end justify-start w-screen h-screen gap-3 bottom-10 ltr:right-10 rtl:left-10 z-[1050]">
+                    <div *ngFor="let notice of notices" (click)="removeNotice(notice.id)" class="cursor-pointer alert w-82" [ngClass]="{
+                  'alert-solid-green': notice.type === 'success',
+                  'alert-solid-sky': notice.type === 'info',
+                  'alert-solid-yellow': notice.type === 'warning',
+                  'alert-solid-red': notice.type === 'error'
+                }" style="pointer-events: all;">
+                        {{ notice.text }}
+                    </div>
+                </div>
+            </ng-container>
+        </div>
+    </div>
+
+    <div class="col-span-12 card">
+        <div class="card-header">
+            <h6 class="card-title">Position Notification</h6>
+        </div>
+        <div class="flex flex-wrap items-center gap-2 card-body">
+            <div>
+                <button class="btn btn-primary" (click)="openNotifaction('topLeft')">
+                    Top Left
+                </button>
+
+                <div *ngIf="tostAlerts.topLeft" class="fixed py-3 text-sm text-white transition-all duration-300 ease-in-out transform rounded-md ltr:pl-5 rtl:pr-5 bg-gradient-to-r from-primary-500 to-primary-600 ltr:pr-9 rtl:pl-9 top-5 z-[1055] ltr:left-5 rtl:right-5 max-w-96" x-transition:enter="transition ease-out duration-300 transform" x-transition:enter-start="opacity-0 translate-y-2" x-transition:enter-end="opacity-100 translate-y-0" x-transition:leave="transition ease-in duration-300 transform" x-transition:leave-start="opacity-100 translate-y-0" x-transition:leave-end="opacity-0 translate-y-2">
+                    <span>You have successfully completed this thing!</span>
+                    <a href="javascript:void(0);" href="javascript:void(0);" class="absolute text-lg transition duration-200 ease-linear text-primary-300 hover:text-primary-50 ltr:right-4 rtl:left-4 top-2" (click)="tostAlerts.topLeft = false"><i class="ri-close-fill"></i></a>
+                </div>
+            </div>
+            <div>
+                <button class="btn btn-primary" (click)="openNotifaction('topCenter')">
+                    Top Center
+                </button>
+
+                <div *ngIf="tostAlerts.topCenter" class="fixed py-3 text-sm text-white transition-all duration-300 ease-in-out transform -translate-x-1/2 rounded-md ltr:pl-5 rtl:pr-5 bg-gradient-to-r from-primary-500 to-primary-600 ltr:pr-9 rtl:pl-9 top-5 z-[1055] left-1/2 max-w-96" x-transition:enter="transition ease-out duration-300 transform" x-transition:enter-start="opacity-0 translate-y-2" x-transition:enter-end="opacity-100 translate-y-0" x-transition:leave="transition ease-in duration-300 transform" x-transition:leave-start="opacity-100 translate-y-0" x-transition:leave-end="opacity-0 translate-y-2">
+                    <span>You have successfully completed this thing!</span>
+                    <a href="javascript:void(0);" href="javascript:void(0);" class="absolute text-lg transition duration-200 ease-linear text-primary-300 hover:text-primary-50 ltr:right-4 rtl:left-4 top-2" (click)="tostAlerts.topCenter = false"><i class="ri-close-fill"></i></a>
+                </div>
+            </div>
+
+            <div>
+                <button class="btn btn-primary" (click)="openNotifaction('topRight')">
+                    Top Right
+                </button>
+
+                <div *ngIf="tostAlerts.topRight" class="fixed py-3 text-sm text-white transition-all duration-300 ease-in-out transform rounded-md ltr:pl-5 rtl:pr-5 bg-gradient-to-r from-primary-500 to-primary-600 ltr:pr-9 rtl:pl-9 top-5 z-[1055] ltr:right-5 rtl:left-5 max-w-96" x-transition:enter="transition ease-out duration-300 transform" x-transition:enter-start="opacity-0 translate-y-2" x-transition:enter-end="opacity-100 translate-y-0" x-transition:leave="transition ease-in duration-300 transform" x-transition:leave-start="opacity-100 translate-y-0" x-transition:leave-end="opacity-0 translate-y-2">
+                    <span>You have successfully completed this thing!</span>
+                    <a href="javascript:void(0);" href="javascript:void(0);" class="absolute text-lg transition duration-200 ease-linear text-primary-300 hover:text-primary-50 ltr:right-4 rtl:left-4 top-2" (click)="tostAlerts.topRight = false"><i class="ri-close-fill"></i></a>
+                </div>
+            </div>
+
+            <div>
+                <button class="btn btn-primary" (click)="openNotifaction('bottomLeft')">
+                    Bottom Left
+                </button>
+
+                <div *ngIf="tostAlerts.bottomLeft" class="fixed py-3 text-sm text-white transition-all duration-300 ease-in-out transform rounded-md ltr:pl-5 rtl:pr-5 bg-gradient-to-r from-primary-500 to-primary-600 ltr:pr-9 rtl:pl-9 bottom-5 z-[1055] ltr:left-5 rtl:right-5 max-w-96" x-transition:enter="transition ease-out duration-300 transform" x-transition:enter-start="opacity-0 translate-y-2" x-transition:enter-end="opacity-100 translate-y-0" x-transition:leave="transition ease-in duration-300 transform" x-transition:leave-start="opacity-100 translate-y-0" x-transition:leave-end="opacity-0 translate-y-2">
+                    <span>You have successfully completed this thing!</span>
+                    <a href="javascript:void(0);" href="javascript:void(0);" class="absolute text-lg transition duration-200 ease-linear text-primary-300 hover:text-primary-50 ltr:right-4 rtl:left-4 top-2" (click)="tostAlerts.bottomLeft = false"><i class="ri-close-fill"></i></a>
+                </div>
+            </div>
+
+            <div>
+                <button class="btn btn-primary" (click)="openNotifaction('bottomCenter')">
+                    Bottom Center
+                </button>
+
+                <div *ngIf="tostAlerts.bottomCenter" class="fixed py-3 text-sm text-white transition-all duration-300 ease-in-out transform -translate-x-1/2 rounded-md ltr:pl-5 rtl:pr-5 bg-gradient-to-r from-primary-500 to-primary-600 ltr:pr-9 rtl:pl-9 bottom-5 z-[1055] left-1/2 max-w-96" x-transition:enter="transition ease-out duration-300 transform" x-transition:enter-start="opacity-0 translate-y-2" x-transition:enter-end="opacity-100 translate-y-0" x-transition:leave="transition ease-in duration-300 transform" x-transition:leave-start="opacity-100 translate-y-0" x-transition:leave-end="opacity-0 translate-y-2">
+                    <span>You have successfully completed this thing!</span>
+                    <a href="javascript:void(0);" href="javascript:void(0);" class="absolute text-lg transition duration-200 ease-linear text-primary-300 hover:text-primary-50 ltr:right-4 rtl:left-4 top-2" (click)="tostAlerts.bottomCenter = false"><i class="ri-close-fill"></i></a>
+                </div>
+            </div>
+
+            <div>
+                <button class="btn btn-primary" (click)="openNotifaction('bottomRight')">
+                    Bottom Right
+                </button>
+
+                <div *ngIf="tostAlerts.bottomRight" class="fixed py-3 text-sm text-white transition-all duration-300 ease-in-out transform rounded-md ltr:pl-5 rtl:pr-5 bg-gradient-to-r from-primary-500 to-primary-600 ltr:pr-9 rtl:pl-9 bottom-5 z-[1055] ltr:right-5 rtl:left-5 max-w-96" x-transition:enter="transition ease-out duration-300 transform" x-transition:enter-start="opacity-0 translate-y-2" x-transition:enter-end="opacity-100 translate-y-0" x-transition:leave="transition ease-in duration-300 transform" x-transition:leave-start="opacity-100 translate-y-0" x-transition:leave-end="opacity-0 translate-y-2">
+                    <span>You have successfully completed this thing!</span>
+                    <a href="javascript:void(0);" href="javascript:void(0);" class="absolute text-lg transition duration-200 ease-linear text-primary-300 hover:text-primary-50 ltr:right-4 rtl:left-4 top-2" (click)="tostAlerts.bottomRight = false"><i class="ri-close-fill"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-span-12 card">
+        <div class="card-header">
+            <h6 class="card-title">Content Toast</h6>
+        </div>
+        <div class="flex items-center gap-2 card-body">
+            <div>
+                <button class="btn btn-purple" (click)="openNotifaction('contentToast')">
+                    Content Toast
+                </button>
+
+                <div *ngIf="tostAlerts.contentToast" class="fixed text-sm transition-all duration-300 ease-in-out transform bg-white rounded-md shadow-lg top-5 z-[1055] ltr:right-5 rtl:left-5 max-w-96 shadow-gray-300 dark:bg-dark-900 dark:shadow-dark-900" x-transition:enter="transition ease-out duration-300 transform" x-transition:enter-start="opacity-0 translate-y-2" x-transition:enter-end="opacity-100 translate-y-0" x-transition:leave="transition ease-in duration-300 transform" x-transition:leave-start="opacity-100 translate-y-0" x-transition:leave-end="opacity-0 translate-y-2">
+                    <div class="flex items-center p-3 border-b border-gray-200 dark:border-dark-800 ltr:pr-9 rtl:pl-9">
+                        <h6>You have successfully completed this thing!</h6>
+                        <a href="javascript:void(0);" href="javascript:void(0);" class="absolute text-lg link link-red ltr:right-4 rtl:left-4 top-2" (click)="tostAlerts.contentToast= false"><i class="ri-close-fill"></i></a>
+                    </div>
+                    <div class="p-3">
+                        <p class="text-gray-500 dark:text-dark-500">Those who successfully complete the programme will be awarded a certificate of achievement. You can concentrate and successfully complete a project that just days ago would have looked too difficult.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

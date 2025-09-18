@@ -1,0 +1,65 @@
+<app-page-title [Title]="'Line Charts'" [pageTitle]="'Apexcharts'"></app-page-title>
+
+<div class="grid grid-cols-12 gap-x-space">
+  <div class="col-span-12 md:col-span-6 card">
+    <div class="card-header">
+      <h6 class="card-title">Basic</h6>
+    </div>
+    <div class="card-body">
+      <app-domix-charts [series]="lineChart.series" [chartOptions]="lineChart.chartOptions">
+      </app-domix-charts>
+    </div>
+  </div>
+
+  <div class="col-span-12 md:col-span-6 card">
+    <div class="card-header">
+      <h6 class="card-title">Line with Data Labels</h6>
+    </div>
+    <div class="card-body">
+
+      <app-domix-charts [series]="labelLineChart.series" [chartOptions]="labelLineChart.chartOptions">
+      </app-domix-charts>
+    </div>
+  </div>
+
+  <div class="col-span-12 md:col-span-6 card">
+    <div class="card-header">
+      <h6 class="card-title">Zoomable Timeseries</h6>
+    </div>
+    <div class="card-body">
+      <app-domix-charts [series]="zoomableLineChart.series" [chartOptions]="zoomableLineChart.chartOptions">
+      </app-domix-charts>
+    </div>
+  </div>
+
+  <div class="col-span-12 md:col-span-6 card">
+    <div class="card-header">
+      <h6 class="card-title">Stepline</h6>
+    </div>
+    <div class="card-body">
+      <app-domix-charts [series]="steplineChart.series" [chartOptions]="steplineChart.chartOptions">
+      </app-domix-charts>
+    </div>
+  </div>
+
+  <div class="col-span-12 md:col-span-6 card">
+    <div class="card-header">
+      <h6 class="card-title">Gradient</h6>
+    </div>
+    <div class="card-body">
+      <app-domix-charts [series]="gradientLineChart.series" [chartOptions]="gradientLineChart.chartOptions">
+      </app-domix-charts>
+    </div>
+  </div>
+
+  <div class="col-span-12 md:col-span-6 card">
+    <div class="card-header">
+      <h6 class="card-title">Dashed</h6>
+    </div>
+    <div class="card-body">
+      <app-domix-charts [series]="sessionDurationChart.series" [chartOptions]="sessionDurationChart.chartOptions">
+      </app-domix-charts>
+    </div>
+  </div>
+
+</div>

@@ -1,0 +1,69 @@
+<div class="grid grid-cols-12 gap-0 from-sky-500/10 ltr:bg-gradient-to-l rtl:bg-gradient-to-r via-green-500/5 to-pink-500/5">
+  <div class="col-span-7">
+    <div class="flex items-center h-screen border-gray-200 ltr:border-r rtl:border-l dark:border-dark-800">
+      <div class="px-20 grow">
+        <h1 class="w-2/3 mb-3">Before we start, we'd like to get to know you better</h1>
+        <form action="javascript: void(0);" class="w-2/3 mb-5">
+          <div class="grid grid-cols-12 gap-5">
+            <div class="col-span-12">
+              <label for="nameInput" class="form-label">Your Name</label>
+              <input type="text" id="nameInput" class="bg-transparent form-input dark:bg-transparent" placeholder="Enter your name">
+            </div>
+            <div class="col-span-6">
+              <label for="yourPlaceInput" class="form-label">Your Place</label>
+              <input type="text" id="yourPlaceInput" class="bg-transparent form-input dark:bg-transparent" placeholder="Enter your name">
+            </div>
+            <div class="col-span-6">
+              <label for="emailAddressInput" class="form-label">Email Address</label>
+              <input type="email" id="emailAddressInput" class="bg-transparent form-input dark:bg-transparent" placeholder="support@SRBThemes.com">
+            </div>
+            <div class="col-span-12">
+              <label for="productCompanyInput" class="form-label">Product Or Company</label>
+              <input type="text" id="productCompanyInput" class="bg-transparent form-input dark:bg-transparent" placeholder="What is the name of your product or comapny ?">
+            </div>
+            <div class="col-span-12">
+              <label for="textareaInput2" class="form-label">Your Reply</label>
+              <textarea name="textareaInput2" id="textareaInput2" rows="3" class="h-auto bg-transparent form-input dark:bg-transparent" placeholder="Enter your description"></textarea>
+            </div>
+          </div>
+        </form>
+        <div class="flex gap-2">
+          <a routerLink="/pages-contact-us" class="cursor-pointer btn btn-outline-gray">
+            <lucide-angular name="MoveLeft" class="mr-1 ltr:inline-block rtl:hidden size-4"></lucide-angular>
+            <lucide-angular name="MoveRight" class="ml-1 ltr:hidden rtl:inline-block size-4"></lucide-angular>
+            Back
+          </a>
+          <a routerLink="/pages-contact-us-three" class="cursor-pointer btn btn-primary">
+            Start Your Own
+            <lucide-angular name="MoveRight" class="ml-1 ltr:inline-block rtl:hidden size-4"></lucide-angular>
+            <lucide-angular name="MoveLeft" class="mr-1 ltr:hidden rtl:inline-block size-4"></lucide-angular>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-span-5">
+    <div class="flex flex-col justify-center w-full h-screen px-20">
+      <div class="w-2/3 mx-auto">
+        <img src="assets/images/avatar/user-16.png" alt="" class="mx-auto rounded-md shadow-lg size-32 shrink-0">
+        <div class="mt-5 text-center grow">
+          <h5 class="mb-1">SRBThemes</h5>
+          <p class="mb-3 text-gray-500 dark:text-dark-500">IT Company</p>
+          <p class="mb-6">But most of all, I have been a Product Designer & Development for nearly 8+ years.</p>
+          <ul class="space-y-2">
+            <li>
+              <lucide-angular name="mail" class="inline-block mr-1 text-gray-500 dark:text-dark-500 size-4">
+              </lucide-angular><a href="javascript:void(0);" href="mailto:support@SRBThemes.com" class="transition duration-200 ease-linear hover:text-primary-500">support&#64;srbthemes.com</a>
+            </li>
+            <li>
+              <lucide-angular name="phone" class="inline-block mr-1 text-gray-500 dark:text-dark-500 size-4">
+              </lucide-angular> +(231)
+              12345
+              67890
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

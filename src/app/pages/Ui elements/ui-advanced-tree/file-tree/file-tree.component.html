@@ -1,0 +1,15 @@
+<ul>
+    <ng-container *ngFor="let item of levels">
+        <li>
+            <a href="javascript: void(0);" class="block px-5 py-1 hover:text-gray-900 dark:hover:text-dark-100" [ngClass]="{'has-children': item.children}" (click)="toggleLevel(item, $event)">
+                <i [ngClass]="item.children ? 'icon ri-folder-3-line text-yellow-500' : 'icon ri-file-line text-gray-500 dark-text-dark-500'"></i>
+                {{ item.title }}
+            </a>
+            <ul *ngIf="item.children && item.expanded" class="pb-1 ltr:pl-5 rtl:pr-5 transition-all duration-1000 opacity-100">
+                <li *ngFor="let child of item.children">
+                    <app-file-tree [levels]="[child]"></app-file-tree>
+                </li>
+            </ul>
+        </li>
+    </ng-container>
+</ul>

@@ -1,0 +1,34 @@
+<app-page-title [Title]="'Area Charts'" [pageTitle]="'Apexcharts'"></app-page-title>
+
+<div class="grid grid-cols-12">
+  <div class="col-span-12 card">
+    <div class="card-header">
+      <h6 class="card-title">Input with Clipboard</h6>
+    </div>
+    <div class="card-body">
+      <div class="relative">
+        <input type="text" id="basicClipboard" class="ltr:pr-8 rtl:pl-8 form-input" [(ngModel)]="inputText">
+        <button (click)="copyInputText()"
+          class="absolute inset-y-0 flex items-center p-0 text-gray-500 dark:text-dark-500 ltr:right-3 dark:hover:text-primary-500 hover:text-primary-500 focus:text-primary-500 dark:focus:text-primary-500 rtl:left-3 focus:outline-hidden btn focus:outline-0">
+          <lucide-angular name="clipboard" class="size-5"></lucide-angular>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-span-12 card">
+    <div class="card-header">
+      <h6 class="card-title">Textarea with Clipboard</h6>
+    </div>
+    <div class="card-body">
+      <div class="relative">
+        <textarea id="bar" class="h-auto form-input" [(ngModel)]="textareaText"></textarea>
+        <div class="ltr:text-right rtl:text-left">
+          <button class="mt-4 btn btn-primary" (click)="copyTextareaText()">
+            Cut to clipboard
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

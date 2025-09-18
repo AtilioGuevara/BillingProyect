@@ -1,0 +1,45 @@
+<app-page-title [Title]="'Timeline Charts'" [pageTitle]="'Apexcharts'"></app-page-title>
+
+<div class="grid grid-cols-12 gap-x-space">
+  <div class="col-span-12 md:col-span-6 card">
+    <div class="card-header">
+      <h6 class="card-title">Basic</h6>
+    </div>
+    <div class="card-body">
+      <app-domix-charts [series]="rangeBarChart.series" [chartOptions]="rangeBarChart.chartOptions">
+      </app-domix-charts>
+    </div>
+  </div>
+
+  <div class="col-span-12 md:col-span-6 card">
+    <div class="card-header">
+      <h6 class="card-title">Advanced</h6>
+    </div>
+    <div class="card-body">
+      <app-domix-charts [series]="timelineChart.series" [chartOptions]="timelineChart.chartOptions">
+      </app-domix-charts>
+    </div>
+  </div>
+
+  <div class="col-span-12 md:col-span-6 card">
+    <div class="card-header">
+      <h6 class="card-title">Multiple Series – Group Rows</h6>
+    </div>
+    <div class="card-body">
+      <app-domix-charts [series]="multipleGroupTimelineChart.series"
+        [chartOptions]="multipleGroupTimelineChart.chartOptions">
+      </app-domix-charts>
+    </div>
+  </div>
+
+  <div class="col-span-12 md:col-span-6 card">
+    <div class="card-header">
+      <h6 class="card-title">Dumbbell Chart (Horizontal)</h6>
+    </div>
+    <div class="card-body">
+      <app-domix-charts [series]="dumbbellTimelineChart.series" [chartOptions]="dumbbellTimelineChart.chartOptions">
+      </app-domix-charts>
+    </div>
+  </div>
+
+</div>

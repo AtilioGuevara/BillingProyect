@@ -1,0 +1,21 @@
+<div class="main-form-container">
+  <!-- Conditional rendering of form steps -->
+  <ng-container [ngSwitch]="currentStep">
+
+    <!-- Personal Details Step -->
+    <app-personal-details *ngSwitchCase="1" (stepChange)="onStepChange($event)"></app-personal-details>
+
+    <!-- Guardian Details Step -->
+    <app-guardian-details *ngSwitchCase="2" (stepChange)="onStepChange($event)"></app-guardian-details>
+
+    <!-- Educational Background Step -->
+    <app-educational-background *ngSwitchCase="3" (stepChange)="onStepChange($event)"></app-educational-background>
+
+    <!-- Documents Step -->
+    <app-documents *ngSwitchCase="4" (stepChange)="onStepChange($event)"></app-documents>
+
+    <!-- Application Overview Step -->
+    <app-application-overview *ngSwitchCase="5" (previousStep)="onStepChange(4)"></app-application-overview>
+
+  </ng-container>
+</div>

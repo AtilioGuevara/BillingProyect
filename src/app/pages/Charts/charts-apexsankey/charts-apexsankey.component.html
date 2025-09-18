@@ -1,0 +1,40 @@
+<app-page-title [Title]="'Charts'" [pageTitle]="'ApexSankey'"></app-page-title>
+
+<div class="grid grid-cols-12 gap-x-space">
+    <div class="col-span-12 card">
+        <div class="card-header">
+            <h6 class="card-title">Basic</h6>
+        </div>
+        <div class="card-body">
+            <div #apexSankeyContainer></div>
+            <!-- <div x-ref="apexSankeyContainer" data-chart-colors="[bg-gray-800, bg-white, bg-gray-200]" data-chart-dark-colors="[bg-dark-100, bg-dark-900, bg-dark-800]"></div> -->
+        </div>
+    </div>
+    <div class="col-span-12 card">
+        <div class="card-header">
+            <h6 class="card-title">Node Customization</h6>
+        </div>
+        <div class="card-body">
+            <div #nodeCustomizationContainer></div>
+            <!-- <div x-ref="apexSankeyNodeContainer" data-chart-colors="[bg-gray-800, bg-white, bg-gray-200]" data-chart-dark-colors="[bg-dark-100, bg-dark-900, bg-dark-800]"></div> -->
+        </div>
+    </div>
+    <div class="col-span-12 card">
+        <div class="card-header">
+            <h6 class="card-title">Edge Customization</h6>
+        </div>
+        <div class="card-body">
+            <div #edgeCustomizationContainer></div>
+        </div>
+    </div>
+    <div class="col-span-12 card">
+        <div class="card-header">
+            <h6 class="card-title">Font Options</h6>
+        </div>
+        <div class="card-body">
+            <div #fontCustomizationContainer></div>
+        </div>
+    </div>
+</div>
+
+<!--  -->

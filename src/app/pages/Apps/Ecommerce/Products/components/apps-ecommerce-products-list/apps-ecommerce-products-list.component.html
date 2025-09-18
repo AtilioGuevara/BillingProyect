@@ -1,0 +1,215 @@
+<app-navbar></app-navbar>
+
+<app-sidebar></app-sidebar>
+
+<div class="relative min-h-screen">
+  <div class="page-wrapper pt-[calc(theme('spacing.topbar')_*_1.2)] group-data-[layout=horizontal]:pt-[calc(theme('spacing.topbar')_*_1.9)]">
+    <app-page-title [pageTitle]="'Ecommerce'" [Title]="'Product List'"></app-page-title>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="flex flex-wrap items-center gap-5">
+          <div class="grow">
+            <h6 class="mb-1 card-title">Product List</h6>
+            <p class="text-gray-500 dark:text-dark-500">Track your store's progress to boost your sales.</p>
+          </div>
+          <div class="flex flex-wrap gap-2 shrink-0">
+            <button class="btn btn-red btn-icon " *ngIf="checkedRows.length" (click)="deleteSelectedItem()">
+              <lucide-angular name="Trash" class="inline-block size-4"></lucide-angular>
+            </button>
+            <button class="btn btn-sub-gray" (click)="exportTable()">
+              <lucide-angular name="download" class="inline-block ltr:mr-1 rtl:ml-1 align-center size-4">
+              </lucide-angular>
+              Export
+            </button>
+            <a [routerLink]="['/apps-ecommerce-create-products']" class="btn btn-primary">
+              <lucide-angular name="plus" class="inline-block ltr:mr-1 rtl:ml-1 align-center size-4"></lucide-angular>
+              Add Product
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="flex flex-wrap justify-between gap-2">
+          <div>
+            <div class="relative group/form">
+              <input type="text" class="ltr:pl-9 rtl:pr-9 form-input ltr:group-[&.right]/form:pr-9 rtl:group-[&.right]/form:pl-9 ltr:group-[&.right]/form:pl-4 rtl:group-[&.right]/form:pr-4" placeholder="Search for ..." (input)="onSearch($event)">
+              <div class="absolute inset-y-0 flex items-center text-gray-500 dark:text-dark-500 ltr:left-3 rtl:right-3 ltr:group-[&.right]/form:right-3 rtl:group-[&.right]/form:left-3 ltr:group-[&.right]/form:left-auto rtl:group-[&.right]/form:right-auto focus:outline-hidden">
+                <lucide-angular name="search" class="size-4"></lucide-angular>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div class="flex items-center gap-3">
+              <button class="btn btn-red btn-icon shrink-0" *ngIf="selectedRows.length" (click)="delProd()">
+                <lucide-angular name="+" class="inline-block size-4"></lucide-angular>
+              </button>
+              <ng-select class="filter-ng-select" [items]="categories" bindLabel="category" [(ngModel)]="selectedCategory" placeholder="Select a category" (change)="catgoryChange()" (clear)="resetFilters()">
+              </ng-select>
+              <div class="dropdown shrink-0">
+                <button type="button" title="dropdown-button" class="btn btn-sub-gray" domixDropdownToggle [dropdownMenu]="dropdown1">
+                  <lucide-angular name="filter" class="inline-block ltr:mr-1 rtl:ml-1 align-center size-4">
+                  </lucide-angular>
+                  Filters
+                </button>
+
+                <div class="p-3 dropdown-menu dropdown-right !w-64 !fixed" #dropdown1>
+
+                  <h6 class="mb-4">Filter Options</h6>
+
+                  <form>
+                    <h6 class="mb-2 text-sm">Status</h6>
+
+                    <div class="grid grid-cols-2 gap-4" (click)="stopPropagation($event)">
+                      <div class="input-check-group">
+                        <input id="publishedCheckboxFilter" class="input-check input-check-primary" type="checkbox" [(ngModel)]="selectedFilters.status.published" name="published" value="Published" (change)="onStatusChange()" />
+                        <label for="publishedCheckboxFilter" class="input-check-label">Published</label>
+                      </div>
+                      <div class="input-check-group">
+                        <input id="inactiveCheckboxFilter" class="input-check input-check-primary" type="checkbox" [(ngModel)]="selectedFilters.status.inactive" name="inactive" value="Inactive" (change)="onStatusChange()" />
+                        <label for="inactiveCheckboxFilter" class="input-check-label">Inactive</label>
+                      </div>
+                      <div class="col-span-2">
+                        <label class="mb-3 form-label">Price Range</label>
+                        <ngx-slider [(value)]="selectedFilters.minPrice" [(highValue)]="selectedFilters.maxPrice" [options]="sliderOptions" (userChangeEnd)="applyFilters()"></ngx-slider>
+                      </div>
+                    </div>
+
+                    <div class="flex items-center justify-end gap-2 pt-1 mt-5">
+                      <button type="reset" class="btn-sm btn btn-sub-gray" (click)="resetFilters()">
+                        Reset
+                      </button>
+                      <!-- <button type="submit" class="btn-sm btn btn-primary" (click)="applyFilters()">
+                                                Apply
+                                            </button> -->
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="pt-0 card-body">
+        <div>
+          <div class="overflow-x-auto table-box">
+            <table class="table hovered">
+              <tbody>
+                <tr class="text-gray-500 bg-gray-100 dark:bg-dark-850 dark:text-dark-500">
+                  <th *ngFor="let col of columnDefs" class="!font-medium cursor-pointer">
+                    <div class="flex items-center gap-space">
+                      <div class="!font-medium" *ngIf="col.headerCheckbox">
+                        <div class="input-check-group">
+                          <label for="checkboxAll" class="hidden input-check-label"></label>
+                          <input id="checkboxAll" class="input-check input-check-primary" type="checkbox" [(ngModel)]="headerCheckBox" (change)="headerCheckBoxChange()" />
+                        </div>
+                      </div>
+                      <div (click)="onSortChange(col)">
+                        {{col.headerName}} <span *ngIf="col.sortable">
+                          {{ col.sortDiraction === 'asc' ? '↑' : '↓' }}</span>
+                      </div>
+                    </div>
+                  </th>
+                </tr>
+                <ng-container *ngIf="displayedData.length > 0">
+                  <ng-container *ngFor="let product of displayedData; let index = index">
+                    <tr>
+                      <td class="whitespace-nowrap">
+                        <div class="flex items-center gap-space">
+                          <div class="!font-medium" *ngIf="hasHeaderCheckbox">
+                            <div class="input-check-group">
+                              <label for="checkboxAll" class="hidden input-check-label"></label>
+                              <input id="checkboxAll" class="input-check input-check-primary" type="checkbox" [checked]="product.checked" (change)="onRowCheckboxChange(index)" />
+                            </div>
+                          </div>
+                          <a href="javascript:void(0);" class="link link-primary">{{ product.productID }}</a>
+                        </div>
+                      </td>
+                      <td class="whitespace-nowrap">
+                        <div class="flex items-center gap-2">
+                          <div class="flex items-center justify-center p-1 border border-gray-200 rounded-sm dark:border-dark-800 size-9">
+                            <img [src]="product.image" alt="" class="rounded">
+                          </div>
+                          <h6><a href="javascript:void(0);" (click)="overviewProduct(product.productID)">{{ product.productName }}</a></h6>
+                        </div>
+                      </td>
+                      <td>{{ product.category }}</td>
+                      <td>{{ product.price }}</td>
+                      <td>{{ product.qty * product.price | currency }}</td>
+                      <td>{{ product.qty }}</td>
+                      <td class="whitespace-nowrap">
+                        <span [ngClass]="product.status ? 'badge badge-green' : 'badge badge-gray' ">
+                          {{product.status ? 'Published' : 'Inactive'}} </span>
+                      </td>
+                      <td class="whitespace-nowrap">
+                        <div class="dropdown">
+                          <button type="button" title="dropdown-button" class="flex items-center text-gray-500 dark:text-dark-500" domixDropdownToggle [dropdownMenu]="dropdown">
+                            <i class="ri-more-2-fill"></i>
+                          </button>
+                          <div #dropdown class="!fixed p-2 dropdown-menu">
+                            <ul>
+                              <li>
+                                <a (click)="overviewProduct(product.productID)" class="dropdown-item hover:!text-red-500">
+                                  <i class="align-middle ltr:mr-2 rtl:ml-2 ri-eye-line"></i> <span>Overview</span>
+                                </a>
+                              </li>
+                              <li>
+                                <a (click)="editProduct(product.productID)" class="dropdown-item">
+                                  <i class="align-middle ltr:mr-2 rtl:ml-2 ri-pencil-line"></i> <span>Edit</span>
+                                </a>
+                              </li>
+                              <li>
+                                <a (click)="delProduct(index)" class="dropdown-item">
+                                  <i class="align-middle ltr:mr-2 rtl:ml-2 ri-delete-bin-line"></i>
+                                  <span>Delete</span>
+                                </a>
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                  </ng-container>
+                </ng-container>
+                <tr>
+                  <ng-container *ngIf="displayedData.length === 0">
+                    <td colspan="10" class="!p-8">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="mx-auto size-12" viewBox="0 0 48 48">
+                        <linearGradient id="SVGID_1__h35ynqzIJzH4_gr1" x1="34.598" x2="15.982" y1="15.982" y2="34.598" gradientUnits="userSpaceOnUse">
+                          <stop offset="0" stop-color="#60e8fe"></stop>
+                          <stop offset=".033" stop-color="#6ae9fe"></stop>
+                          <stop offset=".197" stop-color="#97f0fe"></stop>
+                          <stop offset=".362" stop-color="#bdf5ff"></stop>
+                          <stop offset=".525" stop-color="#dafaff"></stop>
+                          <stop offset=".687" stop-color="#eefdff"></stop>
+                          <stop offset=".846" stop-color="#fbfeff"></stop>
+                          <stop offset="1" stop-color="#fff"></stop>
+                        </linearGradient>
+                        <path fill="url(#SVGID_1__h35ynqzIJzH4_gr1)" d="M40.036,33.826L31.68,25.6c0.847-1.739,1.335-3.684,1.335-5.748c0-7.27-5.894-13.164-13.164-13.164S6.688,12.582,6.688,19.852c0,7.27,5.894,13.164,13.164,13.164c2.056,0,3.995-0.485,5.728-1.326l3.914,4.015l4.331,4.331c1.715,1.715,4.496,1.715,6.211,0C41.751,38.321,41.751,35.541,40.036,33.826z">
+                        </path>
+                        <path fill="none" stroke="#10cfe3" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="3" d="M31.95,25.739l8.086,8.086c1.715,1.715,1.715,4.496,0,6.211l0,0c-1.715,1.715-4.496,1.715-6.211,0l-4.331-4.331">
+                        </path>
+                        <path fill="none" stroke="#10cfe3" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="3" d="M7.525,24.511c-1.771-4.694-0.767-10.196,3.011-13.975c3.847-3.847,9.48-4.817,14.228-2.912">
+                        </path>
+                        <path fill="none" stroke="#10cfe3" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="3" d="M30.856,12.603c3.376,5.114,2.814,12.063-1.688,16.565c-4.858,4.858-12.565,5.129-17.741,0.814">
+                        </path>
+                      </svg>
+                      <p class="mt-2 text-center text-gray-500 dark:text-dark-500">No matching records found</p>
+                    </td>
+                  </ng-container>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <app-domix-pagination [currentPage]="currentPage" [totalPages]="totalPages" [showingStart]="showingStart" [showingEnd]="showingEnd" [totalResults]="gridData.length" (pageChanged)="onPageChange($event)">
+          </app-domix-pagination>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+
+  <app-footer></app-footer>
+
+</div>

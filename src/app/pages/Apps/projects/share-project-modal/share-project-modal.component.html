@@ -1,0 +1,189 @@
+<div class="modal">
+  <div class="modal-wrap modal-center">
+    <div class="modal-header">
+      <h6>Share Project</h6>
+      <button data-modal-close="shareProjectModal" class="link link-red" (click)="close()">
+        <lucide-angular name="x" class="size-5"></lucide-angular>
+      </button>
+    </div>
+    <div class="modal-content">
+      <div class="flex items-center gap-3">
+        <input type="text" id="basicInput1" class="form-input grow" placeholder="name@SRBThemes.com">
+        <button type="button" class="btn btn-primary shrink-0">Send Invite</button>
+      </div>
+      <div class="mt-5">
+        <div class="space-y-3">
+          <div class="flex items-center gap-2">
+            <img src="assets/images/avatar/user-5.png" alt="" class="rounded-full size-7 shrink-0">
+            <h6 class="grow">Ina Payne</h6>
+            <div domixDropdownToggle [dropdownMenu]="dropdown2" class="dropdown shrink-0">
+              <button type="button" class="flex items-center gap-2 text-gray-500 dark:text-dark-500">
+                Admin
+                <svg :class="{ 'transform rotate-180': open }" class="transition-transform duration-300 size-5"
+                  viewBox="0 0 20 20" fill="currentColor">
+                  <path fill-rule="evenodd"
+                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                    clip-rule="evenodd" />
+                </svg>
+              </button>
+
+              <div class="!fixed hidden p-2 dropdown-menu" dropdown-position="right" #dropdown2>
+                <a href="javascript: void(0);" class="dropdown-item">
+                  Edit
+                </a>
+                <a href="javascript: void(0);" class="dropdown-item">
+                  View Only
+                </a>
+                <a href="javascript: void(0);" class="dropdown-item">
+                  Admin
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="flex items-center gap-2">
+            <img src="assets/images/avatar/user-11.png" alt="" class="rounded-full size-7 shrink-0">
+            <h6 class="grow">Robert Freeman</h6>
+            <div domixDropdownToggle [dropdownMenu]="dropdown3" class="dropdown shrink-0">
+              <button type="button" class="flex items-center gap-2 text-gray-500 dark:text-dark-500">
+                View Only
+                <svg :class="{ 'transform rotate-180': open }" class="transition-transform duration-300 size-5"
+                  viewBox="0 0 20 20" fill="currentColor">
+                  <path fill-rule="evenodd"
+                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                    clip-rule="evenodd" />
+                </svg>
+              </button>
+
+              <div class="!fixed hidden p-2 dropdown-menu" dropdown-position="right" #dropdown3>
+                <a href="javascript: void(0);" class="dropdown-item">
+                  Edit
+                </a>
+                <a href="javascript: void(0);" class="dropdown-item">
+                  View Only
+                </a>
+                <a href="javascript: void(0);" class="dropdown-item">
+                  Admin
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="flex items-center gap-2">
+            <img src="assets/images/avatar/user-13.png" alt="" class="rounded-full size-7 shrink-0">
+            <h6 class="grow">Michelle Wile</h6>
+            <div domixDropdownToggle [dropdownMenu]="dropdown4" class="dropdown shrink-0">
+              <button type="button" class="flex items-center gap-2 text-gray-500 dark:text-dark-500">
+                Edit
+                <svg :class="{ 'transform rotate-180': open }" class="transition-transform duration-300 size-5"
+                  viewBox="0 0 20 20" fill="currentColor">
+                  <path fill-rule="evenodd"
+                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                    clip-rule="evenodd" />
+                </svg>
+              </button>
+
+              <div class="!fixed hidden p-2 dropdown-menu" dropdown-position="right" #dropdown4>
+                <a href="javascript: void(0);" class="dropdown-item">
+                  Edit
+                </a>
+                <a href="javascript: void(0);" class="dropdown-item">
+                  View Only
+                </a>
+                <a href="javascript: void(0);" class="dropdown-item">
+                  Admin
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="flex items-center gap-2">
+            <img src="assets/images/avatar/user-14.png" alt="" class="rounded-full size-7 shrink-0">
+            <h6 class="grow">William Keen</h6>
+            <div domixDropdownToggle [dropdownMenu]="dropdown5" class="dropdown shrink-0">
+              <button type="button" class="flex items-center gap-2 text-gray-500 dark:text-dark-500">
+                Edit
+                <svg :class="{ 'transform rotate-180': open }" class="transition-transform duration-300 size-5"
+                  viewBox="0 0 20 20" fill="currentColor">
+                  <path fill-rule="evenodd"
+                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                    clip-rule="evenodd" />
+                </svg>
+              </button>
+
+              <div class="!fixed hidden p-2 dropdown-menu" dropdown-position="right" #dropdown5>
+                <a href="javascript: void(0);" class="dropdown-item">
+                  Edit
+                </a>
+                <a href="javascript: void(0);" class="dropdown-item">
+                  View Only
+                </a>
+                <a href="javascript: void(0);" class="dropdown-item">
+                  Admin
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="flex items-center gap-2">
+            <img src="assets/images/avatar/user-16.png" alt="" class="rounded-full size-7 shrink-0">
+            <h6 class="grow">Carol Kincaid</h6>
+            <div domixDropdownToggle [dropdownMenu]="dropdown6" class="dropdown shrink-0">
+              <button type="button" class="flex items-center gap-2 text-gray-500 dark:text-dark-500">
+                View Only
+                <svg :class="{ 'transform rotate-180': open }" class="transition-transform duration-300 size-5"
+                  viewBox="0 0 20 20" fill="currentColor">
+                  <path fill-rule="evenodd"
+                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                    clip-rule="evenodd" />
+                </svg>
+              </button>
+
+              <div class="!fixed hidden p-2 dropdown-menu" dropdown-position="right" #dropdown6>
+                <a href="javascript: void(0);" class="dropdown-item">
+                  Edit
+                </a>
+                <a href="javascript: void(0);" class="dropdown-item">
+                  View Only
+                </a>
+                <a href="javascript: void(0);" class="dropdown-item">
+                  Admin
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="flex items-center gap-2">
+            <img src="assets/images/avatar/user-17.png" alt="" class="rounded-full size-7 shrink-0">
+            <h6 class="grow">Rachel Jackson</h6>
+            <div domixDropdownToggle [dropdownMenu]="dropdown7" class="dropdown shrink-0">
+              <button type="button" class="flex items-center gap-2 text-gray-500 dark:text-dark-500">
+                Edit
+                <svg :class="{ 'transform rotate-180': open }" class="transition-transform duration-300 size-5"
+                  viewBox="0 0 20 20" fill="currentColor">
+                  <path fill-rule="evenodd"
+                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                    clip-rule="evenodd" />
+                </svg>
+              </button>
+
+              <div class="!fixed hidden p-2 dropdown-menu" dropdown-position="right" #dropdown7>
+                <a href="javascript: void(0);" class="dropdown-item">
+                  Edit
+                </a>
+                <a href="javascript: void(0);" class="dropdown-item">
+                  View Only
+                </a>
+                <a href="javascript: void(0);" class="dropdown-item">
+                  Admin
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <p><a href="javascript: void(0);" class="link link-primary">
+          <lucide-angular name="link" class="inline-block align-middle ltr:mr-1 rtl:ml-1 size-4"></lucide-angular>
+          <span class="align-baseline">Copy
+            URL</span>
+        </a></p>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,79 @@
+<app-page-title [pageTitle]="'Staff'" [Title]="'Holidays'"></app-page-title>
+
+
+<div class="grid grid-cols-12 gap-x-space">
+  <div class="col-span-12 xl:col-span-4 2xl:col-span-3">
+    <div class="bg-gray-100 card dark:bg-dark-850">
+      <div class="card-body">
+        <div class="mx-5 mb-4">
+          <img src="assets/images/hospital/img-01.png" alt="">
+        </div>
+        <div class="flex flex-col gap-4">
+          <div class="relative pl-5 before:absolute before:left-0 before:top-1.5 before:size-2 before:bg-primary-500 before:rounded-full">
+            <p class="mb-2 badge badge-gray">Today - 21 Jan, 2024</p>
+            <h6>World Religion Day</h6>
+          </div>
+          <div class="relative pl-5 before:absolute before:left-0 before:top-1.5 before:size-2 before:bg-yellow-500 before:rounded-full">
+            <p class="mb-2 badge badge-gray">Upcoming - 04 Feb, 2024</p>
+            <h6>World Cancer Day</h6>
+          </div>
+          <div class="relative pl-5 before:absolute before:left-0 before:top-1.5 before:size-2 before:bg-red-500 before:rounded-full">
+            <p class="mb-2 badge badge-gray">Upcoming - 25 May, 2024</p>
+            <h6>African Liberation Day</h6>
+          </div>
+          <div class="relative pl-5 before:absolute before:left-0 before:top-1.5 before:size-2 before:bg-red-500 before:rounded-full">
+            <p class="mb-2 badge badge-gray">Upcoming - 29 Sep, 2024</p>
+            <h6>World Heart Day</h6>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-span-12 xl:col-span-8 2xl:col-span-9 card">
+    <div class="flex items-center gap-3 card-header">
+      <h6 class="card-title grow">Holiday</h6>
+      <button type="button" class="btn btn-primary shrink-0" (click)="openCreateModal(null, null)">
+        <lucide-angular name="CirclePlus" class="inline-block mr-1 size-4"></lucide-angular> Add
+        Holiday
+      </button>
+    </div>
+    <div class="pt-0 card-body">
+      <div>
+        <div class="overflow-x-auto table-box whitespace-nowrap">
+          <table class="table flush">
+            <tbody>
+              <tr class="text-gray-500 bg-gray-100 dark:bg-dark-850 dark:text-dark-500">
+                <th *ngFor="let col of columnDefs" class="!font-medium cursor-pointer">
+                  <div class="flex items-center gap-space">
+                    <div (click)="onSortChange(col)">
+                      {{col.headerName}} <span *ngIf="col.sortable">
+                        {{ col.sortDiraction === 'asc' ? '↑' : '↓' }}</span>
+                    </div>
+                  </div>
+                </th>
+              </tr>
+              <ng-container *ngIf="displayedData.length > 0">
+                <ng-container *ngFor="let holiday of displayedData; let i = index">
+                  <tr class="*:px-3 *:py-2.5">
+                    <td>{{holiday.name}}</td>
+                    <td>{{holiday.date}}</td>
+                    <td>{{holiday.day}}</td>
+                    <td>
+                      <div class="flex items-center gap-2">
+                        <button class="btn btn-sub-gray btn-icon !size-8 rounded-md" title="edit" (click)="openCreateModal(holiday,i)"><i class="ri-pencil-line"></i></button>
+                        <button class="btn btn-sub-red btn-icon !size-8 rounded-md" title="delete" (click)="deleteModal(i)"><i class="ri-delete-bin-line"></i></button>
+                      </div>
+                    </td>
+                  </tr>
+                </ng-container>
+              </ng-container>
+            </tbody>
+          </table>
+        </div>
+
+        <app-domix-pagination [currentPage]="currentPage" [totalPages]="totalPages" [showingStart]="showingStart" [showingEnd]="showingEnd" [totalResults]="displayedData.length" (pageChanged)="onPageChange($event)">
+        </app-domix-pagination>
+      </div>
+    </div>
+  </div>
+</div>

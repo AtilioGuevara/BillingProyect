@@ -1,0 +1,44 @@
+<app-page-title [Title]="'Treemap Charts'" [pageTitle]="'Apexcharts'"></app-page-title>
+
+<div class="grid grid-cols-12 gap-x-space">
+  <div class="col-span-12 md:col-span-6 card">
+    <div class="card-header">
+      <h6 class="card-title">Basic</h6>
+    </div>
+    <div class="card-body">
+      <app-domix-charts [series]="treemapChart.series" [chartOptions]="treemapChart.chartOptions">
+      </app-domix-charts>
+    </div>
+  </div>
+
+  <div class="col-span-12 md:col-span-6 card">
+    <div class="card-header">
+      <h6 class="card-title">Treemap Multiple Series</h6>
+    </div>
+    <div class="card-body">
+      <app-domix-charts [series]="multipleTreemapChart.series" [chartOptions]="multipleTreemapChart.chartOptions">
+      </app-domix-charts>
+    </div>
+  </div>
+
+  <div class="col-span-12 md:col-span-6 card">
+    <div class="card-header">
+      <h6 class="card-title">Color Range</h6>
+    </div>
+    <div class="card-body">
+      <app-domix-charts [series]="colorRangeTreemapChart.series" [chartOptions]="colorRangeTreemapChart.chartOptions">
+      </app-domix-charts>
+    </div>
+  </div>
+
+  <div class="col-span-12 md:col-span-6 card">
+    <div class="card-header">
+      <h6 class="card-title">Distributed</h6>
+    </div>
+    <div class="card-body">
+      <app-domix-charts [series]="distributedTreemapChart.series" [chartOptions]="distributedTreemapChart.chartOptions">
+      </app-domix-charts>
+    </div>
+  </div>
+
+</div>

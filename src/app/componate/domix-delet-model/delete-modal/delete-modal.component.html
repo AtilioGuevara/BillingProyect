@@ -1,0 +1,17 @@
+<div id="deleteModal" class="modal">
+  <div class="modal-wrap modal-xs modal-center">
+    <div class="text-center modal-content p-7">
+      <div
+        class="flex items-center justify-center mx-auto mb-4 text-red-500 rounded-full bg-red-500/10 size-14 backdrop-blur-xl"
+        (click)="closeaDeletModal()">
+        <lucide-angular name="trash-2" class="size-6"></lucide-angular>
+      </div>
+      <h5 class="mb-4">Are you sure you want to delete this Invoice ?</h5>
+      <div class="flex items-center justify-center gap-2">
+        <button class="btn btn-red" (click)="closeaDeletModal(true)">Delete</button>
+        <button class="btn link link-primary"
+          (click)="closeaDeletModal()">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>

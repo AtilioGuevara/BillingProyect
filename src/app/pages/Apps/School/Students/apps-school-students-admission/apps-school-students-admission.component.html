@@ -1,0 +1,94 @@
+<app-page-title [Title]="'Admission Form'" [pageTitle]="'Students'"></app-page-title>
+
+<div class="grid grid-cols-12 gap-x-space">
+  <div class="col-span-12 xl:col-span-8 2xl:col-span-9">
+    <div class="card">
+      <div class="card-header">
+        <ul class="overflow-x-auto tabs-pills">
+          <li (click)="openTab = 1">
+            <a href="javascript:void(0)" [ngClass]="openTab === 1 ? activeClasses : inactiveClasses" class="nav-item">
+              Personal Details
+            </a>
+          </li>
+          <li (click)="openTab = 2">
+            <a href="javascript:void(0)" [ngClass]="openTab === 2 ? activeClasses : inactiveClasses" class="nav-item">
+              Guardian Details
+            </a>
+          </li>
+          <li (click)="openTab = 3">
+            <a href="javascript:void(0)" [ngClass]="openTab === 3 ? activeClasses : inactiveClasses" class="nav-item">
+              Educational Background
+            </a>
+          </li>
+          <li (click)="openTab = 4">
+            <a href="javascript:void(0)" [ngClass]="openTab === 4 ? activeClasses : inactiveClasses" class="nav-item">
+              Documents
+            </a>
+          </li>
+          <li (click)="openTab = 5">
+            <a href="javascript:void(0)" [ngClass]="openTab === 5 ? activeClasses : inactiveClasses" class="nav-item">
+              Application Overview
+            </a>
+          </li>
+        </ul>
+
+      </div>
+      <div class="card-body">
+        <div [ngSwitch]="openTab">
+          <app-personal-details *ngSwitchCase="1" (next)="openTab = 2"></app-personal-details>
+          <app-guardian-details *ngSwitchCase="2" (prev)="openTab = 1" (next)="openTab = 3"></app-guardian-details>
+          <app-educational-background *ngSwitchCase="3" (prev)="openTab = 2" (next)="openTab = 4">
+          </app-educational-background>
+          <app-documents *ngSwitchCase="4" (prev)="openTab = 3" (next)="openTab = 5"></app-documents>
+          <app-application-overview *ngSwitchCase="5"></app-application-overview>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-span-12 xl:col-span-4 2xl:col-span-3">
+    <div class="card">
+      <div class="card-header">
+        <h6 class="card-title">Fees Structure</h6>
+      </div>
+      <div class="card-body">
+        <div class="mb-4 alert-red alert">
+          <span>If the fees are not paid before 01 Aug, 2024, the application will be automatically rejected</span>
+        </div>
+        <form action="javascript: void(0);">
+          <div class="grid items-center grid-cols-12 gap-3">
+            <div class="col-span-12 sm:col-span-4">
+              <label for="courseFrees" class="mb-0 form-label">Course Frees</label>
+            </div>
+            <div class="col-span-12 sm:col-span-8">
+              <input type="text" id="courseFrees" class="form-input" placeholder="$0">
+            </div>
+            <div class="col-span-12 sm:col-span-4">
+              <label for="paidAmount" class="mb-0 form-label">Paid Amount</label>
+            </div>
+            <div class="col-span-12 sm:col-span-8">
+              <input type="text" id="paidAmount" class="form-input" placeholder="$0">
+            </div>
+            <div class="col-span-12 sm:col-span-4">
+              <label for="statuSelect" class="mb-0 form-label">Status</label>
+            </div>
+            <div class="col-span-12 sm:col-span-8">
+              <ng-select class="filter-ng-select" [items]="typeOptions" bindLabel="label" bindValue="value"
+                placeholder="Select Status" formControlName="statusType">
+              </ng-select>
+            </div>
+            <div class="col-span-12 sm:col-span-4">
+              <label for="paidVia" class="mb-0 form-label">Paid Via</label>
+            </div>
+            <div class="col-span-12 sm:col-span-8">
+              <input type="text" id="paidVia" class="form-input" placeholder="N/A">
+            </div>
+          </div>
+          <div class="flex flex-wrap gap-2 mt-5">
+            <button class="btn btn-sub-gray">View Receive</button>
+            <button class="btn btn-primary">Add Account</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,22 @@
+<form [formGroup]="formGroup">
+    <div class="mb-5">
+        <label for="email" class="block mb-2">Gender</label>
+    
+        <div class="flex gap-5">
+            <div class="input-radio-group">
+                <input id="genderMale" x-model="form.gender" value="Male" class="input-radio input-radio-primary" type="radio" formControlName="gender" />
+                <label for="genderMale" class="input-radio-label">Male</label>
+            </div>
+            <div class="input-radio-group">
+                <input id="genderFemale" x-model="form.gender" value="Female" class="input-radio input-radio-primary" type="radio" formControlName="gender"/>
+                <label for="genderFemale" class="input-radio-label">Female</label>
+            </div>
+        </div>
+        <p class="mt-1 text-xs text-red-500" *ngIf="formGroup.get('gender')?.hasError('required')">This filed is required</p>
+    </div>
+    <div class="mb-5">
+        <label for="profession" class="block mb-2 text-sm">Profession</label>
+        <input type="profession" id="profession" class="form-input" x-model="form.proffesion" placeholder="eg. Web Developer" formControlName="profession">
+        <p class="mt-1 text-xs text-red-500" *ngIf="formGroup.get('profession')?.hasError('required')">This filed is required</p>
+    </div>
+</form>

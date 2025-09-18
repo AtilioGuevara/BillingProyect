@@ -1,0 +1,10 @@
+/*
+Template Name: Domiex - Admin & Dashboard Template
+Author: SRBThemes
+Version: 1.0.0
+File: plugins scss files
+*/
+
+@layer base {
+    @import "@ng-select/ng-select/themes/default.theme.css";
+}

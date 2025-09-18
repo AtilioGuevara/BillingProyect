@@ -1,0 +1,45 @@
+<h6 class="mb-3">Application Overview</h6>
+<div class="grid grid-cols-12 gap-space">
+  <!-- Application ID (readonly) -->
+  <div class="col-span-12 sm:col-span-6">
+    <label for="applicationIDInput" class="form-label">Application ID</label>
+    <input type="text" id="applicationIDInput" class="form-input" value="#PEA-1478A5487956236" readonly>
+  </div>
+
+  <!-- Reference Number (editable) -->
+  <div class="col-span-12 sm:col-span-6">
+    <label for="referenceNumberInput" class="form-label">Reference Number</label>
+    <input type="text" id="referenceNumberInput" class="form-input" [(ngModel)]="referenceNumber"
+      placeholder="#PEA-000A0000000000">
+  </div>
+
+  <!-- Date of Application Submission (readonly) -->
+  <div class="col-span-12 sm:col-span-6">
+    <label for="dateOfApplicationSelect" class="form-label">Date of Application Submission</label>
+    <input type="text" id="dateOfApplicationSelect" class="form-input" value="23 June, 2024" readonly>
+  </div>
+
+  <!-- Current Status (readonly badge) -->
+  <div class="col-span-12 sm:col-span-6">
+    <label for="currentStatus" class="form-label">Current Status</label>
+    <span class="badge badge-green">Submitted</span>
+  </div>
+</div>
+
+<!-- Navigation Buttons -->
+<div class="flex flex-wrap items-center gap-2 mt-5 ltr:justify-end rtl:justify-start">
+  <button type="button" class="btn btn-sub-gray" (click)="onPreviousStep()">
+    <lucide-angular name="MoveLeft" class="mr-1 ltr:inline-block rtl:hidden size-4">
+    </lucide-angular>
+    <lucide-angular name="MoveRight" class="ml-1 ltr:hidden rtl:inline-block size-4">
+    </lucide-angular>
+    Previous
+  </button>
+  <button type="button" class="btn btn-primary" (click)="onSubmit()">
+    Submitted Form
+    <lucide-angular name="MoveRight" class="ml-1 ltr:inline-block rtl:hidden size-4">
+    </lucide-angular>
+    <lucide-angular name="MoveLeft" class="mr-1 ltr:hidden rtl:inline-block size-4">
+    </lucide-angular>
+  </button>
+</div>

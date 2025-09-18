@@ -1,0 +1,87 @@
+@layer base {
+    [data-mode=black-white] {
+        @apply grayscale;
+    }
+
+    body {
+        @apply text-base font-body bg-body group-data-[layout=boxed]:m-8 group-data-[layout=boxed]:bg-sky-500 dark:bg-dark-950 dark:text-dark-100;
+    }
+
+    :is(h1, h2, h3, h4, h5, h6) {
+        @apply font-heading;
+        font-weight: var(--font-weight-semibold);
+    }
+
+    h1 {
+        @apply text-4xl;
+    }
+
+    h2 {
+        @apply text-3xl;
+    }
+
+    h3 {
+        @apply text-2xl;
+    }
+
+    h4 {
+        @apply text-xl;
+    }
+
+    h5 {
+        @apply text-lg;
+    }
+
+    h6 {
+        @apply text-base;
+    }
+
+    .list-circle {
+        list-style-type: circle;
+    }
+
+    .list-square {
+        list-style-type: square;
+    }
+
+    .list-roman {
+        list-style-type: upper-roman;
+    }
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(10px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .animate-fadeIn {
+        animation: fadeIn 0.5s ease-in-out;
+    }
+
+    .category-card.active {
+        transform: scale(1.05);
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    }
+
+    .pos-widget-card {
+        .card-body {
+            background: repeating-linear-gradient(-45deg, #ffffff2e, #ffffff0a 35px, #ffffff33 45px);
+        }
+
+        .animate-spin {
+            animation-duration: 20s !important;
+        }
+    }
+
+    .pos-widget-curve {
+        @apply size-12 border-[5px] flex items-center justify-center border-white dark:border-dark-900 absolute -top-0 ltr:-right-0 rtl:-left-0 ltr:rounded-bl-xl rtl:rounded-br-xl bg-white dark:bg-gray-900;
+        @apply before:absolute before:content-[''] before:size-3 ltr:before:rounded-tr-xl rtl:before:rounded-tl-xl before:top-[-5px] ltr:before:left-[-17px] rtl:before:right-[-17px] shadow-white dark:shadow-dark-900 before:shadow-white dark:before:shadow-gray-900 ltr:before:shadow-[0.15rem_-0.13rem_0_0.12rem_var(--tw-shadow-color)] rtl:before:shadow-[-0.15rem_-0.13rem_0_0.12rem_var(--tw-shadow-color)];
+        @apply after:absolute after:content-[''] after:size-3 ltr:after:rounded-tr-xl rtl:after:rounded-tl-xl after:top-[43px] ltr:after:right-[-5px] rtl:after:left-[-5px] shadow-white dark:shadow-dark-900 after:shadow-white dark:after:shadow-gray-900 ltr:after:shadow-[0.15rem_-0.13rem_0_0.12rem_var(--tw-shadow-color)] rtl:after:shadow-[-0.15rem_-0.13rem_0_0.12rem_var(--tw-shadow-color)];
+    }
+}

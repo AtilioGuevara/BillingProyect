@@ -1,0 +1,131 @@
+<div class="flex flex-col gap-2 md:items-center md:flex-row card-header">
+    <div class="flex items-center gap-1">
+        <a href="javascript:void(0);" class="btn btn-icon btn-active-gray" (click)="close()"><lucide-angular name="arrow-left" class="size-4"></lucide-angular></a>
+        <a href="javascript:void(0);" class="btn btn-icon btn-active-gray"><lucide-angular name="archive" class="size-4"></lucide-angular></a>
+        <a href="javascript:void(0);" class="btn btn-icon btn-active-gray"><lucide-angular name="octagon-alert" class="size-4"></lucide-angular></a>
+    </div>
+    <div class="flex items-center gap-1 mx-auto text-gray-500 dark:text-dark-500">
+        <a href="javascript:void(0);" *ngIf="selectedEmailPostion === filterdData.length - 1" (click)="pre(selectedEmailPostion)"><lucide-angular name="ChevronLeft" class="size-4"></lucide-angular></a>
+        <p><span>{{ selectedEmailPostion ? (selectedEmailPostion + 1) : '1'}} </span> of <span>{{filterdData.length}}</span></p>
+        <a href="javascript:void(0);" *ngIf="selectedEmailPostion === 0" (click)="next(selectedEmailPostion)"><lucide-angular name="chevron-right" class="size-4"></lucide-angular></a>
+    </div>
+    <div class="flex items-center gap-1">
+        <a href="javascript:void(0);" class="btn btn-icon btn-active-gray"><lucide-angular name="reply" class="size-4"></lucide-angular></a>
+        <a href="javascript:void(0);" class="btn btn-icon btn-active-gray"><lucide-angular name="clock-3" class="size-4"></lucide-angular></a>
+        <a href="javascript:void(0);" (click)="deleteMail(openMails.id)" class="btn btn-icon btn-active-red"><lucide-angular name="trash-2" class="size-4"></lucide-angular></a>
+    </div>
+</div>
+<ngx-simplebar [options]="options" class="h-[27rem]">
+    <div *ngIf="openMails">
+        <div class="card-body">
+            <div>
+                <div>
+                    <div class="flex items-center gap-2">
+                        <div class="flex items-center justify-center text-red-500 rounded-full bg-red-500/10 shrink-0 size-10">
+                            <ng-container *ngIf="openMails.avatarImage">
+                                <img [src]="openMails.avatarImage" alt="" class="rounded-full">
+                            </ng-container>
+                            <ng-container *ngIf="openMails.avatarText">
+                                <span>{{openMails.avatarText}}</span>
+                            </ng-container>
+                        </div>
+                        <div class="grow">
+                            <h6>{{openMails.sender}} </h6>
+                            <a href="javascript:void(0);" class="link link-primary">{{openMails.email}}</a>
+                        </div>
+                        <p class="text-xs text-gray-500 dark:text-dark-500 shrink-0"> {{openMails.date}}</p>
+                    </div>
+                    <div class="mt-5">
+                        <h6 class="mb-3">{{openMails.subject}}</h6>
+
+                        <div class="space-y-2">
+                            <p>{{openMails.message}}</p>
+                        </div>
+                        <div class="grid grid-cols-1 gap-5 mt-4 md:grid-cols-2">
+                            <ng-container *ngFor="let data of openMails.attachments">
+                                <a class="flex items-center gap-2 p-2 transition duration-300 ease-linear border border-gray-200 border-dashed rounded-md dark:border-dark-800 hover:border-gray-300 dark:hover:border-dark-700 hover:shadow-lg hover:shadow-gray-200 dark:hover:shadow-dark-850">
+                                    <div class="flex items-center justify-center font-semibold text-gray-500 transition duration-200 ease-linear bg-gray-100 rounded-full dark:text-dark-500 dark:bg-dark-850 shrink-0 size-10">
+                                        <lucide-angular [name]="data.type === 'file' ? 'file-text' : 'image'" class="size-4"></lucide-angular>
+                                    </div>
+                                    <div class="grow">
+                                        <h6>{{data.title}}</h6>
+                                        <p class="text-sm text-gray-500 dark:text-dark-500">{{data.size}}</p>
+                                    </div>
+                                    <div class="shrink-0">
+                                        <lucide-angular name="download" class="text-gray-500 dark:text-dark-500 dark:fill-dark-850 size-5 fill-gray-200"></lucide-angular>
+                                    </div>
+                                </a>
+                            </ng-container>
+                        </div>
+                        <p class="mt-4">Best regards,</p>
+                        <p>{{openMails.sender}}</p>
+                    </div>
+                </div>
+                <div *ngIf="openMails.replies.length">
+                    <ng-container *ngFor="let reply of openMails.replies">
+                        <div class="mt-4">
+                            <div class="flex items-center gap-2">
+                                <div class="flex items-center justify-center text-green-500 bg-green-100 rounded-full shrink-0 size-10">
+                                    <ng-container *ngIf="reply.avatarImage">
+                                        <img [src]="reply.avatarImage" alt="" class="rounded-full">
+                                    </ng-container>
+                                    <ng-container *ngIf="reply.avatarText">
+                                        <span>{{reply.avatarText}}</span>
+                                    </ng-container>
+                                </div>
+                                <div class="grow">
+                                    <h6>{{reply.sender}}</h6>
+                                    <a href="javascript:void(0);" class="link link-primary">{{reply.email}}</a>
+                                </div>
+                                <p class="text-xs text-gray-500 shrink-0">{{reply.date}}</p>
+                            </div>
+                            <div class="mt-5">
+                                <h6 class="mb-3">{{reply.subject}}</h6>
+
+                                <div class="space-y-2">
+                                    <p>{{reply.message}}</p>
+                                </div>
+                                <p class="mt-4">Best regards,</p>
+                                <p>{{openMails.sender}}</p>
+                            </div>
+                        </div>
+                    </ng-container>
+                </div>
+            </div>
+        </div>
+    </div>
+</ngx-simplebar>
+<!-- Mail form for reply-->
+<div class="card-body">
+    <div class="mb-0 shadow-none card">
+        <div>
+            <div class="p-4">
+                <div class="flex items-center gap-2">
+                    <p class="text-gray-500 dark:text-dark-500">To:</p>
+                    <input type="text" class="h-auto p-0 border-0 form-input" placeholder="Type email" [formControl]="email">
+                    <a href="javascript:void(0);" class="link link-primary">Cc</a>
+                    <a href="javascript:void(0);" class="link link-primary">Bcc</a>
+                </div>
+                <span class="text-red-500" *ngIf="email.hasError('required') && email.touched">This filed is required</span>
+                <span class="text-red-500" *ngIf="email.hasError('pattern') && email.touched">Please enter vaild email</span>
+            </div>
+            <div class="p-4 pt-1 card-body">
+                <textarea class="h-auto p-0 border-0 resize-none form-input" rows="3" placeholder="Type something ..." [formControl]="message"></textarea>
+                <span class="text-red-500" *ngIf="message.hasError('required') && message.touched">This filed is required</span>
+                <div class="flex flex-wrap items-center gap-3">
+                    <div class="shrink-0">
+                        <label for="sendImages" class="btn btn-active-gray btn-icon">
+                            <lucide-angular name="image" class="size-5"></lucide-angular>
+                        </label>
+                        <input type="file" id="sendImages" class="hidden">
+                    </div>
+                    <button type="button" class="link link-primary shrink-0"><lucide-angular name="link" class="size-5"></lucide-angular></button>
+                    <button type="button" class="link link-primary shrink-0"><lucide-angular name="pencil" class="size-5"></lucide-angular></button>
+                    <button type="button" class="link link-yellow shrink-0"><lucide-angular name="smile" class="size-5"></lucide-angular></button>
+                    <button type="button" class="ml-auto btn btn-sub-gray shrink-0">Draft</button>
+                    <button class="btn btn-primary shrink-0" (click)="save()">Send Now</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

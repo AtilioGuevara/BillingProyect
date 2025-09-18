@@ -1,0 +1,15 @@
+<div [attr.drawer-end]="config.position === 'end' ? '' : null" [attr.drawer-start]="config.position === 'start' ? '' : null" [attr.drawer-top]="config.position === 'top' ? '' : null" [attr.drawer-bottom]="config.position === 'bottom' ? '' : null" class="drawer fixed">
+    <div class="drawer-header">
+        <h6>{{config.title}}</h6>
+        <button (click)="closeDrawer()">
+            <lucide-angular name="x" class="link link-red"></lucide-angular>
+        </button>
+    </div>
+    <div class="drawer-content">
+        <h6 class="mb-4 text-15">Drawer Content</h6>
+        <p class="text-slate-500 dark:text-dark-500">{{config.content}}</p>
+    </div>
+    <div class="drawer-footer">
+        <h6>Drawer Footer</h6>
+    </div>
+</div>

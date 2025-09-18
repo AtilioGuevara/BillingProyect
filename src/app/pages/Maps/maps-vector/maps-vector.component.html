@@ -1,0 +1,74 @@
+<app-page-title [Title]="'Vector'" [pageTitle]="'Maps'"></app-page-title>
+
+
+<div class="grid grid-cols-12 gap-x-space">
+  <div class="col-span-12 card">
+    <div class="card-header">
+      <h6 class="card-title">Basic</h6>
+    </div>
+    <div class="card-body">
+      <div id="world-map-markers" class="h-96"></div>
+    </div>
+  </div>
+
+  <div class="col-span-12 md:col-span-6 card">
+    <div class="card-header">
+      <h6 class="card-title">Markers</h6>
+    </div>
+    <div class="card-body">
+      <div id="markersMap" class="h-96"></div>
+    </div>
+  </div>
+
+  <div class="col-span-12 md:col-span-6 card">
+    <div class="card-header">
+      <h6 class="card-title">Image Marker</h6>
+    </div>
+    <div class="card-body">
+      <div id="imageMarkersMap" class="h-96"></div>
+    </div>
+  </div>
+
+  <div class="col-span-12 md:col-span-6 card">
+    <div class="card-header">
+      <h6 class="card-title">Line Style</h6>
+    </div>
+    <div class="card-body">
+      <div id="lineStyleMap" class="h-96"></div>
+    </div>
+  </div>
+
+  <div class="col-span-12 md:col-span-6 card">
+    <div class="card-header">
+      <h6 class="card-title">With Tooltip</h6>
+    </div>
+    <div class="card-body">
+      <div id="tooltipMap" class="h-96"></div>
+    </div>
+  </div>
+
+  <div class="col-span-12 md:col-span-6 card">
+    <div class="card-header">
+      <h6 class="card-title">Data Series</h6>
+    </div>
+    <div class="card-body">
+      <div id="dataSeriesMap" class="h-96"></div>
+    </div>
+  </div>
+
+  <div class="col-span-12 md:col-span-6 card">
+    <div class="card-header">
+      <h6 class="card-title">Reflect user location</h6>
+    </div>
+    <div class="card-body">
+      <div id="userLocationMap" class="h-96"></div>
+      <div class="flex gap-5">
+        <button id="request-location" class="text-white btn" style="background-color: rgb(0, 162, 255);">Find My
+          Location</button>
+        <button id="clear-location" class="text-white btn" style="background-color: #ef4444;">Clear Location</button>
+      </div>
+      <div id="location-display" style="margin-top: 10px;"></div>
+    </div>
+  </div>
+
+</div>

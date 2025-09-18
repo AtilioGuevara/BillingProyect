@@ -1,0 +1,188 @@
+<app-page-title [Title]="'Files'" [pageTitle]="'Projects'"></app-page-title>
+
+
+<div class="card">
+  <div class="relative overflow-hidden rounded-md-t h-44 bg-primary-500/10">
+    <div class="border-[60px] border-t-primary-500 border-l-primary-500 absolute opacity-10 -top-2 ltr:right-0 rtl:left-0 rotate-45 size-96">
+    </div>
+    <div class="border-[60px] border-green-500 absolute opacity-10 top-20 ltr:right-8 rtl:left-8 rotate-45 size-80">
+    </div>
+    <div class="border-[60px] border-pink-500 absolute opacity-10 top-36 ltr:right-28 rtl:left-28 rotate-45 size-40">
+    </div>
+  </div>
+  <div class="card-body">
+    <div class="relative mb-6">
+      <div class="flex flex-wrap gap-5">
+        <div class="relative flex items-center justify-center bg-white border border-gray-200 rounded-md shadow-lg dark:bg-dark-900 dark:border-dark-800 shadow-gray-100 dark:shadow-dark-850 -mt-14 size-28 shrink-0">
+          <img src="assets/images/brands/img-02.png" alt="" class="mx-auto size-16">
+        </div>
+        <div class="grow">
+          <h5 class="mb-1">AI Model Development <span class="leading-normal ltr:ml-1 rtl:mr-1 badge badge-yellow">In
+              Progress</span></h5>
+          <p class="text-gray-500 dark:text-dark-500">Create Date: 25 Jan, 2024</p>
+        </div>
+        <div class="flex items-center gap-3 shrink-0">
+          <button type="button" class="btn btn-primary" (click)="openModal()">Add User</button>
+          <div class="dropdown">
+            <button type="button" title="dropdown-button" class="btn-icon-text btn-icon btn-sub-gray btn" domixDropdownToggle [dropdownMenu]="dropdown1">
+              <lucide-angular name="ellipsis" class="size-5"></lucide-angular>
+            </button>
+
+            <div class="!fixed p-2 dropdown-menu dropdown-right" #dropdown1>
+              <a href="javascript: void(0);" class="dropdown-item">
+                Create Invoice
+              </a>
+
+              <a href="javascript: void(0);" class="dropdown-item">
+                Generate Billing
+              </a>
+
+              <a href="javascript: void(0);" class="dropdown-item">
+                Delete Project
+              </a>
+              <a href="javascript: void(0);" class="dropdown-item">
+                Settings
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-12 gap-5 mb-5">
+      <div class="col-span-12 p-3 text-center border border-gray-200 border-dashed rounded-md dark:border-dark-800 sm:col-span-6 md:col-span-3 xl:col-span-2">
+        <h6 class="mb-1">31 May, 2024</h6>
+        <p class="text-gray-500 dark:text-dark-500">Due Date</p>
+      </div>
+      <div class="col-span-12 p-3 text-center border border-gray-200 border-dashed rounded-md dark:border-dark-800 sm:col-span-6 md:col-span-3 xl:col-span-2">
+        <h6 class="mb-1">$25,000</h6>
+        <p class="text-gray-500 dark:text-dark-500">Budget ($)</p>
+      </div>
+      <div class="col-span-12 p-3 text-center border border-gray-200 border-dashed rounded-md dark:border-dark-800 sm:col-span-6 md:col-span-3 xl:col-span-2">
+        <h6 class="mb-1">$8,000</h6>
+        <p class="text-gray-500 dark:text-dark-500">Total Spend ($)</p>
+      </div>
+      <div class="col-span-12 p-3 text-center border border-gray-200 border-dashed rounded-md dark:border-dark-800 sm:col-span-6 md:col-span-3 xl:col-span-2">
+        <div class="dropdown">
+
+          <button domixDropdownToggle [dropdownMenu]="dropdown10" type="button" class="flex gap-2 p-0 btn text-start">
+            <img [src]="currentUser.image" alt="" class="rounded-full size-10 shrink-0">
+            <span class="block grow">
+              <span class="text-gray-500 dark:text-dark-500">{{ currentUser.role }}</span>
+              <span class="block font-medium">{{ currentUser.name }}</span>
+            </span>
+            <svg :class="{ 'transform rotate-180': open }" class="text-gray-400 transition-transform duration-300 size-5" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+            </svg>
+          </button>
+
+          <div class="!fixed p-2 dropdown-menu dropdown-right !w-52" #dropdown10>
+            <a *ngFor="let user of users" href="javascript: void(0);" (click)="selectUser(user)" [ngClass]="{ 'active': isActive(user) }" class="dropdown-item">
+              <img [src]="user.image" alt="" class="rounded-full size-8 shrink-0">
+              <h6>{{ user.name }}</h6>
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="grid grid-cols-12 mb-space">
+      <div class="col-span-4">
+        <h6 class="mb-1">Assigned To:</h6>
+        <div class="flex -space-x-3 rtl:space-x-reverse">
+          <a href="javascript:void(0);" title="avatar link" class="transition duration-300 ease-linear hover:z-10" tooltipStr="Ina Payne"><img class="border-2 border-white rounded-full dark:border-dark-900 size-10" src="assets/images/avatar/user-5.png" alt=""></a>
+          <a href="javascript:void(0);" title="avatar link" class="transition duration-300 ease-linear hover:z-10" tooltipStr="Robert Freeman"><img class="border-2 border-white rounded-full dark:border-dark-900 size-10" src="assets/images/avatar/user-11.png" alt=""></a>
+          <a href="javascript:void(0);" title="avatar link" class="transition duration-300 ease-linear hover:z-10" tooltipStr="Michelle Wile"><img class="border-2 border-white rounded-full dark:border-dark-900 size-10" src="assets/images/avatar/user-13.png" alt=""></a>
+          <a href="javascript:void(0);" title="avatar link" class="transition duration-300 ease-linear hover:z-10" tooltipStr="William Keen"><img class="border-2 border-white rounded-full dark:border-dark-900 size-10" src="assets/images/avatar/user-14.png" alt=""></a>
+          <a href="javascript:void(0);" title="avatar link" class="transition duration-300 ease-linear hover:z-10" tooltipStr="Carol Kincaid"><img class="border-2 border-white rounded-full dark:border-dark-900 size-10" src="assets/images/avatar/user-16.png" alt=""></a>
+          <a href="javascript:void(0);" title="avatar link" class="transition duration-300 ease-linear hover:z-10" tooltipStr="Rachel Jackson"><img class="border-2 border-white rounded-full dark:border-dark-900 size-10" src="assets/images/avatar/user-17.png" alt=""></a>
+        </div>
+      </div>
+      <div class="col-span-4">
+        <h6 class="mb-1">Report To:</h6>
+        <div class="flex -space-x-3 rtl:space-x-reverse">
+          <a href="javascript:void(0);" title="avatar link" class="transition duration-300 ease-linear hover:z-10" tooltipStr="Leal Bureau"><img class="border-2 border-white rounded-full dark:border-dark-900 size-10" src="assets/images/avatar/user-20.png" alt=""></a>
+          <a href="javascript:void(0);" title="avatar link" class="transition duration-300 ease-linear hover:z-10" tooltipStr="Julie Seltzer"><img class="border-2 border-white rounded-full dark:border-dark-900 size-10" src="assets/images/avatar/user-18.png" alt=""></a>
+        </div>
+      </div>
+    </div>
+
+    <ul class="overflow-x-auto whitespace-normal tabs-pills">
+      <li>
+        <a routerLink="/apps-projects-overview" class="nav-item [&.active]:bg-primary-500 [&.active]:text-primary-50 active">
+          <lucide-angular name="Eye" class="inline-block ltr:mr-1 rtl:ml-1 size-4"></lucide-angular> <span class="align-middle">Overview</span>
+        </a>
+      </li>
+      <li>
+        <a routerLink="/apps-projects-roadmap" class="cursor-pointer nav-item [&.active]:bg-primary-500 [&.active]:text-primary-50">
+          <lucide-angular name="sparkles" class="inline-block ltr:mr-1 rtl:ml-1 size-4"></lucide-angular> <span class="align-middle">RoadMap</span>
+        </a>
+      </li>
+      <li>
+        <a routerLink="/apps-projects-task" class="cursor-pointer nav-item [&.active]:bg-primary-500 [&.active]:text-primary-50">
+          <lucide-angular name="AlignLeft" class="inline-block ltr:mr-1 rtl:ml-1 size-4"></lucide-angular> <span class="align-middle">Tasks</span>
+        </a>
+      </li>
+      <li>
+        <a routerLink="/apps-projects-files" class="cursor-pointer nav-item [&.active]:bg-primary-500 [&.active]:text-primary-50">
+          <lucide-angular name="FileText" class="inline-block ltr:mr-1 rtl:ml-1 size-4"></lucide-angular> <span class="align-middle">Files</span>
+        </a>
+      </li>
+      <li>
+        <a routerLink="/apps-projects-users" class="cursor-pointer nav-item [&.active]:bg-primary-500 [&.active]:text-primary-50">
+          <lucide-angular name="UserRound" class="inline-block ltr:mr-1 rtl:ml-1 size-4"></lucide-angular> <span class="align-middle">Users</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="grid grid-cols-12 gap-x-space">
+  <div class="col-span-12 card">
+    <div class="card-header">
+      <h6 class="card-title">Project Overview</h6>
+    </div>
+    <div class="card-body">
+      <p class="mb-3 text-gray-500 dark:text-dark-500">The goal of this project is to develop an advanced AI model
+        capable of predictive analytics within the e-commerce domain. This model will leverage machine learning
+        techniques to analyze customer behavior, forecast sales trends, and optimize marketing strategies, ultimately
+        enhancing the overall customer experience and boosting revenue for e-commerce platforms.</p>
+      <h6 class="mb-2">Objectives:</h6>
+      <ul class="mb-5 space-y-2 list-inside list-circle">
+        <li>Customer Behavior Analysis</li>
+        <li>Sales Forecasting</li>
+        <li>Marketing Optimization</li>
+        <li>Personalized Recommendations</li>
+        <li>Performance Monitoring and Evaluation</li>
+      </ul>
+
+      <h6 class="mb-2">Deliverables:</h6>
+      <ul class="space-y-2 list-inside list-circle">
+        <li>Data Requirements Document</li>
+        <li>Data Extraction Scripts</li>
+        <li>Cleaned and Transformed Datasets</li>
+        <li>Data Quality Report</li>
+        <li>Data Storage Setup</li>
+      </ul>
+    </div>
+  </div>
+  <div class="col-span-12 md:col-span-6 lg:col-span-8 card">
+    <div class="card-header">
+      <h6 class="card-title">Working Hours</h6>
+    </div>
+    <div class="card-body">
+      <app-domix-charts [series]="lineChart.series" [chartOptions]="lineChart.chartOptions">
+      </app-domix-charts>
+    </div>
+  </div>
+  <div class="col-span-12 md:col-span-6 lg:col-span-4 card">
+    <div class="card-header">
+      <h6 class="card-title">Task Activities</h6>
+    </div>
+    <div class="card-body">
+      <app-domix-charts [series]="taskChart.series" [chartOptions]="taskChart.chartOptions">
+      </app-domix-charts>
+    </div>
+  </div>
+</div>

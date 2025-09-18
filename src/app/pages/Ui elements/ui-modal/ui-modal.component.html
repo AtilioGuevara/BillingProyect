@@ -1,0 +1,61 @@
+<app-page-title [pageTitle]="'Ui'" [Title]="'Modal'"></app-page-title>
+
+<div class="grid grid-cols-1 gap-x-space">
+    <div class="card">
+        <div class="card-header">
+            <h6 class="card-title">Basic</h6>
+        </div>
+        <div class="card-body">
+            <button (click)="openPositionModal('center')" type="button" class="btn btn-primary">Default Modal</button>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-header">
+            <h6 class="card-title">Modal Position</h6>
+        </div>
+        <div class="card-body">
+            <div class="flex flex-wrap gap-2">
+                <button (click)="openPositionModal('center')" type="button" class="btn btn-sub-gray">Center Modal</button>
+                <button (click)="openPositionModal('top')" type="button" class="btn btn-sub-gray">Top Modal</button>
+                <button (click)="openPositionModal('tl')" type="button" class="btn btn-sub-gray">Top Left Modal</button>
+                <button (click)="openPositionModal('tr')" type="button" class="btn btn-sub-gray">Top Right Modal</button>
+                <button (click)="openPositionModal('br')" type="button" class="btn btn-sub-gray">Bottom Right Modal</button>
+                <button (click)="openPositionModal('bl')" type="button" class="btn btn-sub-gray">Bottom Left Modal</button>
+            </div>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-header">
+            <h6 class="card-title">Size Modal</h6>
+        </div>
+        <div class="card-body">
+            <div class="flex flex-wrap items-center gap-2">
+                <button (click)="openModal('extra-small')" type="button" class="btn btn-sub-gray">Extra small</button>
+                <button (click)="openModal('sm')" type="button" class="btn btn-sub-gray">Small</button>
+                <button (click)="openModal('lg')" type="button" class="btn btn-sub-gray">Large</button>
+                <button (click)="openModal('xl')" type="button" class="btn btn-sub-gray">Extra Large</button>
+                <button (click)="openModal('2xl')" type="button" class="btn btn-sub-gray">Extra Extra Large</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div id="extra-small" class="hidden modal show">
+    <div class="modal-wrap modal-sm modal-center">
+        <div class="modal-header">
+            <h6>Extra Small Modal</h6>
+            <button class="link link-red" (click)="closeModal('extra-small')">
+                <span class="size-5">X</span>
+            </button>
+        </div>
+        <div class="modal-content">
+            <h6 class="mb-2">Modal Content</h6>
+            <p class="text-gray-500 dark:text-dark-500">They all have something to say beyond the words on the page. They can come across as casual or neutral, exotic or graphic.</p>
+        </div>
+        <div class="modal-footer">
+            <h6>Modal Footer</h6>
+        </div>
+    </div>
+    <div class="hidden backdrop-overlay backdrop-blur-xs" id="backDropDiv"></div>
+</div>

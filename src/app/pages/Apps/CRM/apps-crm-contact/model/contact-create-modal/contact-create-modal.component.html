@@ -1,0 +1,80 @@
+<div id="contactCreateModal" class="modal">
+  <div class="modal-wrap modal-center">
+    <div class="p-2 modal-content">
+      <div class="h-24 p-5 rounded-t-sm bg-gradient-to-r from-primary-500/20 via-pink-500/20 to-green-500/20">
+      </div>
+      <div class="p-4" [formGroup]="fromGroup">
+        <div class="-mt-16">
+          <label for="logo" class="flex items-center justify-center p-2 mx-auto overflow-hidden bg-gray-100 border border-gray-200 rounded cursor-pointer dark:bg-dark-850 dark:border-dark-800 size-32">
+            <img *ngIf="fromGroup.get('image')?.value" [src]="fromGroup.get('image')?.value" class="object-cover w-full h-full">
+            <span *ngIf="!fromGroup.get('image')?.value" class="flex flex-col items-center text-gray-500 dark:text-dark-500">
+              <lucide-angular name="upload"></lucide-angular>
+              <span class="block mt-2">Upload Images</span>
+            </span>
+          </label>
+          <span *ngIf="fromGroup.get('image')?.hasError('required')" class="text-red-500">This Field is required</span>
+          <div class="hidden mt-4">
+            <label class="block">
+              <span class="sr-only">Choose profile photo</span>
+              <input type="file" name="logo" id="logo" (change)="onFileChange($event)" class="block w-full text-sm file:rounded-md focus:outline-0 text-slate-500 file:mr-4 file:py-2 file:px-4 file:border-0 file:text-sm file:font-semibold file:bg-violet-50 file:text-violet-700 hover:file:bg-violet-100" formControlName="image" />
+            </label>
+          </div>
+        </div>
+        <div class="grid grid-cols-12 gap-4 mt-5">
+          <div class="col-span-12">
+            <label for="fullNameInput" class="form-label">Full Name</label>
+            <input type="text" id="fullNameInput" class="form-input" placeholder="Full name" formControlName="contactName">
+            <span *ngIf="fromGroup.get('contactName')?.hasError('required')" class="text-red-500"> This Filed is
+              Required</span>
+          </div>
+          <div class="col-span-12">
+            <label for="companyNameInput" class="form-label">Company Name</label>
+            <input type="text" id="companyNameInput" class="form-input" placeholder="Company name" formControlName="company">
+            <span *ngIf="fromGroup.get('company')?.hasError('required')" class="text-red-500"> This Filed is
+              Required</span>
+          </div>
+          <div class="col-span-12">
+            <label for="roleInput" class="form-label">Role</label>
+            <input type="text" id="roleInput" class="form-input" placeholder="Role" formControlName="role">
+            <span *ngIf="fromGroup.get('role')?.hasError('required')" class="text-red-500"> This Filed is
+              Required</span>
+          </div>
+          <div class="col-span-12">
+            <label for="emailInput" class="form-label">Email</label>
+            <input type="email" id="emailInput" class="form-input" placeholder="support@SRBThemes.com" formControlName="email">
+            <span *ngIf="fromGroup.get('email')?.hasError('required')" class="text-red-500"> This Filed is
+              Required</span>
+          </div>
+          <div class="col-span-12">
+            <label for="phoneNumberInput" class="form-label">Phone Number</label>
+            <input type="tel" id="phoneNumberInput" class="form-input" placeholder="+(00) 0000 000" formControlName="phoneNumber">
+            <span *ngIf="fromGroup.get('phoneNumber')?.hasError('required')" class="text-red-500">This Field is Required</span>
+            <span *ngIf="fromGroup.get('phoneNumber')?.hasError('pattern')" class="text-red-500">Invalid phone number format</span>
+          </div>
+          <div class="col-span-6">
+            <label for="websiteInput" class="form-label">WebSite</label>
+            <input type="url" id="websiteInput" class="form-input" placeholder="www.srbthemes.com" formControlName="website">
+            <span *ngIf="fromGroup.get('website')?.hasError('required')" class="text-red-500"> This Filed is
+              Required</span>
+          </div>
+          <div class="col-span-6">
+            <label for="statusSelect" class="form-label">Status</label>
+            <ng-select class="filter-ng-select" [items]="typeOptions" bindLabel="label" bindValue="value" placeholder="Select event type" formControlName="status">
+            </ng-select>
+            <span *ngIf="fromGroup.get('status')?.hasError('required')" class="text-red-500"> This Filed is
+              Required</span>
+          </div>
+          <div class="flex items-center justify-end col-span-12 gap-2 mt-5">
+            <button type="button" class="btn btn-active-red" (click)="close()">
+              <lucide-angular name="x" class="inline-block size-4"></lucide-angular> <span class="align-baseline">Close</span>
+            </button>
+            <button type="button" class="btn btn-primary" (click)="closeEventModal()">{{!config ? 'Add' : 'Update' }}
+              Contact
+              <lucide-angular name="plus" class="inline-block ltr:mr-1 rtl:ml-1 size-4"></lucide-angular>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

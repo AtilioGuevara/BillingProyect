@@ -1,0 +1,264 @@
+<app-page-title [Title]="'Overview'" [pageTitle]="'Teachers'"></app-page-title>
+
+<div class="grid grid-cols-12 gap-x-space">
+  <div class="col-span-12 xl:col-span-8 2xl:col-span-9 xl:row-span-3">
+    <div class="card">
+      <div class="card-body">
+        <div class="gap-4 mb-5 md:flex">
+          <img src="assets/images/avatar/user-4.png" alt="" class="rounded-md size-32 shrink-0">
+          <div class="mt-5 grow md:mt-0">
+            <h6 class="mb-1">Emily Davis</h6>
+            <div class="flex gap-3 mb-4 item-center">
+              <p class="text-gray-500 dark:text-dark-500"><i class="ri-building-line"></i> <span class="align-bottom">Lecturer</span></p>
+              <p class="text-gray-500 dark:text-dark-500"><i class="ri-map-pin-line"></i> <span class="align-bottom">Argentina</span></p>
+              <p class="text-gray-500 dark:text-dark-500"><i class="ri-calendar-event-line"></i> <span class="align-bottom">12 Jul, 2024</span></p>
+            </div>
+            <p class="mb-2 text-gray-500 dark:text-dark-500">
+              <lucide-angular name="phone" class="inline-block size-4 fill-gray-100 dark:fill-dark-850">
+              </lucide-angular> <span class="align-bottom">+1 712 25 1525</span>
+            </p>
+            <p class="mb-3 text-gray-500 dark:text-dark-500">
+              <lucide-angular name="mail" class="inline-block size-4 fill-gray-100 dark:fill-dark-850"></lucide-angular>
+              <span class="align-bottom">michael&#64;gmail.com</span>
+            </p>
+          </div>
+          <div class="absolute top-0 shrink-0 ltr:right-0 rtl:left-0">
+            <a routerLink="/apps-school-teachers-list" class="cursor-pointer btn btn-sub-gray btn-icon">
+              <lucide-angular name="pencil" class="size-4"></lucide-angular>
+            </a>
+          </div>
+        </div>
+        <div class="my-5 space-y-5 overflow-x-auto whitespace-nowrap">
+          <div class="grid grid-cols-12 gap-6">
+            <div class="col-span-12 lg:col-span-6 xl:col-span-3">
+              <p class="mb-1 text-gray-500 dark:text-dark-500">Title</p>
+              <h6><span class="badge badge-red">Lecturer</span></h6>
+            </div>
+            <div class="col-span-12 lg:col-span-6 xl:col-span-3">
+              <p class="mb-1 text-gray-500 dark:text-dark-500">Gender</p>
+              <h6>Female</h6>
+            </div>
+            <div class="col-span-12 lg:col-span-6 xl:col-span-3">
+              <p class="mb-1 text-gray-500 dark:text-dark-500">Religion</p>
+              <h6>Islam</h6>
+            </div>
+            <div class="col-span-12 lg:col-span-6 xl:col-span-3">
+              <p class="mb-1 text-gray-500 dark:text-dark-500">Father Occupation</p>
+              <h6>Web Developer</h6>
+            </div>
+            <div class="col-span-12 lg:col-span-6 xl:col-span-3">
+              <p class="mb-1 text-gray-500 dark:text-dark-500">Joining Date</p>
+              <h6>12 Jul 2024</h6>
+            </div>
+            <div class="col-span-12 lg:col-span-6 xl:col-span-3">
+              <p class="mb-1 text-gray-500 dark:text-dark-500">Salary</p>
+              <h6>$52,000</h6>
+            </div>
+            <div class="col-span-12 lg:col-span-6 xl:col-span-3">
+              <p class="mb-1 text-gray-500 dark:text-dark-500">Experience</p>
+              <h6>9 years</h6>
+            </div>
+            <div class="col-span-12 lg:col-span-6 xl:col-span-3">
+              <p class="mb-1 text-gray-500 dark:text-dark-500">Email</p>
+              <h6>davis&#64;srbthemes.com</h6>
+            </div>
+            <div class="col-span-12 xl:col-span-6">
+              <div class="whitespace-normal">
+                <p class="mb-1 text-gray-500 dark:text-dark-500">Address</p>
+                <h6>1816 Angus Ave, Simi Valley, Argentina</h6>
+              </div>
+            </div>
+          </div>
+        </div>
+        <p class="mb-3 text-gray-500 dark:text-dark-500">As a dedicated and passionate lecturer, my objective is to
+          create a dynamic and engaging learning environment that fosters intellectual growth and critical thinking. I
+          aim to:</p>
+        <ul class="space-y-2 list-inside list-circle">
+          <li class="text-gray-500 dark:text-dark-500"><strong>Deliver High-Quality Education:</strong> Provide students
+            with comprehensive, up-to-date knowledge in my field of expertise through well-structured lectures,
+            interactive discussions, and practical applications.</li>
+          <li class="text-gray-500 dark:text-dark-500"><strong>Encourage Critical Thinking:</strong> Inspire students to
+            think critically and independently, encouraging them to challenge ideas and explore diverse perspectives.
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="col-span-12 md:col-span-6 xl:col-span-4 2xl:col-span-3">
+    <div class="card">
+      <div class="card-body">
+        <h6 class="mb-6">My Achievements and Milestones</h6>
+        <div class="swiper mySwiper group/swiper" dir="ltr">
+          <div class="swiper-wrapper">
+            <div *ngFor="let achievement of achievements" class="swiper-slide">
+              <div class="py-3 text-center">
+                <div [ngClass]="getIconClass(achievement.color)" class="flex items-center justify-center p-2 mx-auto rounded-full ring-offset-2 dark:ring-offset-dark-900 size-28 ring-2">
+                  <img [src]="achievement.image" alt="" class="size-20">
+                </div>
+                <h6 class="mt-6">{{ achievement.title }}</h6>
+              </div>
+            </div>
+          </div>
+          <div class="swiper-button-next after:font-remix after:text-2xl after:text-gray-800 dark:after:text-dark-50 opacity-0 group-hover/swiper:opacity-100 transition ease-linear duration-300 after:content-['\ea6e']">
+          </div>
+          <div class="swiper-button-prev after:font-remix after:text-2xl after:text-gray-800 dark:after:text-dark-50 opacity-0 group-hover/swiper:opacity-100 transition ease-linear duration-300 after:content-['\ea64']">
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <div class="col-span-12 md:col-span-6 xl:col-span-4 2xl:col-span-3 card">
+    <div class="card-body">
+      <div class="flex items-center justify-center mb-5 text-gray-500 bg-gray-100 rounded-md dark:text-dark-500 dark:bg-dark-850 size-14">
+        <lucide-angular name="GraduationCap"></lucide-angular>
+      </div>
+      <h6 class="mb-1">Upcoming Test</h6>
+      <div *ngIf="show" [@fadeInOut]>
+        <p class="text-gray-500 dark:text-dark-500">
+          <span class="font-semibold">{{ currentExam.subject }}</span>
+          <span class="font-semibold">{{ currentExam.date }}</span>
+        </p>
+      </div>
+      <div class="flex items-center gap-2 mt-4">
+        <button type="button" class="w-full btn btn-sub-gray">Learn More</button>
+        <button type="button" class="w-full btn btn-primary" (click)="nextExam()">Next Exam</button>
+      </div>
+    </div>
+  </div>
+  <div class="col-span-12 md:col-span-6 xl:col-span-4 2xl:col-span-6 card">
+    <div class="flex items-center gap-5 card-header">
+      <h6 class="card-title grow">Time Spend in Lecture</h6>
+      <div class="dropdown shrink-0">
+        <button type="button" class="!flex items-center text-gray-500 dark:text-dark-500" domixDropdownToggle [dropdownMenu]="dropdown1">
+          <lucide-angular name="ellipsis" class="size-5"></lucide-angular>
+        </button>
+        <div class="fixed z-50 p-2 dropdown-menu" #dropdown1>
+          <ul>
+            <li>
+              <a routerLink="/apps-event-overview" class="cursor-pointer dropdown-item">
+                <span>Weekly</span>
+              </a>
+            </li>
+            <li>
+              <a href="javascript: void(0);" data-modal-target="addEventModal" class="dropdown-item">
+                <span>Monthly</span>
+              </a>
+            </li>
+            <li>
+              <a href="javascript: void(0);" data-modal-target="addEventModal" class="dropdown-item">
+                <span>Yearly</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+
+      <app-domix-charts [series]="performanceChart.series" [chartOptions]="performanceChart.chartOptions" class="
+        !min-h-full -ml-4">
+      </app-domix-charts>
+    </div>
+  </div>
+  <div class="col-span-12 md:col-span-6 xl:col-span-4 2xl:col-span-3 card">
+    <div class="card-header">
+      <h6 class="card-title">Create Quiz</h6>
+    </div>
+    <div class="card-body">
+      <div class="flex flex-col gap-4">
+        <div *ngFor="let quiz of quizzes" class="flex items-center gap-3">
+          <div class="relative size-12 shrink-0" dir="ltr">
+            <svg class="size-full" width="36" height="36" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="18" cy="18" r="16" fill="none" class="stroke-current text-sky-500/15" stroke-width="3">
+              </circle>
+              <g class="origin-center transform -rotate-90">
+                <circle cx="18" cy="18" r="16" fill="none" class="stroke-current text-sky-500" stroke-width="3" stroke-dasharray="100" [attr.stroke-dashoffset]="quiz.progress" style="transition: stroke-dashoffset 1s ease-out;"></circle>
+              </g>
+            </svg>
+            <!-- Percentage Text -->
+            <div class="absolute transform -translate-x-1/2 -translate-y-1/2 top-1/2 start-1/2">
+              <span class="text-xs font-bold text-center text-gray-800 dark:text-white">{{ quiz.percent }}%</span>
+            </div>
+          </div>
+          <div class="overflow-hidden grow">
+            <h6 class="mb-1 truncate"><a href="javascript:void(0);">{{ quiz.title }}</a></h6>
+            <div class="flex items-center gap-3">
+              <p class="text-gray-500 grow dark:text-dark-500">Expert: <i class="text-yellow-500 ri-star-s-fill" *ngFor="let star of quiz.stars"></i></p>
+              <button type="button" class="btn btn-green px-2 py-1 text-11" (click)="startQuiz(quiz)"><i class="ri-play-line"></i> Start</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-span-12 md:col-span-6 xl:col-span-4 2xl:col-span-3 card">
+    <div class="card-header">
+      <h6 class="card-title">Upcoming Lecture</h6>
+    </div>
+    <div class="card-body">
+      <div class="space-y-3">
+        <div class="flex gap-3 item-center">
+          <div class="flex items-center justify-center rounded-md shrink-0 text-sky-500 bg-sky-500/15 size-10">
+            <lucide-angular name="FlaskConical" class="size-5"></lucide-angular>
+          </div>
+          <div class="grow">
+            <h6>12 (A)</h6>
+            <p class="text-sm text-gray-500 dark:text-dark-500">09:00AM - 10:15AM</p>
+          </div>
+          <div class="shrink-0">
+            <a href="javascript:void(0);" class="btn btn-red btn-xs"><i class="ri-eye-line"></i> Live</a>
+          </div>
+        </div>
+        <div class="flex gap-3 item-center">
+          <div class="flex items-center justify-center text-purple-500 rounded-md bg-purple-500/10 shrink-0 size-10">
+            <lucide-angular name="scale" class="size-5"></lucide-angular>
+          </div>
+          <div class="grow">
+            <h6>11</h6>
+            <p class="text-sm text-gray-500 dark:text-dark-500">10:15AM - 11:30AM</p>
+          </div>
+          <div class="shrink-0">
+            <a href="javascript:void(0);" class="btn btn-sub-gray btn-xs"><i class="ri-eye-line"></i> Live</a>
+          </div>
+        </div>
+        <div class="flex gap-3 item-center">
+          <div class="flex items-center justify-center text-orange-500 rounded-md bg-orange-500/10 shrink-0 size-10">
+            <lucide-angular name="atom" class="size-5"></lucide-angular>
+          </div>
+          <div class="grow">
+            <h6>10 (B)</h6>
+            <p class="text-sm text-gray-500 dark:text-dark-500">11:30AM - 12:45PM</p>
+          </div>
+          <div class="shrink-0">
+            <a href="javascript:void(0);" class="btn btn-sub-gray btn-xs"><i class="ri-eye-line"></i> Live</a>
+          </div>
+        </div>
+        <div class="flex gap-3 item-center">
+          <div class="flex items-center justify-center text-green-500 rounded-md bg-green-500/10 shrink-0 size-10">
+            <lucide-angular name="HeartPulse" class="size-5"></lucide-angular>
+          </div>
+          <div class="grow">
+            <h6>11 (A)</h6>
+            <p class="text-sm text-gray-500 dark:text-dark-500">02:00PM - 03:15PM</p>
+          </div>
+          <div class="shrink-0">
+            <a href="javascript:void(0);" class="btn btn-sub-gray btn-xs"><i class="ri-eye-line"></i> Live</a>
+          </div>
+        </div>
+        <div class="flex gap-3 item-center">
+          <div class="flex items-center justify-center rounded-md shrink-0 text-primary-500 bg-primary-500/10 size-10">
+            <lucide-angular name="JapaneseYen" class="size-5"></lucide-angular>
+          </div>
+          <div class="grow">
+            <h6>9 (B)</h6>
+            <p class="text-sm text-gray-500 dark:text-dark-500">03:15PM - 05:00PM</p>
+          </div>
+          <div class="shrink-0">
+            <a href="javascript:void(0);" class="btn btn-sub-gray btn-xs"><i class="ri-eye-line"></i> Live</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

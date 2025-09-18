@@ -1,0 +1,71 @@
+<div id="addOrderModal" class="modal">
+    <div class="modal-wrap modal-center">
+        <div class="modal-header">
+            <h6>Add Emp Salary</h6>
+            <button class="link link-red float-end"><lucide-angular name="x" class="size-5"></lucide-angular></button>
+        </div>
+        <div class="modal-content">
+            <form [formGroup]="formGroup">
+                <div class="grid grid-cols-12 gap-5">
+                    <div class="col-span-12">
+                        <label for="customerNameInput" class="form-label">Emp name</label>
+                        <input type="text" id="customerNameInput" class="form-input" formControlName="employeeName">
+                        <span *ngIf="formGroup.get('employeeName')?.hasError('required')" class="text-red-500">
+                            This filed is required
+                        </span>
+                    </div>
+                    <div class="col-span-12">
+                        <label for="customerNameInput" class="form-label">Email</label>
+                        <input type="text" id="customerNameInput" class="form-input" formControlName="email">
+                        <span *ngIf="formGroup.get('email')?.hasError('required')" class="text-red-500">
+                            This filed is required
+                        </span>
+                        <span *ngIf="formGroup.get('email')?.hasError('pattern')" class="text-red-500">
+                            Please enter vaild email
+                        </span>
+                    </div>
+                    <div class="col-span-12">
+                        <label for="customerNameInput" class="form-label">Phone Number</label><span>You must follow this pattern:-<small> 503-552-3629</small></span>
+                        <input type="text" id="customerNameInput" class="form-input" formControlName="phoneNumber">
+                        <span *ngIf="formGroup.get('phoneNumber')?.hasError('required')" class="text-red-500">
+                            This filed is required
+                        </span>
+                        <span *ngIf="formGroup.get('phoneNumber')?.hasError('pattern')" class="text-red-500">
+                            Please enter vailed phone number
+                        </span>
+                    </div>
+                    <div class="col-span-12">
+                        <label for="priceInput" class="form-label">Department</label>
+                        <input type="text" id="priceInput" class="form-input" formControlName="department">
+                        <span *ngIf="formGroup.get('department')?.hasError('required')" class="text-red-500">
+                            This filed is required
+                        </span>
+                    </div>
+                    <div class="col-span-12">
+                        <label for="customerNameInput" class="form-label">Monthly Salary</label>
+                        <input type="text" id="customerNameInput" class="form-input" formControlName="monthlySalary">
+                        <span *ngIf="formGroup.get('monthlySalary')?.hasError('required')" class="text-red-500">
+                            This filed is required
+                        </span>
+                    </div>
+                    <div class="col-span-12">
+                        <label for="paymentStatusSelect" class="form-label">Status</label>
+                        <select id="paymentStatusSelect" formControlName="status" class="form-input">
+                            <option value="Successful">Successful</option>
+                            <option value="Failed">Failed</option>
+                            <option value="Pending">Pending</option>
+                        </select>
+                        <span *ngIf="formGroup.get('status')?.hasError('required')" class="text-red-500">
+                            This filed is required
+                        </span>
+                    </div>
+                </div>
+            </form>
+
+            <div class="flex justify-end gap-2 mt-5">
+                <button type="button" class="btn btn-active-red" (click)="close()">Cancel</button>
+                <button class="btn btn-primary" (click)="onSubmit()">Add Order</button>
+            </div>
+        </div>
+    </div>
+</div>

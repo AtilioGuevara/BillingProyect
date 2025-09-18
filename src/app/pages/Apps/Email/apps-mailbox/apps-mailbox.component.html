@@ -1,0 +1,97 @@
+<app-page-title [pageTitle]="'Apps'" [Title]="'Mailbox'"></app-page-title>
+
+<div class="flex">
+    <div class="rounded-r-none w-80 card shrink-0">
+        <div class="dropdown shrink-0 w-full">
+            <button type="button" class="flex items-center w-full gap-2 text-start card-header" *ngIf="activeUserEmail" domixDropdownToggle [dropdownMenu]="dropdown1">
+                <img [src]="activeUserEmail.image" class="size-9">
+                <div class="grow">
+                    <h6>{{activeUserEmail.name}}</h6>
+                    <p class="text-gray-500 dark:text-dark-500">{{activeUserEmail.email}}</p>
+                </div>
+                <lucide-angular name="chevronDown" class="size-4 shrink-0"></lucide-angular>
+            </button>
+            <div class="!fixed p-2 !w-72 dropdown-menu" #dropdown1>
+                <ul class="space-y-2">
+                    <ng-container *ngFor="let email of userEmail; let i = index">
+                        <li (click)="setSelectedEmail(i)">
+                            <button type="button" class="dropdown-item ltr:text-left rtl:text-right">
+                                <img [src]="email.image" alt="" class="size-9">
+                                <div class="grow">
+                                    <h6>{{email.name}}</h6>
+                                    <p class="text-gray-500 dark:text-dark-500">{{email.email}}</p>
+                                </div>
+                            </button>
+                        </li>
+                    </ng-container>
+                </ul>
+            </div>
+        </div>
+        <div class="card-body">
+            <h6 class="mb-1">Inbox Messages</h6>
+            <p class="text-gray-500 dark:text-dark-500">1487 messages - 26 unread</p>
+            <div data-simplebar>
+                <ul class="mt-5 space-y-3">
+                    <li (click)="setSelectedMenu(emailMenu.Inbox)">
+                        <a class="flex items-center gap-2 link link-primary [&.active]:text-primary-500">
+                            <lucide-angular name="inbox" class="size-4"></lucide-angular> Inbox <span class="ml-auto shrink-0 badge badge-gray">{{messageCount.inbox}}</span>
+                        </a>
+                    </li>
+                    <li (click)="setSelectedMenu(emailMenu.Starred)">
+                        <a href="javascript:void(0);" class="flex items-center gap-2 link link-primary [&.active]:text-primary-500"><lucide-angular name="Star" class="size-4"></lucide-angular> Starred <span class="ml-auto shrink-0 badge badge-gray">{{messageCount.starred}}</span></a>
+                    </li>
+                    <li (click)="setSelectedMenu(emailMenu.Sent)">
+                        <a href="javascript:void(0);" class="flex items-center gap-2 link link-primary [&.active]:text-primary-500"><lucide-angular name="SendHorizontal" class="size-4"></lucide-angular> Sent <span class="ml-auto shrink-0 badge badge-gray">{{messageCount.sent}}</span></a>
+                    </li>
+                    <li (click)="setSelectedMenu(emailMenu.Drafts)">
+                        <a href="javascript:void(0);" class="flex items-center gap-2 link link-primary [&.active]:text-primary-500"><lucide-angular name="SquarePen" class="size-4"></lucide-angular> Drafts <span class="ml-auto shrink-0 badge badge-gray">{{messageCount.drafts}}</span></a>
+                    </li>
+                    <li (click)="setSelectedMenu(emailMenu.Spam)">
+                        <a href="javascript:void(0);" class="flex items-center gap-2 link link-primary [&.active]:text-primary-500"><lucide-angular name="CircleAlert" class="size-4"></lucide-angular> Spam <span class="ml-auto shrink-0 badge badge-gray">{{messageCount.spam}}</span></a>
+                    </li>
+                    <li (click)="setSelectedMenu(emailMenu.Trash)">
+                        <a href="javascript:void(0);" class="flex items-center gap-2 link link-red [&.active]:text-red-500"><lucide-angular name="Trash2" class="size-4"></lucide-angular> Trash <span class="ml-auto shrink-0 badge badge-gray">{{messageCount.trash}}</span></a>
+                    </li>
+                    <li (click)="setSelectedMenu(emailMenu.Important)">
+                        <a href="javascript:void(0);" class="flex items-center gap-2 link link-primary [&.active]:text-primary-500"><lucide-angular name="StepForward" class="size-4"></lucide-angular> Important <span class="ml-auto shrink-0 badge badge-gray">{{messageCount.important}}</span></a>
+                    </li>
+                    <li (click)="setSelectedMenu(emailMenu.Scheduled)">
+                        <a href="javascript:void(0);" class="flex items-center gap-2 link link-primary [&.active]:text-primary-500"><lucide-angular name="Calendar" class="size-4"></lucide-angular> Scheduled <span class="ml-auto shrink-0 badge badge-gray">{{messageCount.scheduled}}</span></a>
+                    </li>
+                </ul>
+
+                <div class="flex mt-4 mb-1">
+                    <h6 class="grow">Labels</h6>
+                    <a href="javascript: void(0);" class="inline-block shrink-0 link link-primary">
+                        <lucide-angular name="plus" class="size-4"></lucide-angular>
+                    </a>
+                </div>
+                <ul class="mt-5 space-y-3">
+                    <li>
+                        <a href="javascript: void(0);" class="flex items-center gap-2 link text-current link-primary [&.active]:text-primary-500">
+                            <lucide-angular name="diamond" class="text-red-500 size-4"></lucide-angular>Team Meetings <span class="ml-auto text-gray-500 dark:text-dark-500 shrink-0">19</span></a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0);" class="flex items-center gap-2 link text-current link-primary [&.active]:text-primary-500"><lucide-angular name="diamond" class="text-green-500 size-4"></lucide-angular> Application <span class="ml-auto text-gray-500 dark:text-dark-500 shrink-0">48</span></a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0);" class="flex items-center gap-2 link text-current link-primary [&.active]:text-primary-500"><lucide-angular name="diamond" class="text-yellow-500 size-4"></lucide-angular> Developers <span class="ml-auto text-gray-500 dark:text-dark-500 shrink-0">3</span></a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0);" class="flex items-center gap-2 link text-current link-primary [&.active]:text-primary-500"><lucide-angular name="diamond" class="text-primary-500 size-4"></lucide-angular> Designers <span class="ml-auto text-gray-500 dark:text-dark-500 shrink-0">7</span></a>
+                    </li>
+                </ul>
+            </div>
+
+            <button type="button" class="w-full mt-4 btn btn-primary" (click)="openComposeModal()">Compose</button>
+        </div>
+    </div>
+
+    <div class="rounded-none border-x-0 card grow" [ngClass]="{'max-w-lg':selectedEmail}">
+        <app-main-indox [data]="getDataMenuWise" (setSelectedItemIndex)="setSelectedItem($event)" (deleteMailIds)="delMail($event)"></app-main-indox>
+    </div>
+
+    <div class="rounded-l-none card grow" *ngIf="selectedEmail">
+        <app-mail-action-section [filterdData]="getDataMenuWise" [selectedEmail]="selectedEmail" (closeSidePannal)="closeSidePannal($event)" (delectedMailIndex)="delSelectedMail($event)"></app-mail-action-section>
+    </div>
+</div>

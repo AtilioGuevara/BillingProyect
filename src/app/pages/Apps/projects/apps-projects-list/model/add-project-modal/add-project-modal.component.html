@@ -1,0 +1,78 @@
+<div id="addProjectModal" class="modal">
+  <div class="modal-wrap modal-center">
+    <div class="modal-header">
+      <h6 class="modal-title">{{!config ? 'Add' : 'Edit' }}
+        Project</h6>
+      <button (click)="close()" class="link link-red">
+        <lucide-angular name="x" class="size-5"></lucide-angular>
+      </button>
+    </div>
+    <div class="modal-content" [formGroup]="fromGroup">
+      <div class="grid grid-cols-12 gap-4">
+        <div class="col-span-12">
+          <label for="projectTitleInput" class="form-label">Project Title</label>
+          <input type="text" id="projectTitleInput" class="form-input" placeholder="Project title"
+            formControlName="projectName">
+          <span *ngIf="fromGroup.get('projectName')?.hasError('required')" class="text-red-500"> This Filed is
+            Required</span>
+        </div>
+        <div class="col-span-12">
+          <label for="clientName" class="form-label">Client Name</label>
+          <input type="text" id="clientName" class="form-input" placeholder="Enter name" formControlName="clientName">
+          <span *ngIf="fromGroup.get('clientName')?.hasError('required')" class="text-red-500"> This Filed is
+            Required</span>
+        </div>
+        <div class="col-span-6">
+          <label for="dueDateInput" class="form-label">Due Date</label>
+          <input type="text" placeholder="YYYY-MM-DD" id="eventDateInput" class="form-input" data-provider="flatpickr"
+            formControlName="date" mwlFlatpickr [flatpickrOptions]="{dateFormat: 'Y-m-d'}" formControlName="dueDate">
+          <span *ngIf="fromGroup.get('dueDate')?.hasError('required')" class="text-red-500"> This Filed is
+            Required</span>
+        </div>
+        <div class="col-span-6">
+          <label for="totalAmountInput" class="form-label">Total Amount ($)</label>
+          <input type="text" id="totalAmountInput" class="form-input" placeholder="$00.00"
+            formControlName="totalAmount">
+          <span *ngIf="fromGroup.get('totalAmount')?.hasError('required')" class="text-red-500"> This Filed is
+            Required</span>
+        </div>
+        <div class="col-span-12">
+          <label for="progressInput" class="form-label">% Complete</label>
+          <input type="text" id="progressInput" class="form-input" placeholder="0" formControlName="progress" />
+          <span *ngIf="fromGroup.get('progress')?.hasError('required')" class="text-red-500">
+            This Field is Required
+          </span>
+          <div class="mt-3 progress-bar progress-1">
+            <div class="text-white progress-bar-wrap bg-gradient-to-r from-primary-500 to-pink-500 via-purple-500"
+              [ngStyle]="{ width: fromGroup.get('progress')?.value + '%' }">
+            </div>
+          </div>
+        </div>
+        <div class="col-span-12">
+          <label for="assignedSelect" class="form-label">Assignee To</label>
+          <ng-select class="filter-ng-select" [items]="assigneeOptions" bindLabel="name" bindValue="name"
+            [multiple]="true" placeholder="Select event type" formControlName="assignees">
+          </ng-select>
+          <span *ngIf="fromGroup.get('assignees')?.hasError('required')" class="text-red-500"> This Filed is
+            Required</span>
+        </div>
+        <div class="col-span-12">
+          <label for="statusSelect2" class="form-label">Status</label>
+          <ng-select class="filter-ng-select" [items]="statusOptions" bindLabel="label" bindValue="value"
+            placeholder="Select event type" formControlName="status">
+          </ng-select>
+          <span *ngIf="fromGroup.get('status')?.hasError('required')" class="text-red-500"> This Filed is
+            Required</span>
+        </div>
+      </div>
+      <div class="flex items-center justify-end gap-2 mt-5">
+        <button type="button" class="btn btn-active-red" (click)="close()">
+          <lucide-angular name="x" class="inline-block size-4"></lucide-angular>
+          <span class="align-baseline">Close</span>
+        </button>
+        <button type="button" class="btn btn-primary" (click)="closeEventModal()">{{!config ? 'Add' : 'Update'
+          }}Project</button>
+      </div>
+    </div>
+  </div>
+</div>

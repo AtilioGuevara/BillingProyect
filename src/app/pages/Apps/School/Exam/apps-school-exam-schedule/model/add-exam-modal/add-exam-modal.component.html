@@ -1,0 +1,74 @@
+<div id="addExamModal" class="modal">
+  <div class="modal-wrap modal-center">
+    <div class="modal-header">
+      <h6 class="modal-title">{{!config ? 'Add' : 'Edit' }} Exam</h6>
+      <button (click)="close()" class="link link-red">
+        <lucide-angular name="x" class="size-5"></lucide-angular>
+      </button>
+    </div>
+    <div class="modal-content" [formGroup]="fromGroup">
+      <div class="grid grid-cols-12 gap-4">
+        <div class="col-span-12">
+          <label for="testNameInput" class="form-label">Test Name</label>
+          <input type="text" id="testNameInput" class="form-input" placeholder="Test name" formControlName="testName">
+          <span *ngIf="fromGroup.get('testName')?.hasError('required')" class="text-red-500"> This Filed is
+            Required</span>
+        </div>
+        <div class="col-span-12">
+          <label for="testCategorySelect" class="form-label">Test Category</label>
+          <ng-select class="filter-ng-select" [items]="testCategoryOptions" bindLabel="label" bindValue="value"
+            placeholder="Select event type" formControlName="testCategory">
+          </ng-select>
+          <span *ngIf="fromGroup.get('testCategory')?.hasError('required')" class="text-red-500"> This Filed is
+            Required</span>
+        </div>
+        <div class="col-span-12">
+          <label for="testTypeSelect" class="form-label">Test Type</label>
+          <ng-select class="filter-ng-select" [items]="testTypeOptions" bindLabel="label" bindValue="value"
+            placeholder="Select Type" formControlName="testType">
+          </ng-select>
+          <span *ngIf="fromGroup.get('testType')?.hasError('required')" class="text-red-500"> This Filed is
+            Required</span>
+        </div>
+        <div class="col-span-12">
+          <label for="classSelect" class="form-label">Class</label>
+          <ng-select class="filter-ng-select" [items]="classOptions" bindLabel="label" bindValue="value"
+            placeholder="Select Class" formControlName="class">
+          </ng-select>
+          <span *ngIf="fromGroup.get('class')?.hasError('required')" class="text-red-500"> This Filed is
+            Required</span>
+        </div>
+        <div class="col-span-6">
+          <label for="startDateSelect" class="form-label">Start Date</label>
+          <input type="text" placeholder="YYYY-MM-DD" id="eventDateInput" class="form-input" data-provider="flatpickr"
+            formControlName="date" mwlFlatpickr [flatpickrOptions]="{dateFormat: 'Y-m-d'}" formControlName="startDate">
+          <span *ngIf="fromGroup.get('startDate')?.hasError('required')" class="text-red-500"> This Filed is
+            Required</span>
+        </div>
+        <div class="col-span-6">
+          <label for="endDateSelect" class="form-label">End Date</label>
+          <input type="text" placeholder="YYYY-MM-DD" id="eventDateInput" class="form-input" data-provider="flatpickr"
+            formControlName="date" mwlFlatpickr [flatpickrOptions]="{dateFormat: 'Y-m-d'}" formControlName="endDate">
+          <span *ngIf="fromGroup.get('endDate')?.hasError('required')" class="text-red-500"> This Filed is
+            Required</span>
+        </div>
+        <div class="col-span-12">
+          <label for="statusSelect" class="form-label">Status</label>
+          <ng-select class="filter-ng-select" [items]="statusOptions" bindLabel="label" bindValue="value"
+            placeholder="Select event type" formControlName="status">
+          </ng-select>
+          <span *ngIf="fromGroup.get('status')?.hasError('required')" class="text-red-500"> This Filed is
+            Required</span>
+        </div>
+      </div>
+      <div class="flex items-center justify-end gap-2 mt-5">
+        <button type="button" class="btn btn-active-red" (click)="close()">
+          <lucide-angular name="x" class="inline-block size-4"></lucide-angular>
+          <span class="align-baseline">Close</span>
+        </button>
+        <button type="button" class="btn btn-primary" (click)="closeEventModal()">{{!config ? 'Add' : 'Update' }} Exam
+          Schedule</button>
+      </div>
+    </div>
+  </div>
+</div>

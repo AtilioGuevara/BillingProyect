@@ -1,0 +1,108 @@
+<app-page-title [pageTitle]="'Appointment'" [Title]="'Appointments Book'"></app-page-title>
+
+<div class="grid grid-cols-12 gap-x-space">
+  <div class="col-span-12 xl:col-span-8 2xl:col-span-9 card">
+    <div class="card-header">
+      <h6 class="card-title">Appointment Book</h6>
+    </div>
+    <div class="card-body">
+      <div [formGroup]="formGroup">
+        <div class="grid grid-cols-12 gap-space">
+          <div class="col-span-12">
+            <label for="patientNameInput" class="form-label">Patient Name</label>
+            <input type="text" id="patientNameInput" class="form-input" placeholder="Enter your patient name" formControlName="patientName">
+            <span *ngIf="formGroup.get('patientName')?.hasError('required')" class="text-red-500"> This Filed is
+              Required</span>
+          </div>
+
+          <div class="col-span-12 sm:col-span-6 xl:col-span-4">
+            <label for="emailInput" class="form-label">Email</label>
+            <input type="email" id="emailInput" class="form-input" placeholder="Enter your email" formControlName="email">
+            <span *ngIf="formGroup.get('email')?.hasError('required')" class="text-red-500"> This Filed is
+              Required</span>
+            <span *ngIf="formGroup.get('email')?.hasError('email')" class="text-red-500">Please enter a valid email
+              address.</span>
+          </div>
+
+          <div class="col-span-12 sm:col-span-6 xl:col-span-4">
+            <label for="phoneNumberInput" class="form-label">Phone Number</label>
+            <input type="tel" id="phoneNumberInput" class="form-input" placeholder="(00) 000 00 0000" formControlName="phoneNumber">
+            <span *ngIf="formGroup.get('phoneNumber')?.hasError('required')" class="text-red-500"> This Filed is
+              Required</span>
+          </div>
+
+          <div class="col-span-12 sm:col-span-6 xl:col-span-4">
+            <label for="selectDateInput" class="form-label">Select Date</label>
+            <input type="text" id="selectDateInput" class="form-input" placeholder="Select date" formControlName="date" mwlFlatpickr [flatpickrOptions]="{dateFormat: 'Y-m-d'}">
+            <span *ngIf="formGroup.get('date')?.hasError('required')" class="text-red-500"> This Filed is
+              Required</span>
+          </div>
+
+          <div class="col-span-12">
+            <label class="form-label">Start Time</label>
+            <div class="flex flex-wrap gap-2 md:gap-5">
+              <div *ngFor="let time of ['09:00 AM', '09:30 AM', '10:00 AM', '10:30 AM', '11:00 AM', '11:30 AM', '12:00 PM', '12:30 PM', '01:00 PM', '01:30 PM', '02:00 PM', '02:30 PM', '03:00 PM', '03:30 PM', '04:00 PM', '04:30 PM', '05:00 PM', '05:30 PM', '06:00 PM']" class="input-radio-group">
+                <input [id]="'startTime' + time" class="hidden input-radio" type="radio" formControlName="startTime" [value]="time">
+                <label [for]="'startTime' + time" class="px-3 py-1.5 border border-gray-200 rounded-md inline-block">
+                  {{ time }}
+                </label>
+              </div>
+            </div>
+            <span *ngIf="formGroup.get('startTime')?.hasError('required')" class="text-red-500"> This Filed is
+              Required</span>
+          </div>
+
+          <div class="col-span-12">
+            <label class="form-label">End Time</label>
+            <div class="flex flex-wrap gap-2 md:gap-5">
+              <div *ngFor="let time of ['09:00 AM', '09:30 AM', '10:00 AM', '10:30 AM', '11:00 AM', '11:30 AM', '12:00 PM', '12:30 PM', '01:00 PM', '01:30 PM', '02:00 PM', '02:30 PM', '03:00 PM', '03:30 PM', '04:00 PM', '04:30 PM', '05:00 PM', '05:30 PM', '06:00 PM']" class="input-radio-group">
+                <input [id]="'endTime' + time" class="hidden input-radio" type="radio" formControlName="endTime" [value]="time">
+                <label [for]="'endTime' + time" class="px-3 py-1.5 border border-gray-200 rounded-md inline-block">
+                  {{ time }}
+                </label>
+              </div>
+            </div>
+            <span *ngIf="formGroup.get('endTime')?.hasError('required')" class="text-red-500"> This Filed is
+              Required</span>
+          </div>
+
+          <div class="col-span-12">
+            <label for="doctorSelect" class="form-label">Doctor Name</label>
+            <ng-select class="filter-ng-select" [items]="doctorNameOptions" bindLabel="label" bindValue="value" placeholder="Select doctor Name" formControlName="doctorName">
+            </ng-select>
+            <span *ngIf="formGroup.get('doctorName')?.hasError('required')" class="text-red-500"> This Filed is
+              Required</span>
+          </div>
+
+          <div class="col-span-12">
+            <label for="treatmentInput" class="form-label">Treatment</label>
+            <textarea name="treatmentInput" id="treatmentInput" class="h-auto form-input" rows="3" formControlName="treatment"></textarea>
+            <span *ngIf="formGroup.get('treatment')?.hasError('required')" class="text-red-500"> This Filed is
+              Required</span>
+          </div>
+
+          <div class="col-span-12">
+            <div class="flex flex-wrap items-center justify-end gap-2">
+              <button type="button" (click)="onReset()" class="btn btn-sub-gray">Reset</button>
+              <button type="submit" class="btn btn-primary" (click)="addOrEdit()">Book Appointment</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <div class="col-span-12 xl:col-span-4 2xl:col-span-3">
+    <div class="bg-green-100 !border-green-500/20 dark:bg-green-500/15 card">
+      <div class="card-body">
+        <h6 class="mb-3">Hospital Hours</h6>
+
+        <p class="mb-2 text-gray-500 dark:text-dark-400">Monday - Friday 09:00AM - 06:00PM</p>
+        <p class="mb-4 text-gray-500 dark:text-dark-400">Saturday 09:00AM - 03:00PM</p>
+
+        <h6 class="mb-3">Sunday Closed</h6>
+        <p class="text-red-500">* Every 2nd, 4th Saturday and all govt holidays are closed.</p>
+      </div>
+    </div>
+  </div>
+</div>

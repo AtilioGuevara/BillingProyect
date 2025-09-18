@@ -1,0 +1,30 @@
+<app-page-title [pageTitle]="'Calender'" [Title]="'Default'"></app-page-title>
+
+<div>
+    <div class="flex flex-wrap items-center gap-2 mb-space" id='external-events'>
+        <div id='external-events' class="flex items-center gap-2 grow">
+            <div class='block fc-event fc-h-event fc-daygrid-event fc-daygrid-block-event btn !btn-purple'>
+                <div class='fc-event-main'>Events</div>
+            </div>
+            <div class='block fc-event fc-h-event fc-daygrid-event fc-daygrid-block-event btn !btn-primary'>
+                <div class='fc-event-main'>Personal</div>
+            </div>
+            <div class='block fc-event fc-h-event fc-daygrid-event fc-daygrid-block-event btn !btn-green'>
+                <div class='fc-event-main'>Meeting</div>
+            </div>
+            <div class='block fc-event fc-h-event fc-daygrid-event fc-daygrid-block-event btn !btn-sky'>
+                <div class='fc-event-main'>Festival Function</div>
+            </div>
+        </div>
+
+        <button type="button" class="btn btn-primary"(click)="openAddEditEventModel(null)"><lucide-angular name="circle-plus" class="inline-block size-4 ltr:mr-1 rtl:ml-1"></lucide-angular> Add Event</button>
+    </div>
+
+
+    <div class="card">
+        <div class="card-body">
+            <full-calendar #calendar [options]="calendarOptions"></full-calendar>
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,271 @@
+<app-navbar></app-navbar>
+
+<app-sidebar></app-sidebar>
+
+<div class="relative min-h-screen group-data-[layout=boxed]:bg-white group-data-[layout=boxed]:rounded-md">
+
+  <div class="page-wrapper">
+
+    <div class="relative mb-6">
+      <div class="relative overflow-hidden rounded-md h-44 bg-primary-500/10">
+        <div class="border-[60px] border-t-primary-500 border-l-primary-500 absolute opacity-10 -top-2 left-0 rotate-45 size-96">
+        </div>
+        <div class="border-[60px] border-green-500 absolute opacity-10 top-20 left-8 rotate-45 size-80"></div>
+        <div class="border-[60px] border-pink-500 absolute opacity-10 top-36 left-28 rotate-45 size-40"></div>
+      </div>
+      <div class="text-center">
+        <div class="relative inline-block mx-auto">
+          <div class="relative p-1 rounded-full bg-gradient-to-tr from-primary-300 via-red-300 to-green-300 -mt-14">
+            <img src="assets/images/avatar/user-17.png" alt="" class="mx-auto border-4 border-white rounded-full dark:border-dark-900 size-28">
+          </div>
+          <div class="absolute border-2 border-white dark:border-dark-900 rounded-full size-4 bg-green-500 bottom-2.5 ltr:right-2.5 rtl:left-2.5">
+          </div>
+        </div>
+        <h5 class="mt-2 mb-1">Sophia Mia
+          <lucide-angular name="badge-check" class="inline-block text-primary-500 fill-primary-500/20 size-5">
+          </lucide-angular>
+        </h5>
+        <ul class="flex flex-wrap items-center justify-center gap-2 text-gray-500 dark:text-dark-500 text-14">
+          <li>
+            <lucide-angular name="building-2" class="inline-block ltr:mr-1 rtl:ml-1 size-4"></lucide-angular><span class="align-middle">UI / UX
+              Designer</span>
+          </li>
+          <li>
+            <lucide-angular name="map-pin" class="inline-block ltr:mr-1 rtl:ml-1 size-4"></lucide-angular><span class="align-middle">Argentina</span>
+          </li>
+          <li>
+            <lucide-angular name="calendar-days" class="inline-block ltr:mr-1 rtl:ml-1 size-4"></lucide-angular><span class="align-middle">24 April,
+              2024</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <ul class="pb-2 overflow-x-auto tabs-pills lg:pb-0">
+      <li>
+        <a routerLink="/pages-user" class="cursor-pointer nav-item text-gray-500 dark:text-dark-500 [&.active]:bg-primary-500 [&.active]:text-primary-50 active">
+
+          <lucide-angular name="Eye" class="inline-block ltr:mr-1 rtl:ml-1 size-4"></lucide-angular> <span class="align-middle whitespace-nowrap">Overview</span>
+        </a>
+      </li>
+      <li>
+        <a routerLink="/pages-user-activity" class="cursor-pointer nav-item text-gray-500 dark:text-dark-500 [&.active]:bg-primary-500 [&.active]:text-primary-50">
+
+          <lucide-angular name="sparkles" class="inline-block ltr:mr-1 rtl:ml-1 size-4"></lucide-angular> <span class="align-middle whitespace-nowrap">Activity</span>
+        </a>
+      </li>
+      <li>
+        <a routerLink="/pages-user-followers" class="cursor-pointer nav-item text-gray-500 dark:text-dark-500 [&.active]:bg-primary-500 [&.active]:text-primary-50">
+
+          <lucide-angular name="user-round" class="inline-block ltr:mr-1 rtl:ml-1 size-4"></lucide-angular> <span class="align-middle whitespace-nowrap">Followers</span>
+        </a>
+      </li>
+      <li>
+        <a routerLink="/pages-user-documents" class="cursor-pointer nav-item text-gray-500 dark:text-dark-500 [&.active]:bg-primary-500 [&.active]:text-primary-50">
+
+          <lucide-angular name="file-text" class="inline-block ltr:mr-1 rtl:ml-1 size-4"></lucide-angular> <span class="align-middle whitespace-nowrap">Documents</span>
+        </a>
+      </li>
+      <li>
+        <a routerLink="/pages-user-notes" class="cursor-pointer nav-item text-gray-500 dark:text-dark-500 [&.active]:bg-primary-500 [&.active]:text-primary-50">
+
+          <lucide-angular name="list" class="inline-block ltr:mr-1 rtl:ml-1 size-4"></lucide-angular> <span class="align-middle whitespace-nowrap">Notes</span>
+        </a>
+      </li>
+      <li>
+        <a routerLink="/pages-user-projects" class="cursor-pointer nav-item text-gray-500 dark:text-dark-500 [&.active]:bg-primary-500 [&.active]:text-primary-50">
+
+          <lucide-angular name="monitor" class="inline-block ltr:mr-1 rtl:ml-1 size-4"></lucide-angular> <span class="align-middle whitespace-nowrap">Projects</span>
+        </a>
+      </li>
+    </ul>
+
+    <div class="grid grid-cols-12 mt-space gap-space">
+      <div class="col-span-12 md:col-span-5 lg:col-span-4">
+        <div class="card">
+          <div class="card-body">
+            <div class="grid grid-cols-2 gap-0 mb-4">
+              <div class="text-center border-gray-200 ltr:border-r rtl:border-l dark:border-dark-800">
+                <h6 class="mb-1">2459</h6>
+                <p class="text-gray-500 dark:text-dark-500">Followers</p>
+              </div>
+              <div class="text-center">
+                <h6 class="mb-1">2459</h6>
+                <p class="text-gray-500 dark:text-dark-500">Following</p>
+              </div>
+            </div>
+            <div>
+              <button (click)="toggleFollow()" class="w-full btn btn-sky btn-icon-text">
+                <span class="flex items-center gap-2" *ngIf="!isActive">
+                  <i class="ri-user-add-line"></i> Follow
+                </span>
+                <span class="flex items-center gap-2" *ngIf="isActive">
+                  <i class="ri-user-unfollow-line"></i> UnFollow
+                </span>
+                <svg *ngIf="loadingButton" class="text-white size-4 animate-spin" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                  <circle class="opacity-0" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                  <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z">
+                  </path>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header">
+            <h6 class="card-title">Introductions</h6>
+          </div>
+          <div class="card-body">
+            <p class="mb-3 text-sm font-medium text-gray-500 uppercase dark:text-dark-500">About</p>
+            <div class="flex flex-col gap-3">
+              <h6 class="font-medium">
+
+                <lucide-angular name="monitor" class="inline-block text-gray-500 ltr:mr-2 rtl:ml-2 dark:text-dark-500 size-4"></lucide-angular> <span class="align-middle whitespace-nowrap">Sophia Mia</span>
+              </h6>
+              <h6 class="font-medium">
+
+                <lucide-angular name="briefcase-business" class="inline-block text-gray-500 ltr:mr-2 rtl:ml-2 dark:text-dark-500 size-4"></lucide-angular> <span class="align-middle whitespace-nowrap">UI / UX Designer</span>
+              </h6>
+              <h6 class="font-medium">
+
+                <lucide-angular name="map-pin" class="inline-block text-gray-500 ltr:mr-2 rtl:ml-2 dark:text-dark-500 size-4"></lucide-angular> <span class="align-middle whitespace-nowrap">Argentina</span>
+              </h6>
+              <h6 class="font-medium">
+
+                <lucide-angular name="cake" class="inline-block text-gray-500 ltr:mr-2 rtl:ml-2 dark:text-dark-500 size-4"></lucide-angular> <span class="align-middle whitespace-nowrap">24 Jun, 1998</span>
+              </h6>
+            </div>
+
+            <div class="pt-4 mt-4 flex flex-col gap-3 border-t border-gray-200 dark:border-dark-800">
+              <h6 class="font-medium">
+
+                <lucide-angular name="globe" class="size-4"></lucide-angular> <a href="javascript:void(0);" class="align-middle whitespace-nowrap">www.srbthemes.com</a>
+              </h6>
+              <h6 class="font-medium">
+
+                <lucide-angular name="mail" class="inline-block text-gray-500 ltr:mr-2 rtl:ml-2 dark:text-dark-500 size-4"></lucide-angular> <a href="javascript:void(0);" href="mailto:support@SRBThemes.com" class="align-middle whitespace-nowrap">support&#64;srbthemes.com</a>
+              </h6>
+              <h6 class="font-medium">
+
+                <lucide-angular name="phone" class="inline-block text-gray-500 ltr:mr-2 rtl:ml-2 dark:text-dark-500 size-4"></lucide-angular> <a href="javascript:void(0);" href="tel:+1511555333222" class="align-middle whitespace-nowrap">+(151) 1555 333 222</a>
+              </h6>
+              <h6 class="font-medium">
+
+                <lucide-angular name="twitter" class="inline-block text-gray-500 ltr:mr-2 rtl:ml-2 dark:text-dark-500 size-4"></lucide-angular> <span class="align-middle whitespace-nowrap">SRBThemes</span>
+              </h6>
+            </div>
+
+            <p class="pt-4 mt-4 mb-3 flex flex-col gap-3 text-sm font-medium text-gray-500 uppercase border-t border-gray-200 dark:border-dark-800 dark:text-dark-500">
+              Fluent In</p>
+            <div class="flex items-center gap-2">
+              <span class="text-gray-500 bg-transparent border-gray-200 dark:border-dark-800 dark:text-dark-500 badge">English</span>
+              <span class="text-gray-500 bg-transparent border-gray-200 dark:border-dark-800 dark:text-dark-500 badge">Madrian</span>
+              <span class="text-gray-500 bg-transparent border-gray-200 dark:border-dark-800 dark:text-dark-500 badge">French</span>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header">
+            <h6 class="card-title">Badges</h6>
+          </div>
+          <div class="flex items-center gap-2 card-body">
+            <div tooltipStr="New Users">
+              <img src="assets/images/others/new.png" alt="" class="size-7">
+            </div>
+            <div tooltipStr="Verified Badge">
+              <img src="assets/images/others/quality.png" alt="" class="size-7">
+            </div>
+            <div tooltipStr="High Quality">
+              <img src="assets/images/others/high-quality.png" alt="" class="size-7">
+            </div>
+            <div tooltipStr="Reward">
+              <img src="assets/images/others/reward.png" alt="" class="size-7">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-span-12 md:col-span-7 lg:col-span-8">
+        <h6 class="mb-2">Overview</h6>
+        <p class="mb-2 text-gray-500 dark:text-dark-500">Hello, I'm <span class="font-medium">Sophia Mia</span>, a
+          passionate UI/UX designer dedicated to crafting seamless digital experiences that blend elegance with
+          functionality. With a keen eye for detail and a deep understanding of user psychology, I strive to create
+          interfaces that not only look stunning but also intuitively guide users towards their goals.</p>
+        <p class="mb-3 text-gray-500 dark:text-dark-500">I believe in the power of collaboration and enjoy working
+          closely with cross-functional teams, including developers, product managers, and stakeholders. By fostering
+          open communication and incorporating diverse perspectives, I ensure that the final product exceeds
+          expectations and delights users.</p>
+
+        <h6 class="mb-2">Experience</h6>
+
+        <ul class="timeline">
+          <li class="timeline-primary active">
+            <h6 class="mb-1">UI/UX Designer - March 2020 - Present</h6>
+            <p class="mb-2 text-sm text-gray-500 dark:text-dark-500">XYZ Tech Solutions, San Francisco, CA</p>
+            <ul class="space-y-2 text-gray-500 list-disc list-inside dark:text-dark-500">
+              <li>Designed intuitive user interfaces for web and mobile applications, focusing on user experience
+                optimization.</li>
+              <li>Conducted user research, usability testing, and gathered feedback to iterate on designs and improve
+                user satisfaction.</li>
+              <li>Collaborated with cross-functional teams including product managers, developers, and stakeholders to
+                translate business requirements into user-centric design solutions.</li>
+              <li>Created wireframes, prototypes, and mockups using tools such as Sketch, Adobe XD, and Figma.</li>
+              <li>Implemented responsive design principles to ensure seamless user experiences across various devices
+                and screen sizes.</li>
+              <li>Led design workshops and presentations to communicate design concepts and rationale to team members
+                and stakeholders.</li>
+              <li>Contributed to the development of design systems and style guides to maintain design consistency and
+                scalability across products.</li>
+            </ul>
+          </li>
+          <li class="timeline-primary active">
+            <h6 class="mb-1">Junior UI/UX Designer</h6>
+            <p class="mb-2 text-sm text-gray-500 dark:text-dark-500">ABC Design Studio, New York, NY</p>
+            <ul class="space-y-2 text-gray-500 list-disc list-inside dark:text-dark-500">
+              <li>Assisted in the design and development of user interfaces for web and mobile applications.</li>
+              <li>Conducted competitive analysis and market research to identify design trends and best practices.</li>
+              <li>Collaborated with senior designers to create wireframes, prototypes, and high-fidelity mockups.</li>
+              <li>Participated in usability testing sessions and analyzed user feedback to refine design concepts.</li>
+              <li>Supported the implementation of design solutions by providing assets and design specifications to
+                development teams.</li>
+              <li>Maintained and organized design files and assets using version control systems.</li>
+            </ul>
+          </li>
+        </ul>
+
+        <h6 class="mt-3 mb-2">Portfolio Highlights</h6>
+
+        <div class="grid grid-cols-2 mb-5 lg:grid-cols-3 gap-space">
+          <div class="text-center group/item">
+            <div class="overflow-hidden rounded-md">
+              <img src="assets/images/gallery/img-01.jpg" alt="" class="transition duration-200 ease-linear group-hover/item:scale-105 group-hover/item:skew-x-3">
+            </div>
+            <h6 class="mt-2"><a href="javascript:void(0);">Chat Application</a></h6>
+          </div>
+
+          <div class="text-center group/item">
+            <div class="overflow-hidden rounded-md">
+              <img src="assets/images/gallery/img-02.jpg" alt="" class="transition duration-200 ease-linear group-hover/item:scale-105 group-hover/item:skew-x-3">
+            </div>
+            <h6 class="mt-2"><a href="javascript:void(0);">CRM React Projects</a></h6>
+          </div>
+
+          <div class="text-center group/item">
+            <div class="overflow-hidden rounded-md">
+              <img src="assets/images/gallery/img-04.jpg" alt="" class="transition duration-200 ease-linear group-hover/item:scale-105 group-hover/item:skew-x-3">
+            </div>
+            <h6 class="mt-2"><a href="javascript:void(0);">HR Management Team</a></h6>
+          </div>
+
+        </div>
+
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <app-footer></app-footer>
+
+</div>

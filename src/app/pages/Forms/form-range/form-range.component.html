@@ -1,0 +1,68 @@
+<app-page-title [Title]="'Area Charts'" [pageTitle]="'Apexcharts'"></app-page-title>
+
+<div class="grid grid-cols-12 gap-x-space">
+  <div class="col-span-12 card">
+    <div class="card-header">
+      <h6 class="card-title">Default Example</h6>
+    </div>
+    <div class="flex flex-col gap-5 card-body">
+      <input type="range" min="0" max="10" step="1" value="1" class="input-range">
+      <input type="range" min="0" max="10" step="1" value="2" class="input-range range-purple">
+      <input type="range" min="0" max="10" step="1" value="3" class="input-range range-green">
+      <input type="range" min="0" max="10" step="1" value="4" class="input-range range-red">
+      <input type="range" min="0" max="10" step="1" value="5" class="input-range range-yellow">
+      <input type="range" min="0" max="10" step="1" value="6" class="input-range range-sky">
+      <input type="range" min="0" max="10" step="1" value="7" class="input-range range-orange">
+      <input type="range" min="0" max="10" step="1" value="8" class="input-range range-pink">
+      <input type="range" min="0" max="10" step="1" value="9" class="input-range range-indigo">
+      <input type="range" min="0" max="10" step="1" value="10" class="input-range range-dark">
+    </div>
+  </div>
+  <div class="col-span-12 card">
+    <div class="card-header">
+      <h6 class="card-title">Basic</h6>
+    </div>
+    <div class="card-body">
+      <ngx-slider [(value)]="minValue" [(highValue)]="maxValue" [options]="options1"></ngx-slider>
+    </div>
+  </div>
+  <div class="col-span-12 card">
+    <div class="card-header">
+      <h6 class="card-title">Using an array of values</h6>
+    </div>
+    <div class="card-body">
+      <div class="flex items-center justify-center h-20">
+        <ngx-slider [(value)]="value6" [options]="options6" class="w-full"></ngx-slider>
+      </div>
+    </div>
+  </div>
+  <div class="col-span-12 card">
+    <div class="card-header">
+      <h6 class="card-title">Using arbitrary (string) values</h6>
+    </div>
+    <div class="card-body">
+      <div class="flex items-center justify-center h-20">
+        <ngx-slider [(value)]="value8" [options]="options8" class="slider-custom"></ngx-slider>
+      </div>
+    </div>
+  </div>
+  <div class="col-span-12 card">
+    <div class="card-header">
+      <h6 class="card-title">Colorpicker</h6>
+    </div>
+    <div class="card-body">
+      <div class="flex items-center justify-center gap-4">
+        <ngx-slider [(value)]="rValue" [options]="rOptions" (valueChange)="updateColor()">
+        </ngx-slider>
+
+        <ngx-slider [(value)]="gValue" [options]="gOptions" (valueChange)="updateColor()">
+        </ngx-slider>
+
+        <ngx-slider [(value)]="bValue" [options]="bOptions" (valueChange)="updateColor()">
+        </ngx-slider>
+
+        <div id="RGB" style="width: 100px; height: 100px; border: 1px solid #b8abab;"></div>
+      </div>
+    </div>
+  </div>
+</div>

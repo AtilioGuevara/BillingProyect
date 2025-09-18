@@ -1,0 +1,80 @@
+<app-page-title [Title]="'Wishlist'" [pageTitle]="'Ecommerce'"></app-page-title>
+
+<div class="card">
+    <div class="card-header">
+        <h6 class="card-title">💖 Wishlist</h6>
+    </div>
+    <div class="pt-0 card-body">
+        <div>
+            <div class="overflow-x-auto table-box">
+                <table class="table flush">
+                    <thead>
+                        <tr>
+                            <th>Product</th>
+                            <th>Price</th>
+                            <!-- <th>Quantity</th> -->
+                            <!-- <th>Subtotal</th> -->
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <ng-container *ngIf="wishlistItem.length === 0 ">
+                            <tr>
+                                <td colspan="5" class="whitespace-nowrap">
+                                    <div class="p-4 text-center">
+                                        <img src="assets/images/others/shopping-cart.png" alt="" class="block mx-auto size-16">
+                                        <h6 class="mt-4 mb-1">Your wishlist is waiting for you.</h6>
+                                        <p class="mb-3 text-gray-500 dark:text-dark-500">Add items to your wishlist as you browse, and they will magically appear here.</p>
+
+                                        <div class="flex items-center justify-center gap-2">
+                                            <button class="btn btn-primary" (click)="goToGrid()">Browse our catalog</button>
+                                            <button class="btn btn-outline-purple" (click)="goToCart()">Go to your cart</button>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </ng-container>
+                        <ng-container *ngFor="let item of wishlistItem">
+                            <tr class="*:px-3 *:py-2.5">
+                                <td class="whitespace-nowrap">
+                                    <div class="flex items-center gap-4">
+                                        <div class="relative flex items-center justify-center p-2 bg-gray-100 dark:bg-dark-850 size-16">
+                                            <button class="absolute flex items-center justify-center bg-white dark:bg-dark-900 rounded-full shadow-lg shadow-gray-200 dark:shadow-dark-800 hover:text-red-500 transition duration-300 ease-linear -top-1.5 ltr:-right-1.5 rtl:-left-1.5 size-4" (click)="remove(item.pId)"><i class="ri-close-line"></i></button>
+                                            <img [src]="item.image" alt="">
+                                        </div>
+                                        <div class="grow">
+                                            <h6 class="mb-1">{{item.productName}}</h6>
+                                            <p class="mb-2 text-gray-500 dark:text-dark-500">
+                                                <span class="px-2 first:pl-0">
+                                                    <span class="px-2 border-r border-gray-200 dark:border-dark-800 first:pl-0">{{ item.color }}</span>
+                                                    <span class="px-2 first:pl-0">{{item.size}}</span>
+                                                </span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>{{item.price.toFixed(2)}}</td>
+                                <!-- <td>
+                                    <div class="input-spin-group input-spin-primary">
+                                        <button @click="item.qty = Math.max(1, item.qty - 1)" class="text-lg input-spin-minus"><i class="ri-subtract-line"></i></button>
+                                        <input type="text" x-model.number="item.qty" class="text-center input-spin form-input" readonly>
+                                        <button @click="item.qty++" class="text-lg input-spin-plus"><i class="ri-add-line"></i></button>
+                                    </div>
+                                </td> -->
+                                <!-- <td x-text="`${(item.price * item.qty).toFixed(2)}`"></td> -->
+                                <td><a href="javascript:void(0);" (click)="addToCartProduct.includes(item.pId) ? goToCart() : addToCart(item)" class="btn btn-sub-gray whitespace-nowrap"><i class="align-bottom ri-shopping-cart-line ltr:mr-1 rtl:ml-1"></i>{{addToCartProduct.includes(item.pId) ? 'Go to Cart' : 'Add to Cart'}} </a></td>
+                            </tr>
+                        </ng-container>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="flex flex-wrap items-center justify-between gap-2 mt-3">
+                <a routerLink="/apps-ecommerce-products-grid" class="cursor-pointer btn btn-sub-purple">
+                    <lucide-angular name="move-left" class="inline-block ltr:mr-1 rtl:ml-1 size-5"></lucide-angular>
+                    Continue Shopping</a>
+                <a href="javascript:void(0);" (click)="updateToCart()" class="btn btn-primary">Update to Cart</a>
+            </div>
+        </div>
+    </div>
+</div>

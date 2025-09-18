@@ -1,0 +1,194 @@
+<div class="relative mb-6">
+  <div class="relative overflow-hidden rounded-md h-44 bg-primary-500/10">
+    <div class="border-[60px] border-t-primary-500 border-l-primary-500 absolute opacity-10 -top-2 left-0 rotate-45 size-96">
+    </div>
+    <div class="border-[60px] border-green-500 absolute opacity-10 top-20 left-8 rotate-45 size-80"></div>
+    <div class="border-[60px] border-pink-500 absolute opacity-10 top-36 left-28 rotate-45 size-40"></div>
+  </div>
+  <div class="text-center">
+    <div class="relative inline-block mx-auto">
+      <div class="relative p-1 rounded-full bg-gradient-to-tr from-primary-300 via-red-300 to-green-300 -mt-14">
+        <img src="assets/images/avatar/user-17.png" alt="" class="mx-auto border-4 border-white rounded-full dark:border-dark-900 size-28">
+      </div>
+      <div class="absolute border-2 border-white dark:border-dark-900 rounded-full size-4 bg-green-500 bottom-2.5 ltr:right-2.5 rtl:left-2.5">
+      </div>
+    </div>
+    <h5 class="mt-2 mb-1">Sophia Mia
+      <lucide-angular name="BadgeCheck" class="inline-block text-primary-500 fill-primary-500/20 size-5">
+      </lucide-angular>
+    </h5>
+    <ul class="flex flex-wrap items-center justify-center gap-2 text-gray-500 dark:text-dark-500 text-14">
+      <li>
+        <lucide-angular name="Building2" class="inline-block ltr:mr-1 rtl:ml-1 size-4"></lucide-angular><span class="align-middle">UI /
+          UX Designer</span>
+      </li>
+      <li>
+        <lucide-angular name="MapPin" class="inline-block ltr:mr-1 rtl:ml-1 size-4"></lucide-angular> <span class="align-middle">Argentina</span>
+      </li>
+      <li>
+        <lucide-angular name="ShieldCheck" class="inline-block ltr:mr-1 rtl:ml-1 size-4"></lucide-angular> <span class="align-middle">24 April, 2024</span>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<ul class="pb-2 overflow-x-auto tabs-pills lg:pb-0">
+  <li>
+    <a routerLink="/pages-account-settings" class="nav-item text-gray-500 dark:text-dark-500 [&.active]:bg-primary-500 [&.active]:text-primary-50">
+      <lucide-angular name="UserRound" class="inline-block ltr:mr-1 rtl:ml-1 size-4"></lucide-angular><span class="align-middle whitespace-nowrap">Account</span>
+    </a>
+  </li>
+  <li>
+    <a routerLink="/pages-account-security" class="nav-item text-gray-500 dark:text-dark-500 [&.active]:bg-primary-500 [&.active]:text-primary-50">
+      <lucide-angular name="ShieldCheck" class="inline-block ltr:mr-1 rtl:ml-1 size-4"></lucide-angular><span class="align-middle whitespace-nowrap">Security</span>
+    </a>
+  </li>
+  <li>
+    <a routerLink="/pages-account-billing-plan" class="nav-item text-gray-500 dark:text-dark-500 [&.active]:bg-primary-500 [&.active]:text-primary-50">
+      <lucide-angular name="Gem" class="inline-block ltr:mr-1 rtl:ml-1 size-4"></lucide-angular><span class="align-middle whitespace-nowrap">Billing & Plans</span>
+    </a>
+  </li>
+  <li>
+    <a routerLink="/pages-account-notification" class="nav-item text-gray-500 dark:text-dark-500 [&.active]:bg-primary-500 [&.active]:text-primary-50 active">
+      <lucide-angular name="Bell" class="inline-block ltr:mr-1 rtl:ml-1 size-4"></lucide-angular><span class="align-middle whitespace-nowrap">Notification</span>
+    </a>
+  </li>
+  <li>
+    <a routerLink="/pages-account-statements" class="nav-item text-gray-500 dark:text-dark-500 [&.active]:bg-primary-500 [&.active]:text-primary-50">
+      <lucide-angular name="ListTree" class="inline-block ltr:mr-1 rtl:ml-1 size-4"></lucide-angular><span class="align-middle whitespace-nowrap">Statements</span>
+    </a>
+  </li>
+  <li>
+    <a routerLink="/pages-account-logs" class="nav-item text-gray-500 dark:text-dark-500 [&.active]:bg-primary-500 [&.active]:text-primary-50">
+      <lucide-angular name="LogOut" class="inline-block ltr:mr-1 rtl:ml-1 size-4"></lucide-angular><span class="align-middle whitespace-nowrap">Logs</span>
+    </a>
+  </li>
+</ul>
+
+<div class="items-center gap-3 mt-5 md:flex">
+  <div class="grow">
+    <h6 class="mb-1 text-16 grow">Notifications</h6>
+    <p class="text-gray-500 dark:text-dark-500">Where would you like to receive notifications?</p>
+  </div>
+  <div class="shrink-0">
+    <a href="javascript:void(0);" class="font-medium underline link link-primary">Reset to Default Settings</a>
+  </div>
+</div>
+
+<div class="mt-5 card">
+  <div class="card-header">
+    <h6 class="card-title">Receive notifications about new activities in projects you're involved in</h6>
+  </div>
+  <div class="space-y-4 card-body">
+    <div class="flex items-center gap-2">
+      <label for="notification1" class="mb-0 cursor-pointer form-label grow">New comments by others comments</label>
+      <label for="notification1" class="switch-group">
+        <div class="relative">
+          <input type="checkbox" id="notification1" class="sr-only peer" checked />
+          <div class="switch-wrapper"></div>
+          <div class="switch-dot peer-checked:translate-x-full rtl:peer-checked:-translate-x-full switch-primary"></div>
+        </div>
+      </label>
+    </div>
+    <div class="flex items-center gap-2">
+      <label for="notification2" class="mb-0 cursor-pointer form-label grow">Comments fro you tasks</label>
+      <label for="notification2" class="switch-group">
+        <div class="relative">
+          <input type="checkbox" id="notification2" class="sr-only peer" />
+          <div class="switch-wrapper"></div>
+          <div class="switch-dot peer-checked:translate-x-full rtl:peer-checked:-translate-x-full switch-primary"></div>
+        </div>
+      </label>
+    </div>
+    <div class="flex items-center gap-2">
+      <label for="notification3" class="mb-0 cursor-pointer form-label grow">New tasks assigned to you</label>
+      <label for="notification3" class="switch-group">
+        <div class="relative">
+          <input type="checkbox" id="notification3" class="sr-only peer" />
+          <div class="switch-wrapper"></div>
+          <div class="switch-dot peer-checked:translate-x-full rtl:peer-checked:-translate-x-full switch-primary"></div>
+        </div>
+      </label>
+    </div>
+    <div class="flex items-center gap-2">
+      <label for="notification4" class="mb-0 cursor-pointer form-label grow">Tasks completed (For tasks you created or
+        assigned to)</label>
+      <label for="notification4" class="switch-group">
+        <div class="relative">
+          <input type="checkbox" id="notification4" class="sr-only peer" />
+          <div class="switch-wrapper"></div>
+          <div class="switch-dot peer-checked:translate-x-full rtl:peer-checked:-translate-x-full switch-primary"></div>
+        </div>
+      </label>
+    </div>
+    <div class="flex items-center gap-2">
+      <label for="notification5" class="mb-0 cursor-pointer form-label grow">You are mentioned in a projects, task,
+        etc,.</label>
+      <label for="notification5" class="switch-group">
+        <div class="relative">
+          <input type="checkbox" id="notification5" class="sr-only peer" />
+          <div class="switch-wrapper"></div>
+          <div class="switch-dot peer-checked:translate-x-full rtl:peer-checked:-translate-x-full switch-primary"></div>
+        </div>
+      </label>
+    </div>
+    <div class="flex items-center gap-2">
+      <label for="notification6" class="mb-0 cursor-pointer form-label grow">Change in status of a task you're</label>
+      <label for="notification6" class="switch-group">
+        <div class="relative">
+          <input type="checkbox" id="notification6" class="sr-only peer" />
+          <div class="switch-wrapper"></div>
+          <div class="switch-dot peer-checked:translate-x-full rtl:peer-checked:-translate-x-full switch-primary"></div>
+        </div>
+      </label>
+    </div>
+    <div class="flex items-center gap-2">
+      <label for="notification7" class="mb-0 cursor-pointer form-label grow">Added new projects</label>
+      <label for="notification7" class="switch-group">
+        <div class="relative">
+          <input type="checkbox" id="notification7" class="sr-only peer" />
+          <div class="switch-wrapper"></div>
+          <div class="switch-dot peer-checked:translate-x-full rtl:peer-checked:-translate-x-full switch-primary"></div>
+        </div>
+      </label>
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-header">
+    <h6 class="card-title">Get notified wherever you are</h6>
+  </div>
+  <div class="space-y-4 card-body">
+    <div class="flex items-center gap-2">
+      <label for="notification11" class="mb-0 cursor-pointer form-label grow">Email notifications</label>
+      <label for="notification11" class="switch-group">
+        <div class="relative">
+          <input type="checkbox" id="notification11" class="sr-only peer" checked />
+          <div class="switch-wrapper"></div>
+          <div class="switch-dot peer-checked:translate-x-full rtl:peer-checked:-translate-x-full switch-primary"></div>
+        </div>
+      </label>
+    </div>
+    <div class="flex items-center gap-2">
+      <label for="notification12" class="mb-0 cursor-pointer form-label grow">Notifications via domiex</label>
+      <label for="notification12" class="switch-group">
+        <div class="relative">
+          <input type="checkbox" id="notification12" class="sr-only peer" checked />
+          <div class="switch-wrapper"></div>
+          <div class="switch-dot peer-checked:translate-x-full rtl:peer-checked:-translate-x-full switch-primary"></div>
+        </div>
+      </label>
+    </div>
+    <div class="flex items-center gap-2">
+      <label for="notification13" class="mb-0 cursor-pointer form-label grow">Browser push notifications</label>
+      <label for="notification13" class="switch-group">
+        <div class="relative">
+          <input type="checkbox" id="notification13" class="sr-only peer" checked />
+          <div class="switch-wrapper"></div>
+          <div class="switch-dot peer-checked:translate-x-full rtl:peer-checked:-translate-x-full switch-primary"></div>
+        </div>
+      </label>
+    </div>
+  </div>
+</div>

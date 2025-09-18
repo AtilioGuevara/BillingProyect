@@ -1,0 +1,140 @@
+<app-page-title [Title]="'Data'" [pageTitle]="'Widgets'"></app-page-title>
+
+<div class="grid grid-cols-12 gap-x-space">
+  <div class="col-span-12 xl:col-span-6 card">
+    <div class="flex items-center card-header">
+      <h6 class="card-title grow">Top Products</h6>
+      <div class="dropdown shrink-0">
+        <button domixDropdownToggle [dropdownMenu]="dropdown1" type="button" class="flex px-3 py-1.5 text-xs border-gray-200 dark:border-dark-800 link link-primary btn">
+          Filters
+          <svg :class="{ 'transform rotate-180': open }" class="transition-transform duration-300 ltr:ml-1 rtl:mr-1 size-4" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+          </svg>
+        </button>
+
+        <div #dropdown1 class="!fixed p-2 dropdown-menu hidden" dropdown-position="right">
+          <a href="javascript: void(0);" class="dropdown-item">
+            Amount
+          </a>
+
+          <a href="javascript: void(0);" class="dropdown-item">
+            Revenue
+          </a>
+          <a href="javascript: void(0);" class="dropdown-item">
+            Rating
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="overflow-x-auto">
+        <table class="table flush">
+          <thead>
+            <tr class="bg-gray-100 dark:bg-dark-850">
+              <th class="whitespace-nowrap !font-medium text-gray-500 dark:text-dark-500">Product</th>
+              <th class="whitespace-nowrap !font-medium text-gray-500 dark:text-dark-500">Sales</th>
+              <th class="whitespace-nowrap !font-medium text-gray-500 dark:text-dark-500">Price Unit</th>
+              <th class="whitespace-nowrap !font-medium text-gray-500 dark:text-dark-500">Stock</th>
+              <th class="whitespace-nowrap !font-medium text-gray-500 dark:text-dark-500">Revenue</th>
+              <th class="whitespace-nowrap !font-medium text-gray-500 dark:text-dark-500">Rating</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let product of products">
+              <td class="whitespace-nowrap">
+                <div class="flex items-center gap-2">
+                  <div class="flex items-center justify-center p-1 border border-gray-200 rounded-sm size-9 dark:border-dark-800">
+                    <img [src]="product.image" alt="" class="rounded-sm">
+                  </div>
+                  <h6>{{ product.productName }}</h6>
+                </div>
+              </td>
+              <td class="whitespace-nowrap">{{ product.salesUnit }}</td>
+              <td class="whitespace-nowrap">{{ product.price }}</td>
+              <td class="whitespace-nowrap">{{ product.stock }}</td>
+              <td class="whitespace-nowrap">{{ product.revenue }}</td>
+              <td class="whitespace-nowrap">
+                <i class="text-yellow-500 ri-star-line"></i>
+                <span class="text-gray-500 align-middle dark:text-dark-500 ltr:ml-2 rtl:mr-2">{{ product.rating }}</span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+
+    </div>
+  </div>
+
+  <div class="col-span-12 xl:col-span-6 card">
+    <div class="flex items-center card-header">
+      <h6 class="card-title grow">Recent Invoice</h6>
+      <div class="dropdown shrink-0">
+        <button domixDropdownToggle [dropdownMenu]="dropdown2" type="button" class="flex px-3 py-1.5 text-xs border-gray-200 dark:border-dark-800 link link-primary btn">
+          Filters
+          <svg :class="{ 'transform rotate-180': open }" class="ml-1 transition-transform duration-300 size-4" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+          </svg>
+        </button>
+
+        <div #dropdown2 class="!fixed p-2 dropdown-menu hidden" dropdown-position="right">
+          <a href="javascript: void(0);" class="dropdown-item">
+            Amount
+          </a>
+
+          <a href="javascript: void(0);" class="dropdown-item">
+            Revenue
+          </a>
+          <a href="javascript: void(0);" class="dropdown-item">
+            Rating
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="overflow-x-auto">
+        <table class="table flush">
+          <tbody>
+            <tr class="bg-gray-100 dark:bg-dark-850">
+              <th (click)="sort('invoiceID')" class="whitespace-nowrap !font-medium text-gray-500 dark:text-dark-500 cursor-pointer">
+                Invoice ID
+                <span *ngIf="sortBy === 'invoiceID'" [textContent]="sortDirection === 'asc' ? '↑' : '↓'"></span>
+              </th>
+              <th (click)="sort('client')" class="whitespace-nowrap !font-medium text-gray-500 dark:text-dark-500 cursor-pointer">
+                Client
+                <span *ngIf="sortBy === 'client'" [textContent]="sortDirection === 'asc' ? '↑' : '↓'"></span>
+              </th>
+              <th (click)="sort('dateDue')" class="whitespace-nowrap !font-medium text-gray-500 dark:text-dark-500 cursor-pointer">
+                Due Date
+                <span *ngIf="sortBy === 'dateDue'" [textContent]="sortDirection === 'asc' ? '↑' : '↓'"></span>
+              </th>
+              <th (click)="sort('totalAmount')" class="whitespace-nowrap !font-medium text-gray-500 dark:text-dark-500 cursor-pointer">
+                Total
+                <span *ngIf="sortBy === 'totalAmount'" [textContent]="sortDirection === 'asc' ? '↑' : '↓'"></span>
+              </th>
+              <th (click)="sort('status')" class="whitespace-nowrap !font-medium text-gray-500 dark:text-dark-500 cursor-pointer">
+                Status
+                <span *ngIf="sortBy === 'status'" [textContent]="sortDirection === 'asc' ? '↑' : '↓'"></span>
+              </th>
+            </tr>
+            <tr *ngFor="let product of products2; let index = index" [attr.key]="index">
+              <td class="whitespace-nowrap"><a href="javascript:void(0);">{{ product.invoiceID }}</a></td>
+              <td class="whitespace-nowrap">{{ product.client }}</td>
+              <td class="whitespace-nowrap">{{ product.dateDue }}</td>
+              <td class="whitespace-nowrap">{{ product.totalAmount }}</td>
+              <td class="whitespace-nowrap">
+                <span class="badge" [ngClass]="{
+                  'badge-yellow': product.status === 'Pending',
+                  'badge-green': product.status === 'Successful',
+                  'badge-blue': product.status === 'New'
+                }">{{ product.status }}</span>
+              </td>
+            </tr>
+          </tbody>
+
+        </table>
+      </div>
+    </div>
+  </div>
+
+</div>

@@ -1,0 +1,176 @@
+<app-page-title [pageTitle]="'Appointments'" [Title]="'List View'"></app-page-title>
+
+<div class="grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-4 gap-x-space">
+  <div class="card">
+    <div class="flex items-center gap-3 card-body">
+      <div class="flex items-center justify-center text-green-500 rounded-md size-12 shrink-0 bg-gradient-to-r from-yellow-500/15 to-green-500/15">
+        <lucide-angular name="CalendarPlus2" class="size-6"></lucide-angular>
+      </div>
+      <div class="grow">
+        <p class="mb-1 text-gray-500 dark:text-dark-500">Today Appointment</p>
+        <h6>10</h6>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="flex items-center gap-3 card-body">
+      <div class="flex items-center justify-center rounded-md text-sky-500 size-12 shrink-0 bg-gradient-to-r from-sky-500/15 to-green-500/15">
+        <lucide-angular name="CalendarPlus" class="size-6"></lucide-angular>
+      </div>
+      <div class="grow">
+        <p class="mb-1 text-gray-500 dark:text-dark-500">New Appointment</p>
+        <h6>21</h6>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="flex items-center gap-3 card-body">
+      <div class="flex items-center justify-center text-red-500 rounded-md size-12 shrink-0 bg-gradient-to-r from-red-500/15 to-pink-500/15">
+        <lucide-angular name="CalendarX2" class="size-6"></lucide-angular>
+      </div>
+      <div class="grow">
+        <p class="mb-1 text-gray-500 dark:text-dark-500">Cancel Appointment</p>
+        <h6>09</h6>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="flex items-center gap-3 card-body">
+      <div class="flex items-center justify-center text-purple-500 rounded-md size-12 shrink-0 bg-gradient-to-r from-purple-500/15 to-pink-500/15">
+        <lucide-angular name="CalendarDays" class="size-6"></lucide-angular>
+      </div>
+      <div class="grow">
+        <p class="mb-1 text-gray-500 dark:text-dark-500">Total Appointment</p>
+        <h6>153</h6>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div>
+  <div class="flex mb-3">
+    <h6 class="grow">Today Appointments</h6>
+    <a href="javascript: void(0);" class="underline link link-primary shrink-0">
+      {{ showAll ? 'Show Less' : 'Show All' }}
+    </a>
+  </div>
+  <div class="grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-4 gap-x-space">
+    <ng-container *ngFor="let todayAppointment of todayAppointments; let i = index">
+      <div class="card" [attr.key]="i">
+        <div class="card-body">
+          <div class="flex">
+            <div class="grow">
+              <img [src]="todayAppointment.image" alt="" class="rounded-lg size-12">
+            </div>
+            <div class="dropdown">
+              <button domixDropdownToggle [dropdownMenu]="dropdown1" title="dropdown-button" type="button" class="link link-primary">
+                <i class="ri-more-fill"></i>
+              </button>
+
+              <div #dropdown1 class="!fixed dropdown-menu dropdown-right">
+                <a href="javascript: void(0);" class="dropdown-item">
+                  Overview
+                </a>
+
+                <a href="javascript: void(0);" class="dropdown-item">
+                  Edit
+                </a>
+                <a href="javascript: void(0);" class="dropdown-item">
+                  Delete
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-4">
+            <h6 class="mb-1">
+              <a href="javascript:void(0);">{{ todayAppointment.patientName }}</a>
+            </h6>
+            <p class="text-gray-500 dark:text-dark-500">{{ todayAppointment.treatment }}</p>
+          </div>
+
+          <div class="flex mt-5 text-gray-500 dark:text-dark-500">
+            <p class="grow">
+              <i class="align-baseline ltr:mr-1 rtl:ml-1 ri-calendar-event-line"></i>
+              <span>{{ todayAppointment.date }}</span>
+            </p>
+            <p>
+              <i class="align-baseline ltr:mr-1 rtl:ml-1 ri-time-line"></i>
+              <span>{{ todayAppointment.startTime }}</span>
+            </p>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+</div>
+<div>
+  <div class="card">
+    <div class="flex md:items-center gap-5 card-header flex-col md:flex-row">
+      <h6 class="card-title grow">Appointments (<span>{{gridData.length}}</span>)</h6>
+      <button type="button" class="btn btn-primary shrink-0"><a routerLink="/apps-hospital-appointments-book">Book
+          Appointment</a></button>
+    </div>
+    <div class="pt-0 card-body">
+      <div>
+        <div class="overflow-x-auto table-box">
+          <table class="table whitespace-nowrap">
+            <tbody>
+              <tr class="text-gray-500 bg-gray-100 dark:bg-dark-850 dark:text-dark-500">
+                <th *ngFor="let col of columnDefs" class="!font-medium cursor-pointer">
+                  <div class="flex items-center gap-space">
+                    <div (click)="onSortChange(col)">
+                      {{col.headerName}} <span *ngIf="col.sortable">
+                        {{ col.sortDiraction === 'asc' ? '↑' : '↓' }}</span>
+                    </div>
+                  </div>
+                </th>
+              </tr>
+              <ng-container *ngIf="displayedData.length > 0">
+                <ng-container *ngFor="let appointment of displayedData; let i = index">
+                  <tr class="*:px-3 *:py-2.5">
+                    <td>
+                      <div class="flex items-center gap-3">
+                        <div class="relative text-gray-500 bg-gray-100 rounded-full dark:bg-dark-850 dark:text-dark-500 size-8">
+                          <img [src]="appointment.image" alt="" class="rounded-full">
+                          <span *ngIf="!appointment.image" class="absolute inset-0 flex items-center justify-center text-xs font-semibold text-gray-500 bg-gray-100 rounded-full dark:text-dark-500 dark:bg-dark-850">
+                            {{ generateAvatarText(appointment.patientName) }}
+                          </span>
+                        </div>
+                        <div>
+                          <h6><a href="javascript:void(0);">{{appointment.patientName}}</a></h6>
+                        </div>
+                      </div>
+                    </td>
+                    <td>{{appointment.date}}</td>
+                    <td>{{appointment.startTime}} - {{appointment.endTime}}</td>
+                    <td>{{appointment.treatment}}</td>
+                    <td>{{appointment.doctorName}}</td>
+                    <td>
+                      <span class="badge" [ngClass]="{
+                                          'badge-primary': appointment.status === 'New',
+                                          'badge-red': appointment.status === 'Cancel',
+                                          'badge-green': appointment.status === 'Confirmed',
+                                          'badge-purple': appointment.status === 'Completed',
+                                          'badge-gray': appointment.status === 'Pending'
+                                      }">{{appointment.status}}</span>
+                    </td>
+                    <td>
+                      <div class="flex items-center gap-2">
+                        <button class="btn btn-sub-gray btn-icon !size-8" title="overview" (click)="openAppointmentsOverViewModal(appointment)"><i class="ri-eye-line"></i></button>
+                        <button class="btn btn-sub-gray btn-icon !size-8" title="edit" (click)="editappointments(appointment)"><i class="ri-pencil-line"></i></button>
+                        <button class="btn btn-sub-red btn-icon !size-8" title="delete" (click)="deleteModal(i)"><i class="ri-delete-bin-line"></i></button>
+                      </div>
+                    </td>
+                  </tr>
+                </ng-container>
+              </ng-container>
+            </tbody>
+          </table>
+        </div>
+        <app-domix-pagination [currentPage]="currentPage" [totalPages]="totalPages" [showingStart]="showingStart" [showingEnd]="showingEnd" [totalResults]="gridData.length" (pageChanged)="onPageChange($event)">
+        </app-domix-pagination>
+      </div>
+    </div>
+  </div>
+</div>

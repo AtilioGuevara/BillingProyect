@@ -1,0 +1,59 @@
+<app-page-title [Title]="'Area Charts'" [pageTitle]="'Apexcharts'"></app-page-title>
+
+<div class="grid grid-cols-12">
+  <div class="col-span-12 card">
+    <div class="card-header">
+      <h6 class="card-title">reCAPTCHA</h6>
+    </div>
+    <div class="card-body">
+      <p class="mb-4 text-gray-500 dark:text-dark-500">
+        reCAPTCHA protects your website from fraud and abuse without creating friction.
+      </p>
+      <div class="max-w-md p-6 mx-auto rounded-md shadow-md shadow-gray-200 dark:shadow-dark-800">
+        <form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
+          <div class="mb-4">
+            <label for="name" class="form-label">Name:</label>
+            <input type="text" id="name" formControlName="name" placeholder="Your Name" class="form-input" />
+            <div *ngIf="contactForm.get('name')?.invalid && (contactForm.get('name')?.touched || submitted)"
+              class="text-red-600">
+              Name is required.
+            </div>
+          </div>
+
+          <div class="mb-4">
+            <label for="email" class="form-label">Email:</label>
+            <input type="email" id="email" formControlName="email" placeholder="Your Email" class="form-input" />
+            <div *ngIf="contactForm.get('email')?.invalid && (contactForm.get('email')?.touched || submitted)"
+              class="text-red-600">
+              <div *ngIf="contactForm.get('email')?.errors?.['required']">Email is required.</div>
+              <div *ngIf="contactForm.get('email')?.errors?.['email']">Invalid email format.</div>
+              <div *ngIf="contactForm.get('email')?.errors?.['emailNotValid']">Email must contain &#64; symbol.</div>
+            </div>
+          </div>
+
+          <div class="mb-4">
+            <label for="message" class="form-label">Message:</label>
+            <textarea id="message" formControlName="message" rows="4" placeholder="Your Message"
+              class="h-auto form-input"></textarea>
+            <div *ngIf="contactForm.get('message')?.invalid && (contactForm.get('message')?.touched || submitted)"
+              class="text-red-600">
+              Message is required.
+            </div>
+          </div>
+
+          <div class="mb-4" *ngIf="!submitted">
+            <div class="g-recaptcha" data-sitekey="6LeJWMInAAAAALNEInS0FRjPa6KsvIOYBxFAVci4"></div>
+          </div>
+
+          <div class="mb-4" *ngIf="submitted">
+            <p class="font-bold text-green-600">Form submitted successfully!</p>
+          </div>
+
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+      </div>
+    </div>
+
+  </div>
+</div>
+

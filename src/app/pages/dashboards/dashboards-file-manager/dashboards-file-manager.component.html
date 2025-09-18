@@ -1,0 +1,445 @@
+<app-page-title [Title]="'File Manager'" [pageTitle]="'Dashboards'"></app-page-title>
+
+<div class="grid grid-cols-12 gap-x-space">
+  <div
+    class="relative col-span-12 bg-orange-100 !border-orange-200 sm:col-span-6 md:col-span-4 2xl:col-span-2 dark:bg-orange-500/15 dark:!border-orange-500/20 card">
+    <div class="card-body">
+      <div class="flex items-center justify-center mx-auto rounded-full bg-orange-500/20 size-16">
+        <lucide-angular name="image" class="text-orange-500 size-7"></lucide-angular>
+      </div>
+      <div class="flex items-center gap-3 mt-4">
+        <h6 class="grow"><a href="javascript:void(0);" class="before:absolute before:inset-0">Images</a></h6>
+        <p class="text-gray-500 dark:text-dark-500 shrink-0">245</p>
+      </div>
+    </div>
+  </div>
+  <div
+    class="relative col-span-12 sm:col-span-6 md:col-span-4 2xl:col-span-2 bg-primary-100 !border-primary-200 dark:bg-primary-500/15 dark:!border-primary-500/20 card">
+    <div class="card-body">
+      <div class="flex items-center justify-center mx-auto rounded-full bg-primary-500/20 size-16">
+        <lucide-angular name="image" class="text-primary-500 size-7"></lucide-angular>
+      </div>
+      <div class="flex items-center gap-3 mt-4">
+        <h6 class="grow"><a href="javascript:void(0);" class="before:absolute before:inset-0">Documents</a></h6>
+        <p class="text-gray-500 dark:text-dark-500 shrink-0">1472</p>
+      </div>
+    </div>
+  </div>
+  <div
+    class="relative col-span-12 bg-yellow-100 !border-yellow-200 sm:col-span-6 dark:bg-yellow-500/15 dark:!border-yellow-500/20 md:col-span-4 2xl:col-span-2 card">
+    <div class="card-body">
+      <div class="flex items-center justify-center mx-auto rounded-full bg-yellow-500/20 size-16">
+        <lucide-angular name="FileText" class="text-yellow-500 size-7"></lucide-angular>
+      </div>
+      <div class="flex items-center gap-3 mt-4">
+        <h6 class="grow"><a href="javascript:void(0);" class="before:absolute before:inset-0">PDF Files</a></h6>
+        <p class="text-gray-500 dark:text-dark-500 shrink-0">98</p>
+      </div>
+    </div>
+  </div>
+  <div
+    class="relative col-span-12 bg-purple-100 !border-purple-200 dark:!border-purple-500/20 dark:bg-purple-500/15 sm:col-span-6 md:col-span-4 2xl:col-span-2 card">
+    <div class="card-body">
+      <div class="flex items-center justify-center mx-auto rounded-full bg-purple-500/20 size-16">
+        <lucide-angular name="Video" class="text-purple-500 size-7"></lucide-angular>
+      </div>
+      <div class="flex items-center gap-3 mt-4">
+        <h6 class="grow"><a href="javascript:void(0);" class="before:absolute before:inset-0">Video</a></h6>
+        <p class="text-gray-500 dark:text-dark-500 shrink-0">159</p>
+      </div>
+    </div>
+  </div>
+  <div
+    class="relative col-span-12 sm:col-span-6 md:col-span-4 2xl:col-span-2 bg-sky-100 !border-sky-200 dark:bg-sky-500/15 dark:!border-sky-500/20 card">
+    <div class="card-body">
+      <div class="flex items-center justify-center mx-auto rounded-full bg-sky-500/20 size-16">
+        <lucide-angular name="AudioLines" class="text-sky-500 size-7"></lucide-angular>
+      </div>
+      <div class="flex items-center gap-3 mt-4">
+        <h6 class="grow"><a href="javascript:void(0);" class="before:absolute before:inset-0">Audio</a></h6>
+        <p class="text-gray-500 dark:text-dark-500 shrink-0">208</p>
+      </div>
+    </div>
+  </div>
+  <div
+    class="relative col-span-12 bg-green-100 !border-green-200 dark:bg-green-500/15 dark:!border-green-500/20 sm:col-span-6 md:col-span-4 2xl:col-span-2 card">
+    <div class="card-body">
+      <div class="flex items-center justify-center mx-auto rounded-full bg-green-500/20 size-16">
+        <lucide-angular name="FolderOpen" class="text-green-500 size-7"></lucide-angular>
+      </div>
+      <div class="flex items-center gap-3 mt-4">
+        <h6 class="grow"><a href="javascript:void(0);" class="before:absolute before:inset-0">Others Files</a></h6>
+        <p class="text-gray-500 dark:text-dark-500 shrink-0">1569</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-span-12 2xl:col-span-6 card">
+    <div class="flex items-center card-header">
+      <h6 class="card-title grow">Analytics</h6>
+
+      <div class="dropdown shrink-0">
+        <button domixDropdownToggle [dropdownMenu]="dropdown3" type="button"
+          class="flex px-2 py-1 text-xs border-gray-200 dark:border-dark-800 link link-red btn">
+          Last Week
+          <svg :class="{ 'transform rotate-180': open }" class="transition-transform duration-300 size-4"
+            viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd"
+              d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+              clip-rule="evenodd" />
+          </svg>
+        </button>
+        <div #dropdown3 class="!fixed p-2 dropdown-menu" dropdown-position="right">
+          <ul>
+            <li>
+              <a href="javascript: void(0);" class="dropdown-item">
+                <span>Weekly</span>
+              </a>
+            </li>
+            <li>
+              <a href="javascript: void(0);" class="dropdown-item">
+                <span>Monthly</span>
+              </a>
+            </li>
+            <li>
+              <a href="javascript: void(0);" class="dropdown-item">
+                <span>Yearly</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <app-domix-charts [series]="newChart.series" [chartOptions]="newChart.chartOptions">
+      </app-domix-charts>
+    </div>
+  </div>
+  <div class="col-span-12 md:col-span-6 2xl:col-span-3 card">
+    <div class="flex items-center gap-3 card-header">
+      <h6 class="card-title grow">Recent Files</h6>
+      <a href="javascript: void(0);" class="link link-primary shrink-0">
+        View All
+        <lucide-angular name="MoveRight" class="ml-1 ltr:inline-block rtl:hidden size-4"></lucide-angular>
+        <lucide-angular name="MoveLeft" class="mr-1 rtl:inline-block ltr:hidden size-4"></lucide-angular>
+      </a>
+    </div>
+    <div class="card-body">
+      <div class="space-y-3">
+        <div class="flex items-center gap-3">
+          <div class="flex items-center justify-center p-2 rounded-md shrink-0 size-10 bg-slate-100 dark:bg-dark-850">
+            <img src="assets/images/file-manager/icons/picture.png" alt="">
+          </div>
+          <div class="grow">
+            <h6 class="mb-0.5"><a href="javascript:void(0);" class="text-current link link-primary">Brand Logo.png</a>
+            </h6>
+            <p class="text-sm text-gray-500 dark:text-dark-500">14 June, 2024</p>
+          </div>
+          <p>2.6 MB</p>
+        </div>
+        <div class="flex items-center gap-3">
+          <div class="flex items-center justify-center p-2 rounded-md shrink-0 size-10 bg-slate-100 dark:bg-dark-850">
+            <img src="assets/images/file-manager/icons/ai-file-format.png" alt="">
+          </div>
+          <div class="grow">
+            <h6 class="mb-0.5"><a href="javascript: void(0);" class="text-current link link-primary">AI Chat
+                Module.ai</a></h6>
+            <p class="text-sm text-gray-500 dark:text-dark-500">29 June, 2024</p>
+          </div>
+          <p>29 MB</p>
+        </div>
+        <div class="flex items-center gap-3">
+          <div class="flex items-center justify-center p-2 rounded-md shrink-0 size-10 bg-slate-100 dark:bg-dark-850">
+            <img src="assets/images/file-manager/icons/video.png" alt="">
+          </div>
+          <div class="grow">
+            <h6 class="mb-0.5"><a href="javascript: void(0);" class="text-current link link-primary">Domiex
+                Intro.mp4</a></h6>
+            <p class="text-sm text-gray-500 dark:text-dark-500">05 July, 2024</p>
+          </div>
+          <p>44 MB</p>
+        </div>
+        <div class="flex items-center gap-3">
+          <div class="flex items-center justify-center p-2 rounded-md shrink-0 size-10 bg-slate-100 dark:bg-dark-850">
+            <img src="assets/images/file-manager/icons/document.png" alt="">
+          </div>
+          <div class="grow">
+            <h6 class="mb-0.5"><a href="javascript: void(0);" class="text-current link link-primary">Project
+                guidelines.txt</a></h6>
+            <p class="text-sm text-gray-500 dark:text-dark-500">09 July, 2024</p>
+          </div>
+          <p>7 MB</p>
+        </div>
+        <div class="flex items-center gap-3">
+          <div class="flex items-center justify-center p-2 rounded-md shrink-0 size-10 bg-slate-100 dark:bg-dark-850">
+            <img src="assets/images/file-manager/icons/office365.png" alt="">
+          </div>
+          <div class="grow">
+            <h6 class="mb-0.5"><a href="javascript:void(0);" class="text-current link link-primary">List of invoice</a>
+            </h6>
+            <p class="text-sm text-gray-500 dark:text-dark-500">18 July, 2024</p>
+          </div>
+          <p>4.1 MB</p>
+        </div>
+        <div class="flex items-center gap-3">
+          <div class="flex items-center justify-center p-2 rounded-md shrink-0 size-10 bg-slate-100 dark:bg-dark-850">
+            <img src="assets/images/file-manager/icons/pdf.png" alt="">
+          </div>
+          <div class="grow">
+            <h6 class="mb-0.5"><a href="javascript: void(0);" class="text-current link link-primary">Features
+                Breakdown</a></h6>
+            <p class="text-sm text-gray-500 dark:text-dark-500">18 July, 2024</p>
+          </div>
+          <p>3 MB</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-span-12 md:col-span-6 2xl:col-span-3 card">
+    <div class="flex items-center gap-3 card-header">
+      <h6 class="card-title grow">Overview Storage</h6>
+      <div class="dropdown shrink-0">
+        <button type="button" domixDropdownToggle [dropdownMenu]="dropdown1"
+          class="flex items-center text-gray-500 dark:text-dark-500">
+          <lucide-angular name="Ellipsis" class="size-5"></lucide-angular>
+        </button>
+        <div #dropdown1 class="!fixed p-2 dropdown-menu hidden" dropdown-position="right">
+          <ul>
+            <li>
+              <a routerLink="/apps-event-overview" class="dropdown-item">
+                <span>Weekly</span>
+              </a>
+            </li>
+            <li>
+              <a href="javascript:void(0);" class="dropdown-item">
+                <span>Monthly</span>
+              </a>
+            </li>
+            <li>
+              <a href="javascript:void(0);" class="dropdown-item">
+                <span>Yearly</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <app-domix-charts [series]="donutChart.series" [chartOptions]="donutChart.chartOptions">
+      </app-domix-charts>
+      <div class="mt-5">
+        <div class="flex items-center gap-3 mb-2">
+          <h6 class="text-xs grow">Use Storage</h6>
+          <h6 class="text-xs font-semibold text-red-500">74%</h6>
+        </div>
+        <div class="progress-bar progress-2">
+          <div class="w-[74%] text-white progress-bar-wrap bg-primary-500"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-span-12 xl:col-span-8 xl:row-span-2 card">
+    <div class="flex flex-wrap items-center justify-between gap-4 card-header">
+      <h6 class="card-title">Quick Access</h6>
+      <div class="flex items-center gap-4">
+        <div class="relative group/form grow">
+          <input type="text"
+            class="ltr:pl-9 rtl:pr-9 form-input ltr:group-[&.right]/form:pr-9 rtl:group-[&.right]/form:pl-9 ltr:group-[&.right]/form:pl-4 rtl:group-[&.right]/form:pr-4"
+            placeholder="Search for ..." [(ngModel)]="searchTerm" (input)="filterData()">
+          <button
+            class="absolute inset-y-0 flex items-center ltr:left-3 rtl:right-3 ltr:group-[&.right]/form:right-3 rtl:group-[&.right]/form:left-3 ltr:group-[&.right]/form:left-auto rtl:group-[&.right]/form:right-auto focus:outline-hidden">
+            <lucide-angular name="Search"
+              class="text-gray-500 dark:text-dark-500 size-4 fill-gray-100 dark:fill-dark-850"></lucide-angular>
+          </button>
+        </div>
+        <div class="shrink-0">
+          <input type="file" id="fileInput" class="hidden">
+          <label for="fileInput" class="btn btn-sub-green">
+            <lucide-angular name="CloudUpload" class="inline-block ltr:mr-1 rtl:ml-1 size-4"></lucide-angular> Upload
+          </label>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div>
+        <div class="overflow-x-auto table-box">
+          <table class="table flush">
+            <tbody>
+              <tr *ngFor="let item of data; let index = index">
+                <td class="whitespace-nowrap">
+                  <div class="flex items-center gap-3">
+                    <img [src]="item.image" alt="" class="size-8">
+                    <a href="javascript: void(0);">
+                      <h6>{{ item.name }}</h6>
+                    </a>
+                  </div>
+                </td>
+                <td class="whitespace-nowrap">{{ item.type }}</td>
+                <td class="whitespace-nowrap">{{ item.size }}</td>
+                <td class="whitespace-nowrap">{{ item.date }}</td>
+                <td class="w-16 whitespace-nowrap">
+                  <div class="flex gap-3">
+                    <a href="javascript:void(0);" class="link link-primary"><i class="ri-edit-2-line"></i></a>
+                    <a href="javascript:void(0);" class="link link-primary"><i class="ri-download-2-line"></i></a>
+                    <a href="javascript: void(0);" class="link link-red" (click)="deletePatient(item)">
+                      <i class="ri-delete-bin-6-line"></i>
+                    </a>
+                  </div>
+                </td>
+              </tr>
+              <tr *ngIf="data.length === 0">
+                <td colspan="10" class="!p-8">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="mx-auto size-12" viewBox="0 0 48 48">
+                    <linearGradient id="SVGID_1__h35ynqzIJzH4_gr1" x1="34.598" x2="15.982" y1="15.982" y2="34.598"
+                      gradientUnits="userSpaceOnUse">
+                      <stop offset="0" stop-color="#60e8fe"></stop>
+                      <stop offset=".033" stop-color="#6ae9fe"></stop>
+                      <stop offset=".197" stop-color="#97f0fe"></stop>
+                      <stop offset=".362" stop-color="#bdf5ff"></stop>
+                      <stop offset=".525" stop-color="#dafaff"></stop>
+                      <stop offset=".687" stop-color="#eefdff"></stop>
+                      <stop offset=".846" stop-color="#fbfeff"></stop>
+                      <stop offset="1" stop-color="#fff"></stop>
+                    </linearGradient>
+                    <path fill="url(#SVGID_1__h35ynqzIJzH4_gr1)"
+                      d="M40.036,33.826L31.68,25.6c0.847-1.739,1.335-3.684,1.335-5.748c0-7.27-5.894-13.164-13.164-13.164 S6.688,12.582,6.688,19.852c0,7.27,5.894,13.164,13.164,13.164c2.056,0,3.995-0.485,5.728-1.326l3.914,4.015l4.331,4.331 c1.715,1.715,4.496,1.715,6.211,0C41.751,38.321,41.751,35.541,40.036,33.826z">
+                    </path>
+                    <path fill="none" stroke="#10cfe3" stroke-linecap="round" stroke-linejoin="round"
+                      stroke-miterlimit="10" stroke-width="3"
+                      d="M31.95,25.739l8.086,8.086c1.715,1.715,1.715,4.496,0,6.211l0,0c-1.715,1.715-4.496,1.715-6.211,0 l-4.331-4.331">
+                    </path>
+                    <path fill="none" stroke="#10cfe3" stroke-linecap="round" stroke-linejoin="round"
+                      stroke-miterlimit="10" stroke-width="3"
+                      d="M7.525,24.511c-1.771-4.694-0.767-10.196,3.011-13.975c3.847-3.847,9.48-4.817,14.228-2.912">
+                    </path>
+                    <path fill="none" stroke="#10cfe3" stroke-linecap="round" stroke-linejoin="round"
+                      stroke-miterlimit="10" stroke-width="3"
+                      d="M30.856,12.603c3.376,5.114,2.814,12.063-1.688,16.565c-4.858,4.858-12.565,5.129-17.741,0.814">
+                    </path>
+                  </svg>
+                  <p class="mt-2 text-center text-gray-500 dark:text-dark-500">No matching records found</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-span-12 xl:col-span-4">
+    <h6 class="mb-3">My Favorites</h6>
+    <!-- Swiper -->
+    <div class="swiper mySwiper group/swiper" dir="ltr" #swiperRef>
+      <div class="swiper-wrapper">
+        <div class="swiper-slide">
+          <div
+            class="flex items-center gap-3 p-3 card bg-sky-100 dark:bg-sky-500/15 dark:border-sky-500/20 border-sky-200">
+            <div class="grow">
+              <h6 class="mb-1"><a href="javascript:void(0);">Images</a></h6>
+              <p class="text-sm text-gray-500 dark:text-dark-500">2471 Files</p>
+            </div>
+            <div>
+              <div class="flex ml-3 -space-x-3 grow">
+                <a href="javascript: void(0);"
+                  class="transition duration-300 ease-linear hover:z-10 hover:-translate-y-1">
+                  <img class="border-2 border-white rounded-full dark:border-dark-900 size-8" alt=""
+                    src="assets/images/avatar/user-14.png">
+                </a>
+                <a href="javascript: void(0);"
+                  class="transition duration-300 ease-linear hover:z-10 hover:-translate-y-1">
+                  <img class="border-2 border-white rounded-full dark:border-dark-900 size-8" alt=""
+                    src="assets/images/avatar/user-16.png">
+                </a>
+                <a href="javascript: void(0);"
+                  class="transition duration-300 ease-linear hover:z-10 hover:-translate-y-1">
+                  <img class="border-2 border-white rounded-full dark:border-dark-900 size-8" alt=""
+                    src="assets/images/avatar/user-17.png">
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="swiper-slide">
+          <div
+            class="flex items-center gap-3 p-3 bg-pink-100 border-pink-200 dark:border-pink-500/20 card dark:bg-pink-500/15">
+            <div class="grow">
+              <h6 class="mb-1"><a href="javascript:void(0);">Download</a></h6>
+              <p class="text-sm text-gray-500 dark:text-dark-500">547 Files</p>
+            </div>
+            <div>
+              <div class="flex ml-3 -space-x-3 grow">
+                <a href="javascript: void(0);"
+                  class="transition duration-300 ease-linear hover:z-10 hover:-translate-y-1">
+                  <img class="border-2 border-white rounded-full dark:border-dark-900 size-8" alt=""
+                    src="assets/images/avatar/user-14.png">
+                </a>
+                <a href="javascript: void(0);"
+                  class="transition duration-300 ease-linear hover:z-10 hover:-translate-y-1">
+                  <img class="border-2 border-white rounded-full dark:border-dark-900 size-8" alt=""
+                    src="assets/images/avatar/user-17.png">
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="swiper-slide">
+          <div
+            class="flex items-center gap-3 p-3 bg-purple-100 border-purple-200 dark:border-purple-500/20 card dark:bg-purple-500/15">
+            <div class="grow">
+              <h6 class="mb-1"><a href="javascript:void(0);">Domiex Project</a></h6>
+              <p class="text-sm text-gray-500 dark:text-dark-500">1479 Files</p>
+            </div>
+            <div>
+              <div class="flex ml-3 -space-x-3 grow">
+                <a href="javascript: void(0);"
+                  class="transition duration-300 ease-linear hover:z-10 hover:-translate-y-1">
+                  <img class="border-2 border-white rounded-full dark:border-dark-900 size-8" alt=""
+                    src="assets/images/avatar/user-14.png">
+                </a>
+                <a href="javascript: void(0);"
+                  class="transition duration-300 ease-linear hover:z-10 hover:-translate-y-1">
+                  <img class="border-2 border-white rounded-full dark:border-dark-900 size-8" alt=""
+                    src="assets/images/avatar/user-16.png">
+                </a>
+                <a href="javascript: void(0);"
+                  class="transition duration-300 ease-linear hover:z-10 hover:-translate-y-1">
+                  <img class="border-2 border-white rounded-full dark:border-dark-900 size-8" alt=""
+                    src="assets/images/avatar/user-10.png">
+                </a>
+                <a href="javascript: void(0);"
+                  class="transition duration-300 ease-linear hover:z-10 hover:-translate-y-1">
+                  <img class="border-2 border-white rounded-full dark:border-dark-900 size-8" alt=""
+                    src="assets/images/avatar/user-11.png">
+                </a>
+                <a href="javascript: void(0);"
+                  class="transition duration-300 ease-linear hover:z-10 hover:-translate-y-1">
+                  <img class="border-2 border-white rounded-full dark:border-dark-900 size-8" alt=""
+                    src="assets/images/avatar/user-17.png">
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="swiper-button-next after:!font-remix after:!text-2xl after:text-primary-500 !size-6 bg-white rounded-full opacity-0 group-hover/swiper:opacity-100 transition ease-linear duration-300 after:!content-['\ea6e']">
+      </div>
+      <div
+        class="swiper-button-prev after:!font-remix after:!text-2xl after:text-primary-500 !size-6 bg-white rounded-full opacity-0 group-hover/swiper:opacity-100 transition ease-linear duration-300 after:!content-['\ea64']">
+      </div>
+    </div>
+    <div class="relative card">
+      <div class="absolute bottom-0 right-0 opacity-45">
+        <div class="absolute inset-0 bg-gradient-to-r from-white dark:from-dark-900"></div>
+        <img src="assets/images/dashboards/ecommerce/pattern.png" alt="" class="h-40">
+      </div>
+      <div class="relative card-body">
+        <img src="assets/images/dashboards/file-manager.png" alt="" class="h-32 mx-auto">
+        <h6 class="mt-5 mb-1">Upgrade to Pro</h6>
+        <p class="mb-5 text-gray-500 dark:text-dark-500">Unlock your plan to Pro to get access all features!</p>
+        <a href="javascript:void(0);" routerLink="/pages-pricing" type="button"
+          class="cursor-pointer w-full btn btn-primary">Upgrade Now</a>
+      </div>
+    </div>
+  </div>
+</div>

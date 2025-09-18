@@ -1,0 +1,61 @@
+<div class="flex items-center gap-3 card-header">
+  <h6 class="card-title grow">Appointments History</h6>
+  <a href="javascript: void(0);" class="font-medium shrink-0 text-primary-500 link hover:text-primary-600"
+    (click)="openCreateModal(null,null)">
+    <lucide-angular name="Plus" class="inline-block mb-1 align-middle size-4"></lucide-angular> New
+    Appointment
+  </a>
+</div>
+<div class="pt-0 card-body">
+  <div>
+    <div class="overflow-x-auto table-box">
+      <table class="table whitespace-nowrap">
+        <tbody>
+          <tr class="text-gray-500 bg-gray-100 dark:bg-dark-850 dark:text-dark-500">
+            <th *ngFor="let col of columnDefs" class="!font-medium cursor-pointer">
+              <div class="flex items-center gap-space">
+                <div (click)="onSortChange(col)">
+                  {{col.headerName}} <span *ngIf="col.sortable">
+                    {{ col.sortDiraction === 'asc' ? '↑' : '↓' }}</span>
+                </div>
+              </div>
+            </th>
+          </tr>
+          <ng-container *ngIf="displayedData.length > 0">
+            <ng-container *ngFor="let appointment of displayedData; let i = index">
+              <tr class="*:px-3 *:py-2.5">
+                <td >{{appointment.date}}</td>
+                <td >{{appointment.treatmentType}}</td>
+                <td >{{appointment.time}}</td>
+                <td >{{appointment.reasonCondition}}</td>
+                <td >{{appointment.notes}}</td>
+                <td >{{appointment.doctor}}</td>
+                <td>
+                  <span class="badge" [ngClass]="{
+                                      'badge-green': appointment.status === 'Completed',
+                                      'badge-red': appointment.status === 'Expired',
+                                      'badge-yellow': appointment.status === 'Pending'
+                                  }">{{appointment.status}}</span>
+                </td>
+                <td>
+                  <div class="flex items-center gap-2">
+                    <button class="btn btn-sub-gray btn-icon !size-8" title="overview"><i
+                        class="ri-eye-line"></i></button>
+                    <button class="btn btn-sub-gray btn-icon !size-8" title="edit"><i class="ri-pencil-line"
+                        (click)="openCreateModal(appointment,i)"></i></button>
+                    <button class="btn btn-sub-red btn-icon !size-8" title="delete" (click)="deleteModal(i)"><i
+                        class="ri-delete-bin-line"></i></button>
+                  </div>
+                </td>
+              </tr>
+            </ng-container>
+          </ng-container>
+        </tbody>
+      </table>
+    </div>
+
+    <app-domix-pagination [currentPage]="currentPage" [totalPages]="totalPages" [showingStart]="showingStart"
+      [showingEnd]="showingEnd" [totalResults]="displayedData.length" (pageChanged)="onPageChange($event)">
+    </app-domix-pagination>
+  </div>
+</div>

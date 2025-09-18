@@ -1,0 +1,103 @@
+<div id="addEventModal" class="modal">
+  <div class="modal-wrap modal-center">
+    <div class="modal-header">
+      <h6>{{!config ? 'Add New' : 'Update' }} Event</h6>
+      <button data-modal-close="addEventModal" class="link link-red float-end" (click)="close()">
+        <lucide-angular name="x" class="size-5"></lucide-angular>
+      </button>
+    </div>
+    <div class="modal-content">
+      <div class="grid grid-cols-12 gap-5" [formGroup]="fromGroup">
+        <div class="col-span-12">
+          <h6 class="form-label">Event Logo</h6>
+          <div>
+            <label for="logo">
+              <span
+                class="inline-flex items-center justify-center w-full h-32 overflow-hidden bg-gray-100 border border-gray-200 rounded-md cursor-pointer dark:bg-dark-850 dark:border-dark-800">
+                <img *ngIf="fromGroup.get('mainImage')?.value" [src]="fromGroup.get('mainImage')?.value" class="object-cover h-24">
+                <span *ngIf="!fromGroup.get('mainImage')?.value" class="flex flex-col items-center text-gray-500 dark:text-dark-500">
+                  <lucide-angular name="upload" class=""></lucide-angular>
+                  <span class="block mt-3">Upload Your Event Logo</span>
+                </span>
+              </span>
+            </label>
+            <div class="hidden">
+              <label class="block">
+                <span class="sr-only">Choose profile photo</span>
+                <input type="file" name="logo" id="logo" (change)="onFileChange($event)"
+                  class="block w-full text-sm file:rounded-md focus:outline-0 text-slate-500 file:mr-4 file:py-2 file:px-4 file:border-0 file:text-sm file:font-semibold file:bg-violet-50 file:text-violet-700 hover:file:bg-violet-100" />
+              </label>
+            </div>
+          </div>
+        </div>
+        <div class="col-span-12">
+          <label for="nameInput" class="form-label">Event Name</label>
+          <input type="text" id="nameInput" class="form-input" placeholder="Event name" x-model=""
+            formControlName="name">
+          <span *ngIf="fromGroup.get('name')?.hasError('required')" class="text-red-500"> This Filed is
+            Required</span>
+        </div>
+        <div class="col-span-6">
+          <label for="dateInput" class="form-label">Event Date</label>
+          <input type="text" placeholder="YYYY-MM-DD" id="dateInput" class="form-input" data-provider="flatpickr"
+            formControlName="date" mwlFlatpickr [flatpickrOptions]="{dateFormat: 'Y-m-d'}">
+          <span *ngIf="fromGroup.get('date')?.hasError('required')" class="text-red-500"> This Filed is
+            Required</span>
+        </div>
+        <div class="col-span-6">
+          <label for="eventDurationInput" class="form-label">Event Duration</label>
+          <input type="text" placeholder="00:00" id="eventDurationInput" class="form-input" mwlFlatpickr
+            [flatpickrOptions]="timePickerOptions" formControlName="time">
+          <span *ngIf="fromGroup.get('time')?.hasError('required')" class="text-red-500"> This Filed is
+            Required</span>
+        </div>
+        <div class="col-span-6">
+          <label for="peopleInput" class="form-label">Total People</label>
+          <input type="text" placeholder="0" id="peopleInput" class="form-input" formControlName="peopleSize">
+          <span *ngIf="fromGroup.get('peopleSize')?.hasError('required')" class="text-red-500"> This Filed is
+            Required</span>
+        </div>
+        <div class="col-span-6">
+          <label for="priceInput" class="form-label">Price</label>
+          <input type="text" placeholder="$00.00" id="priceInput" class="form-input" formControlName="price">
+          <span *ngIf="fromGroup.get('price')?.hasError('required')" class="text-red-500"> This Filed is
+            Required</span>
+        </div>
+        <div class="col-span-12">
+          <label for="locationInput" class="form-label">Location</label>
+          <input type="text" placeholder="Enter event location" id="locationInput" class="form-input"
+            formControlName="location">
+          <span *ngIf="fromGroup.get('location')?.hasError('required')" class="text-red-500"> This Filed is
+            Required</span>
+        </div>
+        <div class="col-span-12">
+          <label for="contributorsSelect" class="form-label">contributors </label>
+          <ng-select class="filter-ng-select" [items]="contributorOptions" bindLabel="name" bindValue="name"  [multiple]="true"
+            placeholder="Select contributor To" formControlName="contributors">
+          </ng-select>
+          <span *ngIf="fromGroup.get('contributors')?.hasError('required')" class="text-red-500"> This Filed is
+            Required</span>
+        </div>
+        <div class="col-span-6">
+          <label for="eventTypeSelect" class="form-label">Event Type</label>
+          <ng-select class="filter-ng-select" [items]="typeOptions" bindLabel="label" bindValue="value"
+            placeholder="Select event type" formControlName="eventType">
+          </ng-select>
+          <span *ngIf="fromGroup.get('eventType')?.hasError('required')" class="text-red-500"> This Filed is
+            Required</span>
+        </div>
+        <div class="col-span-6">
+          <label for="StatusSelect" class="form-label">Status</label>
+          <ng-select class="filter-ng-select" [items]="statusOptions" bindLabel="label" bindValue="value"
+            placeholder="Select status" formControlName="status"></ng-select>
+          <span *ngIf="fromGroup.get('status')?.hasError('required')" class="text-red-500"> This Filed is
+            Required</span>
+        </div>
+      </div>
+      <div class="flex justify-end gap-2 mt-5">
+        <button type="button" class="btn btn-active-red" (click)="close()">Cancel</button>
+        <button class="btn btn-primary" (click)="closeEventModal()">{{!config ? 'Add' : 'Update' }} Event</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,131 @@
+<div class="card-body">
+    <ngx-simplebar [options]="options">
+        <div>
+            <div class="flex gap-4 *:shrink-0">
+                <a href="javascript:void(0);" class="block w-24 p-2 text-center transition duration-300 ease-linear rounded-md hover:bg-gray-50 dark:hover:bg-dark-850">
+                    <div class="relative flex items-center justify-center mx-auto mb-1 text-lg font-semibold text-gray-500 bg-white border border-gray-200 rounded-full dark:bg-dark-900 dark:text-dark-500 dark:border-dark-800 size-12">
+                        S
+                        <span class="absolute flex items-center justify-center !p-0 rounded-full !text-11 -bottom-0.5 -right-0.5 !border-2 !border-white size-5 badge dark:!border-dark-900 badge-solid-primary">5</span>
+                    </div>
+                    <h6 class="font-medium truncate">Shopia Mia</h6>
+                </a>
+                <a href="javascript:void(0);" class="block w-24 p-2 text-center transition duration-300 ease-linear rounded-md hover:bg-gray-50 dark:hover:bg-dark-850">
+                    <div class="relative flex items-center justify-center mx-auto mb-1 text-lg font-semibold text-gray-500 bg-white border border-gray-200 rounded-full dark:bg-dark-900 dark:text-dark-500 dark:border-dark-800 size-12">
+                        <img src="assets/images/brands/img-06.png" alt="" class="size-6">
+                    </div>
+                    <h6 class="font-medium truncate">Windows Social Media</h6>
+                </a>
+                <a href="javascript:void(0);" class="block w-24 p-2 text-center transition duration-300 ease-linear rounded-md hover:bg-gray-50 dark:hover:bg-dark-850">
+                    <div class="relative flex items-center justify-center mx-auto mb-1 text-lg font-semibold text-gray-500 bg-white border border-gray-200 rounded-full dark:bg-dark-900 dark:text-dark-500 dark:border-dark-800 size-12">
+                        <img src="assets/images/brands/img-08.png" alt="" class="size-6">
+                        <span class="absolute flex items-center justify-center !p-0 rounded-full !text-11 -bottom-0.5 -right-0.5 !border-2 !border-white size-5 badge dark:!border-dark-900 badge-solid-primary">2</span>
+                    </div>
+                    <h6 class="font-medium truncate">Shopify</h6>
+                </a>
+                <a href="javascript:void(0);" class="block w-24 p-2 text-center transition duration-300 ease-linear rounded-md hover:bg-gray-50 dark:hover:bg-dark-850">
+                    <div class="relative flex items-center justify-center mx-auto mb-1 text-lg font-semibold text-gray-500 bg-white border border-gray-200 rounded-full dark:bg-dark-900 dark:text-dark-500 dark:border-dark-800 size-12">
+                        <img src="assets/images/brands/img-20.png" alt="" class="size-6">
+                    </div>
+                    <h6 class="font-medium truncate">Payment</h6>
+                </a>
+                <a href="javascript:void(0);" class="block w-24 p-2 text-center transition duration-300 ease-linear rounded-md hover:bg-gray-50 dark:hover:bg-dark-850">
+                    <div class="relative flex items-center justify-center mx-auto mb-1 text-lg font-semibold text-gray-500 bg-white border border-gray-200 rounded-full dark:bg-dark-900 dark:text-dark-500 dark:border-dark-800 size-12">
+                        <img src="assets/images/brands/img-09.png" alt="" class="size-6">
+                    </div>
+                    <h6 class="font-medium truncate">Social Media</h6>
+                </a>
+                <a href="javascript:void(0);" class="block w-24 p-2 text-center transition duration-300 ease-linear rounded-md hover:bg-gray-50 dark:hover:bg-dark-850">
+                    <div class="relative flex items-center justify-center mx-auto mb-1 text-lg font-semibold text-gray-500 bg-white border border-gray-200 rounded-full dark:bg-dark-900 dark:text-dark-500 dark:border-dark-800 size-12">
+                        <img src="assets/images/brands/img-17.png" alt="" class="size-6">
+                    </div>
+                    <h6 class="font-medium truncate">Romero</h6>
+                </a>
+                <a href="javascript:void(0);" class="block w-24 p-2 text-center transition duration-300 ease-linear rounded-md hover:bg-gray-50 dark:hover:bg-dark-850">
+                    <div class="relative flex items-center justify-center mx-auto mb-1 text-lg font-semibold text-gray-500 bg-white border border-gray-200 rounded-full dark:bg-dark-900 dark:text-dark-500 dark:border-dark-800 size-12">
+                        <img src="assets/images/brands/img-16.png" alt="" class="size-6">
+                    </div>
+                    <h6 class="font-medium truncate">Romero</h6>
+                </a>
+            </div>
+        </div>
+    </ngx-simplebar>
+
+    <div class="mt-3">
+        <div class="flex items-center gap-2 mb-4">
+            <div class="input-check-group shrink-0">
+                <input id="checkboxBasic1" class="input-check input-check-primary" type="checkbox" [(ngModel)]="headerCheckBox" (change)="allCheckChange()" />
+            </div>
+            <h6 class="grow">Main Inbox <small class="font-normal text-gray-500 ltr:ml-1 rtl:mt-1 dark:text-dark-500 text-14"> {{data.length}} messages</small></h6>
+            <div class="flex items-center gap-4 shrink-0">
+                <a href="javascript:void(0);" *ngIf="allDeletedArr.length" (click)="deleteMail()" class="link link-red"><lucide-angular name="trash" class="size-4"></lucide-angular></a>
+                <div class="dropdown" domixDropdownToggle [dropdownMenu]="temp">
+                    <button type="button" class="flex items-center text-gray-500 dark:text-dark-500">
+                        <lucide-angular name="ellipsis" class="size-5"></lucide-angular>
+                    </button>
+                    <div #temp class="!fixed max-w-md p-2 dropdown-menu">
+                        <ul>
+                            <li>
+                                <a class="dropdown-item">
+                                    <span>Show more messages</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item">
+                                    <span>Hide section when empty</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item">
+                                    <span>Manage Inbox settings</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item">
+                                    <span>Mark all as read</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <a href="javascript:void(0);" class="link link-primary"><lucide-angular name="rotate-ccw" class="size-4"></lucide-angular></a>
+                <a href="javascript:void(0);" class="link link-primary" (click)="searchModal()"><lucide-angular name="search" class="size-4"></lucide-angular></a>
+            </div>
+        </div>
+        <ngx-simplebar [options]="options" class="-mx-5 h-[35rem]">
+            <div class="border-t border-gray-200 divide-y divide-gray-200 dark:border-dark-800 dark:divide-dark-800">
+                <ng-container *ngFor="let email of data;let i = index">
+                    <div class="flex gap-3 p-5 transition duration-300 ease-linear hover:bg-gray-50 dark:hover:bg-dark-850" (click)="onMsgSelect(i)">
+                        <div class="self-start mt-3 input-check-group shrink-0">
+                            <input id="checkboxBasic1" class="input-check input-check-primary" type="checkbox" [checked]="allDeletedArr.includes(email.id)" (change)="proccedDelMail(email.id)" (click)="$event.stopPropagation()" />
+                        </div>
+                        <div class="flex items-center justify-center text-red-500 rounded-full bg-red-500/10 shrink-0 size-10">
+                            <ng-container *ngIf="email.avatarImage">
+                                <img [src]="email.avatarImage" alt="" class="rounded-full">
+                            </ng-container>
+                            <ng-container *ngIf="email.avatarText">
+                                <span>{{email.avatarText}}</span>
+                            </ng-container>
+                        </div>
+                        <div class="overflow-hidden grow">
+                            <p class="float-end text-14">{{email.date}}</p>
+                            <h6 class="mb-1">{{email.sender}}</h6>
+                            <a href="javascript:void(0);" class="link link-primary">{{email.email}}</a>
+                            <a class="block mt-3">
+                                <h6 class="mb-1">{{email.subject}}</h6>
+                                <p class="truncate">{{email.message}}</p>
+                            </a>
+                            <div class="flex justify-end gap-2 mt-2">
+                                <ng-container *ngFor="let lable of email.badges">
+                                    <a class="badge " [ngClass]="lable === 'Application' || lable === 'Scheduled' || lable === 'Important' ? 'badge-green' :
+                                                                            lable === 'Inbox' || lable === 'Drafts' ? 'badge-gray' :
+                                                                            lable === 'Developers' ? 'badge-yellow' :
+                                                                            lable === 'Photographer' ? 'badge-sky' : 'badge-red'">{{lable}}</a>
+                                </ng-container>
+                            </div>
+                        </div>
+                    </div>
+                </ng-container>
+            </div>
+        </ngx-simplebar>
+    </div>
+</div>

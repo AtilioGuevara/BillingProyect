@@ -1,0 +1,159 @@
+<app-page-title [pageTitle]="'Ecommerce Checkout'" [Title]="'Ecommerce'"></app-page-title>
+
+<div class="grid grid-cols-12 gap-space">
+    <div class="col-span-12 2xl:col-span-8">
+        <div class="card">
+            <div class="card-header">
+                <h6 class="card-title">Personal Details</h6>
+            </div>
+            <div class="card-body">
+                <div>
+                    <ng-container class="card" *ngFor="let address of loginUserAddress;let i=index">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="flex items-center gap-2 float-end">
+                                    <a href="javascript:void(0);" class="font-medium link link-primary"><lucide-angular name="pencil" class="inline-block size-4"></lucide-angular><span class="align-center ltr:ml-1 rtl:mr-1" (click)="addOrEditAddress(address,i)">Edit</span></a>
+                                    <a href="javascript:void(0);" class="font-medium link link-primary"><lucide-angular name="trash-2" class="inline-block size-4"></lucide-angular><span class="align-center ltr:ml-1 rtl:mr-1" (click)="del(i)">Delete</span></a>
+                                </div>
+                                <span class="badge badge-purple">{{address.type}}</span>
+                                <h6 class="mt-2 mb-1">{{address.firstName + ' '+ address.lastName + ' - ' + address.phone}}</h6>
+                                <p class="mb-3 text-gray-500 dark:text-dark-500">{{address.address}},{{address.city}},{{address.country}} - {{address.zip}}</p>
+                                <button (click)="selectAdd(address)" [ngClass]="address.selected ? 'btn btn-primary' : 'btn btn-sub-gray'">
+                                    <span>{{address.selected ? 'Selected Address' : 'Select Here'}}</span>
+                                </button>
+                            </div>
+                        </div>
+                    </ng-container>
+                </div>
+                <div>
+                    <!-- <div class="text-right">
+                        <button class="btn btn-green">
+                            Add a New Address
+                        </button>
+                    </div> -->
+
+                    <div class="mt-3">
+                        <h6 class="mb-2"> {{clickedIndex !== null ? 'Edit Address' : 'Add a New Address' }}</h6>
+                        <form [formGroup]="addressForm" (ngSubmit)="onSubmit()">
+                            <div class="grid grid-cols-12 gap-5">
+                                <div class="col-span-12 md:col-span-6">
+                                    <label for="firstName" class="form-label">First Name</label>
+                                    <input type="text" id="firstName" class="form-input" placeholder="Enter first name" formControlName="firstName">
+                                    <span *ngIf="addressForm.get('firstName')?.invalid && addressForm.get('firstName')?.touched" class="text-red-500">
+                                        First Name is required
+                                    </span>
+                                </div>
+
+                                <div class="col-span-12 md:col-span-6">
+                                    <label for="lastName" class="form-label">Last Name</label>
+                                    <input type="text" id="lastName" class="form-input" placeholder="Enter last name" formControlName="lastName">
+                                    <span *ngIf="addressForm.get('lastName')?.invalid && addressForm.get('lastName')?.touched" class="text-red-500">
+                                        Last Name is required
+                                    </span>
+                                </div>
+
+                                <div class="col-span-12 md:col-span-6">
+                                    <label for="phoneNumber" class="form-label">Phone Number</label>
+                                    <input type="tel" id="phoneNumber" class="form-input" placeholder="(000) 000 0000" formControlName="phone">
+                                    <span *ngIf="addressForm.get('phone')?.invalid && addressForm.get('phone')?.touched" class="text-red-500">
+                                        Invalid phone number
+                                    </span>
+                                </div>
+
+                                <div class="col-span-12 md:col-span-6">
+                                    <label for="alternatePhoneNumber" class="form-label">Alternate Phone Number (Optional)</label>
+                                    <input type="tel" id="alternatePhoneNumber" class="form-input" placeholder="(000) 000 0000" formControlName="alternatePhone">
+                                </div>
+
+                                <div class="col-span-12">
+                                    <label for="textareaInput2" class="form-label">Address (Area and Street)</label>
+                                    <textarea name="textareaInput2" id="textareaInput2" rows="3" class="h-auto form-input" placeholder="Area and Street" formControlName="address"></textarea>
+                                    <span *ngIf="addressForm.get('address')?.invalid && addressForm.get('address')?.touched" class="text-red-500">
+                                        Address is required
+                                    </span>
+                                </div>
+
+                                <div class="col-span-12 md:col-span-4">
+                                    <label for="cityDistrictTownInput" class="form-label">City/District/Town</label>
+                                    <input type="text" id="cityDistrictTownInput" class="form-input" placeholder="Enter city name" formControlName="city">
+                                    <span *ngIf="addressForm.get('city')?.invalid && addressForm.get('city')?.touched" class="text-red-500">
+                                        City is required
+                                    </span>
+                                </div>
+
+                                <div class="col-span-12 md:col-span-4">
+                                    <label for="countryNameInput" class="form-label">Country Name</label>
+                                    <input type="text" id="countryNameInput" class="form-input" placeholder="Enter country" formControlName="country">
+                                    <span *ngIf="addressForm.get('country')?.invalid && addressForm.get('country')?.touched" class="text-red-500">
+                                        Country is required
+                                    </span>
+                                </div>
+
+                                <div class="col-span-12 md:col-span-4">
+                                    <label for="zipCodeInput" class="form-label">Zip Code</label>
+                                    <input type="text" id="zipCodeInput" class="form-input" placeholder="Enter zip code" formControlName="zip">
+                                    <span *ngIf="addressForm.get('zip')?.invalid && addressForm.get('zip')?.touched" class="text-red-500">
+                                        Zip Code is required
+                                    </span>
+                                </div>
+
+                                <div class="col-span-12">
+                                    <h6 class="mb-2">Address Type</h6>
+                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-space">
+                                        <div>
+                                            <div class="input-radio-group">
+                                                <input id="homeRadio" class="input-radio input-radio-primary" type="radio" formControlName="type" value="Home" />
+                                                <label for="homeRadio" class="input-radio-label">Home (All day delivery)</label>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="input-radio-group">
+                                                <input id="workRadio" class="input-radio input-radio-primary" type="radio" formControlName="type" value="Work" />
+                                                <label for="workRadio" class="input-radio-label">Work (Delivery between 10 AM - 5 PM)</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <span *ngIf="addressForm.get('type')?.invalid && addressForm.get('type')?.touched" class="text-red-500">
+                                        Address type is required
+                                    </span>
+                                </div>
+
+                                <div class="col-span-12">
+                                    <div class="flex flex-wrap justify-end gap-2">
+                                        <button type="button" class="btn btn-active-red" (click)="addressForm.reset()">Cancel</button>
+                                        <button type="submit" class="btn btn-primary">{{clickedIndex !== null ? 'Edit and Deliver' : 'Save and Deliver' }}</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-span-12 2xl:col-span-4">
+        <div class="sticky mb-5 top-24">
+            <div class="card">
+                <div class="card-header">
+                    <h6 class="card-title">Order Summary</h6>
+                </div>
+                <div class="card-body">
+                    <app-final-order-summary></app-final-order-summary>
+                    <div class="my-4">
+                        <a href="javascript:void(0);" routerLink="/apps-ecommerce-payment" class="cursor-pointer w-full btn btn-primary">Checkout Now</a>
+                    </div>
+                    <p class="text-center text-gray-500 dark:text-dark-500">By clicking the "checkout order" button, you agree to the terms of the public offers.</p>
+                </div>
+            </div>
+            <div class="flex gap-4 mb-5">
+                <div class="flex items-center justify-center bg-gray-100 rounded-md size-12 shrink-0 dark:bg-dark-850">
+                    <lucide-angular name="shield-check" class="text-gray-500 dark:text-dark-500 fill-gray-200 dark:fill-dark-850"></lucide-angular>
+                </div>
+                <div>
+                    <h6 class="mb-1">Safe and Secure</h6>
+                    <p class="text-gray-500 dark:text-dark-500">Safe and Secure Payments. Easy returns. 100% Authentic products.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

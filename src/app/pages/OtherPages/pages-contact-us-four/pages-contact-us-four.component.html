@@ -1,0 +1,75 @@
+<div class="grid grid-cols-12 gap-0 from-sky-500/10 ltr:bg-gradient-to-l rtl:bg-gradient-to-r via-green-500/5 to-pink-500/5">
+  <div class="col-span-7">
+    <div class="flex items-center h-screen border-gray-200 ltr:border-r rtl:border-l dark:border-dark-800">
+      <div class="px-20 grow">
+        <h1 class="w-2/3 mb-8">Let's now concentrate on the fundamental aspects of your projects.</h1>
+        <form action="javascript: void(0);" class="w-2/3 mb-6">
+          <div class="grid grid-cols-12 gap-5">
+            <div class="col-span-12">
+              <label for="projectInput" class="form-label">Project Name</label>
+              <input type="text" id="projectInput" class="bg-transparent form-input dark:bg-transparent">
+            </div>
+            <div class="col-span-12">
+              <label for="textareaInput2" class="form-label">Description</label>
+              <textarea name="textareaInput2" id="textareaInput2" rows="3" class="h-auto bg-transparent form-input dark:bg-transparent"></textarea>
+            </div>
+            <div class="col-span-12">
+              <label for="filesInput" class="form-label">Please send us any additional files you want to send us
+                below</label>
+              <input type="file" id="filesInput" class="form-file" multiple>
+            </div>
+            <div class="col-span-12">
+              <label for="linksInput" class="form-label">You can also upload links to your content, such as Google Docs
+                or Dropbox</label>
+              <input type="url" id="linksInput" class="bg-transparent form-input dark:bg-transparent">
+            </div>
+          </div>
+        </form>
+        <div class="flex gap-2">
+          <a routerLink="/pages-contact-us-three" class="cursor-pointer btn btn-outline-gray">
+            <lucide-angular name="MoveLeft" class="mr-1 ltr:inline-block rtl:hidden size-4"></lucide-angular>
+            <lucide-angular name="MoveRight" class="ml-1 ltr:hidden rtl:inline-block size-4"></lucide-angular>
+            Back
+          </a>
+          <a routerLink="/pages-contact-us-five" class="cursor-pointer btn btn-primary">
+            Go Forward
+            <lucide-angular name="MoveRight" class="ml-1 ltr:inline-block rtl:hidden size-4"></lucide-angular>
+            <lucide-angular name="MoveLeft" class="ml-1 ltr:hidden rtl:inline-block size-4"></lucide-angular>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-span-5">
+    <div class="flex flex-col justify-center w-full h-screen px-20">
+      <div>
+        <h5 class="mb-3">Send Additional Files</h5>
+        <p class="mb-5 text-gray-500 dark:text-dark-500">Please provide any supplementary materials (files or links)
+          that will assist us in formulating the estimate.</p>
+        <ul class="space-y-2 mb-7">
+          <li>
+            <lucide-angular name="CornerUpRight" class="mr-1 text-green-500 ltr:inline-block rtl:hidden size-4">
+            </lucide-angular>
+            <lucide-angular name="CornerUpLeft" class="ml-1 text-green-500 ltr:hidden rtl:inline-block size-4">
+            </lucide-angular>
+            Description of your project
+          </li>
+          <li>
+            <lucide-angular name="CornerUpRight" class="mr-1 text-green-500 ltr:inline-block rtl:hidden size-4">
+            </lucide-angular>
+            <lucide-angular name="CornerUpLeft" class="ml-1 text-green-500 ltr:hidden rtl:inline-block size-4">
+            </lucide-angular>
+            Wireframes or functional sketches
+          </li>
+          <li>
+            <lucide-angular name="CornerUpRight" class="mr-1 text-green-500 ltr:inline-block rtl:hidden size-4">
+            </lucide-angular>
+            <lucide-angular name="CornerUpLeft" class="ml-1 text-green-500 ltr:hidden rtl:inline-block size-4">
+            </lucide-angular>
+            Visual identification materials
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

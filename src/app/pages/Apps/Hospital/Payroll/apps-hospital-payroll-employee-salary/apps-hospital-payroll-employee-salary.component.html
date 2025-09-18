@@ -1,0 +1,47 @@
+<app-page-title [pageTitle]="'Payroll'" [Title]="'Employee Salary'"></app-page-title>
+
+<div class="card">
+    <div class="flex items-center gap-3 card-header">
+        <h6 class="card-title grow">Employee</h6>
+        <button type="button" class="btn btn-primary shrink-0">Download</button>
+    </div>
+    <div class="pt-0 card-body">
+        <div>
+            <div class="overflow-x-auto table-box">
+                <table class="table flush">
+                    <tbody>
+                        <tr class="text-gray-500 bg-gray-100 dark:bg-dark-850 dark:text-dark-500">
+                            <th *ngFor="let col of defs" (click)="onSortChange(col)" class="whitespace-nowrap !font-medium cursor-pointer">
+                                {{col.headerName}}
+                                <span *ngIf="col.sortable">{{ col.sortDiraction === 'asc' ? '↑' : '↓' }}</span>
+                            </th>
+                        </tr>
+                        <ng-container *ngFor="let employee of displayedData; let i = index">
+                            <tr class="*:px-3 *:py-2.5">
+                                <td>{{employee.employeeName}}</td>
+                                <td>{{employee.email}}</td>
+                                <td>{{employee.phoneNumber}}</td>
+                                <td>{{employee.department}}</td>
+                                <td>{{employee.monthlySalary}}</td>
+                                <td>
+                                    <span [ngClass]="{
+                                                'badge-green': employee.status === 'Successful',
+                                                'badge-yellow': employee.status === 'Pending',
+                                                'badge-red': employee.status === 'Failed',
+                                            }" class="badge">{{employee.status}}</span>
+                                </td>
+                                <td>
+                                    <div class="flex items-center gap-2">
+                                        <button class="btn btn-sub-primary btn-icon !size-8" title="edit"><i class="ri-pencil-line" (click)="edit(employee,i)"></i></button>
+                                        <button class="btn btn-sub-red btn-icon !size-8" title="delete"><i class="ri-delete-bin-line" (click)="del(i)"></i></button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </ng-container>
+                    </tbody>
+                </table>
+            </div>
+            <app-domix-pagination [currentPage]="currentPage" [totalPages]="totalPages" [showingStart]="showingStart" [showingEnd]="showingEnd" [totalResults]="gridData.length" (pageChanged)="onPageChange($event)"></app-domix-pagination>
+        </div>
+    </div>
+</div>

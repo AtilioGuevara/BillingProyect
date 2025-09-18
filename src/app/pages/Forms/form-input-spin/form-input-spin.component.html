@@ -1,0 +1,143 @@
+<app-page-title [Title]="'Input Spin'" [pageTitle]="'Form'"></app-page-title>
+
+<div class="grid grid-cols-12">
+  <div class="col-span-12 card">
+    <div class="card-header">
+      <h6 class="card-title">Basic</h6>
+    </div>
+    <div class="card-body">
+      <div class="flex flex-wrap gap-3">
+        <ng-container *ngFor="let item of counters; let i = index">
+          <div class="input-spin-group" [ngClass]="item.class">
+            <button (click)="decrement(i)" class="input-spin-minus">
+              <lucide-angular name="Minus" class="size-4">
+              </lucide-angular>
+            </button>
+            <input type="text" [value]="item.count" class="input-spin form-input" readonly>
+            <button (click)="increment(i)" class="input-spin-plus">
+              <lucide-angular name="Plus" class="size-4">
+              </lucide-angular>
+            </button>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="col-span-12 card">
+    <div class="card-header">
+      <h6 class="card-title">Solid Example</h6>
+    </div>
+    <div class="card-body">
+      <div class="flex flex-wrap gap-3">
+        <div *ngFor="let itemSolid of counters; let i1 = index">
+          <div [ngClass]="'input-spin-group input-spin-solid-' + itemSolid.color">
+            <button (click)="decrement(i1)" class="input-spin-minus">
+              <lucide-angular name="Minus" class="size-4">
+              </lucide-angular>
+            </button>
+            <input type="text" [value]="itemSolid.count" class="input-spin form-input" readonly>
+            <button (click)="increment(i1)" class="input-spin-plus">
+              <lucide-angular name="Plus" class="size-4">
+              </lucide-angular>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-span-12 card">
+    <div class="card-header">
+      <h6 class="card-title">Boxed Example</h6>
+    </div>
+    <div class="card-body">
+      <div class="flex flex-wrap gap-3">
+        <div>
+          <div class="flex items-center w-32 p-1 text-center border border-gray-200 rounded-md dark:border-dark-800">
+            <button (click)="decrementBoxed(0)" class="flex items-center justify-center text-gray-500 transition duration-200 ease-linear dark:text-dark-500 minus size-8 shrink-0 hover:text-primary-500 dark:hover:text-primary-500"><lucide-angular name="Minus" class="size-4">
+              </lucide-angular></button>
+            <input type="text" [value]="counts[0]" class="h-8 p-0 text-center border-0 rounded-none form-input" readonly>
+            <button (click)="incrementBoxed(0)" class="flex items-center justify-center text-gray-500 transition duration-200 ease-linear dark:text-dark-500 plus size-8 shrink-0 hover:text-primary-500 dark:hover:text-primary-500"><lucide-angular name="Plus" class="size-4">
+              </lucide-angular></button>
+          </div>
+        </div>
+        <div>
+          <div class="flex items-center w-32 p-1 text-center border border-gray-200 rounded-md dark:border-dark-800">
+            <button (click)="decrementBoxed(1)" class="flex items-center justify-center transition duration-200 ease-linear rounded-md text-primary-500 minus size-8 shrink-0 bg-primary-500/20 hover:text-primary-700"><lucide-angular name="Minus" class="size-4">
+              </lucide-angular></button>
+            <input type="text" [value]="counts[1]" class="h-8 p-0 text-center border-0 rounded-none form-input" readonly>
+            <button (click)="incrementBoxed(1)" class="flex items-center justify-center transition duration-200 ease-linear rounded-md text-primary-500 plus size-8 shrink-0 bg-primary-500/20 hover:text-primary-700"><lucide-angular name="Plus" class="size-4">
+              </lucide-angular></button>
+          </div>
+        </div>
+        <div>
+          <div class="flex items-center w-32 p-1 text-center border border-gray-200 rounded-md dark:border-dark-800">
+            <button (click)="decrementBoxed(2)" class="flex items-center justify-center text-purple-500 transition duration-200 ease-linear rounded-md bg-purple-500/20 minus size-8 shrink-0 hover:text-purple-700"><lucide-angular name="Minus" class="size-4">
+              </lucide-angular></button>
+            <input type="text" [value]="counts[2]" class="h-8 p-0 text-center border-0 rounded-none form-input" readonly>
+            <button (click)="incrementBoxed(2)" class="flex items-center justify-center text-purple-500 transition duration-200 ease-linear rounded-md bg-purple-500/20 plus size-8 shrink-0 hover:text-purple-700"><lucide-angular name="Plus" class="size-4">
+              </lucide-angular></button>
+          </div>
+        </div>
+        <div>
+          <div class="flex items-center w-32 p-1 text-center border border-gray-200 rounded-md dark:border-dark-800">
+            <button (click)="decrementBoxed(3)" class="flex items-center justify-center text-green-200 transition duration-200 ease-linear bg-green-500 rounded-md minus size-8 shrink-0 hover:text-white"><lucide-angular name="Minus" class="size-4">
+              </lucide-angular></button>
+            <input type="text" [value]="counts[3]" class="h-8 p-0 text-center border-0 rounded-none form-input" readonly>
+            <button (click)="incrementBoxed(3)" class="flex items-center justify-center text-green-200 transition duration-200 ease-linear bg-green-500 rounded-md plus size-8 shrink-0 hover:text-white"><lucide-angular name="Plus" class="size-4">
+              </lucide-angular></button>
+          </div>
+        </div>
+        <div>
+          <div class="flex items-center w-32 p-1 text-center border border-gray-200 rounded-md dark:border-dark-800">
+            <button (click)="decrementBoxed(4)" class="flex items-center justify-center text-pink-200 transition duration-200 ease-linear bg-pink-500 rounded-md minus size-8 shrink-0 hover:text-white"><lucide-angular name="Minus" class="size-4">
+              </lucide-angular></button>
+            <input type="text" [value]="counts[4]" class="h-8 p-0 text-center border-0 rounded-none form-input" readonly>
+            <button (click)="incrementBoxed(4)" class="flex items-center justify-center text-pink-200 transition duration-200 ease-linear bg-pink-500 rounded-md plus size-8 shrink-0 hover:text-white"><lucide-angular name="Plus" class="size-4">
+              </lucide-angular></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-span-12 card">
+    <div class="card-header">
+      <h6 class="card-title">Skin Example</h6>
+    </div>
+    <div class="card-body">
+      <div class="flex flex-wrap gap-3">
+        <div class="flex items-center w-20 p-1 text-center border border-gray-200 rounded-md dark:border-dark-800">
+          <div class="flex flex-col">
+            <button (click)="count1 = incrementCounter(count1)" class="flex items-center justify-center text-gray-500 transition duration-200 ease-linear dark:text-dark-500 plus hover:text-primary-500 dark:hover:text-primary-500">
+              <lucide-angular name="ChevronUp" class="size-4">
+              </lucide-angular>
+            </button>
+            <button (click)="count1 = decrementCounter(count1)" class="flex items-center justify-center text-gray-500 transition duration-200 ease-linear dark:text-dark-500 minus hover:text-primary-500 dark:hover:text-primary-500">
+              <lucide-angular name="ChevronDown" class="size-4">
+              </lucide-angular>
+            </button>
+          </div>
+          <input type="text" [(ngModel)]="count1" class="h-8 p-0 text-center border-0 rounded-none form-input" readonly>
+        </div>
+        <div class="flex items-center w-20 p-1 text-center border border-gray-200 rounded-md dark:border-dark-800">
+          <input type="text" [(ngModel)]="count2" class="h-8 p-0 text-center border-0 rounded-none form-input" readonly>
+          <div class="flex flex-col">
+            <button (click)="count2 = incrementCounter(count2)" class="flex items-center justify-center text-gray-500 transition duration-200 ease-linear dark:text-dark-500 plus hover:text-primary-500 dark:hover:text-primary-500">
+              <lucide-angular name="ChevronUp" class="size-4">
+              </lucide-angular>
+            </button>
+            <button (click)="count2 = decrementCounter(count2)" class="flex items-center justify-center text-gray-500 transition duration-200 ease-linear dark:text-dark-500 minus hover:text-primary-500 dark:hover:text-primary-500">
+              <lucide-angular name="ChevronDown" class="size-4">
+              </lucide-angular>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</div>

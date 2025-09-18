@@ -1,0 +1,36 @@
+<div id="overviewQuestionModal" class="modal">
+  <div class="modal-wrap modal-center">
+    <div class="modal-header">
+      <h6 class="modal-title">Review Question</h6>
+      <button (click)="closeModal(true)" class="link link-red">
+        <lucide-angular name="x" class="size-5"></lucide-angular>
+      </button>
+    </div>
+    <div class="modal-content">
+      <h6>Q{{ config.id }}. {{ config.question }} Standards?</h6>
+      <div class="mt-3 space-y-2">
+        <ng-container *ngFor="let option of config.options; let index = index">
+          <div class="input-radio-group">
+            <input [id]="'qOption' + config.id + index" class="hidden input-radio peer" type="radio"
+              [name]="'optionQ' + config.id" />
+            <label [for]="'qOption' + config.id + index"
+              class="flex items-center justify-center border border-gray-200 rounded-md text-15 size-9 peer-checked:bg-primary-500 peer-checked:border-primary-500 peer-checked:text-white">
+              {{ getOptionLabel(index) }}
+            </label>
+            <label [for]="'qOption' + config.id + index"
+              class="py-1.5 px-3 rounded-md border border-gray-200 input-radio-label grow">
+              {{ option }}
+            </label>
+          </div>
+        </ng-container>
+      </div>
+      <div class="flex justify-end gap-2 mt-4">
+        <button type="button" class="btn btn-active-red" (click)="closeModal(false)">
+          <lucide-angular name="x" class="inline-block size-4"></lucide-angular>
+          <span class="align-baseline">Close</span>
+        </button>
+        <button type="button" class="btn btn-primary" (click)="closeModal(true)">Send Ans</button>
+      </div>
+    </div>
+  </div>
+</div>

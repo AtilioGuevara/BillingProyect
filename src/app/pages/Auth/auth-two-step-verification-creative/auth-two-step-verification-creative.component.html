@@ -1,0 +1,47 @@
+<div class="relative">
+  <div class="grid grid-cols-12">
+    <div class="relative col-span-12 py-8 overflow-hidden bg-gray-100 dark:bg-dark-850 lg:min-h-screen lg:col-span-6 md:p-9 xl:p-12">
+      <div class="absolute bottom-0 w-32 -rotate-45 -top-64 -right-8 bg-gray-200/20absolute bottom-0 w-32 -rotate-45 -top-64 -right-8 bg-gray-200/20 dark:bg-dark-800/20">
+      </div>
+      <div class="p-4">
+        <a routerLink="/">
+          <img src="assets/images/main-logo.png" alt="" class="h-8 dark:hidden">
+          <img src="assets/images/logo-white.png" alt="" class="hidden h-8 dark:inline-block"></a>
+        <h1 class="mmax-w-lg mt-8 text-2xl font-normal leading-tight capitalize md:leading-tight md:text-4xlax-w-lg mt-8 text-2xl font-normal leading-tight capitalize md:text-4max-w-lg mt-8 text-2xl font-normal leading-tight capitalize md:textxl">
+          The most straightforward way
+          to manage your projects</h1>
+
+        <img src="assets/images/others/auth-creative.png" alt="" class="mt-9 xl:mt-0 relative xl:absolute xl:scale-110 rounded-lg shadow-lg xl:top-[315px] xl:left-[115px]">
+      </div>
+    </div>
+    <div class="flex items-center col-span-12 lg:min-h-screen lg:col-span-6 py-9 md:py-122">
+      <div class="grid w-full grid-cols-12">
+        <div class="col-span-12 mx-4 mb-0 2xl:col-span-8 2xl:col-start-3 md:mx-12 card">
+          <div class="p-10 card-body">
+            <div class="mb-4 text-center">
+              <div class="flex items-center justify-center mx-auto size-9 sm:size-12 md:size-14">
+                <lucide-angular name="mailopen" class="text-gray-500 stroke-1 size-10 fill-gray-100"></lucide-angular>
+              </div>
+            </div>
+            <h4 class="mb-2 font-bold leading-relaxed text-center text-transparent drop-shadow-lg ltr:bg-gradient-to-r rtl:bg-gradient-to-l from-primary-500 vie-purple-500 to-pink-500 bg-clip-text">
+              OTP Verification</h4>
+            <p class="mb-5 text-center text-gray-500">We're sent a code to <b>sophiamia&#64;srbthemes.com</b></p>
+            <form [formGroup]="otpForm" (ngSubmit)="onSubmit()">
+              <div class="flex items-center justify-center gap-3">
+                <input type="text" class="text-2xl font-extrabold text-center bg-gray-100 border border-transparent rounded-sm outline-hidden appearance-none size-9 sm:size-12 md:size-14 text-slate-900 dark:text-dark-50 dark:bg-dark-850 hover:border-slate-200 dark:hover:border-dark-800 focus:bg-white dark:focus:bg-dark-900 focus:border-primary-400 dark:focus:border-primary-500 focus:ring-2 focus:ring-primary-500/15" formControlName="otp1" maxlength="1" (input)="moveFocus($event, 1)" />
+                <input type="text" class="text-2xl font-extrabold text-center bg-gray-100 border border-transparent rounded-sm outline-hidden appearance-none size-9 sm:size-12 md:size-14 text-slate-900 dark:text-dark-50 dark:bg-dark-850 hover:border-slate-200 dark:hover:border-dark-800 focus:bg-white dark:focus:bg-dark-900 focus:border-primary-400 dark:focus:border-primary-500 focus:ring-2 focus:ring-primary-500/15" formControlName="otp2" maxlength="1" (input)="moveFocus($event, 2)" />
+                <input type="text" class="text-2xl font-extrabold text-center bg-gray-100 border border-transparent rounded-sm outline-hidden appearance-none size-9 sm:size-12 md:size-14 text-slate-900 dark:text-dark-50 dark:bg-dark-850 hover:border-slate-200 dark:hover:border-dark-800 focus:bg-white dark:focus:bg-dark-900 focus:border-primary-400 dark:focus:border-primary-500 focus:ring-2 focus:ring-primary-500/15" formControlName="otp3" maxlength="1" (input)="moveFocus($event, 3)" />
+                <input type="text" class="text-2xl font-extrabold text-center bg-gray-100 border border-transparent rounded-sm outline-hidden appearance-none size-9 sm:size-12 md:size-14 text-slate-900 dark:text-dark-50 dark:bg-dark-850 hover:border-slate-200 dark:hover:border-dark-800 focus:bg-white dark:focus:bg-dark-900 focus:border-primary-400 dark:focus:border-primary-500 focus:ring-2 focus:ring-primary-500/15" formControlName="otp4" maxlength="1" (input)="moveFocus($event, 4)" />
+                <input type="text" class="text-2xl font-extrabold text-center bg-gray-100 border border-transparent rounded-sm outline-hidden appearance-none size-9 sm:size-12 md:size-14 text-slate-900 dark:text-dark-50 dark:bg-dark-850 hover:border-slate-200 dark:hover:border-dark-800 focus:bg-white dark:focus:bg-dark-900 focus:border-primary-400 dark:focus:border-primary-500 focus:ring-2 focus:ring-primary-500/15" formControlName="otp5" maxlength="1" (input)="moveFocus($event, 5)" />
+                <input type="text" class="text-2xl font-extrabold text-center bg-gray-100 border border-transparent rounded-sm outline-hidden appearance-none size-9 sm:size-12 md:size-14 text-slate-900 dark:text-dark-50 dark:bg-dark-850 hover:border-slate-200 dark:hover:border-dark-800 focus:bg-white dark:focus:bg-dark-900 focus:border-primary-400 dark:focus:border-primary-500 focus:ring-2 focus:ring-primary-500/15" formControlName="otp6" maxlength="1" (input)="moveFocus($event, 6)" />
+              </div>
+              <div class="mt-5">
+                <button type="submit" class="w-full btn btn-primary">Reset Password</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

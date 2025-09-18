@@ -1,0 +1,638 @@
+<app-page-title [Title]="'CRM'" [pageTitle]="'Dashboards'"></app-page-title>
+
+<div class="grid grid-cols-12 gap-x-space">
+  <div class="col-span-12">
+    <div class="mb-space" dir="ltr">
+      <div>
+        <h6 class="mb-1">Sales Analytics</h6>
+        <p class="text-gray-500">Unlocking Insights and Driving Growth Through Data-Driven Sales Strategies</p>
+      </div>
+      <app-domix-charts [series]="newChart.series" [chartOptions]="newChart.chartOptions">
+      </app-domix-charts>
+    </div>
+  </div>
+  <div class="col-span-12 card bg-[url('../images/dashboards/dashboard-patterm.png')] dark:bg-none">
+    <div class="grid grid-cols-12 gap-0">
+      <div class="col-span-12 border-b border-gray-200 dark:border-dark-800 md:col-span-6 xl:col-span-3 md:ltr:border-r md:rtl:border-l">
+        <div class="card-body">
+          <div class="flex items-center gap-3 mb-8">
+            <p class="text-gray-500 dark:text-dark-500 grow">
+              <lucide-angular name="UsersRound" class="inline-block size-4"></lucide-angular>Customers Visits
+            </p>
+            <div class="dropdown shrink-0">
+              <button domixDropdownToggle [dropdownMenu]="dropdown1" type="button" class="flex items-center text-gray-500 dark:text-dark-500">
+                <lucide-angular name="ellipsis" class="size-5"></lucide-angular>
+              </button>
+              <div #dropdown1 class="!fixed p-2 dropdown-menu" dropdown-position="right">
+                <ul>
+                  <li>
+                    <a href="javascript: void(0);" class="dropdown-item">
+                      <span>Weekly</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="javascript: void(0);" class="dropdown-item">
+                      <span>Monthly</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="javascript: void(0);" class="dropdown-item">
+                      <span>Yearly</span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="flex items-center gap-3">
+            <h5 class="grow"><span class="counters" [countUp]="345121" [options]="{decimalPlaces:0}">0</span></h5>
+            <p class="text-gray-500 dark:text-dark-500 shrink-0"><span class="badge badge-green">
+                <lucide-angular name="TrendingUp" class="inline-block size-4"></lucide-angular> 17.9%
+              </span></p>
+          </div>
+        </div>
+      </div>
+      <div class="col-span-12 border-b border-gray-200 dark:border-dark-800 md:col-span-6 xl:col-span-3 xl:ltr:border-r xl:rtl:border-l">
+        <div class="card-body">
+          <div class="flex items-center gap-3 mb-8">
+            <p class="text-gray-500 dark:text-dark-500 grow">
+              <lucide-angular name="Feather" class="inline-block size-4"></lucide-angular>Impressions
+            </p>
+
+            <div class="dropdown shrink-0">
+              <button domixDropdownToggle [dropdownMenu]="dropdown2" type="button" class="flex items-center text-gray-500 dark:text-dark-500">
+                <lucide-angular name="ellipsis" class="size-5"></lucide-angular>
+              </button>
+              <div #dropdown2 class="!fixed p-2 dropdown-menu" dropdown-position="right">
+                <ul>
+                  <li>
+                    <a href="javascript: void(0);" class="dropdown-item">
+                      <span>Weekly</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="javascript: void(0);" class="dropdown-item">
+                      <span>Monthly</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="javascript: void(0);" class="dropdown-item">
+                      <span>Yearly</span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="flex items-center gap-3">
+            <h5 class="grow"><span class="counters" [countUp]="516871" [options]="{decimalPlaces:0}">0</span></h5>
+            <p class="text-gray-500 dark:text-dark-500 shrink-0"><span class="badge badge-green">
+                <lucide-angular name="TrendingUp" class="inline-block size-4"></lucide-angular> 23.7%
+              </span></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-span-12 border-b border-gray-200 dark:border-dark-800 md:col-span-6 xl:col-span-3 md:ltr:border-r md:rtl:border-l">
+        <div class="card-body">
+          <div class="flex items-center gap-3 mb-8">
+            <p class="text-gray-500 dark:text-dark-500 grow">
+              <lucide-angular name="Shuffle" class="inline-block size-4"></lucide-angular>
+              Total Orders
+            </p>
+
+            <div class="dropdown shrink-0">
+              <button domixDropdownToggle [dropdownMenu]="dropdown3" type="button" class="flex items-center text-gray-500 dark:text-dark-500">
+                <lucide-angular name="ellipsis" class="size-5"></lucide-angular>
+              </button>
+              <div #dropdown3 class="!fixed p-2 dropdown-menu" dropdown-position="right">
+                <ul>
+                  <li>
+                    <a href="javascript: void(0);" class="dropdown-item">
+                      <span>Weekly</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="javascript: void(0);" class="dropdown-item">
+                      <span>Monthly</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="javascript: void(0);" class="dropdown-item">
+                      <span>Yearly</span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="flex items-center gap-3">
+            <h5 class="grow"><span class="counters" [countUp]="14596" [options]="{decimalPlaces:0}">0</span></h5>
+            <p class="text-gray-500 dark:text-dark-500 shrink-0"><span class="badge badge-red">
+                <lucide-angular name="TrendingDown" class="inline-block size-4"></lucide-angular> 1.6%
+              </span></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-span-12 border-b border-gray-200 dark:border-dark-800 md:col-span-6 xl:col-span-3">
+        <div class="card-body">
+          <div class="flex items-center gap-3 mb-8">
+            <p class="text-gray-500 dark:text-dark-500 grow">
+              <lucide-angular name="Sparkles" class="inline-block size-4"></lucide-angular>
+              Wishlists
+            </p>
+
+            <div class="dropdown shrink-0">
+              <button domixDropdownToggle [dropdownMenu]="dropdown4" type="button" class="flex items-center text-gray-500 dark:text-dark-500">
+                <lucide-angular name="ellipsis" class="size-5"></lucide-angular>
+              </button>
+              <div #dropdown4 class="!fixed p-2 dropdown-menu" dropdown-position="right">
+                <ul>
+                  <li>
+                    <a href="javascript: void(0);" class="dropdown-item">
+                      <span>Weekly</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="javascript: void(0);" class="dropdown-item">
+                      <span>Monthly</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="javascript: void(0);" class="dropdown-item">
+                      <span>Yearly</span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="flex items-center gap-3">
+            <h5 class="grow"><span class="counters" [countUp]="102450" [options]="{decimalPlaces:0}">0</span></h5>
+            <p class="text-gray-500 dark:text-dark-500 shrink-0"><span class="badge badge-green">
+                <lucide-angular name="TrendingUp" class="inline-block size-4"></lucide-angular> 3.2%
+              </span></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-span-12 border-b border-gray-200 dark:border-dark-800 md:col-span-6 xl:col-span-3 xl:border-b-0 md:ltr:border-r md:rtl:border-l">
+        <div class="card-body">
+          <div class="flex items-center gap-3 mb-8">
+            <p class="text-gray-500 dark:text-dark-500 grow">
+              <lucide-angular name="HandCoins" class="inline-block size-4"></lucide-angular> Total Earning
+            </p>
+
+            <div class="dropdown shrink-0">
+              <button domixDropdownToggle [dropdownMenu]="dropdown5" type="button" class="flex items-center text-gray-500 dark:text-dark-500">
+                <lucide-angular name="ellipsis" class="size-5"></lucide-angular>
+              </button>
+              <div #dropdown5 class="!fixed p-2 dropdown-menu" dropdown-position="right">
+                <ul>
+                  <li>
+                    <a href="javascript: void(0);" class="dropdown-item">
+                      <span>Weekly</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="javascript: void(0);" class="dropdown-item">
+                      <span>Monthly</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="javascript: void(0);" class="dropdown-item">
+                      <span>Yearly</span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="flex items-center gap-3">
+            <h5 class="grow">$<span class="counters" [countUp]="316" [options]="{decimalPlaces:0}">0</span>M</h5>
+            <p class="text-gray-500 dark:text-dark-500 shrink-0"><span class="badge badge-green">
+                <lucide-angular name="TrendingUp" class="inline-block size-4"></lucide-angular> 16.1%
+              </span></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-span-12 border-b border-gray-200 dark:border-dark-800 md:col-span-6 xl:border-b-0 xl:col-span-3 xl:ltr:border-r xl:rtl:border-l">
+        <div class="card-body">
+          <div class="flex items-center gap-3 mb-8">
+            <p class="text-gray-500 dark:text-dark-500 grow">
+              <lucide-angular name="Coins" class="inline-block size-4"></lucide-angular>
+              Total Profit
+            </p>
+
+            <div class="dropdown shrink-0">
+              <button domixDropdownToggle [dropdownMenu]="dropdown6" type="button" class="flex items-center text-gray-500 dark:text-dark-500">
+                <lucide-angular name="ellipsis" class="size-5"></lucide-angular>
+              </button>
+              <div #dropdown6 class="!fixed p-2 dropdown-menu" dropdown-position="right">
+                <ul>
+                  <li>
+                    <a href="javascript: void(0);" class="dropdown-item">
+                      <span>Weekly</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="javascript: void(0);" class="dropdown-item">
+                      <span>Monthly</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="javascript: void(0);" class="dropdown-item">
+                      <span>Yearly</span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="flex items-center gap-3">
+            <h5 class="grow">$<span class="counters" [countUp]="287" [options]="{decimalPlaces:0}">0</span>M</h5>
+            <p class="text-gray-500 dark:text-dark-500 shrink-0"><span class="badge badge-green">
+                <lucide-angular name="TrendingUp" class="inline-block size-4"></lucide-angular> 9.7%
+              </span></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-span-12 border-b border-gray-200 dark:border-dark-800 md:col-span-6 xl:col-span-3 md:border-b-0 md:ltr:border-r md:rtl:border-l">
+        <div class="card-body">
+          <div class="flex items-center gap-3 mb-8">
+            <p class="text-gray-500 dark:text-dark-500 grow">
+              <lucide-angular name="Coins" class="inline-block size-4"></lucide-angular>
+              Repeat Orders
+            </p>
+
+            <div class="dropdown shrink-0">
+              <button domixDropdownToggle [dropdownMenu]="dropdown7" type="button" class="flex items-center text-gray-500 dark:text-dark-500">
+                <lucide-angular name="ellipsis" class="size-5"></lucide-angular>
+              </button>
+              <div #dropdown7 class="!fixed p-2 dropdown-menu" dropdown-position="right">
+                <ul>
+                  <li>
+                    <a href="javascript: void(0);" class="dropdown-item">
+                      <span>Weekly</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="javascript: void(0);" class="dropdown-item">
+                      <span>Monthly</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="javascript: void(0);" class="dropdown-item">
+                      <span>Yearly</span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="flex items-center gap-3">
+            <h5 class="grow"><span class="counters" [countUp]="53629" [options]="{decimalPlaces:0}">0</span></h5>
+            <p class="text-gray-500 dark:text-dark-500 shrink-0"><span class="badge badge-green">
+                <lucide-angular name="TrendingUp" class="inline-block size-4"></lucide-angular> 9.7%
+              </span></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-span-12 md:col-span-6 xl:col-span-3">
+        <div class="card-body">
+          <div class="flex items-center gap-3 mb-8">
+            <p class="text-gray-500 dark:text-dark-500 grow">
+              <lucide-angular name="SquareMousePointer" class="inline-block size-4"></lucide-angular> Conversion Rate
+            </p>
+
+            <div class="dropdown shrink-0">
+              <button domixDropdownToggle [dropdownMenu]="dropdown8" type="button" class="flex items-center text-gray-500 dark:text-dark-500">
+                <lucide-angular name="ellipsis" class="size-5"></lucide-angular>
+              </button>
+              <div #dropdown8 class="!fixed p-2 dropdown-menu" dropdown-position="right">
+                <ul>
+                  <li>
+                    <a href="javascript: void(0);" class="dropdown-item">
+                      <span>Weekly</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="javascript: void(0);" class="dropdown-item">
+                      <span>Monthly</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="javascript: void(0);" class="dropdown-item">
+                      <span>Yearly</span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="flex items-center gap-3">
+            <h5 class="grow"><span class="counters" [countUp]="70" [options]="{decimalPlaces:0}">0</span>%</h5>
+            <p class="text-gray-500 dark:text-dark-500 shrink-0"><span class="badge badge-red">
+                <lucide-angular name="TrendingDown" class="inline-block size-4"></lucide-angular> 0.8%
+              </span></p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+  <div class="col-span-12 2xl:col-span-5 card">
+    <div class="flex items-center gap-3 card-header">
+      <h6 class="card-title grow">Deal Revenue Forecast</h6>
+      <a href="javascript:void(0);" class="link link-primary shrink-0">View All <i class="align-baseline ri-arrow-right-line"></i></a>
+    </div>
+    <div class="card-body">
+      <div class="grid grid-cols-12 gap-x-space">
+        <div class="col-span-5">
+          <app-domix-charts [series]="radialChart.series" [chartOptions]="radialChart.chartOptions">
+          </app-domix-charts>
+        </div>
+        <div class="col-span-7">
+          <h6 class="mb-2">Team Goal</h6>
+          <div class="space-y-4">
+            <div>
+              <div class="flex items-center gap-3 mb-2">
+                <h6 class="text-xs grow">Marketing</h6>
+                <h6 class="text-xs text-gray-500 dark:text-dark-500">$15,498/$80,000</h6>
+              </div>
+              <div class="progress-bar progress-1">
+                <div class="w-[26%] text-white progress-bar-wrap bg-sky-400"></div>
+              </div>
+            </div>
+            <div>
+              <div class="flex items-center gap-3 mb-2">
+                <h6 class="text-xs grow">Sales Revenue</h6>
+                <h6 class="text-xs text-gray-500 dark:text-dark-500">$44,000/$1,00,000</h6>
+              </div>
+              <div class="progress-bar progress-1">
+                <div class="w-[44%] text-white progress-bar-wrap bg-sky-400"></div>
+              </div>
+            </div>
+            <div>
+              <div class="flex items-center gap-3 mb-2">
+                <h6 class="text-xs grow">Ads Revenue</h6>
+                <h6 class="text-xs text-gray-500 dark:text-dark-500">$82,578/$1,50,000</h6>
+              </div>
+              <div class="progress-bar progress-1">
+                <div class="w-[67%] text-white progress-bar-wrap bg-sky-400"></div>
+              </div>
+            </div>
+            <div>
+              <div class="flex items-center gap-3 mb-2">
+                <h6 class="text-xs grow">Digital Marketing</h6>
+                <h6 class="text-xs text-gray-500 dark:text-dark-500">$1,57,000/$2,00,000</h6>
+              </div>
+              <div class="progress-bar progress-1">
+                <div class="w-[79%] text-white progress-bar-wrap bg-sky-400"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-span-12 xl:col-span-6 2xl:col-span-4 card">
+    <div class="flex items-center gap-3 card-header">
+      <h6 class="card-title grow">Deals Open</h6>
+      <a href="javascript: void(0);" class="link link-primary shrink-0">View More
+        <lucide-angular name="ChevronRight" class="inline-block ltr:ml-0.5 rtl:mr-0.5 size-4"></lucide-angular>
+      </a>
+    </div>
+    <div class="card-body">
+      <div class="xl:h-52 -mx-space px-space">
+        <ngx-simplebar [options]="options">
+          <div class="gap-3 flex flex-col">
+            <div class="mb-0 card">
+              <div class="card-body">
+                <div class="flex">
+                  <div class="grow">
+                    <p class="mb-1 text-gray-500 dark:text-dark-500">Closing Date: 20 Jul, 2024</p>
+                    <h6><a href="javascript:void(0);">Financial Work History</a></h6>
+                    <div class="flex items-center gap-2 mt-3">
+                      <img src="assets/images/avatar/user-18.png" alt="User Images" class="rounded-full size-6">
+                      <p>Donna Berlin</p>
+                    </div>
+                  </div>
+                  <div class="ltr:text-right rtl:text-left shrink-0">
+                    <h6 class="mb-1">$87,000</h6>
+                    <span class="badge badge-sub-primary">Contract sent</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="mb-0 card">
+              <div class="card-body">
+                <div class="flex">
+                  <div class="grow">
+                    <p class="mb-1 text-gray-500 dark:text-dark-500">Closing Date: 18 Jul, 2024</p>
+                    <h6><a href="javascript:void(0);">Domiex Admin Role</a></h6>
+                    <div class="flex items-center gap-2 mt-3">
+                      <img src="assets/images/avatar/user-11.png" alt="" class="rounded-full size-6">
+                      <p>Willian Brim</p>
+                    </div>
+                  </div>
+                  <div class="ltr:text-right rtl:text-left shrink-0">
+                    <h6 class="mb-1">$49,599</h6>
+                    <span class="badge badge-sub-primary">Contract sent</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="mb-0 card">
+              <div class="card-body">
+                <div class="flex">
+                  <div class="grow">
+                    <p class="mb-1 text-gray-500 dark:text-dark-500">Closing Date: 10 Jul, 2024</p>
+                    <h6><a href="javascript:void(0);">API & Employee Statistic</a></h6>
+                    <div class="flex items-center gap-2 mt-3">
+                      <img src="assets/images/avatar/user-15.png" alt="" class="rounded-full size-6">
+                      <p>Marla Ramos</p>
+                    </div>
+                  </div>
+                  <div class="ltr:text-right rtl:text-left shrink-0">
+                    <h6 class="mb-1">$34,999</h6>
+                    <span class="badge badge-sub-primary">Contract sent</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </ngx-simplebar>
+      </div>
+    </div>
+  </div>
+  <div class="col-span-12 xl:col-span-6 2xl:col-span-3 card">
+    <div class="card-body">
+      <p class="mb-3 font-medium text-primary-500">Upgrade to Premium</p>
+      <h3 class="mb-2 capitalize">Make the best with the premium</h3>
+
+      <div class="flex -space-x-2 grow rtl:space-x-reverse">
+        <a href="javascript: void(0);" class="transition duration-300 ease-linear hover:z-10">
+          <img class="border-2 border-white rounded-full dark:border-dark-900 size-7" alt="User Images" src="assets/images/avatar/user-17.png">
+        </a>
+        <a href="javascript: void(0);" class="transition duration-300 ease-linear hover:z-10">
+          <img class="border-2 border-white rounded-full dark:border-dark-900 size-7" alt="User Images" src="assets/images/avatar/user-18.png">
+        </a>
+        <a href="javascript: void(0);" class="transition duration-300 ease-linear hover:z-10">
+          <img class="border-2 border-white rounded-full dark:border-dark-900 size-7" alt="User Images" src="assets/images/avatar/user-14.png">
+        </a>
+      </div>
+
+      <div class="flex mt-16 mb-3">
+        <p class="text-gray-500 dark:text-dark-500 grow text-13">Pay Monthly</p>
+        <h6 class="shrink-0">$19.99</h6>
+      </div>
+      <button type="button" class="w-full border-gray-200 dark:border-dark-800 btn btn-outline-gray">Upgrade
+        Now</button>
+    </div>
+  </div>
+
+  <div class="col-span-12 card">
+    <div class="grid grid-cols-12 lg:items-center card-header gap-space">
+      <div class="col-span-12 lg:col-span-3">
+        <h6 class="card-title">Leads ({{ leads.length }})</h6>
+      </div>
+      <div class="col-span-12 lg:col-start-7 lg:col-span-6 2xl:col-span-4 2xl:col-start-9">
+        <div class="flex items-center gap-space">
+          <div class="relative group/form grow">
+            <input type="text" class="pl-9 form-input" [(ngModel)]="searchTerm" (input)="filteredLeads()" placeholder="Search for ...">
+            <button title="search-button" class="absolute inset-y-0 flex items-center text-gray-500 dark:text-dark-500 left-3 focus:outline-hidden">
+              <lucide-angular name="Search" class="size-4"></lucide-angular>
+            </button>
+          </div>
+          <button type="button" class="btn btn-primary shrink-0">
+            <lucide-angular name="CirclePlus" class="inline-block ltr:mr-1 rtl:ml-1 size-4"></lucide-angular> Add Lead
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="pt-0 card-body">
+      <div class="overflow-x-auto table-box">
+        <table class="table whitespace-nowrap">
+          <thead>
+            <tr class="text-gray-500 bg-gray-100 dark:bg-dark-850 dark:text-dark-500">
+              <!-- Column Headers with Sorting -->
+              <th (click)="sort('leadName')" class="cursor-pointer">
+                Lead Name
+                <span *ngIf="sortBy === 'leadName'" [innerText]="sortDirection === 'asc' ? '↑' : '↓'"></span>
+              </th>
+              <th (click)="sort('rating')" class="cursor-pointer">
+                Rating
+                <span *ngIf="sortBy === 'rating'" [innerText]="sortDirection === 'asc' ? '↑' : '↓'"></span>
+              </th>
+              <th (click)="sort('date')" class="cursor-pointer">
+                Date
+                <span *ngIf="sortBy === 'date'" [innerText]="sortDirection === 'asc' ? '↑' : '↓'"></span>
+              </th>
+              <th (click)="sort('contact')" class="cursor-pointer">
+                Contact
+                <span *ngIf="sortBy === 'contact'" [innerText]="sortDirection === 'asc' ? '↑' : '↓'"></span>
+              </th>
+              <th (click)="sort('leadSource')" class="cursor-pointer">
+                Lead Source
+                <span *ngIf="sortBy === 'leadSource'" [innerText]="sortDirection === 'asc' ? '↑' : '↓'"></span>
+              </th>
+              <th (click)="sort('leadStatus')" class="cursor-pointer">
+                Lead Status
+                <span *ngIf="sortBy === 'leadStatus'" [innerText]="sortDirection === 'asc' ? '↑' : '↓'"></span>
+              </th>
+              <th (click)="sort('totalBalance')" class="cursor-pointer">
+                Total Balance
+                <span *ngIf="sortBy === 'totalBalance'" [innerText]="sortDirection === 'asc' ? '↑' : '↓'"></span>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Conditional Rendering with ng-container -->
+            <ng-container *ngIf="displayedLeads.length > 0">
+              <tr *ngFor="let lead of displayedLeads.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)">
+                <td>{{ lead.leadName }}</td>
+                <td><i class="text-yellow-500 align-baseline ri-star-fill"></i> ({{ lead.rating }})</td>
+                <td>{{ lead.date }}</td>
+                <td>{{ lead.contact }}</td>
+                <td><span class="badge badge-gray">{{ lead.leadSource }}</span></td>
+                <td>
+                  <span class="badge" [ngClass]="{
+                    'badge-sky': lead.leadStatus === 'New',
+                    'badge-green': lead.leadStatus === 'Contacted',
+                    'badge-yellow': lead.leadStatus === 'Interested',
+                    'badge-red': lead.leadStatus === 'Closed',
+                    'badge-purple': lead.leadStatus === 'Negotiation'
+                  }">{{ lead.leadStatus }}</span>
+                </td>
+                <td>{{ lead.totalBalance }}</td>
+              </tr>
+            </ng-container>
+            <ng-container *ngIf="displayedLeads.length === 0">
+              <tr>
+                <td colspan="7" class="!p-8e">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="mx-auto size-12" viewBox="0 0 48 48">
+                    <linearGradient id="SVGID_1__h35ynqzIJzH4_gr1" x1="34.598" x2="15.982" y1="15.982" y2="34.598" gradientUnits="userSpaceOnUse">
+                      <stop offset="0" stop-color="#60e8fe"></stop>
+                      <stop offset=".033" stop-color="#6ae9fe"></stop>
+                      <stop offset=".197" stop-color="#97f0fe"></stop>
+                      <stop offset=".362" stop-color="#bdf5ff"></stop>
+                      <stop offset=".525" stop-color="#dafaff"></stop>
+                      <stop offset=".687" stop-color="#eefdff"></stop>
+                      <stop offset=".846" stop-color="#fbfeff"></stop>
+                      <stop offset="1" stop-color="#fff"></stop>
+                    </linearGradient>
+                    <path fill="url(#SVGID_1__h35ynqzIJzH4_gr1)" d="M40.036,33.826L31.68,25.6c0.847-1.739,1.335-3.684,1.335-5.748c0-7.27-5.894-13.164-13.164-13.164S6.688,12.582,6.688,19.852c0,7.27,5.894,13.164,13.164,13.164c2.056,0,3.995-0.485,5.728-1.326l3.914,4.015l4.331,4.331c1.715,1.715,4.496,1.715,6.211,0C41.751,38.321,41.751,35.541,40.036,33.826z">
+                    </path>
+                    <path fill="none" stroke="#10cfe3" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="3" d="M31.95,25.739l8.086,8.086c1.715,1.715,1.715,4.496,0,6.211l0,0c-1.715,1.715-4.496,1.715-6.211,0l-4.331-4.331">
+                    </path>
+                    <path fill="none" stroke="#10cfe3" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="3" d="M7.525,24.511c-1.771-4.694-0.767-10.196,3.011-13.975c3.847-3.847,9.48-4.817,14.228-2.912">
+                    </path>
+                    <path fill="none" stroke="#10cfe3" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="3" d="M30.856,12.603c3.376,5.114,2.814,12.063-1.688,16.565c-4.858,4.858-12.565,5.129-17.741,0.814">
+                    </path>
+                  </svg>
+                  <div class="mt-4 text-center">
+                    <div class="text-gray-500 dark:text-dark-400">No data found</div>
+                  </div>
+                </td>
+              </tr>
+            </ng-container>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="grid items-center grid-cols-12 gap-space mt-space" *ngIf="displayedLeads.length > 0">
+        <div class="col-span-12 text-center lg:col-span-6 lg:ltr:text-left lg:rtl:text-right">
+          <p class="text-gray-500 dark:text-dark-500">
+            Showing <b>{{ showingStart }}</b> to <b>{{ showingEnd }}</b> of <b>{{ displayedLeads.length }}</b> entries
+          </p>
+        </div>
+        <div class="col-span-12 lg:col-span-6">
+          <div class="flex justify-center gap-2 lg:justify-end pagination pagination-primary">
+            <button (click)="prevPage()" [disabled]="currentPage === 1" class="pagination-pre">
+              <lucide-angular name="ChevronLeft" class="mr-1 ltr:inline-block rtl:hidden !size-4"></lucide-angular>
+              <lucide-angular name="ChevronRight" class="ml-1 rtl:inline-block ltr:hidden !size-4"></lucide-angular>
+              Prev
+            </button>
+            <ng-container *ngFor="let page of [].constructor(totalPages); let i = index">
+              <button (click)="gotoPage(i + 1)" [class.active]="i + 1 === currentPage" class="pagination-item">
+                <span>{{ i + 1 }}</span>
+              </button>
+            </ng-container>
+            <button (click)="nextPage()" [disabled]="currentPage === totalPages" class="pagination-next">
+              Next
+              <lucide-angular name="ChevronRight" class="ml-1 ltr:inline-block rtl:hidden !size-4"></lucide-angular>
+              <lucide-angular name="ChevronLeft" class="mr-1 rtl:inline-block ltr:hidden !size-4"></lucide-angular>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

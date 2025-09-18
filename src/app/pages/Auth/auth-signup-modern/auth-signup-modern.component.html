@@ -1,0 +1,93 @@
+<div class="relative flex items-center justify-center min-h-screen py-12 bg-center bg-cover bg-[url('../images/others/auth.jpg')]">
+  <div class="absolute inset-0 bg-gray-950/50"></div>
+  <div class="container relative">
+    <div class="grid grid-cols-12">
+      <div class="col-span-12 mb-0 border-none shadow-none md:col-span-10 lg:col-span-6 xl:col-span-4 md:col-start-2 lg:col-start-4 xl:col-start-5 card bg-white/10 backdrop-blur-md">
+        <div class="p-10 card-body">
+          <div class="mb-5 text-center">
+            <a href="javascript:void(0);"><img src="assets/images/logo-white.png" alt="" class="h-8 mx-auto"></a>
+          </div>
+          <h4 class="mb-2 leading-relaxed text-center text-white">Create a New Account</h4>
+          <p class="mb-5 text-center text-white/75">Already have an account? <a routerLink="/auth-signin-modern" class="font-medium text-white">Sign In</a></p>
+          <form [formGroup]="signUpForm" (ngSubmit)="onSubmit()">
+            <div class="grid grid-cols-12 gap-4 mt-5">
+              <div class="col-span-12 md:col-span-6">
+                <label for="firstNameInput" class="form-label text-white/75">First Name</label>
+                <input type="text" id="firstNameInput" class="text-white border-none form-input bg-white/10 placeholder:text-white/75" placeholder="Enter your first name" formControlName="firstName">
+                <p *ngIf="validateField('firstName')" class="text-sm text-red-500">{{ getErrorMessage('firstName') }}
+                </p>
+              </div>
+              <div class="col-span-12 md:col-span-6">
+                <label for="lastNameInput" class="form-label text-white/75">Last Name</label>
+                <input type="text" id="lastNameInput" class="text-white border-none form-input bg-white/10 placeholder:text-white/75" placeholder="Enter your last name" formControlName="lastName">
+                <p *ngIf="validateField('lastName')" class="text-sm text-red-500">{{ getErrorMessage('lastName') }}</p>
+              </div>
+              <div class="col-span-12 md:col-span-6">
+                <label for="userNameInput" class="form-label text-white/75">Username</label>
+                <input type="text" id="userNameInput" class="text-white border-none form-input bg-white/10 placeholder:text-white/75" placeholder="Enter your username" formControlName="userName">
+                <p *ngIf="validateField('userName')" class="text-sm text-red-500">{{ getErrorMessage('userName') }}</p>
+              </div>
+              <div class="col-span-12 md:col-span-6">
+                <label for="emailInput" class="form-label text-white/75">Email</label>
+                <input type="email" id="emailInput" class="text-white border-none form-input bg-white/10 placeholder:text-white/75" placeholder="Enter your email" formControlName="email">
+                <p *ngIf="validateField('email')" class="text-sm text-red-500">{{ getErrorMessage('email') }}</p>
+              </div>
+              <div class="col-span-12">
+                <div>
+                  <label for="passwordInput" class="form-label">Password</label>
+                  <div class="relative">
+                    <input [type]="showPassword ? 'text' : 'password'" id="passwordInput" class="ltr:pr-8 rtl:pl-8 form-input" placeholder="Enter your password" formControlName="password">
+                    <button type="button" (click)="showPassword = !showPassword" class="absolute inset-y-0 flex items-center text-gray-500 ltr:right-3 rtl:left-3 focus:outline-hidden">
+                      <lucide-angular name="Eye" *ngIf="showPassword" class="size-5"></lucide-angular>
+                      <lucide-angular name="EyeOff" *ngIf="!showPassword" class="size-5"></lucide-angular>
+                    </button>
+                  </div>
+                  <p *ngIf="validateField('password')" class="text-sm text-red-500">{{ getErrorMessage('password') }}
+                  </p>
+                </div>
+              </div>
+              <div class="col-span-12">
+                <div>
+                  <label for="confirmPasswordInput" class="form-label">Confirm Password</label>
+                  <div class="relative">
+                    <input [type]="showConfirmPassword ? 'text' : 'password'" id="confirmPasswordInput" class="ltr:pr-8 rtl:pl-8 form-input" placeholder="Confirm your password" formControlName="confirmPassword">
+                    <button type="button" (click)="showConfirmPassword = !showConfirmPassword" class="absolute inset-y-0 flex items-center text-gray-500 ltr:right-3 rtl:left-3 focus:outline-hidden">
+                      <lucide-angular name="Eye" *ngIf="showConfirmPassword" class="size-5"></lucide-angular>
+                      <lucide-angular name="EyeOff" *ngIf="!showConfirmPassword" class="size-5"></lucide-angular>
+                    </button>
+                  </div>
+                  <p *ngIf="validateField('confirmPassword')" class="text-sm text-red-500">
+                    {{ getErrorMessage('confirmPassword') }}</p>
+                </div>
+              </div>
+              <div class="col-span-12">
+                <div class="items-start input-check-group grow">
+                  <input id="checkboxBasic1" class="border-0 input-check bg-white/10 shrink-0" type="checkbox" formControlName="terms">
+                  <label for="checkboxBasic1" class="input-check-label text-white/75">By creating an account, you agree
+                    to all of our terms, conditions & policies.</label>
+                </div>
+                <p *ngIf="validateField('terms')" class="text-sm text-red-500">{{ getErrorMessage('terms') }}</p>
+              </div>
+              <div class="col-span-12">
+                <button type="submit" class="w-full btn btn-primary">Sign Up</button>
+              </div>
+            </div>
+          </form>
+          <div class="relative my-5 text-center text-white/75">
+            <p>OR</p>
+          </div>
+
+          <div class="space-y-2">
+            <button type="button" class="w-full border-white/10 text-white/75 btn hover:bg-white/10 hover:text-white"><img src="assets/images/others/google.png" alt="" class="inline-block h-4 ltr:mr-1 rtl:ml-1"> SignIn Vie
+              Google</button>
+            <button type="button" class="w-full border-white/10 text-white/75 btn hover:bg-white/10 hover:text-white">
+              <lucide-angular name="Facebook" class="inline-block ltr:mr-1 rtl:ml-1 size-4 text-primary-500">
+              </lucide-angular> SignIn Vie
+              Facebook
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

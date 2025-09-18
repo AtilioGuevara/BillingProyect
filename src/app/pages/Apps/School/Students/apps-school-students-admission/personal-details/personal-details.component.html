@@ -1,0 +1,88 @@
+<form [formGroup]="personalDetailsForm" (ngSubmit)="onSubmit()">
+  <h6 class="mb-3">Personal Details</h6>
+  <div class="grid grid-cols-12 gap-space">
+    <div class="col-span-12 sm:col-span-6 2xl:col-span-4">
+      <label for="firstNameInput" class="form-label">First Name</label>
+      <input type="text" id="firstNameInput" class="form-input" placeholder="Enter your first name"
+        formControlName="firstName">
+    </div>
+    <div class="col-span-12 sm:col-span-6 2xl:col-span-4">
+      <label for="middleNameInput" class="form-label">Middle Name</label>
+      <input type="text" id="middleNameInput" class="form-input" placeholder="Enter your middle name"
+        formControlName="middleName">
+    </div>
+    <div class="col-span-12 sm:col-span-6 2xl:col-span-4">
+      <label for="lastNameInput" class="form-label">Last Name</label>
+      <input type="text" id="lastNameInput" class="form-input" placeholder="Enter your last name"
+        formControlName="lastName">
+    </div>
+    <div class="col-span-12 sm:col-span-6 2xl:col-span-4">
+      <label for="genderSelect" class="form-label">Gender</label>
+      <select id="genderSelect" formControlName="gender" class="form-input">
+        <option value="" disabled>Select Gender</option>
+        <option value="male">Male</option>
+        <option value="female">Female</option>
+        <option value="other">Other</option>
+      </select>
+    </div>
+    <div class="col-span-12 sm:col-span-6 2xl:col-span-4">
+      <label for="ageInput" class="form-label">Age</label>
+      <input type="number" id="ageInput" class="form-input" placeholder="Enter your age" formControlName="age">
+    </div>
+    <div class="col-span-12 sm:col-span-6 2xl:col-span-4">
+      <label for="dateOfBirthInput" class="form-label">Date of Birth</label>
+      <input type="text" id="dateOfBirthInput" class="form-input" placeholder="Select date"
+        formControlName="dateOfBirth">
+    </div>
+  </div>
+
+  <h6 class="mt-6 mb-3">Contact Details</h6>
+  <div class="grid grid-cols-12 gap-space">
+    <div class="col-span-12 md:col-span-6">
+      <label for="mobileNumberInput" class="form-label">Mobile Number</label>
+      <input type="number" id="mobileNumberInput" class="form-input" placeholder="Enter your mobile number"
+        formControlName="mobileNumber">
+    </div>
+    <div class="col-span-12 md:col-span-6">
+      <label for="alternativeMobileNumberInput" class="form-label">Alternative Mobile Number</label>
+      <input type="number" id="alternativeMobileNumberInput" class="form-input" placeholder="Enter your mobile number"
+        formControlName="alternativeMobileNumber">
+    </div>
+    <div class="col-span-12 md:col-span-6">
+      <label for="emailIDInput" class="form-label">Email ID</label>
+      <input type="email" id="emailIDInput" class="form-input" placeholder="example@SRBThemes.com"
+        formControlName="emailID">
+    </div>
+    <div class="col-span-12 md:col-span-6">
+      <label for="nationalityInput" class="form-label">Nationality</label>
+      <input type="text" id="nationalityInput" class="form-input" placeholder="Enter your nationality"
+        formControlName="nationality">
+    </div>
+    <div class="col-span-12">
+      <label for="addressInput" class="form-label">Permanent Address</label>
+      <input type="text" id="addressInput" class="form-input" placeholder="Enter your address"
+        formControlName="address">
+    </div>
+    <div class="col-span-12 md:col-span-4">
+      <label for="cityInput" class="form-label">City</label>
+      <input type="text" id="cityInput" class="form-input" placeholder="Enter your city" formControlName="city">
+    </div>
+    <div class="col-span-12 md:col-span-4">
+      <label for="countryInput" class="form-label">Country</label>
+      <input type="text" id="countryInput" class="form-input" placeholder="Enter your country"
+        formControlName="country">
+    </div>
+    <div class="col-span-12 md:col-span-4">
+      <label for="pinCodeInput" class="form-label">Pin Code</label>
+      <input type="text" id="pinCodeInput" class="form-input" placeholder="Enter your pincode"
+        formControlName="pinCode">
+    </div>
+  </div>
+  <div class="flex flex-wrap items-center gap-2 mt-5 ltr:justify-end rtl:justify-start">
+    <button class="btn btn-primary" (click)="onPrevious()">
+      Save to Next
+      <lucide-angular name="MoveRight" class="ltr:inline-block rtl:hidden ltr:ml-1 rtl:mr-1 size-4"></lucide-angular>
+      <lucide-angular name="MoveLeft" class="ltr:hidden rtl:inline-block ltr:ml-1 rtl:mr-1 size-4"></lucide-angular>
+    </button>
+  </div>
+</form>

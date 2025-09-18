@@ -1,0 +1,90 @@
+<div class="modal">
+
+    <div class="modal-wrap modal-center modal-lg" [formGroup]="eventData">
+        <div class="modal-header">
+            <h6>{{eventData.get('id')?.value ? 'Edit' : 'Add' }} Event</h6>
+            <button class="link link-red"><lucide-angular name="x" class="size-5" (click)="close()"></lucide-angular></button>
+        </div>
+        <div class="modal-content">
+            <form>
+                <div class="grid grid-cols-12 gap-space">
+                    <div class="col-span-12">
+                        <label for="eventNameInput" class="form-label">Event Name</label>
+                        <input type="text" class="form-input" placeholder="Enter event name" formControlName="title">
+                        <span *ngIf="eventData.get('title')?.hasError('required')" class="text-red-500">This filed is required</span>
+                    </div>
+                    <div class="col-span-4">
+                        <label class="form-label">Event start Date</label>
+                        <div class="relative group/form right">
+                            <input type="text" class="ltr:pl-9 rtl:pr-9 form-input" placeholder="Select date" formControlName="start" mwlFlatpickr [flatpickrOptions]="{minDate: eventData.get('start')?.value}">
+                            <button class="absolute inset-y-0 flex items-center text-gray-500 dark:text-dark-500 ltr:left-3 rtl:right-3 focus:outline-hidden">
+                                <lucide-angular name="calendar-check" class="size-4"></lucide-angular>
+                            </button>
+                        </div>
+                        <span *ngIf="eventData.get('start')?.hasError('required')" class="text-red-500">This filed is required</span>
+                    </div>
+                    <div class="col-span-4">
+                        <label for="endEventDateInput" class="form-label">Event End Date</label>
+                        <div class="relative group/form right">
+                            <input type="text" formControlName="end" class="ltr:pl-9 rtl:pr-9 form-input" placeholder="Select date" mwlFlatpickr [flatpickrOptions]="{minDate: eventData.get('end')?.value}">
+                            <button class="absolute inset-y-0 flex items-center text-gray-500 dark:text-dark-500 ltr:left-3 rtl:right-3 focus:outline-hidden">
+                                <lucide-angular name="calendar-check" class="size-4"></lucide-angular>
+                            </button>
+                        </div>
+                        <div *ngIf="eventData.get('end')?.hasError('required')" class="text-red-500">This filed is required</div>
+                        <div *ngIf="eventData.get('end')?.value && eventData.hasError('dateRangeInvalid')" class="text-red-500">Please enter valid date range</div>
+                    </div>
+                    <div class="col-span-4">
+                        <label for="eventTimeInput" class="form-label">Event Time</label>
+                        <div class="relative group/form right">
+                            <input type="text" id="eventTimeInput" class="ltr:pl-9 rtl:pr-9 form-input" placeholder="Select time" mwlFlatpickr formControlName="time" [flatpickrOptions]="timePickerOptions">
+                            <button class="absolute inset-y-0 flex items-center text-gray-500 dark:text-dark-500 ltr:left-3 rtl:right-3 focus:outline-hidden">
+                                <lucide-angular name="clock" class="size-4"></lucide-angular>
+                            </button>
+                        </div>
+                        <span *ngIf="eventData.get('time')?.hasError('required')" class="text-red-500">This filed is required</span>
+                    </div>
+                    <div class="col-span-12">
+                        <label for="locationInput" class="form-label">Select Event type</label>
+                        <ng-select class="filter-ng-select" [items]="eventTypeData" bindLabel="text" bindValue="value" placeholder="Select a category" formControlName="eventype">
+                        </ng-select>
+                        <span *ngIf="eventData.get('eventype')?.hasError('required')" class="text-red-500"> This Filed is
+                            Required</span>
+                    </div>
+                    <div class="col-span-12">
+                        <label for="locationInput" class="form-label">Location</label>
+                        <input type="text" id="locationInput" class="form-input" placeholder="Enter location" formControlName="location">
+                        <span *ngIf="eventData.get('location')?.hasError('required')" class="text-red-500"> This Filed is
+                            Required</span>
+                    </div>
+                    <div class="col-span-12">
+                        <label for="guestInput" class="form-label">Add Guests</label>
+                        <div class="relative">
+                            <input type="email" id="guestInput" class="ltr:pr-14 rtl:pl-14 form-input" placeholder="example@SRBThemes.com" formControlName="gEmail">
+                            <span *ngIf="eventData.get('gEmail')?.hasError('pattern')" class="text-red-500"> Invalid email format</span>
+                            <button type="button" id="addGuestButton" class="absolute btn ltr:right-1.5 rtl:left-1.5 top-1.5 btn-sub-primary btn-sm" (click)="addGuest()">Add</button>
+                        </div>
+                        <div class="flex gap-2 mt-2" id="guestList">
+                            <ng-container *ngIf="eventData.get('guests')?.value">
+                                <ng-container *ngFor="let guest of  eventData.get('guests')?.value;let i=index">
+                                    <div class="relative rounded-full size-9">
+                                        <img [src]="guest" alt="Guest Avatar" class="w-8 h-8 rounded-full">
+                                        <a class="absolute flex items-center justify-center text-white bg-gray-500 border-2 border-white rounded-full dark:bg-dark-500 dark:border-dark-900 size-4 -top-1 -right-1">
+                                            <i class="text-xs ri-close-line" (click)="removeGuest(i)"></i>
+                                        </a>
+                                    </div>
+                                </ng-container>
+                            </ng-container>
+                        </div>
+                    </div>
+                    <div class="col-span-12">
+                        <div class="flex items-center justify-end gap-2">
+                            <button type="button" class="btn btn-active-red" (click)="close()">Cancel</button>
+                            <button type="submit" class="btn btn-primary" (click)="onSubmit()">Submit</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

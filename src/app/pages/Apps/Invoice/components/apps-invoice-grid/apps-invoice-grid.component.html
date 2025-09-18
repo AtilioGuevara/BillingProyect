@@ -1,0 +1,182 @@
+<app-page-title [Title]="'Grid View'" [pageTitle]="'Invoice'"></app-page-title>
+
+<div>
+  <div class="grid grid-cols-12 gap-x-space">
+    <div class="col-span-12 md:col-span-6 xl:col-span-4 2xl:col-span-2 card">
+      <div class="card-body">
+        <div class="flex items-center justify-center mb-4 size-16 bg-gradient-to-t from-green-500/10 rounded-modern">
+          <lucide-angular name="CircleCheckBig" class="relative text-green-500 stroke-1 size-9 fill-green-500/10">
+          </lucide-angular>
+        </div>
+        <h5 class="mb-1">{{ paidCount }}</h5>
+        <p class="mb-4">Paid Invoice</p>
+        <p class="text-gray-500 dark:text-dark-500"><span class="align-bottom badge badge-green"><span>{{ paidPercentage.toFixed(2) }}</span>%</span> This month</p>
+      </div>
+    </div>
+    <div class="col-span-12 md:col-span-6 xl:col-span-4 2xl:col-span-2 card">
+      <div class="card-body">
+        <div class="flex items-center justify-center mb-4 size-16 bg-gradient-to-t from-pink-500/10 rounded-modern">
+          <lucide-angular name="CircleAlert" class="relative text-pink-500 stroke-1 size-9 fill-pink-500/10">
+          </lucide-angular>
+        </div>
+        <h5 class="mb-1">{{ unpaidCount }}</h5>
+        <p class="mb-4">Unpaid Invoice</p>
+        <p class="text-gray-500 dark:text-dark-500"><span class="align-bottom badge badge-green"><span>{{ unpaidPercentage.toFixed(2) }}</span>%</span> This month</p>
+      </div>
+    </div>
+    <div class="col-span-12 md:col-span-6 xl:col-span-4 2xl:col-span-2 card">
+      <div class="card-body">
+        <div class="flex items-center justify-center mb-4 size-16 bg-gradient-to-t from-yellow-500/10 rounded-modern">
+          <lucide-angular name="hourglass" class="relative text-yellow-500 stroke-1 size-9 fill-yellow-500/10">
+          </lucide-angular>
+        </div>
+        <h5 class="mb-1">{{ pendingCount }}</h5>
+        <p class="mb-4">Pending Invoice</p>
+        <p class="text-gray-500 dark:text-dark-500"><span class="align-bottom badge badge-green"><span>{{ pendingPercentage.toFixed(2) }}</span>%</span> This month
+        </p>
+      </div>
+    </div>
+    <div class="col-span-12 md:col-span-6 xl:col-span-4 2xl:col-span-2 card">
+      <div class="card-body">
+        <div class="flex items-center justify-center mb-4 size-16 bg-gradient-to-t from-red-500/10 rounded-modern">
+          <lucide-angular name="x" class="relative text-red-500 stroke-1 size-9 fill-red-500/10"></lucide-angular>
+        </div>
+        <h5 class="mb-1">{{ overdueCount }}</h5>
+        <p class="mb-4">Overdue Invoice</p>
+        <p class="text-gray-500 dark:text-dark-500"><span class="align-bottom badge badge-green"><span>{{ overduePercentage.toFixed(2) }}</span>%</span> This month
+        </p>
+      </div>
+    </div>
+    <div class="col-span-12 md:col-span-6 xl:col-span-4 2xl:col-span-4 card">
+      <div class="flex items-center gap-3 card-header">
+        <h6 class="card-title grow">Invoice Status</h6>
+        <div class="dropdown">
+          <button type="button" class="flex px-2 py-1 text-xs border-gray-200 dark:border-dark-800 link link-red btn" domixDropdownToggle [dropdownMenu]="dropdown2">
+            Last Week
+            <svg class="transition-transform duration-300 size-4" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+            </svg>
+          </button>
+
+          <div class="!fixed p-2 dropdown-menu dropdown-right" #dropdown2>
+            <a href="javascript: void(0);" class="dropdown-item">
+              Last Week
+            </a>
+
+            <a href="javascript: void(0);" class="dropdown-item">
+              Last Month
+            </a>
+            <a href="javascript: void(0);" class="dropdown-item">
+              Last Years
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div dir="ltr">
+          <app-domix-charts [series]="donutChart.series" [chartOptions]="donutChart.chartOptions" class="!min-h-full">
+          </app-domix-charts>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="md:items-center gap-3 mb-4 space-y-3 flex flex-col md:flex-row md:space-y-0">
+    <div class="grow">
+      <h6 class="mb-1">All Invoices</h6>
+      <p class="text-gray-500 dark:text-dark-500">Manage your invoice</p>
+    </div>
+    <div class="md:w-44 shrink-0">
+      <div id="sampleSelect" placeholder="Invoice Type"></div>
+    </div>
+    <ng-select class="filter-ng-select" [items]="categories" bindLabel="label" bindValue="value" [(ngModel)]="selectedCategory" placeholder="Select a category" (change)="catgoryChange()" (clear)="resetFilters()">
+    </ng-select>
+    <button class="btn btn-sub-gray shrink-0">Filters</button>
+    <a href="javascript:void(0);" routerLink="/apps-invoice-create" class="cursor-pointer btn btn-primary shrink-0">Create Invoice</a>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-4 gap-x-5">
+    <ng-container *ngFor="let invoice of displayedData">
+      <div class="card">
+        <div class="card-body">
+          <div class="flex items-center mb-4">
+            <h6 class="grow">Invoice <span>{{invoice.invoicesID}}</span></h6>
+            <div class="dropdown">
+              <button type="button" class="link link-red" domixDropdownToggle [dropdownMenu]="dropdown1">
+                <i class="ri-more-fill"></i>
+              </button>
+
+              <div class="!fixed p-2 dropdown-menu dropdown-right" #dropdown1>
+                <a href="javascript: void(0);" class="dropdown-item">
+                  Overview
+                </a>
+
+                <a href="javascript: void(0);" class="dropdown-item">
+                  Edit
+                </a>
+                <a href="javascript: void(0);" class="dropdown-item" data-modal-target="deleteModal">
+                  Delete
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div class="p-3 border border-gray-200 rounded-md dark:border-dark-800">
+            <p class="mb-2 text-gray-500 dark:text-dark-500">{{invoice.content}}</p>
+
+            <div class="grid grid-cols-2">
+              <div class="p-2 text-center border-r border-gray-200 dark:border-dark-800">
+                <h6 class="mb-1">{{invoice.amount}}</h6>
+                <p class="text-gray-500 dark:text-dark-500">Total Amount</p>
+              </div>
+              <div class="p-2 text-center">
+                <h6 class="mb-1">{{invoice.dueDate}}</h6>
+                <p class="text-gray-500 dark:text-dark-500">Due Date</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-4">
+            <div class="flex items-center gap-2">
+              <img [src]="invoice.image" alt="" class="rounded-full shrink-0 size-8">
+              <a href="javascript:void(0);" class="font-medium text-current link link-primary grow">{{invoice.clientName}}</a>
+              <span class="badge" [ngClass]="{
+                                      'badge-green': invoice.status === 'Paid',
+                                      'badge-pink': invoice.status === 'Unpaid',
+                                      'badge-yellow': invoice.status === 'Pending',
+                                      'badge-red': invoice.status === 'Overdue'
+                                  }">{{invoice.status}}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+  <ng-container *ngIf="displayedData.length == 0">
+    <div class="p-8 text-center">
+      <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" class="mx-auto size-12" viewBox="0 0 48 48">
+        <linearGradient id="SVGID_1__h35ynqzIJzH4_gr1" x1="34.598" x2="15.982" y1="15.982" y2="34.598" gradientUnits="userSpaceOnUse">
+          <stop offset="0" stop-color="#60e8fe"></stop>
+          <stop offset=".033" stop-color="#6ae9fe"></stop>
+          <stop offset=".197" stop-color="#97f0fe"></stop>
+          <stop offset=".362" stop-color="#bdf5ff"></stop>
+          <stop offset=".525" stop-color="#dafaff"></stop>
+          <stop offset=".687" stop-color="#eefdff"></stop>
+          <stop offset=".846" stop-color="#fbfeff"></stop>
+          <stop offset="1" stop-color="#fff"></stop>
+        </linearGradient>
+        <path fill="url(#SVGID_1__h35ynqzIJzH4_gr1)" d="M40.036,33.826L31.68,25.6c0.847-1.739,1.335-3.684,1.335-5.748c0-7.27-5.894-13.164-13.164-13.164	S6.688,12.582,6.688,19.852c0,7.27,5.894,13.164,13.164,13.164c2.056,0,3.995-0.485,5.728-1.326l3.914,4.015l4.331,4.331	c1.715,1.715,4.496,1.715,6.211,0C41.751,38.321,41.751,35.541,40.036,33.826z">
+        </path>
+        <path fill="none" stroke="#10cfe3" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="3" d="M31.95,25.739l8.086,8.086c1.715,1.715,1.715,4.496,0,6.211l0,0c-1.715,1.715-4.496,1.715-6.211,0	l-4.331-4.331">
+        </path>
+        <path fill="none" stroke="#10cfe3" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="3" d="M7.525,24.511c-1.771-4.694-0.767-10.196,3.011-13.975c3.847-3.847,9.48-4.817,14.228-2.912">
+        </path>
+        <path fill="none" stroke="#10cfe3" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="3" d="M30.856,12.603c3.376,5.114,2.814,12.063-1.688,16.565c-4.858,4.858-12.565,5.129-17.741,0.814"></path>
+      </svg>
+      <p class="mt-2 text-center text-gray-500 dark:text-dark-500">No matching records found</p>
+    </div>
+  </ng-container>
+
+  <app-domix-pagination [currentPage]="currentPage" [totalPages]="totalPages" [showingStart]="showingStart" [showingEnd]="showingEnd" [totalResults]="gridData.length" (pageChanged)="onPageChange($event)">
+  </app-domix-pagination>
+</div>

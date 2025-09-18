@@ -1,0 +1,179 @@
+<div class="main-sidebar group-data-[layout=boxed]:top-[calc(theme('spacing.topbar')_+_theme('spacing.sidebar-boxed'))] lg:block" id="main-sidebar" [ngClass]="{
+       'navbar': isSidebarOpen && isMobile,
+       'hidden': !(isSidebarOpen && isMobile),
+       'group-data-[layout=boxed]:!top-topbar': scrolled
+     }">
+
+  <div class="sidebar-wrapper">
+    <div>
+      <!-- group-data-[layout=boxed]:!top-topbar group-data-[layout=boxed]:!bottom-8 -->
+      <div class="navbar-brand">
+        <a href="javascript: void(0);" class="inline-flex items-center justify-center w-full">
+          <div class="group-data-[sidebar=small]:hidden">
+            <img src="assets/images/main-logo.png" aria-label="logo" alt="" class="h-6 mx-auto group-data-[sidebar-colors=light]:dark:hidden group-data-[sidebar-colors=dark]:hidden group-data-[sidebar-colors=brand]:hidden group-data-[sidebar-colors=purple]:hidden group-data-[sidebar-colors=sky]:hidden">
+            <img src="assets/images/logo-white.png" aria-label="logo" alt="" class="h-6 mx-auto group-data-[sidebar-colors=light]:hidden group-data-[sidebar-colors=light]:dark:inline-block">
+          </div>
+          <div class="hidden group-data-[sidebar=small]:inline-block">
+            <img src="assets/images/logo-sm-dark.png" aria-label="logo" alt="" class="h-6 mx-auto group-data-[sidebar-colors=light]:dark:hidden group-data-[sidebar-colors=dark]:hidden group-data-[sidebar-colors=brand]:hidden group-data-[sidebar-colors=purple]:hidden group-data-[sidebar-colors=sky]:hidden">
+            <img src="assets/images/logo-sm-white.png" aria-label="logo" alt="" class="h-6 mx-auto group-data-[sidebar-colors=light]:hidden group-data-[sidebar-colors=light]:dark:inline-block">
+          </div>
+        </a>
+      </div>
+      <div class="relative group-data-[layout=horizontal]:hidden group-data-[sidebar=small]:w-full">
+        <div class="block dropdown">
+          <button x-ref="button" domixDropdownToggle [dropdownMenu]="dropdown1" type="button" class="flex items-center w-full gap-2 p-4 text-left group-data-[sidebar=small]:px-0">
+            <img src="assets/images/avatar/user-17.png" alt="" class="h-10 rounded-md shrink-0 group-data-[sidebar=small]:mx-auto">
+            <div class="grow group-data-[sidebar=icon]:hidden group-data-[sidebar=small]:hidden overflow-hidden text-new-500">
+              <h6 class="font-medium truncate text-sidebar-text-active">Sophia Mia</h6>
+              <p class="text-menu-title text-14">ID: 150001</p>
+            </div>
+            <div class="shrink-0 text-sidebar-text group-data-[sidebar=icon]:hidden group-data-[sidebar=small]:hidden group-data-[sidebar=medium]:hidden">
+              <lucide-angular name="ChevronDown" class="size-4"></lucide-angular>
+            </div>
+          </button>
+          <div #dropdown1 class="!fixed z-50 p-5 bg-white rounded-md shadow-lg !w-64 dropdown-menu !left-3 hidden">
+            <div class="flex items-center gap-2">
+              <img src="assets/images/avatar/user-17.png" alt="" class="rounded-full size-10">
+              <div>
+                <h6>Sophia Mia</h6>
+                <p><a href="javascript:void(0);" class="link link-primary">sophia&#64;srbthemes.com</a></p>
+              </div>
+            </div>
+            <div class="pt-2 mt-3 border-t border-gray-200 dark:border-dark-800">
+              <ul>
+                <li>
+                  <a routerLink="/pages-user-activity" class="cursor-pointer inline-block py-2 text-gray-500 dark:text-dark-500 before:hidden ltr:text-left rtl:text-right link hover:text-primary-500">
+                    <lucide-angular name="BellDot" class="inline-block mr-2 size-4"></lucide-angular> Profile Activity
+                  </a>
+                </li>
+                <li>
+                  <a routerLink="/pages-user-projects" class="cursor-pointer inline-block py-2 text-gray-500 dark:text-dark-500 before:hidden ltr:text-left rtl:text-right link hover:text-primary-500">
+                    <lucide-angular name="Presentation" class="inline-block mr-2 size-4"></lucide-angular> Manage
+                    Projects
+                  </a>
+                </li>
+                <li>
+                  <a routerLink="/pages-account-settings" class="cursor-pointer inline-block py-2 text-gray-500 dark:text-dark-500 before:hidden ltr:text-left rtl:text-right link hover:text-primary-500">
+                    <lucide-angular name="settings" class="inline-block mr-2 size-4"></lucide-angular> Account Settings
+                  </a>
+                </li>
+                <li>
+                  <a routerLink="/pages-help-center" class="cursor-pointer inline-block py-2 text-gray-500 dark:text-dark-500 before:hidden ltr:text-left rtl:text-right link hover:text-primary-500">
+                    <lucide-angular name="Headset" class="inline-block mr-2 size-4"></lucide-angular> Help Center
+                  </a>
+                </li>
+                <li>
+                  <a routerLink="/pages-pricing" class="cursor-pointer inline-block py-2 text-gray-500 dark:text-dark-500 before:hidden ltr:text-left rtl:text-right link hover:text-primary-500">
+                    <lucide-angular name="Gem" class="inline-block mr-2 size-4"></lucide-angular> Upgrade Plan
+                  </a>
+                </li>
+              </ul>
+            </div>
+            <div class="pt-3 mt-2 border-t border-gray-200 dark:border-dark-800">
+              <a routerLink="/auth-signin-basic" class="cursor-pointer !px-0 !py-1.5 before:hidden link link-primary">
+                <lucide-angular name="LogOut" class="inline-block mr-2 size-4"></lucide-angular> Log Out
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="fixed top-0 bottom-0 left-0 w-20 bg-white bg-light hidden group-data-[layout=doulcolumn]:block"></div>
+
+    <ngx-simplebar class="navbar-menu">
+      <div class="navbar-menu" id="navbar-menu-list">
+        <ul class="group-data-[layout=horizontal]:md:flex group-data-[layout=horizontal]:*:shrink-0" id="sidebar">
+          <ng-container *ngFor="let item of filteredMenu; let i = index">
+            <li class="menu-title" *ngIf="item.separatorText">
+              <span class="group-data-[sidebar=small]:hidden">
+                {{ item.separatorText | translate }}
+              </span>
+            </li>
+            <li>
+              <ng-container *ngIf="item.children.length">
+                <button type="button" class="nav-link" domixDropdownToggle [dropdownMenu]="dropdown" [ngClass]="{'active': isActive(item.link) || hasActiveChild(item)}">
+                  <span class="w-6 group-data-[sidebar=small]:mx-auto shrink-0" *ngIf="item.icon">
+                    <lucide-angular [name]="item.icon" class="size-4 group-data-[sidebar=small]:size-5 group-data-[sidebar=medium]:size-5"></lucide-angular>
+                  </span>
+                  <span *ngIf="item.children.length" class="content">
+                    {{ item.title | translate }}
+                  </span>
+                  <svg class="arrow" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                  </svg>
+                </button>
+
+                <!-- Dropdown menu that opens if any child link is active -->
+                <div class="dropdown-menu" #dropdown [ngClass]="{'show': hasActiveChild(item) && !isLayoutHorizontal && !isdataSidebarOpen}" [attr.dropdown-position]="isLayoutHorizontal ? 'left' : 'right-top'" [attr.dropdown-position]="isdataSidebarOpen ? 'right-top' : 'left'">
+                  <ul class="dropdown-wrapper">
+                    <ng-container *ngFor="let child of item.children; let j = index">
+                      <li>
+                        <ng-container *ngIf="child.children.length === 0">
+                          <a *ngIf="isExternalLink(child.link)" [href]="child.link" target="_blank" rel="noopener noreferrer">
+                            {{ child.title | translate }}
+                          </a>
+                          <a *ngIf="!isExternalLink(child.link)" [routerLink]="child.link" [ngClass]="{'active': isActive(child.link)}">
+                            {{ child.title | translate }}
+                          </a>
+                        </ng-container>
+
+                        <ng-container *ngIf="child.children.length > 0">
+                          <div class="relative">
+                            <button type="button" class="nav-link" data-level="1" [ngClass]="{'active': isActive(child.link) || hasActiveChild(child)}" domixDropdownToggle [dropdownMenu]="subDropdown" [shouldCloseAll]="allowToClose">
+                              <span>{{ child.title | translate }}</span>
+                              <svg class="arrow" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                              </svg>
+                            </button>
+
+                            <!-- Sub-dropdown Menu -->
+                            <div class="dropdown-menu" data-level="2" #subDropdown [ngClass]="{'show': hasActiveChild(child) && !isLayoutHorizontal && !isdataSidebarOpen}" dropdown-position="right-top">
+                              <ul class="dropdown-wrapper">
+                                <ng-container *ngFor="let child2 of child.children; let k = index">
+                                  <li class="relative">
+                                    <a [routerLink]="child2.link" [ngClass]="{'active': isActive(child2.link)}">
+                                      {{ child2.title | translate }}
+                                    </a>
+                                  </li>
+                                </ng-container>
+                              </ul>
+                            </div>
+                          </div>
+                        </ng-container>
+                      </li>
+                    </ng-container>
+                  </ul>
+                </div>
+              </ng-container>
+
+              <!-- Single Link Item -->
+              <ng-container *ngIf="!item.children.length">
+                <a *ngIf="isExternalLink(item.link)" [href]="item.link" class="nav-link" target="_blank" rel="noopener noreferrer">
+                  <span class="w-6 group-data-[sidebar=small]:mx-auto shrink-0">
+                    <lucide-angular [name]="item.icon" class="size-4 group-data-[sidebar=small]:size-5 group-data-[sidebar=medium]:size-5"></lucide-angular>
+                  </span>
+                  <span class="group-data-[sidebar=small]:hidden">
+                    {{ item.title | translate }}
+                  </span>
+                </a>
+
+                <a *ngIf="!isExternalLink(item.link)" [routerLink]="item.link" class="nav-link" [ngClass]="{'active': isActive(item.link)}">
+                  <span class="w-6 group-data-[sidebar=small]:mx-auto shrink-0">
+                    <lucide-angular [name]="item.icon" class="size-4 group-data-[sidebar=small]:size-5 group-data-[sidebar=medium]:size-5"></lucide-angular>
+                  </span>
+                  <span class="group-data-[sidebar=small]:hidden">
+                    {{ item.title | translate }}
+                  </span>
+                </a>
+              </ng-container>
+            </li>
+          </ng-container>
+        </ul>
+      </div>
+    </ngx-simplebar>
+
+  </div>
+</div>
+
+<div id="backdrop" class="backdrop-overlay backdrop-blur-xs z-[1004] lg:hidden print:hidden" [ngClass]="{ 'hidden': !(isSidebarOpen && isMobile) }" (click)="setSidebar()">
+</div>

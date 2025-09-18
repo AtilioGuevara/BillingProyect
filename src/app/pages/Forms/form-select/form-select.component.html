@@ -1,0 +1,242 @@
+<app-page-title [Title]="'Select'" [pageTitle]="'Forms'"></app-page-title>
+
+<div class="grid grid-cols-12 gap-x-space">
+  <div class="col-span-12 md:col-span-6 card">
+    <div class="card-header">
+      <h6 class="card-title">Default Select</h6>
+    </div>
+    <div class="card-body">
+      <div id=""></div>
+      <ng-select class="filter-ng-select" [items]="sampleSelectOptions" bindLabel="label" bindValue="value"
+        placeholder="Select Sample To">
+      </ng-select>
+    </div>
+  </div>
+
+  <div class="col-span-12 md:col-span-6 card">
+    <div class="card-header">
+      <h6 class="card-title">With search box</h6>
+    </div>
+    <div class="card-body">
+      <div id="Select"></div>
+      <ng-select class="filter-ng-select" [items]="searchBoxOptions" bindLabel="label" bindValue="value"
+        [searchable]="true" placeholder="Select searchBox To">
+      </ng-select>
+    </div>
+  </div>
+
+  <div class="col-span-12 md:col-span-6 card">
+    <div class="card-header">
+      <h6 class="card-title">Multiple Select</h6>
+    </div>
+    <div class="card-body">
+      <div id="multipleSelect"></div>
+      <ng-select class="filter-ng-select" [items]="multipleOptions" bindLabel="label" bindValue="value"
+        [multiple]="true" placeholder="Select multiple To">
+      </ng-select>
+    </div>
+  </div>
+
+  <div class="col-span-12 md:col-span-6 card">
+    <div class="card-header">
+      <h6 class="card-title">Multiple Select without Search</h6>
+    </div>
+    <div class="card-body">
+      <div id="SearchSelect"></div>
+      <ng-select class="filter-ng-select" [items]="multipleWithoutOptions" bindLabel="label" bindValue="value"
+        placeholder="Select multipleWithout To">
+      </ng-select>
+    </div>
+  </div>
+
+  <div class="col-span-12 md:col-span-6 card">
+    <div class="card-header">
+      <h6 class="card-title">Disabled options</h6>
+    </div>
+    <div class="card-body">
+      <div id="OptionSelect"></div>
+      <ng-select class="filter-ng-select" [items]="disabledOptions" bindLabel="label" bindValue="value"
+        placeholder="Select disabled To">
+      </ng-select>
+    </div>
+  </div>
+
+
+  <div class="col-span-12 md:col-span-6 card">
+    <div class="card-header">
+      <h6 class="card-title">Option Group</h6>
+    </div>
+    <div class="card-body">
+      <div id="optionGroupSelect"></div>
+      <ng-select class="filter-ng-select" [items]="optionGroupOptions" bindLabel="label" bindValue="value"
+        groupBy="options" placeholder="Select optionGroup To">
+      </ng-select>
+    </div>
+  </div>
+
+  <div class="col-span-12 md:col-span-6 card">
+    <div class="card-header">
+      <h6 class="card-title">Preselect value</h6>
+    </div>
+    <div class="card-body">
+      <div id="Value"></div>
+      <ng-select class="filter-ng-select" [items]="preselectOptions" bindLabel="label" bindValue="value"
+        placeholder="Select preselect To">
+      </ng-select>
+    </div>
+  </div>
+
+  <div class="col-span-12 md:col-span-6 card">
+    <div class="card-header">
+      <h6 class="card-title">Preselect multiple values</h6>
+    </div>
+    <div class="card-body">
+      <div id="preselectMultipleValue"></div>
+      <ng-select class="filter-ng-select" [items]="preselectMultipleValueOptions" bindLabel="label" bindValue="value"
+        [multiple]="true" placeholder="Select preselect Multiple Value To">
+      </ng-select>
+    </div>
+  </div>
+
+  <div class="col-span-12 md:col-span-6 card">
+    <div class="card-header">
+      <h6 class="card-title">Hide Clear Button</h6>
+    </div>
+    <div class="card-body">
+      <div id=""></div>
+      <ng-select class="filter-ng-select" [items]="hideClearButtonOptions" bindLabel="label" bindValue="value"
+        placeholder="Select hideClearButton To">
+      </ng-select>
+    </div>
+  </div>
+
+  <div class="col-span-12 md:col-span-6 card">
+    <div class="card-header">
+      <h6 class="card-title">Custom width for dropbox</h6>
+    </div>
+    <div class="card-body">
+      <div id="customWidthDropbox"></div>
+      <ng-select class="filter-ng-select" [items]="customWidthDropboxOptions" bindLabel="label" bindValue="value"
+        placeholder="Select customWidthDropbox To">
+      </ng-select>
+    </div>
+  </div>
+
+  <div class="col-span-12 md:col-span-6 card">
+    <div class="card-header">
+      <h6 class="card-title">Allow to add new option</h6>
+    </div>
+    <div class="card-body">
+      <div id=""></div>
+      <ng-select class="filter-ng-select" [items]="allowNewOption" bindLabel="label" bindValue="value"
+        placeholder="Select allowNew To">
+      </ng-select>
+    </div>
+  </div>
+
+  <div class="col-span-12 md:col-span-6 card">
+    <div class="card-header">
+      <h6 class="card-title">Mark matched term in label</h6>
+    </div>
+    <div class="card-body">
+      <ng-select class="filter-ng-select" [items]="markMatchedcontributorOptions" bindLabel="label" bindValue="value"
+        placeholder="Select markMatched To" formControlName="markMatched">
+      </ng-select>
+    </div>
+  </div>
+
+  <div class="col-span-12 md:col-span-6 card">
+    <div class="card-header">
+      <h6 class="card-title">Showing selected options first</h6>
+    </div>
+    <div class="card-body">
+      <div id=""></div>
+      <ng-select class="filter-ng-select" [items]="showingSelectedOption" bindLabel="label" bindValue="value"
+        placeholder="Select showing Selected To">
+      </ng-select>
+    </div>
+  </div>
+
+  <div class="col-span-12 md:col-span-6 card">
+    <div class="card-header">
+      <h6 class="card-title">Using alias for searching</h6>
+    </div>
+    <div class="card-body">
+      <div id=""></div>
+      <ng-select class="filter-ng-select" [items]="aliasForSearchingOption" bindLabel="label" bindValue="value"
+        placeholder="Select alias For Searching To">
+      </ng-select>
+    </div>
+  </div>
+
+  <div class="col-span-12 md:col-span-6 card">
+    <div class="card-header">
+      <h6 class="card-title">Maximum Values</h6>
+    </div>
+    <div class="card-body">
+      <div id=""></div>
+      <ng-select class="filter-ng-select" [items]="maximumValuesOption" bindLabel="label" bindValue="value"
+        placeholder="Select maximum Values To">
+      </ng-select>
+    </div>
+  </div>
+
+  <div class="col-span-12 md:col-span-6 card">
+    <div class="card-header">
+      <h6 class="card-title">Label with description</h6>
+    </div>
+    <div class="card-body">
+      <div id=""></div>
+      <ng-select class="filter-ng-select" [items]="labelDescriptionOption" bindLabel="label" bindValue="value"
+        placeholder="Select label Description To">
+      </ng-select>
+    </div>
+  </div>
+
+  <div class="col-span-12 md:col-span-6 card">
+    <div class="card-header">
+      <h6 class="card-title">Show options only on search</h6>
+    </div>
+    <div class="card-body">
+      <div id=""></div>
+      <ng-select class="filter-ng-select" [items]="showOptionOnlySearchOption" bindLabel="label" bindValue="value"
+        placeholder="Select show Option Only Search To">
+      </ng-select>
+    </div>
+  </div>
+
+  <div class="col-span-12 md:col-span-6 card">
+    <div class="card-header">
+      <h6 class="card-title">Initialize from native select element (not recommended)</h6>
+    </div>
+    <div class="card-body">
+      <ng-select class="filter-ng-select" [items]="nativeOptions" bindLabel="label" bindValue="value"
+        placeholder="Select native To">
+      </ng-select>
+    </div>
+  </div>
+
+
+  <div class="col-span-12 md:col-span-6 card">
+    <div class="card-header">
+      <h6 class="card-title">Image/Icon</h6>
+    </div>
+    <div class="card-body">
+      <div id=""></div>
+ 
+    </div>
+  </div>
+
+  <div class="col-span-12 md:col-span-6 card">
+    <div class="card-header">
+      <h6 class="card-title">Show values as tags</h6>
+    </div>
+    <div class="card-body">
+      <div id=""></div>
+      <ng-select class="filter-ng-select" [items]="valueTagOptions" bindLabel="label" bindValue="value"
+        [multiple]="true" placeholder="Select value-tag To">
+      </ng-select>
+    </div>
+  </div>
+
+</div>

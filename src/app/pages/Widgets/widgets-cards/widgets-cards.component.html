@@ -1,0 +1,592 @@
+<app-page-title [Title]="'Cards'" [pageTitle]="'Widgets'"></app-page-title>
+
+<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-x-space">
+  <div
+    class="relative overflow-hidden group/item before:transition-all before:duration-500 before:ease-in-out card before:absolute before:h-0.5 before:w-full before:bottom-0 before:bg-primary-500 hover:before:h-full hover:before:top-0">
+    <div class="relative p-6 text-center">
+      <span
+        class="transition-all duration-500 ease-linear badge badge-solid-primary group-hover/item:bg-primary-600 group-hover/item:border-primary-600">Revenue</span>
+
+      <div class="mt-10 mb-8">
+        <h3 class="transition-all duration-500 ease-linear group-hover/item:text-white">$<span class="counters"
+            [countUp]="301" [options]="{decimalPlaces:0}">0</span>M</h3>
+      </div>
+      <a href="javascript: void(0);"
+        class="inline-block px-3 py-1.5 text-sm border rounded-full link link-red transition-all duration-500 ease-linear border-gray-200 dark:border-dark-800 group-hover/item:text-primary-100 group-hover/item:border-primary-400/50 dark:group-hover/item:!border-primary-400/50">
+        View All
+        <lucide-angular name="MoveRight" class="ltr:inline-block rtl:hidden size-4"></lucide-angular>
+        <lucide-angular name="MoveLeft" class="rtl:inline-block ltr:hidden size-4"></lucide-angular>
+      </a>
+    </div>
+  </div>
+
+  <div
+    class="relative overflow-hidden group/item before:transition-all before:duration-500 before:ease-in-out card before:absolute before:h-0.5 before:w-full before:bottom-0 before:bg-green-500 hover:before:h-full hover:before:top-0">
+    <div class="relative p-6 text-center">
+      <span
+        class="transition-all duration-500 ease-linear badge badge-solid-green group-hover/item:bg-green-600 group-hover/item:border-green-600">Orders</span>
+
+      <div class="mt-10 mb-8">
+        <h3 class="transition-all duration-500 ease-linear group-hover/item:text-white"><span class="counters"
+            [countUp]="7000" [options]="{decimalPlaces:0}">0</span>+</h3>
+      </div>
+      <a href="javascript: void(0);"
+        class="inline-block px-3 py-1.5 text-sm border rounded-full link link-red transition-all duration-500 ease-linear border-gray-200 dark:border-dark-800 group-hover/item:text-green-100 group-hover/item:border-green-400/50 dark:group-hover/item:!border-green-400/50">
+        View All
+        <lucide-angular name="MoveRight" class="ltr:inline-block rtl:hidden size-4"></lucide-angular>
+        <lucide-angular name="MoveLeft" class="rtl:inline-block ltr:hidden size-4"></lucide-angular>
+      </a>
+    </div>
+  </div>
+
+  <div
+    class="relative overflow-hidden group/item before:transition-all before:duration-500 before:ease-in-out card before:absolute before:h-0.5 before:w-full before:bottom-0 before:bg-purple-500 hover:before:h-full hover:before:top-0">
+    <div class="relative p-6 text-center">
+      <span
+        class="transition-all duration-500 ease-linear badge badge-solid-purple group-hover/item:bg-purple-600 group-hover/item:border-purple-600">Total
+        Visitors</span>
+
+      <div class="mt-10 mb-8">
+        <h3 class="transition-all duration-500 ease-linear group-hover/item:text-white"><span class="counters"
+            [countUp]="12496" [options]="{decimalPlaces:0}">0</span></h3>
+      </div>
+      <a href="javascript: void(0);"
+        class="inline-block px-3 py-1.5 text-sm border rounded-full link link-red transition-all duration-500 ease-linear border-gray-200 dark:border-dark-800 group-hover/item:text-purple-100 group-hover/item:border-purple-400/50 dark:group-hover/item:!border-purple-400/50">
+        View All
+        <lucide-angular name="MoveRight" class="ltr:inline-block rtl:hidden size-4"></lucide-angular>
+        <lucide-angular name="MoveLeft" class="rtl:inline-block ltr:hidden size-4"></lucide-angular>
+      </a>
+    </div>
+  </div>
+
+  <div
+    class="relative overflow-hidden group/item before:transition-all before:duration-500 before:ease-in-out card before:absolute before:h-0.5 before:w-full before:bottom-0 before:bg-yellow-500 hover:before:h-full hover:before:top-0">
+    <div class="relative p-6 text-center">
+      <span
+        class="transition-all duration-500 ease-linear badge badge-solid-yellow group-hover/item:bg-yellow-600 group-hover/item:border-yellow-600">Total
+        Customers</span>
+
+      <div class="mt-10 mb-8">
+        <h3 class="transition-all duration-500 ease-linear group-hover/item:text-white"><span class="counters"
+            [countUp]="9831" [options]="{decimalPlaces:0}">0</span></h3>
+      </div>
+      <a href="javascript: void(0);"
+        class="inline-block px-3 py-1.5 text-sm border rounded-full link link-red transition-all duration-500 ease-linear border-gray-200 dark:border-dark-800 group-hover/item:text-yellow-100 group-hover/item:border-yellow-400/50 dark:group-hover/item:!border-yellow-400/50">
+        View All
+        <lucide-angular name="MoveRight" class="ltr:inline-block rtl:hidden size-4"></lucide-angular>
+        <lucide-angular name="MoveLeft" class="rtl:inline-block ltr:hidden size-4"></lucide-angular>
+      </a>
+    </div>
+  </div>
+
+  <div
+    class="relative overflow-hidden group/item before:transition-all before:duration-500 before:ease-in-out card before:absolute before:h-0.5 before:w-full before:bottom-0 before:bg-sky-500 hover:before:h-full hover:before:top-0">
+    <div class="relative p-6 text-center">
+      <span
+        class="transition-all duration-500 ease-linear badge badge-solid-sky group-hover/item:bg-sky-600 group-hover/item:border-sky-600">Average
+        Sales</span>
+
+      <div class="mt-10 mb-8">
+        <h3 class="transition-all duration-500 ease-linear group-hover/item:text-white"><span class="counters"
+            [countUp]="3410" [options]="{decimalPlaces:0}">0</span></h3>
+      </div>
+      <a href="javascript: void(0);"
+        class="inline-block px-3 py-1.5 text-sm border rounded-full link link-red transition-all duration-500 ease-linear border-gray-200 dark:border-dark-800 group-hover/item:text-sky-100 group-hover/item:border-sky-400/50 dark:group-hover/item:!border-sky-400/50">
+        View All
+        <lucide-angular name="MoveRight" class="ltr:inline-block rtl:hidden size-4"></lucide-angular>
+        <lucide-angular name="MoveLeft" class="rtl:inline-block ltr:hidden size-4"></lucide-angular>
+      </a>
+    </div>
+  </div>
+
+  <div
+    class="relative overflow-hidden group/item before:transition-all before:duration-500 before:ease-in-out card before:absolute before:h-0.5 before:w-full before:bottom-0 before:bg-red-500 hover:before:h-full hover:before:top-0">
+    <div class="relative p-6 text-center">
+      <span
+        class="transition-all duration-500 ease-linear badge badge-solid-red group-hover/item:bg-red-600 group-hover/item:border-red-600">Transaction</span>
+
+      <div class="mt-10 mb-8">
+        <h3 class="transition-all duration-500 ease-linear group-hover/item:text-white">$<span class="counters"
+            [countUp]="138" [options]="{decimalPlaces:0}">0</span>k</h3>
+      </div>
+      <a href="javascript: void(0);"
+        class="inline-block px-3 py-1.5 text-sm border rounded-full link link-red transition-all duration-500 ease-linear border-gray-200 dark:border-dark-800 group-hover/item:text-red-100 group-hover/item:border-red-400/50 dark:group-hover/item:!border-red-400/50">
+        View All
+        <lucide-angular name="MoveRight" class="ltr:inline-block rtl:hidden size-4"></lucide-angular>
+        <lucide-angular name="MoveLeft" class="rtl:inline-block ltr:hidden size-4"></lucide-angular>
+      </a>
+    </div>
+  </div>
+
+</div>
+<!--end row-->
+
+<div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-x-space">
+  <div class="card">
+    <div class="card-body">
+      <div class="flex items-center gap-3 p-3 mb-4 bg-gray-100 rounded-md dark:bg-dark-850">
+        <div class="flex items-center justify-center text-xs rounded-md size-10">
+          <lucide-angular name="truck" class="fill-primary-500/10 text-primary-500"></lucide-angular>
+        </div>
+        <h6>Superfast Delivery</h6>
+      </div>
+      <div
+        class="grid grid-cols-2 gap-0 text-center divide-x divide-gray-200 dark:divide-dark-800 rtl:divide-x-reverse">
+        <div>
+          <h5>2477</h5>
+          <p class="text-gray-500">Pending</p>
+        </div>
+        <div>
+          <h5>6013</h5>
+          <p class="text-gray-500 dark:text-dark-500">Successfully</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-body">
+      <div class="flex items-center gap-3 p-3 mb-4 bg-gray-100 rounded-md dark:bg-dark-850">
+        <div class="flex items-center justify-center text-xs rounded-md size-10">
+          <lucide-angular name="gallery-vertical-end" class="fill-primary-500/10 text-primary-500"></lucide-angular>
+        </div>
+        <h6>Flexible Payment</h6>
+      </div>
+      <div
+        class="grid grid-cols-2 gap-0 text-center divide-x divide-gray-200 dark:divide-dark-800 rtl:divide-x-reverse">
+        <div>
+          <h5>392</h5>
+          <p class="text-gray-500 dark:text-dark-500">Pending</p>
+        </div>
+        <div>
+          <h5>5789</h5>
+          <p class="text-gray-500 dark:text-dark-500">Successfully</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-body">
+      <div class="flex items-center gap-3 p-3 mb-4 bg-gray-100 rounded-md dark:bg-dark-850">
+        <div class="flex items-center justify-center text-xs rounded-md size-10">
+          <lucide-angular name="Headset" class="fill-primary-500/10 text-primary-500"></lucide-angular>
+        </div>
+        <h6>Premium Support</h6>
+      </div>
+      <div
+        class="grid grid-cols-2 gap-0 text-center divide-x divide-gray-200 dark:divide-dark-800 rtl:divide-x-reverse">
+        <div>
+          <h5>1356</h5>
+          <p class="text-gray-500 dark:text-dark-500">Pending</p>
+        </div>
+        <div>
+          <h5>3264</h5>
+          <p class="text-gray-500 dark:text-dark-500">Success</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-body">
+      <div class="flex items-center gap-3 p-3 mb-4 bg-gray-100 rounded-md dark:bg-dark-850">
+        <div class="flex items-center justify-center text-xs rounded-md size-10">
+          <lucide-angular name="shuffle" class="fill-primary-500/10 text-primary-500"></lucide-angular>
+        </div>
+        <h6>14 Day Returns</h6>
+      </div>
+      <div
+        class="grid grid-cols-2 gap-0 text-center divide-x divide-gray-200 dark:divide-dark-800 rtl:divide-x-reverse">
+        <div>
+          <h5>144</h5>
+          <p class="text-gray-500 dark:text-dark-500">Pending</p>
+        </div>
+        <div>
+          <h5>231</h5>
+          <p class="text-gray-500 dark:text-dark-500">Success</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-x-space">
+  <div class="card">
+    <div class="card-body">
+      <div class="flex flex-wrap items-center gap-2">
+        <img src="assets/images/avatar/user-15.png" alt="" class="rounded-md size-10 shrink-0">
+        <div class="grow">
+          <h6 class="mb-1">Martha Kingery</h6>
+          <p class="text-sm text-gray-500 dark:text-dark-500">Web Designer</p>
+        </div>
+        <h6 class="grow">$469.99</h6>
+        <div class="grow">
+          <span class="badge badge-sub-yellow">Pending</span>
+        </div>
+        <div class="dropdown">
+          <button domixDropdownToggle [dropdownMenu]="dropdown1" type="button" class="link link-primary">
+            <lucide-angular name="ellipsis" class="size-5"></lucide-angular>
+          </button>
+
+          <div #dropdown1 class="!fixed dropdown-menu dropdown-right">
+            <a href="javascript: void(0);" class="dropdown-item">
+              Overview
+            </a>
+
+            <a href="javascript: void(0);" class="dropdown-item">
+              Edit
+            </a>
+
+            <a href="javascript: void(0);" class="dropdown-item">
+              Delete
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-body">
+      <div class="flex flex-wrap items-center gap-2">
+        <img src="assets/images/avatar/user-18.png" alt="" class="rounded-md size-10 shrink-0">
+        <div class="grow">
+          <h6 class="mb-1">Corina Rouse</h6>
+          <p class="text-sm text-gray-500 dark:text-dark-500">ASP.Net Developer</p>
+        </div>
+        <h6 class="grow">$342.87</h6>
+        <div class="grow">
+          <span class="badge badge-sub-green">Successfully</span>
+        </div>
+        <div class="dropdown">
+          <button domixDropdownToggle [dropdownMenu]="dropdown2" type="button" class="link link-primary">
+            <lucide-angular name="ellipsis" class="size-5"></lucide-angular>
+          </button>
+
+          <div #dropdown2 class="!fixed dropdown-menu dropdown-right">
+            <a href="javascript: void(0);" class="dropdown-item">
+              Overview
+            </a>
+
+            <a href="javascript: void(0);" class="dropdown-item">
+              Edit
+            </a>
+
+            <a href="javascript: void(0);" class="dropdown-item">
+              Delete
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+<div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-x-space">
+  <div class="card">
+    <div class="card-body">
+      <div class="flex items-center gap-3">
+        <div class="grow">
+          <p class="mb-1 text-sm text-gray-500 dark:text-dark-500">Today Orders</p>
+          <h6>9736</h6>
+        </div>
+        <div
+          class="flex items-center justify-center text-xs border-2 border-white rounded-full dark:border-dark-900 bg-primary-500 shrink-0 size-12 outline-1 outline-dashed outline-primary-500">
+          <lucide-angular name="ShoppingBag" class="fill-primary-100/20 text-primary-50"></lucide-angular>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-body">
+      <div class="flex items-center gap-3">
+        <div class="grow">
+          <p class="mb-1 text-sm text-gray-500 dark:text-dark-500">Total Customers</p>
+          <h6>9831</h6>
+        </div>
+        <div
+          class="flex items-center justify-center text-xs bg-green-500 border-2 border-white rounded-full dark:border-dark-900 shrink-0 size-12 outline-1 outline-dashed outline-green-500">
+          <lucide-angular name="UserRound" class="fill-green-100/20 text-green-50"></lucide-angular>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="bg-indigo-100 border-indigo-200 card dark:bg-indigo-500/10 dark:border-indigo-500/20">
+    <div class="card-body">
+      <div class="flex items-center gap-3">
+        <div class="grow">
+          <p class="mb-1 text-sm text-indigo-500">Products</p>
+          <h6 class="text-indigo-500">297</h6>
+        </div>
+        <div
+          class="flex items-center justify-center text-xs bg-indigo-500 border-2 border-indigo-100 rounded-full dark:border-dark-900 shrink-0 size-12 outline-1 outline-dashed outline-indigo-500">
+          <lucide-angular name="box" class="fill-indigo-100/20 text-indigo-50"></lucide-angular>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-body">
+      <div class="flex items-center gap-3">
+        <div class="grow">
+          <p class="mb-1 text-sm text-gray-500 dark:text-dark-500">Total Revenue</p>
+          <h6>9831</h6>
+        </div>
+        <div
+          class="flex items-center justify-center text-xs bg-yellow-500 border-2 border-white rounded-full dark:border-dark-900 shrink-0 size-12 outline-1 outline-dashed outline-yellow-500">
+          <lucide-angular name="coins" class="fill-yellow-100/20 text-yellow-50"></lucide-angular>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-x-space">
+  <div class="card">
+    <div class="flex items-center gap-3 card-header">
+      <h6 class="card-title grow">Website Visitors</h6>
+      <a href="javascript: void(0);" class="badge badge-sub-red">
+        <lucide-angular name="dot" class="inline-block size-4"></lucide-angular> Last 30 Days
+      </a>
+    </div>
+    <div class="card-body">
+      <p class="mb-2 text-sm text-gray-500 dark:text-dark-500">Today Orders</p>
+      <div class="flex items-center gap-2">
+        <h5>9736</h5>
+        <lucide-angular name="TrendingUp" class="text-green-500 size-5"></lucide-angular> Increased by 30%
+        compared to the
+        previous period.
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="flex items-center gap-3 card-header">
+      <h6 class="card-title grow">SEO Unique Users</h6>
+      <a href="javascript: void(0);" class="badge badge-sub-purple">
+        <lucide-angular name="dot" class="inline-block size-4"></lucide-angular> Last 30 Days
+      </a>
+    </div>
+    <div class="card-body">
+      <p class="mb-2 text-sm text-gray-500 dark:text-dark-500">Today Orders</p>
+      <div class="flex items-center gap-2">
+        <h5>419</h5>
+        <lucide-angular name="TrendingDown" class="text-red-500 size-5"></lucide-angular> Decreased by 2.8%
+        compared to the
+        previous period.
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-x-space">
+  <div class="text-center card">
+    <div class="card-body">
+      <img src="assets/images/avatar/user-8.png" alt="" class="mx-auto rounded-md size-14">
+      <h6 class="mt-4"><a href="javascript: void(0);"
+          class="text-current dark:text-current link hover:text-primary-500 dark:hover:text-primary-500">Jennifer
+          Kingston</a></h6>
+      <p class="text-sm text-gray-500 dark:text-dark-500">Content Write</p>
+    </div>
+  </div>
+
+  <div class="text-center card">
+    <div class="card-body">
+      <img src="assets/images/avatar/user-10.png" alt="" class="mx-auto rounded-md size-14">
+      <h6 class="mt-4"><a href="javascript: void(0);"
+          class="text-current dark:text-current link hover:text-primary-500 dark:hover:text-primary-500">James
+          Fallon</a></h6>
+      <p class="text-sm text-gray-500 dark:text-dark-500">Marketing Lead</p>
+    </div>
+  </div>
+
+  <div class="text-center card">
+    <div class="card-body">
+      <img src="assets/images/avatar/user-11.png" alt="" class="mx-auto rounded-md size-14">
+      <h6 class="mt-4"><a href="javascript: void(0);"
+          class="text-current dark:text-current link hover:text-primary-500 dark:hover:text-primary-500">Thurman
+          Northup</a></h6>
+      <p class="text-sm text-gray-500 dark:text-dark-500">Sr. React Dev.</p>
+    </div>
+  </div>
+
+  <div class="text-center card">
+    <div class="card-body">
+      <img src="assets/images/avatar/user-12.png" alt="" class="mx-auto rounded-md size-14">
+      <h6 class="mt-4"><a href="javascript: void(0);"
+          class="text-current dark:text-current link hover:text-primary-500 dark:hover:text-primary-500">Marshall
+          Oliver</a></h6>
+      <p class="text-sm text-gray-500 dark:text-dark-500">Sr. PHP Dev.</p>
+    </div>
+  </div>
+
+  <div class="text-center card">
+    <div class="card-body">
+      <img src="assets/images/avatar/user-13.png" alt="" class="mx-auto rounded-md size-14">
+      <h6 class="mt-4"><a href="javascript: void(0);"
+          class="text-current dark:text-current link hover:text-primary-500 dark:hover:text-primary-500">Brenda
+          Gibson</a></h6>
+      <p class="text-sm text-gray-500 dark:text-dark-500">Product Manager</p>
+    </div>
+  </div>
+
+  <div class="text-center card">
+    <div class="card-body">
+      <img src="assets/images/avatar/user-14.png" alt="" class="mx-auto rounded-md size-14">
+      <h6 class="mt-4"><a href="javascript: void(0);"
+          class="text-current dark:text-current link hover:text-primary-500 dark:hover:text-primary-500">David
+          Turner</a></h6>
+      <p class="text-sm text-gray-500 dark:text-dark-500">Sr. Laravel Dev.</p>
+    </div>
+  </div>
+
+</div>
+
+
+<div class="grid grid-cols-12 gap-x-space">
+  <div class="col-span-12 row-span-2 md:col-span-6 xl:col-span-4 card">
+    <div class="flex items-center card-header">
+      <h6 class="card-title grow">My Schedule</h6>
+      <div class="shrink-0">
+        <div class="inline-flex gap-3 text-sm">
+          <a href="javascript: void(0);"
+            class="relative inline-block text-gray-500 dark:text-dark-500 transition duration-200 ease-linear grow hover:text-purple-500 dark:hover:text-purple-500 after:size-1 after:absolute after:transition-all after:duration-200 after:opacity-0 after:-bottom-3 hover:after:-bottom-1.5 hover:after:opacity-100 after:mx-auto after:rounded-full after:inset-x-0 after:bg-purple-500 [&.active]:after:-bottom-1.5 [&.active]:after:opacity-100 [&.active]:text-purple-500 active">Day</a>
+          <a href="javascript: void(0);"
+            class="relative inline-block text-gray-500 dark:text-dark-500 transition duration-200 ease-linear grow hover:text-purple-500 dark:hover:text-purple-500 after:size-1 after:absolute after:transition-all after:duration-200 after:opacity-0 after:-bottom-3 hover:after:-bottom-1.5 hover:after:opacity-100 after:mx-auto after:rounded-full after:inset-x-0 after:bg-purple-500 [&.active]:after:-bottom-1.5 [&.active]:after:opacity-100 [&.active]:text-purple-500">Week</a>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="grid grid-cols-12 gap-5">
+        <div class="col-span-5">
+          <div class="p-5 text-center bg-gray-100 rounded-md dark:bg-dark-850">
+            <div
+              class="flex items-center justify-center mx-auto mb-4 font-medium bg-white rounded-full dark:bg-dark-900 size-12">
+              14
+            </div>
+            <h6>June, 2024</h6>
+          </div>
+        </div>
+        <div class="col-span-7">
+          <p class="mb-1 text-gray-500 dark:text-dark-500">Working Time</p>
+          <h6 class="mb-7">10:30 AM - 9:30 PM</h6>
+
+          <p class="mb-1 text-gray-500 dark:text-dark-500">Total Patient:</p>
+          <h6>10</h6>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-span-12 md:col-span-6 xl:col-span-4 card">
+    <div class="card-body">
+      <p class="mb-2 text-gray-500 dark:text-dark-500">Doctor In Charge</p>
+      <div class="flex items-center gap-2">
+        <img src="assets/images/avatar/user-39.png" alt="" class="rounded-full size-9">
+        <div class="grow">
+          <h6>Dr. Jose Miller</h6>
+          <p class="text-xs text-gray-500 dark:text-dark-500">Neurologist</p>
+        </div>
+        <a href="javascript: void(0);" class="inline-block text-red-500">
+          <lucide-angular name="MessageCircleMore" class="fill-red-500/10"></lucide-angular>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-span-12 row-span-2 md:col-span-6 xl:col-span-4 card">
+    <div class="flex items-center card-header">
+      <h6 class="card-title grow">Today Patients</h6>
+      <div class="shrink-0">
+        <div class="inline-flex gap-3 text-sm">
+          <a href="javascript: void(0);"
+            class="relative inline-block text-gray-500 dark:text-dark-500 transition duration-200 ease-linear grow hover:text-purple-500 dark:hover:text-purple-500 after:size-1 after:absolute after:transition-all after:duration-200 after:opacity-0 after:-bottom-3 hover:after:-bottom-1.5 hover:after:opacity-100 after:mx-auto after:rounded-full after:inset-x-0 after:bg-purple-500 [&.active]:after:-bottom-1.5 [&.active]:after:opacity-100 [&.active]:text-purple-500 active">Day</a>
+          <a href="javascript: void(0);"
+            class="relative inline-block text-gray-500 dark:text-dark-500 transition duration-200 ease-linear grow hover:text-purple-500 dark:hover:text-purple-500 after:size-1 after:absolute after:transition-all after:duration-200 after:opacity-0 after:-bottom-3 hover:after:-bottom-1.5 hover:after:opacity-100 after:mx-auto after:rounded-full after:inset-x-0 after:bg-purple-500 [&.active]:after:-bottom-1.5 [&.active]:after:opacity-100 [&.active]:text-purple-500">Week</a>
+        </div>
+      </div>
+    </div>
+
+    <ngx-simplebar [options]="options" class="h-36 card-body">
+      <div class="space-y-3">
+        <div class="flex items-center gap-3">
+          <img src="assets/images/avatar/user-14.png" alt="" class="rounded-md size-10 shrink-0">
+          <div class="grow">
+            <h6>Colette R. Mejias</h6>
+            <p class="text-sm text-gray-500 dark:text-dark-500">20 May | 9 AM - 10 AM</p>
+          </div>
+          <button class="btn btn-outline-green btn-icon">
+            <lucide-angular name="phone" class="size-5"></lucide-angular>
+          </button>
+        </div>
+        <div class="flex items-center gap-3">
+          <img src="assets/images/avatar/user-16.png" alt="" class="rounded-md size-10 shrink-0">
+          <div class="grow">
+            <h6>Danny S. Lacroix</h6>
+            <p class="text-sm text-gray-500 dark:text-dark-500">20 May | 10 AM - 11 AM</p>
+          </div>
+          <button class="btn btn-outline-green btn-icon">
+            <lucide-angular name="phone" class="size-5"></lucide-angular>
+          </button>
+        </div>
+        <div class="flex items-center gap-3">
+          <img src="assets/images/avatar/user-18.png" alt="" class="rounded-md size-10 shrink-0">
+          <div class="grow">
+            <h6>Louis K. Jacks</h6>
+            <p class="text-sm text-gray-500 dark:text-dark-500">21 May | 2 PM - 3 PM</p>
+          </div>
+          <button class="btn btn-outline-green btn-icon">
+            <lucide-angular name="phone" class="size-5"></lucide-angular>
+          </button>
+        </div>
+      </div>
+    </ngx-simplebar>
+  </div>
+
+  <div class="col-span-12 md:col-span-6 xl:col-span-4 card">
+    <div class="card-body">
+      <h6 class="mb-2">Interns Doctors</h6>
+      <div class="flex -space-x-2 rtl:space-x-reverse grow">
+        <a href="javascript: void(0);" class="transition duration-300 ease-linear hover:z-10"><img
+            class="border-2 border-white rounded-full dark:border-dark-900 size-7"
+            src="assets/images/avatar/user-15.png" alt=""></a>
+        <a href="javascript: void(0);" class="transition duration-300 ease-linear hover:z-10"><img
+            class="border-2 border-white rounded-full dark:border-dark-900 size-7"
+            src="assets/images/avatar/user-16.png" alt=""></a>
+        <a href="javascript: void(0);" class="transition duration-300 ease-linear hover:z-10"><img
+            class="border-2 border-white rounded-full dark:border-dark-900 size-7"
+            src="assets/images/avatar/user-21.png" alt=""></a>
+        <a href="javascript: void(0);" class="transition duration-300 ease-linear hover:z-10"><img
+            class="border-2 border-white rounded-full dark:border-dark-900 size-7"
+            src="assets/images/avatar/user-17.png" alt=""></a>
+        <a href="javascript: void(0);" class="transition duration-300 ease-linear hover:z-10"><img
+            class="border-2 border-white rounded-full dark:border-dark-900 size-7"
+            src="assets/images/avatar/user-18.png" alt=""></a>
+        <a href="javascript: void(0);" class="transition duration-300 ease-linear hover:z-10"><img
+            class="border-2 border-white rounded-full dark:border-dark-900 size-7"
+            src="assets/images/avatar/user-22.png" alt=""></a>
+        <a href="javascript: void(0);" class="transition duration-300 ease-linear hover:z-10"><img
+            class="border-2 border-white rounded-full dark:border-dark-900 size-7"
+            src="assets/images/avatar/user-20.png" alt=""></a>
+        <a href="javascript: void(0);" class="transition duration-300 ease-linear hover:z-10">
+          <div
+            class="flex items-center justify-center text-white border-2 border-white rounded-full dark:border-dark-900 text-11 bg-primary-500 size-7">
+            +14</div>
+        </a>
+      </div>
+    </div>
+  </div>
+
+</div>

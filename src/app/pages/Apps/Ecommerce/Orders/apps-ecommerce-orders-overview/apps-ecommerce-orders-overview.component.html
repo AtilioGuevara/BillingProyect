@@ -1,0 +1,192 @@
+<app-page-title [pageTitle]="'Orders'" [Title]="'Overview'"></app-page-title>
+
+<div class="card">
+  <div class="card-body">
+    <div class="flex flex-wrap items-center gap-5">
+      <div class="grow">
+        <h6 class="mb-1">Order ID: PEO-14521</h6>
+        <p class="mb-3 text-gray-500 dark:text-dark-500">Order Date: 01 Sep, 2024</p>
+        <span class="align-middle badge badge-red">Payment Pending</span>
+      </div>
+      <div class="items-center gap-2 sm:flex shrink-0">
+        <button class="btn btn-primary btn-icon-overlay">
+          <span class="icon">
+            <lucide-angular name="circle-arrow-down" class="size-4"></lucide-angular>
+          </span> Download Invoice
+        </button>
+        <button class="mt-3 btn btn-sub-gray sm:mt-0">
+          <lucide-angular name="pencil" class="inline-block ltr:mr-1 rtl:ml-1 size-4"></lucide-angular> <span class="align-center">Edit</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-body">
+    <div class="grid grid-cols-1 gap-2 md:grid-cols-2">
+      <div class="flex flex-col gap-2">
+        <p class="text-gray-500 dark:text-dark-500">Customer Name: <span class="font-medium text-gray-800 dark:text-dark-50">Isabella Thomas</span></p>
+        <p class="text-gray-500 dark:text-dark-500">Email: <span class="font-medium text-gray-800 dark:text-dark-50">isabella&#64;srbthemes.com</span></p>
+        <p class="text-gray-500 dark:text-dark-500">Phone No: <span class="font-medium text-gray-800 dark:text-dark-50">+(245) 012 345 678</span></p>
+        <p class="text-gray-500 dark:text-dark-500">Delivery Place: <span class="font-medium text-gray-800 dark:text-dark-50">Home</span></p>
+        <p class="text-gray-500 dark:text-dark-500">Payment Method: <span class="font-medium text-gray-800 dark:text-dark-50">Online Payment</span></p>
+      </div>
+      <div class="flex flex-col gap-2">
+        <p class="text-gray-500 dark:text-dark-500">Address Line: <span class="font-medium text-gray-800 dark:text-dark-50">0588 Macey Ranch</span></p>
+        <p class="text-gray-500 dark:text-dark-500">City: <span class="font-medium text-gray-800 dark:text-dark-50">Port
+            Blake</span></p>
+        <p class="text-gray-500 dark:text-dark-500">Country: <span class="font-medium text-gray-800 dark:text-dark-50">New Mexico</span></p>
+        <p class="text-gray-500 dark:text-dark-500">Pin Code: <span class="font-medium text-gray-800 dark:text-dark-50">96153-1460</span></p>
+        <p class="text-gray-500 dark:text-dark-500">Delivery Status: <span class="badge badge-purple">Shipping</span>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-header">
+    <h6 class="card-title">Product Items</h6>
+  </div>
+  <div class="card-body">
+    <div class="overflow-x-auto">
+      <table class="table flush whitespace-nowrap">
+        <tbody>
+          <tr>
+            <th>#</th>
+            <th>Product Name</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Total</th>
+          </tr>
+          <tr>
+            <td>1</td>
+            <td class="whitespace-nowrap">
+              <div class="flex items-center gap-3">
+                <div class="p-2 border border-gray-200 rounded-md dark:border-dark-800 shrink-0 size-16">
+                  <img src="assets/images/products/img-01.png" alt="">
+                </div>
+                <div>
+                  <h6 class="mb-2"><a routerLink="/apps-ecommerce-overview" class="cursor-pointer text-current link link-primary">Blouse
+                      Ruffle Tube top</a></h6>
+                  <div class="text-sm *:px-2.5 divide-x divide-gray-200 dark:divide-dark-800 rtl:divide-x-reverse">
+                    <a href="javascript:void(0);" routerLink="/apps-ecommerce-category" class="cursor-pointer underline ltr:first:pl-0 rtl:first:pr-0">Fashion</a>
+                    <span>XL</span>
+                    <span>Sky Blue</span>
+                  </div>
+                </div>
+              </div>
+            </td>
+            <td>$14.99</td>
+            <td>04</td>
+            <td>$59.96</td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>
+              <div class="flex items-center gap-3">
+                <div class="p-2 border border-gray-200 rounded-md dark:border-dark-800 shrink-0 size-16">
+                  <img src="assets/images/products/img-04.png" alt="">
+                </div>
+                <div>
+                  <h6 class="mb-2"><a routerLink="/apps-ecommerce-overview" class="cursor-pointer text-current link link-primary">Crop
+                      top Sweater Clothing</a></h6>
+                  <div class="text-sm *:px-2.5 divide-x rtl:divide-x-reverse dark:divide-dark-800 divide-gray-200">
+                    <a href="javascript:void(0);" routerLink="/apps-ecommerce-category" class="cursor-pointer underline ltr:first:pl-0 rtl:first:pr-0">Fashion</a>
+                    <span>M</span>
+                    <span>Pink</span>
+                  </div>
+                </div>
+              </div>
+            </td>
+            <td>$29.49</td>
+            <td>06</td>
+            <td>$176.94</td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td>
+              <div class="flex items-center gap-3">
+                <div class="p-2 border border-gray-200 rounded-md dark:border-dark-800 shrink-0 size-16">
+                  <img src="assets/images/products/img-08.png" alt="">
+                </div>
+                <div>
+                  <h6 class="mb-2"><a routerLink="/apps-ecommerce-overview" class="cursor-pointer text-current link link-primary">Tote
+                      bag Leather Handbag Dolce</a></h6>
+                  <div class="text-sm *:px-2.5 divide-x rtl:divide-x-reverse dark:divide-dark-800 divide-gray-200">
+                    <a href="javascript:void(0);" routerLink="/apps-ecommerce-category" class="cursor-pointer underline ltr:first:pl-0 rtl:first:pr-0">Bags</a>
+                    <span>Red</span>
+                  </div>
+                </div>
+              </div>
+            </td>
+            <td>$79.99</td>
+            <td>01</td>
+            <td>$79.99</td>
+          </tr>
+          <tr>
+            <td colspan="3"></td>
+            <td>Sub Amount</td>
+            <td>$316.89</td>
+          </tr>
+          <tr>
+            <td colspan="3"></td>
+            <td>Vat Amount (6%)</td>
+            <td>$19.19</td>
+          </tr>
+          <tr>
+            <td colspan="3"></td>
+            <td>Discount (10%)</td>
+            <td>-$31.98</td>
+          </tr>
+          <tr>
+            <td colspan="3"></td>
+            <td>Shipping Charge</td>
+            <td>$35.00</td>
+          </tr>
+          <tr>
+            <td colspan="3"></td>
+            <td>Total Amount</td>
+            <td>$339.10</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="flex items-center gap-5 card-header">
+    <h6 class="card-title grow">Delivery Status</h6>
+    <a href="javascript:void(0);" routerLink="/apps-ecommerce-orders-track" class="cursor-pointer btn btn-sub-red">Track Order</a>
+  </div>
+  <div class="card-body">
+    <div class="px-12 py-2">
+      <div class="relative flex items-center justify-between lg:w-full horizontal timeline before:absolute before:block before:w-full before:h-[0.2em] before:bg-gray-200 dark:before:bg-dark-800">
+        <div class="relative flex items-center justify-between w-full ltr:pl-0 rtl:pr-0 steps before:!hidden after:!hidden">
+          <div class="relative z-10 block p-1.5 mx-1 border-2 border-white dark:border-dark-900 rounded-full bg-gray-200 dark:bg-gray-800 [&.done]:bg-primary-500 bottom-1.5 ltr:first:ml-0 rtl:first:mr-0 ltr:last:mr-0 rtl:last:ml-0 [&.current]:before:absolute [&.current]:before:bottom-0 ltr:[&.current]:before:left-0 rtl:[&.current]:before:right-0 [&.current]:before:w-3 [&.current]:before:h-3 [&.current]:before:-mt-1 ltr:[&.current]:before:-mr-1 rtl:[&.current]:before:-ml-1 [&.current]:before:bg-primary-500 [&.current]:before:rounded-full [&.current]:before:animate-ping done">
+            <span class="absolute text-gray-500 -translate-x-1/2 dark:text-dark-500 top-5 left-1/2 whitespace-nowrap">Order
+              Place</span>
+          </div>
+          <div class="relative z-10 block p-1.5 mx-1 border-2 border-white dark:border-dark-900 rounded-full bg-gray-200 dark:bg-gray-800 [&.done]:bg-primary-500 bottom-1.5 ltr:first:ml-0 rtl:first:mr-0 ltr:last:mr-0 rtl:last:ml-0 [&.current]:before:absolute [&.current]:before:bottom-0 ltr:[&.current]:before:left-0 rtl:[&.current]:before:right-0 [&.current]:before:w-3 [&.current]:before:h-3 [&.current]:before:-mt-1 ltr:[&.current]:before:-mr-1 rtl:[&.current]:before:-ml-1 [&.current]:before:bg-primary-500 [&.current]:before:rounded-full [&.current]:before:animate-ping done">
+            <span class="absolute text-gray-500 -translate-x-1/2 dark:text-dark-500 top-5 left-1/2 whitespace-nowrap">Pickup</span>
+          </div>
+          <div class="relative z-10 block p-1.5 mx-1 border-2 border-white dark:border-dark-900 rounded-full bg-gray-200 dark:bg-gray-800 [&.done]:bg-primary-500 bottom-1.5 ltr:first:ml-0 rtl:first:mr-0 ltr:last:mr-0 rtl:last:ml-0 [&.current]:before:absolute [&.current]:before:bottom-0 ltr:[&.current]:before:left-0 rtl:[&.current]:before:right-0 [&.current]:before:w-3 [&.current]:before:h-3 [&.current]:before:-mt-1 ltr:[&.current]:before:-mr-1 rtl:[&.current]:before:-ml-1 [&.current]:before:bg-primary-500 [&.current]:before:rounded-full [&.current]:before:animate-ping done current">
+            <span class="absolute text-gray-500 -translate-x-1/2 dark:text-dark-500 top-5 left-1/2 whitespace-nowrap">Shipped</span>
+          </div>
+          <div class="relative z-10 block p-1.5 mx-1 border-2 border-white dark:border-dark-900 rounded-full bg-gray-200 dark:bg-gray-800 [&.done]:bg-primary-500 bottom-1.5 ltr:first:ml-0 rtl:first:mr-0 ltr:last:mr-0 rtl:last:ml-0 [&.current]:before:absolute [&.current]:before:bottom-0 ltr:[&.current]:before:left-0 rtl:[&.current]:before:right-0 [&.current]:before:w-3 [&.current]:before:h-3 [&.current]:before:-mt-1 ltr:[&.current]:before:-mr-1 rtl:[&.current]:before:-ml-1 [&.current]:before:bg-primary-500 [&.current]:before:rounded-full [&.current]:before:animate-ping">
+            <span class="absolute text-gray-500 -translate-x-1/2 dark:text-dark-500 top-5 left-1/2 whitespace-nowrap">Out of
+              Delivery</span>
+          </div>
+          <div class="relative z-10 block p-1.5 mx-1 border-2 border-white dark:border-dark-900 rounded-full bg-gray-200 dark:bg-gray-800 [&.done]:bg-green-500 bottom-1.5 ltr:first:ml-0 rtl:first:mr-0 ltr:last:mr-0 rtl:last:ml-0 [&.current]:before:absolute [&.current]:before:bottom-0 ltr:[&.current]:before:left-0 rtl:[&.current]:before:right-0 [&.current]:before:w-3 [&.current]:before:h-3 [&.current]:before:-mt-1 ltr:[&.current]:before:-mr-1 rtl:[&.current]:before:-ml-1 [&.current]:before:bg-primary-500 [&.current]:before:rounded-full [&.current]:before:animate-ping">
+            <span class="absolute text-gray-500 -translate-x-1/2 dark:text-dark-500 top-5 left-1/2 whitespace-nowrap">Delivered</span>
+          </div>
+        </div>
+
+        <div class="line block absolute w-1/2 inset-x-0 h-[0.2em] bg-primary-500 !pb-0 before:!hidden after:!hidden">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

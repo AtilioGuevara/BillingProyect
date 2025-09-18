@@ -1,0 +1,449 @@
+<app-page-title [Title]="'Tables'" [pageTitle]="'Base Table'"></app-page-title>
+
+<div class="grid grid-cols-12 gap-x-space">
+  <div class="col-span-12 card">
+    <div class="card-header">
+      <h6 class="card-title">Basic Styling</h6>
+    </div>
+    <div class="card-body">
+      <div class="overflow-x-auto">
+        <table class="table flush">
+          <thead>
+            <tr>
+              <th>Transition ID</th>
+              <th>Customer Name</th>
+              <th>Date</th>
+              <th>Amount</th>
+              <th>Status</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of data; let i = index" class="*:px-3 *:py-2.5">
+              <td>{{ item.name }}</td>
+              <td>{{ item.age }}</td>
+              <td>{{ item.date }}</td>
+              <td>{{ item.address }}</td>
+              <td>{{ item.salary }}</td>
+              <td><a href="javascript:void(0);" href="javascript:void(0);" class="text-red-500">Delete</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <!--end-->
+  <div class="col-span-12 card">
+    <div class="card-header">
+      <h6 class="card-title">Border Styling</h6>
+    </div>
+    <div class="card-body">
+      <div class="overflow-x-auto">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Age</th>
+              <th>Date</th>
+              <th>Address</th>
+              <th>Salary</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of data; let i = index">
+              <td>{{ item.name }}</td>
+              <td>{{ item.age }}</td>
+              <td>{{ item.date }}</td>
+              <td>{{ item.address }}</td>
+              <td>{{ item.salary }}</td>
+              <td><a href="javascript:void(0);" href="javascript:void(0);" class="text-red-500">Delete</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <!--end-->
+  <div class="col-span-12 card">
+    <div class="card-header">
+      <h6 class="card-title">Bordered Table</h6>
+    </div>
+    <div class="card-body">
+      <div class="overflow-x-auto">
+        <table class="table bordered">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Age</th>
+              <th>Date</th>
+              <th>Address</th>
+              <th>Salary</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of data; let i = index">
+              <td>{{ item.name }}</td>
+              <td>{{ item.age }}</td>
+              <td>{{ item.date }}</td>
+              <td>{{ item.address }}</td>
+              <td>{{ item.salary }}</td>
+              <td><a href="javascript:void(0);" class="text-red-500">Delete</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <!--end-->
+  <div class="col-span-12 card">
+    <div class="card-header">
+      <h6 class="card-title">Separate Table</h6>
+    </div>
+    <div class="card-body">
+      <p class="mb-2 text-gray-500">Use border-separate to force each cell to display its own separate borders.</p>
+      <div class="overflow-x-auto">
+        <table class="table border-separate bordered">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Age</th>
+              <th>Date</th>
+              <th>Address</th>
+              <th>Salary</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of data; let i = index">
+              <td>{{ item.name }}</td>
+              <td>{{ item.age }}</td>
+              <td>{{ item.date }}</td>
+              <td>{{ item.address }}</td>
+              <td>{{ item.salary }}</td>
+              <td><a href="javascript:void(0);" class="text-red-500">Delete</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <!--end-->
+  <div class="col-span-12 card">
+    <div class="card-header">
+      <h6 class="card-title">Border Spacing Table</h6>
+    </div>
+    <div class="card-body">
+      <div class="overflow-x-auto">
+        <table class="table border-separate border-spacing-2 whitespace-nowrap bordered">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Age</th>
+              <th>Date</th>
+              <th>Address</th>
+              <th>Salary</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of data; let i = index">
+              <td>{{ item.name }}</td>
+              <td>{{ item.age }}</td>
+              <td>{{ item.date }}</td>
+              <td>{{ item.address }}</td>
+              <td>{{ item.salary }}</td>
+              <td><a href="javascript:void(0);" class="text-red-500">Delete</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <!--end-->
+  <div class="col-span-12 card">
+    <div class="card-header">
+      <h6 class="card-title">Caption Side</h6>
+    </div>
+    <div class="card-body">
+      <table class="table table-auto bordered">
+        <caption class="pb-3 text-xs text-gray-500 dark:text-gray-400 caption-top">
+          Table 3.1: Professional wrestlers and their signature moves.
+        </caption>
+        <thead>
+          <tr>
+            <th>Wrestler</th>
+            <th>Signature Move(s)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let wrestler of wrestlers">
+            <td>{{ wrestler.name }}</td>
+            <td>{{ wrestler.moves }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <!--end-->
+  <div class="col-span-12 card">
+    <div class="card-header">
+      <h6 class="card-title">Heading Light</h6>
+    </div>
+    <div class="card-body">
+      <div class="overflow-x-auto">
+        <table class="table flush">
+          <thead>
+            <tr class="bg-gray-100 dark:bg-dark-850">
+              <th>Name</th>
+              <th>Age</th>
+              <th>Date</th>
+              <th>Address</th>
+              <th>Salary</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of data; let i = index">
+              <td>{{ item.name }}</td>
+              <td>{{ item.age }}</td>
+              <td>{{ item.date }}</td>
+              <td>{{ item.address }}</td>
+              <td>{{ item.salary }}</td>
+              <td><a href="javascript:void(0);" class="text-red-500">Delete</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <!--end-->
+  <div class="col-span-12 card">
+    <div class="card-header">
+      <h6 class="card-title">Hovered Table</h6>
+    </div>
+    <div class="card-body">
+      <div class="overflow-x-auto">
+        <table class="table hovered">
+          <thead>
+            <tr class="bg-gray-100 dark:bg-dark-850">
+              <th>Name</th>
+              <th>Age</th>
+              <th>Date</th>
+              <th>Address</th>
+              <th>Salary</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of data; let i = index">
+              <td>{{ item.name }}</td>
+              <td>{{ item.age }}</td>
+              <td>{{ item.date }}</td>
+              <td>{{ item.address }}</td>
+              <td>{{ item.salary }}</td>
+              <td><a href="javascript:void(0);" class="text-red-500">Delete</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <!--end-->
+  <div class="col-span-12 card">
+    <div class="card-header">
+      <h6 class="card-title">Striped Even Table</h6>
+    </div>
+    <div class="card-body">
+      <div class="overflow-x-auto">
+        <table class="table even-striped">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Age</th>
+              <th>Date</th>
+              <th>Address</th>
+              <th>Salary</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of data; let i = index" [ngClass]="{ 'even': i % 2 === 0 }">
+              <td>{{ item.name }}</td>
+              <td>{{ item.age }}</td>
+              <td>{{ item.date }}</td>
+              <td>{{ item.address }}</td>
+              <td>{{ item.salary }}</td>
+              <td><a href="javascript:void(0);" class="text-red-500">Delete</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <!--end-->
+  <div class="col-span-12 card">
+    <div class="card-header">
+      <h6 class="card-title">Striped Odd Table</h6>
+    </div>
+    <div class="card-body">
+      <div class="overflow-x-auto">
+        <table class="table odd-striped">
+          <thead>
+            <tr class="bg-white dark:bg-dark-900">
+              <th>Name</th>
+              <th>Age</th>
+              <th>Date</th>
+              <th>Address</th>
+              <th>Salary</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of data; let i = index">
+              <td>{{ item.name }}</td>
+              <td>{{ item.age }}</td>
+              <td>{{ item.date }}</td>
+              <td>{{ item.address }}</td>
+              <td>{{ item.salary }}</td>
+              <td><a href="javascript:void(0);" class="text-red-500">Delete</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <!--end-->
+  <div class="col-span-12 card">
+    <div class="card-header">
+      <h6 class="card-title">Colored Border Table</h6>
+    </div>
+    <div class="card-body">
+      <div class="overflow-x-auto">
+        <table class="table bordered">
+          <caption class="pb-3 text-xs text-gray-500 dark:text-gray-400 caption-top">
+            Table 1: Data Overview
+          </caption>
+          <thead>
+            <tr class="*:!border-primary-200 dark:*:!border-primary-900">
+              <th>Name</th>
+              <th>Age</th>
+              <th>Date</th>
+              <th>Address</th>
+              <th>Salary</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of data; let i = index">
+              <td>{{ item.name }}</td>
+              <td>{{ item.age }}</td>
+              <td>{{ item.date }}</td>
+              <td>{{ item.address }}</td>
+              <td>{{ item.salary }}</td>
+              <td><a href="javascript:void(0);" class="text-red-500">Delete</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="mt-5 overflow-x-auto">
+        <table class="table border-green">
+          <thead>
+            <tr class="*:!border-green-200 *:dark:!border-green-900">
+              <th>Name</th>
+              <th>Age</th>
+              <th>Date</th>
+              <th>Address</th>
+              <th>Salary</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of data; let i = index" class="*:!border-green-200 *:dark:!border-green-900">
+              <td>{{ item.name }}</td>
+              <td>{{ item.age }}</td>
+              <td>{{ item.date }}</td>
+              <td>{{ item.address }}</td>
+              <td>{{ item.salary }}</td>
+              <td><a href="javascript:void(0);" class="text-red-500">Delete</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <!--end-->
+  <div class="col-span-12 card">
+    <div class="card-header">
+      <h6 class="card-title">Striped Colored Table</h6>
+    </div>
+    <div class="card-body">
+      <div class="overflow-x-auto">
+        <table class="table odd-striped">
+          <thead>
+            <tr class="!bg-white dark:!bg-dark-900">
+              <th>Name</th>
+              <th>Age</th>
+              <th>Date</th>
+              <th>Address</th>
+              <th>Salary</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of data; let i = index" [ngClass]="{'': i % 2 !== 0}" class="odd:!bg-purple-50 dark:odd:!bg-purple-500/10">
+              <td>{{ item.name }}</td>
+              <td>{{ item.age }}</td>
+              <td>{{ item.date }}</td>
+              <td>{{ item.address }}</td>
+              <td>{{ item.salary }}</td>
+              <td><a href="javascript:void(0);" class="text-red-500">Delete</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <!--end-->
+  <div class="col-span-12 card">
+    <div class="card-header">
+      <h6 class="card-title">Loading Table</h6>
+    </div>
+    <div class="card-body">
+      <div *ngIf="loading" class="flex items-center justify-center w-full h-64">
+        <div class="relative">
+          <div class="border-t-4 border-b-4 border-gray-200 rounded-full dark:border-dark-800 size-8"></div>
+          <div class="absolute top-0 left-0 border-t-4 border-b-4 rounded-full border-primary-500 size-8 animate-spin">
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="!loading" class="overflow-x-auto">
+        <table class="table even-striped">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Age</th>
+              <th>Date</th>
+              <th>Address</th>
+              <th>Salary</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let row of rows" [attr.key]="row.name">
+              <td>{{ row.name }}</td>
+              <td>{{ row.age }}</td>
+              <td>{{ row.date }}</td>
+              <td>{{ row.address }}</td>
+              <td>{{ row.salary }}</td>
+              <td><a href="javascript:void(0);" class="text-red-500">Delete</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

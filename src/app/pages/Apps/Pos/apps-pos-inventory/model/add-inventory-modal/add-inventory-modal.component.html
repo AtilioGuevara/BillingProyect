@@ -1,0 +1,93 @@
+<div id="addInventoryModal" class="modal">
+    <div class="modal-wrap modal-center">
+        <div class="modal-header">
+            <h6 class="modal-title">Add Inventory</h6>
+            <button data-modal-close="addInventoryModal" class="link link-red">
+                <lucide-angular name="x" class="size-5"></lucide-angular></button>
+        </div>
+        <div class="modal-content" [formGroup]="fromGroup">
+            <div class="grid grid-cols-12 gap-4">
+                <div class="col-span-12">
+                    <label for="productNameInput" class="form-label">Product Name</label>
+                    <input type="text" id="productNameInput" class="form-input" placeholder="Product name"
+                        formControlName="name">
+                    <span *ngIf="fromGroup.get('name')?.hasError('required')" class="text-red-500"> This Filed is
+                        Required</span>
+                </div>
+                <div class="col-span-12">
+                    <label for="categoryIngredientsName" class="form-label">Category Ingredients Name</label>
+                    <input list="browsers" type="text" id="categoryIngredientsName" class="form-input"
+                        placeholder="Category ingredients name" formControlName="categoryname">
+                    <datalist id="browsers">
+                        <option value="Drinks Ingredients">
+                        <option value="Cooking Essentials">
+                        <option value="Dairy Products">
+                        <option value="Meat Products">
+                        <option value="Desserts">
+                        <option value="Beverages">
+                    </datalist>
+                    <span *ngIf="fromGroup.get('categoryname')?.hasError('required')" class="text-red-500"> This Filed
+                        is
+                        Required</span>
+                </div>
+                <div class="col-span-12">
+                    <label for="SKUInput" class="form-label">SKU</label>
+                    <input type="text" id="SKUInput" class="form-input" placeholder="SRB0748" formControlName="sku">
+                    <span *ngIf="fromGroup.get('sku')?.hasError('required')" class="text-red-500"> This Filed is
+                        Required</span>
+                </div>
+                <div class="col-span-12">
+                    <label for="categorySelect" class="form-label">Category</label>
+                    <div id="categorySelect" placeholder="Select Category"></div>
+
+                    <ng-select class="filter-ng-select" [items]="typeOptions" bindLabel="label" bindValue="value"
+                        placeholder="Select event type" formControlName="category">
+                    </ng-select>
+                    <span *ngIf="fromGroup.get('category')?.hasError('required')" class="text-red-500"> This Filed is
+                        Required</span>
+                </div>
+                <div class="col-span-12">
+                    <label for="availableStockInput" class="form-label">Available Stock</label>
+                    <input type="text" id="availableStockInput" class="form-input" formControlName="stock"
+                        placeholder="0/kg/pieces/cans/liters">
+                    <span *ngIf="fromGroup.get('stock')?.hasError('required')" class="text-red-500"> This Filed is
+                        Required</span>
+                </div>
+                <div class="col-span-6">
+                    <label for="minStockInput" class="form-label">Min Stock</label>
+                    <input type="text" id="minStockInput" class="form-input" placeholder="0"
+                        formControlName="ministock">
+                    <span *ngIf="fromGroup.get('ministock')?.hasError('required')" class="text-red-500"> This Filed is
+                        Required</span>
+                </div>
+                <div class="col-span-6">
+                    <label for="maxStockInput" class="form-label">Max Stock</label>
+                    <input type="text" id="maxStockInput" class="form-input" placeholder="000"
+                        formControlName="maxstock">
+                    <span *ngIf="fromGroup.get('maxstock')?.hasError('required')" class="text-red-500"> This Filed is
+                        Required</span>
+                </div>
+                <div class="col-span-6">
+                    <label for="costInput" class="form-label">Cost</label>
+                    <input type="text" id="costInput" class="form-input" placeholder="$0.00" formControlName="cost">
+                    <span *ngIf="fromGroup.get('cost')?.hasError('required')" class="text-red-500"> This Filed is
+                        Required</span>
+                </div>
+                <div class="col-span-6">
+                    <label for="priceInput" class="form-label">Selling Price</label>
+                    <input type="text" id="priceInput" class="form-input" placeholder="$0.00" formControlName="price">
+                    <span *ngIf="fromGroup.get('price')?.hasError('required')" class="text-red-500"> This Filed is
+                        Required</span>
+                </div>
+            </div>
+            <div class="flex items-center justify-end gap-2 mt-5">
+                <button type="button" class="btn btn-active-red" data-modal-close="addInventoryModal">
+                    <lucide-angular name="x" class="inline-block size-4"></lucide-angular>
+                    <span class="align-baseline" (click)="close()">Close</span>
+                </button>
+                <button type="button" class="btn btn-primary" (click)="closeEventModal()">{{!config ? 'Add'
+                    : 'Update' }} Inventory</button>
+            </div>
+        </div>
+    </div>
+</div>

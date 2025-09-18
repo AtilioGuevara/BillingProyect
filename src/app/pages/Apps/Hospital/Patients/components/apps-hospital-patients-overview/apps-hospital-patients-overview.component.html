@@ -1,0 +1,173 @@
+<app-page-title [Title]="'Overview'" [pageTitle]="'Patients'"></app-page-title>
+
+<div class="grid grid-cols-12 gap-x-space">
+  <div class="col-span-12 card">
+    <div class="card-body">
+      <div class="flex flex-wrap gap-5">
+        <div class="shrink">
+          <img src="assets/images/avatar/user-5.png" alt="" class="rounded-md size-40">
+        </div>
+        <div class="grow">
+          <h6 class="mb-1 text-16">Alice Johnson</h6>
+          <div class="overflow-x-auto">
+            <div class="flex flex-wrap gap-3 item-center *:flex *:items-center">
+              <p><i class="ltr:mr-1 rtl:ml-1 ri-user-3-line"></i> <span class="text-gray-500 dark:text-dark-500">Female</span></p>
+              <p><i class="ltr:mr-1 rtl:ml-1 ri-briefcase-line"></i> <span class="text-gray-500 dark:text-dark-500">Accountant</span></p>
+              <p><i class="ltr:mr-1 rtl:ml-1 ri-map-pin-2-line"></i> <span class="text-gray-500 dark:text-dark-500">California</span></p>
+              <p><i class="ltr:mr-1 rtl:ml-1 ri-calendar-event-line"></i> <span class="text-gray-500 dark:text-dark-500">13 Dec, 1998 (25 Years)</span></p>
+            </div>
+          </div>
+          <div>
+            <div class="flex flex-wrap items-center mt-5 gap-space">
+              <div class="p-4 text-center border border-gray-200 border-dashed rounded-md dark:border-dark-800 w-36 shrink-0">
+                <h4 class="mb-1">26 <small class="text-sm font-normal text-gray-500 dark:text-dark-500">May,
+                    2024</small></h4>
+                <p class="text-gray-500 dark:text-dark-500">Appo. Date</p>
+              </div>
+              <div class="p-4 text-center border border-gray-200 border-dashed rounded-md dark:border-dark-800 w-36 shrink-0">
+                <h4 class="mb-1">115/50</h4>
+                <p class="text-gray-500 dark:text-dark-500">Blood Pressure</p>
+              </div>
+              <div class="p-4 text-center border border-gray-200 border-dashed rounded-md dark:border-dark-800 w-36 shrink-0">
+                <h4 class="mb-1">B+</h4>
+                <p class="text-gray-500 dark:text-dark-500">Blood Group</p>
+              </div>
+              <div class="p-4 text-center border border-gray-200 border-dashed rounded-md dark:border-dark-800 w-36 shrink-0">
+                <h4 class="mb-1">86 <small class="text-sm font-normal text-gray-500 dark:text-dark-500">kg</small></h4>
+                <p class="text-gray-500 dark:text-dark-500">Weight</p>
+              </div>
+              <div class="p-4 text-center border border-gray-200 border-dashed rounded-md dark:border-dark-800 w-36 shrink-0">
+                <h4 class="mb-1">178 <small class="text-sm font-normal text-gray-500 dark:text-dark-500">cm</small></h4>
+                <p class="text-gray-500 dark:text-dark-500">Height</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="shrink-0">
+          <div class="flex items-center gap-2">
+            <button class="btn btn-sub-green btn-icon" title="phone">
+              <lucide-angular name="Phone" class="size-4"></lucide-angular>
+            </button>
+            <button class="btn btn-sub-purple btn-icon" title="messages-square">
+              <lucide-angular name="MessagesSquare" class="size-4"></lucide-angular>
+            </button>
+            <button type="button" class="btn btn-primary" title="add">
+              <lucide-angular name="Pencil" class="inline-block ltr:mr-1 rtl:ml-1 size-4"></lucide-angular> Edit
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-5">
+        <div class="grid grid-cols-12 gap-6">
+          <div class="col-span-12 lg:col-span-6 xl:col-span-3">
+            <p class="mb-1 text-gray-500 dark:text-dark-500">Family Doctor</p>
+            <h6>Dr. Vernon Locklin</h6>
+          </div>
+          <div class="col-span-12 lg:col-span-6 xl:col-span-3">
+            <p class="mb-1 text-gray-500 dark:text-dark-500">Assigned Doctor</p>
+            <h6>Dr. Ellie Maggie</h6>
+          </div>
+          <div class="col-span-12 lg:col-span-6 xl:col-span-3">
+            <p class="mb-1 text-gray-500 dark:text-dark-500">Referring Doctor</p>
+            <h6>Dr. Jasper Liewald</h6>
+          </div>
+          <div class="col-span-12 lg:col-span-6 xl:col-span-3">
+            <p class="mb-1 text-gray-500 dark:text-dark-500">Pharmacy Name</p>
+            <h6>PixalEyez Pharmacy</h6>
+          </div>
+          <div class="col-span-12 lg:col-span-6 xl:col-span-3">
+            <div class="whitespace-normal">
+              <p class="mb-1 text-gray-500 dark:text-dark-500">Full Address</p>
+              <h6>Apt. 757 866 Truman Ridge, Bashirianside, OH 34623-2200</h6>
+            </div>
+          </div>
+          <div class="col-span-12 lg:col-span-6 xl:col-span-3">
+            <p class="mb-1 text-gray-500 dark:text-dark-500">Phone Number</p>
+            <h6>+33 1 42 68 53 00</h6>
+          </div>
+          <div class="col-span-12 lg:col-span-6 xl:col-span-3">
+            <p class="mb-1 text-gray-500 dark:text-dark-500">Emergency Number</p>
+            <h6>+34 91 123 45 67</h6>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-span-12 row-span-2 md:col-span-6 xl:col-span-3 card">
+    <div class="card-header">
+      <h6 class="card-title">Timeline</h6>
+    </div>
+    <div class="card-body">
+      <ngx-simplebar [options]="options" class="h-[20.8rem] -mx-space px-space">
+        <ul class="timeline">
+          <li class="timeline-primary">
+            <span class="badge badge-gray">19 June, 2024 - 11:15 AM</span>
+            <h6 class="mt-3 mb-1">Follow Up </h6>
+            <p class="text-sm text-gray-500 dark:text-dark-500">Follow-up for rash, prescribed antihistamine</p>
+          </li>
+          <li class="timeline-primary">
+            <span class="badge badge-gray">25 May, 2024 - 09:00 AM</span>
+            <h6 class="mt-3 mb-1">Appointment</h6>
+            <p class="text-sm text-gray-500 dark:text-dark-500">Annual physical check-up</p>
+          </li>
+          <li class="timeline-primary">
+            <span class="badge badge-gray">21 May, 2024 - 03:30 PM</span>
+            <h6 class="mt-3 mb-1">Lab Test</h6>
+            <p class="text-sm text-gray-500 dark:text-dark-500">Blood test: Complete Blood Count (CBC)</p>
+          </li>
+          <li class="timeline-primary">
+            <span class="badge badge-gray">05 May, 2024 - 10:00 AM</span>
+            <h6 class="mt-3 mb-1">Medication Start</h6>
+            <p class="text-sm text-gray-500 dark:text-dark-500">Prescribed Atorvastatin 20mg for high cholesterol</p>
+          </li>
+        </ul>
+      </ngx-simplebar>
+    </div>
+  </div>
+  <div class="col-span-12 md:col-span-6 xl:col-span-3">
+    <div class="card">
+      <div class="card-header">
+        <h6 class="card-title">Insurance Overview</h6>
+      </div>
+      <div class="card-body">
+        <div class="flex items-center gap-3">
+          <div class="flex items-center justify-center rounded-full text-primary-500 bg-primary-500/10 size-12">
+            <lucide-angular name="HeartHandshake" class="size-5"></lucide-angular>
+          </div>
+          <div class="grow">
+            <h6 class="mb-1">HealthCare Insurance</h6>
+            <p class="text-gray-500 dark:text-dark-500">#157-PE9871-541</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="bg-green-500/10 border-green-500/20 card">
+      <div class="card-body">
+        <div class="flex items-center gap-3">
+          <div class="grow">
+            <img src="assets/images/others/insurance.png" alt="" class="size-14">
+            <h6 class="mt-5 mb-1">Get peace of mind with the right insurance coverage.</h6>
+            <p class="mb-3 text-gray-500 dark:text-dark-500">Receive your personalized quote in just a few clicks!</p>
+            <button type="button" class="btn btn-green">Buy Insurance</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-span-12 overflow-hidden xl:col-span-6 xl:row-span-2 card">
+
+    <app-reports-table></app-reports-table>
+
+  </div>
+  <div class="col-span-12 overflow-hidden card">
+
+    <app-medicine-table></app-medicine-table>
+
+  </div>
+  <div class="col-span-12 overflow-hidden card">
+
+    <app-appointments-table></app-appointments-table>
+
+  </div>
+</div>

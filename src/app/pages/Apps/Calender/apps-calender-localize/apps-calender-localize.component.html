@@ -1,0 +1,11 @@
+<app-page-title [pageTitle]="'Calender'" [Title]="'Localize'"></app-page-title>
+
+<div class="card">
+    <div class="card-header">
+        <ng-select bindLabel="label" bindValue="value" [items]="options" (change)="onChangeLang()" [formControl]="langControl"></ng-select>
+        <!-- <div id="localizeSelect" placeholder="Select Localize"></div> -->
+    </div>
+    <div class="card-body">
+        <full-calendar #calendar [options]="calendarOptions"></full-calendar>
+    </div>
+</div>

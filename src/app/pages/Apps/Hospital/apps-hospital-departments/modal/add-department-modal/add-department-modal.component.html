@@ -1,0 +1,77 @@
+<div id="addDepartmentModal" class="modal">
+  <div class="modal-wrap modal-center">
+    <div class="p-2 modal-content" [formGroup]="fromGroup">
+      <div class="h-24 p-5 rounded-t-sm bg-gradient-to-r from-primary-500/20 via-pink-500/20 to-green-500/20">
+      </div>
+      <div class="p-4">
+        <div class="-mt-16">
+          <label for="logo">
+            <div
+              class="inline-flex items-center justify-center overflow-hidden bg-gray-100 border-2 border-white border-solid rounded-full cursor-pointer dark:bg-dark-850 dark:border-dark-900 size-24">
+
+              <div class="flex flex-col items-center text-gray-500 dark:text-dark-500">
+                <lucide-angular name="Upload"></lucide-angular>
+              </div>
+            </div>
+          </label>
+          <div class="hidden mt-4">
+            <label class="block">
+              <span class="sr-only">Choose profile photo</span>
+              <input type="file" name="logo" id="logo" (change)="onFileChange($event)"
+                class="block w-full text-sm file:rounded-md focus:outline-0 text-slate-500 file:mr-4 file:py-2 file:px-4 file:border-0 file:text-sm file:font-semibold file:bg-violet-50 file:text-violet-700 hover:file:bg-violet-100 "/>
+            </label>
+          </div>
+        </div>
+        <div class="grid grid-cols-12 gap-4 mt-4">
+          <div class="col-span-12">
+            <label for="departmentNameInput" class="form-label">Department Name</label>
+            <input type="text" id="departmentNameInput" class="form-input" placeholder="Department Name"
+              formControlName="departmentName">
+            <span *ngIf="fromGroup.get('departmentName')?.hasError('required')" class="text-red-500"> This Filed is
+              Required</span>
+          </div>
+          <div class="col-span-12">
+            <label for="doctorInput" class="form-label">Doctor</label>
+            <input type="text" id="doctorInput" class="form-input" placeholder="Enter doctor name"
+              formControlName="doctor">
+            <span *ngIf="fromGroup.get('doctor')?.hasError('required')" class="text-red-500"> This Filed is
+              Required</span>
+          </div>
+          <div class="col-span-12">
+            <label for="totalEmployeeInput" class="form-label">Total Employee</label>
+            <input type="number" id="totalEmployeeInput" class="form-input" placeholder="0"
+              formControlName="totalEmployee">
+            <span *ngIf="fromGroup.get('totalEmployee')?.hasError('required')" class="text-red-500"> This Filed is
+              Required</span>
+          </div>
+          <div class="col-span-12">
+            <label for="headOfDeptInput" class="form-label">Head of Dept.</label>
+            <input type="text" id="headOfDeptInput" class="form-input" placeholder="Head of dept."
+              formControlName="headOfDepartment">
+            <span *ngIf="fromGroup.get('headOfDepartment')?.hasError('required')" class="text-red-500"> This Filed is
+              Required</span>
+          </div>
+          <div class="col-span-12">
+            <label for="statusSelect" class="form-label">Status</label>
+            <ng-select id="statusSelect" class="filter-ng-select" [items]="statusOptions" bindLabel="label"
+              bindValue="value" placeholder="Select Status" formControlName="status">
+            </ng-select>
+            <span *ngIf="fromGroup.get('status')?.hasError('required')" class="text-red-500"> This Filed is
+              Required</span>
+          </div>
+        </div>
+        <div class="flex items-center justify-end gap-2 mt-5">
+          <button type="button" class="btn btn-active-red" (click)="close()">
+            <lucide-angular name="x" class="inline-block size-4"></lucide-angular> <span
+              class="align-baseline">Close</span>
+          </button>
+          <button type="button" class="btn btn-primary" (click)="closeEventModal()">
+            <lucide-angular name="Plus" class="inline-block mr-1 size-4"></lucide-angular>
+            {{!config ? 'Add' : 'Update' }}
+            Department
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

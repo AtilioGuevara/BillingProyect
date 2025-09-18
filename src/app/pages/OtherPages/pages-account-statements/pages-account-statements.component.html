@@ -1,0 +1,283 @@
+<div class="relative mb-6">
+  <div class="relative overflow-hidden rounded-md h-44 bg-primary-500/10">
+    <div class="border-[60px] border-t-primary-500 border-l-primary-500 absolute opacity-10 -top-2 left-0 rotate-45 size-96">
+    </div>
+    <div class="border-[60px] border-green-500 absolute opacity-10 top-20 left-8 rotate-45 size-80"></div>
+    <div class="border-[60px] border-pink-500 absolute opacity-10 top-36 left-28 rotate-45 size-40"></div>
+  </div>
+  <div class="text-center">
+    <div class="relative inline-block mx-auto">
+      <div class="relative p-1 rounded-full bg-gradient-to-tr from-primary-300 via-red-300 to-green-300 -mt-14">
+        <img src="assets/images/avatar/user-17.png" alt="" class="mx-auto border-4 border-white rounded-full dark:border-dark-900 size-28">
+      </div>
+      <div class="absolute border-2 border-white dark:border-dark-900 rounded-full size-4 bg-green-500 bottom-2.5 ltr:right-2.5 rtl:left-2.5">
+      </div>
+    </div>
+    <h5 class="mt-2 mb-1">Sophia Mia
+      <lucide-angular name="BadgeCheck" class="inline-block text-primary-500 fill-primary-500/20 size-5">
+      </lucide-angular>
+    </h5>
+    <ul class="flex flex-wrap items-center justify-center gap-2 text-gray-500 dark:text-dark-500 text-14">
+      <li>
+        <lucide-angular name="Building2" class="inline-block ltr:mr-1 rtl:ml-1 size-4"></lucide-angular><span class="align-middle">UI /
+          UX Designer</span>
+      </li>
+      <li>
+        <lucide-angular name="MapPin" class="inline-block ltr:mr-1 rtl:ml-1 size-4"></lucide-angular> <span class="align-middle">Argentina</span>
+      </li>
+      <li>
+        <lucide-angular name="ShieldCheck" class="inline-block ltr:mr-1 rtl:ml-1 size-4"></lucide-angular> <span class="align-middle">24 April, 2024</span>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<ul class="pb-2 overflow-x-auto tabs-pills lg:pb-0">
+  <li>
+    <a routerLink="/pages-account-settings" class="nav-item text-gray-500 dark:text-dark-500 [&.active]:bg-primary-500 [&.active]:text-primary-50">
+      <lucide-angular name="UserRound" class="inline-block ltr:mr-1 rtl:ml-1 size-4"></lucide-angular><span class="align-middle whitespace-nowrap">Account</span>
+    </a>
+  </li>
+  <li>
+    <a routerLink="/pages-account-security" class="nav-item text-gray-500 dark:text-dark-500 [&.active]:bg-primary-500 [&.active]:text-primary-50">
+      <lucide-angular name="ShieldCheck" class="inline-block ltr:mr-1 rtl:ml-1 size-4"></lucide-angular><span class="align-middle whitespace-nowrap">Security</span>
+    </a>
+  </li>
+  <li>
+    <a routerLink="/pages-account-billing-plan" class="nav-item text-gray-500 dark:text-dark-500 [&.active]:bg-primary-500 [&.active]:text-primary-50">
+      <lucide-angular name="Gem" class="inline-block ltr:mr-1 rtl:ml-1 size-4"></lucide-angular><span class="align-middle whitespace-nowrap">Billing & Plans</span>
+    </a>
+  </li>
+  <li>
+    <a routerLink="/pages-account-notification" class="nav-item text-gray-500 dark:text-dark-500 [&.active]:bg-primary-500 [&.active]:text-primary-50">
+      <lucide-angular name="Bell" class="inline-block ltr:mr-1 rtl:ml-1 size-4"></lucide-angular><span class="align-middle whitespace-nowrap">Notification</span>
+    </a>
+  </li>
+  <li>
+    <a routerLink="/pages-account-statements" class="nav-item text-gray-500 dark:text-dark-500 [&.active]:bg-primary-500 [&.active]:text-primary-50 active">
+      <lucide-angular name="ListTree" class="inline-block ltr:mr-1 rtl:ml-1 size-4"></lucide-angular><span class="align-middle whitespace-nowrap">Statements</span>
+    </a>
+  </li>
+  <li>
+    <a routerLink="/pages-account-logs" class="nav-item text-gray-500 dark:text-dark-500 [&.active]:bg-primary-500 [&.active]:text-primary-50">
+      <lucide-angular name="LogOut" class="inline-block ltr:mr-1 rtl:ml-1 size-4"></lucide-angular><span class="align-middle whitespace-nowrap">Logs</span>
+    </a>
+  </li>
+</ul>
+
+<div class="mt-5 card">
+  <div class="card-header">
+    <div class="flex flex-wrap items-center gap-3">
+      <h6 class="card-title grow">Earnings</h6>
+      <button data-modal-target="withdraw1Modal" class="btn btn-primary shrink-0">Withdraw $5,879</button>
+    </div>
+  </div>
+  <div class="card-body">
+    <p class="mb-3 text-gray-500 dark:text-dark-500">Earnings calculated for the last <span class="font-medium text-primary-500">30</span> days.</p>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-x-3">
+      <div class="card">
+        <div class="text-center card-body">
+          <lucide-angular name="HandCoins" class="mx-auto text-primary-500 fill-primary-100 size-6"></lucide-angular>
+          <h6 class="mt-3 mb-1">$5,487</h6>
+          <p class="text-gray-500 dark:text-dark-500">Net Earnings</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="text-center card-body">
+          <lucide-angular name="Activity" class="mx-auto text-red-500 fill-red-100 size-6"></lucide-angular>
+          <h6 class="mt-3 mb-1">$296.81</h6>
+          <p class="text-gray-500 dark:text-dark-500">Fees & Charges</p>
+        </div>
+      </div>
+
+    </div>
+
+
+    <div class="flex items-center gap-3 mb-5">
+      <h6 class="card-title grow">Statements</h6>
+      <div class="dropdown shrink-0">
+        <button x-ref="button" type="button" domixDropdownToggle [dropdownMenu]="dropdown1" class="flex px-3 py-1.5 text-xs border-gray-200 dark:border-dark-800 link link-primary btn">
+          Filters
+          <svg :class="{ 'transform rotate-180': open }" class="ml-1 transition-transform duration-300 size-4" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+          </svg>
+        </button>
+
+        <div class="!fixed p-2 dropdown-menu dropdown-right" #dropdown1>
+          <a href="javascript: void(0);" class="dropdown-item">
+            Date
+          </a>
+          <a href="javascript: void(0);" class="dropdown-item">
+            Rating
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="overflow-x-auto table-box">
+        <table class="table whitespace-nowrap">
+          <thead>
+            <tr class="bg-gray-100 dark:bg-dark-850">
+              <th (click)="sort('statementsID')" class="whitespace-nowrap !font-medium text-gray-500 dark:text-dark-500 cursor-pointer">
+                ID <span *ngIf="sortBy === 'statementsID'" class="ml-1">{{ sortDirection === 'asc' ? '↑' : '↓' }}</span>
+              </th>
+              <th (click)="sort('date')" class="whitespace-nowrap !font-medium text-gray-500 dark:text-dark-500 cursor-pointer">
+                Date <span *ngIf="sortBy === 'date'" class="ml-1">{{ sortDirection === 'asc' ? '↑' : '↓' }}</span>
+              </th>
+              <th (click)="sort('name')" class="whitespace-nowrap !font-medium text-gray-500 dark:text-dark-500 cursor-pointer">
+                Name <span *ngIf="sortBy === 'name'" class="ml-1">{{ sortDirection === 'asc' ? '↑' : '↓' }}</span>
+              </th>
+              <th (click)="sort('details')" class="whitespace-nowrap !font-medium text-gray-500 dark:text-dark-500 cursor-pointer">
+                Details <span *ngIf="sortBy === 'details'" class="ml-1">{{ sortDirection === 'asc' ? '↑' : '↓' }}</span>
+              </th>
+              <th (click)="sort('totalAmount')" class="whitespace-nowrap !font-medium text-gray-500 dark:text-dark-500 cursor-pointer">
+                Amount <span *ngIf="sortBy === 'totalAmount'" class="ml-1">{{ sortDirection === 'asc' ? '↑' : '↓' }}</span>
+              </th>
+              <th class="!font-medium text-gray-500 dark:text-dark-500 text-right">Download Invoice</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let product of displayedProducts; let i = index">
+              <td><a href="javascript:void(0);">{{ product.statementsID }}</a></td>
+              <td>{{ product.date }}</td>
+              <td>{{ product.name }}</td>
+              <td>{{ product.details }}</td>
+              <td>{{ product.totalAmount }}</td>
+              <td class="text-right">
+                <a href="javascript: void(0);" class="btn btn-md btn-primary"><i class="align-bottom ri-download-2-line"></i> Download</a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="grid grid-cols-12 gap-5 mt-5">
+        <div class="col-span-12 md:col-span-6">
+          <p class="text-gray-500 dark:text-dark-500">Showing <b>{{ showingStart }}</b> - <b>{{ showingEnd }}</b> of
+            <b>{{ billingData.length }}</b> Results
+          </p>
+        </div>
+        <div class="col-span-12 md:col-span-6">
+          <div class="flex pagination pagination-primary md:justify-end">
+            <button (click)="prevPage()">
+              <i class="icon-chevron-left"></i> Prev
+            </button>
+            <button *ngFor="let page of getPages()" (click)="gotoPage(page)" class="pagination-item">
+              {{ page }}
+            </button>
+            <button (click)="nextPage()">
+              Next <i class="icon-chevron-right"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div id="withdraw1Modal" class="hidden modal show">
+  <div class="modal-wrap modal-center">
+    <div class="modal-header">
+      <h6>Withdraw</h6>
+      <button data-modal-close="withdraw1Modal" class="link link-red">
+        <lucide-angular name="x" class="size-5"></lucide-angular>
+      </button>
+    </div>
+    <div class="modal-content">
+      <p class="mb-3 text-gray-500 dark:text-dark-500">What amount would you like to withdraw?</p>
+      <div class="p-3 mb-4 text-center bg-gray-100 rounded-md dark:bg-dark-850">
+        <h5>$5,879</h5>
+      </div>
+      <div class="flex justify-center h-16">
+        <div id="soft-limit" class="w-full"></div>
+      </div>
+      <p class="mt-2 mb-3 text-gray-500 dark:text-dark-500">Please input the account where you'd like to transfer the
+        withdrawn amount.</p>
+      <div class="mb-4">
+        <label for="bankNameInput" class="form-label">Bank Name</label>
+        <input type="text" id="bankNameInput" class="form-input" placeholder="Bank name" required>
+      </div>
+      <div class="mb-5">
+        <label for="accountNumberInput" class="form-label">Account Number</label>
+        <input type="text" id="accountNumberInput" class="form-input" placeholder="0000 0000 00000 000" required>
+      </div>
+      <div>
+        <button type="submit" data-modal-target="withdraw2Modal" class="w-full btn btn-green">Proceed</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--end-->
+
+<div id="withdraw2Modal" class="hidden modal show">
+  <div class="modal-wrap modal-center">
+    <div class="modal-header">
+      <h6>Confirm Withdraw</h6>
+      <button data-modal-close="withdraw2Modal" class="link link-red">
+        <lucide-angular name="x" class="size-5"></lucide-angular>
+      </button>
+    </div>
+    <div class="modal-content">
+      <div class="mb-5 text-center">
+        <div class="flex items-center justify-center mx-auto size-12">
+          <lucide-angular name="ArrowDownToLine" class="text-sky-500 fill-sky-500/10"></lucide-angular>
+        </div>
+        <p class="text-gray-500 dark:text-dark-500">Are you sure you want to make this withdrawal</p>
+      </div>
+      <div class="p-3 mb-5 bg-gray-100 rounded-md dark:bg-dark-850">
+        <div class="grid items-center grid-cols-12 gap-6">
+          <div class="col-span-4">
+            <p>withdrawal</p>
+          </div>
+          <div class="col-span-8">
+            <h5>$5,879</h5>
+          </div>
+          <div class="col-span-4">
+            <p>To</p>
+          </div>
+          <div class="col-span-8">
+            <div class="flex items-center gap-2">
+              <div class="shrink-0">
+                <lucide-angular name="landmark" class="text-gray-500 fill-gray-500/20"></lucide-angular>
+              </div>
+              <div class="grow">
+                <h6>Bank Of New</h6>
+                <p class="text-sm text-gray-500 dark:text-dark-500">24516 8792 335 41</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="flex flex-col gap-2">
+        <button type="submit" data-modal-target="successWithdrawModal" class="w-full btn btn-primary">Withdraw</button>
+        <button type="button" data-modal-close="withdraw2Modal" class="w-full btn btn-active-red">Maybe Later</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--end-->
+
+<div id="successWithdrawModal" class="hidden modal show">
+  <div class="modal-wrap modal-center">
+    <div class="p-8 modal-content">
+      <div class="mb-5 text-center">
+        <button data-modal-close="successWithdrawModal" class="link float-end link-red">
+          <lucide-angular name="x" class="size-5"></lucide-angular>
+        </button>
+        <div class="flex items-center justify-center mx-auto size-20">
+          <lucide-angular name="CircleCheckBig" class="text-green-500 size-10 fill-green-500/10"></lucide-angular>
+        </div>
+        <h6 class="mt-3 mb-1">Transfer Successful</h6>
+        <p class="text-gray-500 dark:text-dark-500">You've transferred <b>$5,879</b> to your bank account.</p>
+      </div>
+      <div class="flex flex-col gap-2">
+        <button type="submit" class="w-full btn btn-primary">View Account</button>
+        <button type="button" data-modal-close="successWithdrawModal" class="w-full btn btn-active-red">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--end-->

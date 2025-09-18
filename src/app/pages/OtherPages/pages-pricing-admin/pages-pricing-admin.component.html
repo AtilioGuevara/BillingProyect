@@ -1,0 +1,83 @@
+<app-page-title [Title]="'Pricing'" [pageTitle]="'Pages'"></app-page-title>
+
+<app-page-pricing-list></app-page-pricing-list>
+
+<h6 class="mt-2 mb-5">All Users</h6>
+
+<div class="overflow-x-auto">
+  <table class="table bordered">
+    <thead>
+      <tr>
+        <th class="whitespace-nowrap">User ID</th>
+        <th class="whitespace-nowrap">Name</th>
+        <th class="whitespace-nowrap">Start Date</th>
+        <th class="whitespace-nowrap">End Date</th>
+        <th class="whitespace-nowrap">Plan Type</th>
+        <th class="whitespace-nowrap">Total Payment</th>
+        <th class="whitespace-nowrap">Status</th>
+        <th class="whitespace-nowrap">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of users">
+        <td class="whitespace-nowrap"><a href="javascript:void(0);">{{ user.userId }}</a></td>
+        <td class="whitespace-nowrap">{{ user.name }}</td>
+        <td class="whitespace-nowrap">{{ user.startDate }}</td>
+        <td class="whitespace-nowrap">{{ user.endDate }}</td>
+        <td class="whitespace-nowrap">{{ user.planType }}</td>
+        <td class="whitespace-nowrap">{{ user.totalPayment }}</td>
+        <td class="whitespace-nowrap">
+          <span class="badge" [ngClass]="{'badge-green': user.status === 'Successfully', 'badge-red': user.status === 'Failed', 'badge-yellow': user.status === 'Pending'}">
+            {{ user.status }}
+          </span>
+        </td>
+        <td class="whitespace-nowrap">
+          <div class="dropdown">
+            <button type="button" class="flex items-center text-gray-500 dark:text-dark-500" domixDropdownToggle [dropdownMenu]="dropdown1">
+              <lucide-angular name="ellipsis" class="size-5"></lucide-angular>
+            </button>
+            <div class="!fixed p-2 dropdown-menu" #dropdown1>
+              <ul>
+                <li><a href="javascript: void(0);" class="dropdown-item">
+                    <lucide-angular name="Eye" class="inline-block ltr:mr-2 rtl:ml-2 size-4"></lucide-angular>
+                    <span>Overview</span>
+                  </a></li>
+                <li><a href="javascript: void(0);" class="dropdown-item">
+                    <lucide-angular name="Pencil" class="inline-block ltr:mr-2 rtl:ml-2 size-4"></lucide-angular>
+                    <span>Edit</span>
+                  </a></li>
+                <li><a href="javascript: void(0);" class="dropdown-item">
+                    <lucide-angular name="Trash2" class="inline-block ltr:mr-2 rtl:ml-2 size-4"></lucide-angular>
+                    <span>Delete</span>
+                  </a></li>
+              </ul>
+            </div>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+</div>
+<div class="my-5">
+  <div class="items-center md:flex">
+    <p class="text-gray-500 dark:text-dark-500 grow">Showing <b>07</b> of <b>19</b> Results</p>
+    <div class="flex shrink-0 mt-2.5 md:mt-0 pagination pagination-primary">
+      <button type="button" class="pagination-pre" disabled>
+        <lucide-angular name="ChevronLeft" class="mr-1 ltr:inline-block rtl:hidden size-5"></lucide-angular>
+        <lucide-angular name="ChevronRight" class="ml-1 ltr:hidden rtl:inline-block size-5"></lucide-angular>
+        Prev
+      </button>
+      <button type="button" class="pagination-item active">1</button>
+      <button type="button" class="pagination-item">2</button>
+      <button type="button" class="pagination-item">3</button>
+      <button type="button" class="pagination-item">...</button>
+      <button type="button" class="pagination-item">10</button>
+      <button type="button" class="pagination-next">
+        Next
+        <lucide-angular name="ChevronRight" class="ml-1 rtl:hidden size-5 ltr:inline-block"></lucide-angular>
+        <lucide-angular name="ChevronLeft" class="mr-1 rtl:inline-block ltr:hidden size-5"></lucide-angular>
+      </button>
+    </div>
+  </div>
+</div>

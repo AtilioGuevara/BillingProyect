@@ -1,0 +1,86 @@
+<app-page-title [Title]="'Row Grouping'" [pageTitle]="'Datatables'"></app-page-title>
+
+<div class="grid grid-cols-12 gap-x-space">
+  <div class="col-span-12 card">
+    <div class="card-header">
+      <h6 class="card-title">Row Grouping</h6>
+    </div>
+    <div class="card-body">
+      <div class="overflow-x-auto">
+        <div class="dt-container dt-tailwindcss flex flex-col gap-5">
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="justify-self-center md:justify-self-start">
+              <div class="dt-length">
+                <select name="example_length" aria-controls="example"
+                  class="form-select inline-block w-auto ltr:mr-2 rtl:ml-2" [(ngModel)]="itemsPerPage1"
+                  id="dt-length-0">
+                  <option *ngFor="let option of entriesOptions" [value]="option">{{ option }}</option>
+                </select>
+                <label for="dt-length-0"> entries per page</label>
+              </div>
+            </div>
+
+            <div class="md:col-start-2 justify-self-center md:justify-self-end">
+              <div class="dt-search">
+                <label for="dt-search-0">Search:</label>
+                <input type="search" class="form-input inline-block w-auto ltr:ml-2 rtl:mr-2" id="dt-search-0"
+                  placeholder="Search..." [(ngModel)]="searchText1" aria-controls="example"
+                  (ngModelChange)="updateGroupedData()" />
+              </div>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 gap-4">
+            <div class="col-span-2">
+              <table class="display group bordered dataTable table whitespace-nowrap dtr-inline" style="width:100%">
+                <thead>
+                  <tr>
+                    <th class="ltr:text-left rtl:text-right bg-gray-100 dark:bg-dark-850">Name</th>
+                    <th class="ltr:text-left rtl:text-right bg-gray-100 dark:bg-dark-850">Position</th>
+                    <th class="ltr:text-left rtl:text-right bg-gray-100 dark:bg-dark-850">Age</th>
+                    <th class="ltr:text-left rtl:text-right bg-gray-100 dark:bg-dark-850">Start Date</th>
+                    <th class="ltr:text-left rtl:text-right bg-gray-100 dark:bg-dark-850">Salary</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <ng-container
+                    *ngFor="let office of groupedData | keyvalue | paginate: { itemsPerPage: itemsPerPage1, currentPage: p1 }">
+                    <tr class="ltr:text-left rtl:text-right bg-gray-100 dark:bg-dark-850">
+                      <td colspan="5">
+                        <strong>Office: {{ office.key }}</strong>
+                      </td>
+                    </tr>
+                    <tr *ngFor="let employee of office.value">
+                      <td>{{ employee.Name }}</td>
+                      <td>{{ employee.Position }}</td>
+                      <td>{{ employee.Age }}</td>
+                      <td>{{ employee['Start date'] }}</td>
+                      <td>{{ employee.Salary }}</td>
+                    </tr>
+                  </ng-container>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="justify-self-center md:justify-self-start">
+              <div class="dt-info" aria-live="polite" id="example_info" role="status">
+                Showing {{ startEntry }} to {{ endEntry }} of {{ filteredEmployees.length }} entries
+              </div>
+            </div>
+            <div class="md:col-start-2 justify-self-center md:justify-self-end">
+              <pagination-controls (pageChange)="onPageChange($event)" [directionLinks]="true" [autoHide]="true">
+              </pagination-controls>
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--
+end col-->
+</div>

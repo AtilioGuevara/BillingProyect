@@ -1,0 +1,68 @@
+[
+    {
+        "employeeID": "SRBE001",
+        "name": "John Doe",
+        "email": "john@domiex.com",
+        "position": "Senior Cashier",
+        "department": "Sales",
+        "contact": "+1 234-567-8900",
+        "joinDate": "Jan 15, 2024",
+        "status": "Active",
+        "avatar": "assets/images/avatar/user-11.png"
+    },
+    {
+        "employeeID": "SRBE002",
+        "name": "Jane Smith",
+        "email": "jane@domiex.com",
+        "position": "Store Manager",
+        "department": "Management",
+        "contact": "+1 234-567-8901",
+        "joinDate": "Mar 20, 2024",
+        "status": "Active",
+        "avatar": "assets/images/avatar/user-17.png"
+    },
+    {
+        "employeeID": "SRBE003",
+        "name": "Robert Johnson",
+        "email": "robert@domiex.com",
+        "position": "IT Support",
+        "department": "IT",
+        "contact": "+1 234-567-8902",
+        "joinDate": "Apr 05, 2024",
+        "status": "Inactive",
+        "avatar": "assets/images/avatar/user-16.png"
+    },
+    {
+        "employeeID": "SRBE004",
+        "name": "Mary Williams",
+        "email": "mary@domiex.com",
+        "position": "Cashier",
+        "department": "Sales",
+        "contact": "+1 234-567-8903",
+        "joinDate": "May 12, 2024",
+        "status": "Active",
+        "avatar": "assets/images/avatar/user-12.png"
+    },
+    {
+        "employeeID": "SRBE005",
+        "name": "David Brown",
+        "email": "david@domiex.com",
+        "position": "Inventory Manager",
+        "department": "Management",
+        "contact": "+1 234-567-8904",
+        "joinDate": "Jun 18, 2024",
+        "status": "Active",
+        "avatar": "assets/images/avatar/user-18.png"
+    },
+    {
+        "employeeID": "SRBE006",
+        "name": "Sarah Jones",
+        "email": "sarah@domiex.com",
+        "position": "System Administrator",
+        "department": "IT",
+        "contact": "+1 234-567-8905",
+        "joinDate": "Jul 25, 2024",
+        "status": "Active",
+        "avatar": "assets/images/avatar/user-19.png"
+    }
+]

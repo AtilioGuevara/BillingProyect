@@ -1,0 +1,44 @@
+<app-page-title [Title]="'Mixed Charts'" [pageTitle]="'Apexcharts'"></app-page-title>
+
+<div class="grid grid-cols-12 gap-x-space">
+  <div class="col-span-12 card">
+    <div class="card-header">
+      <h6 class="card-title">Line Column</h6>
+    </div>
+    <div class="card-body">
+      <app-domix-charts [series]="mixedChart.series" [chartOptions]="mixedChart.chartOptions">
+      </app-domix-charts>
+    </div>
+  </div>
+
+  <div class="col-span-12 card">
+    <div class="card-header">
+      <h6 class="card-title">Line & Area</h6>
+    </div>
+    <div class="card-body">
+      <app-domix-charts [series]="lineAreaChart.series" [chartOptions]="lineAreaChart.chartOptions">
+      </app-domix-charts>
+    </div>
+  </div>
+
+  <div class="col-span-12 md:col-span-6 card">
+    <div class="card-header">
+      <h6 class="card-title">Line Column Area</h6>
+    </div>
+    <div class="card-body">
+      <app-domix-charts [series]="lineColumnAreaChart.series" [chartOptions]="lineColumnAreaChart.chartOptions">
+      </app-domix-charts>
+    </div>
+  </div>
+
+  <div class="col-span-12 md:col-span-6 card">
+    <div class="card-header">
+      <h6 class="card-title">Line Scatter</h6>
+    </div>
+    <div class="card-body">
+      <app-domix-charts [series]="lineScatterChart.series" [chartOptions]="lineScatterChart.chartOptions">
+      </app-domix-charts>
+    </div>
+  </div>
+
+</div>

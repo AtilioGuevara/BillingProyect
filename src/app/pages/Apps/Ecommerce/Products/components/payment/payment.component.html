@@ -1,0 +1,165 @@
+<app-page-title [pageTitle]="'Ecommerce'" [Title]="'Payment'"></app-page-title>
+
+<div class="grid grid-cols-12 gap-x-5">
+    <div class="col-span-12 xl:col-span-8">
+        <div class="mb-5 alert alert-green">
+            <div class="flex flex-wrap items-center gap-3">
+                <div class="flex items-center justify-center bg-white rounded-full dark:bg-dark-900 shrink-0 size-14"><lucide-angular name="UserRoundPlus" class="text-green-500 fill-green-500/10"></lucide-angular>
+                </div>
+                <div class="grow">
+                    <h6 class="mb-2 text-gray-800 dark:text-dark-50">Invite your friend now by referral code!!</h6>
+                    <p class="text-gray-500 dark:text-dark-500">Maximize your rewards by sharing your unique referral code for exclusive benefits!</p>
+                </div>
+                <div class="shrink-0">
+                    <button class="btn btn-green"> <lucide-angular name="UserRoundPlus" class="inline-block ltr:mr-1 rtl:ml-1 size-4"></lucide-angular><span class="align-center">Invite Now</span></button>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header">
+                <div class="grid grid-cols-12 gap-5 mb-5">
+                    <div class="col-span-12 md:col-span-6 xl:col-span-4">
+                        <div (click)="setActiveTab('card')" [ngClass]="{'bg-gray-100 dark:bg-dark-850': activeTab === 'card'}" class="flex items-center gap-3 p-4 border border-gray-200 rounded-md cursor-pointer dark:border-dark-800">
+                            <img src="assets/images/payment/visa.png" alt="Visa" class="h-6">
+                            <h6>Debit / Credit Card</h6>
+                        </div>
+                    </div>
+                    <div class="col-span-12 md:col-span-6 xl:col-span-4">
+                        <div (click)="setActiveTab('bank')" [ngClass]="{'bg-gray-100 dark:bg-dark-850': activeTab === 'bank'}" class="flex items-center gap-3 p-4 border border-gray-200 rounded-md cursor-pointer dark:border-dark-800">
+                            <img src="assets/images/payment/bank.png" alt="Bank" class="h-6">
+                            <h6>Bank Transfer</h6>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Debit / Credit Card Form -->
+                <div *ngIf="activeTab === 'card'">
+                    <h6 class="mb-3">Debit / Credit Card</h6>
+                    <form [formGroup]="cardForm" (ngSubmit)="onSubmitCard()">
+                        <div class="grid grid-cols-12 gap-5">
+                            <div class="col-span-12">
+                                <label for="cardName" class="form-label">Card Holder Name</label>
+                                <input formControlName="cardName" type="text" id="cardName" class="form-input" placeholder="Enter full name">
+                                <div *ngIf="cardForm.get('cardName')?.invalid && cardForm.get('cardName')?.touched" class="text-sm text-red-500">
+                                    Card holder name is required.
+                                </div>
+                            </div>
+                            <div class="col-span-12">
+                                <label for="cardNumber" class="form-label">Debit / Credit Card Number</label>
+                                <input formControlName="cardNumber" type="text" id="cardNumber" class="form-input" placeholder="0000 0000 0000 0000">
+                                <div *ngIf="cardForm.get('cardNumber')?.invalid && cardForm.get('cardNumber')?.touched" class="text-sm text-red-500">
+                                    Enter a valid card number.
+                                </div>
+                            </div>
+                            <div class="col-span-12 md:col-span-6">
+                                <label for="expiryDate" class="form-label">Expiry Date</label>
+                                <input formControlName="expiryDate" type="text" id="expiryDate" class="form-input" placeholder="MM-YY">
+                                <div *ngIf="cardForm.get('expiryDate')?.invalid && cardForm.get('expiryDate')?.touched" class="text-sm text-red-500">
+                                    Enter a valid expiry date.
+                                </div>
+                            </div>
+                            <div class="col-span-12 md:col-span-6">
+                                <label for="cvv" class="form-label">CVV</label>
+                                <input formControlName="cvv" type="text" id="cvv" class="form-input" placeholder="000">
+                                <div *ngIf="cardForm.get('cvv')?.invalid && cardForm.get('cvv')?.touched" class="text-sm text-red-500">
+                                    Enter a valid CVV.
+                                </div>
+                            </div>
+                            <div class="col-span-12">
+                                <label>
+                                    <input type="checkbox" formControlName="saveCard"> Save my card for future
+                                </label>
+                            </div>
+                            <div class="col-span-12 text-right">
+                                <button type="submit" class="btn btn-primary">Pay Now</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Bank Transfer Form -->
+                <div *ngIf="activeTab === 'bank'">
+                    <h6 class="mb-3">Bank Transfer</h6>
+                    <form [formGroup]="bankForm" (ngSubmit)="onSubmitBank()">
+                        <div class="grid grid-cols-12 gap-5">
+                            <div class="col-span-12">
+                                <label for="bankHolderName" class="form-label">Bank Holder Name</label>
+                                <input formControlName="bankHolderName" type="text" id="bankHolderName" class="form-input" placeholder="Enter full name">
+                                <div *ngIf="bankForm.get('bankHolderName')?.invalid && bankForm.get('bankHolderName')?.touched" class="text-sm text-red-500">
+                                    Bank holder name is required.
+                                </div>
+                            </div>
+                            <div class="col-span-6">
+                                <label for="accountNumber" class="form-label">Account Number</label>
+                                <input formControlName="accountNumber" type="text" id="accountNumber" class="form-input" placeholder="Enter account number">
+                                <div *ngIf="bankForm.get('accountNumber')?.invalid && bankForm.get('accountNumber')?.touched" class="text-sm text-red-500">
+                                    Enter a valid account number.
+                                </div>
+                            </div>
+                            <div class="col-span-6">
+                                <label for="confirmAccountNumber" class="form-label">Confirm Account Number</label>
+                                <input formControlName="confirmAccountNumber" type="text" id="confirmAccountNumber" class="form-input" placeholder="Enter confirm account number">
+                                <div *ngIf="bankForm.get('confirmAccountNumber')?.invalid && bankForm.get('confirmAccountNumber')?.touched" class="text-sm text-red-500">
+                                    Account numbers must match.
+                                </div>
+                            </div>
+                            <div class="col-span-6">
+                                <label for="ifscCode" class="form-label">IFSC Code</label>
+                                <input formControlName="ifscCode" type="text" id="ifscCode" class="form-input" placeholder="IFSC Code">
+                                <div *ngIf="bankForm.get('ifscCode')?.invalid && bankForm.get('ifscCode')?.touched" class="text-sm text-red-500">
+                                    Enter a valid IFSC code.
+                                </div>
+                            </div>
+                            <div class="col-span-6">
+                                <label for="bankName" class="form-label">Bank Name</label>
+                                <input formControlName="bankName" type="text" id="bankName" class="form-input" placeholder="Bank name">
+                                <div *ngIf="bankForm.get('bankName')?.invalid && bankForm.get('bankName')?.touched" class="text-sm text-red-500">
+                                    Bank name is required.
+                                </div>
+                            </div>
+                            <div class="col-span-12 text-right">
+                                <button type="submit" class="btn btn-primary">Pay Now</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-span-12 xl:col-span-4">
+        <div class="card">
+            <div class="card-header">
+                <h6 class="card-title">Order Summary</h6>
+            </div>
+            <div class="card-body">
+                <app-final-order-summary></app-final-order-summary>
+                <!-- <table class="table table-sm flush">
+                    <tr>
+                        <th class="!border-0">Sub Amount</th>
+                        <td>$316.89</td>
+                    </tr>
+                    <tr>
+                        <th class="!border-0">Vat Amount (6%)</th>
+                        <td>$19.19</td>
+                    </tr>
+                    <tr>
+                        <th class="!border-0">Discount (10%)</th>
+                        <td>-$31.98</td>
+                    </tr>
+                    <tr>
+                        <th class="!border-0">Shipping Charge</th>
+                        <td>$35.00</td>
+                    </tr>
+                    <tr class="border-t *:!py-2.5 border-gray-200 dark:border-dark-800">
+                        <th class="!border-0">Total Amount</th>
+                        <td>$339.10</td>
+                    </tr>
+                </table> -->
+                <div class="my-4">
+                    <button class="w-full btn btn-primary">Pay {{summary.total.toFixed(2)}}</button>
+                </div>
+                <p class="text-center text-gray-500 dark:text-dark-500">100% Money back guarantee</p>
+            </div>
+        </div>
+    </div>
+</div>

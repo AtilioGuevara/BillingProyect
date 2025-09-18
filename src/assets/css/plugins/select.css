@@ -1,0 +1,64 @@
+@layer components {
+    .ng-select {
+        .ng-select-container {
+            @apply min-h-[38px] border-gray-200 dark:border-dark-800 text-gray-800 dark:text-dark-50 dark:bg-dark-900;
+
+            .ng-value-container {
+                .ng-placeholder {
+                    @apply text-gray-500 dark:text-dark-500;
+                }
+            }
+        }
+
+        &.ng-select-single .ng-select-container {
+            @apply h-[38px];
+        }
+
+        &.ng-select-opened {
+            >.ng-select-container {
+                @apply border-primary-500;
+            }
+        }
+
+        &.ng-select-multiple {
+            .ng-select-container {
+                .ng-value-container {
+                    .ng-value {
+                        @apply text-gray-800 dark:text-dark-50 bg-gray-100 dark:bg-dark-800;
+
+                        .ng-value-icon.left {
+                            @apply border-r-gray-200 dark:border-r-dark-800 hover:bg-gray-200 dark:hover:bg-dark-700;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .ng-dropdown-panel {
+        @apply dark:bg-dark-900 border-gray-200 dark:border-dark-700 shadow-lg shadow-gray-200 dark:shadow-dark-800;
+
+        &.ng-select-bottom {
+            @apply border-t-gray-200 dark:border-t-dark-700;
+        }
+
+        .ng-dropdown-panel-items {
+            .ng-option {
+                @apply bg-white dark:bg-dark-900 text-gray-500 dark:text-dark-500;
+
+                &.ng-option-marked,
+                &.ng-option-selected {
+                    @apply bg-gray-100 dark:bg-dark-800 text-gray-800 dark:text-dark-50;
+                }
+            }
+
+            &.ng-option-selected.ng-option-marked {
+                @apply bg-gray-100 dark:bg-dark-850 text-gray-800 dark:text-dark-50;
+            }
+        }
+
+        .ng-dropdown-header {
+            @apply border-b-gray-200 dark:border-b-dark-700;
+        }
+    }
+}

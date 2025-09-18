@@ -1,0 +1,37 @@
+[{
+    "date": "2024-01-01",
+    "checkInTime": "8:15 am",
+    "checkOutTime": "5:10 pm",
+    "status": "Present"
+  },
+  {
+    "date": "2024-01-02",
+    "checkInTime": "9:00 am",
+    "checkOutTime": "6:00 pm",
+    "status": "Late"
+  },
+  {
+    "date": "2024-01-03",
+    "checkInTime": "8:00 am",
+    "checkOutTime": "5:00 pm",
+    "status": "Present"
+  },
+  {
+    "date": "2024-01-04",
+    "checkInTime": "8:00 am",
+    "checkOutTime": "5:10 pm",
+    "status": "Present"
+  },
+  {
+    "date": "2024-01-05",
+    "checkInTime": "8:15 am",
+    "checkOutTime": "5:30 pm",
+    "status": "Present"
+  },
+  {
+    "date": "2024-01-06",
+    "checkInTime": "8:00 am",
+    "checkOutTime": "5:00 pm",
+    "status": "Present"
+  }
+]

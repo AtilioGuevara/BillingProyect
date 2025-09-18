@@ -1,0 +1,174 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "domiex": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "",
+      "sourceRoot": "src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular/build:application",
+          "options": {
+            "outputPath": {
+              "base": "dist/domiex",
+              "browser": ""
+            },
+            "index": "src/index.html",
+            "browser": "src/main.ts",
+            "allowedCommonJsDependencies": [
+              "dayjs",
+              "dayjs/plugin/quarterOfYear",
+              "@ckeditor/ckeditor5-build-classic",
+              "prismjs",
+              "lodash",
+              "jsvectormap/dist/maps/world",
+              "vanilla-tilt",
+              "apexcharts",
+              "jsvectormap",
+              "img-comparison-slider",
+              "aos"
+            ],
+            "polyfills": [
+              "zone.js",
+              "@angular/localize/init"
+            ],
+            "tsConfig": "tsconfig.app.json",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              "src/favicon.ico",
+              {
+                "glob": "**/*",
+                "input": "src/assets",
+                "output": "/assets/"
+              },
+              {
+                "glob": "**/*",
+                "input": "public",
+                "output": "/"
+              }
+            ],
+            "styles": [
+              "src/assets/css/plugins.css",
+              "src/assets/css/icons.css",
+              "node_modules/aos/dist/aos.css",
+              "node_modules/ag-grid-community/styles/ag-grid.css",
+              "node_modules/ag-grid-community/styles/ag-theme-alpine.css",
+              "node_modules/swiper/swiper-bundle.min.css",
+              "node_modules/remixicon/fonts/remixicon.css",
+              "node_modules/flatpickr/dist/flatpickr.css",
+              "node_modules/jsvectormap/dist/jsvectormap.css",
+              "node_modules/prismjs/themes/prism-okaidia.css",
+              "node_modules/@ctrl/ngx-emoji-mart/picker.css",
+              "src/assets/css/tailwind.css",
+              "src/styles.scss"
+            ],
+            "scripts": [
+              "node_modules/aos/dist/aos.js",
+              "node_modules/prismjs/prism.js"
+            ],
+            "server": "src/main.server.ts",
+            "prerender": false,
+            "ssr": false
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "5MB",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kB",
+                  "maximumError": "4kB"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "optimization": false,
+              "extractLicenses": false,
+              "sourceMap": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular/build:dev-server",
+          "configurations": {
+            "production": {
+              "buildTarget": "domiex:build:production"
+            },
+            "development": {
+              "buildTarget": "domiex:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular/build:extract-i18n"
+        },
+        "test": {
+          "builder": "@angular/build:karma",
+          "options": {
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing",
+              "@angular/localize/init"
+            ],
+            "tsConfig": "tsconfig.spec.json",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              {
+                "glob": "**/*",
+                "input": "public"
+              }
+            ],
+            "styles": [
+              "src/styles.scss"
+            ],
+            "scripts": []
+          }
+        }
+      }
+    }
+  },
+  "cli": {
+    "analytics": "72d86b53-754b-4720-bd10-689c4770b4f9"
+  },
+  "schematics": {
+    "@schematics/angular:component": {
+      "type": "component"
+    },
+    "@schematics/angular:directive": {
+      "type": "directive"
+    },
+    "@schematics/angular:service": {
+      "type": "service"
+    },
+    "@schematics/angular:guard": {
+      "typeSeparator": "."
+    },
+    "@schematics/angular:interceptor": {
+      "typeSeparator": "."
+    },
+    "@schematics/angular:module": {
+      "typeSeparator": "."
+    },
+    "@schematics/angular:pipe": {
+      "typeSeparator": "."
+    },
+    "@schematics/angular:resolver": {
+      "typeSeparator": "."
+    }
+  }
+}

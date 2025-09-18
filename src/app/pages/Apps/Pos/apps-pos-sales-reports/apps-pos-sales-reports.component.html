@@ -1,0 +1,132 @@
+<app-page-title [Title]="'Sales Reports'" [pageTitle]="'POS'"></app-page-title>
+
+
+<div>
+  <div class="grid grid-cols-12 gap-x-5">
+    <div class="col-span-12 xl:col-span-4 card bg-primary-500/15 border-primary-500/15">
+      <div class="card-body">
+        <div class="flex gap-4 mb-4">
+          <div class="grow">
+            <h5 class="text-16 font-semibold mb-1">Sales Per Minutes</h5>
+            <p class="text-sm text-gray-500 dark:text-gray-400">Real-time sales performance</p>
+          </div>
+          <div
+            class="size-10 flex items-center justify-center bg-white dark:bg-dark-900 text-primary-500 rounded-full outline-2 outline-offset-2 outline-white dark:outline-dark-900 shrink-0">
+            <lucide-angular name="chart-no-axes-combined" class="size-5"></lucide-angular>
+          </div>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+          <div class="bg-white/50 dark:bg-dark-900/50 rounded-lg p-3">
+            <p class="text-sm text-gray-500 dark:text-gray-400 mb-1">Current Hour</p>
+            <div class="flex items-baseline gap-2">
+              <h4>$<span [countUp]="1234" [options]="{decimalPlaces:0}"></span></h4>
+              <span class="text-green-500 text-sm">+12.5%</span>
+            </div>
+          </div>
+          <div class="bg-white/50 dark:bg-dark-900/50 rounded-lg p-3">
+            <p class="text-sm text-gray-500 dark:text-gray-400 mb-1">Previous Hour</p>
+            <div class="flex items-baseline gap-2">
+              <h4>$<span [countUp]="1098" [options]="{decimalPlaces:0}"></span></h4>
+              <span class="text-red-500 text-sm">-2.3%</span>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div x-data="salesPerMinuteApp" dir="ltr" class="-ml-3">
+            <div class="!min-h-full" data-chart-colors='["bg-primary-500"]' #salesChartRef></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card col-span-12 xl:col-span-8">
+      <div class="card-header flex items-center gap-3">
+        <h6 class="card-title grow">Revenue vs Expenses</h6>
+        <div x-data="{ open: false, currentYear: '2025' }" x-on:keydown.escape.prevent.stop="open = false"
+          class="dropdown shrink-0">
+          <button x-on:click="open = !open" title="dropdown-button" :aria-expanded="open.toString()" type="button"
+            class="flex px-3 py-1.5 gap-1 text-xs border-gray-200 dark:border-dark-800 link link-primary btn">
+            <span x-text="currentYear">2025</span>
+            <svg :class="{ 'transform rotate-180': open }" class="transition-transform duration-300 size-4"
+              viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd"
+                d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                clip-rule="evenodd" />
+            </svg>
+          </button>
+          <div x-show="open" x-transition.origin.top.right x-on:click.outside="open = false"
+            class="!fixed p-2 dropdown-menu" style="display: none;">
+            <ul>
+              <li *ngFor="let y of ['2023', '2024', '2025', '2026']">
+                <a href="#" class="dropdown-item" (click)="changeYear(y); $event.preventDefault()">
+                  <span>{{ y }}</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div x-data="labelLineApp" x-on:year-changed.window="currentYear = $event.detail.year; updateChartData()"
+          dir="ltr">
+          <div #labelLineChartRef class="min-h-[315px]" data-chart-colors='["bg-primary-500", "bg-red-500"]'></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-5">
+    <div class="card card-body">
+      <span class="text-green-500 text-sm float-end">↑ 12.5%</span>
+      <p class="text-sm text-gray-500 dark:text-dark-500 mb-2">Total Sales</p>
+      <h4>$12,345.67</h4>
+    </div>
+    <div class="card card-body">
+      <span class="text-green-500 text-sm float-end">↑ 8.2%</span>
+      <p class="text-sm text-gray-500 dark:text-dark-500 mb-2">Total Orders</p>
+      <h4>156</h4>
+    </div>
+    <div class="card card-body">
+      <span class="text-red-500 text-sm float-end">↓ 2.1%</span>
+      <p class="text-sm text-gray-500 dark:text-dark-500 mb-2">Average Order Value</p>
+      <h4 class="mb-1">$79.14</h4>
+    </div>
+    <div class="card card-body">
+      <span class="text-green-500 text-sm float-end">↑ 15.3%</span>
+      <p class="text-sm text-gray-500 dark:text-dark-500 mb-2">Total Items Sold</p>
+      <h4 class="mb-1">423</h4>
+    </div>
+  </div>
+
+  <div class="grid grid-cols-1 xl:grid-cols-2 gap-x-5">
+    <div class="card">
+      <div class="card-header">
+        <h6 class="card-title">Sales Trend</h6>
+      </div>
+      <div class="card-body">
+        <div x-data="salesTrendApp" dir="ltr" class="-ml-5">
+          <div class="!min-h-full" #salesTrendChartRef
+            data-chart-colors='["bg-primary-500", "bg-green-500", "bg-purple-500", "bg-sky-500", "bg-orange-500"]'>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header flex md:items-center flex-col md:flex-row gap-4">
+        <h6 class="card-title grow">Top Selling Items</h6>
+        <div class="flex flex-wrap items-center gap-2 shrink-0">
+          <button type="button" class="btn btn-sm btn-primary">1M</button>
+          <button type="button" class="btn btn-sm btn-outline-gray border-gray-200 dark:border-dark-800">6M</button>
+          <button type="button" class="btn btn-sm btn-outline-gray border-gray-200 dark:border-dark-800">1Y</button>
+          <button type="button" class="btn btn-sm btn-outline-gray border-gray-200 dark:border-dark-800">YTD</button>
+        </div>
+      </div>
+      <div class="card-body">
+        <div x-data="topSellingItemsApp" dir="ltr" class="-ml-5">
+          <div #topSellingItemsChartRef class="!min-h-full"
+            data-chart-colors="[bg-primary-500, bg-green-500, bg-purple-500, bg-sky-500, bg-orange-500]">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

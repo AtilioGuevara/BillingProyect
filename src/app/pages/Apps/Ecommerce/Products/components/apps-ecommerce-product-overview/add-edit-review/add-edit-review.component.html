@@ -1,0 +1,76 @@
+<div class="modal">
+    <div class="modal-wrap modal-center">
+        <div class="modal-header">
+            <h6>Add review</h6>
+            <button class="link link-red float-end"  (click)=" closeModal()"><lucide-angular name="x" class="size-5"></lucide-angular></button>
+        </div>
+        <div class="modal-content">
+            <form [formGroup]="reviewForm">
+                <div class="grid grid-cols-12 gap-5">
+                    <div class="col-span-12">
+                        <div class="flex flex-col justify-center gap-5">
+                            <h6 class="text-center">Your Rating?</h6>
+                            <div class="relative flex justify-center gap-3">
+                                <div class="flex justify-center w-10 h-2 transition-all duration-200 rounded-md cursor-pointer" [ngClass]="rating >= 1 ? 'bg-yellow-500' : 'bg-gray-200 dark:bg-dark-800'" (click)="setRating(1)" (mouseover)="hovering = 1" (mouseleave)="hovering = 0">
+                                    <p class="mt-4 text-2xl pointer-events-none select-none" [ngClass]="rating == 1 || hovering == 1 ? '' : 'invisible'">😒</p>
+                                </div>
+                                <div class="flex justify-center w-10 h-2 transition-all duration-200 rounded-md cursor-pointer" [ngClass]="rating >= 2 ? 'bg-yellow-500' : 'bg-gray-200 dark:bg-dark-800'" (click)="setRating(2)" (mouseover)="hovering = 2" (mouseleave)="hovering = 0">
+                                    <p class="mt-4 text-2xl pointer-events-none select-none" [ngClass]="rating == 2 || hovering == 2 ? '' : 'invisible'">🤨</p>
+                                </div>
+                                <div class="flex justify-center w-10 h-2 transition-all duration-200 rounded-md cursor-pointer" [ngClass]="rating >= 3 ? 'bg-yellow-500' : 'bg-gray-200 dark:bg-dark-800'" (click)="setRating(3)" (mouseover)="hovering = 3" (mouseleave)="hovering=0">
+                                    <p class="mt-4 text-2xl pointer-events-none select-none" [ngClass]="rating == 3 || hovering == 3 ? '' : 'invisible'">😊</p>
+                                </div>
+                                <div class="flex justify-center w-10 h-2 transition-all duration-200 rounded-md cursor-pointer" [ngClass]="rating >= 4 ? 'bg-yellow-500' : 'bg-gray-200 dark:bg-dark-800'" (click)="setRating(4)" (mouseover)="hovering = 4" (mouseleave)="hovering = 0">
+                                    <p class="mt-4 text-2xl pointer-events-none select-none" [ngClass]="rating == 4 || hovering == 4 ? '' : 'invisible'">😚</p>
+                                </div>
+                                <div class="flex justify-center w-10 h-2 transition-all duration-200 rounded-md cursor-pointer" [ngClass]="rating >= 5 ? 'bg-yellow-500' : 'bg-gray-200 dark:bg-dark-800'" (click)="setRating(5)" (mouseover)="hovering = 5" (mouseleave)="hovering = 0">
+                                    <p class="mt-4 text-2xl pointer-events-none select-none" [ngClass]="rating == 5 || hovering == 5 ? '' : 'invisible'"> 🥰</p>
+                                </div>
+                            </div>
+                            <div class="mt-5">
+                                <label for="rating" class="form-label">Rating Input:</label>
+                                <input id="rating" type="number" class="form-input" formControlName="star" (input)="changeRating()">
+                                <span *ngIf="reviewForm.get('star')?.hasError('required')" class="text-sm text-red-500">Star is required.</span>
+                            </div>
+                        </div>
+                    </div>
+            
+                    <div class="col-span-6">
+                        <label for="userNameInput" class="form-label">User Name</label>
+                        <input type="text" id="userNameInput" class="form-input" formControlName="userName" placeholder="User name">
+                        <span *ngIf="reviewForm.get('userName')?.hasError('required')" class="text-sm text-red-500">User name is required.</span>
+                    </div>
+            
+                    <div class="col-span-6">
+                        <label for="createDateInput" class="form-label">Create Date</label>
+                        <input type="text" id="createDateInput" class="form-input" placeholder="DD-MM-YYYY" formControlName="date" data-provider="flatpickr" data-date-format="d M, Y" mwlFlatpickr>
+                        <span *ngIf="reviewForm.get('date')?.hasError('required')" class="text-sm text-red-500">Date is required.</span>
+                    </div>
+            
+                    <div class="col-span-12">
+                        <label for="locationInput" class="form-label">Location</label>
+                        <input type="text" id="locationInput" class="form-input" formControlName="location" placeholder="Location">
+                        <span *ngIf="reviewForm.get('location')?.hasError('required')" class="text-sm text-red-500">Location is required.</span>
+                    </div>
+            
+                    <div class="col-span-12">
+                        <label for="titleInput" class="form-label">Title</label>
+                        <input type="text" id="titleInput" class="form-input" formControlName="title" placeholder="Review title">
+                        <span *ngIf="reviewForm.get('title')?.hasError('required')" class="text-sm text-red-500">Title is required.</span>
+                    </div>
+            
+                    <div class="col-span-12">
+                        <label for="writeReviewInput" class="form-label">Write your Content</label>
+                        <textarea name="writeReviewInput" id="writeReviewInput" rows="3" class="h-auto form-input" formControlName="content" placeholder="Enter your description"></textarea>
+                        <span *ngIf="reviewForm.get('content')?.hasError('required')" class="text-sm text-red-500">Content is required.</span>
+                    </div>
+
+                </div>
+            </form>
+            <div class="flex justify-end gap-2 mt-5">
+                <button type="button" class="btn btn-active-red" (click)="closeModal()">Cancel</button>
+                <button type="submit" class="btn btn-primary" (click)="onSubmit()">Add Review</button>
+            </div>
+        </div>
+    </div>
+</div>

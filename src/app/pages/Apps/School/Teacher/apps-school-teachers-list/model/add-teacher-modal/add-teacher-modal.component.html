@@ -1,0 +1,76 @@
+<div id="addTeacherModal" class="modal">
+  <div class="modal-wrap modal-center">
+    <div class="modal-header">
+      <h6 class="modal-title">{{!config ? 'Add' : 'Edit' }}Teacher</h6>
+      <button (click)="close()" class="link link-red">
+        <lucide-angular name="x" class="size-5"></lucide-angular>
+      </button>
+    </div>
+    <div class="modal-content" [formGroup]="fromGroup">
+      <div class="grid grid-cols-12 gap-4">
+        <div class="col-span-12">
+          <label for="titleSelect" class="form-label">Title</label>
+          <ng-select class="filter-ng-select" [items]="typeOptions" bindLabel="label" bindValue="value"
+            placeholder="Select event type" formControlName="title">
+          </ng-select>
+          <span *ngIf="fromGroup.get('title')?.hasError('required')" class="text-red-500"> This Filed is
+            Required</span>
+        </div>
+        <div class="col-span-12">
+          <label for="teacherNameInput" class="form-label">Teacher Name</label>
+          <input type="text" id="teacherNameInput" class="form-input" placeholder="Teacher name"
+            formControlName="teacherName">
+          <span *ngIf="fromGroup.get('teacherName')?.hasError('required')" class="text-red-500"> This Filed is
+            Required</span>
+        </div>
+        <div class="col-span-6">
+          <label for="emailInput" class="form-label">Email</label>
+          <input type="email" id="emailInput" class="form-input" placeholder="name@SRBThemes.com"
+            formControlName="email">
+          <span *ngIf="fromGroup.get('email')?.hasError('required')" class="text-red-500"> This Filed is
+            Required</span>
+        </div>
+        <div class="col-span-6">
+          <label for="phoneInput" class="form-label">Phone</label>
+          <input type="phone" id="phoneInput" class="form-input" placeholder="+1 0123 456 789" formControlName="phone">
+          <span *ngIf="fromGroup.get('phone')?.hasError('required')" class="text-red-500"> This Filed is
+            Required</span>
+        </div>
+        <div class="col-span-6">
+          <label for="salaryInput" class="form-label">Salary ($)</label>
+          <input type="text" id="salaryInput" class="form-input" placeholder="$0" formControlName="salary">
+          <span *ngIf="fromGroup.get('salary')?.hasError('required')" class="text-red-500"> This Filed is
+            Required</span>
+        </div>
+        <div class="col-span-6">
+          <label for="experienceInput" class="form-label">Experience (Years)</label>
+          <input type="text" id="experienceInput" class="form-input" placeholder="0 Years" formControlName="experience">
+          <span *ngIf="fromGroup.get('experience')?.hasError('required')" class="text-red-500"> This Filed is
+            Required</span>
+        </div>
+        <div class="col-span-12">
+          <label for="lastSchoolNameInput" class="form-label">Last School Name</label>
+          <input type="text" id="lastSchoolNameInput" class="form-input" placeholder="School name"
+            formControlName="lastSchool">
+          <span *ngIf="fromGroup.get('lastSchool')?.hasError('required')" class="text-red-500"> This Filed is
+            Required</span>
+        </div>
+        <div class="col-span-12">
+          <label for="joiningDateSelect" class="form-label">Joining Date</label>
+          <input type="text" placeholder="YYYY-MM-DD" id="eventDateInput" class="form-input" data-provider="flatpickr"
+            formControlName="date" mwlFlatpickr [flatpickrOptions]="{dateFormat: 'Y-m-d'}" formControlName="date">
+          <span *ngIf="fromGroup.get('date')?.hasError('required')" class="text-red-500"> This Filed is
+            Required</span>
+        </div>
+      </div>
+      <div class="flex items-center justify-end gap-2 mt-5">
+        <button type="button" class="btn btn-active-red" (click)="close()">
+          <lucide-angular name="x" class="inline-block size-4"></lucide-angular>
+          <span class="align-baseline">Close</span>
+        </button>
+        <button type="button" class="btn btn-primary" (click)="closeEventModal()">{{!config ? 'Add' : 'Update' }}
+          Teacher</button>
+      </div>
+    </div>
+  </div>
+</div>

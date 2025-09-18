@@ -1,0 +1,297 @@
+<div class="relative mb-6">
+  <div class="relative overflow-hidden rounded-md h-44 bg-primary-500/10">
+    <div class="border-[60px] border-t-primary-500 border-l-primary-500 absolute opacity-10 -top-2 left-0 rotate-45 size-96">
+    </div>
+    <div class="border-[60px] border-green-500 absolute opacity-10 top-20 left-8 rotate-45 size-80"></div>
+    <div class="border-[60px] border-pink-500 absolute opacity-10 top-36 left-28 rotate-45 size-40"></div>
+  </div>
+  <div class="text-center">
+    <div class="relative inline-block mx-auto">
+      <div class="relative p-1 rounded-full bg-gradient-to-tr from-primary-300 via-red-300 to-green-300 -mt-14">
+        <img src="assets/images/avatar/user-17.png" alt="" class="mx-auto border-4 border-white rounded-full dark:border-dark-900 size-28">
+      </div>
+      <div class="absolute border-2 border-white dark:border-dark-900 rounded-full size-4 bg-green-500 bottom-2.5 ltr:right-2.5 rtl:left-2.5">
+      </div>
+    </div>
+    <h5 class="mt-2 mb-1">Sophia Mia
+      <lucide-angular name="BadgeCheck" class="inline-block text-primary-500 fill-primary-500/20 size-5">
+      </lucide-angular>
+    </h5>
+    <ul class="flex flex-wrap items-center justify-center gap-2 text-gray-500 dark:text-dark-500 text-14">
+      <li>
+        <lucide-angular name="Building2" class="inline-block ltr:mr-1 rtl:ml-1 size-4"></lucide-angular> <span class="align-middle">UI /
+          UX Designer</span>
+      </li>
+      <li>
+        <lucide-angular name="MapPin" class="inline-block ltr:mr-1 rtl:ml-1 size-4"></lucide-angular> <span class="align-middle">Argentina</span>
+      </li>
+      <li>
+        <lucide-angular name="CalendarDays" class="inline-block ltr:mr-1 rtl:ml-1 size-4"></lucide-angular> <span class="align-middle">24 April, 2024</span>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<ul class="pb-2 overflow-x-auto tabs-pills lg:pb-0">
+  <li>
+    <a routerLink="/pages-user" class="cursor-pointer nav-item text-gray-500 dark:text-dark-500 [&.active]:bg-primary-500 [&.active]:text-primary-50 ">
+      <lucide-angular name="Eye" class="inline-block ltr:mr-2 rtl:ml-2 size-4"></lucide-angular> <span class="align-middle whitespace-nowrap">Overview</span>
+    </a>
+  </li>
+  <li>
+    <a routerLink="/pages-user-activity" class="cursor-pointer nav-item text-gray-500 dark:text-dark-500 [&.active]:bg-primary-500 [&.active]:text-primary-50 active">
+      <lucide-angular name="sparkles" class="inline-block ltr:mr-2 rtl:ml-2 size-4"></lucide-angular> <span class="align-middle whitespace-nowrap">Activity</span>
+    </a>
+  </li>
+  <li>
+    <a routerLink="/pages-user-followers" class="cursor-pointer nav-item text-gray-500 dark:text-dark-500 [&.active]:bg-primary-500 [&.active]:text-primary-50">
+      <lucide-angular name="UserRound" class="inline-block ltr:mr-2 rtl:ml-2 size-4"></lucide-angular> <span class="align-middle whitespace-nowrap">Followers</span>
+    </a>
+  </li>
+  <li>
+    <a routerLink="/pages-user-documents" class="cursor-pointer nav-item text-gray-500 dark:text-dark-500 [&.active]:bg-primary-500 [&.active]:text-primary-50">
+      <lucide-angular name="FileText" class="inline-block ltr:mr-2 rtl:ml-2 size-4"></lucide-angular> <span class="align-middle whitespace-nowrap">Documents</span>
+    </a>
+  </li>
+  <li>
+    <a routerLink="/pages-user-notes" class="cursor-pointer nav-item text-gray-500 dark:text-dark-500 [&.active]:bg-primary-500 [&.active]:text-primary-50">
+      <lucide-angular name="list" class="inline-block ltr:mr-2 rtl:ml-2 size-4"></lucide-angular> <span class="align-middle whitespace-nowrap">Notes</span>
+    </a>
+  </li>
+  <li>
+    <a routerLink="/pages-user-projects" class="cursor-pointer nav-item text-gray-500 dark:text-dark-500 [&.active]:bg-primary-500 [&.active]:text-primary-50">
+      <lucide-angular name="monitor" class="inline-block ltr:mr-2 rtl:ml-2 size-4"></lucide-angular> <span class="align-middle whitespace-nowrap">Projects</span>
+    </a>
+  </li>
+</ul>
+
+<div class="grid grid-cols-12 mt-5 gap-x-5">
+  <div class="col-span-12 md:col-span-4 xl:col-span-3">
+    <div class="card">
+      <div class="card-header">
+        <h6 class="card-title">Filter Activity</h6>
+      </div>
+      <div class="card-body">
+        <p class="mb-3 text-sm font-medium text-gray-500 uppercase dark:text-dark-500">Type</p>
+
+        <div class="space-y-3">
+          <div class="input-check-group">
+            <input id="typeCheckboxAll" class="input-check input-check-primary" type="checkbox">
+            <label for="typeCheckboxAll" class="input-check-label">All Select</label>
+          </div>
+          <div class="input-check-group">
+            <input id="typeCheckbox1" class="input-check input-check-primary" type="checkbox">
+            <label for="typeCheckbox1" class="input-check-label">Comments</label>
+          </div>
+          <div class="input-check-group">
+            <input id="typeCheckbox2" class="input-check input-check-primary" type="checkbox">
+            <label for="typeCheckbox2" class="input-check-label">Uploaded Files</label>
+          </div>
+          <div class="input-check-group">
+            <input id="typeCheckbox3" class="input-check input-check-primary" type="checkbox">
+            <label for="typeCheckbox3" class="input-check-label">Queries</label>
+          </div>
+          <div class="input-check-group">
+            <input id="typeCheckbox4" class="input-check input-check-primary" type="checkbox">
+            <label for="typeCheckbox4" class="input-check-label">Sales & Products</label>
+          </div>
+          <div class="input-check-group">
+            <input id="typeCheckbox5" class="input-check input-check-primary" type="checkbox">
+            <label for="typeCheckbox5" class="input-check-label">Projects</label>
+          </div>
+          <div class="input-check-group">
+            <input id="typeCheckbox6" class="input-check input-check-primary" type="checkbox">
+            <label for="typeCheckbox6" class="input-check-label">Flags</label>
+          </div>
+        </div>
+
+        <p class="mt-5 mb-3 text-sm font-medium text-gray-500 uppercase dark:text-dark-500">Contributor</p>
+
+        <div class="space-y-3">
+          <div class="input-check-group">
+            <input id="contributorCheckboxAll" class="input-check input-check-primary" type="checkbox">
+            <label for="contributorCheckboxAll" class="input-check-label">All Select</label>
+          </div>
+          <div class="input-check-group">
+            <input id="contributorCheckbox1" class="input-check input-check-primary" type="checkbox">
+            <label for="contributorCheckbox1" class="input-check-label">SRBThemes</label>
+          </div>
+          <div class="input-check-group">
+            <input id="contributorCheckbox2" class="input-check input-check-primary" type="checkbox">
+            <label for="contributorCheckbox2" class="input-check-label">Thomas Hayes</label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-span-12 md:col-span-8 xl:col-span-9">
+
+    <div class="flex items-center pb-1 border-b border-gray-200 dark:border-dark-800">
+      <h6 class="grow">Today</h6>
+      <p class="text-sm text-gray-500 dark:text-dark-500">Monday, May 20, 2024</p>
+    </div>
+
+    <ul class="*:before:absolute *:before:w-[1px] *:before:bg-gray-200 dark:*:before:bg-gray-800 *:before:-inset-y-5 *:relative ltr:*:before:left-4 rtl:*:before:right-4 flex flex-col mt-5">
+      <li class="last:before:hidden last:pb-0">
+        <div class="relative">
+          <div class="relative flex items-start space-x-3 rtl:space-x-reverse">
+            <div class="relative shrink-0">
+              <div class="flex items-center justify-center text-green-500 rounded-full bg-green-500/10 size-8 ring-4 ring-white dark:ring-dark-900">
+                <lucide-angular name="ShoppingBag" class="size-4"></lucide-angular>
+              </div>
+            </div>
+            <div class="card card-body grow">
+              <span class="text-sm text-gray-500 dark:text-dark-500 ltr:float-end rtl:float-start">02:35 PM</span>
+              <h6>New Sale</h6>
+              <p class="text-gray-500 dark:text-dark-500">A returning visitor from thomas, Italy just bought a new <a href="javascript:void(0);" class="text-primary-500">Mackbook Pro</a> for <span class="font-medium">$1999.99</span></p>
+            </div>
+          </div>
+        </div>
+      </li>
+      <li class="last:before:hidden last:pb-0">
+        <div class="relative">
+          <div class="relative flex items-start space-x-3 rtl:space-x-reverse">
+            <div class="relative shrink-0">
+              <img src="assets/images/avatar/user-12.png" alt="" class="rounded-full size-8 ring-4 ring-white dark:ring-dark-900">
+            </div>
+            <div class="card card-body grow">
+              <span class="text-sm text-gray-500 dark:text-dark-500 ltr:float-end rtl:float-start">12:59 PM</span>
+              <h6>Jerome send message</h6>
+              <p class="mb-3 text-gray-500 dark:text-dark-500"><span class="font-medium">&#64;jerome</span> send message
+                to
+                thread in channel <span class="font-medium">#show-tell</span></p>
+
+              <div class="mb-2 space-x-1">
+                <span class="text-gray-500 bg-transparent border-gray-200 dark:border-dark-800 dark:text-dark-500 badge">#marketing</span>
+                <span class="text-gray-500 bg-transparent border-gray-200 dark:border-dark-800 dark:text-dark-500 badge">#promotion</span>
+              </div>
+              <p>Hello Everyone</p>
+              <p>I have a question regarding email marketing. What are some strategies or techniques to prevent
+                automated marketing emails from being flagged as promotions, spam, or junk?</p>
+
+              <div class="flex flex-wrap items-center gap-2 mt-3">
+                <p class="text-gray-500 dark:text-dark-500">
+                  <lucide-angular name="smile" class="inline-block size-4"></lucide-angular>
+                  <span class="align-middle whitespace-nowrap"><b>2</b> reactions</span>
+                </p>
+                <p class="text-gray-500 dark:text-dark-500">
+                  <lucide-angular name="MessageSquareText" class="inline-block size-4"></lucide-angular>
+                  <span class="align-middle whitespace-nowrap"><b>6</b>
+                    replies</span>
+                </p>
+                <p class="text-gray-500 dark:text-dark-500">Last Today at 07:30 PM</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </li>
+      <li class="last:before:hidden last:pb-0">
+        <div class="relative">
+          <div class="relative flex items-start space-x-3 rtl:space-x-reverse">
+            <div class="relative shrink-0">
+              <div class="flex items-center justify-center rounded-full bg-primary-500/10 text-primary-500 size-8 ring-4 ring-white dark:ring-dark-900">
+                <lucide-angular name="MonitorDot" class="size-4"></lucide-angular>
+              </div>
+            </div>
+            <div class="card card-body grow">
+              <span class="text-sm text-gray-500 dark:text-dark-500 ltr:float-end rtl:float-start">10:27 AM</span>
+              <h6>Project status updated</h6>
+              <p class="text-gray-500 dark:text-dark-500"><span class="align-middle whitespace-nowrap">Marked</span> <a href="javascript: void(0);" class="link link-primary">
+                  <lucide-angular name="github" class="inline-block size-4"></lucide-angular>
+                  <span class="align-middle whitespace-nowrap">#25 Marge</span>
+                </a>
+                as <span class="badge badge-sub-green">Completed</span></p>
+            </div>
+          </div>
+        </div>
+      </li>
+    </ul>
+
+    <div class="flex items-center pb-1 border-b border-gray-200 dark:border-dark-800">
+      <h6 class="grow">Yesterday</h6>
+      <p class="text-sm text-gray-500 dark:text-dark-500">Sunday, May 19, 2024</p>
+    </div>
+
+    <ul class="*:before:absolute *:before:w-[1px] *:before:bg-gray-200 dark:*:before:bg-dark-800 *:before:-inset-y-5 *:relative ltr:*:before:left-4 rtl:*:before:right-4 flex flex-col mt-5">
+      <li class="last:before:hidden last:pb-0">
+        <div class="relative">
+          <div class="relative flex items-start space-x-3 rtl:space-x-reverse">
+            <div class="relative shrink-0">
+              <img src="assets/images/avatar/user-18.png" alt="" class="rounded-full size-8 ring-4 ring-white dark:ring-dark-900">
+            </div>
+            <div class="card card-body grow">
+              <span class="text-sm text-gray-500 dark:text-dark-500 ltr:float-end rtl:float-start">03:41 AM</span>
+              <h6>Paul Stirling commented on &#64;domiex</h6>
+              <div class="p-3 mt-3 bg-gray-100 rounded-md dark:bg-dark-850">
+                <p class="text-gray-500 dark:text-dark-500">Paul, I believe we should seriously consider removing this
+                  column altogether. It seems redundant as it duplicates content we already have. Additionally,
+                  consolidating information into a single source ensures accuracy and avoids having disparate
+                  information spread across multiple sources. What do you think about this?</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </li>
+      <li class="last:before:hidden last:pb-0">
+        <div class="relative">
+          <div class="relative flex items-start space-x-3 rtl:space-x-reverse">
+            <div class="relative shrink-0">
+              <div class="flex items-center justify-center rounded-full text-sky-500 bg-sky-500/10 size-8 ring-4 ring-white dark:ring-dark-900">
+                <lucide-angular name="file" class="size-4"></lucide-angular>
+              </div>
+            </div>
+            <div class="card card-body grow">
+              <span class="text-sm text-gray-500 dark:text-dark-500 ltr:float-end rtl:float-start">11:59 AM</span>
+              <h6>Task Report - uploaded weekly reports</h6>
+              <p class="text-gray-500 dark:text-dark-500">Added <b>2</b> files to task report by <a href="javascript:void(0);" class="font-medium text-primary-500">domiex</a></p>
+
+              <div class="grid grid-cols-1 gap-5 mt-3 md:grid-cols-2 xl:grid-cols-3">
+                <a href="javascript: void(0);" class="flex items-center gap-3 p-4 border border-gray-200 border-dashed rounded-md dark:border-dark-800">
+                  <div>
+                    <lucide-angular name="FileText" class="text-red-500 stroke-1 size-8 fill-red-500/10">
+                    </lucide-angular>
+                  </div>
+                  <div>
+                    <h6 class="mb-1">task-reports.pdf</h6>
+                    <p class="text-xs text-gray-500 dark:text-dark-500">45 KB</p>
+                  </div>
+                </a>
+                <a href="javascript: void(0);" class="flex items-center gap-3 p-4 border border-gray-200 border-dashed rounded-md dark:border-dark-800">
+                  <div>
+                    <lucide-angular name="ScrollText" class="text-yellow-500 stroke-1 size-8 fill-yellow-500/10">
+                    </lucide-angular>
+                  </div>
+                  <div>
+                    <h6 class="mb-1">requirement-research.txt</h6>
+                    <p class="text-xs text-gray-500 dark:text-dark-500">1.5 MB</p>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </li>
+      <li class="last:before:hidden last:pb-0">
+        <div class="relative">
+          <div class="relative flex items-start space-x-3 rtl:space-x-reverse">
+            <div class="relative shrink-0">
+              <img src="assets/images/avatar/user-9.png" alt="" class="rounded-full size-8 ring-4 ring-white dark:ring-dark-900">
+            </div>
+            <div class="card card-body grow">
+              <span class="text-sm text-gray-500 dark:text-dark-500 ltr:float-end rtl:float-start">04:21 PM</span>
+              <h6>John Brown request joined <a href="javascript:void(0);" class="text-primary-500">#domiex-project</a>
+                channel</h6>
+              <div class="flex items-center gap-2 mt-3">
+                <button type="button" class="btn btn-primary">Accept</button>
+                <button type="button" class="btn btn-sub-gray">Reject</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </li>
+    </ul>
+
+  </div>
+
+</div>

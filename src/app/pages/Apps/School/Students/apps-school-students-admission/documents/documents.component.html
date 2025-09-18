@@ -1,0 +1,55 @@
+<form action="javascript: void(0);" (ngSubmit)="onSubmit()" #documentsForm="ngForm">
+  <h6 class="mb-3">Passport-sized Photograph</h6>
+  <div class="mb-5">
+    <label for="passportPhotoInput">
+      <div
+        class="flex items-center justify-center overflow-hidden bg-gray-100 border border-gray-200 rounded-sm cursor-pointer dark:bg-dark-850 dark:border-dark-800 size-36">
+        <img *ngIf="passportImageUrl" [src]="passportImageUrl" class="object-cover w-full h-full">
+        <div *ngIf="!passportImageUrl" class="flex flex-col items-center text-gray-500 dark:text-dark-500">
+          <lucide-angular name="Upload"></lucide-angular>
+          <div class="mt-2 mb-1">Passport Size</div>
+          <p>144 x 144</p>
+        </div>
+      </div>
+    </label>
+    <label class="block">
+      <input type="file" name="passportPhoto" id="passportPhotoInput"
+        (change)="handleFileChosen('passportPhoto', $event)" class="hidden" />
+    </label>
+    <p *ngIf="passportError" class="mt-1 text-sm text-red-500">{{passportError}}</p>
+  </div>
+
+  <!-- High School Transcript -->
+  <h6 class="mb-3">High School Transcript</h6>
+  <div>
+    <label for="transcriptInput">
+      <div
+        class="flex items-center justify-center p-4 overflow-hidden bg-gray-100 border border-gray-200 rounded-sm cursor-pointer dark:bg-dark-850 dark:border-dark-800 h-28">
+        <img *ngIf="transcriptImageUrl" [src]="transcriptImageUrl" class="object-cover w-full h-full">
+        <div *ngIf="!transcriptImageUrl" class="flex flex-col items-center text-gray-500 dark:text-dark-500">
+          <lucide-angular name="Upload"></lucide-angular>
+          <div class="mt-2 mb-1">Drag and drop your certificate</div>
+          <p>only allowed pdf, png files.</p>
+        </div>
+      </div>
+    </label>
+    <label class="block">
+      <input type="file" name="transcript" id="transcriptInput" (change)="handleFileChosen('transcript', $event)"
+        class="hidden" />
+    </label>
+    <p *ngIf="transcriptError" class="mt-1 text-sm text-red-500">{{transcriptError}}</p>
+  </div>
+
+  <div class="flex flex-wrap items-center gap-2 mt-5 ltr:justify-end rtl:justify-start">
+    <button type="button" class="btn btn-sub-gray" (click)="onPrevious()">
+      <lucide-angular name="MoveLeft" class="mr-1 ltr:inline-block rtl:hidden size-4"></lucide-angular>
+      <lucide-angular name="MoveRight" class="ml-1 ltr:hidden rtl:inline-block size-4"></lucide-angular>
+      Previous
+    </button>
+    <button type="button" class="btn btn-primary">
+      Save to Next
+      <lucide-angular name="MoveLeft" class="ml-1 ltr:hidden rtl:inline-block size-4"></lucide-angular>
+      <lucide-angular name="MoveRight" class="mr-1 ltr:inline-block rtl:hidden size-4"></lucide-angular>
+    </button>
+  </div>
+</form>

@@ -1,0 +1,53 @@
+<div id="newTicketsModal" class="modal">
+  <div class="modal-wrap modal-center modal-2xl">
+    <div class="modal-header">
+      <h6>Create New Ticket</h6>
+      <button data-modal-close="newTicketsModal" class="link link-red"><lucide-angular name="X" class="size-5"></lucide-angular>
+        <lucide-angular name="X" class="size-5"></lucide-angular></button>
+    </div>
+    <div class="modal-content ">
+      <div class="grid grid-cols-12 gap-5">
+        <div class="col-span-6">
+          <label for="taskTitleInput" class="block mb-2 text-sm font-medium">Task Title</label>
+          <input type="text" id="taskTitleInput" class="form-input">
+        </div>
+
+        <div class="col-span-6">
+          <label for="projectNameInput" class="block mb-2 text-sm font-medium">Project Name</label>
+          <input type="text" id="projectNameInput" class="form-input">
+        </div>
+
+        <div class="col-span-12">
+          <label for="descriptionInput2" class="block mb-2 text-sm font-medium">Description</label>
+          <textarea name="descriptionInput2" id="descriptionInput2" rows="3" class="h-auto form-input"></textarea>
+        </div>
+
+        <div class="col-span-6">
+          <label for="emailInput" class="block mb-2 text-sm font-medium">Keywords</label>
+          <div id="multipleSelect" x-model="ticketForm.keywords">
+          </div>
+          <div class="flex flex-wrap items-center gap-2 pt-3">
+          </div>
+        </div>
+
+        <div class="col-span-6">
+          <label for="assignedToSelect" class="block mb-2 text-sm font-medium">Assigned To</label>
+          <div id="assignedToSelect" x-model="ticketForm.assignedTo">
+          </div>
+        </div>
+
+        <div class="col-span-12">
+          <label for="phomenoInput" class="block mb-2 text-sm font-medium">Phone No</label>
+          <input type="tel" id="phomenoInput" class="form-input" x-model="ticketForm.phone">
+        </div>
+
+        <div class="col-span-12">
+          <div class="text-right">
+            <button class="btn btn-primary">Send Message</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

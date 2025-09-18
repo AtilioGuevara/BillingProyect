@@ -1,0 +1,40 @@
+<app-page-title [Title]="'Bar Charts'" [pageTitle]="'Echarts'"></app-page-title>
+
+<div class="grid grid-cols-12 gap-x-space">
+  <div class="col-span-12 md:col-span-6 card">
+    <div class="card-header">
+      <h6 class="card-title">Basic</h6>
+    </div>
+    <div class="card-body">
+      <app-domix-echart [chartData]="pieChartData"></app-domix-echart>
+    </div>
+  </div>
+  <!--end col-->
+  <div class="col-span-12 md:col-span-6 card">
+    <div class="card-header">
+      <h6 class="card-title">Doughnut Chart with Rounded Corner</h6>
+    </div>
+    <div class="card-body">
+      <app-domix-echart [chartData]="pieChartOptions"></app-domix-echart>
+    </div>
+  </div>
+  <!--end col-->
+  <div class="col-span-12 md:col-span-6 card">
+    <div class="card-header">
+      <h6 class="card-title">Doughnut Chart</h6>
+    </div>
+    <div class="card-body">
+      <app-domix-echart [chartData]="doughnutPieChartData"></app-domix-echart>
+    </div>
+  </div>
+  <!--end col-->
+  <div class="col-span-12 md:col-span-6 card">
+    <div class="card-header">
+      <h6 class="card-title">Doughnut Chart</h6>
+    </div>
+    <div class="card-body">
+      <app-domix-echart [chartData]="halfDouglasnutChart"></app-domix-echart>
+    </div>
+  </div>
+  <!--end col-->
+</div>

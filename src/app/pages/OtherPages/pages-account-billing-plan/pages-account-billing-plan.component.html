@@ -1,0 +1,327 @@
+<div class="relative mb-6">
+  <div class="relative overflow-hidden rounded-md h-44 bg-primary-500/10">
+    <div class="border-[60px] border-t-primary-500 border-l-primary-500 absolute opacity-10 -top-2 left-0 rotate-45 size-96">
+    </div>
+    <div class="border-[60px] border-green-500 absolute opacity-10 top-20 left-8 rotate-45 size-80"></div>
+    <div class="border-[60px] border-pink-500 absolute opacity-10 top-36 left-28 rotate-45 size-40"></div>
+  </div>
+  <div class="text-center">
+    <div class="relative inline-block mx-auto">
+      <div class="relative p-1 rounded-full bg-gradient-to-tr from-primary-300 via-red-300 to-green-300 -mt-14">
+        <img src="assets/images/avatar/user-17.png" alt="" class="mx-auto border-4 border-white rounded-full dark:border-dark-900 size-28">
+      </div>
+      <div class="absolute border-2 border-white dark:border-dark-900 rounded-full size-4 bg-green-500 bottom-2.5 ltr:right-2.5 rtl:left-2.5">
+      </div>
+    </div>
+    <h5 class="mt-2 mb-1">Sophia Mia
+      <lucide-angular name="BadgeCheck" class="inline-block text-primary-500 fill-primary-500/20 size-5">
+      </lucide-angular>
+    </h5>
+    <ul class="flex flex-wrap items-center justify-center gap-2 text-gray-500 dark:text-dark-500 text-14">
+      <li>
+        <lucide-angular name="Building2" class="inline-block ltr:mr-1 rtl:ml-1 size-4"></lucide-angular><span class="align-middle">UI /
+          UX Designer</span>
+      </li>
+      <li>
+        <lucide-angular name="MapPin" class="inline-block ltr:mr-1 rtl:ml-1 size-4"></lucide-angular> <span class="align-middle">Argentina</span>
+      </li>
+      <li>
+        <lucide-angular name="ShieldCheck" class="inline-block ltr:mr-1 rtl:ml-1 size-4"></lucide-angular> <span class="align-middle">24 April, 2024</span>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<ul class="pb-2 overflow-x-auto tabs-pills lg:pb-0">
+  <li>
+    <a routerLink="/pages-account-settings" class="nav-item text-gray-500 dark:text-dark-500 [&.active]:bg-primary-500 [&.active]:text-primary-50">
+      <lucide-angular name="UserRound" class="inline-block ltr:mr-1 rtl:ml-1 size-4"></lucide-angular><span class="align-middle whitespace-nowrap">Account</span>
+    </a>
+  </li>
+  <li>
+    <a routerLink="/pages-account-security" class="nav-item text-gray-500 dark:text-dark-500 [&.active]:bg-primary-500 [&.active]:text-primary-50">
+      <lucide-angular name="ShieldCheck" class="inline-block ltr:mr-1 rtl:ml-1 size-4"></lucide-angular><span class="align-middle whitespace-nowrap">Security</span>
+    </a>
+  </li>
+  <li>
+    <a routerLink="/pages-account-billing-plan" class="nav-item text-gray-500 dark:text-dark-500 [&.active]:bg-primary-500 [&.active]:text-primary-50 active">
+      <lucide-angular name="Gem" class="inline-block ltr:mr-1 rtl:ml-1 size-4"></lucide-angular><span class="align-middle whitespace-nowrap">Billing & Plans</span>
+    </a>
+  </li>
+  <li>
+    <a routerLink="/pages-account-notification" class="nav-item text-gray-500 dark:text-dark-500 [&.active]:bg-primary-500 [&.active]:text-primary-50">
+      <lucide-angular name="Bell" class="inline-block ltr:mr-1 rtl:ml-1 size-4"></lucide-angular><span class="align-middle whitespace-nowrap">Notification</span>
+    </a>
+  </li>
+  <li>
+    <a routerLink="/pages-account-statements" class="nav-item text-gray-500 dark:text-dark-500 [&.active]:bg-primary-500 [&.active]:text-primary-50">
+      <lucide-angular name="ListTree" class="inline-block ltr:mr-1 rtl:ml-1 size-4"></lucide-angular><span class="align-middle whitespace-nowrap">Statements</span>
+    </a>
+  </li>
+  <li>
+    <a routerLink="/pages-account-logs" class="nav-item text-gray-500 dark:text-dark-500 [&.active]:bg-primary-500 [&.active]:text-primary-50">
+      <lucide-angular name="LogOut" class="inline-block ltr:mr-1 rtl:ml-1 size-4"></lucide-angular><span class="align-middle whitespace-nowrap">Logs</span>
+    </a>
+  </li>
+</ul>
+
+<div class="mt-4 card">
+  <div class="card-header">
+    <h6 class="mb-1 card-title">Billing Settings</h6>
+    <p class="text-gray-500 dark:text-dark-500">Take control of your billing and plan details here.</p>
+  </div>
+  <div class="card-body">
+    <div class="grid grid-cols-1 gap-5 sm:grid-cols-2">
+      <div>
+        <h6 class="mb-3">Current Plan:</h6>
+        <div class="mb-0 card">
+          <div class="card-body">
+            <div class="flex items-center">
+              <div class="grow">
+                <h6 class="mb-2">Basic Plan <span class="align-middle ltr:ml-1 rtl:mr-1 whitespace-nowrap badge badge-red">Monthly</span></h6>
+                <p class="text-gray-500 dark:text-dark-500">Our most sought-after plan tailored for small teams.</p>
+              </div>
+              <h3>$20 <small class="text-sm font-normal text-gray-500 dark:text-dark-500">Per month</small></h3>
+            </div>
+
+            <div class="mt-4">
+              <div class="flex items-center gap-3 mb-2">
+                <h6 class="text-xs grow">16 of 30 Users</h6>
+                <h6 class="text-xs font-semibold text-sky-500">55.47%</h6>
+              </div>
+              <div class="progress-bar progress-1">
+                <div class="w-1/2 text-white progress-bar-wrap bg-primary-500"></div>
+              </div>
+            </div>
+            <div class="mt-5 text-right">
+              <a routerLink="/pages-pricing" class="cursor-pointer btn btn-primary">
+                <span class="align-middle whitespace-nowrap">Upgrade Plan</span>
+                <lucide-angular name="ArrowUpRight" class="ltr:inline-block rtl:hidden size-4"></lucide-angular>
+                <lucide-angular name="ArrowUpLeft" class="ltr:hidden rtl:inline-block size-4"></lucide-angular>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <h6 class="mb-3">Billing Information:</h6>
+        <div class="mb-0 card">
+          <div class="card-body">
+            <div class="flex items-center">
+              <div class="grow">
+                <h6 class="mb-2">Sophia Mia</h6>
+                <p class="mb-1 text-gray-500 dark:text-dark-500">3011 E Semoran Blvd, Apopka, Florida,</p>
+                <p class="mb-1 text-gray-500 dark:text-dark-500">United States - 32703.</p>
+                <p class="text-gray-500 dark:text-dark-500">+(407) 774-3111</p>
+              </div>
+            </div>
+            <div class="mt-5 ltr:text-right rtl:text-left">
+              <button type="button" class="btn btn-sub-gray">
+                <lucide-angular name="Pencil" class="inline-block ltr:mr-1 rtl:ml-1 size-4"></lucide-angular> <span class="align-middle whitespace-nowrap">Edit
+                  Billing</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-header">
+    <h6 class="card-title">Payment Methods</h6>
+  </div>
+  <div class="card-body">
+    <div class="grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-4">
+      <div class="mb-0 card">
+        <div class="card-body bg-gradient-to-b from-primary-500/10 via-red-500/5 backdrop-lg">
+          <img src="assets/images/payment/visa.png" alt="" class="h-10">
+        </div>
+        <div class="pt-0 card-body">
+          <div class="flex items-center">
+            <div class="grow">
+              <h6 class="mb-1">xxxx xxxx xxx 1547</h6>
+              <p class="text-gray-500 dark:text-dark-500">Expiry on 01/2030</p>
+            </div>
+          </div>
+          <div class="flex items-center justify-between gap-3 mt-5">
+            <a href="javascript:void(0);" class="link link-green" [ngClass]="{'text-green-500': defaultCard === 1}" (click)="setDefaultCard(1)">
+              <span>{{ defaultCard === 1 ? 'Default Set' : 'Set as Default' }}</span>
+            </a>
+            <!-- <a href="javascript: void(0);" data-modal-target="addCardPaymentModal" class="link link-primary"
+              (click)="openModal('addCardPaymentModal')"><lucide-angular name="pencil" class="inline-block size-4"></lucide-angular>
+              Edit</a> -->
+          </div>
+        </div>
+      </div>
+      <div class="mb-0 card">
+        <div class="card-body bg-gradient-to-b from-primary-500/10 via-red-500/5 backdrop-lg">
+          <img src="assets/images/payment/american.png" alt="" class="h-10">
+        </div>
+        <div class="pt-0 card-body">
+          <div class="flex items-center">
+            <div class="grow">
+              <h6 class="mb-1">xxxx xxxx xxx 8749</h6>
+              <p class="text-gray-500 dark:text-dark-500">Expiry on 24/2030</p>
+            </div>
+          </div>
+          <div class="flex items-center justify-between gap-3 mt-5">
+            <a href="javascript:void(0);" class="link link-green" [ngClass]="{'text-green-500': defaultCard === 2}" (click)="setDefaultCard(2)">
+              <span>{{ defaultCard === 2 ? 'Default Set' : 'Set as Default' }}</span>
+            </a>
+            <!-- <a href="javascript: void(0);" data-modal-target="addCardPaymentModal" class="link link-primary"
+              (click)="openModal('addCardPaymentModal')"><lucide-angular name="pencil" class="inline-block size-4"></lucide-angular>
+              Edit</a> -->
+          </div>
+        </div>
+      </div>
+      <div class="mb-0 card">
+        <div class="card-body bg-gradient-to-b from-primary-500/10 via-red-500/5 backdrop-lg">
+          <img src="assets/images/payment/mastercard.png" alt="" class="h-10">
+        </div>
+        <div class="pt-0 card-body">
+          <div class="flex items-center">
+            <div class="grow">
+              <h6 class="mb-1">xxxx xxxx xxx 3641</h6>
+              <p class="text-gray-500 dark:text-dark-500">Expiry on 13/2028</p>
+            </div>
+          </div>
+          <div class="flex items-center justify-between gap-3 mt-5">
+            <a href="javascript:void(0);" class="link link-green" [ngClass]="{'text-green-500': defaultCard === 3}" (click)="setDefaultCard(3)">
+              <span>{{ defaultCard === 3 ? 'Default Set' : 'Set as Default' }}</span>
+            </a>
+            <!-- <a href="javascript: void(0);" data-modal-target="addCardPaymentModal" class="link link-primary"
+              (click)="openModal('addCardPaymentModal')"><lucide-angular name="pencil" class="inline-block size-4"></lucide-angular>
+              Edit</a> -->
+          </div>
+        </div>
+      </div>
+      <a href="javascript: void(0);" data-modal-target="addCardPaymentModal" class="flex items-center justify-center mb-0 border-dashed card">
+        <div class="card-body">
+          <div class="flex items-center justify-center">
+            <lucide-angular name="circle-plus" class="text-green-500 stroke-1 size-10 fill-green-500/10">
+            </lucide-angular>
+          </div>
+        </div>
+      </a>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- <div id="billingEditModal" class="hidden modal show">
+  <div class="modal-wrap modal-center modal-lg">
+    <div class="modal-header">
+      <h6>Billing Information</h6>
+      <button data-modal-close="billingEditModal" class="link link-red"><lucide-angular name="x" class="size-5"></lucide-angular></button>
+    </div>
+    <div class="modal-content">
+      <form action="javascript: void(0);">
+        <div class="grid grid-cols-12 gap-5">
+          <div class="col-span-12">
+            <label for="namePersonalInput" class="form-label">Personal / Company Name</label>
+            <input type="text" id="namePersonalInput" class="form-input" placeholder="Enter your name"
+              value="Sophia Mia" required>
+          </div>
+          <div class="col-span-12">
+            <label for="addressInput" class="form-label">Personal / Company Address</label>
+            <input type="text" id="addressInput" class="form-input" placeholder="Your address"
+              value="3011 E Semoran Blvd" required>
+          </div>
+          <div class="col-span-6">
+            <label for="sampleSelect" class="form-label">Country</label>
+            <div id="sampleSelect"></div>
+          </div>
+          <div class="col-span-6">
+            <label for="stateInput" class="form-label">State</label>
+            <input type="text" id="stateInput" class="form-input" placeholder="Your state" value="Florida" required>
+          </div>
+
+          <div class="col-span-6">
+            <label for="cityInput" class="form-label">City</label>
+            <input type="text" id="cityInput" class="form-input" placeholder="Your city" value="Apopka" required>
+          </div>
+
+          <div class="col-span-6">
+            <label for="zipCodeInput" class="form-label">Zip Code</label>
+            <input type="number" id="zipCodeInput" class="form-input" placeholder="Zip code" value="32703" required>
+          </div>
+
+          <div class="col-span-6">
+            <label for="phoneNumberInput" class="form-label">Phone Number</label>
+            <input type="text" id="phoneNumberInput" class="form-input" placeholder="Enter your phone number"
+              value="+(407) 774-3111" required>
+          </div>
+
+          <div class="col-span-6">
+            <label for="emailInput" class="form-label">Email Address</label>
+            <input type="email" id="emailInput" class="form-input" placeholder="Enter your email"
+              value="shopia@SRBThemes.com" required>
+          </div>
+
+          <div class="col-span-12">
+            <div class="flex items-center justify-end gap-2">
+              <button data-modal-close="billingEditModal" class="btn btn-active-red">Cancel</button>
+              <button type="submit" class="btn btn-primary">Update</button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+<div id="addCardPaymentModal" class="hidden modal show">
+  <div class="modal-wrap modal-center">
+    <div class="modal-header">
+      <h6>Add Card</h6>
+      <button data-modal-close="addCardPaymentModal" class="link link-red"><i data-lucide="x"
+          class="size-5"></i></button>
+    </div>
+    <div class="modal-content">
+      <form action="javascript: void(0);">
+        <div class="grid grid-cols-12 gap-5">
+          <div class="col-span-12">
+            <label for="cardNumberInput" class="form-label">Card Number</label>
+            <input type="text" id="cardNumberInput" class="form-input" x-mask:dynamic="$input.startsWith('34') || $input.startsWith('37')
+                          ? '9999 999999 99999' : '9999 9999 9999 9999' " placeholder="0000 0000 0000 0000" required>
+          </div>
+          <div class="col-span-3">
+            <label for="cvvInput" class="form-label">CVV</label>
+            <input type="text" id="cvvInput" class="form-input" x-mask="999" placeholder="000" required>
+          </div>
+          <div class="col-span-3">
+            <label for="expiryDateInput" class="form-label">Expiry Date</label>
+            <input type="text" id="expiryDateInput" class="form-input" x-mask="99/9999" placeholder="MM/YYYY" required>
+          </div>
+          <div class="col-span-6">
+            <label for="nameOnTheCardInput" class="form-label">Name on th Card</label>
+            <input type="text" id="nameOnTheCardInput" class="form-input" placeholder="Enter name" required>
+          </div>
+
+          <div class="col-span-12">
+            <div class="items-start input-check-group">
+              <input id="checkboxBasic1" class="mt-0.5 input-check input-check-primary shrink-0" type="checkbox" />
+              <label for="checkboxBasic1" class="input-check-label grow">
+                <span class="block mb-1.5 font-medium">Set as Default</span>
+                <span class="block text-gray-500 dark:text-dark-500">Scheduled payment will be automatically deducted
+                  from this card.</span>
+              </label>
+            </div>
+          </div>
+
+          <div class="col-span-12">
+            <div class="flex items-center justify-end gap-2">
+              <button data-modal-close="addCardPaymentModal" class="btn btn-active-red">Cancel</button>
+              <button type="submit" class="btn btn-primary">Add Card</button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div> -->

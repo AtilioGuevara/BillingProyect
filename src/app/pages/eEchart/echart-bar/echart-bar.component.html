@@ -1,0 +1,58 @@
+<app-page-title [Title]="'Bar Charts'" [pageTitle]="'Echarts'"></app-page-title>
+
+<div class="grid grid-cols-12 gap-x-space">
+  <div class="col-span-12 md:col-span-6 card">
+    <div class="card-header">
+      <h6 class="card-title">Basic</h6>
+    </div>
+    <div class="card-body">
+      <app-domix-echart [chartData]="barChartData"></app-domix-echart>
+    </div>
+  </div>
+
+  <div class="col-span-12 md:col-span-6 card">
+    <div class="card-header">
+      <h6 class="card-title">Axis Align with Tick</h6>
+    </div>
+    <div class="card-body">
+      <app-domix-echart [chartData]="axisAlignBarChartData"></app-domix-echart>
+    </div>
+  </div>
+
+  <div class="col-span-12 md:col-span-6 card">
+    <div class="card-header">
+      <h6 class="card-title">Bar with Background</h6>
+    </div>
+    <div class="card-body">
+      <app-domix-echart [chartData]="backgroundBarChartData"></app-domix-echart>
+    </div>
+  </div>
+
+  <div class="col-span-12 md:col-span-6 card">
+    <div class="card-header">
+      <h6 class="card-title">Set Style of Single Bar</h6>
+    </div>
+    <div class="card-body">
+      <app-domix-echart [chartData]="singleBarChartData"></app-domix-echart>
+    </div>
+  </div>
+
+  <div class="col-span-12 md:col-span-6 card">
+    <div class="card-header">
+      <h6 class="card-title">World Population</h6>
+    </div>
+    <div class="card-body">
+      <app-domix-echart [chartData]="worldPopulationBarChartData"></app-domix-echart>
+    </div>
+  </div>
+
+  <div class="col-span-12 md:col-span-6 card">
+    <div class="card-header">
+      <h6 class="card-title">Stacked Bar with borderRadius</h6>
+    </div>
+    <div class="card-body">
+      <app-domix-echart [chartData]="stackedBorderRadiusBarChartData"></app-domix-echart>
+    </div>
+  </div>
+
+</div>

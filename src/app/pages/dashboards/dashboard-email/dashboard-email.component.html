@@ -1,0 +1,442 @@
+<app-page-title [Title]="'Email'" [pageTitle]="'Dashboards'"></app-page-title>
+
+
+<div class="grid grid-cols-12 gap-x-space">
+  <div class="col-span-12 md:col-span-6 xl:col-span-2 card">
+    <div class="card-body">
+      <p class="mb-2 text-gray-500">Emails Sent</p>
+      <h5><span class="counters" [countUp]="48" [options]="{decimalPlaces:0}">0</span>k <lucide-angular
+          name="trending-up" class="inline-block text-green-500 ltr:ml-1 rtl:mr-1 size-4">
+        </lucide-angular> <small class="text-sm font-normal text-gray-500 dark:text-dark-500 ltr:ml-2 rtl:mr-2">This
+          years</small></h5>
+    </div>
+  </div>
+  <div class="col-span-12 md:col-span-6 xl:col-span-2 card">
+    <div class="card-body">
+      <p class="mb-2 text-gray-500 dark:text-dark-500">Average Click Rate</p>
+      <h5><span class="counters" [countUp]="32" [options]="{decimalPlaces:0}">0</span>k <lucide-angular
+          name="trending-down" class="inline-block text-green-500 ltr:ml-1 rtl:mr-1 size-4">
+        </lucide-angular> <small class="text-sm font-normal text-gray-500 dark:text-dark-500 ltr:ml-2 rtl:mr-2">This
+          years</small></h5>
+    </div>
+  </div>
+  <div class="col-span-12 md:col-span-6 xl:col-span-2 card">
+    <div class="card-body">
+      <p class="mb-2 text-gray-500 dark:text-dark-500">Open Rate</p>
+      <h5><span class="counters" [countUp]="84" [options]="{decimalPlaces:0}">0</span>%
+        <lucide-angular name="trending-down" class="inline-block text-red-500 ltr:ml-1 rtl:mr-1 size-4">
+        </lucide-angular><small class="text-sm font-normal text-gray-500 dark:text-dark-500 ltr:ml-2 rtl:mr-2">This
+          years</small>
+      </h5>
+    </div>
+  </div>
+  <div class="col-span-12 md:col-span-6 xl:col-span-2 card">
+    <div class="card-body">
+      <p class="mb-2 text-gray-500 dark:text-dark-500">Unsubscribe</p>
+      <h5><span class="counters" [countUp]="26" [options]="{decimalPlaces:0}">0</span>%
+        <lucide-angular name="trending-down" class="inline-block text-red-500 ltr:ml-1 rtl:mr-1 size-4">
+        </lucide-angular><small class="text-sm font-normal text-gray-500 dark:text-dark-500 ltr:ml-2 rtl:mr-2">This
+          years</small>
+      </h5>
+    </div>
+  </div>
+
+  <div
+    class="relative col-span-12 overflow-hidden border-0 xl:col-span-4 xl:row-span-2 card ltr:bg-gradient-to-bl rtl:bg-gradient-to-br from-green-500/15 to-primary-500/15">
+    <img src="assets/images/dashboards/ecommerce/pattern.png" alt=""
+      class="absolute bottom-0 ltr:right-0 rtl:left-0 opacity-20">
+    <div class="relative card-body">
+      <h6 class="mb-5">Top Campaign</h6>
+
+      <h5 class="mb-2 capitalize">Feeling embarrassed by your design skills? Here’s what you can do.</h5>
+      <p class="mb-8 text-gray-500 dark:text-dark-500">29 June, 2024</p>
+
+      <p class="mb-1">Conversion Rate</p>
+      <h5><span class="counters" [countUp]="1097" [options]="{decimalPlaces:0}">0</span>
+        <lucide-angular name="trending-down" class="inline-block text-red-500 ltr:ml-1 rtl:mr-1 size-4">
+        </lucide-angular> <small class="text-sm font-normal text-gray-500 dark:text-dark-400 ltr:ml-2 rtl:mr-2">12.9%
+          This years</small>
+      </h5>
+    </div>
+  </div>
+
+  <div class="col-span-12 xl:col-span-8 xl:row-span-2 card">
+    <div class="flex flex-col gap-5 lg:items-center lg:flex-row card-header">
+      <h6 class="card-title grow">Email Campaigns Performance</h6>
+      <div class="flex items-center gap-1 p-1 bg-gray-100 rounded-md dark:bg-dark-850 shrink-0">
+        <button type="button"
+          class="px-3 py-1 text-xs [&.active]:bg-white dark:[&.active]:bg-dark-900 btn active">Monthly</button>
+        <button type="button"
+          class="px-3 py-1 text-xs [&.active]:bg-white dark:[&.active]:bg-dark-900 btn">Weekly</button>
+        <button type="button"
+          class="px-3 py-1 text-xs [&.active]:bg-white dark:[&.active]:bg-dark-900 btn">Yearly</button>
+      </div>
+    </div>
+    <div class="card-body">
+      <app-domix-charts [series]="areaChart.series" [chartOptions]="areaChart.chartOptions">
+      </app-domix-charts>
+    </div>
+  </div>
+  <div class="col-span-12 overflow-hidden xl:col-span-4 card">
+    <div class="grid grid-cols-12">
+      <div class="col-span-12 lg:col-span-8">
+        <app-domix-charts [series]="donutChart.series" [chartOptions]="donutChart.chartOptions">
+        </app-domix-charts>
+      </div>
+      <div class="col-span-12 lg:col-span-4 bg-primary-500 card-body !-m-[1px] text-center">
+        <app-domix-charts [series]="labelChart.series" [chartOptions]="labelChart.chartOptions">
+        </app-domix-charts>
+        <p class="mt-4 text-primary-100">Total Revenue</p>
+        <h5 class="text-white">$<span class="counters" [countUp]="145" [options]="{decimalPlaces:0}">0</span>M</h5>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-span-12 xl:col-span-4 xl:row-span-2 card">
+    <div class="flex items-center gap-5 card-header">
+      <h6 class="card-title grow">Mail Statistics</h6>
+      <div class="dropdown shrink-0">
+        <button domixDropdownToggle [dropdownMenu]="dropdown1" type="button"
+          class="flex items-center text-gray-500 dark:text-dark-500">
+          <lucide-angular name="Ellipsis" class="size-5"></lucide-angular>
+        </button>
+        <div #dropdown1 class="!fixed p-2 dropdown-menu" dropdown-position="right">
+          <ul>
+            <li>
+              <a href="javascript:void(0);" class="dropdown-item">
+                <span>Weekly</span>
+              </a>
+            </li>
+            <li>
+              <a href="javascript: void(0);" class="dropdown-item">
+                <span>Monthly</span>
+              </a>
+            </li>
+            <li>
+              <a href="javascript: void(0);" class="dropdown-item">
+                <span>Yearly</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <app-domix-charts [series]="mailStatisticChart.series" [chartOptions]="mailStatisticChart.chartOptions">
+      </app-domix-charts>
+    </div>
+  </div>
+  <div class="col-span-12 xl:col-span-4 card">
+    <div class="flex items-center gap-5 card-header">
+      <h6 class="card-title grow">All Time Spending</h6>
+      <a href="javascript: void(0);" class="badge badge-sub-gray">
+        See All
+        <lucide-angular name="MoveRight" class="ltr:inline-block rtl:hidden ml-0.5 size-4"></lucide-angular>
+        <lucide-angular name="MoveLeft" class="rtl:inline-block ltr:hidden mr-0.5 size-4"></lucide-angular>
+      </a>
+    </div>
+    <div class="card-body">
+      <div class="grid grid-cols-12">
+        <div class="col-span-6">
+          <h5>7.4%</h5>
+          <p class="text-gray-500 dark:text-dark-500">Conversion Rate</p>
+        </div>
+        <div class="col-span-6">
+          <h5>48,759</h5>
+          <p class="text-gray-500 dark:text-dark-500">Users</p>
+        </div>
+        <div class="col-span-12">
+          <app-domix-charts [series]="timeSpendingChart.series" [chartOptions]="timeSpendingChart.chartOptions">
+          </app-domix-charts>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-span-12 xl:col-span-4 xl:row-span-2 card">
+    <div class="flex items-center gap-5 card-header">
+      <h6 class="card-title grow">Monthly Campaign Stats</h6>
+      <div class="dropdown shrink-0">
+        <button domixDropdownToggle [dropdownMenu]="dropdown1" type="button"
+          class="flex items-center text-gray-500 dark:text-dark-500">
+          <lucide-angular name="Ellipsis" class="size-5"></lucide-angular>
+        </button>
+        <div #dropdown1 class="!fixed p-2 dropdown-menu" dropdown-position="right">
+          <ul>
+            <li>
+              <a href="javascript: void(0);" class="dropdown-item">
+                <span>Weekly</span>
+              </a>
+            </li>
+            <li>
+              <a href="javascript: void(0);" class="dropdown-item">
+                <span>Monthly</span>
+              </a>
+            </li>
+            <li>
+              <a href="javascript: void(0);" class="dropdown-item">
+                <span>Yearly</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="overflow-x-auto table-box">
+        <table class="table flush table-sm">
+          <tbody>
+            <tr>
+              <td class="w-12">
+                <div class="flex items-center justify-center text-green-100 bg-green-500 rounded-md size-9">
+                  <lucide-angular name="Mail" class="size-5"></lucide-angular>
+                </div>
+              </td>
+              <td class="pr-3 !pl-0 !py-2.5">Campaign</td>
+              <td class="pr-3 !pl-0 !py-2.5">48</td>
+              <td class="text-green-500 font-medium">0.9%</td>
+            </tr>
+            <tr>
+              <td class="w-12">
+                <div class="flex items-center justify-center rounded-md text-sky-100 bg-sky-500 size-9">
+                  <lucide-angular name="SquareMousePointer" class="size-5"></lucide-angular>
+                </div>
+              </td>
+              <td class="pr-3 !pl-0 !py-2.5">Clicked</td>
+              <td class="pr-3 !pl-0 !py-2.5">48.69%</td>
+              <td class="text-green-500 font-medium">2.9%</td>
+            </tr>
+            <tr>
+              <td class="w-12">
+                <div class="flex items-center justify-center text-orange-100 bg-orange-500 rounded-md size-9">
+                  <lucide-angular name="Mail" class="size-5"></lucide-angular>
+                </div>
+              </td>
+              <td class="pr-3 !pl-0 !py-2.5">Emails</td>
+              <td class="pr-3 !pl-0 !py-2.5">47,899</td>
+              <td class="text-green-500 font-medium">0.5%</td>
+            </tr>
+            <tr>
+              <td class="w-12">
+                <div class="flex items-center justify-center text-yellow-100 bg-yellow-500 rounded-md size-9">
+                  <lucide-angular name="SquareArrowOutUpRight" class="size-5"></lucide-angular>
+                </div>
+              </td>
+              <td class="pr-3 !pl-0 !py-2.5">Opened</td>
+              <td class="pr-3 !pl-0 !py-2.5">71.12%</td>
+              <td class="text-red-500 font-medium">1.7%</td>
+            </tr>
+            <tr>
+              <td class="w-12">
+                <div class="flex items-center justify-center rounded-md text-primary-100 bg-primary-500 size-9">
+                  <lucide-angular name="UserRoundCheck" class="size-5"></lucide-angular>
+                </div>
+              </td>
+              <td class="pr-3 !pl-0 !py-2.5">Subscribe</td>
+              <td class="pr-3 !pl-0 !py-2.5">47,165</td>
+              <td class="text-green-500 font-medium">0.8%</td>
+            </tr>
+            <tr>
+              <td class="w-12">
+                <div class="flex items-center justify-center text-red-100 bg-red-500 rounded-md size-9">
+                  <lucide-angular name="UserX" class="size-5"></lucide-angular>
+                </div>
+              </td>
+              <td>Unsubscribe</td>
+              <td>287</td>
+              <td class="text-red-500 font-medium">0.4%</td>
+            </tr>
+            <tr>
+              <td class="w-12">
+                <div class="flex items-center justify-center text-purple-100 bg-purple-500 rounded-md size-9">
+                  <lucide-angular name="mouse-pointer-2" class="size-5"></lucide-angular>
+                </div>
+              </td>
+              <td>Click-Through Rate</td>
+              <td>45.00%</td>
+              <td class="text-green-500 font-medium">5.0%</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-span-12 md:col-span-6 xl:col-span-2 card">
+    <div class="card-body">
+      <div class="dropdown float-end">
+        <button title="dropdown-button" domixDropdownToggle [dropdownMenu]="dropdown3" type="button"
+          class="flex items-center text-gray-500 dark:text-dark-500">
+          <lucide-angular name="Ellipsis" class="size-5"></lucide-angular>
+        </button>
+        <div #dropdown3 class="!fixed p-2 dropdown-menu hidden" dropdown-position="right">
+          <ul>
+            <li>
+              <a routerLink="/apps-event-overview" class="dropdown-item">
+                <span>Weekly</span>
+              </a>
+            </li>
+            <li>
+              <a href="javascript:void(0);" class="dropdown-item">
+                <span>Monthly</span>
+              </a>
+            </li>
+            <li>
+              <a href="javascript:void(0);" class="dropdown-item">
+                <span>Yearly</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <p class="text-gray-500 dark:text-dark-500">Total Customers</p>
+      <h5 class="mt-6 mb-1">1,32,603</h5>
+      <p class="text-gray-500 dark:text-dark-500"><span class="text-green-500">0.5%</span> From last week</p>
+    </div>
+  </div>
+  <div class="col-span-12 md:col-span-6 xl:col-span-2 card">
+    <div class="card-body">
+      <div class="dropdown float-end">
+        <button title="dropdown-button" domixDropdownToggle [dropdownMenu]="dropdown" type="button"
+          class="flex items-center text-gray-500 dark:text-dark-500">
+          <lucide-angular name="Ellipsis" class="size-5"></lucide-angular>
+        </button>
+        <div #dropdown class="!fixed p-2 dropdown-menu hidden" dropdown-position="right">
+          <ul>
+            <li>
+              <a routerLink="/apps-event-overview" class="dropdown-item">
+                <span>Weekly</span>
+              </a>
+            </li>
+            <li>
+              <a href="javascript:void(0);" class="dropdown-item">
+                <span>Monthly</span>
+              </a>
+            </li>
+            <li>
+              <a href="javascript:void(0);" class="dropdown-item">
+                <span>Yearly</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <p class="text-gray-500 dark:text-dark-500">Bounce Rate</p>
+      <h5 class="mt-6 mb-1">48,314</h5>
+      <p class="text-gray-500 dark:text-dark-500"><span class="text-green-500">1.8%</span> From last week</p>
+    </div>
+  </div>
+
+  <div class="col-span-12 card">
+    <div class="grid items-center grid-cols-12 card-header gap-space">
+      <div class="col-span-12 lg:col-span-3">
+        <h6 class="card-title grow">All Email Performance</h6>
+      </div>
+      <div class="col-span-12 lg:col-span-4 xl:col-start-9">
+        <div class="flex items-center gap-space">
+          <button class="btn btn-red btn-icon" *ngIf="checkedRows.length" (click)="deleteSelectedItem()">
+            <lucide-angular name="trash" class="inline-block size-4"></lucide-angular></button>
+          <div class="relative group/form grow">
+            <input type="text"
+              class="ltr:pl-9 rtl:pr-9 form-input ltr:group-[&.right]/form:pr-9 rtl:group-[&.right]/form:pl-9 ltr:group-[&.right]/form:pl-4 rtl:group-[&.right]/form:pr-4"
+              placeholder="Search ..." [(ngModel)]="searchText" (ngModelChange)="updateDisplayedData()">
+            <button title="search-button"
+              class="absolute inset-y-0 flex items-center text-gray-500 dark:text-dark-500 ltr:left-3 rtl:right-3 ltr:group-[&.right]/form:right-3 rtl:group-[&.right]/form:left-3 ltr:group-[&.right]/form:left-auto rtl:group-[&.right]/form:right-auto focus:outline-hidden">
+              <lucide-angular name="search" class="size-4"></lucide-angular>
+            </button>
+          </div>
+          <button type="button" class="btn btn-primary shrink-0"><lucide-angular name="download"
+              class="inline-block ltr:mr-1 rtl:ml-1 size-4"></lucide-angular> Export</button>
+        </div>
+      </div><!--end col-->
+    </div>
+    <div class="pt-0 card-body">
+      <div class="overflow-x-auto table-box">
+        <table class="table whitespace-nowrap">
+          <tbody>
+            <tr class="text-gray-500 bg-gray-100 dark:text-dark-500 dark:bg-dark-850">
+              <th *ngFor="let col of columnDefs" class="!font-medium cursor-pointer">
+                <div class="flex items-center gap-space">
+                  <div class="!font-medium" *ngIf="col.headerCheckbox">
+                    <div class="input-check-group">
+                      <label for="checkboxAll" class="hidden input-check-label"></label>
+                      <input id="checkboxAll" class="input-check input-check-primary" type="checkbox"
+                        [(ngModel)]="headerCheckBox" (change)="headerCheckBoxChange()" />
+                    </div>
+                  </div>
+                  <div (click)="onSortChange(col)">
+                    {{col.headerName}} <span *ngIf="col.sortable">
+                      {{ col.sortDiraction === 'asc' ? '↑' : '↓' }}</span>
+                  </div>
+                </div>
+              </th>
+            </tr>
+            <ng-container *ngIf="displayedData.length > 0">
+              <ng-container *ngFor="let email of displayedData; let i = index">
+                <tr>
+                  <td>
+                    <div class="flex items-center gap-space">
+                      <div class="!font-medium" *ngIf="hasHeaderCheckbox">
+                        <div class="input-check-group">
+                          <label for="checkboxAll" class="hidden input-check-label"></label>
+                          <input id="checkboxAll" class="input-check input-check-primary" type="checkbox"
+                            x-model="selectAll" [checked]="email.checked" (change)="onRowCheckboxChange(i)" />
+                        </div>
+                      </div>
+                      {{ email.emailName }}
+                    </div>
+                  </td>
+                  <td>{{ email.publishDate }}</td>
+                  <td>{{ email.sent }}</td>
+                  <td>{{ email.clickRate }}</td>
+                  <td>{{ email.deliveredRate }}</td>
+                  <td>{{ email.spamReport }}</td>
+                </tr>
+              </ng-container>
+            </ng-container>
+            <tr>
+              <ng-container *ngIf="displayedData.length == 0">
+                <td colspan="10" class="!p-8">
+                  <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" class="mx-auto size-12" viewBox="0 0 48 48">
+                    <linearGradient id="SVGID_1__h35ynqzIJzH4_gr1" x1="34.598" x2="15.982" y1="15.982" y2="34.598"
+                      gradientUnits="userSpaceOnUse">
+                      <stop offset="0" stop-color="#60e8fe"></stop>
+                      <stop offset=".033" stop-color="#6ae9fe"></stop>
+                      <stop offset=".197" stop-color="#97f0fe"></stop>
+                      <stop offset=".362" stop-color="#bdf5ff"></stop>
+                      <stop offset=".525" stop-color="#dafaff"></stop>
+                      <stop offset=".687" stop-color="#eefdff"></stop>
+                      <stop offset=".846" stop-color="#fbfeff"></stop>
+                      <stop offset="1" stop-color="#fff"></stop>
+                    </linearGradient>
+                    <path fill="url(#SVGID_1__h35ynqzIJzH4_gr1)"
+                      d="M40.036,33.826L31.68,25.6c0.847-1.739,1.335-3.684,1.335-5.748c0-7.27-5.894-13.164-13.164-13.164	S6.688,12.582,6.688,19.852c0,7.27,5.894,13.164,13.164,13.164c2.056,0,3.995-0.485,5.728-1.326l3.914,4.015l4.331,4.331	c1.715,1.715,4.496,1.715,6.211,0C41.751,38.321,41.751,35.541,40.036,33.826z">
+                    </path>
+                    <path fill="none" stroke="#10cfe3" stroke-linecap="round" stroke-linejoin="round"
+                      stroke-miterlimit="10" stroke-width="3"
+                      d="M31.95,25.739l8.086,8.086c1.715,1.715,1.715,4.496,0,6.211l0,0c-1.715,1.715-4.496,1.715-6.211,0	l-4.331-4.331">
+                    </path>
+                    <path fill="none" stroke="#10cfe3" stroke-linecap="round" stroke-linejoin="round"
+                      stroke-miterlimit="10" stroke-width="3"
+                      d="M7.525,24.511c-1.771-4.694-0.767-10.196,3.011-13.975c3.847-3.847,9.48-4.817,14.228-2.912">
+                    </path>
+                    <path fill="none" stroke="#10cfe3" stroke-linecap="round" stroke-linejoin="round"
+                      stroke-miterlimit="10" stroke-width="3"
+                      d="M30.856,12.603c3.376,5.114,2.814,12.063-1.688,16.565c-4.858,4.858-12.565,5.129-17.741,0.814">
+                    </path>
+                  </svg>
+                  <p class="mt-2 text-center text-gray-500 dark:text-dark-500">No matching records found</p>
+                </td>
+              </ng-container>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <app-domix-pagination [currentPage]="currentPage" [totalPages]="totalPages" [showingStart]="showingStart"
+        [showingEnd]="showingEnd" [totalResults]="displayedData.length" (pageChanged)="onPageChange($event)">
+      </app-domix-pagination>
+
+    </div>
+  </div>
+
+</div>

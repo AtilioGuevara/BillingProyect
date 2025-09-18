@@ -1,0 +1,291 @@
+<app-page-title [pageTitle]="'Ecommerce'" [Title]="'Product Overview'"></app-page-title>
+
+<div class="grid grid-cols-12 gap-x-5">
+    <div class="col-span-12 lg:col-span-8">
+        <div class="card">
+            <div class="card-body">
+                <div class="flex items-center mb-5">
+                    <p class="grow">
+                        <span class="badge badge-sub-gray">
+                            <lucide-angular name="Heart" class="inline-block mr-1 text-red-500 size-4 fill-red-500"></lucide-angular>
+                            Wishlist
+                        </span>
+                    </p>
+                    <div class="divide-x divide-gray-200 rtl:divide-x-reverse dark:divide-dark-800 shrink-0">
+                        <a (click)="editProduct()" class="ltr:pr-1 rtl:pl-1 link link-primary">
+                            <lucide-angular class="inline-block size-4" name="pencil"></lucide-angular>
+                            <span class="align-middle">Edit</span>
+                        </a>
+                        <a href="javascript: void(0);" class="ltr:pl-2 rtl:pr-2 link link-red" (click)="deleteProduct()">
+                            <lucide-angular class="inline-block size-4" name="trash2"></lucide-angular>
+                            <span class="align-middle">Delete</span>
+                        </a>
+                    </div>
+                </div>
+
+                <h5 class="mb-3">{{ productName }}</h5>
+
+                <div class="flex items-center mb-5 divide-x divide-gray-200 dark:divide-dark-800 rtl:divide-x-reverse">
+                    <p class="ltr:first:pl-0 rtl:first:pr-0"><i class="text-yellow-500 align-bottom ri-star-half-line"></i> {{ rating }}</p>
+                    <p class="ltr:first:pl-0 rtl:first:pr-0">{{ reviews }} Reviews</p>
+                    <p class="ltr:first:pl-0 rtl:first:pr-0">{{ sales }} Sales</p>
+                </div>
+
+                <h4 class="flex items-center gap-2 mt-3">
+                    ${{ ((basePrice * count) * (1 - discount)).toFixed(2) }}
+                    <small class="font-normal text-gray-500 line-through dark:text-dark-500">
+                        ${{ (basePrice * count).toFixed(2) }}
+                    </small>
+                    <span class="text-xs badge badge-red shrink-0">{{ discountPercent }}%</span>
+                </h4>
+
+                <!-- Select Colors -->
+                <div class="grid grid-cols-1 sm:grid-cols-2">
+                    <div>
+                        <h6 class="mt-5">Select Colors</h6>
+                        <div class="flex items-center gap-2 mt-2 grow">
+                            <a href="javascript:void(0);" *ngFor="let color of colors" class="flex items-center justify-center text-white {{color.code }} border-2 border-white rounded-full dark:border-dark-900 outline-1 outline outline-gray-200 dark:outline-dark-800 size-6 group/item" (click)="selectColor(color)" [ngClass]="{'active': color.active}"><lucide-angular name="check" class="size-4 hidden group-[&.active]/item:block" *ngIf="color.active"></lucide-angular></a>
+                        </div>
+                    </div>
+
+                    <!-- Select Size -->
+                    <div>
+                        <h6 class="mt-5">Select Size</h6>
+                        <div class="flex items-center gap-2 mt-3 font-medium shrink-0">
+                            <ng-container *ngFor="let size of sizes">
+                                <a href="javascript:void(0);" class="text-gray-500 dark:text-dark-500 [&.active]:text-green-500" [class.active]="size.active" (click)="selectSize(size)">{{ size.label }}</a>
+                            </ng-container>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quantity Control -->
+                <div class="my-5">
+                    <div class="flex items-center w-32 p-1 text-center border border-gray-200 rounded-md dark:border-dark-800">
+                        <button class="flex items-center justify-center transition duration-200 ease-linear rounded-md text-primary-500 minus size-8 shrink-0 bg-primary-500/20 hover:text-primary-700" (click)="decreaseCount()">
+                            <lucide-angular class="size-4" name="minus"></lucide-angular>
+                        </button>
+                        <input type="text" class="h-8 p-0 text-center border-0 rounded-none form-input" readonly [value]="count">
+                        <button class="flex items-center justify-center transition duration-200 ease-linear rounded-md text-primary-500 plus size-8 shrink-0 bg-primary-500/20 hover:text-primary-700" (click)="increaseCount()">
+                            <lucide-angular class="size-4" name="plus"></lucide-angular>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Buy/Add to Cart Buttons -->
+                <div class="flex flex-wrap items-center gap-2 mb-5">
+                    <button type="button" class="btn btn-red w-36" (click)="buyNow()">Buy Now</button>
+                    <button type="button" class="btn btn-sub-gray w-36" (click)="addToCart()">Add to Cart</button>
+                </div>
+
+                <!-- Available Offers -->
+                <h6 class="mb-2">Available offers</h6>
+                <div class="mb-5">
+                    <ul class="flex flex-col gap--2 text-gray-500 list-inside dark:text-dark-500 list-circle">
+                        <ng-container *ngFor="let offer of visibleOffers()">
+                            <li>
+                                <span class="font-semibold">{{ offer.title }}</span>
+                                {{ offer.description }} <a href="javascript:void(0);" class="underline link link-red">T&C</a>
+                            </li>
+                        </ng-container>
+                    </ul>
+
+                    <a class="inline-block mt-3 link link-red" (click)="toggleShowMore()">
+                        <span>{{ showMore ? 'Show Less' : 'Show More' }}</span>
+                        <lucide-angular class="inline-block size-4" [class.ri-arrow-up-s-line]="showMore" [class.ri-arrow-down-s-line]="!showMore"></lucide-angular>
+                    </a>
+                </div>
+
+                <!-- Product Overview -->
+                <h6 class="mb-1">Product Overview</h6>
+                <p class="mb-4 text-gray-500 dark:text-dark-500">We work with monitoring programmes to ensure compliance with our social, environmental and health and safety standards for our products.</p>
+
+                <!-- Product Details Table -->
+                <table class="table table-sm flush">
+                    <ng-container *ngFor="let detail of visibleProductDetails()">
+                        <tr>
+                            <th class="!border-0">{{ detail.label }}</th>
+                            <td>{{ detail.value }}</td>
+                        </tr>
+                    </ng-container>
+                </table>
+
+                <a class="inline-block mt-3 link link-red" (click)="showMoreD = !showMoreD">
+                    <span>{{ showMoreD ? 'Show Less' : 'Show More' }}</span>
+                    <i class="inline-block size-4" [class.ri-arrow-up-s-line]="showMoreD" [class.ri-arrow-down-s-line]="!showMoreD"></i>
+                </a>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header">
+                <div class="flex flex-wrap items-center gap-5">
+                    <h6 class="card-title grow">Ratings & Reviews</h6>
+                    <div class="shrink-0">
+                        <button class="btn btn-primary" (click)="handleModal(null,null)"><lucide-angular name="plus" class="inline-block mr-1 size-4"></lucide-angular> New Review</button>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div>
+                    <div class="overflow-x-auto">
+                        <table class="table flush whitespace-nowrap">
+                            <tbody>
+                                <ng-container *ngFor="let review of displayReview; let i = index">
+                                    <tr>
+                                        <td class="align-top">
+                                            <div class="flex items-center gap-3">
+                                                <img [src]="review.image" alt="" class="rounded-md shrink-0 size-16">
+                                                <div class="overflow-hidden grow">
+                                                    <h6 class="mb-1 truncate">
+                                                        <a href="javascript:void(0);" class="text-current link link-primary">{{review.userName}} </a>
+                                                    </h6>
+                                                    <p class="mb-1 text-sm truncate">{{review.date}}</p>
+                                                    <p class="text-sm text-gray-500 truncate dark:text-dark-500">Location: <span>{{review.location}}</span></p>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="max-w-[550px]">
+                                                <div class="flex items-center gap-2 mb-3">
+                                                    <div class="text-yellow-500">
+                                                        <ng-container *ngFor="let iStar of [1, 2, 3, 4, 5]">
+                                                            <i [ngClass]="getStarClass(review.star, iStar)"></i>
+                                                        </ng-container>
+                                                    </div>
+                                                    <h6>(<span>{{review.star}}</span>)</h6>
+                                                </div>
+                                                <h6 class="mb-1">{{review.title}}</h6>
+                                                <p class="text-gray-500 whitespace-normal dark:text-dark-500">{{review.content}}</p>
+                                            </div>
+                                        </td>
+                                        <td class="align-top">
+                                            <div class="flex items-center justify-end gap-3">
+                                                <div class="dropdown">
+                                                    <button type="button" class="btn btn-icon-text btn-sub-gray btn-icon" domixDropdownToggle [dropdownMenu]="dropdown5">
+                                                        <i class="ri-more-2-fill"></i>
+                                                    </button>
+                                                    <div class="!fixed p-2 dropdown-menu" #dropdown5>
+                                                        <ul>
+                                                            <li>
+                                                                <a (click)="handleModal(review,i)" class="dropdown-item">
+                                                                    <i class="align-middle ltr:mr-2 rtl:ml-2 ri-pencil-line"></i> <span>Edit</span>
+                                                                </a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="javascript: void(0);" (click)="openDelModal(i)" class="dropdown-item">
+                                                                    <i class="align-middle ltr:mr-2 rtl:ml-2 ri-delete-bin-line"></i><span>Delete</span>
+                                                                </a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </ng-container>
+                            </tbody>
+                        </table>
+                    </div>
+                    <app-domix-pagination [currentPage]="currentPage" [totalPages]="totalPages" [showingStart]="showingStart" [showingEnd]="showingEnd" [totalResults]="filterdReview.length" (pageChanged)="onPageChange($event)">
+                    </app-domix-pagination>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-span-12 lg:col-span-4">
+        <div class="sticky mb-5 top-24">
+            <div class="card">
+                <div class="card-body">
+                    <div class="bg-gray-100 dark:bg-dark-850">
+                        <div class="swiper previewImages" dir="ltr" #paginationDynamicSlider>
+                            <div class="swiper-wrapper">
+                                <div class="swiper-slide">
+                                    <img src="assets/images/products/img-25.png" alt="">
+                                </div>
+                                <div class="swiper-slide">
+                                    <img src="assets/images/products/img-26.png" alt="">
+                                </div>
+                                <div class="swiper-slide">
+                                    <img src="assets/images/products/img-27.png" alt="">
+                                </div>
+                                <div class="swiper-slide">
+                                    <img src="assets/images/products/img-28.png" alt="">
+                                </div>
+                                <div class="swiper-slide">
+                                    <img src="assets/images/products/img-29.png" alt="">
+                                </div>
+                                <div class="swiper-slide">
+                                    <img src="assets/images/products/img-30.png" alt="">
+                                </div>
+                            </div>
+                            <div class="swiper-button-next after:!content-['\ea6e'] after:!font-['remixicon'] after:bg-white dark:after:bg-dark-900 size-10 after:text-4xl after:size-10 after:flex after:justify-center after:align-center after:rounded-full"></div>
+                            <div class="swiper-button-prev after:!content-['\ea64'] after:!font-['remixicon'] after:bg-white dark:after:bg-dark-900 size-10 after:text-4xl after:size-10 after:flex after:justify-center after:align-center after:rounded-full"></div>
+                            <div class="swiper-pagination"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="flex flex-wrap items-center gap-3 card-body">
+                    <div class="flex items-center justify-center border border-gray-200 rounded-full dark:border-dark-800 shrink-0 size-14">
+                        <lucide-angular name="store" class="text-sky-500 fill-sky-500/10"></lucide-angular>
+                    </div>
+                    <div class="grow">
+                        <h6 class="mb-1"><a href="javascript: void(0);"><span class="align-middle">SRBThemes</span>
+                                <lucide-angular name="badge-check" class="inline-block ml-1 size-4 text-sky-500 fill-sky-500/10"></lucide-angular></a></h6>
+                        <p><i class="text-yellow-500 align-bottom ri-star-half-line"></i> 4.8</p>
+                    </div>
+                    <button class="btn btn-purple shrink-0">View Store</button>
+                </div>
+            </div>
+            <div class="flex items-center gap-3 mb-5">
+                <h6 class="grow">Recent Product</h6>
+                <a href="javascript:void(0);" class="link link-primary">View All</a>
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <div class="relative p-5 bg-gray-100 dark:bg-dark-850">
+                        <a href="javascript:void(0);" class="absolute z-10 flex items-center justify-center bg-white rounded-full link link-red size-10 shrink-0 top-5 ltr:right-5 rtl:left-5"><i class="text-lg ri-heart-line"></i></a>
+                        <div class="swiper productSlider" dir="ltr" #paginationContain>
+                            <div class="swiper-wrapper">
+                                <div class="swiper-slide">
+                                    <img src="assets/images/products/img-06.png" alt="" class="w-3/4 mx-auto">
+                                </div>
+                                <div class="swiper-slide">
+                                    <img src="assets/images/products/img-04.png" alt="" class="w-3/4 mx-auto">
+                                </div>
+                                <div class="swiper-slide">
+                                    <img src="assets/images/products/img-05.png" alt="" class="w-3/4 mx-auto">
+                                </div>
+                            </div>
+                            <div class="swiper-pagination"></div>
+                        </div>
+                    </div>
+                    <div class="mt-5">
+                        <h5 class="mb-2">$36.87</h5>
+                        <h6 class="mb-1"><a href="javascript:void(0);" class="text-current link link-primary">Bra Lace Crop top</a></h6>
+                        <p class="text-gray-500 dark:text-dark-500">Fashion</p>
+
+                        <div class="flex flex-wrap items-center gap-2">
+                            <div class="flex items-center gap-2 mt-3 grow">
+                                <a href="javascript:void(0);" *ngFor="let color of colors" class="flex items-center justify-center text-white rounded size-5 group/item {{color.code }}" (click)="selectColorCart(color)" [ngClass]="{'active': color.active}"><lucide-angular name="check" class="size-4 hidden group-[&.active]/item:block" *ngIf="color.active"></lucide-angular></a>
+                            </div>
+
+
+                            <div class="flex flex-row-reverse items-center gap-2 mt-3 font-medium shrink-0">
+                                <ng-container *ngFor="let size of sizes">
+                                    <a href="javascript:void(0);" class="text-gray-500 dark:text-dark-500 [&.active]:text-green-500" [class.active]="size.active" (click)="selectSizeCart(size)">{{ size.label }}</a>
+                                </ng-container>
+                            </div>
+                        </div>
+
+                        <div class="flex gap-2 mt-4">
+                            <button type="button" class="w-full btn btn-primary">Buy Now</button>
+                            <a href="javascript:void(0);" class="btn btn-sub-gray btn-icon shrink-0"><lucide-angular name="shopping-bag" class="size-5"></lucide-angular></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

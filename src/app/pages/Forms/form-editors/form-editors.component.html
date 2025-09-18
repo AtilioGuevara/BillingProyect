@@ -1,0 +1,17 @@
+<app-page-title [Title]="'Area Charts'" [pageTitle]="'Apexcharts'"></app-page-title>
+
+<!-- editor.component.html -->
+<div class="grid grid-cols-12">
+    <div class="col-span-12 card">
+        <div class="card-header">
+            <h6 class="card-title">NGX Editors</h6>
+        </div>
+        <div class="card-body">
+            <div class="ngx-editors">
+                <ngx-editor [editor]="editor" [ngModel]="html" [disabled]="false" [placeholder]="'Type here...'"></ngx-editor>
+                <ngx-editor-menu [editor]="editor"> </ngx-editor-menu>
+            </div>
+            <!-- <ckeditor [editor]="Editor" data="<p>Hello, world!</p>"></ckeditor> -->
+        </div>
+    </div>
+</div>

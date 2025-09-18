@@ -1,0 +1,100 @@
+<app-page-title [Title]="'Bar Charts'" [pageTitle]="'Apexcharts'"></app-page-title>
+
+
+<div class="grid grid-cols-12 gap-x-space">
+  <div class="col-span-12 md:col-span-6 card">
+    <div class="card-header">
+      <h6 class="card-title">Basic</h6>
+    </div>
+    <div class="card-body">
+      <app-domix-charts [series]="basicBarChart.series" [chartOptions]="basicBarChart.chartOptions">
+      </app-domix-charts>
+    </div>
+  </div>
+
+  <div class="col-span-12 md:col-span-6 card">
+    <div class="card-header">
+      <h6 class="card-title">Grouped</h6>
+    </div>
+    <div class="card-body">
+      <app-domix-charts [series]="groupedBarChart.series" [chartOptions]="groupedBarChart.chartOptions">
+      </app-domix-charts>
+    </div>
+  </div>
+
+  <div class="col-span-12 md:col-span-6 card">
+    <div class="card-header">
+      <h6 class="card-title">Stacked Bar</h6>
+    </div>
+    <div class="card-body">
+      <app-domix-charts [series]="stackedBarChart.series" [chartOptions]="stackedBarChart.chartOptions">
+      </app-domix-charts>
+    </div>
+  </div>
+
+  <div class="col-span-12 md:col-span-6 card">
+    <div class="card-header">
+      <h6 class="card-title">Stacked Bars 100</h6>
+    </div>
+    <div class="card-body">
+      <app-domix-charts [series]="stackedBar100Chart.series" [chartOptions]="stackedBar100Chart.chartOptions">
+      </app-domix-charts>
+    </div>
+  </div>
+
+  <div class="col-span-12 md:col-span-6 card">
+    <div class="card-header">
+      <h6 class="card-title">Grouped Stacked Bars</h6>
+    </div>
+    <div class="card-body">
+      <app-domix-charts [series]="groupedStackedChart.series" [chartOptions]="groupedStackedChart.chartOptions">
+      </app-domix-charts>
+    </div>
+  </div>
+
+  <div class="col-span-12 md:col-span-6 card">
+    <div class="card-header">
+      <h6 class="card-title">Bar with Negative Values</h6>
+    </div>
+    <div class="card-body">
+
+      <app-domix-charts [series]="populationPyramidChart.series" [chartOptions]="populationPyramidChart.chartOptions">
+      </app-domix-charts>
+    </div>
+  </div>
+
+  <div class="col-span-12 md:col-span-6 card">
+    <div class="card-header">
+      <h6 class="card-title">Bar with Markers</h6>
+    </div>
+    <div class="card-body">
+
+      <app-domix-charts [series]="reversedBarApp.series" [chartOptions]="reversedBarApp.chartOptions">
+      </app-domix-charts>
+    </div>
+  </div>
+
+  <div class="col-span-12 md:col-span-6 card">
+    <div class="card-header">
+      <h6 class="card-title">Reversed Bar Chart</h6>
+    </div>
+    <div class="card-body">
+
+      <app-domix-charts [series]="reversedBarChart1.series" [chartOptions]="reversedBarChart1.chartOptions">
+      </app-domix-charts>
+    </div>
+  </div>
+
+  <div class="col-span-12 md:col-span-6 card">
+    <div class="card-header">
+      <h6 class="card-title">Patterned</h6>
+    </div>
+    <div class="card-body">
+
+      <app-domix-charts [series]="patternedBarChart.series" [chartOptions]="patternedBarChart.chartOptions">
+      </app-domix-charts>
+    </div>
+  </div>
+
+</div>
+

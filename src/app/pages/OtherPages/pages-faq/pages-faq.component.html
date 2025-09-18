@@ -1,0 +1,105 @@
+<app-page-title [Title]="'FAQ\'s'" [pageTitle]="'Pages'"></app-page-title>
+
+<div class="grid grid-cols-12 gap-x-space">
+  <div class="col-span-12">
+    <div class="card">
+      <div class="card-header">
+        <h6>Frequently asked questions (FAQ)</h6>
+      </div>
+      <div class="card-body">
+        <p class="mb-4 text-gray-500 dark:text-dark-500">They serve as a self-service tool for customers to easily find
+          the information they need without contacting customer support.</p>
+        <div class="grid items-center grid-cols-1 gap-3 xl:grid-cols-2">
+          <div class="xl:hidden">
+            <div class="text-center">
+              <img src="assets/images/auth/faq.png" alt="" class="mx-auto">
+
+              <h5 class="mt-5 mb-1">Frequently asked questions (FAQ)</h5>
+              <p class="mb-5 text-gray-500 dark:text-dark-500">Cleaning up common queries about domiex.</p>
+              <div class="flex flex-wrap items-center justify-center gap-3">
+                <button class="btn btn-purple">
+                  <lucide-angular name="phone" class="inline-block ltr:mr-1 rtl:ml-1 size-4"></lucide-angular>
+                  Contact US
+                </button>
+                <button class="btn btn-gray">
+                  <lucide-angular name="Headset" class="inline-block ltr:mr-1 rtl:ml-1 size-4"></lucide-angular>
+                  Help Center
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="space-y-3">
+            <div *ngFor="let item of items; let i = index">
+              <div class="accordion-boxed">
+                <button type="button" class="accordion-button accordion-primary" (click)="toggle(i)">
+                  <div class="flex items-center justify-between">
+                    <span>{{ item.title }}</span>
+                    <span class="text-gray-500 ico-down" [ngClass]="{ 'text-primary-500': selectedIndex === i }"
+                      *ngIf="selectedIndex !== i">
+                      <lucide-angular name="chevronDown"></lucide-angular>
+                    </span>
+                    <span class="text-gray-500 ico-up" [ngClass]="{ 'text-primary-500': selectedIndex === i }"
+                      *ngIf="selectedIndex === i">
+                      <lucide-angular name="chevronUp"></lucide-angular>
+                    </span>
+                  </div>
+                </button>
+                <div class="accordion-main-content" #container
+                  [ngStyle]="{'max-height': selectedIndex === i ? container.scrollHeight + 'px' : '0px'}">
+                  <div class="px-3 py-2.5">
+                    <p class="text-gray-500 dark:text-dark-500">{{ item.content }}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+          <div>
+            <div class="text-center">
+              <img src="assets/images/auth/faq.png" alt="" class="mx-auto">
+              <h5 class="mt-5 mb-1">Frequently asked questions (FAQ)</h5>
+              <p class="mb-5 text-gray-500 dark:text-dark-500">Cleaning up common queries about domiex.</p>
+              <div class="flex items-center justify-center gap-3">
+                <button class="btn btn-purple">
+                  <lucide-angular name="phone" class="inline-block ltr:mr-1 rtl:ml-1 size-4"></lucide-angular>
+                  Contact US
+                </button>
+                <button class="btn btn-sub-gray">
+                  <lucide-angular name="Headset"></lucide-angular> Help Center
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-span-12">
+    <div class="card">
+      <div class="card-header">
+        <h6>Video Tutorial by Domiex</h6>
+      </div>
+      <div class="card-body">
+        <div class="grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-3">
+          <iframe class="w-full rounded-xl aspect-video"
+            src="https://www.youtube.com/embed/DxcJbrs6rKk?si=r9xt6eHRj0kayf8d" title="YouTube video player"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+          <iframe class="w-full rounded-xl aspect-video"
+            src="https://www.youtube.com/embed/eSzNNYk7nVU?si=EHJjJ8BjAsp6yMgx" title="YouTube video player"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+          <iframe class="w-full rounded-xl aspect-video"
+            src="https://www.youtube.com/embed/MAtaT8BZEAo?si=iyOi2lREUWB35ct6" title="YouTube video player"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

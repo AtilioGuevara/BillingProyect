@@ -1,0 +1,188 @@
+<app-page-title [Title]="'Basic Input'" [pageTitle]="'Forms'"></app-page-title>
+
+<div class="grid grid-cols-12 gap-x-space">
+
+  <div class="col-span-12 md:col-span-6 card">
+    <div class="card-header">
+      <h6 class="card-title">Default</h6>
+    </div>
+    <div class="card-body">
+      <label for="basicInput1" class="form-label">Default Input</label>
+      <input type="text" id="basicInput1" class="form-input">
+    </div>
+  </div>
+
+  <div class="col-span-12 md:col-span-6 card">
+    <div class="card-header">
+      <h6 class="card-title">Float Label</h6>
+    </div>
+    <div class="card-body">
+      <div class="relative">
+        <input type="text" id="floating_outlined" class="pt-4 form-input peer" placeholder=" " />
+        <label for="floating_outlined" class="absolute text-sm text-gray-500 dark:text-dark-500 duration-300 transform z-10 origin-[0] bg-white dark:bg-dark-900 px-2 peer-focus:px-2 scale-100 -translate-y-1/2 top-1/2 peer-focus:top-2 peer-focus:scale-[0.85] peer-focus:-translate-y-4 start-1">Float
+          Label</label>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-span-12 md:col-span-6 xl:col-span-4 card">
+    <div class="card-header">
+      <h6 class="card-title">Placeholder</h6>
+    </div>
+    <div class="card-body">
+      <label for="placeholderInput" class="form-label">Input</label>
+      <input type="text" id="placeholderInput" class="form-input" placeholder="Placeholder">
+    </div>
+  </div>
+
+  <div class="col-span-12 md:col-span-6 xl:col-span-4 card">
+    <div class="card-header">
+      <h6 class="card-title">Value</h6>
+    </div>
+    <div class="card-body">
+      <label for="valueInput1" class="form-label">Input</label>
+      <input type="text" id="valueInput1" class="form-input" placeholder="Placeholder" value="Input value">
+    </div>
+  </div>
+
+  <div class="col-span-12 md:col-span-6 xl:col-span-4 card">
+    <div class="card-header">
+      <h6 class="card-title">Disabled</h6>
+    </div>
+    <div class="card-body">
+      <label for="disabledInput" class="form-label">Input</label>
+      <input type="text" id="disabledInput" class="form-input" placeholder="Placeholder" value="Disabled Input" disabled>
+    </div>
+  </div>
+
+  <div class="col-span-12 md:col-span-6 xl:col-span-4 card">
+    <div class="card-header">
+      <h6 class="card-title">Valid Field</h6>
+    </div>
+    <div class="card-body">
+      <label for="validInput" class="form-label">Email</label>
+      <input type="email" id="validInput" class="form-input invalid:border-red-500 valid:border-green-500" placeholder="Placeholder" value="example@gmail.com">
+    </div>
+  </div>
+
+  <div class="col-span-12 md:col-span-6 xl:col-span-4 card">
+    <div class="card-header">
+      <h6 class="card-title">Invalid Field</h6>
+    </div>
+    <div class="card-body">
+      <label for="invalidInput" class="form-label">Email</label>
+      <input type="email" id="invalidInput" class="form-input invalid:border-red-500 valid:border-green-500" placeholder="Placeholder" value="example.com">
+    </div>
+  </div>
+
+  <div class="col-span-12 md:col-span-6 xl:col-span-4 card">
+    <div class="card-header">
+      <h6 class="card-title">Password Input</h6>
+    </div>
+    <div class="card-body">
+      <div>
+        <label for="iconWithInput" class="form-label">Password</label>
+        <div class="relative">
+          <input type="password" id="iconWithInput" x-bind:type="show ? 'text' : 'password'" class="ltr:pr-8 rtl:pl-8 form-input" placeholder="Placeholder">
+
+          <button (click)="toggleVisibility()" class="absolute inset-y-0 flex items-center text-gray-500 dark:text-dark-500 ltr:right-3 rtl:left-3 focus:outline-hidden">
+            <lucide-angular *ngIf="!show" name="Eye" class="size-5"></lucide-angular>
+            <lucide-angular *ngIf="show" name="EyeOff" class="size-5"></lucide-angular>
+          </button>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-span-12 md:col-span-6 xl:col-span-4 card">
+    <div class="card-header">
+      <h6 class="card-title">Textarea</h6>
+    </div>
+    <div class="card-body">
+      <label for="textareaInput" class="form-label">Textarea Input</label>
+      <textarea name="textareaInput" id="textareaInput" rows="3" class="h-auto form-input"></textarea>
+    </div>
+  </div>
+
+  <div class="col-span-12 md:col-span-6 xl:col-span-4 card">
+    <div class="card-header">
+      <h6 class="card-title">Textarea Placeholder</h6>
+    </div>
+    <div class="card-body">
+      <label for="textareaInput2" class="form-label">Textarea Placeholder</label>
+      <textarea name="textareaInput2" id="textareaInput2" rows="3" class="h-auto form-input" placeholder="Enter your description"></textarea>
+    </div>
+  </div>
+
+  <div class="col-span-12 md:col-span-6 xl:col-span-4 card">
+    <div class="card-header">
+      <h6 class="card-title">Textarea Placeholder</h6>
+    </div>
+    <div class="card-body">
+      <label for="textareaInput3" class="form-label">Textarea Placeholder</label>
+      <textarea name="textareaInput3" id="textareaInput3" rows="3" class="h-auto form-input" placeholder="Enter your description">Admin dashboard is a single screen that includes all crucial information. In contrast, an admin or control panel allows for certain actions.</textarea>
+    </div>
+  </div>
+
+  <div class="col-span-12 md:col-span-6 xl:col-span-4 card">
+    <div class="card-header">
+      <h6 class="card-title">Icon with Input</h6>
+    </div>
+    <div class="card-body">
+      <div>
+        <label for="iconWithInput" class="form-label">Email</label>
+        <div class="relative group/form">
+          <input type="email" id="iconWithInput" class="ltr:pl-9 rtl:pr-9 form-input ltr:group-[&.right]/form:pr-9 rtl:group-[&.right]/form:pl-9 ltr:group-[&.right]/form:pl-4 rtl:group-[&.right]/form:pr-4" placeholder="Placeholder">
+          <button class="absolute inset-y-0 flex items-center text-gray-500 dark:text-dark-500 ltr:left-3 rtl:right-3 ltr:group-[&.right]/form:right-3 rtl:group-[&.right]/form:left-3 ltr:group-[&.right]/form:left-auto rtl:group-[&.right]/form:right-auto focus:outline-hidden">
+            <lucide-angular name="Mail" class="size-4"></lucide-angular>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-span-12 md:col-span-6 xl:col-span-4 card">
+    <div class="card-header">
+      <h6 class="card-title">Icon with Input (Right)</h6>
+    </div>
+    <div class="card-body">
+      <div>
+        <label for="iconWithInput" class="form-label">Email</label>
+        <div class="relative group/form right">
+          <input type="email" id="iconWithInput" class="ltr:pl-9 rtl:pr-9 form-input ltr:group-[&.right]/form:pr-9 rtl:group-[&.right]/form:pl-9 ltr:group-[&.right]/form:pl-4 rtl:group-[&.right]/form:pr-4" placeholder="Placeholder">
+          <button class="absolute inset-y-0 flex items-center text-gray-500 dark:text-dark-500 ltr:left-3 rtl:right-3 ltr:group-[&.right]/form:right-3 rtl:group-[&.right]/form:left-3 ltr:group-[&.right]/form:left-auto rtl:group-[&.right]/form:right-auto focus:outline-hidden">
+            <lucide-angular name="Mail" class="size-4"></lucide-angular>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-span-12 card">
+    <div class="card-header">
+      <h6 class="card-title">Input Sizes</h6>
+    </div>
+    <div class="card-body">
+      <div class="grid items-center grid-cols-12 gap-5">
+        <div class="col-span-12 sm:col-span-6 xl:col-span-3">
+          <label for="basicInput1" class="form-label">Small Input</label>
+          <input type="text" id="basicInput1" class="form-input input-sm">
+        </div>
+        <div class="col-span-12 sm:col-span-6 xl:col-span-3">
+          <label for="basicInput1" class="form-label">Medium Input</label>
+          <input type="text" id="basicInput1" class="form-input input-md">
+        </div>
+        <div class="col-span-12 sm:col-span-6 xl:col-span-3">
+          <label for="basicInput1" class="form-label">Default Input</label>
+          <input type="text" id="basicInput1" class="form-input">
+        </div>
+        <div class="col-span-12 sm:col-span-6 xl:col-span-3">
+          <label for="basicInput1" class="form-label">Large Input</label>
+          <input type="text" id="basicInput1" class="form-input input-lg">
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

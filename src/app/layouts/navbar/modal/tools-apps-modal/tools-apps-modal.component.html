@@ -1,0 +1,40 @@
+<div id="toolsAppsModal" class="modal">
+  <div class="modal-wrap modal-center modal-lg">
+    <div class="modal-header">
+      <h6 class="text-15">Enhance Your Tech Stacks With Additional Tools</h6>
+      <button data-modal-close="toolsAppsModal" class="link link-red" (click)="closeaToolsModal()">
+        <lucide-angular name="x" class="size-5"></lucide-angular>
+      </button>
+    </div>
+    <div class="modal-content">
+      <div class="relative w-full mb-5 group/form grow">
+        <input type="text" [(ngModel)]="searchTerm"
+          class="ltr:pl-9 rtl:pr-9 form-input ltr:group-[&.right]/form:pr-9 rtl:group-[&.right]/form:pl-9 ltr:group-[&.right]/form:pl-4 rtl:group-[&.right]/form:pr-4"
+          placeholder="Search for ..." />
+        <button
+          class="absolute inset-y-0 flex items-center text-gray-500 dark:text-dark-500 ltr:left-3 rtl:right-3 ltr:group-[&.right]/form:right-3 rtl:group-[&.right]/form:left-3 ltr:group-[&.right]/form:left-auto rtl:group-[&.right]/form:right-auto focus:outline-hidden">
+          <lucide-angular name="search" class="size-4"></lucide-angular>
+        </button>
+      </div>
+
+
+      <div class="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
+        <div *ngFor="let tool of filteredToolsApps" class="relative w-full input-check-group">
+          <input id="toolsCheckbox{{tool.id}}" name="toolsAppsCheckbox"
+            class="absolute bg-white rounded-full input-check -top-2 size-5 -right-2 dark:bg-dark-900 input-check-primary dark:checked:bg-primary-500 peer"
+            type="checkbox" />
+          <label for="toolsCheckbox{{tool.id}}"
+            class="flex items-center w-full gap-3 p-3 font-medium border border-gray-200 rounded-md dark:border-dark-800 input-check-label peer-checked:border-primary-500">
+            <img [src]="tool.img" [alt]="tool.name" class="h-7">
+            {{ tool.name }}
+          </label>
+        </div>
+      </div>
+
+    </div>
+    <div class="flex items-center justify-end gap-2 modal-footer">
+      <button type="button" class="btn btn-active-red" (click)="closeaToolsModal()">Close</button>
+      <button type="button" class="btn btn-primary">Save Changes</button>
+    </div>
+  </div>
+</div>

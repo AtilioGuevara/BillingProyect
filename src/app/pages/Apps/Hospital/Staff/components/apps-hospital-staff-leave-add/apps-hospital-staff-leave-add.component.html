@@ -1,0 +1,99 @@
+<app-page-title [pageTitle]="'Staff'" [Title]="'Add Leave'"></app-page-title>
+
+<div class="grid grid-cols-12 gap-space">
+  <div class="col-span-12 lg:col-span-8 2xl:col-span-9 card">
+    <div class="card-header">
+      <h6 class="card-title">Create Leave Request</h6>
+    </div>
+    <div class="card-body">
+      <div class="grid grid-cols-12 gap-space" [formGroup]="formGroup">
+        <div class="col-span-12">
+          <label for="leaveTypeSelect" class="form-label">Leave Type <span class="text-red-500">*</span></label>
+          <ng-select class="filter-ng-select" [items]="leaveTypeOptions" bindLabel="label" bindValue="value" placeholder="Select Leave Type" formControlName="leaveType">
+          </ng-select>
+
+          <span *ngIf="formGroup.get('leaveType')?.hasError('required')" class="text-red-500"> This Filed is
+            Required</span>
+        </div>
+        <div class="col-span-12 md:col-span-6">
+          <label for="contactNumber" class="form-label">Contact Number <span class="text-red-500">*</span></label>
+          <input type="number" id="contactNumber" class="form-input" placeholder="Enter your contact number" formControlName="contactNumber">
+          <span *ngIf="formGroup.get('contactNumber')?.hasError('required')" class="text-red-500"> This Filed is
+            Required</span>
+        </div>
+        <div class="col-span-12 md:col-span-6">
+          <label for="emergencyNumber" class="form-label">Emergency Number <span class="text-red-500">*</span></label>
+          <input type="number" id="emergencyNumber" class="form-input" placeholder="Enter your emergency number" formControlName="emergencyNumber">
+          <span *ngIf="formGroup.get('emergencyNumber')?.hasError('required')" class="text-red-500"> This Filed is
+            Required</span>
+        </div>
+        <div class="col-span-12 md:col-span-4">
+          <label for="startDateInput" class="form-label">Start Date <span class="text-red-500">*</span></label>
+          <input type="text" placeholder="YYYY-MM-DD" id="startDateInput" class="form-input" data-provider="flatpickr" formControlName="startDate" mwlFlatpickr [flatpickrOptions]="{dateFormat: 'Y-m-d'}">
+          <span *ngIf="formGroup.get('startDate')?.hasError('required')" class="text-red-500"> This Filed is
+            Required</span>
+        </div>
+        <div class="col-span-12 md:col-span-4">
+          <label for="endDateInput" class="form-label">End Date <span class="text-red-500">*</span></label>
+          <input type="text" placeholder="YYYY-MM-DD" id="endDateInput" class="form-input" data-provider="flatpickr" formControlName="endDate" mwlFlatpickr [flatpickrOptions]="{dateFormat: 'Y-m-d'}">
+
+          <span *ngIf="formGroup.get('endDate')?.hasError('required')" class="text-red-500"> This Filed is
+            Required</span>
+        </div>
+        <div class="col-span-12 md:col-span-4">
+          <label for="totalDays" class="form-label">Total Days <span class="text-red-500">*</span></label>
+          <input type="number" id="totalDays" class="form-input" placeholder="0" formControlName="totalDays">
+          <span *ngIf="formGroup.get('totalDays')?.hasError('required')" class="text-red-500"> This Filed is
+            Required</span>
+        </div>
+        <div class="col-span-12">
+          <label for="reasonsInput" class="form-label">Reason <span class="text-red-500">*</span></label>
+          <textarea id="reasonsInput" rows="3" class="h-auto form-input" placeholder="Enter reasons" formControlName="reason"></textarea>
+          <span *ngIf="formGroup.get('reason')?.hasError('required')" class="text-red-500"> This Filed is
+            Required</span>
+        </div>
+        <div class="col-span-12">
+          <div class="flex items-center justify-end gap-2">
+            <button type="reset" class="btn btn-sub-gray">Reset</button>
+            <button class="btn btn-primary" (click)="addOrEdit()">{{sId ? 'Edit' : 'Apply' }} Leave Request</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-span-12 lg:col-span-4 2xl:col-span-3">
+    <div class="card">
+      <div class="card-header">
+        <h6 class="card-title">Leave Summary</h6>
+      </div>
+      <div class="card-body">
+        <table class="table flush table-sm">
+          <tr>
+            <td class="text-gray-500 dark:text-dark-500">Casual Leave</td>
+            <td class="font-medium">{{ leaveCounts['casual'] }}</td>
+          </tr>
+          <tr>
+            <td class="text-gray-500 dark:text-dark-500">Sick Leave</td>
+            <td class="font-medium">{{ leaveCounts['Sick'] }}</td>
+          </tr>
+          <tr>
+            <td class="text-gray-500 dark:text-dark-500">Maternity Leave</td>
+            <td class="font-medium">{{ leaveCounts['Maternity'] }}</td>
+          </tr>
+          <tr>
+            <td class="text-gray-500 dark:text-dark-500">Emergency Leave</td>
+            <td class="font-medium">{{ leaveCounts['emergency'] }}</td>
+          </tr>
+          <tr>
+            <td class="text-gray-500 dark:text-dark-500">Vacation Leave</td>
+            <td class="font-medium">{{ leaveCounts['Vacation'] }}</td>
+          </tr>
+          <tr>
+            <td class="text-gray-500 dark:text-dark-500">Total Leave</td>
+            <td class="font-medium">{{ totalLeave() }}</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

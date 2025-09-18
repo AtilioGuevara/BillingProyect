@@ -1,0 +1,177 @@
+<app-page-title [Title]="'Schedule'" [pageTitle]="'Exam'"></app-page-title>
+
+<div *ngIf="isOpen" class="font-medium text-center ltr:pr-10 rtl:pl-10 alert alert-primary mb-space">
+  <span>Today Test: 2 Test and online 1 Test</span>
+  <a href="javascript:void(0);" (click)="isOpen = false" class="absolute text-lg transition duration-200 ease-linear text-primary-400 hover:text-primary-500 ltr:right-5 rtl:left-5 top-2">
+    <i class="ri-close-fill"></i>
+  </a>
+</div>
+<div class="grid grid-cols-12 gap-x-space">
+  <div class="col-span-12 row-span-2 sm:col-span-6 xl:col-span-3 card">
+    <div class="card-body">
+      <h6 class="mb-5">Total Exam (This month)</h6>
+      <div class="relative mx-auto size-36" dir="ltr">
+        <svg class="size-full" width="36" height="36" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="18" cy="18" r="16" fill="none" class="stroke-current text-sky-500/10" stroke-width="3"></circle>
+          <g class="origin-center transform -rotate-90">
+            <circle cx="18" cy="18" r="16" fill="none" class="stroke-current text-sky-500" stroke-width="3" [attr.stroke-dasharray]="dashArray" [attr.stroke-dashoffset]="progress" style="transition: stroke-dashoffset 1s ease-out;">
+            </circle>
+          </g>
+        </svg>
+        <div class="absolute transform -translate-x-1/2 -translate-y-1/2 top-1/2 start-1/2">
+          <span class="text-lg font-bold text-center text-gray-800 dark:text-dark-50">{{ percent }}%</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="relative col-span-12 sm:col-span-6 xl:col-span-3 card">
+    <div class="card-body">
+      <lucide-angular name="BookOpenText" class="absolute top-5 ltr:right-5 rtl:left-5 text-primary-500 fill-primary-500/10 size-6"></lucide-angular>
+      <p class="mb-3 text-gray-500 dark:text-dark-500">Total Test</p>
+      <h5><span class="counters" [countUp]="498" [options]="{decimalPlaces:0}">0</span>
+      </h5>
+    </div>
+  </div>
+  <div class="relative col-span-12 sm:col-span-6 xl:col-span-3 card">
+    <div class="card-body">
+      <lucide-angular name="LibraryBig" class="absolute text-purple-500 top-5 ltr:right-5 rtl:left-5 fill-purple-500/10 size-6"></lucide-angular>
+      <p class="mb-3 text-gray-500 dark:text-dark-500">General Test</p>
+      <h5><span class="counters" [countUp]="36" [options]="{decimalPlaces:0}">0</span>
+      </h5>
+    </div>
+  </div>
+
+  <div class="relative col-span-12 sm:col-span-6 xl:col-span-3 card">
+    <div class="card-body">
+      <lucide-angular name="NotepadTextDashed" class="absolute text-sky-500 top-5 ltr:right-5 rtl:left-5 fill-sky-500/10 size-6"></lucide-angular>
+      <p class="mb-3 text-gray-500 dark:text-dark-500">Formative Test</p>
+      <h5><span class="counters" [countUp]="54" [options]="{decimalPlaces:0}">0</span>
+      </h5>
+    </div>
+  </div>
+
+  <div class="relative col-span-12 sm:col-span-6 xl:col-span-3 card">
+    <div class="card-body">
+      <lucide-angular name="NotebookText" class="absolute text-green-500 top-5 ltr:right-5 rtl:left-5 fill-green-500/10 size-6"></lucide-angular>
+      <p class="mb-3 text-gray-500 dark:text-dark-500">Summative Test</p>
+      <h5><span class="counters" [countUp]="71" [options]="{decimalPlaces:0}">0</span>
+      </h5>
+    </div>
+  </div>
+
+  <div class="relative col-span-12 sm:col-span-6 xl:col-span-3 card">
+    <div class="card-body">
+      <lucide-angular name="video" class="absolute text-red-500 top-5 ltr:right-5 rtl:left-5 fill-red-500/10 size-6">
+      </lucide-angular>
+      <p class="mb-3 text-gray-500 dark:text-dark-500">Online Test (MCQ)</p>
+      <h5><span class="counters" [countUp]="49" [options]="{decimalPlaces:0}">0</span>
+      </h5>
+    </div>
+  </div>
+
+  <div class="relative col-span-12 sm:col-span-6 xl:col-span-3 card">
+    <div class="card-body">
+      <lucide-angular name="blend" class="absolute text-yellow-500 top-5 ltr:right-5 rtl:left-5 fill-yellow-500/10 size-6"></lucide-angular>
+      <p class="mb-3 text-gray-500 dark:text-dark-500">Rejoining Test</p>
+      <h5><span class="counters" [countUp]="8" [options]="{decimalPlaces:0}">0</span>
+      </h5>
+    </div>
+  </div>
+
+</div>
+<div class="card">
+  <div class="justify-between md:flex card-header gap-5 items-center">
+    <h6 class="card-title">Exam Schedule List</h6>
+    <div class="flex flex-wrap gap-2 mt-3 md:mt-0">
+      <div>
+        <div id="stdFilterSelect" placeholder="Select STD"></div>
+      </div>
+
+      <div>
+        <div id="dateFilterSelect" placeholder="Select Filters"></div>
+      </div>
+
+      <div>
+        <button type="button" class="w-full btn btn-primary" (click)="openCreateModal(null, null)">
+          <lucide-angular name="CirclePlus" class="inline-block ltr:mr-1 rtl:ml-1 size-4"></lucide-angular> Add Exam
+          Schedule
+        </button>
+      </div>
+
+    </div>
+  </div>
+  <div class="pt-0 card-body">
+    <div>
+      <div class="overflow-x-auto table-box">
+        <table class="table flush whitespace-nowrap">
+          <tbody>
+            <tr class="text-gray-500 bg-gray-100 dark:bg-dark-850 dark:text-dark-500">
+              <th *ngFor="let col of columnDefs" class="!font-medium cursor-pointer">
+                <div class="flex items-center gap-space">
+                  <div (click)="onSortChange(col)">
+                    {{col.headerName}} <span *ngIf="col.sortable">
+                      {{ col.sortDiraction === 'asc' ? '↑' : '↓' }}</span>
+                  </div>
+                </div>
+              </th>
+            </tr>
+            <ng-container *ngIf="displayedData.length > 0">
+              <ng-container *ngFor="let schedule of displayedData; let i = index">
+                <tr class="*:px-3 *:py-2.5">
+                  <td>{{schedule.scheduleID}}</td>
+                  <td>{{schedule.testName}}</td>
+                  <td>{{schedule.testCategory}}</td>
+                  <td>{{schedule.testType}}</td>
+                  <td>{{schedule.class}}</td>
+                  <td>{{schedule.startDate}}</td>
+                  <td>{{schedule.endDate}}</td>
+                  <td>
+                    <span class="badge" [ngClass]="{
+                                          'badge-sky': schedule.status === 'New',
+                                          'badge-yellow': schedule.status === 'Scheduled',
+                                          'badge-green': schedule.status === 'Completed'
+                                      }">{{schedule.status}}</span>
+                  <td>
+                    <div class="flex items-center gap-2">
+                      <button class="btn btn-sub-gray btn-icon !size-8 rounded-md" (click)="openCreateModal(schedule,i)"><i class="ri-pencil-line"></i></button>
+                      <button class="btn btn-sub-red btn-icon !size-8 rounded-md" (click)="deleteModal(i)" data-modal-target="deleteModal"><i class="ri-delete-bin-line"></i></button>
+                    </div>
+                  </td>
+                </tr>
+              </ng-container>
+            </ng-container>
+            <tr>
+              <ng-container *ngIf="displayedData.length == 0">
+                <td colspan="10" class="!p-8">
+                  <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" class="mx-auto size-12" viewBox="0 0 48 48">
+                    <linearGradient id="SVGID_1__h35ynqzIJzH4_gr1" x1="34.598" x2="15.982" y1="15.982" y2="34.598" gradientUnits="userSpaceOnUse">
+                      <stop offset="0" stop-color="#60e8fe"></stop>
+                      <stop offset=".033" stop-color="#6ae9fe"></stop>
+                      <stop offset=".197" stop-color="#97f0fe"></stop>
+                      <stop offset=".362" stop-color="#bdf5ff"></stop>
+                      <stop offset=".525" stop-color="#dafaff"></stop>
+                      <stop offset=".687" stop-color="#eefdff"></stop>
+                      <stop offset=".846" stop-color="#fbfeff"></stop>
+                      <stop offset="1" stop-color="#fff"></stop>
+                    </linearGradient>
+                    <path fill="url(#SVGID_1__h35ynqzIJzH4_gr1)" d="M40.036,33.826L31.68,25.6c0.847-1.739,1.335-3.684,1.335-5.748c0-7.27-5.894-13.164-13.164-13.164	S6.688,12.582,6.688,19.852c0,7.27,5.894,13.164,13.164,13.164c2.056,0,3.995-0.485,5.728-1.326l3.914,4.015l4.331,4.331	c1.715,1.715,4.496,1.715,6.211,0C41.751,38.321,41.751,35.541,40.036,33.826z">
+                    </path>
+                    <path fill="none" stroke="#10cfe3" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="3" d="M31.95,25.739l8.086,8.086c1.715,1.715,1.715,4.496,0,6.211l0,0c-1.715,1.715-4.496,1.715-6.211,0	l-4.331-4.331">
+                    </path>
+                    <path fill="none" stroke="#10cfe3" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="3" d="M7.525,24.511c-1.771-4.694-0.767-10.196,3.011-13.975c3.847-3.847,9.48-4.817,14.228-2.912">
+                    </path>
+                    <path fill="none" stroke="#10cfe3" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="3" d="M30.856,12.603c3.376,5.114,2.814,12.063-1.688,16.565c-4.858,4.858-12.565,5.129-17.741,0.814">
+                    </path>
+                  </svg>
+                  <p class="mt-2 text-center text-gray-500 dark:text-dark-500">No matching records found</p>
+                </td>
+              </ng-container>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <app-domix-pagination [currentPage]="currentPage" [totalPages]="totalPages" [showingStart]="showingStart" [showingEnd]="showingEnd" [totalResults]="gridData.length" (pageChanged)="onPageChange($event)">
+      </app-domix-pagination>
+    </div>
+  </div>
+</div>

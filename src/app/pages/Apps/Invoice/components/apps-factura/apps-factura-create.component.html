@@ -1,0 +1,56 @@
+<div class="card">
+  <div class="card-header">
+    <h6 class="grow mb-3 md:mb-0 text-primary-700">Crear Factura</h6>
+    <div class="flex flex-wrap items-center gap-2 shrink-0">
+      <button type="button" class="btn btn-sub-gray" (click)="form.reset({clientPhone: 0, date: ''})" [disabled]="loading">Resetear</button>
+      <button type="submit" class="btn btn-primary" [disabled]="loading" (click)="submit()">Guardar</button>
+    </div>
+  </div>
+  <div class="card-body">
+    <form [formGroup]="form" (ngSubmit)="submit()">
+      <div class="grid grid-cols-12 gap-5">
+        <div class="col-span-12 md:col-span-6">
+          <label class="form-label">Nombre de la empresa</label>
+          <input formControlName="companyName" class="form-input" placeholder="Nombre de la empresa" />
+        </div>
+        <div class="col-span-12 md:col-span-6">
+          <label class="form-label">NIT</label>
+          <input formControlName="companyNIT" class="form-input" placeholder="NIT" />
+        </div>
+        <div class="col-span-12 md:col-span-6">
+          <label class="form-label">Dirección</label>
+          <input formControlName="companyAddress" class="form-input" placeholder="Dirección" />
+        </div>
+        <div class="col-span-12 md:col-span-6">
+          <label class="form-label">Teléfono</label>
+          <input formControlName="companyPhone" class="form-input" placeholder="Teléfono" />
+        </div>
+        <div class="col-span-12 md:col-span-6">
+          <label class="form-label">Email</label>
+          <input formControlName="companyEmail" class="form-input" placeholder="Email" />
+        </div>
+        <div class="col-span-12 md:col-span-6">
+          <label class="form-label">Nombre del cliente</label>
+          <input formControlName="clientName" class="form-input" placeholder="Nombre del cliente" />
+        </div>
+        <div class="col-span-12 md:col-span-6">
+          <label class="form-label">DUI</label>
+          <input formControlName="clientDUI" class="form-input" placeholder="DUI" />
+        </div>
+        <div class="col-span-12 md:col-span-6">
+          <label class="form-label">Teléfono cliente</label>
+          <input formControlName="clientPhone" class="form-input" placeholder="Teléfono cliente" />
+        </div>
+        <div class="col-span-12 md:col-span-6">
+          <label class="form-label">Email cliente</label>
+          <input formControlName="clientEmail" class="form-input" placeholder="Email cliente" />
+        </div>
+        <div class="col-span-12 md:col-span-6">
+          <label class="form-label">Fecha</label>
+          <input type="date" formControlName="date" class="form-input" />
+        </div>
+      </div>
+      <div *ngIf="mensaje" class="mt-4 text-green-700 font-semibold">{{ mensaje }}</div>
+    </form>
+  </div>
+</div>

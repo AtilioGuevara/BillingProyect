@@ -1,0 +1,775 @@
+<app-page-title [Title]="'Hospital'" [pageTitle]="'Dashboards'"></app-page-title>
+
+
+<div class="grid grid-cols-12 gap-x-space">
+  <div class="col-span-12 xl:col-span-8 xl:row-span-2 card">
+    <div class="card-body">
+      <div class="grid grid-cols-12 gap-space">
+        <div class="col-span-12 row-span-2 xl:col-span-6">
+          <div class="flex items-center gap-3 mb-space">
+            <h6 class="card-title grow">Patient Visit</h6>
+            <div class="dropdown shrink-0">
+              <button domixDropdownToggle [dropdownMenu]="dropdown1" type="button" class="flex px-2 py-1 text-xs border-gray-200 dark:border-dark-800 link link-red btn">
+                Last Week
+                <svg :class="{ 'transform rotate-180': open }" class="transition-transform duration-300 size-4" viewBox="0 0 20 20" fill="currentColor">
+                  <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                </svg>
+              </button>
+              <div #dropdown1 class="!fixed p-2 dropdown-menu" dropdown-position="right">
+                <ul>
+                  <li>
+                    <a href="javascript: void(0);" class="dropdown-item">
+                      <span>Weekly</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="javascript: void(0);" class="dropdown-item">
+                      <span>Monthly</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="javascript: void(0);" class="dropdown-item">
+                      <span>Yearly</span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <app-domix-charts [series]="patientVisitChart.series" [chartOptions]="patientVisitChart.chartOptions">
+          </app-domix-charts>
+        </div>
+        <div class="relative col-span-12 p-5 overflow-hidden rounded-md bg-purple-500/15 lg:col-span-6 xl:col-span-3">
+          <svg class="absolute top-0 left-16 size-52" viewBox="0 0 1422 800">
+            <g shape-rendering="crispEdges" stroke-linejoin="round" fill="none" stroke-width="2" class="stroke-purple-500/30">
+              <polygon points="1066.5,200 1066.5,0 1422,200"></polygon>
+              <polygon points="1066.5,100 1066.5,0 888.75,100"></polygon>
+              <polygon points="711,0 888.75,100 711,100"></polygon>
+              <polygon points="888.75,100 711,100 711,200"></polygon>
+              <polygon points="977.625,150 1066.5,100 1066.5,150"></polygon>
+              <polygon points="888.75,150 977.625,100 888.75,100"></polygon>
+              <polygon points="888.75,200 977.625,150 977.625,200"></polygon>
+              <polygon points="1066.5,200 977.625,150 1066.5,150"></polygon>
+              <polygon points="977.625,200 1066.5,200 1066.5,250"></polygon>
+              <polygon points="977.625,250 888.75,250 977.625,200"></polygon>
+              <polygon points="977.625,250 888.75,300 977.625,300"></polygon>
+              <polygon points="1066.5,250 977.625,300 1066.5,300"></polygon>
+              <polygon points="888.75,200 888.75,300 711,300"></polygon>
+              <polygon points="888.75,400 888.75,300 711,300"></polygon>
+              <polygon points="888.75,300 1066.5,400 1066.5,300"></polygon>
+              <polygon points="1244.25,300 1422,200 1244.25,200"></polygon>
+              <polygon points="1244.25,300 1066.5,300 1066.5,200"></polygon>
+              <polygon points="1066.5,400 1244.25,400 1244.25,300"></polygon>
+              <polygon points="1422,400 1422,300 1244.25,400"></polygon>
+              <polygon points="533.25,100 533.25,0 711,100"></polygon>
+              <polygon points="533.25,0 533.25,100 355.5,0"></polygon>
+              <polygon points="355.5,100 533.25,100 533.25,200"></polygon>
+              <polygon points="711,100 533.25,100 711,200"></polygon>
+              <polygon points="355.5,0 355.5,200 0,200"></polygon>
+              <polygon points="355.5,300 177.75,300 355.5,200"></polygon>
+              <polygon points="177.75,300 177.75,200 0,200"></polygon>
+              <polygon points="177.75,300 177.75,400 0,400"></polygon>
+              <polygon points="177.75,400 177.75,300 355.5,300"></polygon>
+              <polygon points="711,300 533.25,300 711,200"></polygon>
+              <polygon points="533.25,250 444.375,200 533.25,200"></polygon>
+              <polygon points="444.375,250 355.5,200 444.375,200"></polygon>
+              <polygon points="355.5,300 444.375,250 355.5,250"></polygon>
+              <polygon points="533.25,250 444.375,250 444.375,300"></polygon>
+              <polygon points="355.5,400 533.25,400 355.5,300"></polygon>
+              <polygon points="533.25,400 533.25,300 711,400"></polygon>
+              <polygon points="533.25,500 533.25,400 711,500"></polygon>
+              <polygon points="533.25,500 533.25,400 355.5,500"></polygon>
+              <polygon points="533.25,500 444.375,550 444.375,500"></polygon>
+              <polygon points="444.375,500 444.375,550 355.5,550"></polygon>
+              <polygon points="355.5,550 444.375,550 444.375,600"></polygon>
+              <polygon points="533.25,550 444.375,600 533.25,600"></polygon>
+              <polygon points="711,500 622.125,500 622.125,550"></polygon>
+              <polygon points="533.25,550 622.125,500 533.25,500"></polygon>
+              <polygon points="622.125,550 622.125,600 533.25,550"></polygon>
+              <polygon points="711,550 622.125,550 622.125,600"></polygon>
+              <polygon points="355.5,400 355.5,500 177.75,400"></polygon>
+              <polygon points="0,400 177.75,400 0,500"></polygon>
+              <polygon points="177.75,600 0,500 0,600"></polygon>
+              <polygon points="355.5,500 355.5,600 177.75,500"></polygon>
+              <polygon points="0,800 355.5,600 355.5,800"></polygon>
+              <polygon points="533.25,700 711,600 711,700"></polygon>
+              <polygon points="355.5,700 533.25,600 355.5,600"></polygon>
+              <polygon points="533.25,700 533.25,800 355.5,700"></polygon>
+              <polygon points="533.25,800 711,700 533.25,700"></polygon>
+              <polygon points="1422,400 1422,500 1244.25,500"></polygon>
+              <polygon points="1244.25,500 1066.5,500 1244.25,400"></polygon>
+              <polygon points="1244.25,600 1244.25,500 1066.5,500"></polygon>
+              <polygon points="1422,500 1422,600 1244.25,600"></polygon>
+              <polygon points="1066.5,400 888.75,500 888.75,400"></polygon>
+              <polygon points="888.75,450 888.75,400 799.875,400"></polygon>
+              <polygon points="711,400 799.875,450 799.875,400"></polygon>
+              <polygon points="799.875,500 711,450 799.875,450"></polygon>
+              <polygon points="799.875,500 799.875,450 888.75,450"></polygon>
+              <polygon points="888.75,550 799.875,550 888.75,500"></polygon>
+              <polygon points="711,550 799.875,500 799.875,550"></polygon>
+              <polygon points="799.875,600 799.875,550 711,600"></polygon>
+              <polygon points="799.875,600 888.75,550 888.75,600"></polygon>
+              <polygon points="888.75,600 888.75,500 1066.5,600"></polygon>
+              <polygon points="1066.5,600 888.75,700 1066.5,700"></polygon>
+              <polygon points="888.75,600 711,700 888.75,700"></polygon>
+              <polygon points="888.75,800 711,800 888.75,700"></polygon>
+              <polygon points="888.75,700 1066.5,800 1066.5,700"></polygon>
+              <polygon points="1066.5,800 1422,600 1422,800"></polygon>
+            </g>
+          </svg>
+          <div class="relative">
+            <p class="mb-12 text-gray-500 dark:text-dark-500">Total Patients</p>
+
+            <h5><span class="counters" [countUp]="1540" [options]="{decimalPlaces:0}">0</span>+</h5>
+            <p class="mt-1 text-gray-500 dark:text-dark-500">Last 28 days</p>
+          </div>
+        </div>
+        <div class="relative col-span-12 p-5 overflow-hidden rounded-md bg-red-500/15 lg:col-span-6 xl:col-span-3">
+          <svg class="absolute top-0 left-16 size-52" viewBox="0 0 1422 800">
+            <g shape-rendering="crispEdges" stroke-linejoin="round" fill="none" stroke-width="2" class="stroke-red-500/30">
+              <polygon points="1066.5,200 1066.5,0 1422,200"></polygon>
+              <polygon points="1066.5,100 1066.5,0 888.75,100"></polygon>
+              <polygon points="711,0 888.75,100 711,100"></polygon>
+              <polygon points="888.75,100 711,100 711,200"></polygon>
+              <polygon points="977.625,150 1066.5,100 1066.5,150"></polygon>
+              <polygon points="888.75,150 977.625,100 888.75,100"></polygon>
+              <polygon points="888.75,200 977.625,150 977.625,200"></polygon>
+              <polygon points="1066.5,200 977.625,150 1066.5,150"></polygon>
+              <polygon points="977.625,200 1066.5,200 1066.5,250"></polygon>
+              <polygon points="977.625,250 888.75,250 977.625,200"></polygon>
+              <polygon points="977.625,250 888.75,300 977.625,300"></polygon>
+              <polygon points="1066.5,250 977.625,300 1066.5,300"></polygon>
+              <polygon points="888.75,200 888.75,300 711,300"></polygon>
+              <polygon points="888.75,400 888.75,300 711,300"></polygon>
+              <polygon points="888.75,300 1066.5,400 1066.5,300"></polygon>
+              <polygon points="1244.25,300 1422,200 1244.25,200"></polygon>
+              <polygon points="1244.25,300 1066.5,300 1066.5,200"></polygon>
+              <polygon points="1066.5,400 1244.25,400 1244.25,300"></polygon>
+              <polygon points="1422,400 1422,300 1244.25,400"></polygon>
+              <polygon points="533.25,100 533.25,0 711,100"></polygon>
+              <polygon points="533.25,0 533.25,100 355.5,0"></polygon>
+              <polygon points="355.5,100 533.25,100 533.25,200"></polygon>
+              <polygon points="711,100 533.25,100 711,200"></polygon>
+              <polygon points="355.5,0 355.5,200 0,200"></polygon>
+              <polygon points="355.5,300 177.75,300 355.5,200"></polygon>
+              <polygon points="177.75,300 177.75,200 0,200"></polygon>
+              <polygon points="177.75,300 177.75,400 0,400"></polygon>
+              <polygon points="177.75,400 177.75,300 355.5,300"></polygon>
+              <polygon points="711,300 533.25,300 711,200"></polygon>
+              <polygon points="533.25,250 444.375,200 533.25,200"></polygon>
+              <polygon points="444.375,250 355.5,200 444.375,200"></polygon>
+              <polygon points="355.5,300 444.375,250 355.5,250"></polygon>
+              <polygon points="533.25,250 444.375,250 444.375,300"></polygon>
+              <polygon points="355.5,400 533.25,400 355.5,300"></polygon>
+              <polygon points="533.25,400 533.25,300 711,400"></polygon>
+              <polygon points="533.25,500 533.25,400 711,500"></polygon>
+              <polygon points="533.25,500 533.25,400 355.5,500"></polygon>
+              <polygon points="533.25,500 444.375,550 444.375,500"></polygon>
+              <polygon points="444.375,500 444.375,550 355.5,550"></polygon>
+              <polygon points="355.5,550 444.375,550 444.375,600"></polygon>
+              <polygon points="533.25,550 444.375,600 533.25,600"></polygon>
+              <polygon points="711,500 622.125,500 622.125,550"></polygon>
+              <polygon points="533.25,550 622.125,500 533.25,500"></polygon>
+              <polygon points="622.125,550 622.125,600 533.25,550"></polygon>
+              <polygon points="711,550 622.125,550 622.125,600"></polygon>
+              <polygon points="355.5,400 355.5,500 177.75,400"></polygon>
+              <polygon points="0,400 177.75,400 0,500"></polygon>
+              <polygon points="177.75,600 0,500 0,600"></polygon>
+              <polygon points="355.5,500 355.5,600 177.75,500"></polygon>
+              <polygon points="0,800 355.5,600 355.5,800"></polygon>
+              <polygon points="533.25,700 711,600 711,700"></polygon>
+              <polygon points="355.5,700 533.25,600 355.5,600"></polygon>
+              <polygon points="533.25,700 533.25,800 355.5,700"></polygon>
+              <polygon points="533.25,800 711,700 533.25,700"></polygon>
+              <polygon points="1422,400 1422,500 1244.25,500"></polygon>
+              <polygon points="1244.25,500 1066.5,500 1244.25,400"></polygon>
+              <polygon points="1244.25,600 1244.25,500 1066.5,500"></polygon>
+              <polygon points="1422,500 1422,600 1244.25,600"></polygon>
+              <polygon points="1066.5,400 888.75,500 888.75,400"></polygon>
+              <polygon points="888.75,450 888.75,400 799.875,400"></polygon>
+              <polygon points="711,400 799.875,450 799.875,400"></polygon>
+              <polygon points="799.875,500 711,450 799.875,450"></polygon>
+              <polygon points="799.875,500 799.875,450 888.75,450"></polygon>
+              <polygon points="888.75,550 799.875,550 888.75,500"></polygon>
+              <polygon points="711,550 799.875,500 799.875,550"></polygon>
+              <polygon points="799.875,600 799.875,550 711,600"></polygon>
+              <polygon points="799.875,600 888.75,550 888.75,600"></polygon>
+              <polygon points="888.75,600 888.75,500 1066.5,600"></polygon>
+              <polygon points="1066.5,600 888.75,700 1066.5,700"></polygon>
+              <polygon points="888.75,600 711,700 888.75,700"></polygon>
+              <polygon points="888.75,800 711,800 888.75,700"></polygon>
+              <polygon points="888.75,700 1066.5,800 1066.5,700"></polygon>
+              <polygon points="1066.5,800 1422,600 1422,800"></polygon>
+            </g>
+          </svg>
+          <div class="relative">
+            <p class="mb-12 text-gray-500 dark:text-dark-500">Surgeries</p>
+
+            <h5><span class="counters" [countUp]="241" [options]="{decimalPlaces:0}">0</span>
+            </h5>
+            <p class="mt-1 text-gray-500 dark:text-dark-500">Last 28 days</p>
+          </div>
+        </div>
+        <div class="relative col-span-12 p-5 overflow-hidden rounded-md lg:col-span-6 xl:col-span-3 bg-sky-500/15">
+          <svg class="absolute top-0 left-16 size-52" viewBox="0 0 1422 800">
+            <g shape-rendering="crispEdges" stroke-linejoin="round" fill="none" stroke-width="2" class="stroke-sky-500/30">
+              <polygon points="1066.5,200 1066.5,0 1422,200"></polygon>
+              <polygon points="1066.5,100 1066.5,0 888.75,100"></polygon>
+              <polygon points="711,0 888.75,100 711,100"></polygon>
+              <polygon points="888.75,100 711,100 711,200"></polygon>
+              <polygon points="977.625,150 1066.5,100 1066.5,150"></polygon>
+              <polygon points="888.75,150 977.625,100 888.75,100"></polygon>
+              <polygon points="888.75,200 977.625,150 977.625,200"></polygon>
+              <polygon points="1066.5,200 977.625,150 1066.5,150"></polygon>
+              <polygon points="977.625,200 1066.5,200 1066.5,250"></polygon>
+              <polygon points="977.625,250 888.75,250 977.625,200"></polygon>
+              <polygon points="977.625,250 888.75,300 977.625,300"></polygon>
+              <polygon points="1066.5,250 977.625,300 1066.5,300"></polygon>
+              <polygon points="888.75,200 888.75,300 711,300"></polygon>
+              <polygon points="888.75,400 888.75,300 711,300"></polygon>
+              <polygon points="888.75,300 1066.5,400 1066.5,300"></polygon>
+              <polygon points="1244.25,300 1422,200 1244.25,200"></polygon>
+              <polygon points="1244.25,300 1066.5,300 1066.5,200"></polygon>
+              <polygon points="1066.5,400 1244.25,400 1244.25,300"></polygon>
+              <polygon points="1422,400 1422,300 1244.25,400"></polygon>
+              <polygon points="533.25,100 533.25,0 711,100"></polygon>
+              <polygon points="533.25,0 533.25,100 355.5,0"></polygon>
+              <polygon points="355.5,100 533.25,100 533.25,200"></polygon>
+              <polygon points="711,100 533.25,100 711,200"></polygon>
+              <polygon points="355.5,0 355.5,200 0,200"></polygon>
+              <polygon points="355.5,300 177.75,300 355.5,200"></polygon>
+              <polygon points="177.75,300 177.75,200 0,200"></polygon>
+              <polygon points="177.75,300 177.75,400 0,400"></polygon>
+              <polygon points="177.75,400 177.75,300 355.5,300"></polygon>
+              <polygon points="711,300 533.25,300 711,200"></polygon>
+              <polygon points="533.25,250 444.375,200 533.25,200"></polygon>
+              <polygon points="444.375,250 355.5,200 444.375,200"></polygon>
+              <polygon points="355.5,300 444.375,250 355.5,250"></polygon>
+              <polygon points="533.25,250 444.375,250 444.375,300"></polygon>
+              <polygon points="355.5,400 533.25,400 355.5,300"></polygon>
+              <polygon points="533.25,400 533.25,300 711,400"></polygon>
+              <polygon points="533.25,500 533.25,400 711,500"></polygon>
+              <polygon points="533.25,500 533.25,400 355.5,500"></polygon>
+              <polygon points="533.25,500 444.375,550 444.375,500"></polygon>
+              <polygon points="444.375,500 444.375,550 355.5,550"></polygon>
+              <polygon points="355.5,550 444.375,550 444.375,600"></polygon>
+              <polygon points="533.25,550 444.375,600 533.25,600"></polygon>
+              <polygon points="711,500 622.125,500 622.125,550"></polygon>
+              <polygon points="533.25,550 622.125,500 533.25,500"></polygon>
+              <polygon points="622.125,550 622.125,600 533.25,550"></polygon>
+              <polygon points="711,550 622.125,550 622.125,600"></polygon>
+              <polygon points="355.5,400 355.5,500 177.75,400"></polygon>
+              <polygon points="0,400 177.75,400 0,500"></polygon>
+              <polygon points="177.75,600 0,500 0,600"></polygon>
+              <polygon points="355.5,500 355.5,600 177.75,500"></polygon>
+              <polygon points="0,800 355.5,600 355.5,800"></polygon>
+              <polygon points="533.25,700 711,600 711,700"></polygon>
+              <polygon points="355.5,700 533.25,600 355.5,600"></polygon>
+              <polygon points="533.25,700 533.25,800 355.5,700"></polygon>
+              <polygon points="533.25,800 711,700 533.25,700"></polygon>
+              <polygon points="1422,400 1422,500 1244.25,500"></polygon>
+              <polygon points="1244.25,500 1066.5,500 1244.25,400"></polygon>
+              <polygon points="1244.25,600 1244.25,500 1066.5,500"></polygon>
+              <polygon points="1422,500 1422,600 1244.25,600"></polygon>
+              <polygon points="1066.5,400 888.75,500 888.75,400"></polygon>
+              <polygon points="888.75,450 888.75,400 799.875,400"></polygon>
+              <polygon points="711,400 799.875,450 799.875,400"></polygon>
+              <polygon points="799.875,500 711,450 799.875,450"></polygon>
+              <polygon points="799.875,500 799.875,450 888.75,450"></polygon>
+              <polygon points="888.75,550 799.875,550 888.75,500"></polygon>
+              <polygon points="711,550 799.875,500 799.875,550"></polygon>
+              <polygon points="799.875,600 799.875,550 711,600"></polygon>
+              <polygon points="799.875,600 888.75,550 888.75,600"></polygon>
+              <polygon points="888.75,600 888.75,500 1066.5,600"></polygon>
+              <polygon points="1066.5,600 888.75,700 1066.5,700"></polygon>
+              <polygon points="888.75,600 711,700 888.75,700"></polygon>
+              <polygon points="888.75,800 711,800 888.75,700"></polygon>
+              <polygon points="888.75,700 1066.5,800 1066.5,700"></polygon>
+              <polygon points="1066.5,800 1422,600 1422,800"></polygon>
+            </g>
+          </svg>
+          <div class="relative">
+            <p class="mb-12 text-gray-500 dark:text-dark-500">Total Reports</p>
+
+            <h5><span class="counters" [countUp]="574" [options]="{decimalPlaces:0}">0</span>
+            </h5>
+            <p class="mt-1 text-gray-500 dark:text-dark-500">Last 28 days</p>
+          </div>
+        </div>
+        <div class="relative col-span-12 p-5 overflow-hidden rounded-md bg-green-500/15 lg:col-span-6 xl:col-span-3">
+          <svg class="absolute top-0 left-16 size-52" viewBox="0 0 1422 800">
+            <g shape-rendering="crispEdges" stroke-linejoin="round" fill="none" stroke-width="2" class="stroke-green-500/30">
+              <polygon points="1066.5,200 1066.5,0 1422,200"></polygon>
+              <polygon points="1066.5,100 1066.5,0 888.75,100"></polygon>
+              <polygon points="711,0 888.75,100 711,100"></polygon>
+              <polygon points="888.75,100 711,100 711,200"></polygon>
+              <polygon points="977.625,150 1066.5,100 1066.5,150"></polygon>
+              <polygon points="888.75,150 977.625,100 888.75,100"></polygon>
+              <polygon points="888.75,200 977.625,150 977.625,200"></polygon>
+              <polygon points="1066.5,200 977.625,150 1066.5,150"></polygon>
+              <polygon points="977.625,200 1066.5,200 1066.5,250"></polygon>
+              <polygon points="977.625,250 888.75,250 977.625,200"></polygon>
+              <polygon points="977.625,250 888.75,300 977.625,300"></polygon>
+              <polygon points="1066.5,250 977.625,300 1066.5,300"></polygon>
+              <polygon points="888.75,200 888.75,300 711,300"></polygon>
+              <polygon points="888.75,400 888.75,300 711,300"></polygon>
+              <polygon points="888.75,300 1066.5,400 1066.5,300"></polygon>
+              <polygon points="1244.25,300 1422,200 1244.25,200"></polygon>
+              <polygon points="1244.25,300 1066.5,300 1066.5,200"></polygon>
+              <polygon points="1066.5,400 1244.25,400 1244.25,300"></polygon>
+              <polygon points="1422,400 1422,300 1244.25,400"></polygon>
+              <polygon points="533.25,100 533.25,0 711,100"></polygon>
+              <polygon points="533.25,0 533.25,100 355.5,0"></polygon>
+              <polygon points="355.5,100 533.25,100 533.25,200"></polygon>
+              <polygon points="711,100 533.25,100 711,200"></polygon>
+              <polygon points="355.5,0 355.5,200 0,200"></polygon>
+              <polygon points="355.5,300 177.75,300 355.5,200"></polygon>
+              <polygon points="177.75,300 177.75,200 0,200"></polygon>
+              <polygon points="177.75,300 177.75,400 0,400"></polygon>
+              <polygon points="177.75,400 177.75,300 355.5,300"></polygon>
+              <polygon points="711,300 533.25,300 711,200"></polygon>
+              <polygon points="533.25,250 444.375,200 533.25,200"></polygon>
+              <polygon points="444.375,250 355.5,200 444.375,200"></polygon>
+              <polygon points="355.5,300 444.375,250 355.5,250"></polygon>
+              <polygon points="533.25,250 444.375,250 444.375,300"></polygon>
+              <polygon points="355.5,400 533.25,400 355.5,300"></polygon>
+              <polygon points="533.25,400 533.25,300 711,400"></polygon>
+              <polygon points="533.25,500 533.25,400 711,500"></polygon>
+              <polygon points="533.25,500 533.25,400 355.5,500"></polygon>
+              <polygon points="533.25,500 444.375,550 444.375,500"></polygon>
+              <polygon points="444.375,500 444.375,550 355.5,550"></polygon>
+              <polygon points="355.5,550 444.375,550 444.375,600"></polygon>
+              <polygon points="533.25,550 444.375,600 533.25,600"></polygon>
+              <polygon points="711,500 622.125,500 622.125,550"></polygon>
+              <polygon points="533.25,550 622.125,500 533.25,500"></polygon>
+              <polygon points="622.125,550 622.125,600 533.25,550"></polygon>
+              <polygon points="711,550 622.125,550 622.125,600"></polygon>
+              <polygon points="355.5,400 355.5,500 177.75,400"></polygon>
+              <polygon points="0,400 177.75,400 0,500"></polygon>
+              <polygon points="177.75,600 0,500 0,600"></polygon>
+              <polygon points="355.5,500 355.5,600 177.75,500"></polygon>
+              <polygon points="0,800 355.5,600 355.5,800"></polygon>
+              <polygon points="533.25,700 711,600 711,700"></polygon>
+              <polygon points="355.5,700 533.25,600 355.5,600"></polygon>
+              <polygon points="533.25,700 533.25,800 355.5,700"></polygon>
+              <polygon points="533.25,800 711,700 533.25,700"></polygon>
+              <polygon points="1422,400 1422,500 1244.25,500"></polygon>
+              <polygon points="1244.25,500 1066.5,500 1244.25,400"></polygon>
+              <polygon points="1244.25,600 1244.25,500 1066.5,500"></polygon>
+              <polygon points="1422,500 1422,600 1244.25,600"></polygon>
+              <polygon points="1066.5,400 888.75,500 888.75,400"></polygon>
+              <polygon points="888.75,450 888.75,400 799.875,400"></polygon>
+              <polygon points="711,400 799.875,450 799.875,400"></polygon>
+              <polygon points="799.875,500 711,450 799.875,450"></polygon>
+              <polygon points="799.875,500 799.875,450 888.75,450"></polygon>
+              <polygon points="888.75,550 799.875,550 888.75,500"></polygon>
+              <polygon points="711,550 799.875,500 799.875,550"></polygon>
+              <polygon points="799.875,600 799.875,550 711,600"></polygon>
+              <polygon points="799.875,600 888.75,550 888.75,600"></polygon>
+              <polygon points="888.75,600 888.75,500 1066.5,600"></polygon>
+              <polygon points="1066.5,600 888.75,700 1066.5,700"></polygon>
+              <polygon points="888.75,600 711,700 888.75,700"></polygon>
+              <polygon points="888.75,800 711,800 888.75,700"></polygon>
+              <polygon points="888.75,700 1066.5,800 1066.5,700"></polygon>
+              <polygon points="1066.5,800 1422,600 1422,800"></polygon>
+            </g>
+          </svg>
+          <div class="relative">
+            <p class="mb-12 text-gray-500 dark:text-dark-500">Total Staffs</p>
+
+            <h5><span class="counters" [countUp]="150" [options]="{decimalPlaces:0}">0</span>
+            </h5>
+            <p class="mt-1 text-gray-500 dark:text-dark-500">Last 28 days</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-span-12 md:col-span-6 xl:col-span-4 card">
+    <div class="flex flex-col gap-3 md:items-center card-header md:flex-row">
+      <h6 class="card-title grow">Patient Visits by Department</h6>
+      <div class="dropdown shrink-0">
+        <button domixDropdownToggle [dropdownMenu]="dropdown3" type="button" class="flex px-2 py-1 text-xs border-gray-200 dark:border-dark-800 link link-red btn">
+          Last Week
+          <svg :class="{ 'transform rotate-180': open }" class="transition-transform duration-300 size-4" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+          </svg>
+        </button>
+        <div #dropdown3 class="!fixed p-2 dropdown-menu" dropdown-position="right">
+          <ul>
+            <li>
+              <a href="javascript: void(0);" class="dropdown-item">
+                <span>Weekly</span>
+              </a>
+            </li>
+            <li>
+              <a href="javascript: void(0);" class="dropdown-item">
+                <span>Monthly</span>
+              </a>
+            </li>
+            <li>
+              <a href="javascript: void(0);" class="dropdown-item">
+                <span>Yearly</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <app-domix-charts [series]="patientDepartmentChart.series" [chartOptions]="patientDepartmentChart.chartOptions">
+      </app-domix-charts>
+    </div>
+  </div>
+
+  <div class="col-span-12 md:col-span-6 xl:col-span-4 xl:row-span-2 card">
+    <div class="flex items-center gap-3 card-header">
+      <h6 class="card-title grow">Appointment Requests</h6>
+      <a href="javascript: void(0);" class="link link-primary shrink-0">
+        Create
+        <i class="ri-arrow-right-line ltr:inline-block rtl:hidden"></i>
+        <i class="ri-arrow-right-line ltr:hidden rtl:inline-block"></i>
+      </a>
+    </div>
+    <div class="card-body">
+      <div>
+        <div *ngFor="let item of appointmentItems; let index = index" class="flex items-center gap-3 mb-3 last:mb-0">
+          <img [src]="item.image" alt="" class="rounded-full size-10 shrink-0">
+          <div class="grow">
+            <h6 class="mb-1">{{ item.name }}</h6>
+            <p class="text-xs text-gray-500 dark:text-dark-500">
+              <i class="align-baseline ri-calendar-line"></i> {{ item.time }}
+            </p>
+          </div>
+          <div *ngIf="item.status === 'pending'" class="flex items-center gap-2 shrink-0">
+            <button (click)="setStatus(index, 'accepted')" title="Accepted" class="btn btn-icon btn-sub-green !size-8">
+              <i class="ri-check-line"></i>
+            </button>
+            <button (click)="setStatus(index, 'rejected')" title="Rejected" class="btn btn-icon btn-sub-red !size-8">
+              <i class="ri-close-line"></i>
+            </button>
+          </div>
+          <div *ngIf="item.status === 'accepted'" class="flex items-center gap-2 shrink-0">
+            <span class="badge badge-green">Accepted</span>
+          </div>
+          <div *ngIf="item.status === 'rejected'" class="flex items-center gap-2 shrink-0">
+            <span class="badge badge-red">Rejected</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-span-12 xl:col-span-8 xl:row-span-2 card">
+    <div class="flex flex-wrap items-center gap-3 card-header">
+      <h6 class="card-title grow">Patients History</h6>
+      <div class="flex items-center gap-2 shrink-0">
+        <button type="button" class="px-3 !text-13 py-1 btn btn-primary">All</button>
+        <button type="button" class="px-3 !text-13 py-1 border-gray-200 dark:border-dark-800 btn btn-outline-gray">Weekly</button>
+        <button type="button" class="px-3 !text-13 py-1 border-gray-200 dark:border-dark-800 btn btn-outline-gray">Monthly</button>
+        <button type="button" class="px-3 !text-13 py-1 border-gray-200 dark:border-dark-800 btn btn-outline-gray">Yearly</button>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="grid grid-cols-12 gap-4 mb-3">
+        <div class="col-span-3">
+          <h6>241</h6>
+          <p class="text-gray-500 dark:text-dark-500">Assign Doctors <span class="text-xs font-medium text-green-500 align-baseline">
+              <lucide-angular name="TrendingUp" class="inline-block ltr:ml-1 rtl:mr-1 size-4"></lucide-angular> 3.5%
+            </span></p>
+        </div>
+        <div class="col-span-3">
+          <h6>241</h6>
+          <p class="text-gray-500 dark:text-dark-500">Admit Patients <span class="text-xs font-medium text-red-500 align-baseline">
+              <lucide-angular name="TrendingDown" class="inline-block ltr:ml-1 rtl:mr-1 size-4"></lucide-angular> 0.4%
+            </span></p>
+        </div>
+      </div>
+      <app-domix-charts [series]="patientsHistoryChart.series" [chartOptions]="patientsHistoryChart.chartOptions">
+      </app-domix-charts>
+    </div>
+  </div>
+
+  <div class="col-span-12 xl:col-span-4">
+    <h6 class="mb-2">Upcoming Consultation</h6>
+    <div class="card">
+      <div class="card-body">
+        <div class="flex gap-3">
+          <img src="assets/images/avatar/user-25.png" alt="" class="rounded-md size-11 shrink-0">
+          <div class="grow">
+            <h6 class="mb-1">Dr. Waylon Modin</h6>
+            <p class="text-gray-500 dark:text-dark-500">Dental Specialist</p>
+          </div>
+        </div>
+        <div class="px-3 py-2 my-4 text-gray-500 bg-gray-100 rounded-md dark:text-dark-500 dark:bg-dark-850 text-13">
+          <p><i class="align-baseline ri-calendar-todo-line text-14 ltr:mr-1 rtl:ml-1"></i> 24 Jul, 2024 - 11:00 AM -
+            12:00 PM</p>
+        </div>
+        <div class="flex items-center gap-2">
+          <button type="button" class="w-full btn btn-outline-red">Cancel</button>
+          <button type="button" class="w-full btn btn-primary">Reschedule</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-span-12 xl:col-span-4 card">
+    <div class="flex items-center gap-3 card-header">
+      <h6 class="card-title grow">Hospital Birth & Death Analytics</h6>
+      <div class="dropdown shrink-0">
+        <button type="button" class="flex items-center text-gray-500 dark:text-dark-500" domixDropdownToggle [dropdownMenu]="dropdown2">
+          <lucide-angular name="ellipsis" class="fill-primary-500/10"></lucide-angular>
+        </button>
+        <div class="!fixed dropdown-menu" dropdown-position="right" #dropdown2>
+          <ul>
+            <li>
+              <a routerLink="/apps-event-overview" class="cursor-pointer dropdown-item">
+                <span>Weekly</span>
+              </a>
+            </li>
+            <li>
+              <a href="javascript: void(0);" class="dropdown-item">
+                <span>Monthly</span>
+              </a>
+            </li>
+            <li>
+              <a href="javascript: void(0);" class="dropdown-item">
+                <span>Yearly</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <app-domix-charts [series]="hospitalBirthDeathChart.series" [chartOptions]="hospitalBirthDeathChart.chartOptions">
+      </app-domix-charts>
+    </div>
+  </div>
+
+  <div class="col-span-12 lg:col-span-6 xl:col-span-4 card">
+    <div class="flex items-center gap-3 card-header">
+      <h6 class="card-title grow">Rooms Analytics Sessions</h6>
+      <div class="dropdown shrink-0">
+        <button type="button" class="flex items-center text-gray-500 dark:text-dark-500" domixDropdownToggle [dropdownMenu]="dropdown1">
+          <lucide-angular name="ellipsis" class="fill-primary-500/10"></lucide-angular>
+        </button>
+        <div class="dropdown-menu" dropdown-position="right" #dropdown1>
+          <ul>
+            <li>
+              <a routerLink="/apps-event-overview" class="cursor-pointer dropdown-item">
+                <span>Weekly</span>
+              </a>
+            </li>
+            <li>
+              <a href="javascript: void(0);" class="dropdown-item">
+                <span>Monthly</span>
+              </a>
+            </li>
+            <li>
+              <a href="javascript: void(0);" class="dropdown-item">
+                <span>Yearly</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="space-y-4">
+        <div *ngFor="let usage of roomUsages" class="flex flex-col gap-3 md:items-center md:flex-row">
+          <img [src]="usage.image" alt="" class="size-8 shrink-0">
+          <div class="grow">
+            <h6>{{ usage.title }}</h6>
+            <p class="text-gray-500 dark:text-dark-500">{{ usage.description }}</p>
+          </div>
+          <div class="md:ltr:text-right md:rtl:text-left shrink-0">
+            <h6>{{ usage.percentage }}</h6>
+            <span class="text-green-500">this month</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="col-span-12 lg:col-span-6 xl:col-span-4 card">
+    <div class="flex items-center gap-3 card-header">
+      <h6 class="card-title grow">Treatment Summaries</h6>
+      <a href="javascript: void(0);" class="text-primary-500 link hover:text-primary-600">
+        See All
+        <lucide-angular name="MoveRight" class="ml-1 ltr:inline-block rtl:hidden size-4"></lucide-angular>
+        <lucide-angular name="MoveLeft" class="mr-1 rtl:inline-block ltr:hidden size-4"></lucide-angular>
+      </a>
+    </div>
+    <div class="card-body">
+      <div class="grid grid-cols-12">
+        <div class="col-span-6 p-4 border-b border-r border-gray-200 border-dashed dark:border-dark-800">
+          <div class="flex gap-2">
+            <img src="assets/images/avatar/user-25.png" alt="" class="rounded-md size-10 shrink-0">
+            <div class="overflow-hidden grow">
+              <h6 class="truncate">Dr. Mariana Grandon</h6>
+              <p class="text-gray-500 dark:text-dark-500">Endocrinologist</p>
+            </div>
+          </div>
+          <p class="mt-4 text-gray-500 dark:text-dark-500">2154 Treatment</p>
+        </div>
+        <div class="col-span-6 p-4 border-b border-gray-200 border-dashed dark:border-dark-800">
+          <div class="flex gap-2">
+            <img src="assets/images/avatar/user-27.png" alt="" class="rounded-md size-10 shrink-0">
+            <div class="overflow-hidden grow">
+              <h6 class="truncate">Dr. Sydney Toor</h6>
+              <p class="text-gray-500 dark:text-dark-500">Hematology</p>
+            </div>
+          </div>
+          <p class="mt-4 text-gray-500 dark:text-dark-500">879 Treatment</p>
+        </div>
+        <div class="col-span-6 p-4 border-b border-r border-gray-200 border-dashed dark:border-dark-800">
+          <div class="flex gap-2">
+            <img src="assets/images/avatar/user-26.png" alt="" class="rounded-md size-10 shrink-0">
+            <div class="overflow-hidden grow">
+              <h6 class="truncate">Dr. Dante Ditto</h6>
+              <p class="text-gray-500 dark:text-dark-500">Radiologist</p>
+            </div>
+          </div>
+          <p class="mt-4 text-gray-500 dark:text-dark-500">643 Treatment</p>
+        </div>
+        <div class="col-span-6 p-4 border-b border-gray-200 border-dashed dark:border-dark-800">
+          <div class="flex gap-2">
+            <img src="assets/images/avatar/user-28.png" alt="" class="rounded-md size-10 shrink-0">
+            <div class="overflow-hidden grow">
+              <h6 class="truncate">Dr. Marcus Welton</h6>
+              <p class="text-gray-500">Nephrologist</p>
+            </div>
+          </div>
+          <p class="mt-4 text-gray-500">5412 Treatment</p>
+        </div>
+        <div class="col-span-6 p-4 border-r border-gray-200 border-dashed dark:border-dark-800">
+          <div class="flex gap-2">
+            <img src="assets/images/avatar/user-29.png" alt="" class="rounded-md size-10 shrink-0">
+            <div class="overflow-hidden grow">
+              <h6 class="truncate">Dr. Jennifer Maune</h6>
+              <p class="text-gray-500 dark:text-dark-500">Cardiologist</p>
+            </div>
+          </div>
+          <p class="mt-4 text-gray-500 dark:text-dark-500">1874 Treatment</p>
+        </div>
+        <div class="col-span-6 p-4 border-gray-200 border-dashed dark:border-dark-800">
+          <div class="flex gap-2">
+            <img src="assets/images/avatar/user-30.png" alt="" class="rounded-md size-10 shrink-0">
+            <div class="overflow-hidden grow">
+              <h6 class="truncate">Dr. Antonio Ligler</h6>
+              <p class="text-gray-500 dark:text-dark-500">Neurologists</p>
+            </div>
+          </div>
+          <p class="mt-4 text-gray-500 dark:text-dark-500">1195 Treatment</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-span-12 card" x-data="patientTable()">
+    <div class="flex flex-wrap items-center justify-between card-header gap-space">
+      <h6 class="card-title grow">Patients List</h6>
+      <div class="flex flex-col w-full md:items-center md:flex-row gap-space md:w-auto">
+        <button class="btn btn-red btn-icon shrink-0" x-show="selectedItems.length > 0" *ngIf="checkedRows.length" (click)="deleteSelectedItem()">
+          <lucide-angular name="trash" class="inline-block size-4"></lucide-angular></button>
+        <div class="relative w-full group/form grow">
+          <input type="text" class="ltr:pl-9 rtl:pr-9 form-input ltr:group-[&.right]/form:pr-9 rtl:group-[&.right]/form:pl-9 ltr:group-[&.right]/form:pl-4 rtl:group-[&.right]/form:pr-4" placeholder="Search for ..." [(ngModel)]="searchText" (ngModelChange)="updateDisplayedData()">
+          <button title="search-button" class="absolute inset-y-0 flex items-center text-gray-500 dark:text-dark-500 ltr:left-3 rtl:right-3 ltr:group-[&.right]/form:right-3 rtl:group-[&.right]/form:left-3 ltr:group-[&.right]/form:left-auto rtl:group-[&.right]/form:right-auto focus:outline-hidden">
+            <lucide-angular name="search" class="size-4"></lucide-angular>
+          </button>
+        </div>
+        <a href="javascript:void(0);" routerLink="/apps-hospital-patients-create" class="btn btn-primary shrink-0"> <lucide-angular name="CirclePlus" class="cursor-pointer inline-block ltr:mr-1 rtl:ml-1 size-4"></lucide-angular> Add Patient</a>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="overflow-x-auto">
+        <table class="table whitespace-nowrap">
+          <tbody>
+            <tr class="!font-medium text-gray-500 dark:text-dark-500">
+              <th *ngFor="let col of columnDefs" class="!font-medium cursor-pointer">
+                <div class="flex items-center gap-space">
+                  <div class="!font-medium" *ngIf="col.headerCheckbox">
+                    <div class="input-check-group">
+                      <label for="checkboxAll" class="hidden input-check-label"></label>
+                      <input id="checkboxAll" class="input-check input-check-primary" type="checkbox" [(ngModel)]="headerCheckBox" (change)="headerCheckBoxChange()" />
+                    </div>
+                  </div>
+                  <div (click)="onSortChange(col)">
+                    {{col.headerName}} <span *ngIf="col.sortable">
+                      {{ col.sortDiraction === 'asc' ? '↑' : '↓' }}</span>
+                  </div>
+                </div>
+              </th>
+            </tr>
+            <ng-container *ngIf="displayedData.length > 0">
+              <ng-container *ngFor="let patient of displayedData; let i = index">
+                <tr>
+                  <td>
+                    <div class="flex items-center gap-space">
+                      <div class="!font-medium" *ngIf="hasHeaderCheckbox">
+                        <div class="input-check-group">
+                          <label for="checkboxAll" class="hidden input-check-label"></label>
+                          <input id="checkboxAll" class="input-check input-check-primary" type="checkbox" x-model="selectAll" [checked]="patient.checked" (change)="onRowCheckboxChange(i)" />
+                        </div>
+                      </div>
+                      {{ patient.patientName }}
+                    </div>
+                  </td>
+                  <td>{{ patient.age }}</td>
+                  <td>{{ patient.phone }}</td>
+                  <td>{{ patient.email }}</td>
+                  <td>{{ patient.condition }}</td>
+                  <td>{{ patient.medications }}</td>
+                  <td>{{ patient.lastVisit }}</td>
+                  <td class="w-16">
+                    <div class="flex gap-3">
+                      <a href="javascript:void(0);" routerLink="/apps-hospital-patients-lists" title="overview" class="cursor-pointer link link-primary"><i class="ri-eye-line"></i></a>
+                      <a href="javascript:void(0);" routerLink="/apps-hospital-patients-lists" title="edit" class="cursor-pointer link link-primary"><i class="ri-edit-2-line"></i></a>
+                      <a href="javascript:void(0);" href="javascript:void(0);" class="link link-red" title="delete" (click)="deleteModal(i)"><i class="ri-delete-bin-6-line"></i></a>
+                    </div>
+                  </td>
+                </tr>
+              </ng-container>
+            </ng-container>
+            <tr>
+              <ng-container *ngIf="displayedData.length == 0">
+                <td colspan="10" class="!p-8">
+                  <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" class="mx-auto size-12" viewBox="0 0 48 48">
+                    <linearGradient id="SVGID_1__h35ynqzIJzH4_gr1" x1="34.598" x2="15.982" y1="15.982" y2="34.598" gradientUnits="userSpaceOnUse">
+                      <stop offset="0" stop-color="#60e8fe"></stop>
+                      <stop offset=".033" stop-color="#6ae9fe"></stop>
+                      <stop offset=".197" stop-color="#97f0fe"></stop>
+                      <stop offset=".362" stop-color="#bdf5ff"></stop>
+                      <stop offset=".525" stop-color="#dafaff"></stop>
+                      <stop offset=".687" stop-color="#eefdff"></stop>
+                      <stop offset=".846" stop-color="#fbfeff"></stop>
+                      <stop offset="1" stop-color="#fff"></stop>
+                    </linearGradient>
+                    <path fill="url(#SVGID_1__h35ynqzIJzH4_gr1)" d="M40.036,33.826L31.68,25.6c0.847-1.739,1.335-3.684,1.335-5.748c0-7.27-5.894-13.164-13.164-13.164	S6.688,12.582,6.688,19.852c0,7.27,5.894,13.164,13.164,13.164c2.056,0,3.995-0.485,5.728-1.326l3.914,4.015l4.331,4.331	c1.715,1.715,4.496,1.715,6.211,0C41.751,38.321,41.751,35.541,40.036,33.826z">
+                    </path>
+                    <path fill="none" stroke="#10cfe3" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="3" d="M31.95,25.739l8.086,8.086c1.715,1.715,1.715,4.496,0,6.211l0,0c-1.715,1.715-4.496,1.715-6.211,0	l-4.331-4.331">
+                    </path>
+                    <path fill="none" stroke="#10cfe3" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="3" d="M7.525,24.511c-1.771-4.694-0.767-10.196,3.011-13.975c3.847-3.847,9.48-4.817,14.228-2.912">
+                    </path>
+                    <path fill="none" stroke="#10cfe3" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="3" d="M30.856,12.603c3.376,5.114,2.814,12.063-1.688,16.565c-4.858,4.858-12.565,5.129-17.741,0.814">
+                    </path>
+                  </svg>
+                  <p class="mt-2 text-center text-gray-500 dark:text-dark-500">No matching records found</p>
+                </td>
+              </ng-container>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+
+      <app-domix-pagination [currentPage]="currentPage" [totalPages]="totalPages" [showingStart]="showingStart" [showingEnd]="showingEnd" [totalResults]="displayedData.length" (pageChanged)="onPageChange($event)">
+      </app-domix-pagination>
+
+    </div>
+  </div>
+
+</div>

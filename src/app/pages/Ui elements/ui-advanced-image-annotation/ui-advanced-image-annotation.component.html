@@ -1,0 +1,34 @@
+<app-page-title [pageTitle]="'Ui'" [Title]="'Images Annotation'"></app-page-title>
+
+<div class="grid grid-cols-12 gap-x-space">
+    <div class="col-span-12 md:col-span-6 card">
+        <div class="card-header">
+            <h6 class="card-title">Basic</h6>
+        </div>
+        <div class="card-body">
+            <div class="relative">
+                <img src="assets/images/gallery/img-02.jpg" class="w-full rounded-sm">
+
+                <div class="absolute z-20 top-8 ltr:left-1/3 rtl:right-1/3">
+                    <div class="absolute top-0 z-0 bg-red-500 rounded-full ltr:right-0 rtl:left-0 size-5 animate-ping"></div>
+                    <button class="relative z-10 bg-red-500 border border-red-200 rounded-full shadow-sm shadow-outline size-5" (click)="toggleAnnotations()"></button>
+
+                    <ng-container *ngIf="annotationsVisible">
+                        <div *ngFor="let note of notes" [ngStyle]="markerStyle(note)" class="absolute" (click)="toggleNote(note)">
+                            <div *ngIf="note.visible" class="relative z-10 flex flex-col w-48 gap-2 overflow-hidden bg-white divide-y divide-gray-200 rounded dark:divide-dark-800 dark:bg-dark-900" (click)="stopPropagation($event)">
+                                <div *ngFor="let comment of note.comments">
+                                    <p class="px-4 pt-2">{{ comment.text }}</p>
+                                </div>
+
+                                <input [(ngModel)]="newComment" placeholder="Type comment" class="rounded-none form-input first:pt-2" (keydown.enter)="addComment(note)">
+                            </div>
+                        </div>
+                    </ng-container>
+                </div>
+            </div>
+            <p class="mt-2 text-sm italic text-gray-500 dark:text-dark-500">
+                Add comments to the existing marker or click anywhere on the image to add new markers.
+            </p>
+        </div>
+    </div>
+</div>

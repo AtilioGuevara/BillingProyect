@@ -1,0 +1,515 @@
+<div>
+  <header class="container mx-auto px-4 max-w-[1300px] [&.scroll-sticky]:max-w-full landing-navbar top-0 h-20 bg-white rounded-b-lg [&.scroll-sticky]:rounded-none shadow-lg shadow-gray-200/50 dark:bg-dark-950 dark:shadow-dark-850">
+    <div class="flex items-center w-full gap-5">
+      <a routerLink="/" title="Logo">
+        <img src="assets/images/main-logo.png" alt="" class="inline-block h-7 dark:hidden">
+        <img src="assets/images/logo-white.png" alt="" class="hidden h-7 dark:inline-block">
+      </a>
+      <div class="mx-auto navbar-collapase" [ngClass]="{ 'hidden xl:flex': !isMenuOpen }">
+        <div class="flex flex-col xl:flex-row xl:items-center *:py-3 xl:py-0 xl:*:px-3 *:inline-block *:text-16 *:tracking-wide *:font-medium">
+          <a href="javascript:void(0);" (click)="scrollToSection('products')" [class.active]="currentSection === 'products'" class="leading-normal [&.active]:text-primary-500 hover:text-primary-500 transition duration-300 ease-linear ">Products</a>
+          <a href="javascript: void(0);" (click)="scrollToSection('new-arrivals')" [class.active]="currentSection === 'new-arrivals'" class="leading-normal [&.active]:text-primary-500 hover:text-primary-500 transition duration-300 ease-linear">New
+            Arrivals</a>
+          <a href="javascript:void(0);" (click)="scrollToSection('service')" [class.active]="currentSection === 'service'" class="leading-normal [&.active]:text-primary-500 hover:text-primary-500 transition duration-300 ease-linear">Service</a>
+          <a href="javascript:void(0);" (click)="scrollToSection('cta')" [class.active]="currentSection === 'cta'" class="leading-normal [&.active]:text-primary-500 hover:text-primary-500 transition duration-300 ease-linear">CTA</a>
+        </div>
+      </div>
+      <div class="flex items-center gap-2 ltr:ml-auto rtl:mr-auto xl:ltr:ml-0 xl:rtl:mr-0">
+        <button title="menu toggle" (click)="toggleMenu()" type="button" class="rounded-full xl:ltr:ml-0 xl:rtl:mr-0 ltr:ml-auto rtl:mr-auto navbar-toggle btn btn-sub-sky btn-icon xl:!hidden">
+          <i [ngClass]="isMenuOpen ? 'ri-close-line' : 'ri-menu-2-line'" class="text-lg"></i>
+        </button>
+        <button type="button" title="search" class="rounded-full btn btn-icon btn-active-gray">
+          <lucide-angular name="search" class="size-4"></lucide-angular>
+        </button>
+        <a routerLink="/apps-ecommerce-shop-cart" title="shopping-cart" class="rounded-full btn btn-icon btn-active-gray">
+          <lucide-angular name="ShoppingCart" class="size-4"></lucide-angular>
+        </a>
+        <div class="dropdown">
+          <button domixDropdownToggle [dropdownMenu]="dropdown1" type=" button" class="rounded-full btn btn-icon btn-active-gray">
+            <img src="assets/images/avatar/user-17.png" alt="Profile" class="rounded-full">
+          </button>
+
+          <div #dropdown1 class="dropdown-menu dropdown-right !w-72 !fixed">
+            <div class="p-4">
+              <div class="flex items-center gap-3 mb-4">
+                <img src="assets/images/avatar/user-17.png" alt="" class="rounded-md size-11">
+                <div>
+                  <h6 class="mb-0.5">Shopia Mia</h6>
+                  <p class="flex items-center gap-2 text-gray-500 dark:text-dark-500"><span class="inline-block align-baseline bg-green-500 rounded-full size-2"></span> Active</p>
+                </div>
+              </div>
+              <a routerLink="/pages-user" class="flex items-center gap-2 w-full first-of-type:rounded-t-md last-of-type:rounded-b-md px-4 py-2.5 text-sm hover:bg-gray-50 dark:hover:bg-dark-850">
+                <i class="align-baseline ltr:mr-1 rtl:ml-1 ri-user-line"></i> Profile
+              </a>
+              <a routerLink="/apps-ecommerce-shop-cart" class="flex items-center gap-2 w-full first-of-type:rounded-t-md last-of-type:rounded-b-md px-4 py-2.5 text-sm hover:bg-gray-50 dark:hover:bg-dark-850">
+                <i class="align-baseline ltr:mr-1 rtl:ml-1 ri-shopping-cart-2-line"></i> Shopping Cart
+              </a>
+              <a routerLink="/apps-ecommerce-wishlist" class="flex items-center gap-2 w-full first-of-type:rounded-t-md last-of-type:rounded-b-md px-4 py-2.5 text-sm hover:bg-gray-50 dark:hover:bg-dark-850">
+                <i class="align-baseline ltr:mr-1 rtl:ml-1 ri-bookmark-line"></i> Wish List
+              </a>
+              <a routerLink="/pages-help-center" class="flex items-center gap-2 w-full first-of-type:rounded-t-md last-of-type:rounded-b-md px-4 py-2.5 text-sm hover:bg-gray-50 dark:hover:bg-dark-850">
+                <i class="align-baseline ltr:mr-1 rtl:ml-1 ri-customer-service-2-line"></i> Help Center
+              </a>
+              <a routerLink="/pages-account-settings" class="flex items-center gap-2 w-full first-of-type:rounded-t-md last-of-type:rounded-b-md px-4 py-2.5 text-sm hover:bg-gray-50 dark:hover:bg-dark-850">
+                <i class="align-baseline ltr:mr-1 rtl:ml-1 ri-settings-3-line"></i> Account Settings
+              </a>
+            </div>
+            <div class="flex items-center gap-2 p-4 border-purple-500/20 border-y bg-purple-500/10">
+              <img src="assets/images/ecommerce/landing/gift.png" alt="" class="size-8 shrink-0">
+              <div class="grow">
+                <h6 class="mb-0.5">Refer a friend</h6>
+                <p class="text-gray-500 dark:text-dark-500">7 invitation remaining</p>
+              </div>
+            </div>
+            <div class="p-4">
+              <a routerLink="/auth-signin-basic" class="flex items-center gap-2 w-full first-of-type:rounded-t-md last-of-type:rounded-b-md px-4 py-2.5 text-sm hover:bg-gray-50 dark:hover:bg-dark-850">
+                <i class="align-baseline ltr:mr-1 rtl:ml-1 ri-logout-circle-r-line"></i> Sign Out
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+</div>
+
+<section class="relative pb-48 min-h-screen overflow-hidden pt-80 bg-[url('../images/ecommerce/landing/home.jpg')] bg-cover bg-center">
+  <div class="container mx-auto px-4 max-w-[1350px] px-20">
+    <h1 class="absolute inset-x-0 md:text-[80px] xl:text-[140px] 2xl:text-[11rem] bottom-10 text-white/60 text-center font-bold">
+      DOMIEX FASHION</h1>
+  </div>
+</section>
+
+<section class="relative -mt-10 pb-14 md:pb-24">
+  <div class="container mx-auto px-4 max-w-[1350px]">
+    <div class="grid grid-cols-12">
+      <div class="col-span-12 lg:col-span-8 lg:col-start-3">
+        <div class="p-5 bg-white rounded-lg dark:bg-dark-950">
+          <form action="javascript: void(0);" class="relative block group/form">
+            <input type="email" class="ltr:pl-9 rtl:pr-9 form-input dark:bg-transparent" placeholder="Search for product, brand etc...">
+            <button title="search" type="submit" class="absolute inset-y-0 flex items-center text-gray-500 dark:text-dark-500 ltr:left-3 rtl:right-3 focus:outline-hidden">
+              <lucide-angular name="search" class="size-4"></lucide-angular>
+            </button>
+          </form>
+          <div class="flex flex-wrap items-center justify-center gap-2 mt-2 whitespace-nowrap">
+            <h6>Popular Search:</h6>
+            <a href="javascript:void(0);" title="link" class="link link-primary">Fashion,</a>
+            <a href="javascript:void(0);" title="link" class="link link-primary">Girl Top,</a>
+            <a href="javascript:void(0);" title="link" class="link link-primary">Boys Fashion,</a>
+            <a href="javascript:void(0);" title="link" class="link link-primary">Watch</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="flex items-center gap-5">
+        <ul class="flex items-center gap-6 overflow-x-auto grow">
+          <li>
+            <a href="javascript:void(0)" (click)="setActiveTab('Men')" [ngClass]="{'active': activeTab === 'Men'}" class="relative block py-2 text-center link link-primary [&.active]:text-primary-500 ">
+              Men
+            </a>
+          </li>
+          <li>
+            <a href="javascript:void(0)" (click)="setActiveTab('Women')" [ngClass]="{'active': activeTab === 'Women'}" class="relative block py-2 text-center link link-primary [&.active]:text-primary-500">
+              Women
+            </a>
+          </li>
+          <li>
+            <a href="javascript:void(0)" (click)="setActiveTab('Children')" [ngClass]="{'active': activeTab === 'Children'}" class="relative block py-2 text-center link link-primary [&.active]:text-primary-500">
+              Children
+            </a>
+          </li>
+          <li>
+            <a href="javascript:void(0)" (click)="setActiveTab('brand')" [ngClass]="{'active': activeTab === 'brand'}" class="relative block py-2 text-center link link-primary [&.active]:text-primary-500">
+              Brand
+            </a>
+          </li>
+        </ul>
+        <div class="items-center hidden gap-3 lg:flex shrink-0">
+          <a href="javascript:void(0)" title="Columns link" (click)="setColumns(4)" [ngClass]="{'text-primary-500 active': columns === 4}">
+            <lucide-angular name="columns4" class="size-5"></lucide-angular>
+          </a>
+          <a href="javascript:void(0)" title="Columns link" (click)="setColumns(3)" [ngClass]="{'text-primary-500': columns === 3}">
+            <lucide-angular name="columns3" class="size-5"></lucide-angular>
+          </a>
+        </div>
+      </div>
+      <div class="grid gap-8 mt-5" [ngClass]="{
+          'grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4': columns === 4,
+          'grid-cols-1 md:grid-cols-2 lg:grid-cols-3': columns === 3
+        }">
+        <div *ngFor="let product of filteredProducts" class="relative">
+          <div class="relative overflow-hidden bg-gray-100 rounded-md dark:bg-dark-900/40 group/item">
+            <img [src]="product.image" alt="">
+            <div class="absolute flex transition-all duration-300 ease-linear opacity-0 top-2 group-hover/item:top-5 ltr:right-5 rtl:left-5 group-hover/item:opacity-100">
+              <button title="Rating Star Icon" type="button" class="text-lg rounded-full bg-white/90 link link-red btn btn-icon"><i class="ri-star-fill"></i></button>
+            </div>
+          </div>
+          <div class="mt-3">
+            <h6 class="mb-1 truncate"><a href="javascript:void(0);" class="text-current link hover:text-primary-500 dark:text-current dark:hover:text-primary-500" [textContent]="product.name"></a></h6>
+            <p class="text-gray-500 dark:text-dark-500" [textContent]="product.price"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<div class="relative flex items-center h-40 max-w-full overflow-x-hidden">
+  <div class="absolute animate-marquee whitespace-nowrap will-change-transform">
+    <h1 class="font-bold uppercase text-gray-500/10 dark:text-dark-500/10 text-8xl">&nbsp;Mens Fashion Winter Deal ||
+      Girls Fashion || Brand Clothes Fashion || Up to 50% Discount in Domiex Fashion</h1>
+  </div>
+</div>
+
+<section class="relative py-8 md:py-24" id="new-arrivals">
+  <div class="container mx-auto px-4 lg:max-w-[1350px]">
+    <div class="grid items-center grid-cols-12 gap-5 mb-8">
+      <div class="col-span-12 2xl:col-span-5">
+        <h1 class="relative leading-normal capitalize ltr:pl-5 rtl:pr-5 before:rounded-full drop-shadow-lg before:absolute before:w-1 before:bg-primary-500 before:h-1/2 ltr:before:left-0 rtl:before:right-0">
+          New Arrivals this Spring Season</h1>
+      </div>
+      <div class="col-span-12 2xl:col-span-5 2xl:col-start-8">
+        <p class="mb-3 text-gray-500 dark:text-dark-500">Spring is the time when nature blossoms, so look for pieces of
+          clothing that feature flowers, leaves, and pale colors. Additionally, opt for light-weight fabrics like cotton
+          or linen, since the weather is warming up.</p>
+        <button title="All Collection" type="button" class="font-medium border-gray-200 dark:border-dark-800 btn btn-outline-gray">
+          Show All Collection
+          <i class="ml-1 align-baseline ri-arrow-right-line ltr:inline-block rtl:hidden"></i>
+          <i class="mr-1 align-baseline ri-arrow-left-line ltr:hidden rtl:inline-block"></i>
+        </button>
+      </div>
+    </div>
+    <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+      <div class="relative">
+        <div class="relative overflow-hidden bg-gray-100 group/item dark:bg-dark-900/40">
+          <img src="assets/images/ecommerce/landing/products/img-09.png" alt="">
+          <div class="absolute flex transition-all duration-300 ease-linear opacity-0 top-2 group-hover/item:top-5 ltr:right-5 rtl:left-5 group-hover/item:opacity-100">
+            <button title="Rating Star Icon" type="button" class="text-lg rounded-full bg-white/90 link link-red btn btn-icon"><i class="ri-star-fill"></i></button>
+          </div>
+          <div class="absolute px-4 py-1 text-red-100 bg-red-500 ltr:left-0 rtl:right-0 before:border-4 before:absolute ltr:before:border-l-transparent rtl:before:border-r-transparent before:border-b-transparent before:size-2 before:-bottom-2 before:border-red-500 ltr:before:right-0 rtl:before:left-0 top-2">
+            50% OFF
+          </div>
+        </div>
+        <div class="mt-4">
+          <h6 class="mb-1 truncate"><a href="javascript: void(0);" class="text-current link hover:text-primary-500 dark:text-current dark:hover:text-primary-500">Fashion Hub
+              Women Peach Net Dress</a></h6>
+          <p class="text-gray-500 dark:text-dark-500">$74.99 <span class="line-through">$149.99</span></p>
+        </div>
+      </div>
+      <div class="relative">
+        <div class="relative overflow-hidden bg-gray-100 group/item dark:bg-dark-900/40">
+          <img src="assets/images/ecommerce/landing/products/img-10.png" alt="">
+          <div class="absolute flex transition-all duration-300 ease-linear opacity-0 top-2 group-hover/item:top-5 ltr:right-5 rtl:left-5 group-hover/item:opacity-100">
+            <button title="Rating Star Icon" type="button" class="text-lg rounded-full bg-white/90 link link-red btn btn-icon"><i class="ri-star-fill"></i></button>
+          </div>
+        </div>
+        <div class="mt-4">
+          <h6 class="mb-1 truncate"><a href="javascript: void(0);" class="text-current link hover:text-primary-500 dark:text-current dark:hover:text-primary-500">Fashion
+              portrait of young elegant woman</a></h6>
+          <p class="text-gray-500 dark:text-dark-500">$187.00</p>
+        </div>
+      </div>
+      <div class="relative">
+        <div class="relative overflow-hidden bg-gray-100 group/item dark:bg-dark-900/40">
+          <img src="assets/images/ecommerce/landing/products/img-11.png" alt="">
+          <div class="absolute flex transition-all duration-300 ease-linear opacity-0 top-2 group-hover/item:top-5 ltr:right-5 rtl:left-5 group-hover/item:opacity-100">
+            <button type="button" title="Rating Star Icon" class="text-lg rounded-full bg-white/90 link link-red btn btn-icon"><i class="ri-star-fill"></i></button>
+          </div>
+          <div class="absolute px-4 py-1 text-red-100 bg-red-500 ltr:left-0 rtl:right-0 before:border-4 before:absolute ltr:before:border-l-transparent rtl:before:border-r-transparent before:border-b-transparent before:size-2 before:-bottom-2 before:border-red-500 ltr:before:right-0 rtl:before:left-0 top-2">
+            25% OFF
+          </div>
+        </div>
+        <div class="mt-4">
+          <h6 class="mb-1 truncate"><a href="javascript: void(0);" class="text-current link hover:text-primary-500 dark:text-current dark:hover:text-primary-500">Demonstrating
+              winter Clothes</a></h6>
+          <p class="text-gray-500 dark:text-dark-500">$59.99 <span class="line-through">$79.99</span></p>
+        </div>
+      </div>
+      <div class="relative">
+        <div class="relative overflow-hidden bg-gray-100 group/item dark:bg-dark-900/40">
+          <img src="assets/images/ecommerce/landing/products/img-12.png" alt="">
+          <div class="absolute flex transition-all duration-300 ease-linear opacity-0 top-2 group-hover/item:top-5 ltr:right-5 rtl:left-5 group-hover/item:opacity-100">
+            <button type="button" title="Rating Star Icon" class="text-lg rounded-full bg-white/90 link link-red btn btn-icon"><i class="ri-star-fill"></i></button>
+          </div>
+        </div>
+        <div class="mt-4">
+          <h6 class="mb-1 truncate"><a href="javascript: void(0);" class="text-current link hover:text-primary-500 dark:text-current dark:hover:text-primary-500">Y2K
+              Trending Korean Fashion Aesthetic Shirt</a></h6>
+          <p class="text-gray-500 dark:text-dark-500">$79.99</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<a href="javascript: void(0);" title="Banner" class="relative block py-60 bg-center bg-[url('../images/ecommerce/landing/cta-01.jpg')]">
+  <div class="container mx-auto px-4 lg:max-w-[1350px] relative">
+    <h2 class="absolute hidden font-bold uppercase md:flex left-4 text-8xl text-white/70">Summer</h2>
+    <h2 class="absolute font-bold uppercase right-4 text-8xl text-white/70">Fashion</h2>
+  </div>
+</a>
+
+<section class="relative py-14 md:py-24">
+  <div class="container max-w-[1350px]">
+    <div class="grid items-center grid-cols-12 mb-10">
+      <div class="col-span-12 text-center lg:col-span-6 lg:col-start-4">
+        <h1 class="mb-2 leading-normal capitalize">The Coastal Edition</h1>
+        <p class="text-gray-500 dark:text-dark-500">Clothing is practical and preppy, with plenty of coverage—it's
+          perfect for moms and grandmothers who aren't interested in baring it all in a bikini at the beach.</p>
+      </div>
+    </div>
+    <div class="grid grid-cols-12">
+      <div class="col-span-6">
+        <div class="relative">
+          <img src="assets/images/ecommerce/landing/img-01.jpg" alt="">
+          <div class="absolute top-[20%] left-[38%]">
+            <button domixDropdownToggle [dropdownMenu]="dropdown1" type="button" class="flex">
+              <div class="absolute top-0 right-0 w-3 h-3 -mt-1 -mr-1 bg-white rounded-full animate-ping"></div>
+              <div class="absolute top-0 right-0 w-3 h-3 -mt-1 -mr-1 bg-white rounded-full"></div>
+            </button>
+
+            <div class="absolute left-0 right-0 z-10 w-48 p-3 mt-1 bg-white rounded-md shadow-md dark:bg-dark-900">
+              <img src="assets/images/ecommerce/landing/img-03.jpg" alt="Images 03" class="object-cover w-full">
+              <h6 class="mt-3 mb-1 font-medium"><a href="javascript:void(0);">Faded Effect Top</a></h6>
+              <p class="text-gray-500 dark:text-dark-500">$34.65</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-span-6">
+        <div class="relative">
+          <img src="assets/images/ecommerce/landing/img-02.jpg" alt="">
+          <div class="absolute bottom-[25%] left-[33%]">
+            <button domixDropdownToggle [dropdownMenu]="dropdown2" type="button" class="flex">
+              <div class="absolute top-0 right-0 w-3 h-3 -mt-1 -mr-1 bg-white rounded-full animate-ping"></div>
+              <div class="absolute top-0 right-0 w-3 h-3 -mt-1 -mr-1 bg-white rounded-full"></div>
+            </button>
+
+            <div #dropdown2 class="absolute left-0 right-0 z-10 w-48 p-3 mt-1 bg-white rounded-md shadow-md dark:bg-dark-900">
+              <img src="assets/images/ecommerce/landing/img-04.jpg" alt="Images 03" class="object-cover w-full">
+              <h6 class="mt-3 mb-1 font-medium"><a href="javascript:void(0);">Short sleeve white</a></h6>
+              <p class="text-gray-500 dark:text-dark-500">$49.99</p>
+            </div>
+          </div>
+          <div class="absolute bottom-[38%] left-[45%]">
+            <button domixDropdownToggle [dropdownMenu]="dropdown1" type="button" class="flex">
+              <div class="absolute top-0 right-0 w-3 h-3 -mt-1 -mr-1 bg-white rounded-full animate-ping"></div>
+              <div class="absolute top-0 right-0 w-3 h-3 -mt-1 -mr-1 bg-white rounded-full"></div>
+            </button>
+
+            <div #dropdown1 class="absolute left-0 right-0 z-10 w-48 p-3 mt-1 bg-white rounded-md shadow-md dark:bg-dark-900">
+              <img src="assets/images/ecommerce/landing/img-05.jpg" alt="Images 03" class="object-cover w-full">
+              <h6 class="mt-3 mb-1 font-medium"><a href="javascript:void(0);">Luxury handbag</a></h6>
+              <p class="text-gray-500 dark:text-dark-500">$79.99</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="relative pt-10 pb-10 md:pb-24" id="service">
+  <div class="container mx-auto px-4 lg:max-w-[1350px]">
+    <div class="grid items-center grid-cols-12 gap-8">
+      <div class="col-span-12 sm:col-span-6 lg:col-span-3 lg:row-span-2">
+        <div class="flex items-center gap-3 md:p-5">
+          <div class="flex items-center justify-center size-12 shrink-0">
+            <lucide-angular name="truck" class="text-gray-500 stroke-1 dark:text-dark-500 size-8"></lucide-angular>
+          </div>
+          <div class="overflow-hidden grow">
+            <h6 class="mb-1">Free Shipping</h6>
+            <p class="text-gray-500 truncate dark:text-dark-500">Enjoy free shipping on orders over $149.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-span-12 sm:col-span-6 lg:col-span-3">
+        <div class="flex items-center gap-3 md:p-5">
+          <div class="flex items-center justify-center size-12 shrink-0">
+            <lucide-angular name="handshake" class="text-gray-500 stroke-1 dark:text-dark-500 size-8"></lucide-angular>
+          </div>
+          <div class="overflow-hidden grow">
+            <h6 class="mb-1">Money Guarantee</h6>
+            <p class="text-gray-500 truncate dark:text-dark-500">Exchange within 30 days</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-span-12 sm:col-span-6 lg:col-span-3">
+        <div class="flex items-center gap-3 md:p-5">
+          <div class="flex items-center justify-center size-12 shrink-0">
+            <lucide-angular name="Headset" class="text-gray-500 stroke-1 dark:text-dark-500 size-8"></lucide-angular>
+          </div>
+          <div class="overflow-hidden grow">
+            <h6 class="mb-1">Online Help Center</h6>
+            <p class="text-gray-500 truncate dark:text-dark-500">24 hours a day, 7 days a week</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-span-12 sm:col-span-6 lg:col-span-3 lg:row-span-2">
+        <div class="flex items-center gap-3 md:p-5">
+          <div class="flex items-center justify-center size-12 shrink-0">
+            <lucide-angular name="CreditCard" class="text-gray-500 stroke-1 dark:text-dark-500 size-8">
+            </lucide-angular>
+          </div>
+          <div class="overflow-hidden grow">
+            <h6 class="mb-1">Flexible Payment Options</h6>
+            <p class="text-gray-500 truncate dark:text-dark-500">Pay Using Multiple Credit Cards</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-span-12 text-center lg:col-span-6">
+        <h1 class="relative leading-normal capitalize ltr:pl-5 rtl:pr-5 before:rounded-full drop-shadow-lg before:absolute before:w-1 before:bg-primary-500 before:h-1/2 ltr:before:left-0 rtl:before:right-0">
+          Benefits You Get When Using Our Service</h1>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="relative pt-8 pb-14 md:pb-24" id="cta">
+  <div class="container mx-auto px-4 lg:max-w-[1350px]">
+    <div class="grid items-center grid-cols-12 gap-5">
+      <div class="col-span-12 md:col-span-6">
+        <div id="beforeAfterImages" class="relative">
+          <img-comparison-slider>
+            <img slot="before" src="assets/images/ecommerce/landing/cta-02.jpg" alt="Before Image" />
+            <img slot="after" src="assets/images/ecommerce/landing/cta-03.jpg" alt="After Image" />
+          </img-comparison-slider>
+          <div class="absolute top-5 left-5">
+            <span class="text-gray-500 bg-white badge text-13 border-transparent">After</span>
+          </div>
+          <div class="absolute bottom-5 right-5">
+            <span class="text-gray-500 bg-white badge text-13 border-transparent">Before</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-span-12 text-center md:col-span-6 2xl:col-span-4 2xl:col-start-8">
+        <h1 class="relative mb-3 leading-normal capitalize ltr:pl-5 rtl:pr-5 before:rounded-full drop-shadow-lg before:absolute before:w-1 before:bg-primary-500 before:h-1/2 ltr:before:left-0 rtl:before:right-0">
+          Layer Up with Expertly Designed Pieces</h1>
+        <p class="mb-5 text-gray-500">Discover our collection of meticulously crafted pieces that are perfect for
+          layering. Each item is designed to complement your style and keep you comfortable, no matter the season.</p>
+        <button type="button" title="shop now" class="font-medium border-gray-200 dark:border-dark-800 btn btn-outline-gray">
+          Shop Now
+          <i class="ml-1 align-baseline ri-arrow-right-line ltr:inline-block rtl:hidden"></i>
+          <i class="mr-1 align-baseline ri-arrow-left-line ltr:hidden rtl:inline-block"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="relative pt-8">
+  <div class="container mx-auto px-4 lg:max-w-[1350px]">
+    <div class="mb-8 text-center">
+      <h1 class="relative leading-normal capitalize drop-shadow-lg">Follow us Instagram &#64;domiex</h1>
+    </div>
+  </div>
+  <div class="grid items-center grid-cols-2 lg:grid-cols-3 2xl:grid-cols-5">
+    <a href="javascript: void(0);" title="Instagram Post" class="relative block group/item">
+      <img src="assets/images/ecommerce/landing/instagram/img-01.jpg" alt="">
+      <div class="absolute inset-0 transition-all duration-300 opacity-0 bg-gray-950/15 group-hover/item:opacity-100">
+      </div>
+      <lucide-angular name="instagram" class="absolute block text-white transition-all duration-300 -translate-x-1/2 -translate-y-1/2 opacity-0 size-8 top-[45%] group-hover/item:top-1/2 group-hover/item:opacity-100 left-1/2">
+      </lucide-angular>
+    </a>
+    <a href="javascript: void(0);" title="Instagram Post" class="relative block group/item">
+      <img src="assets/images/ecommerce/landing/instagram/img-02.jpg" alt="">
+      <div class="absolute inset-0 transition-all duration-300 opacity-0 bg-gray-950/15 group-hover/item:opacity-100">
+      </div>
+      <lucide-angular name="instagram" class="absolute block text-white transition-all duration-300 -translate-x-1/2 -translate-y-1/2 opacity-0 size-8 top-[45%] group-hover/item:top-1/2 group-hover/item:opacity-100 left-1/2">
+      </lucide-angular>
+    </a>
+    <a href="javascript: void(0);" title="Instagram Post" class="relative block group/item">
+      <img src="assets/images/ecommerce/landing/instagram/img-03.jpg" alt="">
+      <div class="absolute inset-0 transition-all duration-300 opacity-0 bg-gray-950/15 group-hover/item:opacity-100">
+      </div>
+      <lucide-angular name="instagram" class="absolute block text-white transition-all duration-300 -translate-x-1/2 -translate-y-1/2 opacity-0 size-8 top-[45%] group-hover/item:top-1/2 group-hover/item:opacity-100 left-1/2">
+      </lucide-angular>
+    </a>
+    <a href="javascript: void(0);" title="Instagram Post" class="relative block group/item">
+      <img src="assets/images/ecommerce/landing/instagram/img-04.jpg" alt="">
+      <div class="absolute inset-0 transition-all duration-300 opacity-0 bg-gray-950/15 group-hover/item:opacity-100">
+      </div>
+      <lucide-angular name="instagram" class="absolute block text-white transition-all duration-300 -translate-x-1/2 -translate-y-1/2 opacity-0 size-8 top-[45%] group-hover/item:top-1/2 group-hover/item:opacity-100 left-1/2">
+      </lucide-angular>
+    </a>
+    <a href="javascript: void(0);" title="Instagram Post" class="relative block group/item">
+      <img src="assets/images/ecommerce/landing/instagram/img-05.jpg" alt="">
+      <div class="absolute inset-0 transition-all duration-300 opacity-0 bg-gray-950/15 group-hover/item:opacity-100">
+      </div>
+      <lucide-angular name="instagram" class="absolute block text-white transition-all duration-300 -translate-x-1/2 -translate-y-1/2 opacity-0 size-8 top-[45%] group-hover/item:top-1/2 group-hover/item:opacity-100 left-1/2">
+      </lucide-angular>
+    </a>
+  </div>
+</section>
+
+
+<footer class="relative">
+  <div class="container mx-auto px-4 lg:max-w-[1350px]">
+    <div class="grid grid-cols-12 py-16 gap-x-8 ">
+      <div class="col-span-12 pr-4 lg:col-span-5 lg:pr-10">
+        <h5 class="drop-shadow-lg">Stay Connected</h5>
+        <div class="relative mt-5">
+          <input type="text" class="border-0 border-b-2 rounded-none dark:bg-transparent ltr:pr-8 rtl:pl-8 form-input" placeholder="Enter your email">
+          <button type="submit" title="submit" class="absolute ltr:right-0 rtl:left-0 link link-primary top-2">
+            <lucide-angular name="MoveRight" class="ltr:inline-block rtl:hidden"></lucide-angular>
+            <lucide-angular name="MoveLeft" class="ltr:hidden rtl:inline-block"></lucide-angular>
+          </button>
+        </div>
+        <p class="mt-5 text-gray-500 dark:text-dark-500">Enjoy 15% off your first purchase as a thank you for staying in
+          touch.</p>
+      </div>
+      <div class="col-span-6 md:col-span-4 lg:col-span-2">
+        <h5 class="mb-5 drop-shadow-lg">Quick Links</h5>
+        <ul class="space-y-5">
+          <li><a href="javascript:void(0);" class="link link-primary">My Account</a></li>
+          <li><a href="javascript:void(0);" class="link link-primary">Cart</a></li>
+          <li><a href="javascript:void(0);" class="link link-primary">Wishlist</a></li>
+          <li><a href="javascript:void(0);" class="link link-primary">Product Overview</a></li>
+          <li><a href="javascript:void(0);" class="link link-primary">Checkout</a></li>
+        </ul>
+      </div>
+      <div class="col-span-6 md:col-span-4 lg:col-span-2">
+        <h5 class="mb-5 drop-shadow-lg">Services</h5>
+        <ul class="space-y-5">
+          <li><a href="javascript:void(0);" class="link link-primary">Privacy Policy</a></li>
+          <li><a href="javascript:void(0);" class="link link-primary">Refund Policy</a></li>
+          <li><a href="javascript:void(0);" class="link link-primary">Shipping & Return</a></li>
+          <li><a href="javascript:void(0);" class="link link-primary">Term & Condition</a></li>
+          <li><a href="javascript:void(0);" class="link link-primary">Help Center</a></li>
+        </ul>
+      </div>
+      <div class="col-span-6 md:col-span-4 lg:col-span-3">
+        <h5 class="mb-5 drop-shadow-lg">Our Store</h5>
+        <p class="mb-4 text-gray-500 dark:text-dark-500">Find the nearest location to you. <a href="javascript:void(0);" class="text-gray-900 underline dark:text-dark-50">Visit our Stores</a></p>
+        <p class="mb-1"><a href="javascript:void(0);" href="tel:241012345678">+241 01234 5678</a></p>
+        <p><a href="javascript:void(0);" href="mailto:support&#64;srbthemes.com">support&#64;srbthemes.com</a></p>
+      </div>
+    </div>
+    <div class="grid flex-wrap justify-between grid-cols-1 gap-5 py-6 text-center border-t border-gray-200 border-dashed md:grid-cols-3 dark:border-dark-800">
+      <div class="flex justify-center gap-6 text-lg md:justify-start">
+        <a href="javascript:void(0);" title="twitter" class="link link-sky"><i class="ri-twitter-x-line"></i></a>
+        <a href="javascript:void(0);" title="instagram" class="link link-pink"><i class="ri-instagram-line"></i></a>
+        <a href="javascript:void(0);" title="amazon" class="link link-green"><i class="ri-amazon-line"></i></a>
+        <a href="javascript:void(0);" title="chrome" class="link link-red"><i class="ri-chrome-line"></i></a>
+      </div>
+      <div class="text-center">
+        <p class="text-gray-500 dark:text-dark-500">
+          &copy; {{ currentYear }} Domiex. Crafted by
+          <a href="javascript:void(0);" href="javascript:void(0);" title="SRBThemes" class="font-semibold">SRBThemes</a>
+        </p>
+      </div>
+      <div class="flex justify-center gap-5 text-lg md:justify-end">
+        <a href="javascript:void(0);" title="Payment"><img src="assets/images/payment/american.png" alt="" class="h-6"></a>
+        <a href="javascript:void(0);" title="Payment"><img src="assets/images/payment/mastercard.png" alt="" class="h-6"></a>
+        <a href="javascript:void(0);" title="Payment"><img src="assets/images/payment/visa.png" alt="" class="h-6"></a>
+      </div>
+    </div>
+  </div>
+</footer>
+<button (click)="toggleMode()" class="fixed flex items-center justify-center text-white ltr:right-0 rtl:left-0 bg-primary-500 ltr:rounded-l-md rtl:rounded-r-md size-12 top-1/2">
+  <lucide-angular name="Moon" class="inline-block size-5 dark:hidden" [class.hidden]="isDarkMode"></lucide-angular>
+  <lucide-angular name="Sun" class="hidden size-5 dark:inline-block" [class.hidden]="!isDarkMode"></lucide-angular>
+</button>

@@ -1,0 +1,47 @@
+<app-page-title [Title]="'Area Charts'" [pageTitle]="'Apexcharts'"></app-page-title>
+
+<div class="grid grid-cols-12 gap-x-space">
+  <div class="col-span-12 md:col-span-6 card">
+    <div class="card-header">
+      <h6 class="card-title">Basic</h6>
+    </div>
+    <div class="card-body">
+
+      <app-domix-charts [series]="heatmapChart.series" [chartOptions]="heatmapChart.chartOptions">
+      </app-domix-charts>
+    </div>
+  </div>
+
+  <div class="col-span-12 md:col-span-6 card">
+    <div class="card-header">
+      <h6 class="card-title">Multiple Colors</h6>
+    </div>
+    <div class="card-body">
+      <app-domix-charts [series]="basicHatmapChart.series" [chartOptions]="basicHatmapChart.chartOptions">
+      </app-domix-charts>
+    </div>
+  </div>
+
+  <div class="col-span-12 md:col-span-6 card">
+    <div class="card-header">
+      <h6 class="card-title">Multiple Colors Flipped</h6>
+    </div>
+    <div class="card-body">
+      <app-domix-charts [series]="multiColorFlippedHatmapChart.series"
+        [chartOptions]="multiColorFlippedHatmapChart.chartOptions">
+      </app-domix-charts>
+
+    </div>
+  </div>
+
+  <div class="col-span-12 md:col-span-6 card">
+    <div class="card-header">
+      <h6 class="card-title">Rounded</h6>
+    </div>
+    <div class="card-body">
+      <app-domix-charts [series]="roundedHatmapChart.series" [chartOptions]="roundedHatmapChart.chartOptions">
+      </app-domix-charts>
+    </div>
+  </div>
+
+</div>

@@ -1,0 +1,89 @@
+<div id="addMedicineModal" class="modal">
+  <div class="modal-wrap modal-center">
+    <div class="modal-header">
+      <h6 class="modal-title">{{!config ? 'Add' : 'Edit' }} Medicine</h6>
+      <button data-modal-close="addMedicineModal" class="link link-red" (click)="close()">
+        <lucide-angular name="x" class="size-5"></lucide-angular>
+      </button>
+    </div>
+    <div class="modal-content" [formGroup]="fromGroup">
+      <form action="javascript: void(0);">
+        <div class="grid grid-cols-12 gap-space">
+          <div class="col-span-12">
+            <label for="medicineNameInput" class="form-label">Medicine Name <span class="text-red-500">*</span></label>
+            <input type="text" id="medicineNameInput" class="form-input" placeholder="Enter medicine name"
+              formControlName="medicineName">
+            <span *ngIf="fromGroup.get('medicineName')?.hasError('required')" class="text-red-500"> This Filed is
+              Required</span>
+          </div>
+          <div class="col-span-6">
+            <label for="dosageInput" class="form-label">Dosage <span class="text-red-500">*</span></label>
+            <input type="text" id="dosageInput" class="form-input" placeholder="0mg" formControlName="dosage">
+            <span *ngIf="fromGroup.get('dosage')?.hasError('required')" class="text-red-500"> This Filed is
+              Required</span>
+          </div>
+          <div class="col-span-6">
+            <label for="frequencyInput" class="form-label">Frequency <span class="text-red-500">*</span></label>
+            <input type="text" id="frequencyInput" class="form-input" placeholder="Enter frequency"
+              formControlName="frequency">
+            <span *ngIf="fromGroup.get('frequency')?.hasError('required')" class="text-red-500"> This Filed is
+              Required</span>
+          </div>
+          <div class="col-span-6">
+            <label for="medicineStartDateInput" class="form-label">Start Date <span
+                class="text-red-500">*</span></label>
+            <input id="medicineStartDateInput" class="form-input" placeholder="Select date" data-provider="flatpickr"
+              data-date-format="Y-m-d" formControlName="startDate" mwlFlatpickr
+              [flatpickrOptions]="{dateFormat: 'Y-m-d'}">
+            <span *ngIf="fromGroup.get('startDate')?.hasError('required')" class="text-red-500"> This Filed is
+              Required</span>
+          </div>
+          <div class="col-span-6">
+            <label for="medicineEndDateInput" class="form-label">End Date <span class="text-red-500">*</span></label>
+            <input type="text" id="medicineEndDateInput" class="form-input" placeholder="Select date"
+              data-provider="flatpickr" data-date-format="Y-m-d" formControlName="endDate" mwlFlatpickr
+              [flatpickrOptions]="{dateFormat: 'Y-m-d'}">
+            <span *ngIf="fromGroup.get('endDate')?.hasError('required')" class="text-red-500"> This Filed is
+              Required</span>
+          </div>
+          <div class="col-span-12">
+            <label for="prescribingDoctorNameInput" class="form-label">Prescribing Doctor <span
+                class="text-red-500">*</span></label>
+            <input type="text" id="prescribingDoctorNameInput" class="form-input" placeholder="Enter prescribing doctor"
+              formControlName="prescribingDoctor">
+            <span *ngIf="fromGroup.get('prescribingDoctor')?.hasError('required')" class="text-red-500"> This Filed is
+              Required</span>
+          </div>
+          <div class="col-span-12">
+            <label for="reasonConditionInput" class="form-label">Reason/Condition <span
+                class="text-red-500">*</span></label>
+            <input type="text" id="reasonConditionInput" class="form-input" placeholder="Reason/Condition"
+              formControlName="reasonCondition">
+            <span *ngIf="fromGroup.get('reasonCondition')?.hasError('required')" class="text-red-500"> This Filed is
+              Required</span>
+          </div>
+          <div class="col-span-12">
+            <label for="textareaInput2" class="form-label">Notes</label>
+            <textarea name="textareaInput2" id="textareaInput2" rows="2" class="h-auto form-input"
+              placeholder="Enter notes" formControlName="notes"></textarea>
+            <span *ngIf="fromGroup.get('notes')?.hasError('required')" class="text-red-500"> This Filed is
+              Required</span>
+          </div>
+          <div class="col-span-12">
+            <div class="flex items-center justify-end gap-2">
+              <button type="button" class="btn btn-active-red" (click)="close()">
+                <lucide-angular name="x" class="inline-block size-4"></lucide-angular> <span
+                  class="align-baseline">Close dsd</span>
+              </button>
+              <a href="javascript: void(0);" class="btn btn-primary" (click)="closeEventModal()">
+                <lucide-angular name="Plus" class="inline-block mb-1 align-middle size-4"></lucide-angular>
+                {{!config ? 'Add' : 'Edit' }}
+                Medicine
+              </a>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

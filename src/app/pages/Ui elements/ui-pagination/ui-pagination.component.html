@@ -1,0 +1,301 @@
+<app-page-title [pageTitle]="'Ui'" [Title]="'Pagination'"></app-page-title>
+
+<div class="grid grid-cols-12 gap-x-space">
+    <div class="col-span-12 xl:col-span-6 card">
+        <div class="card-header">
+            <h6 class="card-title">Basic Pagination</h6>
+        </div>
+        <div class="card-body">
+            <div>
+                <div class="pagination pagination-primary">
+                    <button type="button" class="pagination-pre" disabled>
+                        <lucide-angular name="ChevronLeft" class="mr-1 ltr:inline-block rtl:hidden size-5"></lucide-angular>
+                        <lucide-angular name="ChevronRight" class="ml-1 ltr:hidden rtl:inline-block size-5"></lucide-angular>
+                        Prev
+                    </button>
+                    <button type="button" class="pagination-item active">1</button>
+                    <button type="button" class="pagination-item">2</button>
+                    <button type="button" class="pagination-item">3</button>
+                    <button type="button" class="pagination-item">...</button>
+                    <button type="button" class="pagination-item">10</button>
+                    <button type="button" class="pagination-next">
+                        Next
+                        <lucide-angular name="ChevronRight" class="ml-1 rtl:hidden size-5 ltr:inline-block"></lucide-angular>
+                        <lucide-angular name="ChevronLeft" class="mr-1 rtl:inline-block ltr:hidden size-5"></lucide-angular>
+                    </button>
+                </div>
+            </div>
+            <div class="mt-space">
+                <div class="pagination pagination-green">
+                    <button type="button" class="!rounded-full pagination-pre">
+                        <lucide-angular name="ChevronLeft" class="mr-1 ltr:inline-block rtl:hidden size-5"></lucide-angular>
+                        <lucide-angular name="ChevronRight" class="ml-1 ltr:hidden rtl:inline-block size-5"></lucide-angular>
+                        Prev
+                    </button>
+                    <button type="button" class="!rounded-full pagination-item">1</button>
+                    <button type="button" class="!rounded-full pagination-item active">2</button>
+                    <button type="button" class="!rounded-full pagination-item">3</button>
+                    <button type="button" class="!rounded-full pagination-item">...</button>
+                    <button type="button" class="!rounded-full pagination-item">10</button>
+                    <button type="button" class="!rounded-full pagination-next">
+                        Next
+                        <lucide-angular name="ChevronRight" class="ml-1 rtl:hidden size-5 ltr:inline-block"></lucide-angular>
+                        <lucide-angular name="ChevronLeft" class="mr-1 rtl:inline-block ltr:hidden size-5"></lucide-angular>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div><!--basic-->
+    <div class="col-span-12 xl:col-span-6 card">
+        <div class="card-header">
+            <h6 class="card-title">Modern Pagination</h6>
+        </div>
+        <div class="card-body">
+            <div class="flex flex-wrap items-center gap-4">
+                <div class="inline-flex items-center gap-3 overflow-hidden border border-gray-200 rounded-md dark:border-dark-800">
+                    <button type="button" class="flex items-center justify-center text-sm transition duration-200 ease-linear size-9 ltr:border-r rtl:border-l border-gray-200 bg-gray-100 dark:border-dark-800 dark:bg-dark-850 hover:text-primary-500 [&.active]:text-primary-500 disabled:text-gray-500 dark:disabled:text-dark-500">
+                        <lucide-angular name="ChevronLeft" class="mr-1 ltr:inline-block rtl:hidden size-5"></lucide-angular>
+                        <lucide-angular name="ChevronRight" class="ltr:hidden rtl:inline-block size-5"></lucide-angular>
+                    </button>
+                    <p class="text-gray-500 dark:text-dark-500"><b class="font-medium text-gray-800 dark:text-dark-100">04</b> / 24</p>
+                    <button type="button" class="flex items-center justify-center text-sm transition duration-200 ease-linear size-9 ltr:border-l rtl:border-r border-gray-200 bg-gray-100 dark:border-dark-800 dark:bg-dark-850 hover:text-primary-500 [&.active]:text-primary-500 disabled:text-gray-500 dark:disabled:text-dark-500">
+                        <lucide-angular name="ChevronRight" class="ltr:inline-block rtl:hidden size-5"></lucide-angular>
+                        <lucide-angular name="ChevronLeft" class="ltr:hidden rtl:inline-block size-5"></lucide-angular>
+                    </button>
+                </div>
+
+                <div class="inline-flex items-center gap-3 overflow-hidden border border-gray-200 rounded-full dark:border-dark-800">
+                    <button type="button" class="flex items-center justify-center text-sm transition duration-200 ease-linear size-9 ltr:border-r rtl:border-l border-gray-200 bg-gray-100 dark:border-dark-800 dark:bg-dark-850 hover:text-primary-500 [&.active]:text-primary-500 disabled:text-gray-500 dark:disabled:text-dark-500">
+                        <lucide-angular name="ChevronLeft" class="ltr:inline-block rtl:hidden size-5"></lucide-angular>
+                        <lucide-angular name="ChevronRight" class="ltr:hidden rtl:inline-block size-5"></lucide-angular>
+                    </button>
+                    <p class="text-gray-500 dark:text-dark-500"><b class="font-medium text-gray-800 dark:text-dark-100">04</b> / 24</p>
+                    <button type="button" class="flex items-center justify-center text-sm transition duration-200 ease-linear size-9 ltr:border-l rtl:border-r border-gray-200 bg-gray-100 dark:border-dark-800 dark:bg-dark-850 hover:text-primary-500 [&.active]:text-primary-500 disabled:text-gray-500 dark:disabled:text-dark-500">
+                        <lucide-angular name="ChevronRight" class="ltr:inline-block rtl:hidden size-5"></lucide-angular>
+                        <lucide-angular name="ChevronLeft" class="ltr:hidden rtl:inline-block size-5"></lucide-angular>
+                    </button>
+                </div>
+            </div>
+            <div class="flex flex-wrap items-center gap-4 mt-5">
+                <div class="inline-flex items-center gap-3 overflow-hidden border rounded-md border-primary-500 bg-primary-500">
+                    <button type="button" class="flex items-center justify-center text-sm transition duration-200 ease-linear size-9 ltr:border-r rtl:border-l border-primary-200/20 bg-primary-500 text-primary-200 hover:text-white [&.active]:text-white disabled:text-primary-300">
+                        <lucide-angular name="ChevronLeft" class="ltr:inline-block rtl:hidden size-5"></lucide-angular>
+                        <lucide-angular name="ChevronRight" class="ltr:hidden rtl:inline-block size-5"></lucide-angular>
+                    </button>
+                    <p class="cursor-default text-primary-200"><b class="font-medium text-white">04</b> / 24</p>
+                    <button type="button" class="flex items-center justify-center text-sm transition duration-200 ease-linear size-9 ltr:border-l rtl:border-r border-primary-200/20 bg-primary-500 text-primary-200 hover:text-white [&.active]:text-white disabled:text-primary-300">
+                        <lucide-angular name="ChevronRight" class="ltr:inline-block rtl:hidden size-5"></lucide-angular>
+                        <lucide-angular name="ChevronLeft" class="rtl:inline-block ltr:hidden size-5"></lucide-angular>
+                    </button>
+                </div>
+
+                <div class="inline-flex items-center gap-3 overflow-hidden bg-green-500 border border-green-500 rounded-full">
+                    <button type="button" class="flex items-center justify-center text-sm transition duration-200 ease-linear size-9 ltr:border-r rtl:border-l border-green-200/20 bg-green-500 text-green-200 hover:text-white [&.active]:text-white disabled:text-green-300">
+                        <lucide-angular name="ChevronLeft" class="ltr:inline-block rtl:hidden size-5"></lucide-angular>
+                        <lucide-angular name="ChevronRight" class="ltr:hidden rtl:inline-block size-5"></lucide-angular>
+                    </button>
+                    <p class="text-green-200 cursor-default "><b class="font-medium text-white">04</b> / 24</p>
+                    <button type="button" class="flex items-center justify-center text-sm transition duration-200 ease-linear size-9 ltr:border-l rtl:border-r border-green-200/20 bg-green-500 text-green-200 hover:text-white [&.active]:text-white disabled:text-green-300">
+                        <lucide-angular name="ChevronRight" class="ltr:inline-block rtl:hidden size-5"></lucide-angular>
+                        <lucide-angular name="ChevronLeft" class="rtl:inline-block ltr:hidden size-5"></lucide-angular>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div><!--end modern-->
+    <div class="col-span-12 card">
+        <div class="card-header">
+            <h6 class="card-title">Flush Pagination</h6>
+        </div>
+        <div class="card-body">
+            <div>
+                <div class="pagination pagination-primary pagination-flush">
+                    <button type="button" class="pagination-item" disabled>
+                        <lucide-angular name="ChevronLeft" class="ltr:inline-block rtl:hidden size-5"></lucide-angular>
+                        <lucide-angular name="ChevronRight" class="ltr:hidden rtl:inline-block size-5"></lucide-angular>
+                    </button>
+                    <button type="button" class="pagination-item active">1</button>
+                    <button type="button" class="pagination-item">2</button>
+                    <button type="button" class="pagination-item">3</button>
+                    <button type="button" class="pagination-item">...</button>
+                    <button type="button" class="pagination-item">10</button>
+                    <button type="button" class="pagination-item">
+                        <lucide-angular name="ChevronRight" class="ltr:inline-block rtl:hidden size-5"></lucide-angular>
+                        <lucide-angular name="ChevronLeft" class="rtl:inline-block ltr:hidden size-5"></lucide-angular>
+                    </button>
+                </div>
+            </div>
+
+            <div class="mt-space">
+                <div class="pagination pagination-purple pagination-flush">
+                    <button type="button" class="!rounded-full pagination-pre">
+                        <lucide-angular name="ChevronLeft" class="mr-1 ltr:inline-block rtl:hidden size-5"></lucide-angular>
+                        <lucide-angular name="ChevronRight" class="ml-1 ltr:hidden rtl:inline-block size-5"></lucide-angular>
+                        Prev
+                    </button>
+                    <button type="button" class="!rounded-full pagination-item">1</button>
+                    <button type="button" class="!rounded-full pagination-item active">2</button>
+                    <button type="button" class="!rounded-full pagination-item">3</button>
+                    <button type="button" class="!rounded-full pagination-item">...</button>
+                    <button type="button" class="!rounded-full pagination-item">10</button>
+                    <button type="button" class="!rounded-full pagination-next">
+                        Next
+                        <lucide-angular name="ChevronRight" class="ml-1 rtl:hidden size-5 ltr:inline-block"></lucide-angular>
+                        <lucide-angular name="ChevronLeft" class="mr-1 rtl:inline-block ltr:hidden size-5"></lucide-angular>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div><!--basic-->
+
+    <div class="col-span-12 xl:col-span-6 card">
+        <div class="card-header">
+            <h6 class="card-title">Size Pagination</h6>
+        </div>
+        <div class="card-body">
+
+            <div>
+                <div class="pagination pagination-primary pagination-xs">
+                    <button type="button" class="pagination-pre" disabled>
+                        <lucide-angular name="ChevronLeft" class="mr-1 ltr:inline-block rtl:hidden size-5"></lucide-angular>
+                        <lucide-angular name="ChevronRight" class="ml-1 ltr:hidden rtl:inline-block size-5"></lucide-angular>
+                        Prev
+                    </button>
+                    <button type="button" class="pagination-item active">1</button>
+                    <button type="button" class="pagination-item">2</button>
+                    <button type="button" class="pagination-item">3</button>
+                    <button type="button" class="pagination-item">...</button>
+                    <button type="button" class="pagination-item">10</button>
+                    <button type="button" class="pagination-next">
+                        Next
+                        <lucide-angular name="ChevronRight" class="ml-1 rtl:hidden size-5 ltr:inline-block"></lucide-angular>
+                        <lucide-angular name="ChevronLeft" class="mr-1 rtl:inline-block ltr:hidden size-5"></lucide-angular>
+                    </button>
+                </div>
+            </div>
+
+            <div class="mt-space">
+                <div class="pagination pagination-primary pagination-sm">
+                    <button type="button" class="pagination-pre" disabled>
+                        <lucide-angular name="ChevronLeft" class="mr-1 ltr:inline-block rtl:hidden size-5"></lucide-angular>
+                        <lucide-angular name="ChevronRight" class="ml-1 ltr:hidden rtl:inline-block size-5"></lucide-angular>
+                        Prev
+                    </button>
+                    <button type="button" class="pagination-item active">1</button>
+                    <button type="button" class="pagination-item">2</button>
+                    <button type="button" class="pagination-item">3</button>
+                    <button type="button" class="pagination-item">...</button>
+                    <button type="button" class="pagination-item">10</button>
+                    <button type="button" class="pagination-next">
+                        Next
+                        <lucide-angular name="ChevronRight" class="ml-1 rtl:hidden size-5 ltr:inline-block"></lucide-angular>
+                        <lucide-angular name="ChevronLeft" class="mr-1 rtl:inline-block ltr:hidden size-5"></lucide-angular>
+                    </button>
+                </div>
+            </div>
+
+            <div class="mt-space">
+                <div class="pagination pagination-primary pagination-md">
+                    <button type="button" class="pagination-pre" disabled>
+                        <lucide-angular name="ChevronLeft" class="mr-1 ltr:inline-block rtl:hidden size-5"></lucide-angular>
+                        <lucide-angular name="ChevronRight" class="ml-1 ltr:hidden rtl:inline-block size-5"></lucide-angular>
+                        Prev
+                    </button>
+                    <button type="button" class="pagination-item active">1</button>
+                    <button type="button" class="pagination-item">2</button>
+                    <button type="button" class="pagination-item">3</button>
+                    <button type="button" class="pagination-item">...</button>
+                    <button type="button" class="pagination-item">10</button>
+                    <button type="button" class="pagination-next">
+                        Next
+                        <lucide-angular name="ChevronRight" class="ml-1 rtl:hidden size-5 ltr:inline-block"></lucide-angular>
+                        <lucide-angular name="ChevronLeft" class="mr-1 rtl:inline-block ltr:hidden size-5"></lucide-angular>
+                    </button>
+                </div>
+            </div>
+
+            <div class="mt-space">
+                <div class="pagination pagination-primary">
+                    <button type="button" class="pagination-pre" disabled>
+                        <lucide-angular name="ChevronLeft" class="mr-1 ltr:inline-block rtl:hidden size-5"></lucide-angular>
+                        <lucide-angular name="ChevronRight" class="ml-1 ltr:hidden rtl:inline-block size-5"></lucide-angular>
+                        Prev
+                    </button>
+                    <button type="button" class="pagination-item active">1</button>
+                    <button type="button" class="pagination-item">2</button>
+                    <button type="button" class="pagination-item">3</button>
+                    <button type="button" class="pagination-item">...</button>
+                    <button type="button" class="pagination-item">10</button>
+                    <button type="button" class="pagination-next">
+                        Next
+                        <lucide-angular name="ChevronRight" class="ml-1 rtl:hidden size-5 ltr:inline-block"></lucide-angular>
+                        <lucide-angular name="ChevronLeft" class="mr-1 rtl:inline-block ltr:hidden size-5"></lucide-angular>
+                    </button>
+                </div>
+            </div>
+
+            <div class="mt-space">
+                <div class="pagination pagination-lg">
+                    <button type="button" class="pagination-pre" disabled>
+                        <lucide-angular name="ChevronLeft" class="mr-1 ltr:inline-block rtl:hidden size-5"></lucide-angular>
+                        <lucide-angular name="ChevronRight" class="ml-1 ltr:hidden rtl:inline-block size-5"></lucide-angular>
+                        Prev
+                    </button>
+                    <button type="button" class="pagination-item active">1</button>
+                    <button type="button" class="pagination-item">2</button>
+                    <button type="button" class="pagination-item">3</button>
+                    <button type="button" class="pagination-item">...</button>
+                    <button type="button" class="pagination-item">10</button>
+                    <button type="button" class="pagination-next">
+                        Next
+                        <lucide-angular name="ChevronRight" class="ml-1 rtl:hidden size-5 ltr:inline-block"></lucide-angular>
+                        <lucide-angular name="ChevronLeft" class="mr-1 rtl:inline-block ltr:hidden size-5"></lucide-angular>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div><!--size-->
+    <div class="col-span-12 xl:col-span-6 card">
+        <div class="card-header">
+            <h6 class="card-title">Light Pagination</h6>
+        </div>
+        <div class="card-body">
+            <div>
+                <div class="p-2 bg-gray-100 pagination pagination-primary pagination-flush dark:bg-dark-850">
+                    <button type="button" class="pagination-item" disabled>
+                        <lucide-angular name="ChevronLeft" class="ltr:inline-block rtl:hidden size-5"></lucide-angular>
+                        <lucide-angular name="ChevronRight" class="ltr:hidden rtl:inline-block size-5"></lucide-angular>
+                    </button>
+                    <button type="button" class="pagination-item active">1</button>
+                    <button type="button" class="pagination-item">2</button>
+                    <button type="button" class="pagination-item">3</button>
+                    <button type="button" class="pagination-item">...</button>
+                    <button type="button" class="pagination-item">10</button>
+                    <button type="button" class="pagination-item">
+                        <lucide-angular name="ChevronRight" class="ltr:inline-block rtl:hidden size-5"></lucide-angular>
+                        <lucide-angular name="ChevronLeft" class="rtl:inline-block ltr:hidden size-5"></lucide-angular>
+                    </button>
+                </div>
+            </div>
+
+            <div class="mt-space">
+                <div class="p-2 bg-gray-100 rounded-full pagination pagination-primary pagination-flush dark:bg-dark-850">
+                    <button type="button" class="pagination-item !rounded-full" disabled>
+                        <lucide-angular name="ChevronLeft" class="ltr:inline-block rtl:hidden size-5"></lucide-angular>
+                        <lucide-angular name="ChevronRight" class="ltr:hidden rtl:inline-block size-5"></lucide-angular>
+                    </button>
+                    <button type="button" class="pagination-item !rounded-full active">1</button>
+                    <button type="button" class="pagination-item !rounded-full">2</button>
+                    <button type="button" class="pagination-item !rounded-full">3</button>
+                    <button type="button" class="pagination-item !rounded-full">...</button>
+                    <button type="button" class="pagination-item !rounded-full">10</button>
+                    <button type="button" class="pagination-item !rounded-full">
+                        <lucide-angular name="ChevronRight" class="ltr:inline-block rtl:hidden size-5"></lucide-angular>
+                        <lucide-angular name="ChevronLeft" class="rtl:inline-block ltr:hidden size-5"></lucide-angular>
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div><!--basic-->
+</div>

@@ -1,0 +1,241 @@
+<div class="relative mb-6">
+  <div class="relative overflow-hidden rounded-md h-44 bg-primary-500/10">
+    <div
+      class="border-[60px] border-t-primary-500 border-l-primary-500 absolute opacity-10 -top-2 left-0 rotate-45 size-96">
+    </div>
+    <div class="border-[60px] border-green-500 absolute opacity-10 top-20 left-8 rotate-45 size-80"></div>
+    <div class="border-[60px] border-pink-500 absolute opacity-10 top-36 left-28 rotate-45 size-40"></div>
+  </div>
+  <div class="text-center">
+    <div class="relative inline-block mx-auto">
+      <div class="relative p-1 rounded-full bg-gradient-to-tr from-primary-300 via-red-300 to-green-300 -mt-14">
+        <img src="assets/images/avatar/user-17.png" alt=""
+          class="mx-auto border-4 border-white rounded-full dark:border-dark-900 size-28">
+      </div>
+      <div
+        class="absolute border-2 border-white dark:border-dark-900 rounded-full size-4 bg-green-500 bottom-2.5 ltr:right-2.5 rtl:left-2.5">
+      </div>
+    </div>
+    <h5 class="mt-2 mb-1">Sophia Mia
+      <lucide-angular name="BadgeCheck" class="inline-block text-primary-500 fill-primary-500/20 size-5">
+      </lucide-angular>
+    </h5>
+    <ul class="flex flex-wrap items-center justify-center gap-2 text-gray-500 dark:text-dark-500 text-14">
+      <li>
+        <lucide-angular name="Building2" class="inline-block ltr:mr-1 rtl:ml-1 size-4"></lucide-angular><span
+          class="align-middle">UI /
+          UX Designer</span>
+      </li>
+      <li>
+        <lucide-angular name="MapPin" class="inline-block ltr:mr-1 rtl:ml-1 size-4"></lucide-angular> <span
+          class="align-middle">Argentina</span>
+      </li>
+      <li>
+        <lucide-angular name="ShieldCheck" class="inline-block ltr:mr-1 rtl:ml-1 size-4"></lucide-angular> <span
+          class="align-middle">24 April, 2024</span>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<ul class="pb-2 overflow-x-auto tabs-pills lg:pb-0">
+  <li>
+    <a routerLink="/pages-account-settings"
+      class="nav-item text-gray-500 dark:text-dark-500 [&.active]:bg-primary-500 [&.active]:text-primary-50 active">
+      <lucide-angular name="UserRound" class="inline-block ltr:mr-1 rtl:ml-1 size-4"></lucide-angular><span
+        class="align-middle whitespace-nowrap">Account</span>
+    </a>
+  </li>
+  <li>
+    <a routerLink="/pages-account-security"
+      class="nav-item text-gray-500 dark:text-dark-500 [&.active]:bg-primary-500 [&.active]:text-primary-50">
+      <lucide-angular name="ShieldCheck" class="inline-block ltr:mr-1 rtl:ml-1 size-4"></lucide-angular><span
+        class="align-middle whitespace-nowrap">Security</span>
+    </a>
+  </li>
+  <li>
+    <a routerLink="/pages-account-billing-plan"
+      class="nav-item text-gray-500 dark:text-dark-500 [&.active]:bg-primary-500 [&.active]:text-primary-50">
+      <lucide-angular name="Gem" class="inline-block ltr:mr-1 rtl:ml-1 size-4"></lucide-angular><span
+        class="align-middle whitespace-nowrap">Billing & Plans</span>
+    </a>
+  </li>
+  <li>
+    <a routerLink="/pages-account-notification"
+      class="nav-item text-gray-500 dark:text-dark-500 [&.active]:bg-primary-500 [&.active]:text-primary-50">
+      <lucide-angular name="Bell" class="inline-block ltr:mr-1 rtl:ml-1 size-4"></lucide-angular><span
+        class="align-middle whitespace-nowrap">Notification</span>
+    </a>
+  </li>
+  <li>
+    <a routerLink="/pages-account-statements"
+      class="nav-item text-gray-500 dark:text-dark-500 [&.active]:bg-primary-500 [&.active]:text-primary-50">
+      <lucide-angular name="ListTree" class="inline-block ltr:mr-1 rtl:ml-1 size-4"></lucide-angular><span
+        class="align-middle whitespace-nowrap">Statements</span>
+    </a>
+  </li>
+  <li>
+    <a routerLink="/pages-account-logs"
+      class="nav-item text-gray-500 dark:text-dark-500 [&.active]:bg-primary-500 [&.active]:text-primary-50">
+      <lucide-angular name="LogOut" class="inline-block ltr:mr-1 rtl:ml-1 size-4"></lucide-angular><span
+        class="align-middle whitespace-nowrap">Logs</span>
+    </a>
+  </li>
+</ul>
+
+<div class="mt-5 card">
+  <div class="card-body">
+    <div class="grid grid-cols-12 gap-3">
+      <div class="col-span-12 xl:col-span-3">
+        <h6 class="card-title">Personal Information</h6>
+      </div>
+
+      <div class="col-span-12 xl:col-span-9">
+        <form action="javascript: void(0);">
+          <div class="grid grid-cols-12 gap-5">
+            <div class="col-span-12">
+              <div>
+                <div class="shrink-0">
+                  <img class="object-cover rounded-md size-20" src="assets/images/avatar/user-17.png"
+                    alt="Current profile photo" />
+                </div>
+                <label class="block mt-4">
+                  <span class="sr-only">Choose profile photo</span>
+                  <input type="file" x-on:change="photoPreview = URL.createObjectURL($event.target.files[0])"
+                    class="hidden" />
+                  <span class="btn btn-sub-primary">
+                    <lucide-angular name="Upload" class="inline-block size-4 me-1"></lucide-angular> <span
+                      class="align-middle">Upload Profile</span>
+                  </span>
+                </label>
+              </div>
+            </div>
+
+            <div class="col-span-12 md:col-span-6">
+              <label for="firstNameInput" class="form-label">First Name</label>
+              <input type="text" id="firstNameInput" class="form-input" value="Sophia"
+                placeholder="Enter your first name">
+            </div>
+
+            <div class="col-span-12 md:col-span-6">
+              <label for="lastNameInput" class="form-label">Last Name</label>
+              <input type="text" id="lastNameInput" class="form-input" value="Mia" placeholder="Enter your last name">
+            </div>
+
+            <div class="col-span-12 md:col-span-6 lg:col-span-4">
+              <label for="roleInput" class="form-label">Role</label>
+              <input type="text" id="roleInput" class="form-input" value="UI / UX Designer"
+                placeholder="Enter your role">
+            </div>
+
+            <div class="col-span-12 md:col-span-6 lg:col-span-4">
+              <label for="birthDateInput" class="form-label">Birth of Date</label>
+              <input type="date" id="birthDateInput" class="form-input" placeholder="Select date">
+            </div>
+
+            <div class="col-span-12 md:col-span-6 lg:col-span-4">
+              <label for="joiningDateInput" class="form-label">Joining Date</label>
+              <input type="date" id="joiningDateInput" class="form-input" placeholder="Select date">
+            </div>
+
+            <div class="col-span-12 md:col-span-6 lg:col-span-4">
+              <label for="emailInput" class="form-label">Email Address</label>
+              <input type="email" id="emailInput" class="form-input" value="sophia@SRBThemes.com"
+                placeholder="example@SRBThemes.com">
+            </div>
+
+            <div class="col-span-12 md:col-span-6 lg:col-span-4">
+              <label for="phoneNumberInput" class="form-label">Phone Number</label>
+              <input type="text" id="phoneNumberInput" class="form-input" value="+(245) 01234 56789"
+                placeholder="+(00) 00000 00000">
+            </div>
+
+            <div class="col-span-12 md:col-span-6 lg:col-span-4">
+              <label for="locationInput" class="form-label">Location</label>
+              <input type="text" id="locationInput" class="form-input" value="Argentina" placeholder="Enter location">
+            </div>
+
+            <div class="col-span-12 md:col-span-6">
+              <label for="languageSelect" class="form-label">Language</label>
+              <div id="languageSelect"></div>
+            </div>
+
+            <div class="col-span-12 md:col-span-6">
+              <label for="currencySelect" class="form-label">Currency</label>
+              <div id="currencySelect"></div>
+            </div>
+
+            <div class="col-span-12">
+              <label for="textareaInput2" class="form-label">Objective</label>
+              <textarea name="textareaInput2" id="textareaInput2" rows="3" class="h-auto form-input"
+                placeholder="Write your objective"></textarea>
+            </div>
+
+            <div class="col-span-12 text-right">
+              <button type="submit" class="btn btn-primary">Update Profile</button>
+            </div>
+
+          </div>
+
+        </form>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-body">
+    <div class="grid grid-cols-12 gap-3 lg:gap-0 ">
+      <div class="col-span-12 xl:col-span-3">
+        <h6 class="card-title">Public Account</h6>
+      </div>
+      <div class="col-span-12 xl:col-span-9">
+        <div class="items-center gap-3 md:flex">
+          <div for="publicProfile" class="grow">
+            <h6 class="mb-1">Publish your contact information publicly.</h6>
+            <p class="text-gray-500 dark:text-dark-500">Allow anyone viewing your profile to access your contact
+              information.</p>
+          </div>
+          <label for="publicProfile" class="switch-group">
+            <div class="relative">
+              <input type="checkbox" id="publicProfile" class="sr-only peer" />
+              <div class="switch-wrapper"></div>
+              <div class="switch-dot peer-checked:translate-x-full rtl:peer-checked:-translate-x-full switch-primary">
+              </div>
+            </div>
+          </label>
+        </div>
+        <div class="items-center gap-3 mt-4 md:flex">
+          <div for="publicProfile2" class="grow">
+            <h6 class="mb-1">Make Contact Info Public</h6>
+            <p class="text-gray-500 dark:text-dark-500">Allow anyone viewing your profile to access your contact
+              information.</p>
+          </div>
+          <label for="publicProfile2" class="switch-group">
+            <div class="relative">
+              <input type="checkbox" id="publicProfile2" class="sr-only peer" />
+              <div class="switch-wrapper"></div>
+              <div class="switch-dot peer-checked:translate-x-full rtl:peer-checked:-translate-x-full switch-primary">
+              </div>
+            </div>
+          </label>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-header">
+    <h6 class="card-title">Delete Account</h6>
+  </div>
+  <div class="card-body">
+    <p class="mb-3 text-gray-500 dark:text-dark-500">Please proceed with caution, as deleting your account and all
+      associated data from our organization is a permanent action and cannot be undone.</p>
+    <button class="btn btn-red">Delete Account</button>
+  </div>
+</div>

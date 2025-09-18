@@ -1,0 +1,297 @@
+<app-page-title [Title]="'Products Grid'" [pageTitle]="'Ecommerce'"></app-page-title>
+
+<div class="flex flex-wrap items-center gap-5 mb-5">
+  <div class="grow">
+    <h6 class="mb-1 card-title">Popular Products</h6>
+    <p class="text-gray-500 dark:text-dark-500">Track your store's progress to boost your sales.</p>
+  </div>
+  <div class="flex gap-2 shrink-0">
+    <button type="button" class="relative btn btn-icon btn-sub-primary" (click)="goToCart()">
+      <lucide-angular name="ShoppingCart" class="size-5"></lucide-angular>
+      <span class="absolute border-2 border-white rounded-full dark:border-dark-900 badge badge-square badge-solid-primary -top-2 -right-2">{{addCartProductIds.length}}</span>
+    </button>
+    <button type="button" class="relative btn btn-icon btn-sub-red" (click)="goToWishlist()">
+      <lucide-angular name="heart" class="size-5"></lucide-angular>
+      <span class="absolute border-2 border-white rounded-full dark:border-dark-900 badge badge-square badge-solid-red -top-2 -right-2">{{wishListItemCount}}</span>
+    </button>
+    <button class="btn btn-sub-gray" data-drawer-target="filterAside" drawer-end>
+      <lucide-angular name="sliders-horizontal" class="inline-block ltr:mr-1 rt:ml-1 align-center size-4">
+      </lucide-angular> Filters
+    </button>
+    <a routerLink="/apps-ecommerce-create-products" class="cursor-pointer btn btn-primary">
+      <lucide-angular name="Plus" class="inline-block ltr:mr-1 rt:ml-1 align-center size-4"></lucide-angular> Add
+      Product
+    </a>
+  </div>
+</div>
+<div>
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-5">
+    <ng-container *ngIf="displayedData.length > 0">
+      <ng-container *ngFor="let product of displayedData; let i = index">
+        <div class="card">
+          <div class="p-2 card-body">
+            <div class="relative p-5" [ngClass]="
+            i % 5 === 0 ? 'bg-primary-500/15' :
+            i % 5 === 1 ? 'bg-green-500/15' :
+            i % 5 === 2 ? 'bg-yellow-500/15' :
+            i % 5 === 3 ? 'bg-red-500/15' :
+            'bg-gray-500/15'">
+              <div class="absolute right-2 top-2 dropdown">
+                <button x-ref="button" domixDropdownToggle [dropdownMenu]="dropdown1" type="button" class="flex items-center justify-center bg-white rounded-full size-10 link link-red dark:bg-dark-850">
+                  <i class="ri-more-2-fill"></i>
+                </button>
+
+                <div #dropdown1 class="!fixed p-2 dropdown-menu">
+                  <a (click)="goToOverview(product)" href="javascript:void(0);" class="dropdown-item">
+                    <i class="align-middle ltr:mr-1 rtl:ml-1 ri-eye-line"></i> Overview
+                  </a>
+                  <a href="javascript: void(0);" class="dropdown-item">
+                    <i class="align-middle ltr:mr-1 rtl:ml-1 ri-pencil-line"></i> Edit
+                  </a>
+                  <a href="javascript: void(0);" data-modal-target="deleteModal" class="dropdown-item hover:!text-red-500">
+                    <i class="align-middle ltr:mr-1 rtl:ml-1 ri-delete-bin-6-line"></i> Delete
+                  </a>
+                </div>
+              </div>
+              <img [src]="product.image" alt="">
+            </div>
+            <div class="p-1 mt-2">
+              <h5 class="mb-2">{{product.price}}</h5>
+              <h6 class="mb-1"><a href="javascript:void(0);" class="cursor-pointer" routerLink="/apps-ecommerce-product-overview">{{product.productName}}</a></h6>
+              <p class="text-gray-500 dark:text-dark-500">{{product.category}}</p>
+              <div class="flex gap-2 mt-3">
+                <button (click)="!addCartProductIds.includes(product.productID) ? addToCart(product): removeFromCart(product.productID)" type="button" class="w-full btn btn-primary">
+                  {{addCartProductIds.includes(product.productID)? 'Remove from cart': 'Add to Cart'}} </button>
+                <a class="btn btn-sub-gray btn-icon shrink-0" (click)="!wishlistProductIds.includes(product.productID) ? addToWishList(product) : removeFromWishlist(product.productID)">
+                  <lucide-angular [tooltipStr]="wishlistProductIds.includes(product.productID) ? 'Remove from wishlist' :'Add to  wishlist'" [name]="wishlistProductIds.includes(product.productID) ? 'heart-off' : 'heart' "></lucide-angular>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+    </ng-container>
+  </div>
+  <ng-container *ngIf="displayedData.length == 0">
+    <div class="!p-8">
+      <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" class="mx-auto size-12" viewBox="0 0 48 48">
+        <linearGradient id="SVGID_1__h35ynqzIJzH4_gr1" x1="34.598" x2="15.982" y1="15.982" y2="34.598" gradientUnits="userSpaceOnUse">
+          <stop offset="0" stop-color="#60e8fe"></stop>
+          <stop offset=".033" stop-color="#6ae9fe"></stop>
+          <stop offset=".197" stop-color="#97f0fe"></stop>
+          <stop offset=".362" stop-color="#bdf5ff"></stop>
+          <stop offset=".525" stop-color="#dafaff"></stop>
+          <stop offset=".687" stop-color="#eefdff"></stop>
+          <stop offset=".846" stop-color="#fbfeff"></stop>
+          <stop offset="1" stop-color="#fff"></stop>
+        </linearGradient>
+        <path fill="url(#SVGID_1__h35ynqzIJzH4_gr1)" d="M40.036,33.826L31.68,25.6c0.847-1.739,1.335-3.684,1.335-5.748c0-7.27-5.894-13.164-13.164-13.164	S6.688,12.582,6.688,19.852c0,7.27,5.894,13.164,13.164,13.164c2.056,0,3.995-0.485,5.728-1.326l3.914,4.015l4.331,4.331	c1.715,1.715,4.496,1.715,6.211,0C41.751,38.321,41.751,35.541,40.036,33.826z">
+        </path>
+        <path fill="none" stroke="#10cfe3" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="3" d="M31.95,25.739l8.086,8.086c1.715,1.715,1.715,4.496,0,6.211l0,0c-1.715,1.715-4.496,1.715-6.211,0	l-4.331-4.331">
+        </path>
+        <path fill="none" stroke="#10cfe3" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="3" d="M7.525,24.511c-1.771-4.694-0.767-10.196,3.011-13.975c3.847-3.847,9.48-4.817,14.228-2.912">
+        </path>
+        <path fill="none" stroke="#10cfe3" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="3" d="M30.856,12.603c3.376,5.114,2.814,12.063-1.688,16.565c-4.858,4.858-12.565,5.129-17.741,0.814"></path>
+      </svg>
+      <p class="mt-2 text-center text-gray-500 dark:text-dark-500">No matching records found</p>
+    </div>
+  </ng-container>
+
+
+  <app-domix-pagination [currentPage]="currentPage" [totalPages]="totalPages" [showingStart]="showingStart" [showingEnd]="showingEnd" [totalResults]="gridData.length" (pageChanged)="onPageChange($event)">
+  </app-domix-pagination>
+
+  <div id="filterAside" drawer-end class="drawer show drawer-lg">
+    <div class="drawer-header">
+      <h6 class="text-15">Filter & Sorting</h6>
+      <button data-drawer-close="filterAside">
+        <lucide-angular name="x" class="link link-red"></lucide-angular>
+      </button>
+    </div>
+    <div class="drawer-content">
+      <div class="relative group/form">
+        <input type="email" class="ltr:pl-9 rtl:pr-9 form-input ltr:group-[&.right]/form:pr-9 rtl:group-[&.right]/form:pl-9 ltr:group-[&.right]/form:pl-4 rtl:group-[&.right]/form:pr-4" placeholder="Search products, price etc..." x-model="searchTerm">
+        <button class="absolute inset-y-0 flex items-center text-gray-500 dark:text-dark-500 ltr:left-3 rtl:right-3 rtl ltr:group-[&.right]/form:right-3 rtl:group-[&.right]/form:left-3 ltr:group-[&.right]/form:left-auto rtl:group-[&.right]/form:right-auto focus:outline-hidden">
+          <lucide-angular name="Search" class="size-4"></lucide-angular>
+        </button>
+      </div>
+      <div class="mt-5">
+        <div class="flex items-center gap-4 mb-3">
+          <h6 class="grow">Selected Filters</h6>
+          <a href="javascript: void(0);" class="text-sm link link-primary" x-on:click="showAll = false">
+            Clear All
+            <lucide-angular name="x" class="inline-block size-4"></lucide-angular>
+          </a>
+        </div>
+        <div class="flex flex-wrap items-center gap-2">
+          <template x-for="filter in selectedFilters" :key="index">
+
+            <span class="badge badge-gray" x-data="{ isOpen: true }" x-show="showAll && isOpen">
+              <span x-text="filter.category"></span>
+              <a href="javascript:void(0);" x-on:click="isOpen = false"><i class="align-bottom ltr:ml-1 rtl:mr-1 ri-close-fill"></i></a>
+            </span>
+
+          </template>
+          <span class="badge badge-gray" x-data="{ isOpen: true }" x-show="showAll && isOpen">
+            <span>M</span>
+            <a href="javascript:void(0);" x-on:click="isOpen = false"><i class="align-bottom ltr:ml-1 rtl:mr-1 ri-close-fill"></i></a>
+          </span>
+          <span class="badge badge-gray" x-data="{ isOpen: true }" x-show="showAll && isOpen">
+            <span>Green</span>
+            <a href="javascript:void(0);" x-on:click="isOpen = false"><i class="align-bottom ltr:ml-1 rtl:mr-1 ri-close-fill"></i></a>
+          </span>
+          <span class="badge badge-gray" x-data="{ isOpen: true }" x-show="showAll && isOpen">
+            <span>$200 - $600</span>
+            <a href="javascript:void(0);" x-on:click="isOpen = false"><i class="align-bottom ltr:ml-1 rtl:mr-1 ri-close-fill"></i></a>
+          </span>
+        </div>
+      </div>
+
+      <div class="mt-5" x-data="productCategory">
+        <h6 class="mb-3">Product Category (<span x-text="selectedCount"></span>)</h6>
+
+        <div class="flex flex-col gap">
+          <!-- Checkbox items -->
+          <div class="input-check-group">
+            <input id="productCategory1" class="input-check input-check-primary" type="checkbox" value="Fashion">
+            <label for="productCategory1" class="input-check-label">Fashion</label>
+          </div>
+          <div class="input-check-group">
+            <input id="productCategory2" class="input-check input-check-primary" type="checkbox" value="Footwear">
+            <label for="productCategory2" class="input-check-label">Footwear</label>
+          </div>
+          <div class="input-check-group">
+            <input id="productCategory3" class="input-check input-check-primary" type="checkbox" value="Bags">
+            <label for="productCategory3" class="input-check-label">Bags</label>
+          </div>
+          <div class="input-check-group">
+            <input id="productCategory4" class="input-check input-check-primary" type="checkbox" value="Watch">
+            <label for="productCategory4" class="input-check-label">Watch</label>
+          </div>
+          <div class="input-check-group">
+            <input id="productCategory5" class="input-check input-check-primary" type="checkbox" value="Accessories">
+            <label for="productCategory5" class="input-check-label">Accessories</label>
+          </div>
+
+          <!-- Additional Categories -->
+          <div x-show="showMore" class="flex flex-col gap">
+            <div class="input-check-group">
+              <input id="productCategory6" class="input-check input-check-primary" type="checkbox" value="Jewelry">
+              <label for="productCategory6" class="input-check-label">Jewelry</label>
+            </div>
+            <div class="input-check-group">
+              <input id="productCategory7" class="input-check input-check-primary" type="checkbox" value="Sunglasses">
+              <label for="productCategory7" class="input-check-label">Sunglasses</label>
+            </div>
+            <div class="input-check-group">
+              <input id="productCategory8" class="input-check input-check-primary" type="checkbox" value="Belts">
+              <label for="productCategory8" class="input-check-label">Belts</label>
+            </div>
+          </div>
+          <!-- Show more button -->
+          <a href="javascript: void(0);" class="block mt-3 link link-primary" x-on:click="toggleShowMore">
+            <span x-show="!showMore">Show More
+              <lucide-angular name="ChevronDown" class="inline-block size-4"></lucide-angular>
+            </span>
+            <span x-show="showMore">Show Less
+              <lucide-angular name="ChevronUp" class="inline-block size-4"></lucide-angular>
+            </span>
+          </a>
+        </div>
+      </div>
+      <div class="mt-5" x-data="colorFilter">
+        <h6 class="mb-3">Colors (<span x-text="selectedCount"></span>)</h6>
+
+        <div class="flex flex-col gap">
+          <div class="input-check-group">
+            <input id="productColor1" class="input-check input-check-primary" type="checkbox" value="bg-primary-50">
+            <label for="productColor1" class="input-check-label">Blue</label>
+          </div>
+          <div class="input-check-group">
+            <input id="productColor2" class="input-check input-check-primary" type="checkbox" value="bg-green-50">
+            <label for="productColor2" class="input-check-label">Green</label>
+          </div>
+          <div class="input-check-group">
+            <input id="productColor3" class="input-check input-check-primary" type="checkbox" value="bg-red-50">
+            <label for="productColor3" class="input-check-label">Red</label>
+          </div>
+          <div class="input-check-group">
+            <input id="productColor4" class="input-check input-check-primary" type="checkbox" value="bg-yellow-50">
+            <label for="productColor4" class="input-check-label">Yellow</label>
+          </div>
+          <div class="input-check-group">
+            <input id="productColor5" class="input-check input-check-primary" type="checkbox" value="bg-sky-50">
+            <label for="productColor5" class="input-check-label">Sky</label>
+          </div>
+
+          <!-- Additional Categories -->
+          <div x-show="showMore" class="flex flex-col gap">
+            <div class="input-check-group">
+              <input id="productColor6" class="input-check input-check-primary" type="checkbox" value="bg-pink-50">
+              <label for="productColor6" class="input-check-label">Pink</label>
+            </div>
+            <div class="input-check-group">
+              <input id="productColor7" class="input-check input-check-primary" type="checkbox" value="bg-indigo-50">
+              <label for="productColor7" class="input-check-label">Black</label>
+            </div>
+            <div class="input-check-group">
+              <input id="productColor8" class="input-check input-check-primary" type="checkbox" value="bg-gray-50">
+              <label for="productColor8" class="input-check-label">Gray</label>
+            </div>
+          </div>
+
+          <a href="javascript: void(0);" class="block mt-3 link link-primary" x-on:click="toggleShowMore">
+            <span x-show="!showMore">Show More
+              <lucide-angular name="ChevronDown" class="inline-block size-4"></lucide-angular>
+            </span>
+            <span x-show="showMore">Show Less
+              <lucide-angular name="ChevronUp" class="inline-block size-4"></lucide-angular>
+            </span>
+          </a>
+        </div>
+      </div>
+      <div class="mt-5">
+        <h6 class="mb-4">Price Range</h6>
+        <div class="flex items-center justify-center h-20 px-5">
+          <div id="arbitrary-values-slider" class="w-full"></div>
+        </div>
+      </div>
+
+      <div class="mt-5">
+        <h6 class="mb-3">Sort By</h6>
+
+        <div class="flex flex-col gap">
+          <div class="input-radio-group">
+            <input id="bestSellerByRadio" class="input-radio input-radio-primary" type="radio" name="sortBy">
+            <label for="bestSellerByRadio" class="input-radio-label">Best Sellers</label>
+          </div>
+          <div class="input-radio-group">
+            <input id="newArrivalsSortBy" class="input-radio input-radio-primary" type="radio" name="sortBy">
+            <label for="newArrivalsSortBy" class="input-radio-label">New Arrivals</label>
+          </div>
+          <div class="input-radio-group">
+            <input id="tradingSortBy" class="input-radio input-radio-primary" type="radio" name="sortBy">
+            <label for="tradingSortBy" class="input-radio-label">Trading</label>
+          </div>
+          <div class="input-radio-group">
+            <input id="lowToHighSortBy" class="input-radio input-radio-primary" type="radio" name="sortBy">
+            <label for="lowToHighSortBy" class="input-radio-label">Price (Low to High)</label>
+          </div>
+          <div class="input-radio-group">
+            <input id="highToLowSortBy" class="input-radio input-radio-primary" type="radio" name="sortBy">
+            <label for="highToLowSortBy" class="input-radio-label">Price (High to Low)</label>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="flex items-center justify-end gap-2 p-4 border-t border-slate-200">
+      <button class="btn btn-sub-gray" data-drawer-close="filterAside">
+        <lucide-angular name="x" class="inline-block ltr:mr-1 rtl:ml-1 align-center size-4"></lucide-angular>Reset
+      </button>
+      <button class="btn btn-primary" data-drawer-close="filterAside">
+        <lucide-angular name="SlidersHorizontal" class="inline-block ltr:mr-1 rtl:ml-1 align-center size-4">
+        </lucide-angular> <span class="align-middle">Filter</span>
+      </button>
+    </div>
+  </div>
+</div>

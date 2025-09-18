@@ -1,0 +1,126 @@
+<app-page-title [Title]="'Overview'" [pageTitle]="'Invoice'"></app-page-title>
+
+<div class="mx-auto mb-5 sm:max-w-6xl print:max-w-full" id="invoice-content">
+  <div class="relative overflow-hidden card print:border-0 print:shadow-none">
+    <div class="absolute inset-x-0 top-0 bottom-0 bg-gradient-to-b blur-2xl from-primary-500/10"></div>
+    <div class="top-0 h-40 md:block md:absolute rtl:left-0 ltr:right-0 rtl:rounded-br-full ltr:rounded-bl-full w-96 bg-primary-500">
+    </div>
+    <div class="relative md:p-10 card-body print:p-0">
+      <div class="mb-8 md:flex">
+        <div class="mb-4 grow md:mb-0">
+          <a href="javascript: void(0);">
+            <img src="assets/images/main-logo.png" alt="" class="inline-block h-8 dark:hidden">
+            <img src="assets/images/logo-white.png" alt="" class="hidden h-8 dark:inline-block">
+          </a>
+          <h6 class="mt-3 text-16">Invoice #PEI-15485</h6>
+        </div>
+        <div class="mt-6 space-y-2 text-right md:mt-0">
+          <p class="text-gray-500 dark:text-dark-500 md:text-primary-100 dark:md:text-primary-100">Support Email: <a href="javascript:void(0);" href="mailto:support&#64;srbthemes.com" class="font-semibold text-gray-900 dark:text-dark-50 md:text-primary-50 dark:md:text-primary-50">support&#64;srbthemes.com</a>
+          </p>
+          <p class="text-gray-500 dark:text-dark-500 md:text-primary-100 dark:md:text-primary-100">Invoice Date: <span class="font-semibold text-gray-900 dark:text-dark-50 md:text-primary-50 dark:md:text-primary-50">28 May,
+              2024</span></p>
+          <p class="text-gray-500 dark:text-dark-500 md:text-primary-100 dark:md:text-primary-100">Due Date: <span class="font-semibold text-gray-900 dark:text-dark-50 md:text-primary-50 dark:md:text-primary-50">02 June,
+              2024</span></p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-12 mb-6">
+        <div class="col-span-12 md:col-span-6">
+          <p class="mb-1 text-gray-500 dark:text-dark-500">From Address</p>
+          <h6 class="mb-2">Martin Riedel</h6>
+          <pre class="text-gray-500 dark:text-dark-500 font-body font-base">Emma-Köhler-Allee 4c, Germering,
+Nordrhein-Westfalen, Germany - 13907</pre>
+          <p class="mt-1 text-gray-500 dark:text-dark-500">Phone No.: 0068829546</p>
+          <p class="mt-1 text-gray-500 dark:text-dark-500">Email: thiele.hanspeter&#64;web.de</p>
+        </div>
+        <div class="col-span-12 md:col-span-6">
+          <p class="mb-1 text-gray-500 dark:text-dark-500">Billing Address</p>
+          <h6 class="mb-2">Jana Timmermans</h6>
+          <pre class="text-gray-500 dark:text-dark-500 font-body font-base">place Denis 11, Chimay,
+Fosses-la-Ville, Belgium - 4823</pre>
+          <p class="mt-1 text-gray-500 dark:text-dark-500">Phone No.: 03 7327843</p>
+          <p class="mt-1 text-gray-500 dark:text-dark-500">Email: axelle.dewinter&#64;willems.net</p>
+        </div>
+      </div>
+
+      <div>
+        <div class="overflow-x-auto">
+          <table class="table flush">
+            <tbody>
+              <tr class="whitespace-nowrap">
+                <th>#</th>
+                <th>Product Name</th>
+                <th>Price</th>
+                <th>Qty</th>
+                <th>Subtotal</th>
+              </tr>
+              <ng-container *ngFor="let item of invoice">
+                <tr>
+                  <td>{{item.productNumber}}</td>
+                  <td>
+                    <div class="flex items-center gap-2">
+                      <div class="flex items-center justify-center p-1 border border-gray-200 rounded-sm dark:border-dark-800 size-12">
+                        <img [src]="item.image" alt="" class="rounded">
+                      </div>
+                      <div>
+                        <h6 class="mb-1"><a href="javascript:void(0);" routerLink="/apps-ecommerce-product-overview">{{item.name}}</a></h6>
+                        <p class="text-gray-500 dark:text-dark-500 divide-x divide-gray-200 dark:divide-dark-800 flex gap-2 items-center"><span class="px-2 ltr:first:!pl-0 rtl:first:!pr-0" x-text="item.color">{{item.color}}</span> <span class="px-2 first:pl-0">{{item.size}}</span></p>
+                      </div>
+                    </div>
+                  </td>
+                  <td>{{item.price}}</td>
+                  <td>{{item.qty}}</td>
+                  <td>{{item.subTotal}}</td>
+                </tr>
+              </ng-container>
+              <tr class="whitespace-nowrap">
+                <td colspan="3"></td>
+                <td>Subtotal:</td>
+                <th class="!border-0">$316.89</th>
+              </tr>
+              <tr class="whitespace-nowrap">
+                <td colspan="3"></td>
+                <td>Vat Amount (6%)</td>
+                <th class="!border-0">$19.19</th>
+              </tr>
+              <tr class="whitespace-nowrap">
+                <td colspan="3"></td>
+                <td>Discount (10%)</td>
+                <th class="!border-0">-$31.98</th>
+              </tr>
+              <tr class="whitespace-nowrap">
+                <td colspan="3"></td>
+                <td>Shipping Charge</td>
+                <th class="!border-0">$35.00</th>
+              </tr>
+              <tr class="whitespace-nowrap">
+                <td colspan="3"></td>
+                <td>Total Amount</td>
+                <th class="!border-0 text-primary-600">$339.10</th>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="grid grid-cols-12 mt-5">
+        <div class="col-span-12 md:col-span-6">
+          <h6 class="mb-2">Payment Method <span class="align-middle ltr:ml-1 rtl:mr-1 badge badge-green">Paid</span>
+          </h6>
+          <p class="mt-1 text-gray-500 dark:text-dark-500">Card Holder Name: Karen Reich</p>
+          <p class="mt-1 text-gray-500 dark:text-dark-500">Debit Card: XXXX XXXX XXXX 8741</p>
+          <p class="mt-1 text-gray-500 dark:text-dark-500">Expiry Date: 08/2035</p>
+          <p class="mt-1 text-gray-500 dark:text-dark-500">Total Amount: $339.10</p>
+        </div>
+      </div>
+    </div>
+    <div class="flex flex-wrap items-center bg-sky-500/10 card-footer border-sky-500/20">
+      <h6 class="grow">Thank you for purchasing Domiex Admin & Dashboards</h6>
+      <a href="javascript:void(0);" class="shrink-0">+(021) 1452 023 021</a>
+    </div>
+  </div>
+
+  <div class="flex flex-wrap items-center justify-end gap-2 print:hidden" x-data>
+    <button class="btn btn-sub-red">Download</button>
+    <button class="btn btn-primary" (click)="printInvoice()">Print Now</button>
+  </div>
+</div>

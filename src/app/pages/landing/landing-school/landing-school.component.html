@@ -1,0 +1,672 @@
+<div class="flex items-center mx-auto px-4 justify-center h-10 text-center bg-pink-400 dark:bg-pink-700 text-pink-50 dark:text-pink-200">
+  <div class="container mx-auto px-4">
+    <p>Join new friends and embark on a New Year learning experience. <a href="javascript:void(0);" class="underline transition duration-300 ease-linear hover:text-white">Click on the student list!</a></p>
+  </div>
+</div>
+
+<div>
+  <header class="landing-navbar h-20 top-10 [&.scroll-sticky]:top-0 [&.scroll-sticky]:shadow-gray-200/50 [&.scroll-sticky]:shadow-lg [&.scroll-sticky]:bg-white dark:[&.scroll-sticky]:shadow-dark-850 dark:[&.scroll-sticky]:bg-dark-900">
+    <div class="container mx-auto px-4 flex items-center">
+      <a routerLink="/" title="Logo">
+        <img src="assets/images/main-logo.png" alt="" class="inline-block h-7 dark:hidden">
+        <img src="assets/images/logo-white.png" alt="" class="hidden h-7 dark:inline-block">
+      </a>
+      <div class="mx-auto navbar-collapase" [ngClass]="{ 'hidden xl:flex': !isMenuOpen }">
+        <div class="flex flex-col xl:flex-row xl:items-center *:py-3 xl:py-0 xl:*:px-3 *:inline-block *:text-16 *:tracking-wide *:font-medium">
+          <a href="javascript:void(0);" (click)="scrollToSection('home')" [class.active]="currentSection === 'home'" class="leading-normal [&.active]:text-orange-500 hover:text-orange-500 transition duration-300 ease-linear active">Home</a>
+          <a href="javascript: void(0);" (click)="scrollToSection('about-us')" [class.active]="currentSection === 'about-us'" class="leading-normal [&.active]:text-orange-500 hover:text-orange-500 transition duration-300 ease-linear">About
+            Us</a>
+          <a href="javascript:void(0);" (click)="scrollToSection('courses')" [class.active]="currentSection === 'courses'" class="leading-normal [&.active]:text-orange-500 hover:text-orange-500 transition duration-300 ease-linear">Courses</a>
+          <a href="javascript:void(0);" (click)="scrollToSection('mentors')" [class.active]="currentSection === 'mentors'" class="leading-normal [&.active]:text-orange-500 hover:text-orange-500 transition duration-300 ease-linear">Mentors</a>
+          <a href="javascript:void(0);" (click)="scrollToSection('blogs')" [class.active]="currentSection === 'blogs'" class="leading-normal [&.active]:text-orange-500 hover:text-orange-500 transition duration-300 ease-linear">Blogs</a>
+          <a href="javascript: void(0);" (click)="scrollToSection('contact-us')" [class.active]="currentSection === 'contact-us'" class="leading-normal [&.active]:text-orange-500 hover:text-orange-500 transition duration-300 ease-linear">Contact
+            Us</a>
+        </div>
+      </div>
+      <div class="flex items-center gap-2 ltr:ml-auto rtl:mr-auto">
+        <button (click)="toggleMenu()" type="button" title="menu toggle" class="rounded-full xl:ltr:ml-0 xl:rtl:mr-0 ltr:ml-auto rtl:mr-auto navbar-toggle btn btn-sub-sky btn-icon xl:!hidden">
+          <i [class]="isMenuOpen ? 'ri-close-line text-lg' : 'ri-menu-2-line text-lg'"></i>
+        </button>
+        <button type="button" class="py-3 min-w-40 btn btn-orange">Enroll Now</button>
+      </div>
+    </div>
+  </header>
+</div>
+
+<section class="pt-48 pb-14 md:pb-24 bg-gradient-to-b from-orange-500/10" id="home">
+  <div class="container mx-auto px-4">
+    <div class="max-w-5xl mx-auto text-center">
+      <h1 class="mb-5 text-5xl font-medium leading-normal capitalize">
+        Ready to build meaningful connections
+        <span class="relative inline-block">
+          <svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 334 80" class="absolute left-0 bottom-1.5 h-11">
+            <g id="Graphic Elements">
+              <g id="&lt;Group&gt;">
+                <path id="&lt;Compound Path&gt;" fill-rule="evenodd" class="fill-orange-500/20" d="m325.5 27.6c-0.2 0.1-0.5 0.1-0.7 0.2-2.4 0.1-4.7 0.1-7 0.2-0.6 0.1-1.3 0.2-1.6 0.5-0.8 0.9-1.7 1-2.8 1.1-1.5 0.1-1.7 0.3-2.5 1.9 1.8 1 3.8 0.3 5.7 0.7-0.2 0.2-0.5 0.4-1 0.8 0.9 0.4 1.7 0.8 2.4 0.9 2.1 0.1 4.2 0.1 6.2 0.2 0.6 0 1.2-0.1 1.8 0 1.5 0.3 2.8-0.2 4.3-0.6-0.3-0.4-0.5-0.6-0.8-1 1.3 0 2.4 0 3.5 0-0.5 1.8-0.7 1.9-2.4 2-1.4 0.1-2.9 0.1-4.3 0.2-0.5 0-1.1 0.1-1.6 0.3-1.7 0.9-3.5 1-5.4 0.8-0.3 0-0.6-0.2-0.8-0.1-1.7 0.9-3.5 0.3-5.2 0.5-1.2 0.2-2.3 0.7-3.5 1.1q0 0.2 0 0.4 0.9 0.2 1.9 0.4c2.4 0.5 4.7 1.3 7.3 1.1 2.4-0.2 4.9-0.1 7.6-0.1-0.5 0.3-0.7 0.5-0.9 0.5q-3.7 0.4-7.3 0.8c-0.7 0-1.5-0.1-2.3-0.1-0.8-0.1-1.7-0.2-2.6-0.1-3.4 0.4-6.9 0.9-10.3 1.3-1.1 0.2-2.2 0.1-3.3 0.2-1.1 0.1-2.2 0.2-3.3 0.4-0.8 0.2-1.5 0.7-1.4 1.9 3.7 0.1 7.3-0.2 11.2-0.5-0.9 1.2-2.1 1.2-3.1 1.3-5 0.7-10 1.2-15 1.8-0.2 0-0.5 0-0.7 0.1-0.2 0.1-0.4 0.3-0.4 0.5 0 0.2 0.1 0.6 0.3 0.7 0.4 0.1 0.8 0.2 1.2 0.2 1.6 0 3.2 0 5 0-0.3 0.6-0.6 1.2-0.9 1.8 1.4 0.7 2.8 0.3 4.2 0.4 1.3 0 2.6 0 3.9 0.2-3.1 0.8-6.5 0.1-9.6 1.2-0.2 1 0.3 1.3 1 1.3 1.3 0 2.6 0.1 3.9 0.1 3.4 0 6.7-0.1 10.1 0 0.9 0 1.8 0.2 2.8 0.3 1.2 0.2 2.5 0.4 3.8 0.4 4.4 0 8.8-0.1 13.2-0.1q1 0 2.1 0.3c-2.2 0.8-4.5 0.5-6.7 0.8-2.3 0.4-4.6 0.5-6.8 0.7q-0.1 0.3-0.1 0.5c0.4 0.1 0.8 0.2 1.2 0.2 2.9 0 5.8 0 8.7 0 1.4 0 2.9-0.2 4.6 0.5-3.6 0.2-6.8 0.4-10.2 0.7 0.2 1.6-0.8 2-2.1 2.2q-3.1 0.4-6.1 0.9c-0.8 0.1-1.7 0.3-2.5 0.5-0.5 0.2-0.9 0.6-1.3 1.1 1.7 0.6 3.3 0.4 5.1 0.4-0.3 0.9-1 0.8-1.6 0.9-1.9 0.2-3.8 0.3-5.7 0.5q-1.1 0.1-2.2 0.4c-0.2 0.1-0.5 0.5-0.4 0.7 0 0.2 0.3 0.5 0.5 0.5 0.7 0.1 1.4 0.1 2.4 0.2-2.1 1-4.2 0.8-6.1 1.3-1.8 0.5-3.6 1-5.5 1.6 1.4 0.6 2.7 0.3 4.1 0.1q2.1-0.2 4.4 0.1c-0.3 0.1-0.5 0.4-0.8 0.4-2 0.1-4 0-6 0.3-5.8 0.8-11.5 0.5-17.2 1.1-10.9 1.2-21.9 1.4-32.8 1.9-2.1 0.1-4.2 0-6.3 0-0.7 0.1-1.5 0.2-2.2 0.3-0.3 0-0.6 0.1-0.8 0.1-1.7-0.1-3.3-0.3-4.9-0.3-6.6 0-13.1 0-19.7 0-2.8 0-5.7-0.1-8.5-0.2-0.3 0-0.5 0-0.7 0.1-3.5 0.9-7.1 0.3-10.6 0.4-9.2 0.2-18.4 0.2-27.6 0.2q-9.4 0.1-18.8 0.2-6.3 0-12.6 0.1-13.1 0.1-26.2 0.1c-3.9 0-7.8 0-11.7 0-0.9 0-1.8 0.2-2.7 0.3-0.2 0.9 0.1 1.3 0.8 1.5 0.5 0.1 1.1 0.1 1.7 0.1q5.7 0.2 11.5 0.4c0.2 0 0.4 0.1 0.6 0.5-1.8 0.1-3.7 0.4-5.5 0.4-4.8 0-9.6-0.1-14.3-0.2-3.4 0-6.8 0-10.2-0.2-5.5-0.2-11.1-0.5-16.7-0.9-4.7-0.4-9.3-1-14-1.5-7.2-0.7-14.4-1.4-21.5-2.1-1.4-0.1-2.8-0.3-4.2-0.6-0.4 0-0.7-0.2-1.1-0.3q0-0.2 0-0.4c0.6 0 1.3-0.1 1.9-0.1 2.8 0.2 5.6 0.5 8.3 0.7 0.2 0 0.3 0.1 0.4 0.1q2.6-0.3 5.2-0.5c-0.8-0.7-2.9-1.1-6.7-1.3-2.5-0.2-4.9-0.6-7.3-0.8q-3.5-0.4-7-0.7 0-0.2 0-0.4c1.4-0.1 2.7-0.2 4.4-0.4-1.3-1.6-3-0.4-4.5-1.2 1.5-0.6 3.1 0.1 4.4-0.9-1.1-0.7-2.2-0.4-3.3-0.5q-1.6-0.1-3.3-0.3c-1-0.2-2.1 0.5-3.1-0.4 4.7 0 9.3-0.6 13.9-0.7q0-0.2 0.1-0.4c-0.3-0.2-0.5-0.4-0.8-0.5q-1.9-0.3-3.8-0.4c-2.5-0.2-5-0.8-7.6-0.8-1.8 0.1-3.6-0.3-5.4-0.4-1.3 0-2.4-0.6-3.2-1.8 0.4-0.2 0.7-0.5 1-0.5 2.4-0.2 4.7-0.3 7-0.4 1.7-0.2 3.3-0.2 4.7-1.4 0.6-0.5 1.6-0.5 2.4-0.6q6.8-0.5 13.7-1.1 4.8-0.3 9.7-0.6c1-0.1 2 0.1 3 0.1q1.6 0.1 3.3-0.1c0.6 0 1.2-0.3 1.2-1.4-2.7-0.2-5.3-0.3-8-0.5 0.8-1.2 2-1.7 3.4-1.9 2.9-0.3 5.7-0.9 8.6-0.8 0.5 0.1 1-0.1 1.5-0.1q0-0.2 0-0.4c-0.3-0.1-0.5-0.3-0.8-0.3-1.8 0.1-3.6 0.3-5.4 0.4q-5 0.4-10.1 0.7c-1.7 0.2-3.4 0.3-5.2 0.3-1.7 0-3.5-0.2-5-1.2-0.3-0.2-0.8-0.1-1.2-0.2q-5-0.9-10.1-1.8c-0.1-0.1-0.2-0.2-0.4-0.4 0.6-0.6 1.2-0.2 1.8-0.1 2.1 0.3 4.2 0.8 6.3 0 0.5-0.2 0.9-0.5 1.3-0.9-4.2-0.1-8.2-0.6-12.2-1.7 0.4-0.1 0.7-0.2 1.1-0.2 0.6-0.1 1.2-0.1 1.7-0.1 0.7-0.1 1.7 0.2 2-0.8 0.2-1-0.9-1-1.4-1.4q0 0-0.1-0.2c0.4-0.2 0.7-0.5 1.3-0.9-0.8-0.2-1.4-0.4-2.1-0.6 0.2-0.3 0.2-0.7 0.5-0.8 0.8-0.2 1.6-0.4 2.5-0.6 1.8-0.4 3.7-0.9 5.7-1.4-0.7-0.9-1.5-1-2.2-0.9-1 0.2-2.2-0.2-3.1 0.8-0.1 0.1-0.3 0.1-0.5 0.1-0.3-0.1-0.6-0.3-0.8-0.2-2.6 1.1-5.2 0.5-7.7 0.1-0.8-0.1-1.5-0.6-2.5-1.1 1.9-0.8 5.1-1.4 6.5-1.4 1 0.1 1.9-0.2 3.2-0.8-2.1-0.6-3.8 0.1-5.7-0.1 0.8-1.1 1.7-1.9 3-2.1 1.7-0.2 2.5-1.8 3.9-2.6q-0.1-0.2-0.1-0.4c-1 0-1.9 0.1-2.8-0.1-0.9-0.3-1.7-0.8-2.6-1.3 0.3-0.8 0.6-1.6 0.9-2.4-1.4-0.6-1.9 1.3-3.2 1-0.3-0.4-0.6-0.9-0.9-1.3 0.7-2.5 3.1-3.1 5-4.3q-0.1-0.1-0.1-0.3c-0.3 0-0.6-0.1-0.8 0-0.3 0-0.6 0.1-0.9 0.1-0.3-0.7-0.5-1.4-0.8-2.1q1.7-0.7 3.4-1.4c1-0.4 2.3 0.4 3.2-0.8-0.4-0.8-1.3-0.7-2-0.8-0.6-0.1-1.3 0-2-0.3 1.7-0.7 3.5-1.4 5.2-2.2 3.7-1.8 7.8-2.2 11.8-3q8.1-1.6 16.3-2.9c5.6-0.9 11.2-1.8 16.8-2.3 5.7-0.6 11.5-0.9 17.3-1.3 1.2-0.1 2.2 0.4 3.4 0.3 1.8-0.2 3.8 0.2 5.7 0.2 1 0.1 2.1 0 3.1-0.1 2.2-0.3 4.4-0.6 6.6-0.9 0.2 0 0.6-0.1 0.8 0 1.7 1 3.5 0.3 5.3 0.3q1 0 2 0 0 0.2 0.1 0.3-1 0.5-2 1 0 0.2 0 0.3c0.8 0.1 1.5 0.1 2.3 0.2 0.7 0.1 1.5 0.3 2.2 0.3 2.5 0.1 5 0.1 7.5 0.1 3.4-0.1 6.9-0.3 10.3-0.4 2.4 0 4.7 0.1 7.1 0.1q0.3 0 0.7 0c5.1-0.6 10.3-0.6 15.5-0.3 1.9 0.1 3.9-0.1 5.8-0.1q6.8 0 13.6-0.1c0.2 0 0.4 0 0.7 0.1 7.4 1.1 14.8 0.8 22.3 1 11.8 0.3 23.6 0.5 35.4 0.8 3.1 0 6.3 0 9.4 0 1.2 0 1.5 0.2 1.4 1.5 0 0.3 0.4 0.6 0.6 1-0.2 0.1-0.6 0.1-1 0.1q-2.4 0.2-4.8 0.4c-0.3 0.1-0.5 0.1-0.7 0.2-1.6 1.3-3.3 1-5.1 0.7-0.7-0.2-2.4 0.3-3.2 0.7-0.4 0.2-1 0.2-1.3 0-1.2-0.5-2.4-0.7-3.9-0.4-0.2 0.4-0.3 0.9-0.6 1.5 0.9 0.1 1.6 0.3 2.4 0.3 8.2 0.2 16.4 0.3 24.6 0.5 2.6 0.1 5.2 0.5 7.8 0.5 4.1 0.2 8.2 0.2 12.4 0.3 2 0.1 4.1 0.3 6.2 0.4q6.7 0.4 13.4 0.6 7.7 0.2 15.4 0.4c1.1 0 2.3 0 3.4 0q0.5 1.1-0.5 1.2c-0.5 0.1-0.9 0.1-1.4 0.1q-0.4 0.1-0.8 0.4c1.9 0.7 3.9 0.1 5.8 0.5q0 0.2 0 0.4c-0.7 0.1-1.4 0.3-2.2 0.3-2.3 0.2-4.7 0.3-7.1 0.4-0.4 0.1-0.8 0.1-1.2 0.3-2 0.8-4.1 0.8-6.1 0.7-3.9-0.1-7.7 0.3-11.5 0.6-1.4 0.2-2.9 0.1-4.4 0.1-0.5 0-1 0.2-1.5 0.3q0 0.2 0 0.4c0.3 0.1 0.5 0.3 0.8 0.3q8 0.3 16.1 0.5c0.7 0.1 1.5 0.2 2.2 0.2 1.1 0 1.9 0.4 2.4 1.2 0.3 0.6 0.8 0.7 1.4 0.7q1.6 0 3.3 0.1c0.8 0 1.7-0.2 2.3 0.8 0.2 0.2 0.8 0.2 1.2 0.3 1.3 0.2 2.7 0.5 4.1 0.4 1.7-0.1 2.9 0.9 4.2 1.6 0.6 0.4 1.2 0.6 1.9 0.6q5 0.2 10.1 0.4c0.2 0 0.4 0.1 0.6 0.1q0 0.2 0 0.3zm-246.6 3.9c-0.2-0.1-0.5-0.1-0.7-0.1-2.7 0.2-5.4 0.5-8.1 0.6-0.9 0.1-1.8 0.2-2.6-0.1-1.1-0.4-2 0-3 0.3 1 0.8 3 1 7.5 0.9 2.5 0 5 0 7.7-0.1-0.3-0.6-0.5-1.1-0.8-1.5zm4.2 2.4c1.8 1.1 6.2 1.1 7.5 0.1-2.1-0.6-4.2-1.1-6.2-1.5-0.9-0.2-1.4 0.4-1.3 1.4zm-77.8 25c1.8 0.6 5.2 0.4 6.1-0.2-2.1-0.1-4.1-0.4-6.1 0.2z" />
+                <path id="&lt;Path&gt;" class="fill-orange-500/20" d="m279.5 11.2c0.2-0.6 0.3-1 0.6-1.5-1.6-0.1-3-0.2-4.5-0.3q-5.3-0.2-10.6-0.3c-1.2 0-2.4 0.2-3.6 0.3q-0.2 0-0.3 0.1c-2.5 0.1-5 0.7-7.5 0.4-1.7-0.2-3.1 0.5-4.7 0.3-1.6-0.2-3.2-0.1-4.7-0.1-1 0-2.1-0.1-3.1-0.4 0.3-0.1 0.6-0.3 0.9-0.3 1.6-0.2 3.1-0.3 4.7-0.5 0.8-0.1 1.8 0 2.1-1.1 0-0.2 0.6-0.4 0.9-0.4 3.5 0.2 6.9 0.5 10.4 0.6q8.5 0.4 16.9 0.6c1 0 1.9-0.3 2.8-0.7-2.6-0.8-5.3-0.8-7.9-0.9-2.7 0-5.4-0.3-8-0.5q-4.1-0.3-8.1-0.6 0-0.2-0.1-0.4c0.5 0 0.9-0.1 1.3-0.1 4.6 0 9.3 0 13.9 0.2 3.8 0.1 7.7 0.4 11.5 0.5 1.9 0 3.8-0.2 5.7-0.2 3.3-0.2 6.7-0.3 10-0.4 2.5 0 5 0.1 7.4 0.1 0.6 0 1.2 0.1 1.7 0.2q0.1 0.2 0.1 0.4c-1.3 0.3-2.5 0.6-4 1 0.7 0.7 1.5 0.7 2.2 0.7q10.1 0.7 20.2 1.4c0 0 0.1 0.2 0.3 0.3-0.3 0.2-0.6 0.4-0.9 0.5-2.4 0.6-4.9 0.7-7.4 0.4q-1.5-0.1-3.1-0.1c-4.4 0.2-8.8 0.6-13.2 0.5-2.8-0.1-5.6-0.2-8.4-0.1-1.6 0-3.2 0.2-4.8 0.2-1.6 0-3.2 0.5-4.8-0.2-0.5-0.2-1.3 0.1-1.9 0.1-0.6 0.1-1.2 0.2-2 0.3z" />
+                <path id="&lt;Path&gt;" class="fill-orange-500/20" d="m243.4 76.7c-0.2 0.3-0.3 0.4-0.3 0.4-2.4 0.1-4.6 1-6.9 1.4-0.9 0.2-1.8 0.1-2.2-1-2.1 0.9-4.3 0.9-6.5 0.8q-6-0.1-11.9-0.2c-6.9-0.2-13.9-0.4-20.9-0.5-4.1 0-8.2 0.2-12.3 0.3-1.8 0-3.5-0.1-5.3-0.1-0.3 0-0.7-0.2-1-0.4 1.2-0.6 2.5-0.6 3.8-0.6q2 0 4 0.1c4.1 0.1 8.2-0.2 12.3-0.4 3.9-0.1 7.8-0.3 11.7-0.4q4.6-0.2 9.2-0.2c1.3 0 2.6 0.4 3.9 0.4 7.2 0.1 14.3 0.1 21.5 0.2 0.2 0 0.5 0.1 0.9 0.2z" />
+                <path id="&lt;Path&gt;" class="fill-orange-500/20" d="m307 72.2c-1.1 0.9-2.2 1.2-3.4 1.4-1.7 0.2-3.5 0.6-5.3 0.8-1.4 0.2-2.9 0.4-4.3 0.6-2.5 0.2-5.1 0.3-7.6 0.9-2 0.4-4.1 0.7-6.2 0.7-0.6 0-1.2-0.1-1.9-0.2-0.2 0-0.4-0.1-0.6-0.1-3 0.3-5.9 0.6-8.8 0.8-2.3 0.2-4.6 0.2-6.9 0 0.9-0.2 1.8-0.5 2.7-0.6 2.7-0.3 5.3-0.4 8-0.7 2.4-0.3 4.9-0.7 7.4-1 2-0.2 4-0.3 6.1-0.5q6.1-0.4 12.3-0.9c1.5-0.1 3.1-0.1 4.6-0.3 1.3-0.2 2.5-0.6 3.9-0.9z" />
+                <path id="&lt;Path&gt;" class="fill-orange-500/20" d="m135.8 75.2c-1.3-0.1-2.6-0.3-3.9-0.3-1.1-0.1-2.2-0.1-3.3-0.1-3.8 0-7.6 0-11.3 0.1-2.6 0-5.1 0.2-7.7 0.3-0.2 0-0.4-0.1-0.7-0.4 0.9-0.1 1.8-0.3 2.6-0.4 4.8-0.5 22.9-0.1 24.3 0.4q0 0.2 0 0.4z" />
+                <path id="&lt;Path&gt;" class="fill-orange-500/20" d="m244.7 78.9c0.3-0.4 0.3-0.6 0.4-0.6 3-0.5 6-1 8.8-1.5 0.6 0.7 1 1.1 1.6 1.8-3.6 0.1-7.1 0.2-10.8 0.3z" />
+                <path id="&lt;Path&gt;" class="fill-orange-500/20" d="m137.4 74.7c0.7-0.1 1.2-0.3 1.8-0.2 2.3 0 4.6 0 7.1 0.1-2.1 1-7.1 1.1-8.9 0.1z" />
+                <path id="&lt;Path&gt;" class="fill-orange-500/20" d="m166.2 74.8c-1.5 1-2.9 0.3-4.3 0.4 1.4-0.3 2.7-0.6 4.3-0.4z" />
+                <path id="&lt;Path&gt;" class="fill-orange-500/20" d="m315.7 25.5c0.8-0.8 1.7-0.4 2.5-0.3q0 0.2 0.1 0.5-1.3 0.1-2.5 0.2-0.1-0.2-0.1-0.4z" />
+                <path id="&lt;Path&gt;" class="fill-orange-500/20" d="m266.5 78.7q-1.4 0-2.9 0 0-0.1 0-0.2 1.4-0.1 2.9-0.1 0 0.1 0 0.3z" />
+                <path id="&lt;Path&gt;" class="fill-orange-500/20" d="m326.5 32.5q1-0.1 1.9-0.1 0 0.2 0 0.3-0.9 0.1-1.8 0.3 0-0.3-0.1-0.5z" />
+                <path id="&lt;Path&gt;" class="fill-orange-500/20" d="m328.9 27.6q-0.6 0-1.2 0-0.1-0.1-0.1-0.2 0.7-0.1 1.3-0.1 0 0.1 0 0.3z" />
+                <path id="&lt;Path&gt;" class="fill-orange-500/20" d="m329.5 53.8q0.5 0 1 0.1 0 0.1 0 0.3-0.5 0-1-0.1 0-0.1 0-0.3z" />
+                <path id="&lt;Path&gt;" class="fill-orange-500/20" d="m172.4 74.8q0.5 0 1.1-0.1 0 0.2 0 0.4-0.5 0.1-1.1 0.2 0-0.2 0-0.5z" />
+                <path id="&lt;Path&gt;" class="fill-orange-500/20" d="m319.2 29.7c0.2 0 0.5 0 1.1 0-0.4 0.3-0.6 0.4-0.7 0.4-0.2 0.1-0.3 0-0.4-0.1q0-0.1 0-0.3z" />
+              </g>
+            </g>
+          </svg>
+          <span class="relative">Domiex</span>
+        </span>
+        education?
+      </h1>
+      <p class="mb-8 text-lg text-gray-500 dark:text-dark-500">Let's discover new knowledge, make new friends, and enjoy
+        a learning experience with amazing teachers.</p>
+
+      <div class="flex flex-wrap items-center justify-center gap-3">
+        <button type="button" class="py-3 rounded-full btn btn-primary min-w-40 hover:-translate-y-0.5">
+          Get Started
+          <lucide-angular name="MoveRight" class="ml-1 ltr:inline-block rtl:hidden size-4"></lucide-angular>
+          <lucide-angular name="MoveLeft" class="mr-1 rtl:inline-block ltr:hidden size-4"></lucide-angular>
+        </button>
+        <a href="javascript: void(0);" class="flex items-center gap-2 font-semibold">
+          <div class="flex items-center justify-center bg-orange-500 rounded-full size-9 text-primary-50">
+            <lucide-angular name="CirclePlay" class="size-5"></lucide-angular>
+          </div>
+          Watch Videos
+        </a>
+      </div>
+    </div>
+    <div class="grid grid-cols-2 gap-8 mt-8 md:grid-cols-4 lg:gap-x-16">
+      <div>
+        <div class="relative p-6 overflow-hidden bg-white rounded-t-full dark:bg-dark-900/40 max-h-96 before:absolute before:h-2/3 before:inset-x-0 before:bottom-0 before:bg-sky-500/10 before:rounded-t-full">
+          <img src="assets/images/school/landing/img-01.png" alt="" class="relative">
+        </div>
+      </div>
+      <div>
+        <div class="relative p-6 overflow-hidden bg-white rounded-t-full dark:bg-dark-900/40 max-h-96 before:absolute before:h-2/3 before:inset-x-0 before:bottom-0 before:bg-purple-500/10 before:rounded-t-full">
+          <img src="assets/images/school/landing/img-02.png" alt="" class="relative">
+        </div>
+      </div>
+      <div>
+        <div class="relative p-6 overflow-hidden bg-white rounded-t-full dark:bg-dark-900/40 max-h-96 before:absolute before:h-2/3 before:inset-x-0 before:bottom-0 before:bg-green-500/10 before:rounded-t-full">
+          <img src="assets/images/school/landing/img-03.png" alt="" class="relative">
+        </div>
+      </div>
+      <div>
+        <div class="relative p-6 overflow-hidden bg-white rounded-t-full dark:bg-dark-900/40 max-h-96 before:absolute before:h-2/3 before:inset-x-0 before:bottom-0 before:bg-yellow-500/10 before:rounded-t-full">
+          <img src="assets/images/school/landing/img-04.png" alt="" class="relative">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container mx-auto px-4 mt-12">
+    <div class="grid grid-cols-2 gap-5 sm:grid-cols-3 md:grid-cols-5">
+      <div class="text-center">
+        <h3 class="mb-1"><span class="counters" [countUp]="250" [options]="{decimalPlaces:0}">0</span>k</h3>
+        <p class="text-gray-500 dark:text-dark-500 text-16">Total Student</p>
+      </div>
+      <div class="text-center">
+        <h3 class="mb-1"><span class="counters" [countUp]="350" [options]="{decimalPlaces:0}">0</span>+</h3>
+        <p class="text-gray-500 dark:text-dark-500 text-16">Expert Teacher Teams</p>
+      </div>
+      <div class="text-center">
+        <h3 class="mb-1"><span class="counters" [countUp]="170" [options]="{decimalPlaces:0}">0</span>+</h3>
+        <p class="text-gray-500 dark:text-dark-500 text-16">Conducive Class Room</p>
+      </div>
+      <div class="text-center">
+        <h3 class="mb-1"><span class="counters" [countUp]="7546" [options]="{decimalPlaces:0}">0</span></h3>
+        <p class="text-gray-500 dark:text-dark-500 text-16">Online Tutorial</p>
+      </div>
+      <div class="text-center">
+        <h3 class="mb-1"><span class="counters" [countUp]="65" [options]="{decimalPlaces:0}">0</span>+</h3>
+        <p class="text-gray-500 dark:text-dark-500 text-16">Career Guide</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="relative pt-12 md:pb-20">
+  <div class="container mx-auto px-4">
+    <div class="max-w-3xl mx-auto mb-12 text-center">
+      <span class="px-5 mb-4 badge badge-sub-orange text-15 py-1.5 rounded-full">Our Featured</span>
+      <h2 class="mb-3 leading-normal capitalize">Top Education Offered by Domiex School</h2>
+      <p class="text-gray-500 dark:text-dark-500 text-16">Our dedicated team of educators and comprehensive curriculum
+        are designed to foster academic excellence and personal growth in every student. </p>
+    </div>
+    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-space">
+      <div>
+        <div class="p-4 mb-3 rounded-lg bg-purple-500/10 size-20">
+          <img src="assets/images/school/landing/feature/online-education.png" alt="">
+        </div>
+        <h5 class="mb-1">Online Classes</h5>
+        <p class="mb-3 text-gray-500 dark:text-dark-500 text-16">An online class is a course conducted over the
+          Internet. They are generally conducted through a learning management.</p>
+        <a href="javascript: void(0);" class="link link-orange text-16">
+          Read More
+          <lucide-angular name="MoveRight" class="ml-1 ltr:inline-block rtl:hidden size-4"></lucide-angular>
+          <lucide-angular name="MoveLeft" class="mr-1 rtl:inline-block ltr:hidden size-4"></lucide-angular>
+        </a>
+      </div>
+      <div>
+        <div class="p-4 mb-3 rounded-lg bg-10low-500/410 size-20">
+          <img src="assets/images/school/landing/feature/self-improvement.png" alt="">
+        </div>
+        <h5 class="mb-1">New Skills</h5>
+        <p class="mb-3 text-gray-500 dark:text-dark-500 text-16">These life skills include problem solving, critical
+          thinking, communication skills, decision-making, creative thinking.</p>
+        <a href="javascript: void(0);" class="link link-orange text-16">
+          Read More
+          <lucide-angular name="MoveRight" class="ml-1 ltr:inline-block rtl:hidden size-4"></lucide-angular>
+          <lucide-angular name="MoveLeft" class="mr-1 rtl:inline-block ltr:hidden size-4"></lucide-angular>
+        </a>
+      </div>
+      <div>
+        <div class="p-4 mb-3 rounded-lg bg-sky-500/10 size-20">
+          <img src="assets/images/school/landing/feature/coach.png" alt="">
+        </div>
+        <h5 class="mb-1">Best Trainer</h5>
+        <p class="mb-3 text-gray-500 dark:text-dark-500 text-16">The Skills Trainer helps individuals develop the
+          knowledge and abilities necessary to do their jobs effectively and efficiently.</p>
+        <a href="javascript: void(0);" class="link link-orange text-16">
+          Read More
+          <lucide-angular name="MoveRight" class="ml-1 ltr:inline-block rtl:hidden size-4"></lucide-angular>
+          <lucide-angular name="MoveLeft" class="mr-1 rtl:inline-block ltr:hidden size-4"></lucide-angular>
+        </a>
+      </div>
+      <div>
+        <div class="p-4 mb-3 rounded-lg bg-emerald-500/10 size-20">
+          <img src="assets/images/school/landing/feature/learning.png" alt="">
+        </div>
+        <h5 class="mb-1">Easy to Learn</h5>
+        <p class="mb-3 text-gray-500 dark:text-dark-500 text-16">A fast learner is someone who embodies the skills of
+          being a strategic a good listener and applies them to learning quickly.</p>
+        <a href="javascript: void(0);" class="link link-orange text-16">
+          Read More
+          <lucide-angular name="MoveRight" class="ml-1 ltr:inline-block rtl:hidden size-4"></lucide-angular>
+          <lucide-angular name="MoveLeft" class="mr-1 rtl:inline-block ltr:hidden size-4"></lucide-angular>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="relative py-14 md:py-24" id="about-us">
+  <div class="hidden md:block size-[400px] lg:size-[480px] xl:size-[650px] border rounded-md border-orange-500 blur-xs absolute">
+  </div>
+  <div class="container mx-auto px-4">
+    <div class="grid items-center grid-cols-12 gap-5">
+      <div class="col-span-12 md:col-span-6 2xl:col-span-4 2xl:col-start-2">
+        <div class="relative before:absolute before:inset-0 before:bg-orange-500/10 before:backdrop-blur-lg before:rounded-md before:top-20 thumbnail">
+          <span class="absolute text-2xl font-bold tracking-wide uppercase -rotate-90 text-orange-500/30 -left-3 bottom-14">Domiex</span>
+          <img src="assets/images/school/landing/img-05.png" alt="" class="max-h-[36rem] relative mx-auto">
+        </div>
+      </div>
+      <div class="col-span-12 md:col-span-6 2xl:col-span-4 2xl:col-start-8">
+        <p class="mb-3 font-medium text-orange-500 text-16">About Us</p>
+        <h2 class="mb-6 leading-normal capitalize">We are the best school and offer numerous advantages.</h2>
+
+        <div class="space-y-4">
+          <div class="flex items-center gap-4 p-3 rounded-lg shadow-2xl shadow-gray-100 dark:shadow-dark-800/50">
+            <div class="flex items-center justify-center rounded-full size-12 bg-primary-500/10 text-primary-500">
+              <lucide-angular name="Gem" class="size-6"></lucide-angular>
+            </div>
+            <h6>Highlight Unique Programs and Curriculum</h6>
+          </div>
+          <div class="flex items-center gap-4 p-3 rounded-lg shadow-2xl shadow-gray-100 dark:shadow-dark-800/50">
+            <div class="flex items-center justify-center rounded-full size-12 bg-primary-500/10 text-primary-500">
+              <lucide-angular name="Feather" class="size-6"></lucide-angular>
+            </div>
+            <h6>Qualified and Passionate Staff</h6>
+          </div>
+          <div class="flex items-center gap-4 p-3 rounded-lg shadow-2xl shadow-gray-100 dark:shadow-dark-800/50">
+            <div class="flex items-center justify-center rounded-full size-12 bg-primary-500/10 text-primary-500">
+              <lucide-angular name="BriefcaseBusiness" class="size-6"></lucide-angular>
+            </div>
+            <h6>Modern Facilities and Technology</h6>
+          </div>
+          <div class="flex items-center gap-4 p-3 rounded-lg shadow-2xl shadow-gray-100 dark:shadow-dark-800/50">
+            <div class="flex items-center justify-center rounded-full size-12 bg-primary-500/10 text-primary-500">
+              <lucide-angular name="Handshake" class="size-6"></lucide-angular>
+            </div>
+            <h6>Safe and Supportive Environment</h6>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="relative py-14 md:py-24" id="courses">
+  <div class="container mx-auto px-4">
+    <div class="max-w-3xl mx-auto mb-12 text-center">
+      <h2 class="mb-3 leading-normal capitalize">How to get Started</h2>
+      <p class="text-gray-500 dark:text-dark-500 text-16">Starting an e-learning process involves several steps to
+        ensure a smooth transition and effective learning experience for students. Here's a comprehensive guide to get
+        you started:</p>
+    </div>
+
+    <div class="relative before:absolute mb-8 before:border-b dark:bg-transparent before:w-2/3 before:top-1/2 ltr:[&.right]:before:right-0 rtl:[&.right]:before:left-0 before:border-gray-200 after:border-gray-200 dark:before:border-dark-800 dark:after:border-dark-800 after:absolute ltr:after:border-l rtl:after:border-r md:after:h-[calc(100%_+_2rem_)] after:top-1/2 ltr:after:left-2/3 rtl:after:right-2/3 ltr:[&.right]:after:left-auto rtl:[&.right]:after:right-auto ltr:[&.right]:after:right-2/3 rtl:[&.right]:after:left-2/3 last:after:hidden last:before:w-[33.3%]">
+      <div class="relative max-w-md card bg-gradient-to-b from-orange-500/10">
+        <div class="absolute text-orange-500 top-5 ltr:right-5 rtl:left-5 text-7xl opacity-10">1</div>
+        <div class="card-body">
+          <lucide-angular name="UserRound" class="inline-block text-green-500 size-4"></lucide-angular>
+          <h6 class="mt-4 mb-2 text-16">Create on Account</h6>
+          <p class="text-gray-500 dark:text-dark-500">By creating an account, you can easily connect with others,
+            whether it's through direct messaging on social media or email communication through a registered email
+            account.</p>
+        </div>
+      </div>
+    </div>
+    <div class="relative before:absolute mb-8 before:border-b dark:bg-transparent before:w-2/3 before:top-1/2 ltr:[&.right]:before:right-0 rtl:[&.right]:before:left-0 before:border-gray-200 after:border-gray-200 dark:before:border-dark-800 dark:after:border-dark-800 after:absolute ltr:after:border-l rtl:after:border-r md:after:h-[calc(100%_+_2rem_)] after:top-1/2 ltr:after:left-2/3 rtl:after:right-2/3 ltr:[&.right]:after:left-auto rtl:[&.right]:after:right-auto ltr:[&.right]:after:right-2/3 rtl:[&.right]:after:left-2/3 last:after:hidden last:before:w-[33.3%] right">
+      <div class="relative max-w-md ltr:ml-auto rtl:mr-auto card bg-gradient-to-b from-orange-500/10">
+        <div class="absolute text-orange-500 top-5 ltr:right-5 rtl:left-5 text-7xl opacity-10">2</div>
+        <div class="card-body">
+          <lucide-angular name="HandMetal" class="text-red-500 size-8"></lucide-angular>
+          <h6 class="mt-4 mb-2 text-16">Select Class</h6>
+          <p class="text-gray-500 dark:text-dark-500">The Select class in Selenium provides methods to interact with
+            dropdown lists. Using these methods, you can easily automate interactions with dropdown lists on web pages
+            using Selenium, making it easier to test.</p>
+        </div>
+      </div>
+    </div>
+    <div class="relative before:absolute mb-8 before:border-b dark:bg-transparent before:w-2/3 before:top-1/2 ltr:[&.right]:before:right-0 rtl:[&.right]:before:left-0 before:border-gray-200 after:border-gray-200 dark:before:border-dark-800 dark:after:border-dark-800 after:absolute ltr:after:border-l rtl:after:border-r md:after:h-[calc(100%_+_2rem_)] after:top-1/2 ltr:after:left-2/3 rtl:after:right-2/3 ltr:[&.right]:after:left-auto rtl:[&.right]:after:right-auto ltr:[&.right]:after:right-2/3 rtl:[&.right]:after:left-2/3 last:after:hidden last:before:w-[33.3%]">
+      <div class="relative max-w-md card bg-gradient-to-b from-orange-500/10">
+        <div class="absolute text-orange-500 top-5 right-5 text-7xl opacity-10">3</div>
+        <div class="card-body">
+          <lucide-angular name="Crown" class="text-green-500 size-8"></lucide-angular>
+          <h6 class="mt-4 mb-2 text-16">Select Your Courses</h6>
+          <p class="text-gray-500 dark:text-dark-500">You can start by choosing a field that you are interested in, and
+            from there, think of a course that will match your skills, values and personality type. you are in a better
+            position to figure out what courses will suit you.</p>
+        </div>
+      </div>
+    </div>
+    <div class="relative before:absolute mb-8 before:border-b dark:bg-transparent before:w-2/3 before:top-1/2 ltr:[&.right]:before:right-0 rtl:[&.right]:before:left-0 before:border-gray-200 after:border-gray-200 dark:before:border-dark-800 dark:after:border-dark-800 after:absolute ltr:after:border-l rtl:after:border-r md:after:h-[calc(100%_+_2rem_)] after:top-1/2 ltr:after:left-2/3 rtl:after:right-2/3 ltr:[&.right]:after:left-auto rtl:[&.right]:after:right-auto ltr:[&.right]:after:right-2/3 rtl:[&.right]:after:left-2/3 last:after:hidden last:before:w-[33.3%] right">
+      <div class="relative max-w-md ltr:ml-auto rtl:mr-auto card bg-gradient-to-b from-orange-500/10">
+        <div class="absolute text-orange-500 top-5 ltr:right-5 rtl:left-5 text-7xl opacity-10">4</div>
+        <div class="card-body">
+          <lucide-angular name="Users" class="text-sky-500 size-8"></lucide-angular>
+          <h6 class="mt-4 mb-2 text-16">Select Your Teachers</h6>
+          <p class="text-gray-500 dark:text-dark-500">Know your principles and priorities and compare them to the
+            person/system you want to learn from. You will want to find a teacher who aligns with your principles and
+            priorities.</p>
+        </div>
+      </div>
+    </div>
+    <div class="relative before:absolute mb-8 before:border-b dark:bg-transparent before:w-2/3 before:top-1/2 ltr:[&.right]:before:right-0 rtl:[&.right]:before:left-0 before:border-gray-200 after:border-gray-200 dark:before:border-dark-800 dark:after:border-dark-800 after:absolute ltr:after:border-l rtl:after:border-r md:after:h-[calc(100%_+_2rem_)] after:top-1/2 ltr:after:left-2/3 rtl:after:right-2/3 ltr:[&.right]:after:left-auto rtl:[&.right]:after:right-auto ltr:[&.right]:after:right-2/3 rtl:[&.right]:after:left-2/3 last:after:hidden last:before:w-[33.3%]">
+      <div class="relative max-w-md card bg-gradient-to-b from-orange-500/10">
+        <div class="absolute text-orange-500 top-5 right-5 text-7xl opacity-10">5</div>
+        <div class="card-body">
+          <lucide-angular name="CalendarClock" class="text-primary-500 size-8"></lucide-angular>
+          <h6 class="mt-4 mb-2 text-16">Set Class Time</h6>
+          <p class="text-gray-500 dark:text-dark-500">By creating an account, you can easily connect with others,
+            whether it's through direct messaging on social media or email communication through a registered email
+            account.</p>
+        </div>
+      </div>
+    </div>
+    <div class="relative before:absolute mb-8 before:border-b dark:bg-transparent before:w-2/3 before:top-1/2 ltr:[&.right]:before:right-0 rtl:[&.right]:before:left-0 before:border-gray-200 after:border-gray-200 dark:before:border-dark-800 dark:after:border-dark-800 after:absolute ltr:after:border-l rtl:after:border-r md:after:h-[calc(100%_+_2rem_)] after:top-1/2 ltr:after:left-2/3 rtl:after:right-2/3 ltr:[&.right]:after:left-auto rtl:[&.right]:after:right-auto ltr:[&.right]:after:right-2/3 rtl:[&.right]:after:left-2/3 last:after:hidden last:before:w-[33.3%] right">
+      <div class="relative max-w-md ltr:ml-auto rtl:mr-auto card bg-gradient-to-b from-orange-500/10">
+        <div class="absolute text-orange-500 top-5 ltr:right-5 rtl:left-5 text-7xl opacity-10">6</div>
+        <div class="card-body">
+          <lucide-angular name="GraduationCap" class="text-pink-500 size-8"></lucide-angular>
+          <h6 class="mt-4 mb-2 text-16">Now You Can Start</h6>
+          <p class="text-gray-500 dark:text-dark-500">By creating an account, you can easily connect with others,
+            whether it's through direct messaging on social media or email communication through a registered email
+            account.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="relative pt-14 md:py-24 bg-gradient-to-b from-orange-500/10">
+  <div class="container mx-auto px-4">
+    <div class="grid items-center grid-cols-12 gap-5">
+      <div class="col-span-12 md:col-span-6">
+        <h2 class="mb-4 leading-normal capitalize">What Our Beloved Students Say About</h2>
+        <p class="mb-5 text-gray-500 dark:text-dark-500 text-16">These testimonials reflect the profound impact our
+          school has on its students, fostering an environment and achieve their dreams. Our students' experiences speak
+          volumes about the impact of our school. Here are some heartfelt testimonials from those who have thrived in
+          our community:</p>
+        <a href="javascript: void(0);" class="text-orange-500 underline link hover:text-orange-600">
+          View All Reviews
+          <lucide-angular name="MoveRight" class="ml-1 ltr:inline-block rtl:hidden size-4"></lucide-angular>
+          <lucide-angular name="MoveLeft" class="mr-1 rtl:inline-block ltr:hidden size-4"></lucide-angular>
+        </a>
+      </div>
+      <div class="col-span-12 md:col-span-6">
+        <div class="p-3 swiper swiper-container mx-auto px-4 mySwiper group/swiper" dir="ltr" #grabCursor>
+          <div class="swiper-wrapper">
+            <div class="swiper-slide">
+              <div class="card">
+                <div class="p-8 card-body">
+                  <img src="assets/images/avatar/user-14.png" alt="" class="rounded-modern size-20">
+                  <div class="mt-5 text-lg text-gray-500 dark:text-dark-500">
+                    <i class="text-yellow-500 ri-star-fill"></i>
+                    <i class="text-yellow-500 ri-star-fill"></i>
+                    <i class="text-yellow-500 ri-star-fill"></i>
+                    <i class="text-yellow-500 ri-star-fill"></i>
+                    <i class="text-yellow-500 ri-star-fill"></i>
+                  </div>
+                  <h6 class="mt-3 mb-3">A Truly Transformation Experience</h6>
+                  <p class="text-gray-500 text-16 dark:text-dark-500">“ Attending this school has been a life-changing
+                    journey. The supportive teachers and enriching curriculum have helped me discover my passions and
+                    excel in ways I never imagined. ”</p>
+                </div>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="card">
+                <div class="p-8 card-body">
+                  <img src="assets/images/avatar/user-15.png" alt="" class="rounded-modern size-20">
+                  <div class="mt-5 text-lg text-gray-500 dark:text-dark-500">
+                    <i class="text-yellow-500 ri-star-fill"></i>
+                    <i class="text-yellow-500 ri-star-fill"></i>
+                    <i class="text-yellow-500 ri-star-fill"></i>
+                    <i class="text-yellow-500 ri-star-fill"></i>
+                    <i class="text-yellow-500 ri-star-fill"></i>
+                  </div>
+                  <h6 class="mt-3 mb-3">A Nurturing Environment</h6>
+                  <p class="text-gray-500 text-16 dark:text-dark-500">“ From the moment I joined, I felt welcomed and
+                    valued. The sense of community here is incredible, and the opportunities for growth are endless. ”
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="card">
+                <div class="p-8 card-body">
+                  <img src="assets/images/avatar/user-17.png" alt="" class="rounded-modern size-20">
+                  <div class="mt-5 text-lg text-gray-500 dark:text-dark-500">
+                    <i class="text-yellow-500 ri-star-fill"></i>
+                    <i class="text-yellow-500 ri-star-fill"></i>
+                    <i class="text-yellow-500 ri-star-fill"></i>
+                    <i class="text-yellow-500 ri-star-fill"></i>
+                    <i class="text-yellow-500 ri-star-fill"></i>
+                  </div>
+                  <h6 class="mt-3 mb-3">Exceptional Learning and Growth</h6>
+                  <p class="text-gray-500 text-16 dark:text-dark-500">“ The challenging academic programs, combined with
+                    the amazing extracurricular activities, have allowed me to grow both intellectually and personally.
+                    This school truly prepares you for the future. ”</p>
+                </div>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="card">
+                <div class="p-8 card-body">
+                  <img src="assets/images/avatar/user-11.png" alt="" class="rounded-modern size-20">
+                  <div class="mt-5 text-lg text-gray-500 dark:text-dark-500">
+                    <i class="text-yellow-500 ri-star-fill"></i>
+                    <i class="text-yellow-500 ri-star-fill"></i>
+                    <i class="text-yellow-500 ri-star-fill"></i>
+                    <i class="text-yellow-500 ri-star-fill"></i>
+                    <i class="text-yellow-500 ri-star-fill"></i>
+                  </div>
+                  <h6 class="mt-3 mb-3">Incredible Support and Guidance</h6>
+                  <p class="text-gray-500 text-16 dark:text-dark-500">“ The dedication of the teachers is unmatched.
+                    They go above and beyond to ensure every student succeeds, providing constant support and guidance.
+                    ”</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="swiper-button-next after:font-remix after:text-2xl after:text-orange-500 opacity-0 group-hover/swiper:opacity-100 transition ease-linear duration-300 after:content-['\ea6e']">
+          </div>
+          <div class="swiper-button-prev after:font-remix after:text-2xl after:text-orange-500 opacity-0 group-hover/swiper:opacity-100 transition ease-linear duration-300 after:content-['\ea64']">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="relative py-14 md:py-24" id="mentors">
+  <div class="container mx-auto px-4">
+    <div class="max-w-3xl mx-auto mb-12 text-center">
+      <h2 class="mb-3 leading-normal capitalize">Meet with our mentors</h2>
+      <p class="text-gray-500 dark:text-dark-500 text-16">Ask your potential mentor if he or she can make time for an
+        hour meeting with you. You don't want to be rushed, and you want for the ask you questions about your goals,
+        etc.</p>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-x-8">
+      <div class="relative bg-transparent border-0 shadow-none dark:bg-transparent card thumbnail">
+        <div class="relative pb-0 card-body before:absolute before:inset-x-0 before:bottom-0 before:bg-gray-100 dark:before:bg-gray-900/40 before:h-[80%] before:rounded-t-full">
+          <img src="assets/images/school/landing/img-06.png" alt="" class="relative mx-auto max-h-80">
+        </div>
+        <div class="text-center card-body">
+          <h6 class="mb-1 text-16">John B. Gilliam</h6>
+          <p class="text-gray-500 dark:text-dark-500">Senior Instructor</p>
+        </div>
+      </div>
+      <div class="relative bg-transparent border-0 shadow-none dark:bg-transparent card thumbnail">
+        <div class="relative pb-0 card-body before:absolute before:inset-x-0 before:bottom-0 before:bg-gray-100 dark:before:bg-gray-900/40 before:h-[80%] before:rounded-t-full">
+          <img src="assets/images/school/landing/img-07.png" alt="" class="relative mx-auto max-h-80">
+        </div>
+        <div class="text-center card-body">
+          <h6 class="mb-1 text-16">Patricia J. Dillon</h6>
+          <p class="text-gray-500 dark:text-dark-500">Junior Instructor</p>
+        </div>
+      </div>
+      <div class="relative bg-transparent border-0 shadow-none dark:bg-transparent card thumbnail">
+        <div class="relative pb-0 card-body before:absolute before:inset-x-0 before:bottom-0 before:bg-gray-100 dark:before:bg-gray-900/40 before:h-[80%] before:rounded-t-full">
+          <img src="assets/images/school/landing/img-08.png" alt="" class="relative mx-auto max-h-80">
+        </div>
+        <div class="text-center card-body">
+          <h6 class="mb-1 text-16">Marian J. Martin</h6>
+          <p class="text-gray-500 dark:text-dark-500">Senior Instructor</p>
+        </div>
+      </div>
+      <div class="relative bg-transparent border-0 shadow-none dark:bg-transparent card thumbnail">
+        <div class="relative pb-0 card-body before:absolute before:inset-x-0 before:bottom-0 before:bg-gray-100 dark:before:bg-gray-900/40 before:h-[80%] before:rounded-t-full">
+          <img src="assets/images/school/landing/img-09.png" alt="" class="relative mx-auto max-h-80">
+        </div>
+        <div class="text-center card-body">
+          <h6 class="mb-1 text-16">Theresa W. Berry</h6>
+          <p class="text-gray-500 dark:text-dark-500">Senior Instructor</p>
+        </div>
+      </div>
+      <div class="relative bg-transparent border-0 shadow-none dark:bg-transparent card thumbnail">
+        <div class="relative pb-0 card-body before:absolute before:inset-x-0 before:bottom-0 before:bg-gray-100 dark:before:bg-gray-900/40 before:h-[80%] before:rounded-t-full">
+          <img src="assets/images/school/landing/img-10.png" alt="" class="relative mx-auto max-h-80">
+        </div>
+        <div class="text-center card-body">
+          <h6 class="mb-1 text-16">Jacklyn A. Keith</h6>
+          <p class="text-gray-500 dark:text-dark-500">Junior Instructor</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="relative py-12 md:pb-24" id="blogs">
+  <div class="container mx-auto px-4">
+    <div class="max-w-3xl mx-auto mb-12 text-center">
+      <h2 class="mb-3 leading-normal capitalize">Latest Blogs</h2>
+      <p class="text-gray-500 dark:text-dark-500 text-16">The state of blogs now. Short answer: yes. A recent survey
+        found that over 60% of all internet users read blogs, while another found that 77% of internet users read blogs
+        daily.</p>
+    </div>
+    <div class="grid grid-cols-1 space-y-6 lg:grid-cols-2 md:gap-8 md:space-y-0">
+      <div class="grid items-center grid-cols-12 md:gap-8">
+        <div class="col-span-12 md:col-span-4">
+          <img src="assets/images/school/blog/img-01.jpg" alt="" class="rounded-md">
+        </div>
+        <div class="col-span-12 mt-5 md:col-span-8 md:mt-0">
+          <p class="mb-2 text-gray-500 dark:text-dark-500">
+            <lucide-angular name="Calendar" class="inline-block align-middle ltr:mr-1 rtl:ml-1 size-4">
+            </lucide-angular> 28 May, 2024
+          </p>
+          <h5 class="mb-1"><a href="javascript: void(0);" class="text-current link hover:text-primary-500 dark:hover:text-primary-500 dark:text-current">3 Lessons
+              Learned From X</a></h5>
+          <p class="mb-3 text-gray-500 dark:text-dark-500 line-clamp-2">He boosted the self-esteem of Black Americans
+            due to his advocacy for black empowerment and self-determination.</p>
+          <a href="javascript: void(0);" class="font-medium text-orange-500 link hover:text-orange-600">
+            Read More
+            <lucide-angular name="MoveRight" class="ml-1 ltr:inline-block rtl:hidden size-4"></lucide-angular>
+            <lucide-angular name="MoveLeft" class="mr-1 rtl:inline-block ltr:hidden size-4"></lucide-angular>
+          </a>
+        </div>
+      </div>
+      <div class="grid items-center grid-cols-12 md:gap-8">
+        <div class="col-span-12 md:col-span-4">
+          <img src="assets/images/school/blog/img-02.jpg" alt="" class="rounded-md">
+        </div>
+        <div class="col-span-12 mt-5 md:col-span-8 md:mt-0">
+          <p class="mb-2 text-gray-500 dark:text-dark-500">
+            <lucide-angular name="calendar" class="inline-block align-middle ltr:mr-1 rtl:ml-1 size-4">
+            </lucide-angular> 29 May, 2024
+          </p>
+          <h5 class="mb-1"><a href="javascript: void(0);" class="text-current link hover:text-primary-500 dark:hover:text-primary-500 dark:text-current">Edu-tainment:
+              Fun and Engaging Lessons</a></h5>
+          <p class="mb-3 text-gray-500 dark:text-dark-500 line-clamp-2">He boosted the self-esteem of Black Americans
+            due to his advocacy for black empowerment and self-determination.</p>
+          <a href="javascript: void(0);" class="font-medium text-orange-500 link hover:text-orange-600">
+            Read More
+            <lucide-angular name="MoveRight" class="ml-1 ltr:inline-block rtl:hidden size-4">
+            </lucide-angular>
+            <lucide-angular name="MoveLeft" class="mr-1 rtl:inline-block ltr:hidden size-4">
+            </lucide-angular>
+          </a>
+        </div>
+      </div>
+      <div class="grid items-center grid-cols-12 md:gap-8">
+        <div class="col-span-12 md:col-span-4">
+          <img src="assets/images/school/blog/img-03.jpg" alt="" class="rounded-md">
+        </div>
+        <div class="col-span-12 mt-5 md:col-span-8 md:mt-0">
+          <p class="mb-2 text-gray-500 dark:text-dark-500">
+            <lucide-angular name="Calendar" class="inline-block align-middle ltr:mr-1 rtl:ml-1 size-4">
+            </lucide-angular> 22 May, 2024
+          </p>
+          <h5 class="mb-1"><a href="javascript: void(0);" class="text-current link hover:text-primary-500 dark:hover:text-primary-500 dark:text-current">The Power
+              of Education: Changing Lives</a></h5>
+          <p class="mb-3 text-gray-500 dark:text-dark-500 line-clamp-2">He boosted the self-esteem of Black Americans
+            due to his advocacy for black empowerment and self-determination.</p>
+          <a href="javascript: void(0);" class="font-medium text-orange-500 link hover:text-orange-600">
+            Read More
+            <lucide-angular name="MoveRight" class="ml-1 ltr:inline-block rtl:hidden size-4"></lucide-angular>
+            <lucide-angular name="MoveLeft" class="mr-1 rtl:inline-block ltr:hidden size-4"></lucide-angular>
+          </a>
+        </div>
+      </div>
+      <div class="grid items-center grid-cols-12 md:gap-8">
+        <div class="col-span-12 md:col-span-4">
+          <img src="assets/images/school/blog/img-04.jpg" alt="" class="rounded-md">
+        </div>
+        <div class="col-span-12 mt-5 md:col-span-8 md:mt-0">
+          <p class="mb-2 text-gray-500 dark:text-dark-500">
+            <lucide-angular name="calendar" class="inline-block align-middle ltr:mr-1 rtl:ml-1 size-4">
+            </lucide-angular> 20 May, 2024
+          </p>
+          <h5 class="mb-1"><a href="javascript: void(0);" class="text-current link hover:text-primary-500 dark:hover:text-primary-500 dark:text-current">Teaching
+              with Purpose: Inspiring Lessons</a></h5>
+          <p class="mb-3 text-gray-500 dark:text-dark-500 line-clamp-2">He boosted the self-esteem of Black Americans
+            due to his advocacy for black empowerment and self-determination.</p>
+          <a href="javascript: void(0);" class="font-medium text-orange-500 link hover:text-orange-600">
+            Read More
+            <lucide-angular name="MoveRight" class="ml-1 ltr:inline-block rtl:hidden size-4"></lucide-angular>
+            <lucide-angular name="MoveLeft" class="mr-1 rtl:inline-block ltr:hidden size-4"></lucide-angular>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--end container mx-auto px-4-->
+</section>
+
+
+<section class="py-14 md:py-24 bg-primary-500" id="contact-us">
+  <div class="container mx-auto px-4">
+    <div class="max-w-3xl mx-auto text-center">
+      <h1 class="mb-5 leading-normal capitalize text-primary-50">Come join Us and Achieve your dreams Here at the best
+        School</h1>
+      <a href="javascript:void(0);" class="rounded-full btn btn-orange">Get Started</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="py-14">
+    <div class="container mx-auto px-4">
+      <div class="grid grid-cols-12 gap-5">
+        <div class="col-span-12 md:col-span-6">
+          <div class="max-w-lg">
+            <a routerLink="/" title="logo">
+              <img src="assets/images/main-logo.png" alt="" class="inline-block h-7 dark:hidden">
+              <img src="assets/images/logo-white.png" alt="" class="hidden h-7 dark:inline-block">
+            </a>
+            <p class="mt-4 mb-6 text-gray-500 dark:text-dark-500 text-16">They constitute one of the fundamental
+              components of learning, alongside objectives, methodology, and assessment. knowledge, procedures, skills,
+              attitudes, abilities, and values necessary to achieve the curricular goals outlined in educational.</p>
+            <div class="flex items-center gap-5">
+              <a href="javascript: void(0);" title="facebook" class="relative flex items-center justify-center transition duration-300 ease-linear hover:-translate-y-1 after:absolute after:inset-0 after:rounded-lg after:-rotate-45 after:bg-primary-500/10 size-10 text-primary-500">
+                <lucide-angular name="Facebook" class="relative z-10 size-5">
+                </lucide-angular>
+              </a>
+              <a href="javascript: void(0);" title="dribbble" class="relative flex items-center justify-center text-pink-500 transition duration-300 ease-linear hover:-translate-y-1 after:absolute after:inset-0 after:rounded-lg after:-rotate-45 after:bg-pink-500/10 size-10">
+                <lucide-angular name="Dribbble" class="relative z-10 size-5">
+                </lucide-angular>
+              </a>
+              <a href="javascript: void(0);" title="twitter" class="relative flex items-center justify-center transition duration-300 ease-linear hover:-translate-y-1 text-sky-500 after:absolute after:inset-0 after:rounded-lg after:-rotate-45 after:bg-sky-500/10 size-10">
+                <lucide-angular name="Twitter" class="relative z-10 size-5">
+                </lucide-angular>
+              </a>
+              <a href="javascript: void(0);" title="youtube" class="relative flex items-center justify-center text-red-500 transition duration-300 ease-linear hover:-translate-y-1 after:absolute after:inset-0 after:rounded-lg after:-rotate-45 after:bg-red-500/10 size-10">
+                <lucide-angular name="Youtube" class="relative z-10 size-5">
+                </lucide-angular>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-span-12 sm:col-span-4 md:col-span-2">
+          <h6 class="mb-4 text-17">About Us</h6>
+          <ul class="space-y-5 text-16">
+            <li><a href="javascript:void(0);" class="link link-orange">Pricing</a></li>
+            <li><a href="javascript:void(0);" class="link link-orange">NewsLatter</a></li>
+            <li><a href="javascript:void(0);" class="link link-orange">About Us</a></li>
+            <li><a href="javascript:void(0);" class="link link-orange">Help Center</a></li>
+            <li><a href="javascript:void(0);" class="link link-orange">Dashboards</a></li>
+          </ul>
+        </div>
+        <div class="col-span-12 sm:col-span-4 md:col-span-2">
+          <h6 class="mb-4 text-17">Students</h6>
+          <ul class="space-y-5 text-16">
+            <li><a href="javascript:void(0);" class="link link-orange">List View</a></li>
+            <li><a href="javascript:void(0);" class="link link-orange">Profile</a></li>
+            <li><a href="javascript:void(0);" class="link link-orange">Attendance</a></li>
+          </ul>
+        </div>
+        <div class="col-span-12 sm:col-span-4 md:col-span-2">
+          <h6 class="mb-4 text-17">Our Support</h6>
+          <ul class="space-y-5 text-16">
+            <li><a href="javascript:void(0);" class="link link-orange">Contact Us</a></li>
+            <li><a href="javascript:void(0);" class="link link-orange">Account</a></li>
+            <li><a href="javascript:void(0);" class="link link-orange">Feedback</a></li>
+            <li><a href="javascript:void(0);" class="link link-orange">Licenses</a></li>
+            <li><a href="javascript:void(0);" class="link link-orange">FAQ's</a></li>
+            <li><a href="javascript:void(0);" class="link link-orange">Privacy Policy</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container mx-auto px-4">
+    <div class="py-6 text-center text-gray-500 border-t border-gray-200 border-dashed dark:text-dark-500 dark:border-dark-800 text-16">
+      <p>
+        &copy; <span>{{ currentYear }}</span> Domiex. Crafted & Design by <a href="javascript:void(0);" class="font-semibold link link-orange">SRBThemes</a>
+      </p>
+    </div>
+  </div>
+</footer>
+<button (click)="toggleMode()" class="fixed flex items-center justify-center text-white ltr:right-0 rtl:left-0 bg-primary-500 ltr:rounded-l-md rtl:rounded-r-md size-12 top-1/2">
+  <lucide-angular name="Moon" class="inline-block size-5 dark:hidden" [class.hidden]="isDarkMode"></lucide-angular>
+  <lucide-angular name="Sun" class="hidden size-5 dark:inline-block" [class.hidden]="!isDarkMode"></lucide-angular>
+</button>

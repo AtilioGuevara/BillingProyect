@@ -1,0 +1,178 @@
+[
+  {
+    "promotionName": {
+      "title": "New Year Sale",
+      "description": "Store-wide discount"
+    },
+    "type": "Percentage",
+    "discount": "25%",
+    "duration": "Nov 24 - Nov 27",
+    "status": "Active",
+    "usage": "342/500"
+  },
+  {
+    "promotionName": {
+      "title": "Summer Clearance",
+      "description": "End of season sale"
+    },
+    "type": "Fixed Amount",
+    "discount": "$50",
+    "duration": "Jun 1 - Jun 15",
+    "status": "Scheduled",
+    "usage": "0/1000"
+  },
+  {
+    "promotionName": {
+      "title": "Buy One Get One",
+      "description": "Free item on selected products"
+    },
+    "type": "BOGO",
+    "discount": "100%",
+    "duration": "Mar 1 - Mar 7",
+    "status": "Active",
+    "usage": "156/300"
+  },
+  {
+    "promotionName": {
+      "title": "Flash Sale",
+      "description": "24-hour special offer"
+    },
+    "type": "Percentage",
+    "discount": "40%",
+    "duration": "Apr 15 - Apr 16",
+    "status": "Scheduled",
+    "usage": "0/200"
+  },
+  {
+    "promotionName": {
+      "title": "Holiday Special",
+      "description": "Christmas season promotion"
+    },
+    "type": "Fixed Amount",
+    "discount": "$75",
+    "duration": "Dec 20 - Dec 25",
+    "status": "Scheduled",
+    "usage": "0/800"
+  },
+  {
+    "promotionName": {
+      "title": "Member Exclusive",
+      "description": "Special discount for loyalty members"
+    },
+    "type": "Percentage",
+    "discount": "15%",
+    "duration": "Jan 1 - Jan 31",
+    "status": "Active",
+    "usage": "89/500"
+  },
+  {
+    "promotionName": {
+      "title": "Back to School",
+      "description": "Educational supplies discount"
+    },
+    "type": "Percentage",
+    "discount": "20%",
+    "duration": "Aug 1 - Aug 15",
+    "status": "Scheduled",
+    "usage": "0/1000"
+  },
+  {
+    "promotionName": {
+      "title": "Weekend Special",
+      "description": "Weekend-only deals"
+    },
+    "type": "Fixed Amount",
+    "discount": "$30",
+    "duration": "May 20 - May 21",
+    "status": "Active",
+    "usage": "45/200"
+  },
+  {
+    "promotionName": {
+      "title": "Birthday Bonus",
+      "description": "Special birthday discount"
+    },
+    "type": "Percentage",
+    "discount": "10%",
+    "duration": "Jan 1 - Dec 31",
+    "status": "Active",
+    "usage": "234/1000"
+  },
+  {
+    "promotionName": {
+      "title": "Clearance Event",
+      "description": "Massive clearance sale"
+    },
+    "type": "Fixed Amount",
+    "discount": "$100",
+    "duration": "Jul 1 - Jul 7",
+    "status": "Scheduled",
+    "usage": "0/500"
+  },
+  {
+    "promotionName": {
+      "title": "Early Bird Special",
+      "description": "Morning shopping discount"
+    },
+    "type": "Percentage",
+    "discount": "15%",
+    "duration": "Jun 1 - Jun 30",
+    "status": "Active",
+    "usage": "78/300"
+  },
+  {
+    "promotionName": {
+      "title": "Referral Reward",
+      "description": "Refer a friend discount"
+    },
+    "type": "Fixed Amount",
+    "discount": "$25",
+    "duration": "Jan 1 - Dec 31",
+    "status": "Active",
+    "usage": "156/500"
+  },
+  {
+    "promotionName": {
+      "title": "Seasonal Sale",
+      "description": "End of season clearance"
+    },
+    "type": "Percentage",
+    "discount": "35%",
+    "duration": "Sep 1 - Sep 15",
+    "status": "Scheduled",
+    "usage": "0/800"
+  },
+  {
+    "promotionName": {
+      "title": "Bundle Deal",
+      "description": "Buy more save more"
+    },
+    "type": "BOGO",
+    "discount": "50%",
+    "duration": "Oct 1 - Oct 7",
+    "status": "Active",
+    "usage": "123/400"
+  },
+  {
+    "promotionName": {
+      "title": "First Purchase",
+      "description": "Welcome discount"
+    },
+    "type": "Fixed Amount",
+    "discount": "$20",
+    "duration": "Jan 1 - Dec 31",
+    "status": "Active",
+    "usage": "567/1000"
+  },
+  {
+    "promotionName": {
+      "title": "Holiday Bundle",
+      "description": "Special holiday package"
+    },
+    "type": "Percentage",
+    "discount": "30%",
+    "duration": "Dec 1 - Dec 15",
+    "status": "Scheduled",
+    "usage": "0/600"
+  }
+]

@@ -1,0 +1,30 @@
+<div id="createGroupModal" class="modal">
+  <div class="modal-wrap modal-center">
+    <div class="modal-header">
+      <h6>New Group</h6>
+      <button data-modal-close="createGroupModal" class="link link-red" (click)="closeFileModal()">
+        <lucide-angular name="x" class="size-5"></lucide-angular>
+      </button>
+    </div>
+    <div class="modal-content">
+      <form [formGroup]="fromGroup">
+        <div class="mb-5">
+          <label for="basicInput1" class="form-label">Group Name</label>
+          <input type="text" id="basicInput1" class="form-input" required placeholder="Enter group title"
+            formControlName="name">
+          <span *ngIf="fromGroup.get('name')?.hasError('required')" class="text-red-500"> Folder name is required</span>
+        </div>
+        <div class="mb-5">
+          <label for="addMemberSelect" class="form-label">Add Contacts</label>
+          <ng-select class="filter-ng-select" [items]="typeOptions" bindLabel="label" bindValue="value" [multiple]="true"
+            placeholder="Select Contact" formControlName="contact"></ng-select>
+        </div>
+        <div class="flex items-center justify-end gap-2">
+          <button type="button" data-modal-close="createGroupModal" class="btn btn-sub-gray" (click)="closeFileModal()">
+            Cancel</button>
+          <button type="submit" class="btn btn-primary" (click)="closeFileModal()">Create Group</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

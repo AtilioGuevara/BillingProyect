@@ -1,0 +1,396 @@
+<app-page-title [pageTitle]="'Ui'" [Title]="'Tabs'"></app-page-title>
+
+<div class="grid grid-cols-12 gap-x-space">
+  <div class="col-span-12 md:col-span-6">
+    <div class="card">
+      <div class="card-header">
+        <h6 class="card-title">Basic</h6>
+      </div>
+      <div class="card-body">
+        <ul class="tabs">
+          <li (click)="openTab(1)">
+            <a href="javascript:void(0)"
+              [ngClass]="[activeTab === 1 ? 'active' : 'text-gray-500 hover:text-primary-500 dark:text-dark-500 dark:hover:text-primary-500']"
+              class="nav-item [&.active]:after:opacity-100 [&.active]:after:w-full [&.active]:text-primary-500">
+              Home
+            </a>
+          </li>
+          <li (click)="openTab(2)">
+            <a href="javascript:void(0)"
+              [ngClass]="[activeTab === 2 ? 'active' : 'text-gray-500 hover:text-primary-500 dark:text-dark-500 dark:hover:text-primary-500']"
+              class="nav-item [&.active]:after:opacity-100 [&.active]:after:w-full [&.active]:text-primary-500">
+              Service
+            </a>
+          </li>
+          <li (click)="openTab(3)">
+            <a href="javascript:void(0)"
+              [ngClass]="[activeTab === 3 ? 'active' : 'text-gray-500 hover:text-primary-500 dark:text-dark-500 dark:hover:text-primary-500']"
+              class="nav-item [&.active]:after:opacity-100 [&.active]:after:w-full [&.active]:text-primary-500">
+              Contact Us
+            </a>
+          </li>
+        </ul>
+        <div class="mt-4">
+          <div *ngIf="activeTab === 1">
+            <p class="text-gray-500 dark:text-dark-500">
+              The Admin Dashboard displays tabs for multiple pages that provide a personalized view of BI performance,
+              data correctness, required cube maintenance and required administrative actions. These pages contain the
+              results of detailed analyses, represented by links, images, graphs, pie charts and BI reports.
+            </p>
+          </div>
+          <div *ngIf="activeTab === 2">
+            <p class="text-gray-500 dark:text-dark-500">A service administrator is responsible for overseeing all
+              aspects of the work order for a service department. Your job duties include coordinating with the service
+              manager on the completion of customer work orders, putting together billing for work completed, and
+              reviewing time cards for service employees.</p>
+          </div>
+          <div *ngIf="activeTab === 3">
+            <p class="text-gray-500 dark:text-dark-500">The official business definition of a Contact Administrator is
+              an individual responsible for managing the contact database of an organization. This includes the
+              maintenance of contact information, the creation of contact groups, and the organization of contact
+              information into categories.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-span-12 md:col-span-6">
+    <div class="card">
+      <div class="card-header">
+        <h6 class="card-title">Basic Justify</h6>
+      </div>
+      <div class="card-body">
+        <div>
+          <ul class="tabs *:grow">
+            <li (click)="activeJustifyTab(1)">
+              <a href="javascript:void(0)"
+                [ngClass]="[justifyTab === 1 ? 'active' : 'text-gray-500 hover:text-primary-500 dark:text-dark-500 dark:hover:text-primary-500']"
+                class="nav-item [&.active]:after:opacity-100 [&.active]:after:w-full [&.active]:text-primary-500">
+                Home
+              </a>
+            </li>
+            <li (click)="activeJustifyTab(2)">
+              <a href="javascript:void(0)"
+                [ngClass]="[justifyTab === 2 ? 'active' : 'text-gray-500 hover:text-primary-500 dark:text-dark-500 dark:hover:text-primary-500']"
+                class="nav-item [&.active]:after:opacity-100 [&.active]:after:w-full [&.active]:text-primary-500">
+                Service
+              </a>
+            </li>
+            <li (click)="activeJustifyTab(3)">
+              <a href="javascript:void(0)"
+                [ngClass]="[justifyTab === 3 ? 'active' : 'text-gray-500 hover:text-primary-500 dark:text-dark-500 dark:hover:text-primary-500']"
+                class="nav-item [&.active]:after:opacity-100 [&.active]:after:w-full [&.active]:text-primary-500">
+                Contact Us
+              </a>
+            </li>
+          </ul>
+          <div class="mt-4">
+            <div *ngIf="justifyTab === 1">
+              <p class="text-gray-500 dark:text-dark-500">The Admin Dashboard displays tabs for multiple pages that
+                provide a personalized view of BI performance, data correctness, required cube maintenance and required
+                administrative actions. These pages contain the results of detailed analyses, represented by links,
+                images, graphs, pie charts and BI reports.</p>
+            </div>
+            <div *ngIf="justifyTab === 2">
+              <p class="text-gray-500 dark:text-dark-500">A service administrator is responsible for overseeing all
+                aspects of the work order for a service department. Your job duties include coordinating with the
+                service manager on the completion of customer work orders, putting together billing for work completed,
+                and reviewing time cards for service employees.</p>
+            </div>
+            <div *ngIf="justifyTab === 3">
+              <p class="text-gray-500 dark:text-dark-500">The official business definition of a Contact Administrator is
+                an individual responsible for managing the contact database of an organization. This includes the
+                maintenance of contact information, the creation of contact groups, and the organization of contact
+                information into categories.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-span-12 md:col-span-6">
+    <div class="card">
+      <div class="card-header">
+        <h6 class="card-title">Pill Tabs</h6>
+      </div>
+      <div class="card-body">
+        <div>
+          <ul class="tabs-pills">
+            <li (click)="pillTab = 1">
+              <a href="javascript:void(0)"
+                [ngClass]="[pillTab === 1 ? 'active' : 'text-gray-500 hover:text-primary-500 dark:text-dark-500 dark:hover:text-primary-500']"
+                class="nav-item [&.active]:bg-primary-500 [&.active]:text-primary-50">
+                Home
+              </a>
+            </li>
+            <li (click)="pillTab = 2">
+              <a href="javascript:void(0)"
+                [ngClass]="[pillTab === 2 ? 'active' : 'text-gray-500 hover:text-primary-500 dark:text-dark-500 dark:hover:text-primary-500']"
+                class="nav-item [&.active]:bg-primary-500 [&.active]:text-primary-50">
+                Service
+              </a>
+            </li>
+            <li (click)="pillTab = 3">
+              <a href="javascript:void(0)"
+                [ngClass]="[pillTab === 3 ? 'active' : 'text-gray-500 hover:text-primary-500 dark:text-dark-500 dark:hover:text-primary-500']"
+                class="nav-item [&.active]:bg-primary-500 [&.active]:text-primary-50">
+                Contact Us
+              </a>
+            </li>
+          </ul>
+          <div class="mt-4">
+            <div *ngIf="pillTab === 1">
+              <p class="text-gray-500 dark:text-dark-500">The Admin Dashboard displays tabs for multiple pages that
+                provide a personalized view of BI performance, data correctness, required cube maintenance and required
+                administrative actions. These pages contain the results of detailed analyses, represented by links,
+                images, graphs, pie charts and BI reports.</p>
+            </div>
+            <div *ngIf="pillTab === 2">
+              <p class="text-gray-500 dark:text-dark-500">A service administrator is responsible for overseeing all
+                aspects of the work order for a service department. Your job duties include coordinating with the
+                service manager on the completion of customer work orders, putting together billing for work completed,
+                and reviewing time cards for service employees.</p>
+            </div>
+            <div *ngIf="pillTab === 3">
+              <p class="text-gray-500 dark:text-dark-500">The official business definition of a Contact Administrator is
+                an individual responsible for managing the contact database of an organization. This includes the
+                maintenance of contact information, the creation of contact groups, and the organization of contact
+                information into categories.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-span-12 md:col-span-6">
+    <div class="card">
+      <div class="card-header">
+        <h6 class="card-title">Pill Justify Tabs</h6>
+      </div>
+      <div class="card-body">
+        <div>
+          <ul class="tabs-pills *:grow">
+            <li (click)="pillTabJustify = 1">
+              <a href="javascript:void(0)"
+                [ngClass]="[pillTabJustify === 1 ? 'active' : 'text-gray-500 hover:text-primary-500 dark:text-dark-500 dark:hover:text-primary-500']"
+                class="nav-item [&.active]:bg-primary-500 [&.active]:text-primary-50">
+                Home
+              </a>
+            </li>
+            <li (click)="pillTabJustify = 2">
+              <a href="javascript:void(0)"
+                [ngClass]="[pillTabJustify === 2 ? 'active' : 'text-gray-500 hover:text-primary-500 dark:text-dark-500 dark:hover:text-primary-500']"
+                class="nav-item [&.active]:bg-primary-500 [&.active]:text-primary-50">
+                Service
+              </a>
+            </li>
+            <li (click)="pillTabJustify = 3">
+              <a href="javascript:void(0)"
+                [ngClass]="[pillTabJustify === 3 ? 'active' : 'text-gray-500 hover:text-primary-500 dark:text-dark-500 dark:hover:text-primary-500']"
+                class="nav-item [&.active]:bg-primary-500 [&.active]:text-primary-50">
+                Contact Us
+              </a>
+            </li>
+          </ul>
+          <div class="mt-4">
+            <div *ngIf="pillTabJustify === 1">
+              <p class="text-gray-500 dark:text-dark-500">The Admin Dashboard displays tabs for multiple pages that
+                provide a personalized view of BI performance, data correctness, required cube maintenance and required
+                administrative actions. These pages contain the results of detailed analyses, represented by links,
+                images, graphs, pie charts and BI reports.</p>
+            </div>
+            <div *ngIf="pillTabJustify === 2">
+              <p class="text-gray-500 dark:text-dark-500">A service administrator is responsible for overseeing all
+                aspects of the work order for a service department. Your job duties include coordinating with the
+                service manager on the completion of customer work orders, putting together billing for work completed,
+                and reviewing time cards for service employees.</p>
+            </div>
+            <div *ngIf="pillTabJustify === 3">
+              <p class="text-gray-500 dark:text-dark-500">The official business definition of a Contact Administrator is
+                an individual responsible for managing the contact database of an organization. This includes the
+                maintenance of contact information, the creation of contact groups, and the organization of contact
+                information into categories.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-span-12 md:col-span-6">
+    <div class="card">
+      <div class="card-header">
+        <h6 class="card-title">Icon with Animation Tabs</h6>
+      </div>
+      <div class="card-body">
+        <div>
+          <ul class="tabs-pills tabs-icon">
+            <li (click)="iconWithAnimation = 1">
+              <a href="javascript:void(0)"
+                [ngClass]="[iconWithAnimation === 1 ? 'active' : 'text-gray-500 hover:text-primary-500 dark:text-dark-500 dark:hover:text-primary-500']"
+                class="nav-item [&.active]:bg-primary-500 [&.active]:text-primary-50 group/item">
+                <lucide-angular name="home"
+                  class="transition duration-200 ease-linear size-4 group-hover/item:animate-pulse"></lucide-angular>
+              </a>
+            </li>
+            <li (click)="iconWithAnimation = 2">
+              <a href="javascript:void(0)"
+                [ngClass]="[iconWithAnimation === 2 ? 'active' : 'text-gray-500 hover:text-primary-500 dark:text-dark-500 dark:hover:text-primary-500']"
+                class="nav-item [&.active]:bg-primary-500 [&.active]:text-primary-50 group/item">
+                <lucide-angular name="Airplay"
+                  class="transition duration-200 ease-linear size-4 group-hover/item:animate-pulse"></lucide-angular>
+              </a>
+            </li>
+            <li (click)="iconWithAnimation = 3">
+              <a href="javascript:void(0)"
+                [ngClass]="[iconWithAnimation === 3 ? 'active' : 'text-gray-500 hover:text-primary-500 dark:text-dark-500 dark:hover:text-primary-500']"
+                class="nav-item [&.active]:bg-primary-500 [&.active]:text-primary-50 group/item">
+                <lucide-angular name="squareUser"
+                  class="transition duration-200 ease-linear size-4 group-hover/item:animate-pulse"></lucide-angular>
+              </a>
+            </li>
+          </ul>
+          <div class="mt-4">
+            <div *ngIf="iconWithAnimation === 1">
+              <p class="text-gray-500 dark:text-dark-500">The Admin Dashboard displays tabs for multiple pages that
+                provide a personalized view of BI performance, data correctness, required cube maintenance and required
+                administrative actions. These pages contain the results of detailed analyses, represented by links,
+                images, graphs, pie charts and BI reports.</p>
+            </div>
+            <div *ngIf="iconWithAnimation === 2">
+              <p class="text-gray-500 dark:text-dark-500">A service administrator is responsible for overseeing all
+                aspects of the work order for a service department. Your job duties include coordinating with the
+                service manager on the completion of customer work orders, putting together billing for work completed,
+                and reviewing time cards for service employees.</p>
+            </div>
+            <div *ngIf="iconWithAnimation === 3">
+              <p class="text-gray-500 dark:text-dark-500">The official business definition of a Contact Administrator is
+                an individual responsible for managing the contact database of an organization. This includes the
+                maintenance of contact information, the creation of contact groups, and the organization of contact
+                information into categories.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-span-12 md:col-span-6">
+    <div class="card">
+      <div class="card-header">
+        <h6 class="card-title">Icon with Text Tabs</h6>
+      </div>
+      <div class="card-body">
+        <div>
+          <ul class="tabs-pills">
+            <li (click)="iconWithText = 1">
+              <a href="javascript:void(0)"
+                [ngClass]="[iconWithText === 1 ? 'active' : 'text-gray-500 hover:text-primary-500 dark:text-dark-500 dark:hover:text-primary-500']"
+                class="nav-item [&.active]:bg-primary-500 [&.active]:text-primary-50">
+                <lucide-angular name="home" class="inline-block size-4 ltr:mr-1 rtl:ml-1"></lucide-angular><span
+                  class="align-middle">Home</span>
+              </a>
+            </li>
+            <li (click)="iconWithText = 2">
+              <a href="javascript:void(0)"
+                [ngClass]="[iconWithText === 2 ? 'active' : 'text-gray-500 hover:text-primary-500 dark:text-dark-500 dark:hover:text-primary-500']"
+                class="nav-item [&.active]:bg-primary-500 [&.active]:text-primary-50">
+                <lucide-angular name="tangent" class="inline-block size-4 ltr:mr-1 rtl:ml-1"></lucide-angular><span
+                  class="align-middle">Service</span>
+              </a>
+            </li>
+            <li (click)="iconWithText = 3">
+              <a href="javascript:void(0)"
+                [ngClass]="[iconWithText === 3 ? 'active' : 'text-gray-500 hover:text-primary-500 dark:text-dark-500 dark:hover:text-primary-500']"
+                class="nav-item [&.active]:bg-primary-500 [&.active]:text-primary-50">
+                <lucide-angular name="home" class="inline-block size-4 ltr:mr-1 rtl:ml-1"></lucide-angular><span
+                  class="align-middle">Contact Us</span>
+              </a>
+            </li>
+          </ul>
+          <div class="mt-4">
+            <div *ngIf="iconWithText === 1">
+              <p class="text-gray-500 dark:text-dark-500">The Admin Dashboard displays tabs for multiple pages that
+                provide a personalized view of BI performance, data correctness, required cube maintenance and required
+                administrative actions. These pages contain the results of detailed analyses, represented by links,
+                images, graphs, pie charts and BI reports.</p>
+            </div>
+            <div *ngIf="iconWithText === 2">
+              <p class="text-gray-500 dark:text-dark-500">A service administrator is responsible for overseeing all
+                aspects of the work order for a service department. Your job duties include coordinating with the
+                service manager on the completion of customer work orders, putting together billing for work completed,
+                and reviewing time cards for service employees.</p>
+            </div>
+            <div *ngIf="iconWithText === 3">
+              <p class="text-gray-500 dark:text-dark-500">The official business definition of a Contact Administrator is
+                an individual responsible for managing the contact database of an organization. This includes the
+                maintenance of contact information, the creation of contact groups, and the organization of contact
+                information into categories.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-span-12 md:col-span-6">
+    <div class="card">
+      <div class="card-header">
+        <h6 class="card-title">Animation Tabs</h6>
+      </div>
+      <div class="card-body">
+        <div>
+          <ul class="tabs-animation ng-animation">
+            <li class="w-32" (click)="animateTab = 1">
+              <a href="javascript:void(0)"
+                [ngClass]="[animateTab === 1 ? 'active' : 'text-gray-500 hover:text-green-500 dark:text-dark-500 dark:hover:text-green-500']"
+                class="nav-item group/item [&.active]:bg-green-500 [&.active]:text-green-50">
+                <lucide-angular name="home" class="icon"></lucide-angular><span
+                  class="content group-hover/item:visible group-hover/item:-translate-y-3">Home</span>
+              </a>
+            </li>
+            <li class="w-32" (click)="animateTab = 2">
+              <a href="javascript:void(0)"
+                [ngClass]="[animateTab === 2 ? 'active' : 'text-gray-500 hover:text-green-500 dark:text-dark-500 dark:hover:text-green-500']"
+                class="nav-item group/item [&.active]:bg-green-500 [&.active]:text-green-50">
+                <lucide-angular name="tangent" class="icon group-hover/item:translate-y-11"></lucide-angular><span
+                  class="content group-hover/item:visible group-hover/item:-translate-y-3">Service</span>
+              </a>
+            </li>
+            <li class="w-32" (click)="animateTab = 3">
+              <a href="javascript:void(0)"
+                [ngClass]="[animateTab === 3 ? 'active' : 'text-gray-500 hover:text-green-500 dark:text-dark-500 dark:hover:text-green-500']"
+                class="nav-item group/item [&.active]:bg-green-500 [&.active]:text-green-50">
+                <lucide-angular name="home" class="icon group-hover/item:translate-y-11"></lucide-angular><span
+                  class="content group-hover/item:visible group-hover/item:-translate-y-3">Contact Us</span>
+              </a>
+            </li>
+          </ul>
+          <div class="mt-4">
+            <div *ngIf="animateTab === 1">
+              <p class="text-gray-500 dark:text-dark-500">The Admin Dashboard displays tabs for multiple pages that
+                provide a personalized view of BI performance, data correctness, required cube maintenance and required
+                administrative actions. These pages contain the results of detailed analyses, represented by links,
+                images, graphs, pie charts and BI reports.</p>
+            </div>
+            <div *ngIf="animateTab === 2">
+              <p class="text-gray-500 dark:text-dark-500">A service administrator is responsible for overseeing all
+                aspects of the work order for a service department. Your job duties include coordinating with the
+                service manager on the completion of customer work orders, putting together billing for work completed,
+                and reviewing time cards for service employees.</p>
+            </div>
+            <div *ngIf="animateTab === 3">
+              <p class="text-gray-500 dark:text-dark-500">The official business definition of a Contact Administrator is
+                an individual responsible for managing the contact database of an organization. This includes the
+                maintenance of contact information, the creation of contact groups, and the organization of contact
+                information into categories.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

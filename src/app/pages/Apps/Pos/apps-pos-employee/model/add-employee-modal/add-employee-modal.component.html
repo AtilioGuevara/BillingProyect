@@ -1,0 +1,132 @@
+<!-- Add/Edit Employee Modal -->
+<div id="addEmployeeModal" class="modal">
+    <div class="modal-wrap modal-center modal-lg">
+        <div class="p-2 modal-content">
+            <div class="h-24 p-5 rounded-t-sm bg-gradient-to-r from-primary-500/20 via-pink-500/20 to-green-500/20">
+            </div>
+            <div [formGroup]="fromGroup">
+                <div class="p-4">
+                    <div>
+                        <label for="logo"
+                            class="flex items-center justify-center p-2 mx-auto overflow-hidden bg-gray-100 border border-gray-200 rounded cursor-pointer dark:bg-dark-850 dark:border-dark-800 size-32">
+                            <img *ngIf="fromGroup.get('avatar')?.value" [src]="fromGroup.get('avatar')?.value"
+                                class="object-cover w-full h-full">
+                            <span *ngIf="!fromGroup.get('avatar')?.value"
+                                class="flex flex-col items-center text-gray-500 dark:text-dark-500">
+                                <lucide-angular name="upload"></lucide-angular>
+                                <span class="block mt-2">Upload Images</span>
+                            </span>
+                        </label>
+                        <span *ngIf="fromGroup.get('avatar')?.hasError('required')" class="text-red-500">This Field is
+                            required</span>
+                        <div class="hidden mt-4">
+                            <label class="block">
+                                <span class="sr-only">Choose profile photo</span>
+                                <input type="file" name="logo" id="logo" (change)="onFileChange($event)"
+                                    class="block w-full text-sm file:rounded-md focus:outline-0 text-slate-500 file:mr-4 file:py-2 file:px-4 file:border-0 file:text-sm file:font-semibold file:bg-violet-50 file:text-violet-700 hover:file:bg-violet-100"
+                                    formControlName="avatar" />
+                            </label>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-12 gap-4 mt-4">
+                        <div class="col-span-12">
+                            <h6 class="text-base font-semibold">Personal Information</h6>
+                        </div>
+                        <div class="col-span-12 md:col-span-6">
+                            <label for="firstName" class="form-label">First Name *</label>
+                            <input type="text" id="firstName" class="form-input" placeholder="Enter first name"
+                                formControlName="name">
+
+                            <span *ngIf="fromGroup.get('name')?.hasError('required')" class="text-red-500"> This
+                                Filed is
+                                Required</span>
+                        </div>
+                        <div class="col-span-12 md:col-span-6">
+                            <label for="lastName" class="form-label">Last Name *</label>
+                            <input type="text" id="lastName" class="form-input" placeholder="Enter last name"
+                                formControlName="lastName">
+                        </div>
+                        <div class="col-span-12 md:col-span-6">
+                            <label for="email" class="form-label">Email Address *</label>
+                            <input type="email" id="email" class="form-input" placeholder="Enter email address"
+                                formControlName="mail">
+
+                            <span *ngIf="fromGroup.get('mail')?.hasError('required')" class="text-red-500"> This
+                                Filed is
+                                Required</span>
+                        </div>
+                        <div class="col-span-12 md:col-span-6">
+                            <label for="phone" class="form-label">Phone Number</label>
+                            <input type="tel" id="phone" class="form-input" placeholder="Enter phone number"
+                                formControlName="contact">
+
+                            <span *ngIf="fromGroup.get('contact')?.hasError('required')" class="text-red-500"> This
+                                Filed is
+                                Required</span>
+                        </div>
+                        <div class="col-span-12">
+                            <h6 class="text-base font-semibold">Employment Information</h6>
+                        </div>
+                        <div class="col-span-12 md:col-span-6">
+                            <label for="employeeId" class="form-label">Employee ID *</label>
+                            <input type="text" id="employeeId" class="form-input" placeholder="Enter employee ID"
+                                formControlName="employeeID">
+                        </div>
+                        <div class="col-span-12 md:col-span-6">
+                            <label for="department" class="form-label">Department *</label>
+
+                            <ng-select class="filter-ng-select" [items]="typeOptions" bindLabel="label"
+                                bindValue="value" placeholder="Select event type" formControlName="department">
+                            </ng-select>
+                            <span *ngIf="fromGroup.get('department')?.hasError('required')" class="text-red-500"> This
+                                Filed is
+                                Required</span>
+                        </div>
+                        <div class="col-span-12 md:col-span-6">
+                            <label for="position" class="form-label">Position *</label>
+                            <input type="text" id="position" class="form-input" placeholder="Enter position"
+                                formControlName="position">
+
+                            <span *ngIf="fromGroup.get('position')?.hasError('required')" class="text-red-500"> This
+                                Filed is
+                                Required</span>
+                        </div>
+                        <div class="col-span-12 md:col-span-6">
+                            <label for="joinDate" class="form-label">Join Date</label>
+                            <input mwlFlatpickr [flatpickrOptions]="{dateFormat: 'Y-m-d'}" formControlName="joinDate"
+                                type="text" placeholder="YYYY-MM-DD" id="joinDate" class="form-input">
+
+                            <span *ngIf="fromGroup.get('joinDate')?.hasError('required')" class="text-red-500"> This
+                                Filed is
+                                Required</span>
+                        </div>
+                        <div class="col-span-12 md:col-span-6">
+                            <label for="employmentType" class="form-label">Employment Type</label>
+
+                            <ng-select class="filter-ng-select" [items]="EmploymentOptions" bindLabel="label"
+                                bindValue="value" placeholder="Select Type" formControlName="empType">
+                            </ng-select>
+                        </div>
+                        <div class="col-span-12 md:col-span-6">
+                            <label for="statusSelect" class="form-label">Status *</label>
+                            <ng-select class="filter-ng-select" [items]="StatusOptions" bindLabel="label"
+                                bindValue="value" placeholder="Select Status" formControlName="status">
+                            </ng-select>
+                        </div>
+                        <div class="col-span-12">
+                            <label for="address" class="form-label">Address</label>
+                            <textarea id="address" class="form-input h-auto" rows="3" placeholder="Enter address"
+                                formControlName="address"></textarea>
+                        </div>
+                        <div class="col-span-12 flex justify-end gap-3 mt-4">
+                            <button type="button" (click)="close()" class="btn btn-sub-gray">Cancel</button>
+                            <button type="submit" class="btn btn-primary" (click)="closeEventModal()">{{!config ? 'Add'
+                                : 'Update' }}
+                                Employee</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

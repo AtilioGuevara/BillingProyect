@@ -1,0 +1,28 @@
+<app-page-title [Title]="'Bubble Charts'" [pageTitle]="'Apexcharts'"></app-page-title>
+
+<div class="grid grid-cols-12 gap-x-space">
+  <div class="col-span-12 md:col-span-6 card">
+    <div class="card-header">
+      <h6 class="card-title">Simple</h6>
+    </div>
+    <div class="card-body">
+      <div dir="ltr">
+        <app-domix-charts [series]="simpleBubbleChart.series" [chartOptions]="simpleBubbleChart.chartOptions">
+        </app-domix-charts>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-span-12 md:col-span-6 card">
+    <div class="card-header">
+      <h6 class="card-title">3D Bubble</h6>
+    </div>
+    <div class="card-body">
+      <div  dir="ltr">
+        <app-domix-charts [series]="bubbleChart.series" [chartOptions]="bubbleChart.chartOptions">
+        </app-domix-charts>
+      </div>
+    </div>
+  </div>
+
+</div>

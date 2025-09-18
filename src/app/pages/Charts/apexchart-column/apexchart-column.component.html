@@ -1,0 +1,105 @@
+<app-page-title [Title]="'Column Charts'" [pageTitle]="'Apexcharts'"></app-page-title>
+
+<div class="grid grid-cols-12 gap-x-space">
+  <div class="col-span-12 card">
+    <div class="card-header">
+      <h6 class="card-title">Basic</h6>
+    </div>
+    <div class="card-body">
+      <app-domix-charts [series]="basicChart.series" [chartOptions]="basicChart.chartOptions"></app-domix-charts>
+    </div>
+  </div>
+
+  <div class="col-span-12 card">
+    <div class="card-header">
+      <h6 class="card-title">Column with Data Labels</h6>
+    </div>
+    <div class="card-body">
+      <app-domix-charts [series]="inflationChart.series" [chartOptions]="inflationChart.chartOptions">
+      </app-domix-charts>
+    </div>
+  </div>
+
+  <div class="col-span-12 md:col-span-6 card">
+    <div class="card-header">
+      <h6 class="card-title">Stacked Columns</h6>
+    </div>
+    <div class="card-body">
+      <app-domix-charts [series]="stackedChart.series" [chartOptions]="stackedChart.chartOptions"></app-domix-charts>
+    </div>
+  </div>
+
+  <div class="col-span-12 md:col-span-6 card">
+    <div class="card-header">
+      <h6 class="card-title">Stacked Columns 100</h6>
+    </div>
+    <div class="card-body">
+      <app-domix-charts [series]="stackedColumnChart.series" [chartOptions]="stackedColumnChart.chartOptions">
+      </app-domix-charts>
+    </div>
+  </div>
+  <div class="col-span-12 card">
+    <div class="card-header">
+      <h6 class="card-title">Grouped Stacked Columns</h6>
+    </div>
+    <div class="card-body">
+      <app-domix-charts [series]="groupStackedChart.series" [chartOptions]="groupStackedChart.chartOptions">
+      </app-domix-charts>
+    </div>
+  </div>
+  <div class="col-span-12 md:col-span-6 card">
+    <div class="card-header">
+      <h6 class="card-title">Dumbbell Chart</h6>
+    </div>
+    <div class="card-body">
+      <app-domix-charts [series]="dumbbellChartData.series" [chartOptions]="dumbbellChartData.chartOptions">
+      </app-domix-charts>
+    </div>
+  </div>
+  <div class="col-span-12 md:col-span-6 card">
+    <div class="card-header">
+      <h6 class="card-title">Column with Markers</h6>
+    </div>
+    <div class="card-body">
+      <app-domix-charts [series]="markersChart.series" [chartOptions]="markersChart.chartOptions">
+      </app-domix-charts>
+    </div>
+  </div>
+  <div class="col-span-12 md:col-span-6 card">
+    <div class="card-header">
+      <h6 class="card-title">Column with Group Label</h6>
+    </div>
+    <div class="card-body">
+      <app-domix-charts [series]="groupedChart.series" [chartOptions]="groupedChart.chartOptions">
+      </app-domix-charts>
+    </div>
+  </div>
+  <div class="col-span-12 md:col-span-6 card">
+    <div class="card-header">
+      <h6 class="card-title">Column with Rotated Labels</h6>
+    </div>
+    <div class="card-body">
+      <app-domix-charts [series]="rotatedLabelChart.series" [chartOptions]="rotatedLabelChart.chartOptions">
+      </app-domix-charts>
+    </div>
+  </div>
+  <div class="col-span-12 md:col-span-6 card">
+    <div class="card-header">
+      <h6 class="card-title">Column with Negative Values</h6>
+    </div>
+    <div class="card-body">
+      <app-domix-charts [series]="negativeLabelChart.series" [chartOptions]="negativeLabelChart.chartOptions">
+      </app-domix-charts>
+    </div>
+  </div>
+  <div class="col-span-12 md:col-span-6 card">
+    <div class="card-header">
+      <h6 class="card-title">Distributed Columns</h6>
+    </div>
+    <div class="card-body">
+      <app-domix-charts [series]="distributedChart.series" [chartOptions]="distributedChart.chartOptions">
+      </app-domix-charts>
+
+    </div>
+  </div>
+</div>

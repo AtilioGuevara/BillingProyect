@@ -1,0 +1,49 @@
+<ng-container *ngFor="let product of addToCartProduct;let first=first">
+    <div>
+        <div class="mb-3">
+            <button class="float-end" (click)="removeProductDetail(product.pId)">
+                <i class="link size-4 link-red ri-close-line"></i>
+            </button>
+            <div class="flex flex-col gap-3 md:flex-row">
+                <div class="flex items-center justify-center w-16 bg-gray-100 rounded-md dark:bg-dark-850">
+                    <img [src]="product.image">
+                </div>
+                <div>
+                    <h6 class="mb-1">{{product.productName}}</h6>
+                    <p class="text-gray-500 dark:text-dark-500 divide-x divide-gray-200 dark:divide-dark-800 flex gap-2 items-center mb-2">
+                        <span class="px-2 ltr:first:!pl-0 rtl:first:!pr-0">{{product.qty}} Qty</span>
+                        <span class="px-2 ltr:first:!pl-0 rtl:first:!pr-0">{{product.selectedColor}}</span>
+                        <span>{{product.selectedSize}}</span>
+                    </p>
+                    <h5>{{product.displayedPrice}}</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-container>
+<div class="mb-4">
+    <label for="discountCode" class="form-label">Discount Code</label>
+    <input type="text" id="discountCode" class="form-input" placeholder="Enter coupon code">
+</div>
+<table class="table flush">
+    <tr>
+        <td class="font-semibold">Sub Amount</td>
+        <td>$<span>{{summary.subtotal.toFixed(2)}}</span></td>
+    </tr>
+    <tr>
+        <td class="font-semibold">Vat Amount (6%)</td>
+        <td>$<span>{{summary.vat.toFixed(2)}}</span></td>
+    </tr>
+    <tr>
+        <td class="font-semibold">Discount (10%)</td>
+        <td>-$<span>{{summary.discount.toFixed(2)}}</span></td>
+    </tr>
+    <tr>
+        <td class="font-semibold">Shipping Charge</td>
+        <td>$<span>{{summary.shippingCharge.toFixed(2)}}</span></td>
+    </tr>
+    <tr class="border-t border-gray-200 dark:border-dark-800">
+        <td class="font-semibold">Total Amount</td>
+        <td>$<span>{{summary.total.toFixed(2)}}</span></td>
+    </tr>
+</table>

@@ -1,0 +1,41 @@
+<app-page-title [pageTitle]="'Ui'" [Title]="'Drawer'"></app-page-title>
+
+<div class="grid grid-cols-12 gap-x-space">
+  <div class="col-span-12 md:col-span-6 card">
+    <div class="card-header">
+      <h6 class="card-title">Basic</h6>
+    </div>
+    <div class="card-body">
+      <button (click)="openDrawer('end')" type="button" class="btn btn-primary">Default Drawer</button>
+    </div>
+  </div>
+  <!--end -->
+  <div class="col-span-12 md:col-span-6 card">
+    <div class="card-header">
+      <h6 class="card-title">Drawer Position</h6>
+    </div>
+    <div class="card-body">
+      <div class="flex flex-wrap items-center gap-2">
+        <button type="button" (click)="openDrawer('end')" class="btn btn-sub-gray">End Drawer</button>
+        <button type="button" class="btn btn-sub-gray" (click)="openDrawer('start')">Start Drawer</button>
+        <button type="button" class="btn btn-sub-gray" (click)="openDrawer('top')">Top Drawer</button>
+        <button type="button" class="btn btn-sub-gray" (click)="openDrawer('bottom')">Bottom Drawer</button>
+      </div>
+    </div>
+  </div>
+  <!--end -->
+  <div class="col-span-12 md:col-span-12 card">
+    <div class="card-header">
+      <h6 class="card-title">Size Drawer</h6>
+    </div>
+    <div class="card-body">
+      <div class="flex flex-wrap items-center gap-2">
+        <button (click)="openDrawersmallDrawer()" type="button" class="btn btn-sub-gray">Extra small</button>
+        <button (click)="openDrawerlargeDrawer()" type="button" class="btn btn-sub-gray">Large</button>
+        <button (click)="openDrawerhalfScreenDrawer()" type="button" class="btn btn-sub-gray">Half Screen</button>
+      </div>
+    </div>
+  </div>
+  <!--end -->
+</div>
+

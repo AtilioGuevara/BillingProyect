@@ -1,0 +1,187 @@
+<app-page-title [pageTitle]="'Orders'" [Title]="'Orders List'"></app-page-title>
+
+<div>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-5">
+        <ng-container *ngFor="let order of summary">
+            <div class="card {{order.class}}">
+                <div class="card-body">
+                    <h6 class="mb-3">{{order.title}}</h6>
+                    <div class="flex items-center divide-x *:px-3 divide-gray-300 dark:divide-dark-800">
+                        <h4 class="ltr:pl-0 rtl:pr-0">{{order.count}}</h4>
+                        <p class="text-gray-500"><span class="font-semibold"><i class="{{order.icon}}"></i> <span>{{order.percentage}}</span></span> this months</p>
+                    </div>
+                </div>
+            </div>
+        </ng-container>
+    </div>
+</div>
+
+<div>
+    <div class="card">
+        <div class="card-body">
+            <div class="grid grid-cols-12">
+                <div class="col-span-12 xl:col-span-8">
+                    <ul class="flex items-center gap-2 overflow-x-auto">
+                        <li>
+                            <a href="javascript: void(0);" (click)="setSelectedOrder(orderStatusList.AllOrder)" [ngClass]="{ 'active' : selectedOrederList === orderStatusList.AllOrder }" class="whitespace-nowrap relative block px-4 py-2 font-medium text-center transition duration-200 ease-linear rounded-md text-gray-500 [&.active]:bg-gray-100 dark:[&.active]:bg-dark-850 dark:text-dark-500 hover:text-gray-900 dark:hover:text-dark-50 [&.active]:text-gray-900 dark:[&.active]:text-dark-50 active">
+                                <span class="align-middle">All Orders</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript: void(0);" (click)="setSelectedOrder(orderStatusList.New)" [ngClass]="{ 'active': selectedOrederList === orderStatusList.New }" class="whitespace-nowrap relative block px-4 py-2 font-medium text-center transition duration-200 ease-linear rounded-md text-gray-500 [&.active]:bg-gray-100 dark:[&.active]:bg-dark-850 dark:text-dark-500 hover:text-gray-900 dark:hover:text-dark-50 [&.active]:text-gray-900 dark:[&.active]:text-dark-50">
+                                <span class="align-middle">New</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript: void(0);" (click)="setSelectedOrder(orderStatusList.Pending)" [ngClass]="{ 'active': selectedOrederList === orderStatusList.Pending  }" class="whitespace-nowrap relative block px-4 py-2 font-medium text-center transition duration-200 ease-linear rounded-md text-gray-500 [&.active]:bg-gray-100 dark:[&.active]:bg-dark-850 dark:text-dark-500 hover:text-gray-900 dark:hover:text-dark-50 [&.active]:text-gray-900 dark:[&.active]:text-dark-50">
+                                <span class="align-middle">Pending</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript: void(0);" (click)="setSelectedOrder(orderStatusList.Delivered)" [ngClass]="{ 'active': selectedOrederList === orderStatusList.Delivered  }" class="whitespace-nowrap relative block px-4 py-2 font-medium text-center transition duration-200 ease-linear rounded-md text-gray-500 [&.active]:bg-gray-100 dark:[&.active]:bg-dark-850 dark:text-dark-500 hover:text-gray-900 dark:hover:text-dark-50 [&.active]:text-gray-900 dark:[&.active]:text-dark-50">
+                                <span class="align-middle">Delivered</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript: void(0);" (click)="setSelectedOrder(orderStatusList.Shipping)" [ngClass]="{ 'active': selectedOrederList === orderStatusList.Shipping}" class="relative block px-4 py-2 font-medium text-center transition duration-200 ease-linear rounded-md text-gray-500 [&.active]:bg-gray-100 dark:[&.active]:bg-dark-850 dark:text-dark-500 hover:text-gray-900 dark:hover:text-dark-50 [&.active]:text-gray-900 dark:[&.active]:text-dark-50">
+                                <span class="align-middle">Shipping</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript: void(0);" (click)="setSelectedOrder(orderStatusList.Cancelled)" [ngClass]="{ 'active': selectedOrederList === orderStatusList.Cancelled }" class="relative block px-4 py-2 font-medium text-center transition duration-200 ease-linear rounded-md text-gray-500 [&.active]:bg-gray-100 dark:[&.active]:bg-dark-850 dark:text-dark-500 hover:text-gray-900 dark:hover:text-dark-50 [&.active]:text-gray-900 dark:[&.active]:text-dark-50">
+                                <span class="align-middle">Cancelled</span>
+                            </a>
+                        </li>
+                    </ul>
+
+                </div>
+                <div class="flex col-span-12 gap-3 mt-4 xl:mt-0 xl:justify-end xl:col-span-4">
+                    <button *ngIf="checkedRows.length" class="btn btn-red btn-icon shrink-0" (click)="delOrder()"><lucide-angular name="trash" class="size-4"></lucide-angular></button>
+                    <button class="btn btn-primary" (click)="addEditOrder(null,null)"><lucide-angular name="plus" class="inline-block mr-1 size-4"></lucide-angular> New Order</button>
+                    <button class="btn btn-sub-gray" (click)="onSortChange(pObj)"><lucide-angular name="filter" class="inline-block mr-1 size-4"></lucide-angular> Product sorting</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="pt-0 card-body">
+            <div>
+                <div class="overflow-x-auto table-box">
+                    <table class="table hovered ">
+                        <tbody>
+                            <tr class="text-gray-500 bg-gray-100 dark:bg-dark-850 dark:text-dark-500">
+                                <th class="!font-medium whitespace-nowrap">
+                                    <div class="input-check-group">
+                                        <label for="checkboxAll" class="hidden input-check-label"></label>
+                                        <input id="checkboxAll" class="input-check input-check-primary" type="checkbox" x-model="selectAll" [(ngModel)]="headerCheckBox" (change)="headerCheckBoxChange()" />
+                                    </div>
+                                </th>
+                                <th *ngFor="let col of defs" (click)="onSortChange(col)" class="whitespace-nowrap !font-medium cursor-pointer">
+                                    {{col.headerName}}
+                                    <span *ngIf="col.sortable">{{ col.sortDiraction === 'asc' ? '↑' : '↓' }}</span>
+                                </th>
+                            </tr>
+                            <ng-container *ngIf="displayedData.length">
+                                <ng-container *ngFor="let product of displayedData;let i = index">
+                                    <tr>
+                                        <td class="whitespace-nowrap">
+                                            <div class="input-check-group">
+                                                <label class="hidden input-check-label"></label>
+                                                <input class="input-check input-check-primary" type="checkbox" [checked]="product.checked" (change)="onRowCheckboxChange(i)" />
+                                            </div>
+                                        </td>
+                                        <td class="whitespace-nowrap"><a href="javascript:void(0);" class="link link-primary">{{product.orderID}}</a></td>
+                                        <td class="whitespace-nowrap">{{product.ordersDate}}</td>
+                                        <td class="whitespace-nowrap">{{product.deliveredDate}}</td>
+                                        <td class="whitespace-nowrap">{{product.customersName}}</td>
+                                        <td class="whitespace-nowrap">{{product.productName}}</td>
+                                        <td class="whitespace-nowrap">
+                                            <span class="badge" [ngClass]="{
+                                                'badge-green': product.payment === Payment.Paid,
+                                                'badge-gray': product.payment === Payment.COD,
+                                                'badge-red': product.payment === Payment.Unpaid
+                                              }">
+                                                {{ getPaymentText(product.payment) }}
+                                            </span>
+                                        </td>
+                                        <td class="whitespace-nowrap">{{product.total}}</td>
+                                        <td class="whitespace-nowrap">{{product.qty}}</td>
+                                        <td class="whitespace-nowrap">
+                                            <span class="badge" [ngClass]="{
+                                                'badge-green': product.status === orderStatusList.Delivered,
+                                                'badge-primary': product.status === orderStatusList.New,
+                                                'badge-red': product.status === orderStatusList.Cancelled,
+                                                'badge-purple': product.status === orderStatusList.Shipping,
+                                                'badge-yellow': product.status === orderStatusList.Pending
+                                              }">
+                                                <div [ngSwitch]="product.status">
+                                                    <div *ngSwitchCase="orderStatusList.Delivered">Delivered</div>
+                                                    <div *ngSwitchCase="orderStatusList.Shipping">Shipping</div>
+                                                    <div *ngSwitchCase="orderStatusList.New">New</div>
+                                                    <div *ngSwitchCase="orderStatusList.Pending">Pending</div>
+                                                    <div *ngSwitchCase="orderStatusList.Cancelled">Cancelled</div>
+                                                </div>
+                                                <!-- {{ getOrderStatusText(product.status) }} -->
+                                            </span>
+                                        </td>
+                                        <td class="whitespace-nowrap">
+                                            <div class="dropdown">
+                                                <button type="button" class="flex items-center text-gray-500 dark:text-dark-500" domixDropdownToggle [dropdownMenu]="action">
+                                                    <i class="ri-more-2-fill"></i>
+                                                </button>
+                                                <div class="!fixed p-2 dropdown-menu" #action>
+                                                    <ul>
+                                                        <li>
+                                                            <a href="javascript: void(0);" class="dropdown-item">
+                                                                <i class="align-middle ltr:mr-2 rtl:ml-2 ri-eye-line"></i> <span>Overview</span>
+                                                            </a>
+                                                        </li>
+                                                        <li (click)="addEditOrder(product,i)">
+                                                            <a href="javascript: void(0);" class="dropdown-item">
+                                                                <i class="align-middle ltr:mr-2 rtl:ml-2 ri-pencil-line"></i> <span>Edit</span>
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="javascript: void(0);" class="dropdown-item">
+                                                                <i class="align-middle ltr:mr-2 rtl:ml-2 ri-delete-bin-line"></i> <span>Delete</span>
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </ng-container>
+                            </ng-container>
+                            <tr>
+                                <ng-container *ngIf="!displayedData.length">
+                                    <td colspan="10" class="!p-8">
+                                        <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" class="mx-auto size-12" viewBox="0 0 48 48">
+                                            <linearGradient id="SVGID_1__h35ynqzIJzH4_gr1" x1="34.598" x2="15.982" y1="15.982" y2="34.598" gradientUnits="userSpaceOnUse">
+                                                <stop offset="0" stop-color="#60e8fe"></stop>
+                                                <stop offset=".033" stop-color="#6ae9fe"></stop>
+                                                <stop offset=".197" stop-color="#97f0fe"></stop>
+                                                <stop offset=".362" stop-color="#bdf5ff"></stop>
+                                                <stop offset=".525" stop-color="#dafaff"></stop>
+                                                <stop offset=".687" stop-color="#eefdff"></stop>
+                                                <stop offset=".846" stop-color="#fbfeff"></stop>
+                                                <stop offset="1" stop-color="#fff"></stop>
+                                            </linearGradient>
+                                            <path fill="url(#SVGID_1__h35ynqzIJzH4_gr1)" d="M40.036,33.826L31.68,25.6c0.847-1.739,1.335-3.684,1.335-5.748c0-7.27-5.894-13.164-13.164-13.164	S6.688,12.582,6.688,19.852c0,7.27,5.894,13.164,13.164,13.164c2.056,0,3.995-0.485,5.728-1.326l3.914,4.015l4.331,4.331	c1.715,1.715,4.496,1.715,6.211,0C41.751,38.321,41.751,35.541,40.036,33.826z"></path>
+                                            <path fill="none" stroke="#10cfe3" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="3" d="M31.95,25.739l8.086,8.086c1.715,1.715,1.715,4.496,0,6.211l0,0c-1.715,1.715-4.496,1.715-6.211,0	l-4.331-4.331"></path>
+                                            <path fill="none" stroke="#10cfe3" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="3" d="M7.525,24.511c-1.771-4.694-0.767-10.196,3.011-13.975c3.847-3.847,9.48-4.817,14.228-2.912"></path>
+                                            <path fill="none" stroke="#10cfe3" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="3" d="M30.856,12.603c3.376,5.114,2.814,12.063-1.688,16.565c-4.858,4.858-12.565,5.129-17.741,0.814"></path>
+                                        </svg>
+                                        <p class="mt-2 text-center text-gray-500 dark:text-dark-500">No matching records found</p>
+                                    </td>
+                                </ng-container>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <app-domix-pagination [currentPage]="currentPage" [totalPages]="totalPages" [showingStart]="showingStart" [showingEnd]="showingEnd" [totalResults]="gridData.length" (pageChanged)="onPageChange($event)"></app-domix-pagination>
+            </div>
+        </div>
+    </div><!--end card-->
+</div>

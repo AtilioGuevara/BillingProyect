@@ -1,0 +1,14 @@
+<div class="modal">
+  <div class="modal-wrap modal-sm modal-center">
+    <div class="text-center modal-content p-8 bg-[url('../images/payment-modal.png')] bg-cover bg-center">
+      <div class="flex items-center justify-center mx-auto mt-20 mb-4 text-green-500 rounded-full bg-green-500/10 size-14 backdrop-blur-xl" (click)="closeaPaymentModal()">
+        <lucide-angular name="PartyPopper" class="size-6"></lucide-angular>
+      </div>
+      <h5 class="mb-1">Thank you for your purchase.</h5>
+      <p class="mb-4 text-gray-500 dark:text-dark-500">Your payment has been processed successfully!</p>
+      <div class="flex items-center justify-center gap-2">
+        <a href="javascript:void(0);" [routerLink]="['/apps-ecommerce-products-grid']" routerLinkActive="router-link-active" class="btn btn-green" (click)="closeaPaymentModal()">Continue Shopping!</a>
+      </div>
+    </div>
+  </div>
+</div>

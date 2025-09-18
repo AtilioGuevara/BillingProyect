@@ -1,0 +1,156 @@
+<app-page-title [Title]="'Attendance'" [pageTitle]="'Staff'"></app-page-title>
+
+
+<div class="grid grid-cols-12 gap-x-space">
+  <div class="col-span-12 card">
+    <div class="card-body">
+      <div class="flex flex-col gap-5 2xl:flex-row">
+        <div class="shrink-0">
+          <img src="assets/images/avatar/user-3.png" alt="" class="rounded-md size-40">
+        </div>
+        <div class="mt-5 grow 2xl:mt-0">
+          <h6 class="mb-1 text-16">Linda Sharp</h6>
+          <div class="flex flex-wrap gap-3 item-center *:flex *:items-center">
+            <p><i class="ltr:mr-1 rtl:ml-1 ri-user-3-line"></i> <span class="text-gray-500 dark:text-dark-500">Female</span></p>
+            <p><i class="ltr:mr-1 rtl:ml-1 ri-briefcase-line"></i> <span class="text-gray-500 dark:text-dark-500">Merchandiser, retail</span></p>
+            <p><i class="ltr:mr-1 rtl:ml-1 ri-map-pin-2-line"></i> <span class="text-gray-500 dark:text-dark-500">California</span></p>
+          </div>
+          <div class="flex flex-wrap items-center gap-3 mt-5 xl:mr-40 md:gap-space">
+            <div class="p-3 md:p-4 text-center border border-gray-200 dark:border-dark-800 border-dashed rounded-md w-[110px] md:w-36 shrink-0">
+              <h5 class="mb-1 text-base md:text-lg">1 <small class="text-sm font-normal text-gray-500 dark:text-dark-500">hr</small> 48 <small class="text-sm font-normal text-gray-500 dark:text-dark-500">m</small> 37 <small class="text-sm font-normal text-gray-500 dark:text-dark-500">s</small></h5>
+              <p class="text-gray-500 dark:text-dark-500">Today Timing</p>
+            </div>
+            <div class="p-3 md:p-4 text-center border border-gray-200 dark:border-dark-800 border-dashed rounded-md w-[110px] md:w-36 shrink-0">
+              <h4 class="mb-1 text-base md:text-lg">20 <small class="text-sm font-normal text-gray-500 dark:text-dark-500">Feb, 2021</small></h4>
+              <p class="text-gray-500 dark:text-dark-500">Joining Date</p>
+            </div>
+            <div class="p-3 md:p-4 text-center border border-gray-200 dark:border-dark-800 border-dashed rounded-md w-[110px] md:w-36 shrink-0">
+              <h4 class="mb-1 text-base md:text-lg">13 <small class="text-sm font-normal text-gray-500 dark:text-dark-500">Dec, 1998</small></h4>
+              <p class="text-gray-500 dark:text-dark-500">Birthday Date</p>
+            </div>
+            <div class="p-3 md:p-4 text-center border border-gray-200 dark:border-dark-800 border-dashed rounded-md w-[110px] md:w-36 shrink-0">
+              <h4 class="mb-1 text-base md:text-lg">25 <small class="text-sm font-normal text-gray-500 dark:text-dark-500">Years</small></h4>
+              <p class="text-gray-500 dark:text-dark-500">Age</p>
+            </div>
+            <div class="p-3 md:p-4 text-center border border-gray-200 dark:border-dark-800 border-dashed rounded-md w-[110px] md:w-36 shrink-0">
+              <h6 class="mb-1 text-base md:text-lg">Radiology</h6>
+              <p class="text-gray-500 dark:text-dark-500">Department</p>
+            </div>
+          </div>
+        </div>
+        <div class="mt-4 shrink-0 lg:mt-0">
+          <div class="flex items-center gap-2">
+            <button class="btn btn-sub-green btn-icon" title="phone">
+              <lucide-angular name="phone" class="size-4"></lucide-angular>
+            </button>
+            <button class="btn btn-sub-purple btn-icon" title="messages-square">
+              <lucide-angular name="messages-square" class="size-4"></lucide-angular>
+            </button>
+            <button type="button" class="btn btn-primary" title="edit">
+              <lucide-angular name="pencil" class="inline-block mr-1 size-4"></lucide-angular> Edit
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <h6 class="mt-5">Summary Overview</h6>
+
+      <div class="grid grid-cols-12 mt-4 gap-space">
+        <div class="col-span-12 mb-0 border-dashed md:col-span-6 xl:col-span-4 2xl:col-span-3 card">
+          <div class="card-body">
+            <h6 class="mb-2">208 hr 30 min (292hr)</h6>
+            <p class="text-gray-500 dark:text-dark-500">Total Working Time (Monthly)</p>
+          </div>
+        </div>
+
+        <div class="col-span-12 mb-0 border-dashed md:col-span-6 xl:col-span-4 2xl:col-span-3 card">
+          <div class="card-body">
+            <h6 class="mb-2">5 hr 15 min</h6>
+            <p class="text-gray-500 dark:text-dark-500">Total Delay (Monthly)</p>
+          </div>
+        </div>
+
+        <div class="col-span-12 mb-0 border-dashed md:col-span-6 xl:col-span-4 2xl:col-span-3 card">
+          <div class="card-body">
+            <h6 class="mb-2 text-red-500">-5 hr 15 min</h6>
+            <p class="text-gray-500 dark:text-dark-500">Total Delay (Monthly)</p>
+          </div>
+        </div>
+
+        <div class="col-span-12 md:col-span-6 xl:col-span-4 2xl:col-span-3">
+          <div class="grid grid-cols-2 gap-space">
+            <div class="mb-0 border-dashed card">
+              <div class="card-body">
+                <h6 class="mb-2">3</h6>
+                <p class="text-gray-500 dark:text-dark-500">Missed Shift</p>
+              </div>
+            </div>
+            <div class="mb-0 border-dashed card">
+              <div class="card-body">
+                <h6 class="mb-2">2</h6>
+                <p class="text-gray-500 dark:text-dark-500">Absence</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-span-12 card">
+    <div class="flex items-center gap-3 card-header">
+      <h6 class="card-title grow">Attendance List</h6>
+      <button type="button" class="btn btn-primary shrink-0">Start Timing</button>
+    </div>
+    <div class="pt-0 card-body">
+      <div>
+        <div class="overflow-x-auto table-box">
+          <table class="table flush whitespace-nowrap">
+            <tbody>
+              <tr class="text-gray-500 dark:text-dark-500">
+                <th *ngFor="let col of columnDefs" class="!font-medium cursor-pointer">
+                  <div class="flex items-center gap-space">
+                    <div (click)="onSortChange(col)">
+                      {{col.headerName}} <span *ngIf="col.sortable">
+                        {{ col.sortDiraction === 'asc' ? '↑' : '↓' }}</span>
+                    </div>
+                  </div>
+                </th>
+              </tr>
+              <ng-container *ngIf="displayedData.length > 0">
+                <ng-container *ngFor="let attendance of displayedData; let i = index">
+                  <tr class="*:px-3 *:py-2.5">
+                    <td>{{attendance.date}}</td>
+                    <td>
+                      <div class="badge badge-gray">
+                        9 hrs Shift
+                      </div>
+                    </td>
+                    <td>{{attendance.checkInTime}}</td>
+                    <td>{{attendance.checkOutTime}}</td>
+                    <td>{{attendance.workedTime}}</td>
+                    <td>{{attendance.differenceTime}}</td>
+                    <td>
+                      <span class="badge" [ngClass]="{
+                                        'badge-green': attendance.status === 'Present',
+                                        'badge-yellow': attendance.status === 'Late',
+                                        'badge-red': attendance.status === 'Absent',
+                                    }">{{attendance.status}}</span>
+                    </td>
+                    <td>
+                      <div class="flex items-center gap-2">
+                        <button class="btn btn-sub-primary btn-icon !size-8" title="edit"><i class="ri-pencil-line"></i></button>
+                        <button class="btn btn-sub-red btn-icon !size-8" title="delete" (click)="deleteModal(i)"><i class="ri-delete-bin-line"></i></button>
+                      </div>
+                    </td>
+                  </tr>
+                </ng-container>
+              </ng-container>
+            </tbody>
+          </table>
+        </div>
+        <app-domix-pagination [currentPage]="currentPage" [totalPages]="totalPages" [showingStart]="showingStart" [showingEnd]="showingEnd" [totalResults]="displayedData.length" (pageChanged)="onPageChange($event)">
+        </app-domix-pagination>
+      </div>
+    </div>
+  </div>
+</div>

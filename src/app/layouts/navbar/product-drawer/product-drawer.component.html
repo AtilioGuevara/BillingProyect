@@ -1,0 +1,90 @@
+<div id="basicEnd" [class]="'drawer drawer-lg'" [attr.drawer-end]="config.position === 'end' ? '' : null" [attr.drawer-start]="config.position === 'start' ? '' : null" [attr.drawer-top]="config.position === 'top' ? '' : null" [attr.drawer-bottom]="config.position === 'bottom' ? '' : null">
+    <div class="drawer-header">
+        <h6>{{config.title}} ({{formArray.controls.length}})</h6>
+        <button (click)="closeDrawer()"><lucide-angular name="x" class="link link-red"></lucide-angular></button>
+    </div>
+    <div class="drawer-content">
+        <ng-container *ngFor="let product of formArray.controls;let i = index;">
+            <div [formGroup]="product" class="py-3 border-b border-gray-200 dark:border-dark-800 last:border-none first:pt-0">
+                <div class="flex gap-3 item-center">
+                    <div class="bg-gray-100 rounded-md dark:bg-dark-850 size-16 shrink-0">
+                        <img [src]="product.get('image')?.value" alt="Img 04">
+                    </div>
+                    <div class="grow">
+                        <h6 class="mb-2 text-14"><a href="javascript:void(0);" href="javascript:void(0);" title="product-link">{{product.get('productName')?.value}}</a></h6>
+                        <p>
+                            <span class="badge badge-green ltr:mr-2 rtl:ml-2">
+                                In Stock {{product.get('stock')?.value}}
+                            </span> -
+                            <span class="inline-block bg-{{product.get('selectedColor')?.value}}-500 ltr:ml-2 rtl:mr-5 size-3"></span> <span class="align-baseline ltr:ml-1 rtl:mr-1">{{product.get('selectedColor')?.value}}</span>
+                        </p>
+                        <div class="flex gap-3 *:flex *:items-center items-center mt-5">
+                            <a href="javascript:void(0);" title="Remove" class="shrink-0 link link-red text-14" (click)="removeProductDetail(product.get('pId')?.value ,i)">
+                                <lucide-angular name="Trash2" class="size-4 ltr:mr-1 rtl:ml-1"></lucide-angular> Remove
+                            </a>
+                            <a href="javascript:void(0);" title="Wishlist" class="shrink-0 link link-primary text-14" (click)="removeProductDetail(product.get('pId')?.value ,i)">
+                                <lucide-angular name="ShoppingBasket" class="size-4 ltr:mr-1 rtl:ml-1"></lucide-angular> Wishlist
+                            </a>
+                        </div>
+                    </div>
+                    <div class="flex flex-col shrink-0">
+                        <h6>${{product.get('displayedPrice')?.value}}</h6>
+                        <div class="mt-auto">
+                            <div class="flex items-center w-16 p-1 text-center border border-gray-200 rounded-md dark:border-dark-800">
+                                <div class="flex flex-col">
+                                    <button (click)="decrementCount(i)" class="flex items-center justify-center text-gray-500 transition duration-200 ease-linear dark:text-dark-500 plus hover:text-primary-500 dark:hover:text-primary-500">
+                                        <lucide-angular name="ChevronUp" class="size-3"></lucide-angular>
+                                    </button>
+                                    <button (click)="incrementCount(i)" class="flex items-center justify-center text-gray-500 transition duration-200 ease-linear dark:text-dark-500 minus hover:text-primary-500 dark:hover:text-primary-500">
+                                        <lucide-angular name="ChevronDown" class="size-3"></lucide-angular>
+                                    </button>
+                                </div>
+                                <input type="text" formControlName="qty" title="countNumber" class="h-5 p-0 text-center border-0 rounded-none form-input" readonly>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </ng-container>
+    </div>
+    <div class="flex-col p-0 border-none drawer-footer" *ngIf="summary">
+        <div class="w-full p-5 pb-3 border-t border-gray-200 dark:border-dark-800">
+            <div class="-mx-5">
+                <table class="w-full flush text-start">
+                    <tbody>
+                        <tr class="*:py-2 *:px-5">
+                            <td>Sub Amount</td>
+                            <td>$<span>{{summary.subtotal }}</span></td>
+                        </tr>
+                        <tr class="*:py-2 *:px-5">
+                            <td>Vat Amount (6%)</td>
+                            <td>$<span>{{summary.vat}}</span></td>
+                        </tr>
+                        <tr class="*:py-2 *:px-5">
+                            <td>Discount (10%)</td>
+                            <td>-$<span>{{summary.discount}}</span></td>
+                        </tr>
+                        <tr class="*:py-2 *:px-5">
+                            <td>Shipping Charge</td>
+                            <td>$<span>{{summary.shippingCharge}}</span></td>
+                        </tr>
+                        <tr class="border-t border-gray-200 dark:border-dark-800 *:pt-3 *:px-5">
+                            <th class="text-start">Total Amount</th>
+                            <td>$<span>{{summary.total}}</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="flex items-center justify-end gap-2 p-5 border-t border-gray-200 dark:border-dark-800">
+            <a [routerLink]="['/apps-ecommerce-products-grid']" (click)="closeDrawer()" class="btn btn-sub-indigo btn-icon-text">
+                <lucide-angular name="ShoppingBag" class="size-4"></lucide-angular>
+                Continue Shopping
+            </a>
+            <a [routerLink]="['/apps-ecommerce-checkout']" (click)="closeDrawer()" class="btn btn-primary btn-icon-text">
+                <lucide-angular name="Rotate3D" class="size-4"></lucide-angular>
+                Checkout
+            </a>
+        </div>
+    </div>
+</div>-

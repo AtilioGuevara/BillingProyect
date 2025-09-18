@@ -1,0 +1,348 @@
+<app-page-title [pageTitle]="'Ui'" [Title]="'Dropdown'"></app-page-title>
+
+<div class="grid grid-cols-12 gap-x-space">
+  <div class="col-span-12 card">
+    <div class="card-header">
+      <h6 class="card-title">Base Dropdown</h6>
+    </div>
+    <div class="card-body">
+      <div class="flex flex-wrap items-center gap-4">
+        <div class="dropdown">
+          <button domixDropdownToggle [dropdownMenu]="dropdown1" type="button" class="flex items-center gap-2 btn-sub-gray btn">
+            Dropdown Options
+            <svg :class="{ 'transform rotate-180': open }" class="size-5" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+            </svg>
+          </button>
+
+          <div #dropdown1 class="!fixed dropdown-menu">
+            <a href="javascript: void(0);" class="dropdown-item">
+              New Task
+            </a>
+
+            <a href="javascript: void(0);" class="dropdown-item">
+
+              Edit Task
+            </a>
+
+            <a href="javascript: void(0);" class="dropdown-item">
+              <span class="text-red-500">Delete Task</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="dropdown">
+          <button domixDropdownToggle [dropdownMenu]="dropdown2" type="button" class="flex items-center gap-2">
+            Dropdown Link Options
+            <svg :class="{ 'transform rotate-180': open }" class="text-gray-500 transition-transform duration-300 dark:text-dark-500 size-5" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+            </svg>
+          </button>
+
+          <div #dropdown2 class="!fixed dropdown-menu">
+            <a href="javascript: void(0);" class="dropdown-item">
+              New Task
+            </a>
+
+            <a href="javascript: void(0);" class="dropdown-item">
+              Edit Task
+            </a>
+
+            <a href="javascript: void(0);" class="dropdown-item">
+              <span class="text-red-500">Delete Task</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--Base-->
+
+  <div class="col-span-12 card">
+    <div class="card-header">
+      <h6 class="card-title">Position Dropdown</h6>
+    </div>
+    <div class="card-body">
+      <div class="flex flex-wrap items-center gap-4">
+        <div class="dropdown">
+          <button type="button" class="flex items-center gap-2 btn-sub-gray btn" domixDropdownToggle [dropdownMenu]="dropdown3">
+            Dropdown Options
+            <svg class="text-gray-400 transition-transform duration-300 size-5" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+            </svg>
+          </button>
+
+          <div class="!fixed dropdown-menu" #dropdown3>
+            <a href="javascript:void(0);" class="dropdown-item">New Task</a>
+            <a href="javascript:void(0);" class="dropdown-item">Edit Task</a>
+            <a href="javascript:void(0);" class="dropdown-item"><span class="text-red-500">Delete Task</span></a>
+          </div>
+        </div>
+
+
+        <div class="dropdown">
+          <button type="button" class="flex items-center gap-2 btn-sub-gray btn" domixDropdownToggle [dropdownMenu]="dropdown4">
+            Right Dropdown
+            <svg class="text-gray-400 transition-transform duration-300 size-5" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+            </svg>
+          </button>
+
+          <div class="!fixed dropdown-menu dropdown-right" #dropdown4 dropdown-position="right">
+            <a href="javascript:void(0);" class="dropdown-item">New Task</a>
+            <a href="javascript:void(0);" class="dropdown-item">Edit Task</a>
+            <a href="javascript:void(0);" class="dropdown-item"><span class="text-red-500">Delete Task</span></a>
+          </div>
+        </div>
+
+        <div class="dropdown">
+          <button domixDropdownToggle [dropdownMenu]="dropdown6" type="button" class="flex items-center gap-2 btn-sub-gray btn">
+            Right Top Dropdown Options
+            <svg :class="{ 'transform rotate-180': open }" class="text-gray-400 transition-transform duration-300 size-5" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+            </svg>
+          </button>
+
+          <div #dropdown6 class="!fixed dropdown-menu dropdown-top-right" dropdown-position="right-top">
+            <a href="javascript: void(0);" class="dropdown-item">
+              New Task
+            </a>
+
+            <a href="javascript: void(0);" class="dropdown-item">
+              Edit Task
+            </a>
+
+            <a href="javascript: void(0);" class="dropdown-item">
+              <span class="text-red-500">Delete Task</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="dropdown">
+          <button domixDropdownToggle [dropdownMenu]="dropdown7" type="button" class="flex items-center gap-2 btn-sub-gray btn">
+            Left Top Dropdown Options
+            <svg :class="{ 'transform rotate-180': open }" class="text-gray-400 transition-transform duration-300 size-5" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+            </svg>
+          </button>
+          <div #dropdown7 class="!fixed dropdown-menu dropdown-top-left" dropdown-position="left-top">
+            <a href="javascript: void(0);" class="dropdown-item">
+              New Task
+            </a>
+
+            <a href="javascript: void(0);" class="dropdown-item">
+              Edit Task
+            </a>
+
+            <a href="javascript: void(0);" class="dropdown-item">
+              <span class="text-red-500">Delete Task</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--Position-->
+
+  <div class="col-span-12 card">
+    <div class="card-header">
+      <h6 class="card-title">Colored Dropdown</h6>
+    </div>
+    <div class="card-body">
+      <div class="flex flex-wrap items-center gap-4">
+        <div class="dropdown">
+          <button domixDropdownToggle [dropdownMenu]="dropdown8" type="button" class="flex items-center gap-2 btn-primary btn">
+            Primary Option
+            <svg :class="{ 'transform rotate-180': open }" class="transition-transform duration-300 size-5" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+            </svg>
+          </button>
+
+          <div #dropdown8 class="!fixed dropdown-menu">
+            <a href="javascript: void(0);" class="dropdown-item dropdown-primary">
+              New Task
+            </a>
+
+            <a href="javascript: void(0);" class="dropdown-item dropdown-primary">
+              Edit Task
+            </a>
+
+            <a href="javascript: void(0);" class="dropdown-item dropdown-primary">
+              Delete Task
+            </a>
+          </div>
+        </div>
+        <div class="dropdown">
+          <button domixDropdownToggle [dropdownMenu]="dropdown9" type="button" class="flex items-center gap-2 btn-green btn">
+            Green Option
+            <svg :class="{ 'transform rotate-180': open }" class="transition-transform duration-300 size-5" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+            </svg>
+          </button>
+
+          <div #dropdown9 class="!fixed dropdown-menu">
+            <a href="javascript: void(0);" class="dropdown-item dropdown-green">
+              New Task
+            </a>
+
+            <a href="javascript: void(0);" class="dropdown-item dropdown-green">
+              Edit Task
+            </a>
+
+            <a href="javascript: void(0);" class="dropdown-item dropdown-green">
+              Delete Task
+            </a>
+          </div>
+        </div>
+        <div class="dropdown">
+          <button domixDropdownToggle [dropdownMenu]="dropdown10" type="button" class="flex items-center gap-2 btn-purple btn">
+            Purple Option
+            <svg :class="{ 'transform rotate-180': open }" class="transition-transform duration-300 size-5" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+            </svg>
+          </button>
+
+          <div #dropdown10 class="!fixed dropdown-menu">
+            <a href="javascript: void(0);" class="dropdown-item dropdown-purple">
+              New Task
+            </a>
+
+            <a href="javascript: void(0);" class="dropdown-item dropdown-purple">
+              Edit Task
+            </a>
+
+            <a href="javascript: void(0);" class="dropdown-item dropdown-purple">
+              Delete Task
+            </a>
+          </div>
+        </div>
+        <div class="dropdown">
+          <button domixDropdownToggle [dropdownMenu]="dropdown11" type="button" class="flex items-center gap-2 btn-yellow btn">
+            Yellow Option
+            <svg :class="{ 'transform rotate-180': open }" class="transition-transform duration-300 size-5" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+            </svg>
+          </button>
+
+          <div #dropdown11 class="!fixed dropdown-menu">
+            <a href="javascript: void(0);" class="dropdown-item dropdown-yellow">
+              New Task
+            </a>
+
+            <a href="javascript: void(0);" class="dropdown-item dropdown-yellow">
+              Edit Task
+            </a>
+
+            <a href="javascript: void(0);" class="dropdown-item dropdown-yellow">
+              Delete Task
+            </a>
+          </div>
+        </div>
+        <div class="dropdown">
+          <button domixDropdownToggle [dropdownMenu]="dropdown12" type="button" class="flex items-center gap-2 btn-sky btn">
+            Sky Option
+            <svg :class="{ 'transform rotate-180': open }" class="transition-transform duration-300 size-5" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+            </svg>
+          </button>
+
+          <div #dropdown12 class="!fixed dropdown-menu">
+            <a href="javascript: void(0);" class="dropdown-item dropdown-sky">
+              New Task
+            </a>
+
+            <a href="javascript: void(0);" class="dropdown-item dropdown-sky">
+              Edit Task
+            </a>
+
+            <a href="javascript: void(0);" class="dropdown-item dropdown-sky">
+              Delete Task
+            </a>
+          </div>
+        </div>
+        <div class="dropdown">
+          <button domixDropdownToggle [dropdownMenu]="dropdown13" type="button" class="flex items-center gap-2 btn-red btn">
+            Red Option
+            <svg :class="{ 'transform rotate-180': open }" class="transition-transform duration-300 size-5" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+            </svg>
+          </button>
+
+          <div #dropdown13 class="!fixed dropdown-menu">
+            <a href="javascript: void(0);" class="dropdown-item dropdown-red">
+              New Task
+            </a>
+
+            <a href="javascript: void(0);" class="dropdown-item dropdown-red">
+              Edit Task
+            </a>
+
+            <a href="javascript: void(0);" class="dropdown-item dropdown-red">
+              Delete Task
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--Colored-->
+
+  <div class="col-span-12 card">
+    <div class="card-header">
+      <h6 class="card-title">Profile Dropdown</h6>
+    </div>
+    <div class="card-body">
+      <div class="flex flex-wrap items-center gap-4">
+        <div class="dropdown">
+          <button domixDropdownToggle [dropdownMenu]="dropdown14" type="button" class="flex items-center gap-2 btn btn-primary">
+            Profile
+            <svg :class="{ 'transform rotate-180': open }" class="transition-transform duration-300 size-5" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+            </svg>
+          </button>
+
+          <div #dropdown14 class="!fixed dropdown-menu !w-72" dropdown-position="right">
+            <div class="flex items-center gap-3 p-4 border-b border-gray-200 dark:border-dark-800">
+              <img src="assets/images/avatar/user-17.png" alt="" class="rounded-full size-9 shrink-0">
+              <div class="overflow-hidden grow">
+                <h6>Sophia Mia</h6>
+                <a href="javascript:void(0);" class="truncate link link-primary">sophia&#64;srbthemes.com</a>
+              </div>
+              <div class="shrink-0">
+                <span class="badge badge-pink">Pro</span>
+              </div>
+            </div>
+            <div class="p-4 *:flex space-y-4 *:items-center">
+              <a href="javascript: void(0);" class="link link-primary">
+                <lucide-angular name="UserRound" class="size-4 ltr:mr-1 rtl:ml-1"></lucide-angular> Account Settings
+              </a>
+              <a href="javascript: void(0);" class="link link-primary">
+                <lucide-angular name="VenetianMask" class="size-4 ltr:mr-1 rtl:ml-1"></lucide-angular> Go Incognito
+              </a>
+              <a href="javascript: void(0);" class="link link-primary">
+                <lucide-angular name="Headset" class="size-4 ltr:mr-1 rtl:ml-1"></lucide-angular> Help Center
+              </a>
+              <a href="javascript: void(0);" class="link link-primary">
+                <lucide-angular name="moon" class="size-4 ltr:mr-1 rtl:ml-1"></lucide-angular>
+                <span class="grow">Dark Mode</span>
+                <label for="darkModeProfile" class="switch-group shrink-0">
+                  <div class="relative">
+                    <input type="checkbox" id="darkModeProfile" class="sr-only peer" />
+                    <div class="switch-wrapper"></div>
+                    <div class="switch-dot peer-checked:translate-x-full rtl:peer-checked:-translate-x-full switch-primary">
+                    </div>
+                  </div>
+                </label>
+              </a>
+              <a href="javascript: void(0);" class="link link-primary">
+                <lucide-angular name="phone" class="size-4 ltr:mr-1 rtl:ml-1"></lucide-angular> Contact Us
+              </a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <!--Base-->
+</div>

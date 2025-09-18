@@ -1,0 +1,93 @@
+<div class="relative flex items-center justify-center min-h-screen py-12 bg-center bg-cover bg-[url('../images/others/auth.jpg')]">
+  <div class="absolute inset-0 bg-gray-950/50"></div>
+  <div class="container relative">
+    <div class="grid grid-cols-12">
+      <div class="col-span-12 md:col-span-10 lg:col-span-6 xl:col-span-4 md:col-start-2 lg:col-start-4 xl:col-start-5 mb-0 border-none shadow-none card bg-white/10 backdrop-blur-md">
+        <div class="md:p-10 card-body">
+          <div class="mb-5 text-center">
+            <a href="javascript:void(0);"><img src="assets/images/logo-white.png" alt="" class="h-8 mx-auto"></a>
+          </div>
+          <h4 class="mb-2 leading-relaxed text-center text-white">Welcome Back, Sofia!</h4>
+          <p class="mb-5 text-center text-white/75">Don't have an account? <a href="javascript:void(0);" routerLink="/auth-signup-modern" class="cursor-pointer font-medium text-white">Sign Up</a></p>
+          <form [formGroup]="signInForm" (ngSubmit)="onSubmit()">
+            <!-- Alert Section -->
+            <div *ngIf="alert.isVisible" [ngClass]="alert.type" class="relative py-3 text-sm rounded-md ltr:pl-5 rtl:pr-5 ltr:pr-7 rtl:pl-7">
+              <span>{{ alert.message }}</span>
+              <a href="javascript:void(0);" (click)="alert.isVisible = false" class="absolute text-lg transition duration-200 ease-linear ltr:right-5 rtl:left-5 top-2">
+                <i class="ri-close-fill"></i>
+              </a>
+            </div>
+
+            <!-- Input Fields -->
+            <div class="grid grid-cols-12 gap-5 mt-5">
+              <div class="col-span-12">
+                <label for="emailOrUsername" class="form-label text-white/75">Email Or Username</label>
+                <input type="text" id="emailOrUsername" formControlName="emailOrUsername" class="text-white border-none ltr:pr-8 rtl:pl-8 form-input bg-white/10 placeholder:text-white/75" placeholder="Enter your email or username">
+              </div>
+
+              <div class="col-span-12">
+                <div>
+                  <label for="password" class="block mb-2 text-sm text-white/75">Password</label>
+                  <div class="relative">
+                    <input [type]="showPassword ? 'text' : 'password'" id="password" formControlName="password" class="text-white border-none ltr:pr-8 rtl:pl-8 form-input bg-white/10 placeholder:text-white/75" placeholder="Enter your password">
+                    <button type="button" (click)="togglePasswordVisibility()" class="absolute inset-y-0 flex items-center text-gray-500 ltr:right-3 rtl:left-3 focus:outline-hidden dark:text-dark-500">
+                      <lucide-angular name="Eye" *ngIf="showPassword" class="size-5"></lucide-angular>
+                      <lucide-angular name="EyeOff" *ngIf="!showPassword" class="size-5"></lucide-angular>
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-span-12">
+                <div class="flex items-center">
+                  <div class="input-check-group grow">
+                    <input id="checkboxBasic1" class="border-0 input-check bg-white/10" type="checkbox" formControlName="rememberMe" />
+                    <label for="checkboxBasic1" class="input-check-label text-white/75">Remember me</label>
+                  </div>
+                  <a routerLink="/auth-forgot-password-basic" class="cursor-pointer block text-sm font-medium text-right underline transition duration-300 ease-linear shrink-0 text-white/75 hover:text-white">Forgot
+                    Password?</a>
+                </div>
+              </div>
+
+              <div class="col-span-12">
+                <button type="submit" class="w-full btn btn-primary">Sign In</button>
+              </div>
+            </div>
+          </form>
+
+          <div class="relative my-5 text-center text-white/75">
+            <p>OR</p>
+          </div>
+
+          <div class="space-y-2">
+            <button type="button" class="w-full border-white/10 text-white/75 btn hover:bg-white/10 hover:text-white"><img src="assets/images/others/google.png" alt="" class="inline-block h-4 ltr:mr-1 rtl:ml-1"> SignIn Vie
+              Google</button>
+            <button type="button" class="w-full border-white/10 text-white/75 btn hover:bg-white/10 hover:text-white">
+              <lucide-angular name="facebook" class="inline-block ltr:mr-1 rtl:ml-1 size-4 text-primary-500">
+              </lucide-angular>SignIn Vie
+              Facebook
+            </button>
+          </div>
+
+          <div class="flex items-center gap-3 mt-5">
+            <div class="grow">
+              <h6 class="mb-1 text-white">Admin</h6>
+              <p class="text-white/75">Email: admin&#64;srbthemes.com</p>
+              <p class="text-white/75">Password: admin&#64;123</p>
+            </div>
+            <button class="shrink-0 btn btn-sub-gray">Login</button>
+          </div>
+
+          <div class="flex items-center gap-3 mt-3">
+            <div class="grow">
+              <h6 class="mb-1 text-white">Users</h6>
+              <p class="text-white/75">Email: user&#64;srbthemes.com</p>
+              <p class="text-white/75">Password: user&#64;123</p>
+            </div>
+            <button class="shrink-0 btn btn-sub-gray">Login</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,82 @@
+<app-page-title [Title]="'Departments'" [pageTitle]="'Hospital'"></app-page-title>
+
+<div class="grid grid-cols-12 gap-x-space">
+  <div class="col-span-12 card">
+    <div class="flex items-center gap-3 card-header flex-wrap">
+      <h6 class="card-title grow">Employee</h6>
+      <p class="text-gray-500 shrink-0 dark:text-dark-500">Number of Staff according to department</p>
+    </div>
+    <div class="card-body">
+      <app-domix-charts [series]="distributedColumnChart.series" [chartOptions]="distributedColumnChart.chartOptions">
+      </app-domix-charts>
+    </div>
+    <div class="col-span-12 card">
+      <div class="flex items-center gap-3 card-header flex-col md:flex-row">
+        <h6 class="card-title grow">Department List</h6>
+        <button type="button" class="btn btn-primary shrink-0" (click)="openCreateModal(null,null)" data-modal-target="addDepartmentModal">
+          <lucide-angular name="CirclePlus" class="inline-block ltr:mr-1 rtl:ml-1 size-4"></lucide-angular> Add
+          Department
+        </button>
+      </div>
+      <div class="pt-0 card-body">
+        <div>
+          <div class="overflow-x-auto table-box whitespace-nowrap">
+            <table class="table flush">
+              <tbody>
+                <tr class="text-gray-500 bg-gray-100 dark:text-dark-500 dark:bg-dark-850">
+                  <th *ngFor="let col of columnDefs" class="!font-medium cursor-pointer">
+                    <div class="flex items-center gap-space">
+                      <div (click)="onSortChange(col)">
+                        {{col.headerName}} <span *ngIf="col.sortable">
+                          {{ col.sortDiraction === 'asc' ? '↑' : '↓' }}</span>
+                      </div>
+                    </div>
+                  </th>
+                </tr>
+                <ng-container *ngIf="displayedData.length > 0">
+                  <ng-container *ngFor="let department of displayedData; let i = index">
+                    <tr class="*:px-3 *:py-2.5">
+                      <td>{{department.departmentID}}</td>
+                      <td>{{department.departmentName}}</td>
+                      <td>
+                        <div class="flex">
+                          <div class="flex items-center gap-3">
+                            <div class="relative text-gray-500 bg-gray-100 rounded-full dark:text-dark-500 dark:bg-dark-850 size-10">
+                              <img *ngIf="department.image" [src]="department.image" alt="" class="rounded-full">
+                              <span *ngIf="!department.image" class="absolute inset-0 flex items-center justify-center text-xs font-semibold text-gray-500 bg-gray-100 rounded-full dark:text-dark-500 dark:bg-dark-850">
+                                {{ generateAvatarText(department.doctor) }}
+                              </span>
+                            </div>
+                            <div>
+                              <h6><a href="javascript:void(0);">{{department.doctor}}</a></h6>
+                            </div>
+                          </div>
+                        </div>
+                      </td>
+                      <td>{{department.totalEmployee}}</td>
+                      <td><a href="javascript:void(0);" class="link link-primary">{{department.headOfDepartment}}</a>
+                      </td>
+                      <td>
+                        <span class="badge" [ngClass]="{
+                                          'badge-green': department.status === 'Active',
+                                          'badge-red': department.status === 'Unactive',
+                                      }">{{department.status}}</span>
+                      </td>
+                      <td>
+                        <div class="flex items-center gap-2">
+                          <button class="btn btn-sub-gray btn-icon !size-8" title="Edit" (click)="openCreateModal(department,i)"><i class="ri-pencil-line"></i></button>
+                          <button class="btn btn-sub-red btn-icon !size-8" title="delete" (click)="deleteModal(i)"><i class="ri-delete-bin-line"></i></button>
+                        </div>
+                      </td>
+                    </tr>
+                  </ng-container>
+                </ng-container>
+              </tbody>
+            </table>
+          </div>
+          <app-domix-pagination [currentPage]="currentPage" [totalPages]="totalPages" [showingStart]="showingStart" [showingEnd]="showingEnd" [totalResults]="displayedData.length" (pageChanged)="onPageChange($event)">
+          </app-domix-pagination>
+        </div>
+      </div>
+    </div>
+  </div>

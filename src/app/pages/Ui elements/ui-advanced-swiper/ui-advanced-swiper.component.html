@@ -1,0 +1,150 @@
+<app-page-title [pageTitle]="'Ui'" [Title]="'Swiper'"></app-page-title>
+
+<div class="grid grid-cols-12 gap-x-space">
+    <div class="col-span-12 md:col-span-6 card">
+        <div class="card-header">
+            <h6 class="card-title">Basic Slider</h6>
+        </div>
+        <div class="card-body">
+            <div class="swiper mySwiper" #basic>
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <img src="assets/images/gallery/img-01.jpg" alt="" class="object-cover w-full h-full rounded-md">
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="assets/images/gallery/img-02.jpg" alt="" class="object-cover w-full h-full rounded-md">
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="assets/images/gallery/img-03.jpg" alt="" class="object-cover w-full h-full rounded-md">
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="assets/images/gallery/img-04.jpg" alt="" class="object-cover w-full h-full rounded-md">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-span-12 md:col-span-6 card">
+        <div class="card-header">
+            <h6 class="card-title">Pagination Dynamic</h6>
+        </div>
+        <div class="card-body">
+            <div class="swiper paginationDynamicSlider" #paginationDynamicSlider>
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <img src="assets/images/gallery/img-05.jpg" alt="" class="object-cover w-full h-full rounded-md">
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="assets/images/gallery/img-06.jpg" alt="" class="object-cover w-full h-full rounded-md">
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="assets/images/gallery/img-03.jpg" alt="" class="object-cover w-full h-full rounded-md">
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="assets/images/gallery/img-02.jpg" alt="" class="object-cover w-full h-full rounded-md">
+                    </div>
+                    <div class="swiper-pagination"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-span-12 md:col-span-6 card">
+        <div class="card-header">
+            <h6 class="card-title">Pagination</h6>
+        </div>
+        <div class="card-body">
+            <div class="swiper pagination-swiper" #pagination>
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <img src="assets/images/gallery/img-03.jpg" alt="" class="object-cover w-full h-full rounded-md">
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="assets/images/gallery/img-04.jpg" alt="" class="object-cover w-full h-full rounded-md">
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="assets/images/gallery/img-05.jpg" alt="" class="object-cover w-full h-full rounded-md">
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="assets/images/gallery/img-06.jpg" alt="" class="object-cover w-full h-full rounded-md">
+                    </div>
+                </div>
+                <div class="swiper-pagination"></div>
+            </div>
+        </div>
+    </div>
+    <div class="col-span-12 md:col-span-6 card">
+        <div class="card-header">
+            <h6 class="card-title">Vertical</h6>
+        </div>
+        <div class="card-body">
+            <div class="swiper verticalSlider h-[445px]" #paginationVertical>
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <img src="assets/images/gallery/img-05.jpg" alt="" class="object-cover w-full h-full rounded-md">
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="assets/images/gallery/img-06.jpg" alt="" class="object-cover w-full h-full rounded-md">
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="assets/images/gallery/img-03.jpg" alt="" class="object-cover w-full h-full rounded-md">
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="assets/images/gallery/img-02.jpg" alt="" class="object-cover w-full h-full rounded-md">
+                    </div>
+                </div>
+                <div class="swiper-pagination"></div>
+            </div>
+        </div>
+    </div>
+    <div class="col-span-12 card">
+        <div class="card-header">
+            <h6 class="card-title">Grab cursor</h6>
+        </div>
+        <div class="card-body">
+            <div class="swiper grabCursorSlider" #grabCursor>
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <img src="assets/images/gallery/img-05.jpg" alt="" class="object-cover w-full h-full rounded-md">
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="assets/images/gallery/img-06.jpg" alt="" class="object-cover w-full h-full rounded-md">
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="assets/images/gallery/img-03.jpg" alt="" class="object-cover w-full h-full rounded-md">
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="assets/images/gallery/img-02.jpg" alt="" class="object-cover w-full h-full rounded-md">
+                    </div>
+                </div>
+                <div class="swiper-pagination"></div>
+            </div>
+        </div>
+    </div>
+    <div class="col-span-12 card">
+        <div class="card-header">
+            <h6 class="card-title">Slides per view</h6>
+        </div>
+        <div class="card-body">
+            <div class="swiper slidersPerView" #sildesPerView>
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <img src="assets/images/gallery/img-05.jpg" alt="" class="object-cover w-full h-full rounded-md">
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="assets/images/gallery/img-06.jpg" alt="" class="object-cover w-full h-full rounded-md">
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="assets/images/gallery/img-03.jpg" alt="" class="object-cover w-full h-full rounded-md">
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="assets/images/gallery/img-02.jpg" alt="" class="object-cover w-full h-full rounded-md">
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="assets/images/gallery/img-04.jpg" alt="" class="object-cover w-full h-full rounded-md">
+                    </div>
+                </div>
+                <div class="swiper-pagination"></div>
+            </div>
+        </div>
+    </div>
+</div>

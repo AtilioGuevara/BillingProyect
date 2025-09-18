@@ -1,0 +1,105 @@
+<div id="addOrderModal" class="modal">
+  <div class="modal-wrap modal-center">
+    <div class="modal-header">
+      <h6> {{!config ? 'Add new' : 'Edit' }} Order</h6>
+      <button class="link link-red float-end">
+        <lucide-angular name="x" class="size-5"></lucide-angular>
+      </button>
+    </div>
+    <div class="modal-content">
+      <form [formGroup]="orderForm">
+        <div class="grid grid-cols-12 gap-5">
+          <!-- <div class="col-span-12">
+            <label for="orderIDInput" class="form-label">Order ID</label>
+            <input type="text" id="orderIDInput" class="form-input" placeholder="Order ID" formControlName="orderID">
+          </div> -->
+          <div class="col-span-6">
+            <label for="ordersDateInput" class="form-label">Order Date</label>
+            <input type="date" id="ordersDateInput" class="form-input" formControlName="ordersDate" data-date-format="d M, Y" mwlFlatpickr>
+            <span *ngIf="orderForm.get('ordersDate')?.invalid && orderForm.get('ordersDate')?.touched"
+              class="text-red-500">
+              Order date is required.
+            </span>
+          </div>
+          <div class="col-span-6">
+            <label for="deliveredDateInput" class="form-label">Delivered Date</label>
+            <input type="date" id="deliveredDateInput" class="form-input" formControlName="deliveredDate" data-date-format="d M, Y" mwlFlatpickr>
+            <span *ngIf="orderForm.get('deliveredDate')?.invalid && orderForm.get('deliveredDate')?.touched"
+              class="text-red-500">
+              Delivered date is required.
+            </span>
+          </div>
+          <div class="col-span-12">
+            <label for="customerNameInput" class="form-label">Customer Name</label>
+            <input type="text" id="customerNameInput" class="form-input" placeholder="Customer name"
+              formControlName="customersName">
+            <span *ngIf="orderForm.get('customersName')?.invalid && orderForm.get('customersName')?.touched"
+              class="text-red-500">
+              Full name is required.
+            </span>
+          </div>
+          <div class="col-span-6">
+            <label for="quantityInput" class="form-label">Quantity</label>
+            <div class="input-spin-group">
+              <button type="button" (click)="decreaseQty()" class="input-spin-minus">
+                <lucide-angular name="Minus" class="size-4"></lucide-angular>
+              </button>
+              <input type="text" formControlName="qty" class="input-spin form-input" id="quantityInput" readonly>
+              <button type="button" (click)="increaseQty()" class="input-spin-plus">
+                <lucide-angular name="Plus" class="size-4"></lucide-angular>
+              </button>
+            </div>
+          </div>
+          <div class="col-span-6">
+            <label for="priceInput" class="form-label">Product Amount</label>
+            <input type="text" id="priceInput" class="form-input" placeholder="Amount" formControlName="price">
+            <span *ngIf="orderForm.get('price')?.invalid && orderForm.get('price')?.touched" class="text-red-500">
+              Price is required.
+            </span>
+          </div>
+          <div class="col-span-12">
+            <label for="totalAmountInput" class="form-label">Total Price</label>
+            <input type="text" id="totalAmountInput" class="form-input" placeholder="Total Amount"
+              formControlName="total">
+          </div>
+          <div class="col-span-12">
+            <label for="productNameInput" class="form-label">Products Name</label>
+            <input type="text" id="productNameInput" class="form-input" placeholder="Product Name"
+              formControlName="productName">
+            <span *ngIf="orderForm.get('productName')?.invalid && orderForm.get('productName')?.touched"
+              class="text-red-500">
+              Product name is required.
+            </span>
+          </div>
+          <div class="col-span-6">
+            <label for="paymentStatusSelect" class="form-label">Payment Status</label>
+            <select id="paymentStatusSelect" formControlName="payment" class="form-input">
+              <option value="">Select Payment Status</option>
+              <option *ngFor="let option of paymentOptions" [value]="option.value">{{ option.label }}</option>
+            </select>
+            <span *ngIf="orderForm.get('payment')?.invalid && orderForm.get('payment')?.touched" class="text-red-500">
+              Payment is required.
+            </span>
+          </div>
+          
+          <div class="col-span-6">
+            <label for="orderStatusSelect" class="form-label">Order Status</label>
+            <select id="orderStatusSelect" formControlName="status" class="form-input">
+              <option value="">Select Order Status</option>
+              <option *ngFor="let option of orderStatusOptions" [value]="option.value">{{ option.label }}</option>
+            </select>
+            <span *ngIf="orderForm.get('status')?.invalid && orderForm.get('status')?.touched" class="text-red-500">
+              Status is required.
+            </span>
+          </div>
+
+        </div>
+      </form>
+
+      <div class="flex justify-end gap-2 mt-5">
+        <button type="button" class="btn btn-active-red" (click)="close()">Cancel</button>
+        <button class="btn btn-primary" (click)="onSubmit()">{{!config ? 'Add' : 'Edit' }} Order</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,134 @@
+<app-page-title [Title]="'Question'" [pageTitle]="'Exam'"></app-page-title>
+
+<div>
+  <div class="grid grid-cols-12 gap-5 gap-x-space mb-space">
+    <div class="col-span-12 md:col-span-6 xl:col-span-4">
+      <div class="relative flex items-center">
+        <input type="text" class="!border-r-0 !rounded-r-none form-input grow focus:!border-green-500/20" placeholder="Search for ..." [(ngModel)]="searchText" (ngModelChange)="updateDisplayedData()">
+        <button class="border-green-200 rounded-l-none btn btn-sub-green btn-icon shrink-0">
+          <lucide-angular name="search" class="size-5"></lucide-angular>
+        </button>
+      </div>
+    </div>
+
+    <button class="btn btn-red btn-icon">
+      <lucide-angular name="trash" class="inline-block size-4"></lucide-angular>
+    </button>
+    <div class="col-span-12 sm:col-span-6 md:col-span-2 xl:col-start-9">
+      <ng-select class="filter-ng-select" [items]="categories" bindLabel="label" bindValue="value" [(ngModel)]="selectedCategory" placeholder="Select a category" (change)="catgoryChange()" (clear)="resetFilters()">
+      </ng-select>
+    </div>
+
+
+    <div class="col-span-12 sm:col-span-6 md:col-span-4 xl:col-span-2">
+      <button type="button" class="w-full btn btn-primary" (click)="openCreateModal(null,null)">Create New
+        Question</button>
+    </div>
+  </div>
+
+
+  <div>
+    <div class="overflow-x-auto">
+      <table class="table border-separate border-spacing-y-2 whitespace-nowrap">
+        <tr class="font-medium text-gray-500">
+          <th *ngFor="let col of columnDefs" class="!font-medium cursor-pointer">
+            <div class="flex items-center gap-space">
+              <div (click)="onSortChange(col)">
+                {{col.headerName}} <span *ngIf="col.sortable">
+                  {{ col.sortDiraction === 'asc' ? '↑' : '↓' }}</span>
+              </div>
+            </div>
+          </th>
+        </tr>
+        <ng-container *ngFor="let question of displayedData; let index = index">
+          <tr>
+            <td class="border-t ltr:last:border-r rtl:last:border-l ltr:first:border-l rtl:first:border-r ltr:last:rounded-r-md rtl:last:rounded-l-md ltr:first:rounded-l-md rtl:first:rounded-r-md">
+              <h6><a href="javascript:void(0);">{{question.question}}</a>
+              </h6>
+              <ng-container *ngIf="question.showAll">
+                <div class="mt-3 space-y-2">
+                  <ng-container *ngFor="let option of question.options; let optionIndex = index">
+                    <div class="input-radio-group">
+                      <input [id]="'qOption' + question.id + optionIndex" class="hidden input-radio peer" type="radio" [name]="'optionQ' + question.id">
+                      <label for="qOption{{ question.id }}{{ index }}" class="flex items-center justify-center border border-gray-200 dark:border-dark-800 rounded-md text-15 size-9 peer-checked:bg-primary-500 dark:peer-checked:bg-primary-500 peer-checked:border-primary-500 peer-checked:text-white">
+                        {{ getCharFromIndex(optionIndex) }}
+                      </label>
+                      <label [for]="'qOption' + question.id + optionIndex" class="py-2.5 px-3 rounded-md border border-gray-200 dark:border-dark-800 input-radio-label grow">
+                        {{ option }}
+                      </label>
+                    </div>
+                  </ng-container>
+                </div>
+              </ng-container>
+            </td>
+            <td class="align-top border-t ltr:last:border-r rtl:last:border-l ltr:first:border-l rtl:first:border-r ltr:last:rounded-r-md rtl:last:rounded-l-md ltr:first:rounded-l-md rtl:first:rounded-r-md">
+              <a href="javascript:void(0);" class="link link-primary" (click)="question.showAll = !question.showAll">
+                {{ question.showAll ? 'Hide All' : 'Show All' }}
+              </a>
+            </td>
+            <td class="align-top border-t ltr:last:border-r rtl:last:border-l ltr:first:border-l rtl:first:border-r ltr:last:rounded-r-md rtl:last:rounded-l-md ltr:first:rounded-l-md rtl:first:rounded-r-md">{{question.type}}</td>
+            <td class="align-top border-t ltr:last:border-r rtl:last:border-l ltr:first:border-l rtl:first:border-r ltr:last:rounded-r-md rtl:last:rounded-l-md ltr:first:rounded-l-md rtl:first:rounded-r-md">{{question.difficulty}}</td>
+            <td class="align-top border-t ltr:last:border-r rtl:last:border-l ltr:first:border-l rtl:first:border-r ltr:last:rounded-r-md rtl:last:rounded-l-md ltr:first:rounded-l-md rtl:first:rounded-r-md">
+              <span class="badge" [ngClass]="question.status == 'New' ?  'badge-green ':  'badge-gray'">{{question.status}}</span>
+            </td>
+            <td class="align-top border-t ltr:last:border-r rtl:border-l ltr:first:border-l rtl:first:border-r ltr:last:rounded-r-md rtl:last:rounded-l-md ltr:first:rounded-l-md rtl:first:rounded-r-md">
+              <div class="dropdown">
+                <button type="button" domixDropdownToggle [dropdownMenu]="dropdown1" class="flex items-center text-gray-500">
+                  <i class="ri-more-2-fill"></i>
+                </button>
+                <div #dropdown1 class="!fixed py-2 dropdown-menu">
+                  <ul>
+                    <li>
+                      <a href="javascript: void(0);" (click)="overviewQuestionModal(question)" class="flex items-center px-4 py-1.5 text-gray-500 hover:text-primary-500 text-14 transition duration-300 ease-linear">
+                        <i class="align-middle ltr:mr-2 rtl:ml-2 ri-eye-line"></i>
+                        <span>Overview</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="javascript: void(0);" (click)="openCreateModal(question,index)" class="flex items-center px-4 py-1.5 text-gray-500 hover:text-primary-500 text-14 transition duration-300 ease-linear">
+                        <i class="align-middle ltr:mr-2 rtl:ml-2 ri-pencil-line"></i>
+                        <span>Edit</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="javascript: void(0);" (click)="deleteModal(index)" class="flex items-center px-4 py-1.5 text-gray-500 hover:text-red-500 text-14 transition duration-300 ease-linear">
+                        <i class="align-middle ltr:mr-2 rtl:ml-2 ri-delete-bin-line"></i>
+                        <span>Delete</span>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </td>
+          </tr>
+        </ng-container>
+
+        <ng-container *ngIf="displayedData.length == 0">
+          <td colspan="10" class="!p-8">
+            <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" class="mx-auto size-12" viewBox="0 0 48 48">
+              <linearGradient id="SVGID_1__h35ynqzIJzH4_gr1" x1="34.598" x2="15.982" y1="15.982" y2="34.598" gradientUnits="userSpaceOnUse">
+                <stop offset="0" stop-color="#60e8fe"></stop>
+                <stop offset=".033" stop-color="#6ae9fe"></stop>
+                <stop offset=".197" stop-color="#97f0fe"></stop>
+                <stop offset=".362" stop-color="#bdf5ff"></stop>
+                <stop offset=".525" stop-color="#dafaff"></stop>
+                <stop offset=".687" stop-color="#eefdff"></stop>
+                <stop offset=".846" stop-color="#fbfeff"></stop>
+                <stop offset="1" stop-color="#fff"></stop>
+              </linearGradient>
+              <path fill="url(#SVGID_1__h35ynqzIJzH4_gr1)" d="M40.036,33.826L31.68,25.6c0.847-1.739,1.335-3.684,1.335-5.748c0-7.27-5.894-13.164-13.164-13.164	S6.688,12.582,6.688,19.852c0,7.27,5.894,13.164,13.164,13.164c2.056,0,3.995-0.485,5.728-1.326l3.914,4.015l4.331,4.331	c1.715,1.715,4.496,1.715,6.211,0C41.751,38.321,41.751,35.541,40.036,33.826z">
+              </path>
+              <path fill="none" stroke="#10cfe3" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="3" d="M31.95,25.739l8.086,8.086c1.715,1.715,1.715,4.496,0,6.211l0,0c-1.715,1.715-4.496,1.715-6.211,0	l-4.331-4.331">
+              </path>
+              <path fill="none" stroke="#10cfe3" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="3" d="M7.525,24.511c-1.771-4.694-0.767-10.196,3.011-13.975c3.847-3.847,9.48-4.817,14.228-2.912"></path>
+              <path fill="none" stroke="#10cfe3" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="3" d="M30.856,12.603c3.376,5.114,2.814,12.063-1.688,16.565c-4.858,4.858-12.565,5.129-17.741,0.814"></path>
+            </svg>
+            <p class="mt-2 text-center text-gray-500 dark:text-dark-500">No matching records found</p>
+          </td>
+        </ng-container>
+
+      </table>
+    </div>
+  </div>
+
+</div>

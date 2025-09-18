@@ -1,0 +1,14 @@
+<app-page-title [pageTitle]="'Ui'" [Title]="'Tree'"></app-page-title>
+
+<div class="grid grid-cols-12 gap-x-space">
+    <div class="col-span-12 card">
+        <div class="card-header">
+            <h6 class="card-title">Folder Structure Tree</h6>
+        </div>
+        <div class="card-body">
+            <div class="-mx-5">
+                <app-file-tree [levels]="fileTreeData"></app-file-tree>
+            </div>
+        </div>
+    </div>
+</div>

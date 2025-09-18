@@ -1,0 +1,59 @@
+<div id="leadCreateModal" class="modal">
+  <div class="modal-wrap modal-center">
+    <div class="p-2 modal-content">
+      <div class="h-24 p-5 rounded-t-sm bg-gradient-to-r from-primary-500/20 via-pink-500/20 to-green-500/20">
+      </div>
+      <div class="p-4">
+
+        <div class="-mt-16">
+          <label for="logo">
+            <div
+              class="inline-flex items-center justify-center overflow-hidden bg-gray-100 border-2 border-white border-solid rounded-full cursor-pointer dark:border-dark-900 dark:bg-dark-850 size-24">
+              <img x-show="contactForm.image" :src="contactForm.image" class="object-cover w-full h-full rounded-full">
+              <div x-show="!contactForm.image" class="flex flex-col items-center text-gray-500 dark:text-dark-500">
+                <lucide-angular name="Upload"></lucide-angular>
+              </div>
+            </div>
+          </label>
+          <div class="hidden mt-4">
+            <label class="block">
+              <span class="sr-only">Choose profile photo</span>
+              <input type="file" name="logo" id="logo"
+                class="block w-full text-sm file:rounded-md focus:outline-0 text-slate-500 file:mr-4 file:py-2 file:px-4 file:border-0 file:text-sm file:font-semibold file:bg-violet-50 file:text-violet-700 hover:file:bg-violet-100 " />
+            </label>
+          </div>
+        </div>
+        <div class="grid grid-cols-12 gap-4 mt-5">
+          <div class="col-span-12">
+            <label for="fullNameInput" class="form-label">Full Name</label>
+            <input type="text" id="fullNameInput" class="form-input" placeholder="Full name">
+          </div>
+
+          <div class="col-span-12">
+            <label for="emailInput" class="form-label">Email</label>
+            <input type="email" id="emailInput" class="form-input" placeholder="support@SRBThemes.com">
+          </div>
+          <div class="col-span-12">
+            <label for="phoneNumberInput" class="form-label">Phone Number</label>
+            <input type="tel" id="phoneNumberInput" class="form-input" placeholder="+(00) 0000 000">
+          </div>
+
+          <div class="col-span-6">
+            <label for="statusSelect2" class="form-label">Status</label>
+            <div id="statusSelect2" x-model="contactForm.status"></div>
+            <span x-show="errors.status" class="text-red-500"></span>
+          </div>
+          <div class="flex items-center justify-end col-span-12 gap-2 mt-5">
+            <button type="button" class="btn btn-active-red" data-modal-close="contactCreateModal">
+              <lucide-angular name="x" class="inline-block size-4"></lucide-angular> <span
+                class="align-baseline">Close</span>
+            </button>
+            <button type="button" class="btn btn-primary">
+              <lucide-angular name="Plus" class="inline-block ltr:mr-1 rtl:ml-1 size-4"></lucide-angular>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

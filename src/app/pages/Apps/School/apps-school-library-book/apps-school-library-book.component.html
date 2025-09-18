@@ -1,0 +1,95 @@
+<app-page-title [Title]="'Book Library'" [pageTitle]="'School'"></app-page-title>
+
+<div>
+  <div class="grid grid-cols-12 gap-space mb-space">
+    <div class="col-span-12 md:col-span-4 xl:col-span-3">
+      <div class="relative flex items-center">
+        <input type="text" class="ltr:rounded-r-none rtl:rounded-l-none ltr:border-r-0 rtl:border-l-0 form-input grow" placeholder="Search for ..." [(ngModel)]="searchTerm" />
+        <button type="button" title="search-button" class="border-gray-200 ltr:rounded-l-none rtl:rounded-r-none btn btn-sub-gray btn-icon shrink-0">
+          <lucide-angular name="search" class="size-5"></lucide-angular>
+        </button>
+      </div>
+    </div>
+    <div class="col-span-12 md:col-span-3 2xl:col-span-2 2xl:col-start-9">
+      <div id="sortBySelect" placeholder="Sort By"></div>
+
+      <ng-select class="filter-ng-select" [items]="categories" bindLabel="label" bindValue="value" [(ngModel)]="selectedCategory" placeholder="Select a category" (change)="catgoryChange()" (clear)="resetFilters()">
+      </ng-select>
+    </div>
+    <div class="col-span-12 md:col-span-3 2xl:col-span-2">
+      <button type="button" class="w-full btn btn-primary" (click)="openAddBookModal()">
+        <lucide-angular name="circle-plus" class="inline-block ltr:mr-1 rtl:ml-1 size-4"></lucide-angular>
+        Add Book
+      </button>
+    </div>
+  </div>
+  <div class="grid grid-cols-12 gap-x-space">
+    <ng-container *ngIf="displayedData.length > 0">
+      <ng-container *ngFor="let book of displayedData; let i = index">
+        <div class="col-span-12 md:col-span-6 xl:col-span-4 2xl:col-span-3 card">
+          <div class="flex items-center gap-3 card-body">
+            <img [src]="book.image" alt="{{ book.title }}" class="h-40 rounded-md shrink-0">
+            <div class="overflow-hidden grow">
+              <h6 class="mb-1 truncate">
+                <a href="javascript: void(0);" (click)="openBookOverviewModal(i)" class="text-current link link-primary">
+                  {{ book.title }}
+                </a>
+              </h6>
+              <p class="mb-2 text-gray-500 dark:text-dark-500">
+                By <a href="javascript:void(0);" class="underline link link-green">{{ book.author }}</a>
+              </p>
+              <div class="text-yellow-500 flex gap-1.5 mb-2">
+                <ng-container *ngFor="let _ of getFullStars(book.rating); let i = index">
+                  <i class="ri-star-fill"></i>
+                </ng-container>
+                <ng-container *ngIf="hasHalfStar(book.rating)">
+                  <i class="ri-star-half-fill"></i>
+                </ng-container>
+                <ng-container *ngFor="let _ of getEmptyStars(book.rating); let i = index">
+                  <i class="ri-star-line"></i>
+                </ng-container>
+                <span class="text-gray-800 dark:text-dark-50">
+                  ({{ book.reviewCount }})
+                </span>
+              </div>
+              <h5 class="mb-2">
+                {{ book.price | currency }}
+              </h5>
+              <button type="button" class="w-full btn btn-sub-red">Buy Now</button>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+    </ng-container>
+  </div>
+  <ng-container *ngIf="allBook.length == 0">
+    <div colspan="10" class="!p-8">
+      <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" class="mx-auto size-12" viewBox="0 0 48 48">
+        <linearGradient id="SVGID_1__h35ynqzIJzH4_gr1" x1="34.598" x2="15.982" y1="15.982" y2="34.598" gradientUnits="userSpaceOnUse">
+          <stop offset="0" stop-color="#60e8fe"></stop>
+          <stop offset=".033" stop-color="#6ae9fe"></stop>
+          <stop offset=".197" stop-color="#97f0fe"></stop>
+          <stop offset=".362" stop-color="#bdf5ff"></stop>
+          <stop offset=".525" stop-color="#dafaff"></stop>
+          <stop offset=".687" stop-color="#eefdff"></stop>
+          <stop offset=".846" stop-color="#fbfeff"></stop>
+          <stop offset="1" stop-color="#fff"></stop>
+        </linearGradient>
+        <path fill="url(#SVGID_1__h35ynqzIJzH4_gr1)" d="M40.036,33.826L31.68,25.6c0.847-1.739,1.335-3.684,1.335-5.748c0-7.27-5.894-13.164-13.164-13.164	S6.688,12.582,6.688,19.852c0,7.27,5.894,13.164,13.164,13.164c2.056,0,3.995-0.485,5.728-1.326l3.914,4.015l4.331,4.331	c1.715,1.715,4.496,1.715,6.211,0C41.751,38.321,41.751,35.541,40.036,33.826z">
+        </path>
+        <path fill="none" stroke="#10cfe3" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="3" d="M31.95,25.739l8.086,8.086c1.715,1.715,1.715,4.496,0,6.211l0,0c-1.715,1.715-4.496,1.715-6.211,0	l-4.331-4.331">
+        </path>
+        <path fill="none" stroke="#10cfe3" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="3" d="M7.525,24.511c-1.771-4.694-0.767-10.196,3.011-13.975c3.847-3.847,9.48-4.817,14.228-2.912">
+        </path>
+        <path fill="none" stroke="#10cfe3" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="3" d="M30.856,12.603c3.376,5.114,2.814,12.063-1.688,16.565c-4.858,4.858-12.565,5.129-17.741,0.814"></path>
+      </svg>
+      <p class="mt-2 text-center text-gray-500 dark:text-dark-500">No matching records found</p>
+    </div>
+  </ng-container>
+
+
+  <app-domix-pagination [currentPage]="currentPage" [totalPages]="totalPages" [showingStart]="showingStart" [showingEnd]="showingEnd" [totalResults]="gridData.length" (pageChanged)="onPageChange($event)">
+  </app-domix-pagination>
+
+
+</div>

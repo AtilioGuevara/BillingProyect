@@ -1,0 +1,270 @@
+<div class="relative mb-6">
+  <div class="relative overflow-hidden rounded-md h-44 bg-primary-500/10">
+    <div class="border-[60px] border-t-primary-500 border-l-primary-500 absolute opacity-10 -top-2 left-0 rotate-45 size-96">
+    </div>
+    <div class="border-[60px] border-green-500 absolute opacity-10 top-20 left-8 rotate-45 size-80"></div>
+    <div class="border-[60px] border-pink-500 absolute opacity-10 top-36 left-28 rotate-45 size-40"></div>
+  </div>
+  <div class="text-center">
+    <div class="relative inline-block mx-auto">
+      <div class="relative p-1 rounded-full bg-gradient-to-tr from-primary-300 via-red-300 to-green-300 -mt-14">
+        <img src="assets/images/avatar/user-17.png" alt="" class="mx-auto border-4 border-white rounded-full dark:border-dark-900 size-28">
+      </div>
+      <div class="absolute border-2 border-white dark:border-dark-900 rounded-full size-4 bg-green-500 bottom-2.5 ltr:right-2.5 rtl:left-2.5">
+      </div>
+    </div>
+    <h5 class="mt-2 mb-1">Sophia Mia
+      <lucide-angular name="BadgeCheck" class="inline-block text-primary-500 fill-primary-500/20 size-5">
+      </lucide-angular>
+    </h5>
+    <ul class="flex flex-wrap items-center justify-center gap-2 text-gray-500 dark:text-dark-500 text-14">
+      <li>
+        <lucide-angular name="Building2" class="inline-block ltr:mr-1 rtl:ml-1 size-4"></lucide-angular> <span class="align-middle">UI /
+          UX Designer</span>
+      </li>
+      <li>
+        <lucide-angular name="MapPin" class="inline-block ltr:mr-1 rtl:ml-1 size-4"></lucide-angular> <span class="align-middle">Argentina</span>
+      </li>
+      <li>
+        <lucide-angular name="CalendarDays" class="inline-block ltr:mr-1 rtl:ml-1 size-4"></lucide-angular> <span class="align-middle">24 April, 2024</span>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<ul class="pb-2 overflow-x-auto tabs-pills lg:pb-0">
+  <li>
+    <a routerLink="/pages-user" class="cursor-pointer nav-item text-gray-500 dark:text-dark-500 [&.active]:bg-primary-500 [&.active]:text-primary-50 ">
+      <lucide-angular name="Eye" class="inline-block ltr:mr-2 rtl:ml-2 size-4"></lucide-angular> <span class="align-middle whitespace-nowrap">Overview</span>
+    </a>
+  </li>
+  <li>
+    <a routerLink="/pages-user-activity" class="cursor-pointer nav-item text-gray-500 dark:text-dark-500 [&.active]:bg-primary-500 [&.active]:text-primary-50 ">
+      <lucide-angular name="sparkles" class="inline-block ltr:mr-2 rtl:ml-2 size-4"></lucide-angular> <span class="align-middle whitespace-nowrap">Activity</span>
+    </a>
+  </li>
+  <li>
+    <a routerLink="/pages-user-followers" class="cursor-pointer nav-item text-gray-500 dark:text-dark-500 [&.active]:bg-primary-500 [&.active]:text-primary-50">
+      <lucide-angular name="UserRound" class="inline-block ltr:mr-2 rtl:ml-2 size-4"></lucide-angular> <span class="align-middle whitespace-nowrap">Followers</span>
+    </a>
+  </li>
+  <li>
+    <a routerLink="/pages-user-documents" class="cursor-pointer nav-item text-gray-500 dark:text-dark-500 [&.active]:bg-primary-500 [&.active]:text-primary-50 active">
+      <lucide-angular name="FileText" class="inline-block ltr:mr-2 rtl:ml-2 size-4"></lucide-angular> <span class="align-middle whitespace-nowrap">Documents</span>
+    </a>
+  </li>
+  <li>
+    <a routerLink="/pages-user-notes" class="cursor-pointer nav-item text-gray-500 dark:text-dark-500 [&.active]:bg-primary-500 [&.active]:text-primary-50">
+      <lucide-angular name="list" class="inline-block ltr:mr-2 rtl:ml-2 size-4"></lucide-angular> <span class="align-middle whitespace-nowrap">Notes</span>
+    </a>
+  </li>
+  <li>
+    <a routerLink="/pages-user-projects" class="cursor-pointer nav-item text-gray-500 dark:text-dark-500 [&.active]:bg-primary-500 [&.active]:text-primary-50">
+      <lucide-angular name="monitor" class="inline-block ltr:mr-2 rtl:ml-2 size-4"></lucide-angular> <span class="align-middle whitespace-nowrap">Projects</span>
+    </a>
+  </li>
+</ul>
+
+<div class="mt-4">
+  <div class="flex items-center gap-5">
+    <h5 class="text-16 grow">Documents</h5>
+    <div class="shrink-0">
+      <div class="dropdown">
+        <button domixDropdownToggle [dropdownMenu]="dropdown1" type="button" class="btn btn-sub-gray">
+          <lucide-angular name="SlidersHorizontal" class="inline-block mr-1 size-4"></lucide-angular> <span class="align-middle whitespace-nowrap">Filter</span>
+        </button>
+
+        <div class="p-4 !w-80 dropdown-menu dropdown-right" #dropdown1>
+
+          <h6 class="mb-4">Filter Options</h6>
+
+          <form action="javascript: void(0);">
+            <p class="mb-2 text-sm font-medium">Member Type:</p>
+
+            <div class="grid grid-cols-2 gap-4">
+              <div class="input-check-group">
+                <input id="memaberType1" class="input-check input-check-primary" type="checkbox">
+                <label for="memaberType1" class="input-check-label">Author</label>
+              </div>
+              <div class="input-check-group">
+                <input id="memaberType2" class="input-check input-check-primary" type="checkbox">
+                <label for="memaberType2" class="input-check-label">Customer</label>
+              </div>
+              <div class="col-span-2">
+                <p class="mb-2 text-sm font-medium">Files Type:</p>
+                <div id="multipleSelect"></div>
+              </div>
+            </div>
+
+            <div class="flex items-center justify-end gap-2 mt-4">
+              <button type="reset" class="btn-xs btn btn-sub-gray">
+                Reset
+              </button>
+              <button type="submit" class="btn-xs btn btn-primary">
+                Apply
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid grid-cols-1 mt-4 sm:grid-cols-2 md:grid-cols-3 2xl:grid-cols-5 gap-x-5">
+    <div class="relative card">
+      <div class="card-body">
+
+        <lucide-angular name="FolderClosed" class="text-indigo-500 stroke-1 size-8 fill-indigo-500/10">
+        </lucide-angular>
+        <h6 class="mt-4 mb-1"><a href="javascript:void(0);" class="before:inset-0 before:absolute before:content-['']">Projects 2024</a>
+        </h6>
+        <p class="text-gray-500 dark:text-dark-500">23 Files - 128 MB</p>
+      </div>
+    </div>
+
+    <div class="relative card">
+      <div class="card-body">
+
+        <lucide-angular name="FolderClosed" class="text-indigo-500 stroke-1 size-8 fill-indigo-500/10">
+        </lucide-angular>
+        <h6 class="mt-4 mb-1"><a href="javascript:void(0);" class="before:inset-0 before:absolute before:content-['']">All Contact</a>
+        </h6>
+        <p class="text-gray-500 dark:text-dark-500">49 Files - 27 MB</p>
+      </div>
+    </div>
+
+    <div class="relative card">
+      <div class="card-body">
+
+        <lucide-angular name="FolderClosed" class="text-indigo-500 stroke-1 size-8 fill-indigo-500/10">
+        </lucide-angular>
+        <h6 class="mt-4 mb-1"><a href="javascript: void(0);" class="before:inset-0 before:absolute before:content-['']">Marketing
+            Analysis</a></h6>
+        <p class="text-gray-500 dark:text-dark-500">3 Files - 5.65 MB</p>
+      </div>
+    </div>
+
+    <div class="relative card">
+      <div class="card-body">
+
+        <lucide-angular name="FolderClosed" class="text-indigo-500 stroke-1 size-8 fill-indigo-500/10">
+        </lucide-angular>
+        <h6 class="mt-4 mb-1"><a href="javascript:void(0);" class="before:inset-0 before:absolute before:content-['']">Images & Video</a>
+        </h6>
+        <p class="text-gray-500 dark:text-dark-500">163 Files - 0.9 GB</p>
+      </div>
+    </div>
+
+    <div class="relative card">
+      <div class="card-body">
+
+        <lucide-angular name="FolderClosed" class="text-indigo-500 stroke-1 size-8 fill-indigo-500/10">
+        </lucide-angular>
+        <h6 class="mt-4 mb-1"><a href="javascript:void(0);" class="before:inset-0 before:absolute before:content-['']">Application</a>
+        </h6>
+        <p class="text-gray-500 dark:text-dark-500">149 Files - 68.83 GB</p>
+      </div>
+    </div>
+
+  </div>
+
+
+  <h5 class="text-16">Files</h5>
+
+  <div class="grid grid-cols-1 mt-4 sm:grid-cols-2 md:grid-cols-3 2xl:grid-cols-5 gap-x-5">
+    <div class="relative card">
+      <div class="card-body">
+        <lucide-angular name="file" class="stroke-1 text-sky-500 size-8 fill-sky-500/10"></lucide-angular>
+        <h6 class="mt-4 mb-1"><a href="javascript:void(0);" class="before:inset-0 before:absolute before:content-['']">tailwind.config.js</a></h6>
+        <p class="text-gray-500 dark:text-dark-500">4 KB</p>
+      </div>
+    </div>
+
+    <div class="relative card">
+      <div class="card-body">
+        <lucide-angular name="file" class="stroke-1 text-sky-500 size-8 fill-sky-500/10"></lucide-angular>
+        <h6 class="mt-4 mb-1"><a href="javascript:void(0);" class="before:inset-0 before:absolute before:content-['']">package.json</a>
+        </h6>
+        <p class="text-gray-500 dark:text-dark-500">2 kb</p>
+      </div>
+    </div>
+
+    <div class="relative card">
+      <div class="card-body">
+        <lucide-angular name="file" class="stroke-1 text-sky-500 size-8 fill-sky-500/10"></lucide-angular>
+        <h6 class="mt-4 mb-1"><a href="javascript:void(0);" class="before:inset-0 before:absolute before:content-['']">vite.config.js</a>
+        </h6>
+        <p class="text-gray-500 dark:text-dark-500">5 KB</p>
+      </div>
+    </div>
+
+    <div class="relative card">
+      <div class="card-body">
+        <lucide-angular name="file" class="stroke-1 text-sky-500 size-8 fill-sky-500/10"></lucide-angular>
+        <h6 class="mt-4 mb-1"><a href="javascript:void(0);" class="before:inset-0 before:absolute before:content-['']">tailwind.scss</a>
+        </h6>
+        <p class="text-gray-500 dark:text-dark-500">5 KB</p>
+      </div>
+    </div>
+
+    <div class="relative card">
+      <div class="card-body">
+        <lucide-angular name="file" class="stroke-1 text-sky-500 size-8 fill-sky-500/10"></lucide-angular>
+        <h6 class="mt-4 mb-1"><a href="javascript:void(0);" class="before:inset-0 before:absolute before:content-['']">index.html</a>
+        </h6>
+        <p class="text-gray-500 dark:text-dark-500">129 kb</p>
+      </div>
+    </div>
+
+  </div>
+
+
+  <h5 class="text-16">Images & Video</h5>
+
+  <div class="grid grid-cols-1 mt-4 sm:grid-cols-2 md:grid-cols-3 2xl:grid-cols-5 gap-x-5">
+    <div class="relative card">
+      <div class="card-body">
+        <img src="assets/images/gallery/img-01.jpg" alt="" class="object-cover rounded-md shadow-lg aspect-video shadow-primary-500/10">
+        <h6 class="mt-4 mb-1 truncate"><a href="javascript: void(0);" class="before:inset-0 before:absolute before:content-['']">Adventure
+            is a form of self care</a></h6>
+        <p class="text-gray-500 dark:text-dark-500">15.6 KB</p>
+      </div>
+    </div>
+
+    <div class="relative card">
+      <div class="card-body">
+        <iframe class="object-cover w-full rounded-md shadow-lg aspect-video shadow-primary-500/10" src="https://www.youtube.com/embed/eSzNNYk7nVU?si=EHJjJ8BjAsp6yMgx" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        <h6 class="mt-4 mb-1 truncate">Rebuilding iOS 15 with Tailwind CSS</h6>
+        <p class="text-gray-500 dark:text-dark-500">23.98 MB</p>
+      </div>
+    </div>
+
+    <div class="relative card">
+      <div class="card-body">
+        <iframe class="object-cover w-full rounded-md shadow-lg aspect-video shadow-primary-500/10" src="https://www.youtube.com/embed/Tmkr2kKUEgU?si=g6q_jn3gzqxK_CMj" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        <h6 class="mt-4 mb-1 truncate">Building Blurry, Animated Background Shapes with Tailwind CSS</h6>
+        <p class="text-gray-500 dark:text-dark-500">46.32 MB</p>
+      </div>
+    </div>
+
+    <div class="relative card">
+      <div class="card-body">
+        <img src="assets/images/gallery/img-02.jpg" alt="" class="object-cover rounded-md shadow-lg aspect-video shadow-primary-500/10">
+        <h6 class="mt-4 mb-1 truncate"><a href="javascript: void(0);" class="before:inset-0 before:absolute before:content-['']">Cuteness
+            in every bloom</a></h6>
+        <p class="text-gray-500 dark:text-dark-500">1.97 KB</p>
+      </div>
+    </div>
+
+    <div class="relative card">
+      <div class="card-body">
+        <img src="assets/images/gallery/img-03.jpg" alt="" class="object-cover rounded-md shadow-lg aspect-video shadow-primary-500/10">
+        <h6 class="mt-4 mb-1 truncate"><a href="javascript: void(0);" class="before:inset-0 before:absolute before:content-['']">Finding
+            paradise wherever I go</a></h6>
+        <p class="text-gray-500 dark:text-dark-500">0.587 KB</p>
+      </div>
+    </div>
+
+  </div>
+
+</div>

@@ -1,0 +1,31 @@
+<div class="relative flex items-center justify-center min-h-screen py-12 bg-center bg-cover bg-auth">
+  <div class="absolute inset-0 bg-gray-950/50"></div>
+  <div class="container relative">
+    <div class="grid grid-cols-12">
+      <div class="col-span-12 mb-0 border-none shadow-none md:col-span-10 lg:col-span-6 xl:col-span-4 md:col-start-2 lg:col-start-4 xl:col-start-5 card bg-white/10 backdrop-blur-md">
+        <div class="p-10 card-body">
+          <div class="mb-4 text-center">
+            <div class="flex items-center justify-center mx-auto size-14">
+              <lucide-angular name="MailOpen" class="stroke-1 text-white/75 size-10 fill-white/20"></lucide-angular>
+            </div>
+          </div>
+          <h4 class="mb-2 leading-relaxed text-center text-white">OTP Verification</h4>
+          <p class="mb-5 text-center text-white/75">We're sent a code to <b>sophiamia&#64;srbthemes.com</b></p>
+          <form [formGroup]="otpForm" (ngSubmit)="onSubmit()">
+            <div class="flex flex-wrap items-center justify-center gap-3">
+              <input type="text" class="text-2xl font-extrabold text-center text-white border border-transparent rounded-sm outline-hidden appearance-none size-9 sm:size-12 md:size-14 bg-white/10 focus:bg-white/10" formControlName="otp1" maxlength="1" (input)="moveFocus($event, 1)" />
+              <input type="text" class="text-2xl font-extrabold text-center text-white border border-transparent rounded-sm outline-hidden appearance-none size-9 sm:size-12 md:size-14 bg-white/10 focus:bg-white/10" formControlName="otp2" maxlength="1" (input)="moveFocus($event, 2)" />
+              <input type="text" class="text-2xl font-extrabold text-center text-white border border-transparent rounded-sm outline-hidden appearance-none size-9 sm:size-12 md:size-14 bg-white/10 focus:bg-white/10" formControlName="otp3" maxlength="1" (input)="moveFocus($event, 3)" />
+              <input type="text" class="text-2xl font-extrabold text-center text-white border border-transparent rounded-sm outline-hidden appearance-none size-9 sm:size-12 md:size-14 bg-white/10 focus:bg-white/10" formControlName="otp4" maxlength="1" (input)="moveFocus($event, 4)" />
+              <input type="text" class="text-2xl font-extrabold text-center text-white border border-transparent rounded-sm outline-hidden appearance-none size-9 sm:size-12 md:size-14 bg-white/10 focus:bg-white/10" formControlName="otp5" maxlength="1" (input)="moveFocus($event, 5)" />
+              <input type="text" class="text-2xl font-extrabold text-center text-white border border-transparent rounded-sm outline-hidden appearance-none size-9 sm:size-12 md:size-14 bg-white/10 focus:bg-white/10" formControlName="otp6" maxlength="1" (input)="moveFocus($event, 6)" />
+            </div>
+            <div class="mt-5">
+              <button type="submit" class="w-full btn btn-primary">Reset Password</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,53 @@
+<div id="messageModal" class="modal">
+  <div class="modal-wrap modal-sm modal-br">
+    <div class="modal-content">
+      <div class="flex items-center gap-2 p-2 bg-gray-100 rounded-md dark:bg-dark-850">
+        <button data-modal-close="messageModal" class="p-0 text-gray-500 dark:text-dark-500 btn btn-icon-text size-10 hover:text-gray-800 dark:hover:text-dark-50 shrink-0">
+          <lucide-angular name="ChevronLeft"></lucide-angular>
+        </button>
+        <img [src]="config.userImage" alt="" class="rounded-full size-10">
+        <div class="grow">
+          <h6>Sophia Mia</h6>
+          <p class="text-xs text-gray-500 dark:text-dark-500"> {{config.status}}<span class="inline-block bg-green-500 size-1.5 rounded-full ltr:mr-0.5 rtl:ml-0.5 align-middle"></span>
+            Active</p>
+        </div>
+        <button type="button" data-modal-close="messageModal" data-modal-target="callModal" class="p-0 btn btn-sub-red shrink-0 btn-icon-text size-10">
+          <lucide-angular name="Phone" class="size-5"></lucide-angular>
+        </button>
+      </div>
+
+      <ngx-simplebar class="px-5 mt-4 -mx-5 min-h-72 max-h-72">
+        <div>
+          <div class="flex flex-col gap-3">
+            <ng-container *ngFor="let message of config.messages">
+              <div>
+                <div class="flex gap-2 group [&.right]:justify-end">
+                  <div class="rounded-full size-9 group-[&.right]:order-2">
+                    <img [src]="config.userImage" alt="" class="rounded-full">
+                  </div>
+                  <div class="py-2 px-3 text-sm font-medium rounded-md bg-gray-100 dark:bg-dark-850 max-w-64 text-gray-500 dark:text-dark-500 ltr:rounded-bl-none rtl:rounded-br-none group-[&.right]:bg-primary-100 group-[&.right]:text-primary-500 group-[&.right]:order-1 ltr:group-[&.right]:rounded-br-none rtl:group-[&.right]:rounded-bl-none ltr:group-[&.right]:rounded-bl-md rtl:group-[&.right]:rounded-br-md">{{message.text}}
+                  </div>
+                </div>
+                <div class="flex gap-2 right group [&.right]:justify-end">
+                  <div class="rounded-full size-9 group-[&.right]:order-2">
+                    <img src="assets/images/avatar/user-14.png" alt="" class="rounded-full">
+                  </div>
+                  <div class="py-2 px-3 text-sm font-medium rounded-md bg-gray-100 dark:bg-dark-850 max-w-64 text-gray-500 dark:text-dark-500 ltr:rounded-bl-none rtl:rounded-br-none group-[&.right]:bg-primary-100 group-[&.right]:text-primary-500 group-[&.right]:order-1 ltr:group-[&.right]:rounded-br-none rtl:group-[&.right]:rounded-bl-none ltr:group-[&.right]:rounded-bl-md rtl:group-[&.right]:rounded-br-md">{{message.text}}
+                  </div>
+                </div>
+              </div>
+            </ng-container>
+          </div>
+        </div>
+      </ngx-simplebar>
+      <div class="relative flex mt-4">
+        <input type="text" placeholder="Say something..." x-model="newMessage" autocomplete="off" autofocus="true" class="ltr:pr-12 rtl:pl-12 form-input" x-ref="input" />
+        <div class="absolute inset-y-0 items-center hidden ltr:right-1 rtl:left-1 sm:flex">
+          <button type="button" class="inline-flex items-center justify-center text-white transition duration-200 ease-in-out rounded-md size-8 bg-primary-500 hover:bg-primary-600 focus:outline-hidden">
+            <lucide-angular name="SendHorizontal" class="size-4"></lucide-angular>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

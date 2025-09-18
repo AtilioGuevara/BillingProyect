@@ -1,0 +1,67 @@
+<app-page-title [pageTitle]="'Staff'" [Title]="'List View'"></app-page-title>
+
+<div class="grid grid-cols-12 gap-x-space">
+  <div class="col-span-12 card">
+    <div class="flex items-center gap-3 card-header">
+      <h6 class="card-title grow">Staff List</h6>
+      <button type="button" class="btn btn-primary shrink-0" (click)="openCreateModal(null, null)">
+        <lucide-angular name="CirclePlus" class="inline-block mr-1 size-4"></lucide-angular> Add
+        Staff
+      </button>
+    </div>
+    <div class="pt-0 card-body">
+      <div>
+        <div class="overflow-x-auto table-box whitespace-nowrap">
+          <table class="table flush">
+            <tbody>
+              <tr class="text-gray-500 bg-gray-100 dark:bg-dark-850 dark:text-dark-500">
+                <th *ngFor="let col of columnDefs" class="!font-medium cursor-pointer">
+                  <div class="flex items-center gap-space">
+                    <div (click)="onSortChange(col)">
+                      {{col.headerName}} <span *ngIf="col.sortable">
+                        {{ col.sortDiraction === 'asc' ? '↑' : '↓' }}</span>
+                    </div>
+                  </div>
+                </th>
+              </tr>
+              <ng-container *ngIf="displayedData.length > 0">
+                <ng-container *ngFor="let staff of displayedData; let i = index">
+                  <tr class="*:px-3 *:py-2.5">
+                    <td>{{staff.staffID}}</td>
+                    <td>
+                      <div class="flex items-center gap-3">
+                        <div class="relative text-gray-500 bg-gray-100 rounded-full dark:text-dark-500 dark:bg-dark-850 size-10">
+                          <img *ngIf="staff.image" [src]="staff.image" alt="" class="rounded-full">
+                          <span *ngIf="!staff.image" class="absolute inset-0 flex items-center justify-center text-xs font-semibold text-gray-500 bg-gray-100 rounded-full dark:text-dark-500 dark:bg-dark-850">
+                            {{ generateAvatarText(staff.name) }}
+                          </span>
+                        </div>
+                        <div>
+                          <h6 class="mb-1"><a href="javascript:void(0);">{{staff.name}}</a></h6>
+                          <p class="text-sm text-gray-500 dark:text-dark-500">{{staff.role}}</p>
+                        </div>
+                      </div>
+                    </td>
+                    <td>{{staff.department}}</td>
+                    <td>{{staff.email}}</td>
+                    <td>{{staff.phone}}</td>
+                    <td>{{staff.date}}</td>
+                    <td>
+                      <div class="flex items-center gap-2">
+                        <button class="btn btn-sub-gray btn-icon !size-8 rounded-md" title="edit" (click)="openCreateModal(staff,i)"><i class="ri-pencil-line"></i></button>
+                        <button class="btn btn-sub-red btn-icon !size-8 rounded-md" title="delete" (click)="deleteModal(i)"><i class="ri-delete-bin-line"></i></button>
+                      </div>
+                    </td>
+                  </tr>
+                </ng-container>
+              </ng-container>
+            </tbody>
+          </table>
+        </div>
+
+        <app-domix-pagination [currentPage]="currentPage" [totalPages]="totalPages" [showingStart]="showingStart" [showingEnd]="showingEnd" [totalResults]="displayedData.length" (pageChanged)="onPageChange($event)">
+        </app-domix-pagination>
+      </div>
+    </div>
+  </div>
+</div>

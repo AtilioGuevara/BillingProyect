@@ -1,0 +1,90 @@
+<app-page-title [pageTitle]="'Ui'" [Title]="'Gallery'"></app-page-title>
+
+<div class="grid grid-cols-12 gap-x-space">
+    <div class="col-span-12 card">
+        <div class="card-header">
+            <h6 class="card-title">Basic Gallery</h6>
+        </div>
+        <div class="card-body">
+            <div class="grid grid-cols-12 gap-5">
+                <div class="col-span-12 sm:col-span-6 lg:col-span-4">
+                    <div class="relative overflow-hidden rounded-md group/item h-80">
+                        <img src="assets/images/gallery/img-01.jpg" alt="" class="object-cover w-full h-full transition duration-[8s] ease-effect group-hover/item:scale-125">
+                        <div class="absolute inset-0 flex items-end p-5 text-white bg-gradient-to-t from-gray-900/50">
+                            <div>
+                                <h5 class="mb-1">Gallery Title</h5>
+                                <p class="text-white/75">Subtitle</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-span-12 sm:col-span-6 lg:col-span-8">
+                    <div class="relative overflow-hidden rounded-md h-80 group/item">
+                        <img src="assets/images/gallery/long/img-02.jpg" alt="" class="object-cover w-full h-full transition duration-[8s] ease-effect group-hover/item:scale-125">
+                        <div class="absolute inset-0 flex items-end p-5 text-white bg-gradient-to-t from-gray-900/50">
+                            <div>
+                                <h5 class="mb-1">Gallery Title</h5>
+                                <p class="text-white/75">Subtitle</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-span-12 sm:col-span-6 lg:col-span-4 xl:col-span-6">
+                    <div class="relative overflow-hidden rounded-md h-80 group/item">
+                        <img src="assets/images/gallery/long/img-03.jpg" alt="" class="object-cover w-full h-full transition duration-[8s] ease-effect group-hover/item:scale-125">
+                        <div class="absolute inset-0 flex items-end p-5 text-white bg-gradient-to-t from-gray-900/50">
+                            <div>
+                                <h5 class="mb-1">Gallery Title</h5>
+                                <p class="text-white/75">Subtitle</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-span-12 sm:col-span-6 lg:col-span-4 xl:col-span-3">
+                    <div class="relative overflow-hidden rounded-md group/item h-80">
+                        <img src="assets/images/gallery/img-05.jpg" alt="" class="object-cover w-full h-full transition duration-[8s] ease-effect group-hover/item:scale-125">
+                        <div class="absolute inset-0 flex items-end p-5 text-white bg-gradient-to-t from-gray-900/50">
+                            <div>
+                                <h5 class="mb-1">Gallery Title</h5>
+                                <p class="text-white/75">Subtitle</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-span-12 sm:col-span-6 lg:col-span-4 xl:col-span-3">
+                    <div class="relative overflow-hidden rounded-md group/item h-80">
+                        <img src="assets/images/gallery/img-06.jpg" alt="" class="object-cover w-full h-full transition duration-[8s] ease-effect group-hover/item:scale-125">
+                        <div class="absolute inset-0 flex items-end p-5 text-white bg-gradient-to-t from-gray-900/50">
+                            <div>
+                                <h5 class="mb-1">Gallery Title</h5>
+                                <p class="text-white/75">Subtitle</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-span-12 card">
+        <div class="card-header">
+            <h6 class="card-title">Masonry With Lightbox Gallery</h6>
+        </div>
+        <div class="card-body">
+            <div *ngIf="isOpen" class="fixed inset-0 flex items-center justify-center bg-gray-900/60 z-[1050]" (click)="closeLightbox()">
+                <div class="relative max-w-3xl mx-auto overflow-y-auto">
+                    <!-- Close Button -->
+                    <button (click)="closeLightbox()" class="absolute top-0 right-0 p-1.5 m-4 text-white rounded-full bg-gray-900 hover:text-red-500 transition ease-linear duration-200">
+                        <span class="lucide-x">X</span>
+                    </button>
+                    <!-- Image -->
+                    <img [src]="imageSrc" alt="" class="object-contain rounded-sm">
+                </div>
+            </div>
+            <ul class="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+                <li class="h-64" *ngFor="let img of images">
+                    <img [src]="img.src" alt="" class="object-cover object-center w-full h-full rounded cursor-pointer" (click)="openLightbox(img.src)">
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

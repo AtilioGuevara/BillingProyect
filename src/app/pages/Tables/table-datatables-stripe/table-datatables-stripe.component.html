@@ -1,0 +1,93 @@
+<app-page-title [Title]="'Stripe'" [pageTitle]="'Datatables'"></app-page-title>
+
+<div class="grid grid-cols-12 gap-x-space">
+  <div class="col-span-12 card">
+    <div class="card-header">
+      <h6 class="card-title">Stripe</h6>
+    </div>
+    <div class="card-body">
+      <div class="overflow-x-auto">
+        <div class="flex flex-col gap-5 dt-container dt-tailwindcss">
+          <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
+            <div class="justify-self-center md:justify-self-start">
+              <div class="dt-length">
+                <select name="example_length" aria-controls="example"
+                  class="inline-block w-auto form-select ltr:mr-2 rtl:ml-2" [(ngModel)]="itemsPerPage1"
+                  id="dt-length-0">
+                  <option *ngFor="let option of entriesOptions" [value]="option">{{ option }}</option>
+                </select>
+                <label for="dt-length-0"> entries per page</label>
+              </div>
+            </div>
+
+            <div class="md:col-start-2 justify-self-center md:justify-self-end">
+              <div class="dt-search">
+                <label for="dt-search-0">Search:</label>
+                  <input type="search" class="inline-block w-auto form-input ltr:ml-2 rtl:mr-2" id="dt-search-0"
+                  placeholder="Search..." (input)="onSearch($event)" aria-controls="example" />
+              </div>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 gap-4">
+            <div class="col-span-2">
+              <table class="table display group even-striped dataTable whitespace-nowrap dtr-inline" style="width:100%">
+                <thead>
+                  <tr>
+                    <th *ngFor="let col of columnDefs"
+                      class="bg-gray-100 ltr:text-left rtl:text-right dark:bg-dark-850 dt-orderable-asc dt-orderable-desc dt-ordering-asc">
+                      <div class="flex items-center gap-space">
+                        <div (click)="onSortChange(col)">
+                          {{col.headerName}} <span *ngIf="col.sortable">
+                            {{ col.sortDiraction === 'asc' ? '↑' : '↓' }}</span>
+                        </div>
+                      </div>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr
+                    *ngFor="let data of displayedData">
+                    <td>{{ data.Name }}</td>
+                    <td>{{ data.Position }}</td>
+                    <td>{{ data.Office }}</td>
+                    <td class="dt-type-numeric">{{ data.Age }}</td>
+                    <td class="dt-type-date">{{ data['Start date'] }}</td>
+                    <td class="dt-type-numeric">{{ data.Salary }}</td>
+                  </tr>
+                </tbody>
+                <tfoot>
+                  <tr>
+                    <th class="ltr:text-left rtl:text-right">
+                      Name
+                    </th>
+                    <th class="ltr:text-left rtl:text-right">
+                      Position
+                    </th>
+                    <th class="ltr:text-left rtl:text-right">
+                      Office
+                    </th>
+                    <th class="ltr:text-left rtl:text-right dt-type-numeric">
+                      Age
+                    </th>
+                    <th class="ltr:text-left rtl:text-right dt-type-date">
+                      Start date
+                    </th>
+                    <th class="ltr:text-left rtl:text-right dt-type-numeric">
+                      Salary
+                    </th>
+                  </tr>
+                </tfoot>
+              </table>
+            </div>
+          </div>
+
+          <app-domix-pagination [currentPage]="currentPage" [totalPages]="totalPages" [showingStart]="showingStart"
+            [showingEnd]="showingEnd" [totalResults]="gridData.length" (pageChanged)="onPageChange($event)">
+          </app-domix-pagination>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

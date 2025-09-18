@@ -1,0 +1,786 @@
+<app-page-title [Title]="'POS (Admin)'" [pageTitle]="'POS'"></app-page-title>
+
+
+<div class="grid grid-cols-12 gap-x-space">
+    <div class="col-span-12 xl:col-span-8 order-1 card pos-widget-card bg-primary-500 border-none text-white relative">
+        <div class="card-body p-8">
+            <div class="max-w-[450px]">
+                <h3 class="mb-2 leading-normal capitalize">Advanced reporting and real-time analytics</h3>
+                <p class="text-white/75 mb-6">Remove all limits on transactions, users, and reporting features</p>
+                <a href="javascript:void(0);" class="btn bg-white text-primary-500">
+                    Unlock Premium ($29/month)
+                    <lucide-angular name="move-right" class="inline-block rtl:hidden size-4 ml-1"></lucide-angular>
+                    <lucide-angular name="move-left"
+                        class="ltr:hidden rtl:inline-block size-4 mr-1"></lucide-angular></a>
+            </div>
+            <img src="assets/images/others/dashboard.png" alt=""
+                class="md:absolute md:top-1/2 md:-translate-y-1/2 ltr:md:right-8 rtl:md:left-8 size-44 animate-spin mt-5 md:m-0 mx-auto">
+        </div>
+    </div>
+    <div class="col-span-12 xl:col-span-4 order-2 card">
+        <div class="card-body">
+            <div class="dropdown float-end">
+                <button title="dropdown-button" domixDropdownToggle [dropdownMenu]="dropdown1" type="button"
+                    class="flex items-center text-gray-500 dark:text-dark-500">
+                    <lucide-angular name="ellipsis" class="size-5"></lucide-angular>
+                </button>
+                <div #dropdown1 class="!fixed p-2 dropdown-menu hidden" dropdown-position="right">
+                    <ul>
+                        <li>
+                            <a href="javascript:void(0);" class="dropdown-item">
+                                <span>Weekly</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0);" class="dropdown-item">
+                                <span>Monthly</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0);" class="dropdown-item">
+                                <span>Yearly</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <h6 class="card-title mb-1">Point of Sale</h6>
+            <p class="text-gray-500 dark:text-dark-500 mb-4">Sales Dashboard</p>
+            <ngx-simplebar [options]="options" class="h-[124px] -mx-5 px-5">
+                <div class="space-y-3">
+                    <a href="javascript:void(0);"
+                        class="p-3 bg-green-500/10 text-green-500 flex items-center gap-3 rounded-md">
+                        <lucide-angular name="receipt" class="size-5"></lucide-angular>
+                        <p class="text-sm grow">New Transaction</p>
+                        <span
+                            class="badge bg-white border-white dark:bg-dark-900 dark:border-dark-900 shrink-0">POS</span>
+                    </a>
+                    <a href="javascript:void(0);"
+                        class="p-3 bg-indigo-500/10 text-indigo-500 flex items-center gap-3 rounded-md">
+                        <lucide-angular name="bar-chart-2" class="size-5"></lucide-angular>
+                        <p class="text-sm grow">Daily Sales Report</p>
+                        <span
+                            class="badge bg-white border-white dark:bg-dark-900 dark:border-dark-900 shrink-0">Reports</span>
+                    </a>
+                    <a href="javascript:void(0);"
+                        class="p-3 bg-yellow-500/10 text-yellow-500 flex items-center gap-3 rounded-md">
+                        <lucide-angular name="users" class="size-5"></lucide-angular>
+                        <p class="text-sm grow">Customer Management</p>
+                        <span
+                            class="badge bg-white border-white dark:bg-dark-900 dark:border-dark-900 shrink-0">CRM</span>
+                    </a>
+                </div>
+            </ngx-simplebar>
+        </div>
+    </div>
+    <div class="col-span-12 order-3">
+        <div class="card">
+            <div class="card-body">
+                <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-space">
+                    <div
+                        class="card mb-0 bg-gradient-to-r from-primary-500/15 via-primary-500/5 to-primary-500/10 backdrop-lg border-none shadow-none relative">
+                        <div class="pos-widget-curve">
+                            <div class="bg-primary-500 text-white rounded-xl size-10 flex items-center justify-center">
+                                <lucide-angular name="BadgeDollarSign" class="size-5"></lucide-angular>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <p class="mb-3 text-gray-500 dark:text-dark-500">Total Sales</p>
+                            <h3 class="font-normal grow mb-3"><span class="counters" [countUp]="3497"
+                                    [options]="{decimalPlaces:0}"></span></h3>
+                            <p class="text-gray-500 dark:text-dark-500"><span class="text-green-500">
+                                    <lucide-angular name="trending-up"
+                                        class="size-4 inline-block mr-1"></lucide-angular> 10%</span> than
+                                yesterday</p>
+                        </div>
+                    </div>
+                    <div
+                        class="card mb-0 bg-gradient-to-r from-pink-500/15 via-pink-500/5 to-pink-500/10 backdrop-lg border-none shadow-none relative">
+                        <div class="pos-widget-curve">
+                            <div class="bg-pink-500 text-white rounded-xl size-10 flex items-center justify-center">
+                                <lucide-angular name="badge-dollar-sign" class="size-5"></lucide-angular>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <p class="mb-3 text-gray-500 dark:text-dark-500">New Orders</p>
+                            <h3 class="font-normal grow mb-3"><span class="counters" [countUp]="1205"
+                                    [options]="{decimalPlaces:0}"></span></h3>
+                            <p class="text-gray-500 dark:text-dark-500"><span class="text-green-500">
+                                    <lucide-angular name="trending-up"
+                                        class="size-4 inline-block mr-1"></lucide-angular> 10%</span> than
+                                yesterday</p>
+                        </div>
+                    </div>
+                    <div
+                        class="card mb-0 bg-gradient-to-r from-yellow-500/15 via-yellow-500/5 to-yellow-500/10 backdrop-lg border-none shadow-none relative">
+                        <div class="pos-widget-curve">
+                            <div class="bg-yellow-500 text-white rounded-xl size-10 flex items-center justify-center">
+                                <lucide-angular name="badge-dollar-sign" class="size-5"></lucide-angular>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <p class="mb-3 text-gray-500 dark:text-dark-500">Pending Orders</p>
+                            <h3 class="font-normal grow mb-3"><span class="counters" [countUp]="937"
+                                    [options]="{decimalPlaces:0}"></span></h3>
+                            <p class="text-gray-500 dark:text-dark-500"><span class="text-green-500">
+                                    <lucide-angular name="trending-up"
+                                        class="size-4 inline-block mr-1"></lucide-angular> 10%</span> than
+                                yesterday</p>
+                        </div>
+                    </div>
+                    <div
+                        class="card mb-0 bg-gradient-to-r from-purple-500/15 via-purple-500/5 to-purple-500/10 backdrop-lg border-none shadow-none relative">
+                        <div class="pos-widget-curve">
+                            <div class="bg-purple-500 text-white rounded-xl size-10 flex items-center justify-center">
+                                <lucide-angular name="badge-dollar-sign" class="size-5"></lucide-angular>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <p class="mb-3 text-gray-500 dark:text-dark-500">Net Profit</p>
+                            <h3 class="font-normal grow mb-3">$<span class="counters" [countUp]="389"
+                                    [options]="{decimalPlaces:0}">
+                                </span>K</h3>
+                            <p class="text-gray-500 dark:text-dark-500"><span class="text-green-500">
+                                    <lucide-angular name="trending-up"
+                                        class="size-4 inline-block mr-1"></lucide-angular> 10%</span> than
+                                yesterday</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-span-12 2xl:col-span-8 order-4">
+        <div class="mb-3 flex items-center gap-3">
+            <h6 class="grow">Recently Payment</h6>
+            <a href="javascript:void(0);" class="link link-primary">View All
+                <lucide-angular name="move-right" class="inline-block size-4 ltr:ml-1 rtl:mr-1"></lucide-angular></a>
+        </div>
+        <div class="swiper mySwiper" #paginationDynamicSlider>
+            <div class="swiper-wrapper">
+                <div class="swiper-slide" *ngFor="let user of swiperUsers">
+                    <div class="card">
+                        <div class="card-body flex items-center gap-3 p-3">
+                            <img [src]="user.image" alt="" class="size-12 rounded-md shrink-0">
+                            <div class="grow">
+                                <h6 class="mb-0.5">{{ user.name }}</h6>
+                                <p class="text-gray-500 fs-sm">{{ user.date }}</p>
+                            </div>
+                            <h6 class="grow">{{ user.amount }}</h6>
+                            <span class="shrink-0 badge" [ngClass]="{
+          'badge-green': user.status === 'Done',
+          'badge-yellow': user.status === 'Pending',
+          'badge-red': user.status === 'Failed'
+        }">{{ user.status }}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="col-span-12 2xl:col-span-4 2xl:row-span-2 order-6 2xl:order-5 card">
+        <div class="card-header flex items-center gap-3">
+            <h6 class="card-title grow">Top Selling Products</h6>
+            <div class="dropdown shrink-0">
+                <button x-ref="button" domixDropdownToggle [dropdownMenu]="dropdown2" type="button"
+                    class="flex items-center text-gray-500 dark:text-dark-500">
+                    <lucide-angular name="ellipsis" class="size-5"></lucide-angular>
+                </button>
+                <div #dropdown2 class="!fixed p-2 dropdown-menu hidden" dropdown-position="right">
+                    <ul>
+                        <li>
+                            <a href="javascript:void(0);" class="dropdown-item">
+                                <span>Revenue</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0);" class="dropdown-item">
+                                <span>Sales</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="card-body pt-0">
+            <div class="overflow-x-auto table-box">
+                <table class="table text-whitespace">
+                    <tbody class="divide-y">
+                        <tr *ngFor="let item of productSales" class="hover:bg-gray-50 dark:hover:bg-dark-850">
+                            <td>
+                                <div class="flex items-center gap-3">
+                                    <div
+                                        class="size-10 bg-gray-100 dark:bg-dark-850 rounded-lg flex items-center justify-center">
+                                        <img [src]="item.image" alt="" class="h-8" />
+                                    </div>
+                                    <div>
+                                        <a href="javascript:void(0);">
+                                            <h6>{{ item.name }}</h6>
+                                        </a>
+                                        <p class="text-sm text-gray-500 dark:text-dark-500">
+                                            SKU: {{ item.sku }}
+                                        </p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <p class="font-medium">{{ item.quantity }}</p>
+                                <p class="text-sm text-gray-500 dark:text-dark-500">
+                                    {{ item.quantityLabel }}
+                                </p>
+                            </td>
+                            <td>
+                                <p class="font-medium">{{ item.amount }}</p>
+                                <p class="text-sm" [ngClass]="item.growthColor">
+                                    {{ item.growth }}
+                                </p>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+            <div class="text-center pt-4">
+                <a href="javascript:void(0);" class="link link-primary">Show More Products
+                    <lucide-angular name="move-right"
+                        class="inline-block size-4 ltr:ml-1 rtl:mr-1"></lucide-angular></a>
+            </div>
+        </div>
+    </div>
+    <div class="col-span-12 2xl:col-span-8 order-5 2xl:order-6 card">
+        <div class="card-header flex items-center gap-3" dir="ltr">
+            <h6 class="card-title grow">Sales Trade</h6>
+            <div class="flex gap-2 shrink-0">
+                <button class="btn btn-sm"
+                    [ngClass]="{'btn-primary': activePeriod === 'thisMonth', 'btn-sub-primary': activePeriod !== 'thisMonth'}"
+                    (click)="switchPeriod('thisMonth')">
+                    This Month
+                </button>
+
+                <button class="btn btn-sm"
+                    [ngClass]="{'btn-primary': activePeriod === 'lastMonth', 'btn-sub-primary': activePeriod !== 'lastMonth'}"
+                    (click)="switchPeriod('lastMonth')">
+                    Last Month
+                </button>
+            </div>
+        </div>
+        <div class="card-body">
+            <app-domix-charts *ngIf="newChart" [series]="newChart.series" [chartOptions]="newChart.chartOptions">
+            </app-domix-charts>
+        </div>
+    </div>
+    <div class="col-span-12 md:col-span-6 2xl:col-span-4 order-7 card">
+        <div class="card-header flex items-center gap-3">
+            <h6 class="card-title grow">Customers</h6>
+            <div class="dropdown shrink-0">
+                <button type="button" domixDropdownToggle [dropdownMenu]="dropdown3"
+                    class="flex px-3 py-1.5 text-xs border-gray-200 font-medium dark:border-dark-800 link link-primary btn">
+                    <span
+                        x-text="$store.customers.period.charAt(0).toUpperCase() + $store.customers.period.slice(1)">Recent</span>
+                    <svg :class="{ 'transform rotate-180': open }"
+                        class="transition-transform duration-300 ltr:ml-1 rtl:mr-1 size-4" viewBox="0 0 20 20"
+                        fill="currentColor">
+                        <path fill-rule="evenodd"
+                            d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                            clip-rule="evenodd" />
+                    </svg>
+                </button>
+                <div #dropdown3 class="!fixed p-2 dropdown-menu hidden" dropdown-position="right">
+                    <ul>
+                        <li>
+                            <a href="javascript:void(0);" class="dropdown-item">
+                                <span>Recent</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0);" class="dropdown-item">
+                                <span>Weekly</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0);" class="dropdown-item">
+                                <span>Monthly</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0);" class="dropdown-item">
+                                <span>Yearly</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <div x-data="customersApp" dir="ltr">
+                <div class="!min-h-full" #customersChartRef data-chart-colors="[bg-purple-500]"></div>
+            </div>
+            <div class="space-y-4 mt-6">
+                <div class="flex items-center gap-2">
+                    <div
+                        class="size-10 flex items-center justify-center bg-primary-500/10 text-primary-500 rounded-full shrink-0">
+                        <lucide-angular name="users" class="size-5"></lucide-angular>
+                    </div>
+                    <div class="grow">
+                        <h6>New Customers</h6>
+                        <p class="text-sm text-gray-500 dark:text-dark-500">2,450 total</p>
+                    </div>
+                    <p class="text-green-500">+12%</p>
+                </div>
+                <div class="flex items-center gap-2">
+                    <div
+                        class="size-10 flex items-center justify-center bg-green-500/10 text-green-500 rounded-full shrink-0">
+                        <lucide-angular name="user-check" class="size-5"></lucide-angular>
+                    </div>
+                    <div class="grow">
+                        <h6>Active Customers</h6>
+                        <p class="text-sm text-gray-500 dark:text-dark-500">1,280 total</p>
+                    </div>
+                    <p class="text-green-500">65%</p>
+                </div>
+                <div class="flex items-center gap-2">
+                    <div
+                        class="size-10 flex items-center justify-center bg-yellow-500/10 text-yellow-500 rounded-full shrink-0">
+                        <lucide-angular name="user-plus" class="size-5"></lucide-angular>
+                    </div>
+                    <div class="grow">
+                        <h6>Returning Customers</h6>
+                        <p class="text-sm text-gray-500 dark:text-dark-500">856 total</p>
+                    </div>
+                    <p class="text-yellow-500">35%</p>
+                </div>
+                <div class="flex items-center gap-2">
+                    <div
+                        class="size-10 flex items-center justify-center bg-red-500/10 text-red-500 rounded-full shrink-0">
+                        <lucide-angular name="user-minus" class="size-5"></lucide-angular>
+                    </div>
+                    <div class="grow">
+                        <h6>Inactive Customers</h6>
+                        <p class="text-sm text-gray-500 dark:text-dark-500">320 total</p>
+                    </div>
+                    <p class="text-red-500">15%</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-span-12 2xl:col-span-4 order-9 2xl:order-8 card">
+        <div class="card-header flex items-center gap-3">
+            <h6 class="card-title grow">Products Stock</h6>
+            <div class="dropdown shrink-0">
+                <button domixDropdownToggle [dropdownMenu]="dropdown4" type="button"
+                    class="flex items-center text-gray-500 dark:text-dark-500">
+                    <lucide-angular name="ellipsis" class="size-5"></lucide-angular>
+                </button>
+                <div #dropdown4 class="!fixed p-2 dropdown-menu hidden" dropdown-position="right">
+                    <ul>
+                        <li>
+                            <a href="javascript:void(0);" class="dropdown-item">
+                                <span>Low to High</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0);" class="dropdown-item">
+                                <span>High to Low</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="space-y-4">
+                <div class="flex items-center gap-3" *ngFor="let item of inventoryItems">
+                    <div
+                        class="size-14 bg-gray-100 dark:bg-dark-850 rounded-lg flex items-center justify-center shrink-0">
+                        <img [src]="item.image" alt="" class="h-10" />
+                    </div>
+                    <div class="grow">
+                        <div class="flex items-center justify-between mb-1">
+                            <h6 class="mb-0">{{ item.name }}</h6>
+                            <span class="text-sm font-medium">{{ item.percentage }}%</span>
+                        </div>
+
+                        <!-- Dynamic Progress Bar -->
+                        <div class="progress-bar progress-1">
+                            <div class="text-white progress-bar-wrap" [ngClass]="item.barColor"
+                                [ngStyle]="{ width: item.percentage + '%' }"></div>
+                        </div>
+
+                        <!-- Optional alternative bar if needed
+      <div class="w-full bg-gray-100 dark:bg-dark-850 rounded-full h-2">
+        <div
+          class="h-2 rounded-full"
+          [ngClass]="item.barColor"
+          [ngStyle]="{ width: item.percentage + '%' }"
+        ></div>
+      </div>
+      -->
+
+                        <div class="flex items-center justify-between mt-1 *:text-sm *:text-gray-500 *:text-dark-500">
+                            <p>In Stock: {{ item.inStock }}</p>
+                            <p>Total: {{ item.total }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="col-span-12 md:col-span-6 2xl:col-span-4 order-8 2xl:order-9 card">
+        <div class="card-header flex items-center gap-3">
+            <h6 class="card-title grow">Payment Types</h6>
+            <div class="dropdown shrink-0">
+                <button title="dropdown-button" domixDropdownToggle [dropdownMenu]="dropdown5" type="button"
+                    class="flex items-center text-gray-500 dark:text-dark-500">
+                    <lucide-angular name="ellipsis" class="size-5"></lucide-angular>
+                </button>
+                <div #dropdown5 class="!fixed p-2 dropdown-menu hidden" dropdown-position="right">
+                    <ul>
+                        <li>
+                            <a href="javascript:void(0);" class="dropdown-item">
+                                <span>Weekly</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0);" class="dropdown-item">
+                                <span>Monthly</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0);" class="dropdown-item">
+                                <span>Yearly</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <div x-data="paymentTypesApp" dir="ltr">
+                <div #paymentTypesChartRef class="!min-h-full"
+                    data-chart-colors="[bg-primary-500, bg-yellow-500, bg-sky-500, bg-red-500, bg-green-500]"></div>
+            </div>
+
+            <div class="grid grid-cols-2 mt-5 *:flex *:items-center *:gap-2 gap-4">
+                <a href="javascript:void(0);" class="payment-legend-item" data-label="Cash">
+                    <lucide-angular name="squares-unite"
+                        class="size-5 stroke-1 fill-primary-500/20 stroke-primary-500"></lucide-angular>
+                    <span>Cash</span>
+                    <span class="text-sm text-gray-500 dark:text-dark-500">$974</span>
+                </a>
+                <a href="javascript:void(0);" class="payment-legend-item" data-label="Credit Card">
+                    <lucide-angular name="squares-unite"
+                        class="size-5 stroke-1 fill-yellow-500/20 stroke-yellow-500"></lucide-angular>
+                    <span>Card</span>
+                    <span class="text-sm text-gray-500 dark:text-dark-500">$750</span>
+                </a>
+                <a href="javascript:void(0);" class="payment-legend-item" data-label="PayPal">
+                    <lucide-angular name="squares-unite"
+                        class="size-5 stroke-1 fill-sky-500/20 stroke-sky-500"></lucide-angular>
+                    <span>PayPal</span>
+                    <span class="text-sm text-gray-500 dark:text-dark-500">$510</span>
+                </a>
+                <a href="javascript:void(0);" class="payment-legend-item" data-label="Bank Transfer">
+                    <lucide-angular name="squares-unite"
+                        class="size-5 stroke-1 fill-red-500/20 stroke-red-500"></lucide-angular>
+                    <span>Bank Transfer</span>
+                    <span class="text-sm text-gray-500 dark:text-dark-500">$370</span>
+                </a>
+                <a href="javascript:void(0);" class="payment-legend-item" data-label="Other">
+                    <lucide-angular name="squares-unite"
+                        class="size-5 stroke-1 fill-green-500/20 stroke-green-500"></lucide-angular>
+                    <span>Other</span>
+                    <span class="text-sm text-gray-500 dark:text-dark-500">$250</span>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="col-span-12 2xl:col-span-3 order-10 card">
+        <div class="card-body p-3">
+            <div class="p-4 bg-gradient-to-br from-primary-500 to-purple-500 text-white rounded-md relative">
+                <lucide-angular name="coins" class="size-8 fill-white/20 absolute right-4 top-4"></lucide-angular>
+                <p class="mb-2">Total Balance</p>
+                <h3>$<span [countUp]="9475" [options]="{decimalPlaces:0}"></span></h3>
+            </div>
+            <div class="my-3 flex items-center gap-2">
+                <p class="text-gray-500 dark:text-dark-500 grow">Recent</p>
+                <a href="javascript:void(0);" class="link link-primary shrink-0 text-sm">View More</a>
+            </div>
+            <ngx-simplebar class="h-[205px] -mx-3 px-3">
+                <div class="space-y-2">
+                    <div class="flex items-center gap-2" *ngFor="let payment of payments">
+                        <div
+                            class="size-10 bg-gray-100 rounded flex items-center justify-center text-gray-500 dark:bg-dark-850 dark:text-dark-500 shrink-0">
+                            <lucide-angular [name]="payment.icon" class="size-5"></lucide-angular>
+                        </div>
+                        <div class="grow">
+                            <h6 class="line-clamp-1">{{ payment.method }}</h6>
+                            <p class="text-11 text-gray-500 dark:text-dark-500">{{ payment.time }}</p>
+                        </div>
+                        <h6 class="shrink-0" [ngClass]="payment.color">{{ payment.amount }}</h6>
+                    </div>
+                </div>
+
+            </ngx-simplebar>
+        </div>
+    </div>
+    <div class="col-span-12 2xl:col-span-9 order-11">
+        <div class="card">
+            <div class="card-header flex items-center gap-3">
+                <h6 class="card-title grow">All Revenue</h6>
+                <div class="dropdown shrink-0">
+                    <button domixDropdownToggle [dropdownMenu]="dropdown6" type="button"
+                        class="flex px-3 py-1.5 text-xs border-gray-200 font-medium dark:border-dark-800 link link-primary btn">
+                        Recent
+                        <svg :class="{ 'transform rotate-180': open }"
+                            class="transition-transform duration-300 ltr:ml-1 rtl:mr-1 size-4" viewBox="0 0 20 20"
+                            fill="currentColor">
+                            <path fill-rule="evenodd"
+                                d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                clip-rule="evenodd" />
+                        </svg>
+                    </button>
+                    <div #dropdown6 class="!fixed p-2 dropdown-menu hidden" dropdown-position="right">
+                        <ul>
+                            <li>
+                                <a href="javascript:void(0);" class="dropdown-item">
+                                    <span>Recent</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0);" class="dropdown-item">
+                                    <span>Weekly</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0);" class="dropdown-item">
+                                    <span>Monthly</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0);" class="dropdown-item">
+                                    <span>Yearly</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="grid grid-cols-12 gap-0 items-center">
+                    <div *ngFor="let item of summaryList" [class]="item.colClass + ' ' + item.border">
+                        <div class="flex items-center gap-2 mb-3">
+                            <lucide-angular [name]="item.icon" class="size-5 text-primary-500"></lucide-angular>
+                            <p class="text-gray-500 dark:text-dark-500">{{ item.title }}</p>
+                        </div>
+                        <h4>{{ item.amount }}</h4>
+                        <div class="progress-bar progress-2 mt-2">
+                            <div class="text-white progress-bar-wrap bg-primary-500"
+                                [ngStyle]="{ width: item.progress + '%' }"></div>
+                        </div>
+                        <div class="flex items-center gap-2 text-sm mt-1 text-gray-500 dark:text-dark-500">
+                            <div class="flex items-center gap-1 grow">
+                                <lucide-angular name="target" class="size-4"></lucide-angular>
+                                <p>Target Progress</p>
+                            </div>
+                            <span class="shrink-0">{{ item.progress }}%</span>
+                        </div>
+                        <div class="flex items-center gap-2 mt-3">
+                            <lucide-angular name="shopping-cart" class="size-4 text-gray-500"></lucide-angular>
+                            <p class="text-gray-500 dark:text-dark-500">{{ item.orders }}</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="alert flex gap-2 border-none bg-gradient-to-r from-red-500/20 to-yellow-500/20 mb-5">
+            <lucide-angular name="circle-alert" class="size-4 shrink-0 mt-0.5"></lucide-angular>
+            <div class="grow">
+                <p class="mb-1">Low stock alert: Product #SRB-041 (Triple Cheese Bacon Supreme) is running low with only
+                    5 units remaining.</p>
+                <a href="javascript:void(0);" class="link text-red-500">Restock inventory now</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-span-12 order-12 card">
+        <div class="card-header flex md:items-center gap-3 flex-col md:flex-row">
+            <h6 class="card-title grow">Recent Orders</h6>
+            <div class="relative group/form shrink-0">
+                <input type="text" [(ngModel)]="searchTerm" (input)="onSearchChange()"
+                    class="ltr:pl-9 rtl:pr-9 form-input ltr:group-[&.right]/form:pr-9 rtl:group-[&.right]/form:pl-9 ltr:group-[&.right]/form:pl-4 rtl:group-[&.right]/form:pr-4"
+                    placeholder="Search for ...">
+                <button title="search-button"
+                    class="absolute inset-y-0 flex items-center text-gray-500 dark:text-dark-500 ltr:left-3 rtl:right-3 ltr:group-[&.right]/form:right-3 rtl:group-[&.right]/form:left-3 ltr:group-[&.right]/form:left-auto rtl:group-[&.right]/form:right-auto focus:outline-hidden">
+                    <lucide-angular name="search" class="size-4"></lucide-angular>
+                </button>
+            </div>
+            <div class="shrink-0">
+                <a href="javascript:void(0);" class="btn btn-primary">
+                    <lucide-angular name="circle-plus" class="inline-block ltr:mr-1 rtl:ml-1 size-4"></lucide-angular>
+                    Add Orders
+                </a>
+            </div>
+        </div>
+
+        <div class="card-header flex items-center gap-3 flex-wrap *:py-2 *:px-4 *:rounded-md">
+            <button (click)="changeTab('Dine In')"
+                [class]="activeTab === 'Dine In' ? 'bg-primary-500 text-white' : 'bg-gray-100 dark:bg-dark-850 text-gray-500 dark:text-dark-500 hover:text-primary-500'">
+                Dine In
+            </button>
+            <button (click)="changeTab('Takeaway')"
+                [class]="activeTab === 'Takeaway' ? 'bg-primary-500 text-white' : 'bg-gray-100 dark:bg-dark-850 text-gray-500 dark:text-dark-500 hover:text-primary-500'">
+                Takeaway
+            </button>
+            <button (click)="changeTab('Delivered')"
+                [class]="activeTab === 'Delivered' ? 'bg-primary-500 text-white' : 'bg-gray-100 dark:bg-dark-850 text-gray-500 dark:text-dark-500 hover:text-primary-500'">
+                Delivered
+            </button>
+        </div>
+
+        <div class="card-body pt-0">
+            <div class="overflow-x-auto table-box">
+                <table class="table whitespace-nowrap">
+                    <thead>
+                        <tr class="text-gray-500 bg-gray-100 dark:bg-dark-850 dark:text-dark-500">
+                            <th (click)="sort('orderNumber')" class="cursor-pointer !font-medium">
+                                Order Number
+                                <span *ngIf="sortBy === 'orderNumber'">{{ getSortIcon('orderNumber') }}</span>
+                            </th>
+                            <th (click)="sort('orderDate')" class="cursor-pointer !font-medium">
+                                Order Date
+                                <span *ngIf="sortBy === 'orderDate'">{{ getSortIcon('orderDate') }}</span>
+                            </th>
+                            <th (click)="sort('productName')" class="cursor-pointer !font-medium">
+                                Product Name
+                                <span *ngIf="sortBy === 'productName'">{{ getSortIcon('productName') }}</span>
+                            </th>
+                            <th (click)="sort('customersName')" class="cursor-pointer !font-medium">
+                                Customers
+                                <span *ngIf="sortBy === 'customersName'">{{ getSortIcon('customersName') }}</span>
+                            </th>
+                            <th (click)="sort('quantity')" class="cursor-pointer !font-medium">
+                                QTY
+                                <span *ngIf="sortBy === 'quantity'">{{ getSortIcon('quantity') }}</span>
+                            </th>
+                            <th (click)="sort('totalAmount')" class="cursor-pointer !font-medium">
+                                Amount
+                                <span *ngIf="sortBy === 'totalAmount'">{{ getSortIcon('totalAmount') }}</span>
+                            </th>
+                            <th (click)="sort('paymentMethod')" class="cursor-pointer !font-medium">
+                                Payment Method
+                                <span *ngIf="sortBy === 'paymentMethod'">{{ getSortIcon('paymentMethod') }}</span>
+                            </th>
+                            <th *ngIf="activeTab === 'Dine In'" (click)="sort('tableNumber')"
+                                class="cursor-pointer !font-medium">
+                                Table Number
+                                <span *ngIf="sortBy === 'tableNumber'">{{ getSortIcon('tableNumber') }}</span>
+                            </th>
+                            <th *ngIf="activeTab === 'Takeaway'" (click)="sort('pickupTime')"
+                                class="cursor-pointer !font-medium">
+                                Pickup Time
+                                <span *ngIf="sortBy === 'pickupTime'">{{ getSortIcon('pickupTime') }}</span>
+                            </th>
+                            <th *ngIf="activeTab === 'Delivered'" (click)="sort('deliveryAddress')"
+                                class="cursor-pointer !font-medium">
+                                Delivery Address
+                                <span *ngIf="sortBy === 'deliveryAddress'">{{ getSortIcon('deliveryAddress') }}</span>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let order of displayedOrders; let i = index">
+                            <td>{{ order.orderNumber }}</td>
+                            <td>{{ order.orderDate }}</td>
+                            <td>
+                                <a routerLink="/apps-ecommerce-product-overview">{{ order.productName }}</a>
+                            </td>
+                            <td>{{ order.customersName }}</td>
+                            <td>{{ order.quantity }}</td>
+                            <td>{{ order.totalAmount }}</td>
+                            <td>
+                                <span [class]="getPaymentMethodClass(order.paymentMethod)">
+                                    {{ order.paymentMethod }}
+                                </span>
+                            </td>
+                            <td *ngIf="activeTab === 'Dine In'">{{ order.tableNumber }}</td>
+                            <td *ngIf="activeTab === 'Takeaway'">{{ order.pickupTime }}</td>
+                            <td *ngIf="activeTab === 'Delivered'">{{ order.deliveryAddress }}</td>
+                        </tr>
+
+                        <!-- No results row -->
+                        <tr *ngIf="displayedOrders.length === 0">
+                            <td [attr.colspan]="activeTab === 'Dine In' ? 8 : activeTab === 'Takeaway' ? 8 : 8"
+                                class="!p-8">
+                                <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" class="mx-auto size-12"
+                                    viewBox="0 0 48 48">
+                                    <linearGradient id="SVGID_1__h35ynqzIJzH4_gr1" x1="34.598" x2="15.982" y1="15.982"
+                                        y2="34.598" gradientUnits="userSpaceOnUse">
+                                        <stop offset="0" stop-color="#60e8fe"></stop>
+                                        <stop offset=".033" stop-color="#6ae9fe"></stop>
+                                        <stop offset=".197" stop-color="#97f0fe"></stop>
+                                        <stop offset=".362" stop-color="#bdf5ff"></stop>
+                                        <stop offset=".525" stop-color="#dafaff"></stop>
+                                        <stop offset=".687" stop-color="#eefdff"></stop>
+                                        <stop offset=".846" stop-color="#fbfeff"></stop>
+                                        <stop offset="1" stop-color="#fff"></stop>
+                                    </linearGradient>
+                                    <path fill="url(#SVGID_1__h35ynqzIJzH4_gr1)"
+                                        d="M40.036,33.826L31.68,25.6c0.847-1.739,1.335-3.684,1.335-5.748c0-7.27-5.894-13.164-13.164-13.164	S6.688,12.582,6.688,19.852c0,7.27,5.894,13.164,13.164,13.164c2.056,0,3.995-0.485,5.728-1.326l3.914,4.015l4.331,4.331	c1.715,1.715,4.496,1.715,6.211,0C41.751,38.321,41.751,35.541,40.036,33.826z">
+                                    </path>
+                                    <path fill="none" stroke="#10cfe3" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-miterlimit="10" stroke-width="3"
+                                        d="M31.95,25.739l8.086,8.086c1.715,1.715,1.715,4.496,0,6.211l0,0c-1.715,1.715-4.496,1.715-6.211,0	l-4.331-4.331">
+                                    </path>
+                                    <path fill="none" stroke="#10cfe3" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-miterlimit="10" stroke-width="3"
+                                        d="M7.525,24.511c-1.771-4.694-0.767-10.196,3.011-13.975c3.847-3.847,9.48-4.817,14.228-2.912">
+                                    </path>
+                                    <path fill="none" stroke="#10cfe3" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-miterlimit="10" stroke-width="3"
+                                        d="M30.856,12.603c3.376,5.114,2.814,12.063-1.688,16.565c-4.858,4.858-12.565,5.129-17.741,0.814">
+                                    </path>
+                                </svg>
+                                <p class="mt-2 text-center text-gray-500 dark:text-dark-500">No matching records found
+                                </p>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Pagination -->
+            <div class="grid items-center grid-cols-12 gap-space mt-space" *ngIf="displayedOrders.length > 0">
+                <div class="col-span-12 text-center lg:col-span-6 lg:ltr:text-left lg:rtl:text-right">
+                    <p class="text-gray-500 dark:text-dark-500">
+                        Showing <b>{{ showingStart }}</b> - <b>{{ showingEnd }}</b> of <b>{{ filteredOrders.length
+                            }}</b> Results
+                    </p>
+                </div>
+                <div class="col-span-12 lg:col-span-6">
+                    <div class="flex justify-center gap-2 lg:justify-end pagination pagination-primary">
+                        <button (click)="prevPage()" [disabled]="currentPage === 1" class="pagination-pre">
+                            <lucide-angular name="chevron-left"
+                                [class]="'mr-1 ltr:inline-block rtl:hidden size-4'"></lucide-angular>
+                            <lucide-angular name="chevron-right"
+                                [class]="'ml-1 rtl:inline-block ltr:hidden size-4'"></lucide-angular>
+                            Prev
+                        </button>
+                        <button *ngFor="let page of paginationPages" (click)="gotoPage(page)"
+                            [class]="currentPage === page ? 'pagination-item active' : 'pagination-item'">
+                            <span>{{ page }}</span>
+                        </button>
+                        <button (click)="nextPage()" [disabled]="currentPage === totalPages" class="pagination-next">
+                            Next
+                            <lucide-angular name="chevron-right"
+                                [class]="'ml-1 ltr:inline-block rtl:hidden size-4'"></lucide-angular>
+                            <lucide-angular name="chevron-left"
+                                [class]="'mr-1 rtl:inline-block ltr:hidden size-4'"></lucide-angular>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

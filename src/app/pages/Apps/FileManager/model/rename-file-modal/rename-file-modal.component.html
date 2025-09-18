@@ -1,0 +1,28 @@
+<div id="renameFileModal" class="modal">
+  <div class="modal-wrap modal-center">
+    <div class="modal-header">
+      <h6>Rename File</h6>
+      <button data-modal-close="renameFileModal" class="link link-red" (click)="closeFileModal()">
+        <lucide-angular name="x" class="size-5"></lucide-angular>
+      </button>
+    </div>
+    <div class="modal-content">
+
+      <div [formGroup]="fromGroup">
+        <label for="renameTitle" class="form-label">Rename Title <span class="text-red-500">*</span></label>
+        <input type="text" id="renameTitle" class="form-input dark:bg-dark-800 dark:border-dark-500" required
+          placeholder="Enter rename file" formControlName="documentName">
+        <span *ngIf="fromGroup.get('documentName')?.hasError('required')" class="text-red-500"> Folder name is
+          required</span>
+      </div>
+      <div class="flex items-center justify-end gap-2 mt-space">
+        <button type="button" class="btn btn-active-red" data-modal-close="renameFileModal"
+          (click)="closeFileModal()">Close
+          <lucide-angular name="x" class="inline-block ltr:ml-1 rtl:mr-1 size-4"></lucide-angular>
+        </button>
+        <button class="btn btn-primary" (click)="closeFileModal(false)">Rename File</button>
+      </div>
+
+    </div>
+  </div>
+</div>

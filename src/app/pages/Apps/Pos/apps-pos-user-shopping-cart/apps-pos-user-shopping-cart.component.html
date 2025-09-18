@@ -1,0 +1,313 @@
+<app-page-title [Title]="'Shopping Cart'" [pageTitle]="'POS'"></app-page-title>
+
+<div x-data="shoppingCart">
+    <!-- Customer Information Section -->
+    <div class="card mb-6">
+        <div class="card-header">
+            <h6 class="card-title mb-0 flex items-center gap-2">
+                <lucide-angular name="users" class="size-4"></lucide-angular>
+                Customer Information
+            </h6>
+        </div>
+        <div class="card-body">
+            <div class="grid grid-cols-12 gap-6">
+                <div class="col-span-4">
+                    <label for="orderIDInput" class="form-label">Order ID</label>
+                    <input type="text" id="orderIDInput" class="form-input" placeholder="SRB0748" value="SRB0748"
+                        disabled>
+                </div>
+                <div class="col-span-4">
+                    <label for="customerNameInput" class="form-label">Customer Name</label>
+                    <input type="text" id="customerNameInput" class="form-input" placeholder="Customer name">
+                </div>
+                <div class="col-span-4">
+                    <label for="mobileNumberInput" class="form-label">Mobile Number</label>
+                    <input type="text" id="mobileNumberInput" class="form-input" placeholder="(021) 1234-5678">
+                </div>
+                <div class="col-span-4">
+                    <label for="emailAddressInput" class="form-label">Email Address</label>
+                    <input type="email" id="emailAddressInput" class="form-input" placeholder="example@gmail.com">
+                </div>
+                <div class="col-span-8">
+                    <label for="addressInput" class="form-label">Address</label>
+                    <input type="text" id="addressInput" class="form-input" placeholder="Enter address">
+                </div>
+                <div class="col-span-12">
+                    <label for="notesInput" class="form-label">Notes</label>
+                    <textarea id="notesInput" class="form-input h-auto" rows="3"
+                        placeholder="Any additional notes..."></textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="grid grid-cols-12 gap-6">
+        <div class="col-span-8">
+            <div class="flex items-center mb-5">
+                <h6 class="card-title grow flex items-center gap-2">
+                    <lucide-angular name="shopping-cart" class="size-4"></lucide-angular>
+                    Shopping Cart <span class="badge badge-solid-red shrink-0">{{items.length}}</span>
+                </h6>
+                <a routerLink="/dashboard-pos-user-interface" class="link link-primary">
+                    Continue Shopping
+                    <lucide-angular name="move-right" class="size-4 inline-block rtl:hidden"></lucide-angular>
+                    <lucide-angular name="move-left" class="size-4 hidden rtl:inline-block"></lucide-angular>
+                </a>
+            </div>
+            <div *ngIf="items.length > 0">
+                <div *ngFor="let item of items; trackBy: trackByItemId" class="card mb-4">
+                    <div class="card-body">
+                        <div class="flex gap-space">
+                            <div
+                                class="bg-gradient-to-br from-primary-500/10 via-primary-500/5 to-transparent rounded-xl p-4 flex items-center justify-center">
+                                <img [src]="item.image" [alt]="item.name" class="size-24 object-contain">
+                            </div>
+                            <div class="flex-grow">
+                                <div class="flex items-start justify-between mb-2">
+                                    <div>
+                                        <h6 class="mb-1">{{ item.name }}</h6>
+                                        <p class="text-sm text-gray-500 dark:text-dark-500">
+                                            Size: {{ item.size }} | {{ item.temperature }}
+                                        </p>
+                                    </div>
+                                    <h5>${{ item.price.toFixed(2) }}</h5>
+                                </div>
+
+                                <div class="space-y-3">
+                                    <!-- Coffee Customizations -->
+                                    <div *ngIf="item.category === 'coffee'" class="flex flex-wrap gap-3">
+                                        <div class="input-check-group">
+                                            <input type="checkbox" [id]="'extraShot' + item.id"
+                                                class="input-check input-check-primary"
+                                                [checked]="item.customizations.extraShot"
+                                                (change)="updateCustomization(item, 'extraShot')">
+                                            <label [for]="'extraShot' + item.id" class="input-check-label">
+                                                Extra Shot (+$1.00)
+                                            </label>
+                                        </div>
+                                        <div class="input-check-group">
+                                            <input type="checkbox" [id]="'whippedCream' + item.id"
+                                                class="input-check input-check-primary"
+                                                [checked]="item.customizations.whippedCream"
+                                                (change)="updateCustomization(item, 'whippedCream')">
+                                            <label [for]="'whippedCream' + item.id" class="input-check-label">
+                                                Whipped Cream (+$0.50)
+                                            </label>
+                                        </div>
+                                        <div class="input-check-group">
+                                            <input type="checkbox" [id]="'caramelDrizzle' + item.id"
+                                                class="input-check input-check-primary"
+                                                [checked]="item.customizations.caramelDrizzle"
+                                                (change)="updateCustomization(item, 'caramelDrizzle')">
+                                            <label [for]="'caramelDrizzle' + item.id" class="input-check-label">
+                                                Caramel Drizzle (+$0.50)
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    <!-- Burger Customizations -->
+                                    <div *ngIf="item.category === 'burger'" class="flex flex-wrap gap-3">
+                                        <div class="input-check-group">
+                                            <input type="checkbox" [id]="'extraCheese' + item.id"
+                                                class="input-check input-check-primary"
+                                                [checked]="item.customizations.extraCheese"
+                                                (change)="updateCustomization(item, 'extraCheese')">
+                                            <label [for]="'extraCheese' + item.id" class="input-check-label">
+                                                Extra Cheese (+$1.00)
+                                            </label>
+                                        </div>
+                                        <div class="input-check-group">
+                                            <input type="checkbox" [id]="'extraPatty' + item.id"
+                                                class="input-check input-check-primary"
+                                                [checked]="item.customizations.extraPatty"
+                                                (change)="updateCustomization(item, 'extraPatty')">
+                                            <label [for]="'extraPatty' + item.id" class="input-check-label">
+                                                Extra Patty (+$2.00)
+                                            </label>
+                                        </div>
+                                        <div class="input-check-group">
+                                            <input type="checkbox" [id]="'bacon' + item.id"
+                                                class="input-check input-check-primary"
+                                                [checked]="item.customizations.bacon"
+                                                (change)="updateCustomization(item, 'bacon')">
+                                            <label [for]="'bacon' + item.id" class="input-check-label">
+                                                Add Bacon (+$1.50)
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    <!-- Pizza Customizations -->
+                                    <div *ngIf="item.category === 'pizza'" class="flex flex-wrap gap-3">
+                                        <div class="input-check-group">
+                                            <input type="checkbox" [id]="'extraCheese' + item.id"
+                                                class="input-check input-check-primary"
+                                                [checked]="item.customizations.extraCheese"
+                                                (change)="updateCustomization(item, 'extraCheese')">
+                                            <label [for]="'extraCheese' + item.id" class="input-check-label">
+                                                Extra Cheese (+$1.50)
+                                            </label>
+                                        </div>
+                                        <div class="input-check-group">
+                                            <input type="checkbox" [id]="'extraToppings' + item.id"
+                                                class="input-check input-check-primary"
+                                                [checked]="item.customizations.extraToppings"
+                                                (change)="updateCustomization(item, 'extraToppings')">
+                                            <label [for]="'extraToppings' + item.id" class="input-check-label">
+                                                Extra Toppings (+$2.00)
+                                            </label>
+                                        </div>
+                                        <div class="input-check-group">
+                                            <input type="checkbox" [id]="'glutenFree' + item.id"
+                                                class="input-check input-check-primary"
+                                                [checked]="item.customizations.glutenFree"
+                                                (change)="updateCustomization(item, 'glutenFree')">
+                                            <label [for]="'glutenFree' + item.id" class="input-check-label">
+                                                Gluten Free (+$2.00)
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    <!-- Special Instructions -->
+                                    <div>
+                                        <label [for]="'instructions' + item.id"
+                                            class="form-label text-sm text-gray-500 dark:text-dark-500">
+                                            Special Instructions
+                                        </label>
+                                        <input type="text" [id]="'instructions' + item.id" class="form-input text-sm"
+                                            [value]="item.instructions" (input)="updateInstructions(item, $event)"
+                                            placeholder="E.g., Extra hot, Light ice...">
+                                    </div>
+
+                                    <!-- Quantity and Price -->
+                                    <div class="flex items-center justify-between pt-2">
+                                        <div class="flex gap-space items-center">
+                                            <div
+                                                class="flex items-center w-32 p-1 text-center border border-gray-200 rounded-md dark:border-dark-800">
+                                                <button (click)="updateQuantity(item, -1)"
+                                                    class="flex items-center justify-center transition duration-200 ease-linear rounded-md text-primary-500 minus size-8 shrink-0 bg-primary-500/20 hover:text-primary-700">
+                                                    <lucide-angular name="minus" class="size-4"></lucide-angular>
+                                                </button>
+                                                <input type="text" [value]="item.quantity"
+                                                    class="h-8 p-0 text-center border-0 rounded-none form-input"
+                                                    readonly>
+                                                <button (click)="updateQuantity(item, 1)"
+                                                    class="flex items-center justify-center transition duration-200 ease-linear rounded-md text-primary-500 plus size-8 shrink-0 bg-primary-500/20 hover:text-primary-700">
+                                                    <lucide-angular name="plus" class="size-4"></lucide-angular>
+                                                </button>
+                                            </div>
+                                            <h6 class="text-sm text-gray-500">
+                                                <span class="font-medium">Subtotal:</span> ${{ getItemSubtotal(item) }}
+                                            </h6>
+                                        </div>
+                                        <button (click)="removeItem(item.id)" class="btn btn-sub-red btn-icon">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="size-5" viewBox="0 0 20 20"
+                                                fill="currentColor">
+                                                <path fill-rule="evenodd"
+                                                    d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z"
+                                                    clip-rule="evenodd" />
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- No Records Found -->
+            <div *ngIf="items.length === 0" class="card">
+                <div class="card-body">
+                    <div class="text-center py-8">
+                        <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" class="mx-auto size-12"
+                            viewBox="0 0 48 48">
+                            <linearGradient id="SVGID_1__h35ynqzIJzH4_gr1" x1="34.598" x2="15.982" y1="15.982"
+                                y2="34.598" gradientUnits="userSpaceOnUse">
+                                <stop offset="0" stop-color="#60e8fe"></stop>
+                                <stop offset=".033" stop-color="#6ae9fe"></stop>
+                                <stop offset=".197" stop-color="#97f0fe"></stop>
+                                <stop offset=".362" stop-color="#bdf5ff"></stop>
+                                <stop offset=".525" stop-color="#dafaff"></stop>
+                                <stop offset=".687" stop-color="#eefdff"></stop>
+                                <stop offset=".846" stop-color="#fbfeff"></stop>
+                                <stop offset="1" stop-color="#fff"></stop>
+                            </linearGradient>
+                            <path fill="url(#SVGID_1__h35ynqzIJzH4_gr1)"
+                                d="M40.036,33.826L31.68,25.6c0.847-1.739,1.335-3.684,1.335-5.748c0-7.27-5.894-13.164-13.164-13.164	S6.688,12.582,6.688,19.852c0,7.27,5.894,13.164,13.164,13.164c2.056,0,3.995-0.485,5.728-1.326l3.914,4.015l4.331,4.331	c1.715,1.715,4.496,1.715,6.211,0C41.751,38.321,41.751,35.541,40.036,33.826z">
+                            </path>
+                            <path fill="none" stroke="#10cfe3" stroke-linecap="round" stroke-linejoin="round"
+                                stroke-miterlimit="10" stroke-width="3"
+                                d="M31.95,25.739l8.086,8.086c1.715,1.715,1.715,4.496,0,6.211l0,0c-1.715,1.715-4.496,1.715-6.211,0	l-4.331-4.331">
+                            </path>
+                            <path fill="none" stroke="#10cfe3" stroke-linecap="round" stroke-linejoin="round"
+                                stroke-miterlimit="10" stroke-width="3"
+                                d="M7.525,24.511c-1.771-4.694-0.767-10.196,3.011-13.975c3.847-3.847,9.48-4.817,14.228-2.912">
+                            </path>
+                            <path fill="none" stroke="#10cfe3" stroke-linecap="round" stroke-linejoin="round"
+                                stroke-miterlimit="10" stroke-width="3"
+                                d="M30.856,12.603c3.376,5.114,2.814,12.063-1.688,16.565c-4.858,4.858-12.565,5.129-17.741,0.814">
+                            </path>
+                        </svg>
+                        <p class="mt-2 text-center text-gray-500 dark:text-dark-500">Your shopping cart is empty</p>
+                        <a routerLink="/dashboard-pos-user-interface" class="btn btn-primary mt-4">
+                            Add Items
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="lg:col-span-4">
+            <div class="sticky top-24">
+                <div class="card">
+                    <div class="card-header">
+                        <h6 class="card-title mb-0 flex items-center gap-2">
+                            <lucide-angular name="credit-card" class="size-4"></lucide-angular>
+                            Order Summary
+                        </h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="mb-6">
+                            <label for="discountCode" class="form-label">Discount Code</label>
+                            <div class="flex gap-2">
+                                <input type="text" id="discountCode" class="form-input" [(ngModel)]="discountCode"
+                                    placeholder="Enter coupon code">
+                                <button (click)="applyDiscount()" class="btn btn-outline-primary">Apply</button>
+                            </div>
+                        </div>
+                        <table class="table flush">
+                            <tr>
+                                <td class="font-medium">Sub Total</td>
+                                <td class="text-right">${{ subtotal.toFixed(2) }}</td>
+                            </tr>
+                            <tr>
+                                <td class="font-medium">Tax(5.6%)</td>
+                                <td class="text-right">${{ vat.toFixed(2) }}</td>
+                            </tr>
+                            <tr>
+                                <td class="font-medium">Discount</td>
+                                <td class="text-right text-red-500">-${{ discountAmount.toFixed(2) }}</td>
+                            </tr>
+                            <tr class="border-t border-gray-200/50 dark:border-dark-700/50">
+                                <td>
+                                    <h5>Total Amount</h5>
+                                </td>
+                                <td class="text-right text-primary-500">
+                                    <h5>${{ total.toFixed(2) }}</h5>
+                                </td>
+                            </tr>
+                        </table>
+                        <div class="mt-8">
+                            <button (click)="proceedToCheckout()" class="w-full btn btn-primary">
+                                Proceed to Checkout
+                            </button>
+                        </div>
+                        <p class="text-center text-sm text-gray-500 dark:text-dark-500 mt-4">
+                            By proceeding to checkout, you agree to our terms of service and privacy policy.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,67 @@
+<div
+  class="relative flex items-center justify-center min-h-screen py-20 from-sky-500/10 ltr:bg-gradient-to-l rtl:bg-gradient-to-r via-green-500/5 to-pink-500/5">
+  <div class="container">
+    <div class="grid grid-cols-12">
+      <div class="col-span-12 text-center lg:col-span-8 lg:col-start-3">
+        <h1
+          class="pb-5 text-4xl font-bold text-transparent drop-shadow-lg md:text-6xl lg:text-7xl ltr:bg-gradient-to-r rtl:bg-gradient-to-l from-primary-500 vie-purple-500 to-pink-500 bg-clip-text"
+          data-tilt data-tilt-full-page-listening>We're Coming Soon</h1>
+        <div id="clockdiv" class="flex items-center justify-center gap-5 mb-5">
+          <div class="w-24 p-2">
+            <h3 class="mb-1 days">{{days}}</h3>
+            <div class="text-gray-500 dark:text-dark-500 smalltext">Days</div>
+          </div>
+          <div class="w-24 p-2">
+            <h3 class="mb-1 hours">{{hours}}</h3>
+            <div class="text-gray-500 dark:text-dark-500 smalltext">Hours</div>
+          </div>
+          <div class="w-24 p-2">
+            <h3 class="mb-1 minutes">{{minutes}}</h3>
+            <div class="text-gray-500 dark:text-dark-500 smalltext">Minutes</div>
+          </div>
+          <div class="w-24 p-2">
+            <h3 class="mb-1 seconds">{{seconds}}</h3>
+            <div class="text-gray-500 dark:text-dark-500 smalltext">Seconds</div>
+          </div>
+        </div>
+        <p class="max-w-2xl mx-auto mb-5 text-gray-500 dark:text-dark-500 text-16">Receive the latest articles and
+          business updates you need to know, along with special weekly recommendations.</p>
+        <form action="javascript: void(0);" class="max-w-xl mx-auto">
+          <div class="relative">
+            <input type="email" class="h-12 bg-transparent ltr:pr-32 rtl:pl-32 dark:bg-transparent form-input"
+              placeholder="Enter your email">
+            <button type="submit" class="absolute ltr:right-1 rtl:left-1 top-1 btn btn-primary">Subscribe</button>
+          </div>
+          <p class="mt-4 text-gray-500 dark:text-dark-500">Sign up now to receive early notifications about our launch
+            date!</p>
+        </form>
+        <div class="flex items-center justify-center gap-2 mt-5">
+          <a href="javascript: void(0);"
+            class="inline-flex items-center justify-center text-white rounded-full shadow-lg bg-sky-500 shadow-gray-200 dark:shadow-dark-800 size-10">
+            <lucide-angular name="Linkedin" class="size-5"></lucide-angular>
+          </a>
+          <a href="javascript: void(0);"
+            class="inline-flex items-center justify-center text-white bg-pink-500 rounded-full shadow-lg shadow-gray-200 dark:shadow-dark-800 size-10">
+            <lucide-angular name="Dribbble" class="size-5"></lucide-angular>
+          </a>
+          <a href="javascript: void(0);"
+            class="inline-flex items-center justify-center text-white rounded-full shadow-lg bg-primary-500 shadow-gray-200 dark:shadow-dark-800 size-10">
+            <lucide-angular name="facebook" class="size-5"></lucide-angular>
+          </a>
+          <a href="javascript: void(0);"
+            class="inline-flex items-center justify-center text-white bg-purple-500 rounded-full shadow-lg shadow-gray-200 dark:shadow-dark-800 size-10">
+            <lucide-angular name="Twitch" class="size-5"></lucide-angular>
+          </a>
+          <a href="javascript: void(0);"
+            class="inline-flex items-center justify-center text-white bg-pink-500 rounded-full shadow-lg shadow-gray-200 dark:shadow-dark-800 size-10">
+            <lucide-angular name="Instagram" class="size-5"></lucide-angular>
+          </a>
+          <a href="javascript: void(0);"
+            class="inline-flex items-center justify-center text-white bg-orange-500 rounded-full shadow-lg shadow-gray-200 dark:shadow-dark-800 size-10">
+            <lucide-angular name="Gitlab" class="size-5"></lucide-angular>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

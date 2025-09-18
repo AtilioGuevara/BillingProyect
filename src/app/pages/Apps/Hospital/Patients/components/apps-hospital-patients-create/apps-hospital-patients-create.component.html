@@ -1,0 +1,234 @@
+<app-page-title [pageTitle]="'Apps'" [Title]="'Create Patient'"></app-page-title>
+
+<div class="card">
+  <div class="card-header">
+    <h6 class="card-title">Patient Personal {{pId ? 'Edit Details' : 'Create Details' }}</h6>
+  </div>
+  <div class="card-body">
+    <div [formGroup]="formGroup">
+      <div class="grid grid-cols-12 gap-space">
+        <div class="col-span-12">
+          <div>
+            <label for="logo" class="flex items-center justify-center p-2 mx-auto overflow-hidden bg-gray-100 border border-gray-200 rounded cursor-pointer dark:bg-dark-850 dark:border-dark-800 size-32">
+              <img *ngIf="formGroup.get('image')?.value" [src]="formGroup.get('image')?.value" class="object-cover w-full h-full">
+              <span *ngIf="!formGroup.get('image')?.value" class="flex flex-col items-center text-gray-500 dark:text-dark-500">
+                <lucide-angular name="upload"></lucide-angular>
+                <span class="block mt-2">Upload Images</span>
+              </span>
+            </label>
+            <span *ngIf="formGroup.get('image')?.hasError('required')" class="text-red-500">This Field is
+              required</span>
+            <div class="hidden mt-4">
+              <label class="block">
+                <span class="sr-only">Choose profile photo</span>
+                <input type="file" name="logo" id="logo" (change)="onFileChange($event)" class="block w-full text-sm file:rounded-md focus:outline-0 text-slate-500 file:mr-4 file:py-2 file:px-4 file:border-0 file:text-sm file:font-semibold file:bg-violet-50 file:text-violet-700 hover:file:bg-violet-100" formControlName="image" />
+              </label>
+            </div>
+          </div>
+        </div>
+        <div class="col-span-12 md:col-span-6 xl:col-span-4">
+          <label for="firstNameInput" class="form-label">First Name <span class="text-red-500">*</span></label>
+          <input type="text" id="firstNameInput" formControlName="firstName" class="form-input" placeholder="Enter your first name" required>
+          <span *ngIf="formGroup.get('firstName')?.hasError('required')" class="text-red-500"> This Filed is
+            Required</span>
+        </div>
+        <div class="col-span-12 md:col-span-6 xl:col-span-4">
+          <label for="middleNameInput" class="form-label">Middle Name</label>
+          <input type="text" id="middleNameInput" formControlName="middleName" class="form-input" placeholder="Enter your middle name">
+        </div>
+        <div class="col-span-12 md:col-span-6 xl:col-span-4">
+          <label for="lastNameInput" class="form-label">Last Name <span class="text-red-500">*</span></label>
+          <input type="text" id="lastNameInput" class="form-input" placeholder="Enter your last name" title="Only letters and spaces allowed" formControlName="lastName">
+          <span *ngIf="formGroup.get('lastName')?.hasError('required')" class="text-red-500"> This Filed is
+            Required</span>
+        </div>
+        <div class="col-span-12 md:col-span-6 xl:col-span-4">
+          <label for="dateOfBirthInput" class="form-label">Date of Birth <span class="text-red-500">*</span></label>
+          <input type="text" id="dateOfBirthInput" class="form-input" placeholder="Select date" data-provider="flatpickr" mwlFlatpickr [flatpickrOptions]="{dateFormat: 'Y-m-d'}" formControlName="dateOfBirth">
+          <span *ngIf="formGroup.get('dateOfBirth')?.hasError('required')" class="text-red-500"> This Filed is
+            Required</span>
+        </div>
+        <div class="col-span-12 md:col-span-6 xl:col-span-4">
+          <label for="ageInput" class="form-label">Age <span class="text-red-500">*</span></label>
+          <input type="number" id="ageInput" class="form-input" placeholder="0" formControlName="age">
+
+          <!-- Required Field Error -->
+          <span *ngIf="formGroup.get('age')?.hasError('required')" class="text-red-500">
+            This Field is Required
+          </span>
+
+          <!-- Minimum Value Error -->
+          <span *ngIf="formGroup.get('age')?.hasError('min')" class="text-red-500">
+            Age must be at least 1
+          </span>
+
+          <!-- Maximum Value Error -->
+          <span *ngIf="formGroup.get('age')?.hasError('max')" class="text-red-500">
+            Age must be less than or equal to 100
+          </span>
+        </div>
+
+        <div class="col-span-12 md:col-span-6 xl:col-span-4">
+          <label for="genderSelect" class="form-label">Gender <span class="text-red-500">*</span></label>
+          <ng-select id="statusSelect" class="filter-ng-select" [items]="genderOptions" bindLabel="label" bindValue="value" placeholder="Select Status" formControlName="gender">
+          </ng-select>
+          <span *ngIf="formGroup.get('gender')?.hasError('required')" class="text-red-500"> This Filed is
+            Required</span>
+        </div>
+        <div class="col-span-12 md:col-span-6 xl:col-span-4">
+          <label for="weightInput" class="form-label">Weight (KG) <span class="text-red-500">*</span></label>
+          <input type="text" id="weightInput" class="form-input" placeholder="0 kg" formControlName="weight">
+          <span *ngIf="formGroup.get('weight')?.hasError('required')" class="text-red-500"> This Filed is
+            Required</span>
+        </div>
+        <div class="col-span-12 md:col-span-6 xl:col-span-4">
+          <label for="heightInput" class="form-label">Height <span class="text-red-500">*</span></label>
+          <input type="text" id="heightInput" class="form-input" placeholder="0' 0'" formControlName="height">
+          <span *ngIf="formGroup.get('height')?.hasError('required')" class="text-red-500"> This Filed is
+            Required</span>
+        </div>
+        <div class="col-span-12 md:col-span-6 xl:col-span-4">
+          <label for="bloodPressureInput" class="form-label">Blood Pressure <span class="text-red-500">*</span></label>
+          <input type="text" id="bloodPressureInput" class="form-input" placeholder="Blood pressure" formControlName="bloodPressure">
+          <span *ngIf="formGroup.get('bloodPressure')?.hasError('required')" class="text-red-500"> This Filed is
+            Required</span>
+        </div>
+        <div class="col-span-12 md:col-span-6">
+          <label for="phoneNumber" class="form-label">
+            Phone Number <span class="text-red-500">*</span>
+          </label>
+          <div class="flex form-input">
+            <select id="countries" class="bg-transparent outline-hidden cursor-pointer dark:bg-dark-900 ltr:pl-3 rtl:pr-3" (change)="onSelectChangeHandler($event)">
+              <option *ngFor="let country of countryCodes" [value]="country.dial_code">
+                {{ country.name }}
+              </option>
+            </select>
+            <input type="text" class="w-full p-3 bg-transparent border-gray-200 outline-hidden ltr:ml-3 rtl:mr-3 ltr:border-l-2 dark:border-dark-800 rtl:border-r-2" [mask]="currentMask" formControlName="phoneNumber" [placeholder]="placeholderFormat">
+          </div>
+        </div>
+        <div class="col-span-12 md:col-span-6">
+          <label for="emergencyNumber" class="form-label">Emergency Number <span class="text-red-500">*</span></label>
+          <div class="flex form-input">
+            <select id="countries" class="bg-transparent outline-hidden cursor-pointer dark:bg-dark-900 ltr:pl-3 rtl:pr-3" (change)="onSelectChangeHandlerForE($event)">
+              <option *ngFor="let country of countryCodes" [value]="country.dial_code">{{ country.name }}</option>
+            </select>
+            <input type="text" class="w-full p-3 bg-transparent border-gray-200 outline-hidden ltr:ml-3 rtl:mr-3 ltr:border-l-2 dark:border-dark-800 rtl:border-r-2" [mask]="currentMaskForE" formControlName="emergencyNumber" [placeholder]="placeholderFormatForE">
+          </div>
+        </div>
+        <div class="col-span-12 md:col-span-6 xl:col-span-4">
+          <label for="emailInput" class="form-label">Email <span class="text-red-500">*</span></label>
+          <input type="email" id="emailInput" class="form-input" placeholder="example@SRBThemes.com" formControlName="email">
+          <span *ngIf="formGroup.get('email')?.hasError('required')" class="text-red-500"> This Filed is
+            Required</span>
+        </div>
+        <div class="col-span-12 md:col-span-6 xl:col-span-4">
+          <label for="occupationInput" class="form-label">Occupation <span class="text-red-500">*</span></label>
+          <input type="text" id="occupationInput" class="form-input" placeholder="Enter your occupation" title="Only letters and spaces allowed" formControlName="occupation">
+          <span *ngIf="formGroup.get('occupation')?.hasError('required')" class="text-red-500"> This Filed is
+            Required</span>
+        </div>
+        <div class="col-span-12 md:col-span-6 xl:col-span-4">
+          <label for="cityInput" class="form-label">City <span class="text-red-500">*</span></label>
+          <input type="text" id="cityInput" class="form-input" placeholder="Enter city name" title="Only letters and spaces allowed" formControlName="city">
+          <span *ngIf="formGroup.get('city')?.hasError('required')" class="text-red-500"> This Filed is
+            Required</span>
+        </div>
+        <div class="col-span-12 md:col-span-6 xl:col-span-4">
+          <label for="stateInput" class="form-label">State Name <span class="text-red-500">*</span></label>
+          <input type="text" id="stateInput" class="form-input" placeholder="Enter state name" title="Only letters and spaces allowed" formControlName="state">
+          <span *ngIf="formGroup.get('state')?.hasError('required')" class="text-red-500"> This Filed is
+            Required</span>
+        </div>
+        <div class="col-span-12 md:col-span-6 xl:col-span-4">
+          <label for="countryInput" class="form-label">Country Name <span class="text-red-500">*</span></label>
+          <input type="text" id="countryInput" class="form-input" placeholder="Enter country name" title="Only letters and spaces allowed" formControlName="country">
+          <span *ngIf="formGroup.get('country')?.hasError('required')" class="text-red-500"> This Filed is
+            Required</span>
+        </div>
+        <div class="col-span-12 md:col-span-6 xl:col-span-4">
+          <label for="zipCodeInput" class="form-label">Zip Code <span class="text-red-500">*</span></label>
+          <input type="number" id="zipCodeInput" class="form-input" placeholder="000 000" formControlName="zipCode">
+          <span *ngIf="formGroup.get('zipCode')?.hasError('required')" class="text-red-500"> This Filed is
+            Required</span>
+        </div>
+        <div class="col-span-12 md:col-span-6 xl:col-span-3">
+          <label for="familyDoctorName" class="form-label">Family Doctor</label>
+          <input type="text" id="familyDoctorName" class="form-input" placeholder="Enter doctor name" title="Only letters and spaces allowed" formControlName="familyDoctorName">
+        </div>
+        <div class="col-span-12 md:col-span-6 xl:col-span-3">
+          <label for="referringDoctorName" class="form-label">Referring Doctor</label>
+          <input type="text" id="referringDoctorName" class="form-input" placeholder="Referring doctor" title="Only letters and spaces allowed" formControlName="referringDoctorName">
+        </div>
+        <div class="col-span-12 md:col-span-6 xl:col-span-3">
+          <label for="assignedDoctorName" class="form-label">Assigned Doctor</label>
+          <input type="text" id="assignedDoctorName" class="form-input" placeholder="Assigned doctor" title="Only letters and spaces allowed" formControlName="assignedDoctorName">
+        </div>
+        <div class="col-span-12 md:col-span-6 xl:col-span-3">
+          <label for="pharmacyDoctorName" class="form-label">Pharmacy Name</label>
+          <input type="text" id="pharmacyDoctorName" class="form-input" placeholder="Pharmacy Name" title="Only letters and spaces allowed" formControlName="pharmacyName">
+        </div>
+        <div class="col-span-12 md:col-span-6 xl:col-span-3">
+          <label for="pharmacyDoctorName" class="form-label">Pharmacy Name</label>
+          <input type="text" id="pharmacyDoctorName" class="form-input" placeholder="Pharmacy Name" title="Only letters and spaces allowed" formControlName="pharmacyName">
+        </div>
+        <div class="col-span-12">
+          <label class="form-label">Insurance</label>
+          <div class="flex items-center gap-4 flex-wrap">
+            <div class="input-radio-group">
+              <input type="radio" class="input-radio input-radio-primary" formControlName="insuranceOption" id="insuranceOption1" value="Yes" (change)="onInsuranceChange($event)">
+              <label for="insuranceOption1" class="input-radio-label">
+                Yes
+              </label>
+            </div>
+            <div class="input-radio-group">
+              <input type="radio" class="input-radio input-radio-primary" formControlName="insuranceOption" value="No" id="insuranceOption2" (change)="onInsuranceChange($event)">
+              <label for="insuranceOption2" class="input-radio-label">
+                No
+              </label>
+            </div>
+          </div>
+        </div>
+        <div class="col-span-12">
+          <div class="flex items-center justify-end gap-2">
+            <button class="btn btn-primary" (click)="addOrEdit()">{{pId ? 'Edit' : 'Submit' }} Now</button>
+            <button type="reset" class="btn btn-sub-gray">Reset</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="showInsuranceCard" class="card">
+  <div class="card-header">
+    <h6 class="card-title">Insurance Information</h6>
+  </div>
+  <div class="card-body">
+    <form [formGroup]="formGroup">
+      <div class="grid grid-cols-12 gap-space">
+        <div class="col-span-12 md:col-span-6 xl:col-span-4">
+          <label for="insuranceProviderInput" class="form-label">Insurance Provider <span class="text-red-500">*</span></label>
+          <input type="text" id="insuranceProviderInput" class="form-input" placeholder="Insurance provider" title="Only letters and spaces allowed" formControlName="insuranceName">
+        </div>
+        <div class="col-span-12 md:col-span-6 xl:col-span-4">
+          <label for="policyNumberInput" class="form-label">Policy Number <span class="text-red-500">*</span></label>
+          <input type="text" id="policyNumberInput" class="form-input" placeholder="000 0000 0000 0000 000" pattern="^[A-Za-z0-9]+$" title="Policy number can only contain letters and numbers" formControlName="insurancePolicyNumber">
+        </div>
+        <div class="col-span-12 md:col-span-6 xl:col-span-4">
+          <label for="startDateInput" class="form-label">Start Date <span class="text-red-500">*</span></label>
+          <input type="text" id="startDateInput" class="form-input" placeholder="Select Date" formControlName="startDate" data-provider="flatpickr" mwlFlatpickr [flatpickrOptions]="{dateFormat: 'Y-m-d'}">
+        </div>
+        <div class="col-span-12 md:col-span-6 xl:col-span-4">
+          <label for="effectiveDateInput" class="form-label">Effective Date <span class="text-red-500">*</span></label>
+          <input type="text" id="effectiveDateInput" class="form-input" placeholder="Select Date" formControlName="effectiveDate" mwlFlatpickr [flatpickrOptions]="{dateFormat: 'Y-m-d'}">
+        </div>
+        <div class="col-span-12">
+          <div class="flex items-center justify-end gap-2">
+            <button class="btn btn-primary" type="submit">Save Now</button>
+            <button type="reset" class="btn btn-sub-gray">Reset</button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

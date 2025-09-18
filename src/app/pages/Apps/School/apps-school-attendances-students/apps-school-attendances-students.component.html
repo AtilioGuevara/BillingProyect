@@ -1,0 +1,314 @@
+<app-page-title [pageTitle]="'Students'" [Title]="'Attendance'"></app-page-title>
+
+<div class="grid grid-cols-12 gap-x-space">
+  <div class="col-span-12 md:col-span-7">
+    <h6 class="mb-1">Attendance History</h6>
+    <p class="mb-5 text-gray-500 dark:text-dark-500">
+      <lucide-angular name="sun-medium" class="inline-block size-4 ltr:mr-1 rtl:ml-1"></lucide-angular>
+      Today Mon, July 8, 2024
+    </p>
+    <div class="flex items-center mb-space">
+      <button class="border-gray-200 rounded-r-none dark:border-dark-800 btn">
+        <lucide-angular name="dot" class="inline-block ltr:mr-0.5 rtl:ml-0.5 text-green-500 size-6"></lucide-angular>
+        <strong class="whitespace-nowrap ltr:mr-1 rtl:ml-1">On Time</strong>
+        <span class="text-gray-500 dark:text-dark-500">80%</span>
+      </button>
+      <button class="border-gray-200 rounded-none dark:border-dark-800 border-x-0 btn">
+        <lucide-angular name="dot" class="inline-block ltr:mr-0.5 rtl:ml-0.5 text-orange-500 size-6"></lucide-angular>
+        <strong class="ltr:mr-1 rtl:ml-1">Late</strong>
+        <span class="text-gray-500 dark:text-dark-500">10%</span>
+      </button>
+      <button class="border-gray-200 rounded-l-none dark:border-dark-800 btn">
+        <lucide-angular name="dot" class="inline-block ltr:mr-0.5 rtl:ml-0.5 text-red-500 size-6"></lucide-angular>
+        <strong class="ltr:mr-1 rtl:ml-1">Absent</strong>
+        <span class="text-gray-500 dark:text-dark-500">10%</span>
+      </button>
+    </div>
+  </div>
+
+  <div class="col-span-12 md:col-span-5">
+    <div class="flex justify-end gap-3 mb-space">
+      <img src="assets/images/avatar/user-14.png" alt="" class="rounded-full size-10">
+      <div>
+        <h6>Michael Johnson</h6>
+        <p class="text-sm text-gray-500 dark:text-dark-500">Class: 12 (A)</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-span-12 sm:col-span-6 md:col-span-3 card">
+    <div class="card-body">
+      <p class="mb-2 text-gray-500 dark:text-dark-500">Total Attendance</p>
+      <h5><span [countUp]="21" [options]="{decimalPlaces:0}"></span></h5>
+    </div>
+  </div>
+
+  <div class="col-span-12 sm:col-span-6 md:col-span-3 card">
+    <div class="card-body">
+      <p class="mb-2 text-gray-500 dark:text-dark-500">Absent Attendance</p>
+      <h5><span [countUp]="3" [options]="{decimalPlaces:0}"></span></h5>
+    </div>
+  </div>
+
+  <div class="col-span-12 sm:col-span-6 md:col-span-3 card">
+    <div class="card-body">
+      <p class="mb-2 text-gray-500 dark:text-dark-500">Late Attendance</p>
+      <h5><span [countUp]="5" [options]="{decimalPlaces:0}"></span></h5>
+    </div>
+  </div>
+
+  <div class="col-span-12 sm:col-span-6 md:col-span-3 card">
+    <div class="card-body">
+      <p class="mb-2 text-gray-500 dark:text-dark-500">Total Hours</p>
+      <h5><span [countUp]="178" [options]="{decimalPlaces:0}"></span></h5>
+    </div>
+  </div>
+
+</div>
+
+<h6 class="mb-3">Attendance List</h6>
+<div class="grid grid-cols-12 gap-x-space">
+  <div class="col-span-12 border-t-2 md:col-span-6 lg:col-span-4 card border-t-green-300">
+    <div class="card-body">
+      <div class="flex items-center gap-3">
+        <h6 class="grow">Thu, July 04, 2024</h6>
+        <span class="badge shrink-0 badge-green">On Time</span>
+      </div>
+      <div class="grid grid-cols-3 my-4">
+        <div>
+          <p class="mb-1 text-gray-500 dark:text-dark-500">Check In</p>
+          <h6>9:00 AM</h6>
+        </div>
+        <div>
+          <p class="mb-1 text-gray-500 dark:text-dark-500">Check Out</p>
+          <h6>6:00 PM</h6>
+        </div>
+        <div>
+          <p class="mb-1 text-gray-500 dark:text-dark-500">Total</p>
+          <h6>9hr</h6>
+        </div>
+      </div>
+      <div class="flex items-center gap-3">
+        <p class="grow">Notes:</p>
+        <p class="text-gray-500 dark:text-dark-500 shrink-0">Well Done</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-span-12 border-t-2 md:col-span-6 lg:col-span-4 card border-t-green-300">
+    <div class="card-body">
+      <div class="flex items-center gap-3">
+        <h6 class="grow">Wed, July 03, 2024</h6>
+        <span class="badge shrink-0 badge-green">On Time</span>
+      </div>
+      <div class="grid grid-cols-3 my-4">
+        <div>
+          <p class="mb-1 text-gray-500 dark:text-dark-500">Check In</p>
+          <h6>9:15 AM</h6>
+        </div>
+        <div>
+          <p class="mb-1 text-gray-500 dark:text-dark-500">Check Out</p>
+          <h6>5:45 PM</h6>
+        </div>
+        <div>
+          <p class="mb-1 text-gray-500 dark:text-dark-500">Total</p>
+          <h6>7:30hr</h6>
+        </div>
+      </div>
+      <div class="flex items-center gap-3">
+        <p class="grow">Notes:</p>
+        <p class="text-gray-500 dark:text-dark-500 shrink-0">Well Done</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-span-12 border-t-2 md:col-span-6 lg:col-span-4 card border-t-orange-300">
+    <div class="card-body">
+      <div class="flex items-center gap-3">
+        <h6 class="grow">Tue, July 02, 2024</h6>
+        <span class="badge shrink-0 badge-orange">Late</span>
+      </div>
+      <div class="grid grid-cols-3 my-4">
+        <div>
+          <p class="mb-1 text-gray-500 dark:text-dark-500">Check In</p>
+          <h6>9:00 AM</h6>
+        </div>
+        <div>
+          <p class="mb-1 text-gray-500 dark:text-dark-500">Check Out</p>
+          <h6>5:00 PM</h6>
+        </div>
+        <div>
+          <p class="mb-1 text-gray-500 dark:text-dark-500">Total</p>
+          <h6>8hr</h6>
+        </div>
+      </div>
+      <div class="flex items-center gap-3">
+        <p class="grow">Notes:</p>
+        <p class="text-gray-500 dark:text-dark-500 shrink-0">Traffic Issue</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-span-12 border-t-2 md:col-span-6 lg:col-span-4 card border-t-green-300">
+    <div class="card-body">
+      <div class="flex items-center gap-3">
+        <h6 class="grow">Mon, July 01, 2024</h6>
+        <span class="badge shrink-0 badge-green">On Time</span>
+      </div>
+      <div class="grid grid-cols-3 my-4">
+        <div>
+          <p class="mb-1 text-gray-500 dark:text-dark-500">Check In</p>
+          <h6>8:45 AM</h6>
+        </div>
+        <div>
+          <p class="mb-1 text-gray-500 dark:text-dark-500">Check Out</p>
+          <h6>6:00 PM</h6>
+        </div>
+        <div>
+          <p class="mb-1 text-gray-500 dark:text-dark-500">Total</p>
+          <h6>9:15hr</h6>
+        </div>
+      </div>
+      <div class="flex items-center gap-3">
+        <p class="grow">Notes:</p>
+        <p class="text-gray-500 dark:text-dark-500 shrink-0">Well Done</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-span-12 border-t-2 md:col-span-6 lg:col-span-4 card border-t-gray-400">
+    <div class="card-body">
+      <div class="flex items-center gap-3">
+        <h6 class="grow">Sun, Jun 30, 2024</h6>
+        <span class="badge shrink-0 badge-gray">Holiday</span>
+      </div>
+      <div class="grid grid-cols-3 my-4">
+        <div>
+          <p class="mb-1 text-gray-500 dark:text-dark-500">Check In</p>
+          <h6>9:00 AM</h6>
+        </div>
+        <div>
+          <p class="mb-1 text-gray-500 dark:text-dark-500">Check Out</p>
+          <h6>5:00 PM</h6>
+        </div>
+        <div>
+          <p class="mb-1 text-gray-500 dark:text-dark-500">Total</p>
+          <h6>8hr</h6>
+        </div>
+      </div>
+      <div class="flex items-center gap-3">
+        <p class="grow">Notes:</p>
+        <p class="text-gray-500 dark:text-dark-500 shrink-0">Well Done</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-span-12 border-t-2 md:col-span-6 lg:col-span-4 card border-t-green-300">
+    <div class="card-body">
+      <div class="flex items-center gap-3">
+        <h6 class="grow">Sat, Jun 29, 2024</h6>
+        <span class="badge shrink-0 badge-green">On Time</span>
+      </div>
+      <div class="grid grid-cols-3 my-4">
+        <div>
+          <p class="mb-1 text-gray-500 dark:text-dark-500">Check In</p>
+          <h6>9:00 AM</h6>
+        </div>
+        <div>
+          <p class="mb-1 text-gray-500 dark:text-dark-500">Check Out</p>
+          <h6>6:00 PM</h6>
+        </div>
+        <div>
+          <p class="mb-1 text-gray-500 dark:text-dark-500">Total</p>
+          <h6>9hr</h6>
+        </div>
+      </div>
+      <div class="flex items-center gap-3">
+        <p class="grow">Notes:</p>
+        <p class="text-gray-500 dark:text-dark-500 shrink-0">Well Done</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-span-12 border-t-2 md:col-span-6 lg:col-span-4 card border-t-orange-300">
+    <div class="card-body">
+      <div class="flex items-center gap-3">
+        <h6 class="grow">Fri, Jun 28, 2024</h6>
+        <span class="badge shrink-0 badge-orange">Late</span>
+      </div>
+      <div class="grid grid-cols-3 my-4">
+        <div>
+          <p class="mb-1 text-gray-500 dark:text-dark-500">Check In</p>
+          <h6>9:30 AM</h6>
+        </div>
+        <div>
+          <p class="mb-1 text-gray-500 dark:text-dark-500">Check Out</p>
+          <h6>6:00 PM</h6>
+        </div>
+        <div>
+          <p class="mb-1 text-gray-500 dark:text-dark-500">Total</p>
+          <h6>8:30hr</h6>
+        </div>
+      </div>
+      <div class="flex items-center gap-3">
+        <p class="grow">Notes:</p>
+        <p class="text-gray-500 dark:text-dark-500 shrink-0">Traffic Issue</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-span-12 border-t-2 md:col-span-6 lg:col-span-4 card border-t-green-300">
+    <div class="card-body">
+      <div class="flex items-center gap-3">
+        <h6 class="grow">Thu, Jun 27, 2024</h6>
+        <span class="badge shrink-0 badge-green">On Time</span>
+      </div>
+      <div class="grid grid-cols-3 my-4">
+        <div>
+          <p class="mb-1 text-gray-500 dark:text-dark-500">Check In</p>
+          <h6>9:00 AM</h6>
+        </div>
+        <div>
+          <p class="mb-1 text-gray-500 dark:text-dark-500">Check Out</p>
+          <h6>5:00 PM</h6>
+        </div>
+        <div>
+          <p class="mb-1 text-gray-500 dark:text-dark-500">Total</p>
+          <h6>8hr</h6>
+        </div>
+      </div>
+      <div class="flex items-center gap-3">
+        <p class="grow">Notes:</p>
+        <p class="text-gray-500 dark:text-dark-500 shrink-0">Well Done</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-span-12 border-t-2 md:col-span-6 lg:col-span-4 card border-t-green-300">
+    <div class="card-body">
+      <div class="flex items-center gap-3">
+        <h6 class="grow">Wed, Jun 26, 2024</h6>
+        <span class="badge shrink-0 badge-green">On Time</span>
+      </div>
+      <div class="grid grid-cols-3 my-4">
+        <div>
+          <p class="mb-1 text-gray-500 dark:text-dark-500">Check In</p>
+          <h6>9:00 AM</h6>
+        </div>
+        <div>
+          <p class="mb-1 text-gray-500 dark:text-dark-500">Check Out</p>
+          <h6>6:00 PM</h6>
+        </div>
+        <div>
+          <p class="mb-1 text-gray-500 dark:text-dark-500">Total</p>
+          <h6>9hr</h6>
+        </div>
+      </div>
+      <div class="flex items-center gap-3">
+        <p class="grow">Notes:</p>
+        <p class="text-gray-500 dark:text-dark-500 shrink-0">Well Done</p>
+      </div>
+    </div>
+  </div>
+
+</div>

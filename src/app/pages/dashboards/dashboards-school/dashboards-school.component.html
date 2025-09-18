@@ -1,0 +1,513 @@
+<app-page-title [Title]="'School'" [pageTitle]="'Dashboards'"></app-page-title>
+
+<div class="grid grid-cols-12 gap-x-space">
+  <div class="relative order-1 col-span-12 md:col-span-4 2xl:col-span-2 card">
+    <div class="card-body">
+      <div class="flex items-center gap-2 mb-7">
+        <div class="flex items-center justify-center rounded-md bg-primary-500 size-7 text-primary-50">
+          <lucide-angular name="GraduationCap" class="size-5"></lucide-angular>
+        </div>
+        <p class="text-gray-500 dark:text-dark-500">Total Students</p>
+      </div>
+      <h5 class="relative inline-block mb-2 before:absolute before:border-b-2 before:border-primary-500 before:inset-x-0 before:-bottom-1">
+        <span class="counters" [countUp]="1478" [options]="{decimalPlaces:0}">0</span>
+      </h5>
+    </div>
+  </div>
+
+  <div class="relative order-2 col-span-12 md:col-span-4 2xl:col-span-2 card">
+    <div class="card-body">
+      <div class="flex items-center gap-2 mb-7">
+        <div class="flex items-center justify-center bg-orange-500 rounded-md size-7 text-orange-50">
+          <lucide-angular name="UserRound" class="size-5"></lucide-angular>
+        </div>
+        <p class="text-gray-500 dark:text-dark-500">Total Teachers</p>
+      </div>
+      <h5 class="relative inline-block mb-2 before:absolute before:border-b-2 before:border-orange-500 before:inset-x-0 before:-bottom-1">
+        <span class="counters" [countUp]="120" [options]="{decimalPlaces:0}">0</span>
+      </h5>
+    </div>
+  </div>
+
+  <div class="relative order-3 col-span-12 md:col-span-4 2xl:col-span-2 card">
+    <div class="card-body">
+      <div class="flex items-center gap-2 mb-7">
+        <div class="flex items-center justify-center rounded-md bg-sky-500 size-7 text-sky-50">
+          <lucide-angular name="BookOpen" class="size-5"></lucide-angular>
+        </div>
+        <p class="text-gray-500 dark:text-dark-500">Total Courses</p>
+      </div>
+      <h5 class="relative inline-block mb-2 before:absolute before:border-b-2 before:border-sky-500 before:inset-x-0 before:-bottom-1">
+        <span class="counters" [countUp]="120" [options]="{decimalPlaces:0}">0</span>
+      </h5>
+    </div>
+  </div>
+
+  <div class="relative order-7 col-span-12 2xl:order-4 2xl:col-span-3 2xl:row-span-2 card">
+    <div class="flex items-center gap-3 card-header">
+      <h6 class="card-title grow">Course Activities</h6>
+      <div class="dropdown shrink-0">
+        <button domixDropdownToggle [dropdownMenu]="dropdown2" type="button" class="flex items-center text-gray-500 dark:text-dark-500">
+          <lucide-angular name="Ellipsis" class="size-5"></lucide-angular>
+        </button>
+        <div #dropdown2 class="!fixed p-2 dropdown-menu hidden" dropdown-position="right">
+          <ul>
+            <li>
+              <a href="javascript:void(0);" class="dropdown-item">
+                <span>Weekly</span>
+              </a>
+            </li>
+            <li>
+              <a href="javascript:void(0);" class="dropdown-item">
+                <span>Monthly</span>
+              </a>
+            </li>
+            <li>
+              <a href="javascript:void(0);" class="dropdown-item">
+                <span>Yearly</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+
+      <app-domix-charts [series]="donutChartConfig.series" [chartOptions]="donutChartConfig.chartOptions">
+      </app-domix-charts>
+    </div>
+  </div>
+
+
+  <div class="order-8 col-span-12 2xl:order-5 2xl:col-span-3 2xl:row-span-4 card">
+    <div class="card-body">
+      <div class="mb-5">
+        <div>
+          <h6 class="mb-3">{{ monthName + ', ' + year }}</h6>
+          <ngx-simplebar [options]="options">
+            <div class="flex items-center gap-2">
+              <ng-container *ngFor="let day of daysInMonth">
+                <a href="javascript: void(0);" [ngClass]="{
+                     'active': isToday(day),
+                     'flex items-center justify-center font-medium text-lg bg-gray-100 dark:bg-dark-850 rounded-md size-12 shrink-0': true,
+                     'bg-primary-500 text-primary-50 border-primary-500': isToday(day)
+                   }">
+                  {{ day }}
+                </a>
+              </ng-container>
+            </div>
+          </ngx-simplebar>
+        </div>
+      </div>
+      <div class="flex items-center gap-3 mb-4">
+        <h6 class="grow">Holiday Lists</h6>
+        <a href="javascript: void(0);" class="shrink-0 text-13 link link-primary text-primary-500">View More
+          <lucide-angular name="MoveRight" class="inline-block size-4"></lucide-angular>
+        </a>
+      </div>
+      <div class="swiper mySwiper" dir="ltr" #swiperRef>
+        <div class="swiper-wrapper">
+          <div class="swiper-slide">
+            <div class="relative card">
+              <div class="flex items-center gap-3 card-body">
+                <div class="grow">
+                  <h6 class="mb-1">
+                    <lucide-angular name="CircleDot" class="inline-block text-green-500 ltr:mr-1 rtl:ml-1 size-4 fill-green-500/15"></lucide-angular>
+                    World Braille
+                    Day
+                  </h6>
+                  <p class="text-gray-500 dark:text-dark-500 text-13">04 Jan, 2024</p>
+                </div>
+                <img src="assets/images/school/holiday.png" alt="" class="shrink-0 size-10">
+              </div>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <div class="relative card">
+              <div class="flex items-center gap-3 card-body">
+                <div class="grow">
+                  <h6 class="mb-1">
+                    <lucide-angular name="CircleDot" class="inline-block text-green-500 ltr:mr-1 rtl:ml-1 size-4 fill-green-500/15"></lucide-angular>
+                    Earth Hour
+                  </h6>
+                  <p class="text-gray-500 dark:text-dark-500 text-13">23 March 2024</p>
+                </div>
+                <img src="assets/images/school/holiday.png" alt="" class="shrink-0 size-10">
+              </div>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <div class="relative card">
+              <div class="flex items-center gap-3 card-body">
+                <div class="grow">
+                  <h6 class="mb-1">
+                    <lucide-angular name="CircleDot" class="inline-block text-green-500 ltr:mr-1 rtl:ml-1 size-4 fill-green-500/15"></lucide-angular>
+                    Software Freedom
+                    Day
+                  </h6>
+                  <p class="text-gray-500 dark:text-dark-500 text-13">15 Sep 2024</p>
+                </div>
+                <img src="assets/images/school/holiday.png" alt="" class="shrink-0 size-10">
+              </div>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <div class="relative card">
+              <div class="flex items-center gap-3 card-body">
+                <div class="grow">
+                  <h6 class="mb-1">
+                    <lucide-angular name="CircleDot" class="inline-block text-green-500 ltr:mr-1 rtl:ml-1 size-4 fill-green-500/15"></lucide-angular>
+                    Inventors Day
+                  </h6>
+                  <p class="text-gray-500 dark:text-dark-500 text-13">29 Sep 2024</p>
+                </div>
+                <img src="assets/images/school/holiday.png" alt="" class="shrink-0 size-10">
+              </div>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <div class="relative card">
+              <div class="flex items-center gap-3 card-body">
+                <div class="grow">
+                  <h6 class="mb-1">
+                    <lucide-angular name="CircleDot" class="inline-block text-green-500 ltr:mr-1 rtl:ml-1 size-4 fill-green-500/15"></lucide-angular>
+                    World Teacher's
+                    Day
+                  </h6>
+                  <p class="text-gray-500 dark:text-dark-500 text-13">05 Oct 2024</p>
+                </div>
+                <img src="assets/images/school/holiday.png" alt="" class="shrink-0 size-10">
+              </div>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <div class="relative card">
+              <div class="flex items-center gap-3 card-body">
+                <div class="grow">
+                  <h6 class="mb-1">
+                    <lucide-angular name="CircleDot" class="inline-block text-green-500 ltr:mr-1 rtl:ml-1 size-4 fill-green-500/15"></lucide-angular>
+                    Human Rights Day
+                  </h6>
+                  <p class="text-gray-500 dark:text-dark-500 text-13">10 Dec 2024</p>
+                </div>
+                <img src="assets/images/school/holiday.png" alt="" class="shrink-0 size-10">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="relative">
+        <h6 class="mb-4">Notice Board</h6>
+        <div class="flex flex-col gap-5">
+          <div class="flex items-center gap-3">
+            <img src="assets/images/school/blog/img-05.jpg" alt="" class="object-cover w-16 h-20 rounded-md">
+            <div>
+              <h6 class="mb-2 line-clamp-2"><a href="javascript: void(0);" class="text-current dark:text-current dark:hover:text-primary-500 link link-primary">Beginning or end
+                  of the school year</a></h6>
+              <p class="text-gray-500 dark:text-dark-500">By Erwin Legros</p>
+            </div>
+          </div>
+          <div class="flex items-center gap-3">
+            <img src="assets/images/school/blog/img-03.jpg" alt="" class="object-cover w-16 h-20 rounded-md">
+            <div>
+              <h6 class="mb-2 line-clamp-2"><a href="javascript: void(0);" class="text-current dark:text-current dark:hover:text-primary-500 link link-primary">Motivational or
+                  inspirational quotes</a></h6>
+              <p class="text-gray-500 dark:text-dark-500">By Ardith Bode</p>
+            </div>
+          </div>
+          <div class="flex items-center gap-3">
+            <img src="assets/images/school/blog/img-04.jpg" alt="" class="object-cover w-16 h-20 rounded-md">
+            <div>
+              <h6 class="mb-2 line-clamp-2"><a href="javascript: void(0);" class="text-current dark:text-current dark:hover:text-primary-500 link link-primary">Examination &
+                  Parent - Teacher Meeting</a></h6>
+              <p class="text-gray-500 dark:text-dark-500">By Gerhard Boyle</p>
+            </div>
+          </div>
+          <div class="flex items-center gap-3">
+            <img src="assets/images/school/blog/img-02.jpg" alt="" class="object-cover w-16 h-20 rounded-md">
+            <div>
+              <h6 class="mb-2 line-clamp-2"><a href="javascript: void(0);" class="text-current dark:text-current dark:hover:text-primary-500 link link-primary">Elementary school
+                  student activities</a></h6>
+              <p class="text-gray-500 dark:text-dark-500">By Maci Crist</p>
+            </div>
+          </div>
+          <div class="flex items-center gap-3">
+            <img src="assets/images/school/blog/img-01.jpg" alt="" class="object-cover w-16 h-20 rounded-md">
+            <div>
+              <h6 class="mb-2 line-clamp-2"><a href="javascript: void(0);" class="text-current dark:text-current dark:hover:text-primary-500 link link-primary">Random acts of
+                  kindness board compare and contrast</a></h6>
+              <p class="text-gray-500 dark:text-dark-500">By Ruthie Blanda</p>
+            </div>
+          </div>
+          <div class="flex items-center gap-3">
+            <img src="assets/images/school/blog/img-06.jpg" alt="" class="object-cover w-16 h-20 rounded-md">
+            <div>
+              <h6 class="mb-2 line-clamp-2"><a href="javascript: void(0);" class="text-current dark:text-current dark:hover:text-primary-500 link link-primary">A Book a Day
+                  Keeps the Monsters Away</a></h6>
+              <p class="text-gray-500 dark:text-dark-500">By Magnus Miller</p>
+            </div>
+          </div>
+          <div class="flex items-center gap-3">
+            <img src="assets/images/school/blog/img-07.jpg" alt="" class="object-cover w-16 h-20 rounded-md">
+            <div>
+              <h6 class="mb-2 line-clamp-2"><a href="javascript: void(0);" class="text-current dark:text-current dark:hover:text-primary-500 link link-primary">Student Work
+                  Coming Bulletin Board</a></h6>
+              <p class="text-gray-500 dark:text-dark-500">By Jeremie Thiel</p>
+            </div>
+          </div>
+          <div class="flex items-center gap-3">
+            <img src="assets/images/school/blog/img-08.jpg" alt="" class="object-cover w-16 h-20 rounded-md">
+            <div>
+              <h6 class="mb-2 line-clamp-2"><a href="javascript: void(0);" class="text-current dark:text-current dark:hover:text-primary-500 link link-primary">Add a Little
+                  Sunshine to Someone’s Day</a></h6>
+              <p class="text-gray-500 dark:text-dark-500">By Treva Trantow</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="relative order-4 col-span-12 2xl:order-6 md:col-span-4 2xl:col-span-2 card">
+    <div class="card-body">
+      <div class="flex items-center gap-2 mb-7">
+        <div class="flex items-center justify-center bg-yellow-500 rounded-md size-7 text-yellow-50">
+          <lucide-angular name="computer" class="size-5"></lucide-angular>
+        </div>
+        <p class="text-gray-500 dark:text-dark-500">Class Rooms</p>
+      </div>
+      <h5 class="relative inline-block mb-2 before:absolute before:border-b-2 before:border-yellow-500 before:inset-x-0 before:-bottom-1">
+        <span class="counters" [countUp]="65" [options]="{decimalPlaces:0}">0</span>
+      </h5>
+    </div>
+  </div>
+
+  <div class="relative order-5 col-span-12 2xl:order-7 md:col-span-4 2xl:col-span-2 card">
+    <div class="card-body">
+      <div class="flex items-center gap-2 mb-7">
+        <div class="flex items-center justify-center bg-pink-500 rounded-md size-7 text-pink-50">
+          <lucide-angular name="HandCoins" class="size-5"></lucide-angular>
+        </div>
+        <p class="text-gray-500 dark:text-dark-500">Total Earnings</p>
+      </div>
+      <h5 class="relative inline-block mb-2 before:absolute before:border-b-2 before:border-pink-500 before:inset-x-0 before:-bottom-1">
+        $<span class="counters" [countUp]="487" [options]="{decimalPlaces:0}">0</span>M</h5>
+    </div>
+  </div>
+
+  <div class="relative order-6 col-span-12 2xl:order-8 md:col-span-4 2xl:col-span-2 card">
+    <div class="card-body">
+      <div class="flex items-center gap-2 mb-7">
+        <div class="flex items-center justify-center bg-purple-500 rounded-md size-7 text-purple-50">
+          <lucide-angular name="Medal" class="size-5"></lucide-angular>
+        </div>
+        <p class="text-gray-500 dark:text-dark-500">Awards</p>
+      </div>
+      <h5 class="relative inline-block mb-2 before:absolute before:border-b-2 before:border-purple-500 before:inset-x-0 before:-bottom-1">
+        <span class="counters" [countUp]="30" [options]="{decimalPlaces:0}">0</span>+
+      </h5>
+    </div>
+  </div>
+
+  <div class="order-9 col-span-12 md:col-span-6 2xl:col-span-6 card">
+    <div class="flex items-center gap-3 card-header">
+      <h6 class="card-title grow">Total Students</h6>
+      <div class="dropdown shrink-0">
+        <button domixDropdownToggle [dropdownMenu]="dropdown1" type="button" class="flex items-center text-gray-500 dark:text-dark-500">
+          <lucide-angular name="Ellipsis" class="size-5"></lucide-angular>
+        </button>
+        <div #dropdown1 class="!fixed p-2 dropdown-menu" dropdown-position="right">
+          <ul>
+            <li>
+              <a href="javascript: void(0);" class="dropdown-item">
+                <span>Weekly</span>
+              </a>
+            </li>
+            <li>
+              <a href="javascript: void(0);" class="dropdown-item">
+                <span>Monthly</span>
+              </a>
+            </li>
+            <li>
+              <a href="javascript: void(0);" class="dropdown-item">
+                <span>Yearly</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <app-domix-charts [series]="dumbbellChart.series" [chartOptions]="dumbbellChart.chartOptions">
+      </app-domix-charts>
+    </div>
+  </div>
+
+  <div class="order-10 col-span-12 md:col-span-6 2xl:col-span-3 card">
+    <div class="card-header">
+      <h6 class="card-title">Upcoming Test</h6>
+    </div>
+    <div class="space-y-3 card-body">
+      <div class="flex items-center gap-3">
+        <div class="flex items-center justify-center rounded-md bg-orange-500/15 size-12">
+          <img src="assets/images/school/computer.png" alt="" class="h-6">
+        </div>
+        <div class="grow">
+          <h6 class="mb-1"><a href="javascript:void(0);">Basic Computer</a></h6>
+          <p class="text-gray-500 dark:text-dark-500">Class 9</p>
+        </div>
+        <p class="text-red-500 shrink-0">26 Dec</p>
+      </div>
+      <div class="flex items-center gap-3">
+        <div class="flex items-center justify-center rounded-md bg-red-500/15 size-12">
+          <img src="assets/images/school/chemical.png" alt="" class="h-6">
+        </div>
+        <div class="grow">
+          <h6 class="mb-1"><a href="javascript:void(0);">Science Part 2 Test</a></h6>
+          <p class="text-gray-500 dark:text-dark-500">Class 11</p>
+        </div>
+        <p class="text-red-500 shrink-0">21 Dec</p>
+      </div>
+      <div class="flex items-center gap-3">
+        <div class="flex items-center justify-center rounded-md bg-red-500/15 size-12">
+          <img src="assets/images/school/dictionary.png" alt="" class="h-6">
+        </div>
+        <div class="grow">
+          <h6 class="mb-1"><a href="javascript:void(0);">English Grammar</a></h6>
+          <p class="text-gray-500 dark:text-dark-500">Class 12</p>
+        </div>
+        <p class="text-red-500 shrink-0">15 Dec</p>
+      </div>
+      <div class="flex items-center gap-3">
+        <div class="flex items-center justify-center rounded-md bg-primary-500/15 size-12">
+          <img src="assets/images/school/chemical.png" alt="" class="h-6">
+        </div>
+        <div class="grow">
+          <h6 class="mb-1"><a href="javascript:void(0);">Science Part 1 Test</a></h6>
+          <p class="text-gray-500 dark:text-dark-500">Class 11</p>
+        </div>
+        <p class="text-red-500 shrink-0">03 Dec</p>
+      </div>
+      <div class="flex items-center gap-3">
+        <div class="flex items-center justify-center rounded-md bg-purple-500/15 size-12">
+          <img src="assets/images/school/change-management.png" alt="" class="h-6">
+        </div>
+        <div class="grow">
+          <h6 class="mb-1"><a href="javascript:void(0);">Management</a></h6>
+          <p class="text-gray-500 dark:text-dark-500">Class 12</p>
+        </div>
+        <p class="text-red-500 shrink-0">24 Nov</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="order-11 col-span-12 2xl:col-span-9 card">
+    <div class="flex items-center gap-3 card-header">
+      <h6 class="card-title grow">Top Score</h6>
+      <div class="shrink-0">
+        <a href="javascript: void(0);" class="py-1 px-2.5 btn btn-primary">
+          View All
+          <lucide-angular name="MoveRight" class="ml-1 ltr:inline-block rtl:hidden size-4"></lucide-angular>
+          <lucide-angular name="MoveLeft" class="ml-1 rtl:inline-block ltr:hidden size-4"></lucide-angular>
+        </a>
+      </div>
+    </div>
+    <div class="pt-0 card-body">
+      <div class="overflow-x-auto table-box">
+        <table class="table whitespace-nowrap flush">
+          <tbody>
+            <tr *ngFor="let email of displayedEmails">
+              <td>{{ email.studentsName }}</td>
+              <td><span>{{ email.marks }}</span>/600</td>
+              <td>{{ email.resultDate }}</td>
+              <td>{{ email.grade }}</td>
+              <td>
+                <span class="badge" [ngClass]="{
+                  'badge-green': email.passFail === 'Pass',
+                  'badge-orange': email.passFail === 'Fail'
+                }">{{ email.passFail }}</span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="grid items-center grid-cols-12 gap-space mt-space">
+        <div class="col-span-12 text-center md:col-span-6 ltr:md:text-left rtl:md:text-right">
+          <p class="text-gray-500 dark:text-dark-500">Showing <b>{{ showingStart }}</b> - <b>{{ showingEnd }}</b> of
+            <b>{{ emails.length }}</b> Results
+          </p>
+        </div>
+        <div class="col-span-12 md:col-span-6">
+          <div class="flex justify-center md:justify-end pagination pagination-primary">
+            <button (click)="prevPage()" [disabled]="currentPage === 1" class="pagination-pre">
+              <lucide-angular name="ChevronLeft" class="mr-1 ltr:inline-block rtl:hidden !size-4"></lucide-angular>
+              <lucide-angular name="ChevronRight" class="ml-1 rtl:inline-block ltr:hidden !size-4"></lucide-angular>
+              Prev
+            </button>
+            <button *ngFor="let page of [].constructor(totalPages); let i = index" (click)="gotoPage(i + 1)" [ngClass]="{ 'active': currentPage === (i + 1) }" class="pagination-item">
+              <span>{{ i + 1 }}</span>
+            </button>
+            <button (click)="nextPage()" [disabled]="currentPage === totalPages" class="pagination-next">
+              Next
+              <lucide-angular name="ChevronRight" class="ml-1 ltr:inline-block rtl:hidden !size-4"></lucide-angular>
+              <lucide-angular name="ChevronLeft" class="mr-1 rtl:inline-block ltr:hidden !size-4"></lucide-angular>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="order-12 col-span-12 xl:col-span-8 2xl:col-span-9 card">
+    <div class="card-header">
+      <h6 class="card-title">
+        Continue Watching
+        <lucide-angular name="MoveRight" class="ml-1 ltr:inline-block rtl:hidden size-4"></lucide-angular>
+        <lucide-angular name="MoveLeft" class="mr-1 rtl:inline-block ltr:hidden size-4"></lucide-angular>
+      </h6>
+    </div>
+    <div class="card-body">
+      <div class="grid grid-cols-12 gap-space">
+        <div class="col-span-12 lg:col-span-4">
+          <div class="aspect-video">
+            <iframe class="w-full rounded-md aspect-video" src="https://www.youtube.com/embed/_x9lsSPW4rA?si=dldJWZYL7u6URBi5" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+          </div>
+          <div class="mt-3">
+            <h6 class="mb-1 truncate"><a href="javascript:void(0);">Domiex - Admin & Dashboard Template Introduction</a></h6>
+            <p class="text-xs text-gray-500 dark:text-dark-500">Domiex Intro</p>
+          </div>
+        </div>
+        <div class="col-span-12 lg:col-span-4">
+          <div class="aspect-video">
+            <iframe class="w-full rounded-md aspect-video" src="https://www.youtube.com/embed/mSC6GwizOag?si=Dqcl3RgGrfRyqmHo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+          </div>
+          <div class="mt-3">
+            <h6 class="mb-1 truncate"><a href="javascript:void(0);">What's new in Tailwind CSS v3.0?</a></h6>
+            <p class="text-xs text-gray-500 dark:text-dark-500">TailwindCSS</p>
+          </div>
+        </div>
+        <div class="col-span-12 lg:col-span-4">
+          <div class="aspect-video">
+            <iframe class="w-full rounded-md aspect-video" src="https://www.youtube.com/embed/RZ9cWr3tY9w?si=J6KavpQC6n9gaC64" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+          </div>
+          <div class="mt-3">
+            <h6 class="mb-1 truncate"><a href="javascript: void(0);">Controlling Stacking Contexts with Isolation
+                Utilities</a></h6>
+            <p class="text-xs text-gray-500 dark:text-dark-500">TailwindCSS</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-span-12 text-center bg-gray-100 order-13 dark:bg-dark-850 xl:col-span-4 2xl:col-span-3 card">
+    <div class="card-body">
+      <h5 class="mb-2">Join the community and find out more information</h5>
+      <button type="button" class="btn btn-green">Explore Now</button>
+      <div class="mt-5">
+        <img src="assets/images/dashboards/school.png" alt="" class="mx-auto h-44">
+      </div>
+    </div>
+  </div>
+</div>

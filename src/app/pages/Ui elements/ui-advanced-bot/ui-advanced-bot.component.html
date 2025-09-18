@@ -1,0 +1,268 @@
+<app-page-title [pageTitle]="'Ui'" [Title]="'Bot'"></app-page-title>
+
+<div class="grid grid-cols-12 gap-x-space">
+  <div class="col-span-12 card">
+    <div class="card-header">
+      <h6 class="card-title">Default ChatBot</h6>
+    </div>
+    <div class="grid items-center grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3 card-body">
+      <div class="flex flex-col rounded-md shadow-lg shadow-gray-200 dark:shadow-dark-800 dark:bg-dark-900">
+        <div class="p-4 text-white bg-gradient-to-tr from-primary-500 to-purple-500 rounded-t-md">
+          <div>
+            <h6 class="mb-1 text-16">ChatBot</h6>
+            <p class="text-xs text-white/75">Online</p>
+          </div>
+        </div>
+        <ngx-simplebar class="p-4 h-80">
+          <div>
+            <div id="messages" class="flex flex-col gap-y-4">
+              <div *ngFor="let message of messages">
+                <div class="flex items-end" [ngClass]="{'justify-end': message.from !== 'bot'}">
+                  <div class="flex flex-col max-w-sm space-y-2 text-sm" [ngClass]="{'order-2 items-start rtl:mr-2 ltr:ml-2': message.from === 'bot',
+                                                    'order-1 items-end ltr:mr-2 rtl:ml-2': message.from !== 'bot'}">
+                    <div>
+                      <span class="inline-block px-3 py-2 rounded-md"
+                        [ngClass]="{'ltr:rounded-bl-none rtl:rounded-br-none bg-gray-100 dark:bg-dark-850': message.from === 'bot',
+                                                            'ltr:rounded-br-none rtl:rounded-bl-none bg-primary-500 text-white': message.from !== 'bot'}"
+                        [innerHTML]="message.text">
+                      </span>
+                    </div>
+                  </div>
+                  <img
+                    [src]="message.from === 'bot' ? 'assets/images/others/bot.png' : 'assets/images/avatar/user-2.png'"
+                    alt="" class="rounded-full size-6"
+                    [ngClass]="{'order-1': message.from === 'bot', 'order-2': message.from !== 'bot'}">
+                </div>
+              </div>
+              <div *ngIf="botTyping1">
+                <div class="flex items-end">
+                  <div class="flex flex-col items-start order-2 mx-2 space-y-2 text-sm">
+                    <div class="flex items-end">
+                      <img src="assets/images/others/bot.png" alt="" class="rounded-full size-6">
+                      <div class="flex items-center justify-center space-x-1">
+                        <span class="sr-only">Loading...</span>
+                        <div class="size-2 bg-primary-500 rounded-full animate-bounce [animation-delay:-0.3s]"></div>
+                        <div class="size-2 bg-primary-500 rounded-full animate-bounce [animation-delay:-0.15s]"></div>
+                        <div class="rounded-full bg-primary-500 size-2 animate-bounce"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </ngx-simplebar>
+        <div class="p-4">
+          <div class="relative flex">
+            <input #inputElement type="text" placeholder="Say something..." autocomplete="off" autofocus="true"
+              (keydown.enter)="updateChat(inputElement)" class="rounded-full ltr:pr-10 rtl:pl-10 form-input" />
+            <div class="absolute inset-y-0 items-center hidden ltr:right-1 rtl:left-1 sm:flex">
+              <button type="button"
+                class="inline-flex items-center justify-center text-white transition duration-200 ease-in-out rounded-full size-8 bg-primary-500 hover:bg-primary-600 focus:outline-hidden"
+                (click)="updateChat(inputElement)">
+                <lucide-angular class="size-4" name="send-horizontal"></lucide-angular>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="flex flex-col rounded-md shadow-lg shadow-gray-200 dark:shadow-dark-800 dark:bg-dark-900">
+        <div class="p-4 text-white bg-gradient-to-br from-green-500 to-sky-500 rounded-t-md">
+          <div>
+            <h6 class="mb-1 text-16">ChatBot</h6>
+            <p class="text-xs text-white/75">Online</p>
+          </div>
+        </div>
+        <ngx-simplebar class="p-4 h-80">
+          <div>
+            <div id="messages" class="flex flex-col gap-y-4">
+              <div *ngFor="let message of messages1">
+                <div class="flex items-end" [ngClass]="{'justify-end': message.from !== 'bot'}">
+                  <div class="flex flex-col max-w-sm space-y-2 text-sm" [ngClass]="{'order-2 items-start rtl:mr-2 ltr:ml-2': message.from === 'bot',
+                                                    'order-1 items-end ltr:mr-2 rtl:ml-2': message.from !== 'bot'}">
+                    <div>
+                      <span class="inline-block px-3 py-2 rounded-md"
+                        [ngClass]="{'ltr:rounded-bl-none rtl:rounded-br-none bg-gray-100 dark:bg-dark-850': message.from === 'bot',
+                                                            'ltr:rounded-br-none rtl:rounded-bl-none bg-primary-500 text-white': message.from !== 'bot'}"
+                        [innerHTML]="message.text">
+                      </span>
+                    </div>
+                  </div>
+                  <img
+                    [src]="message.from === 'bot' ? 'assets/images/others/bot.png' : 'assets/images/avatar/user-2.png'"
+                    alt="" class="rounded-full size-6"
+                    [ngClass]="{'order-1': message.from === 'bot', 'order-2': message.from !== 'bot'}">
+                </div>
+              </div>
+              <div *ngIf="botTyping2">
+                <div class="flex items-end">
+                  <div class="flex flex-col items-start order-2 mx-2 space-y-2 text-sm">
+                    <div class="flex items-end">
+                      <img src="assets/images/others/bot.png" alt="" class="rounded-full size-6">
+                      <div class="flex items-center justify-center space-x-1">
+                        <span class="sr-only">Loading...</span>
+                        <div class="size-2 bg-primary-500 rounded-full animate-bounce [animation-delay:-0.3s]"></div>
+                        <div class="size-2 bg-primary-500 rounded-full animate-bounce [animation-delay:-0.15s]"></div>
+                        <div class="rounded-full bg-primary-500 size-2 animate-bounce"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </ngx-simplebar>
+        <div class="p-4">
+          <div class="relative flex">
+            <input #inputElement1 type="text" placeholder="Say something..." autocomplete="off" autofocus="true"
+              (keydown.enter)="updateChat2(inputElement1)" class="rounded-full ltr:pr-10 rtl:pl-10 form-input" />
+            <div class="absolute inset-y-0 items-center hidden ltr:right-1 rtl:left-1 sm:flex">
+              <button type="button"
+                class="inline-flex items-center justify-center text-white transition duration-200 ease-in-out rounded-full size-8 bg-primary-500 hover:bg-primary-600 focus:outline-hidden"
+                (click)="updateChat2(inputElement1)">
+                <lucide-angular class="size-4" name="send-horizontal"></lucide-angular>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="flex flex-col rounded-md shadow-lg shadow-gray-200 dark:shadow-dark-800 dark:bg-dark-900">
+        <div class="p-4 bg-gradient-to-br from-primary-500/20 via-green-500/20 to-purple-500/20 rounded-t-md">
+          <div>
+            <h6 class="mb-1 text-16">ChatBot</h6>
+            <p class="text-xs text-white/75">Online</p>
+          </div>
+        </div>
+        <ngx-simplebar class="p-4 h-80">
+          <div>
+            <div id="messages" class="flex flex-col gap-y-4">
+              <div *ngFor="let message of messages2">
+                <div class="flex items-end" [ngClass]="{'justify-end': message.from !== 'bot'}">
+                  <div class="flex flex-col max-w-sm space-y-2 text-sm" [ngClass]="{'order-2 items-start rtl:mr-2 ltr:ml-2': message.from === 'bot',
+                                                    'order-1 items-end ltr:mr-2 rtl:ml-2': message.from !== 'bot'}">
+                    <div>
+                      <span class="inline-block px-3 py-2 rounded-md"
+                        [ngClass]="{'ltr:rounded-bl-none rtl:rounded-br-none bg-gray-100 dark:bg-dark-850': message.from === 'bot',
+                                                            'ltr:rounded-br-none rtl:rounded-bl-none bg-primary-500 text-white': message.from !== 'bot'}"
+                        [innerHTML]="message.text">
+                      </span>
+                    </div>
+                  </div>
+                  <img
+                    [src]="message.from === 'bot' ? 'assets/images/others/bot.png' : 'assets/images/avatar/user-2.png'"
+                    alt="" class="rounded-full size-6"
+                    [ngClass]="{'order-1': message.from === 'bot', 'order-2': message.from !== 'bot'}">
+                </div>
+              </div>
+              <div *ngIf="botTyping3">
+                <div class="flex items-end">
+                  <div class="flex flex-col items-start order-2 mx-2 space-y-2 text-sm">
+                    <div class="flex items-end">
+                      <img src="assets/images/others/bot.png" alt="" class="rounded-full size-6">
+                      <div class="flex items-center justify-center space-x-1">
+                        <span class="sr-only">Loading...</span>
+                        <div class="size-2 bg-primary-500 rounded-full animate-bounce [animation-delay:-0.3s]"></div>
+                        <div class="size-2 bg-primary-500 rounded-full animate-bounce [animation-delay:-0.15s]"></div>
+                        <div class="rounded-full bg-primary-500 size-2 animate-bounce"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </ngx-simplebar>
+        <div class="p-4">
+          <div class="relative flex">
+            <input #inputElement2 type="text" placeholder="Say something..." autocomplete="off" autofocus="true"
+              (keydown.enter)="updateChat3(inputElement2)" class="rounded-full ltr:pr-10 rtl:pl-10 form-input" />
+            <div class="absolute inset-y-0 items-center hidden ltr:right-1 rtl:left-1 sm:flex">
+              <button type="button"
+                class="inline-flex items-center justify-center text-white transition duration-200 ease-in-out rounded-full size-8 bg-primary-500 hover:bg-primary-600 focus:outline-hidden"
+                (click)="updateChat3(inputElement2)">
+                <lucide-angular class="size-4" name="send-horizontal"></lucide-angular>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="col-span-12 card">
+    <div class="card-header">
+      <h6 class="card-title">Live ChatBot</h6>
+    </div>
+    <div class="flex items-center gap-5 card-body">
+      <!-- Live Chatbox Button -->
+      <button type="button"
+        class="text-white btn bg-primary-500 border-primary-500 hover:bg-primary-600 hover:text-white hover:border-primary-600 focus:bg-primary-600 focus:text-white focus:border-primary-600"
+        (click)="toggleChatbox()">Live Chatbox</button>
+
+      <!-- Chatbox Modal -->
+      <div class="fixed hidden z-[1050] ltr:right-5 rtl:left-5 ltr:md:right-8 rtl:md:left-8 bottom-8 md:w-96"
+        [ngClass]="{'hidden': !isChatboxVisible}">
+        <div class="flex flex-col bg-white rounded-md shadow-lg shadow-gray-200 dark:shadow-dark-800 dark:bg-dark-900">
+          <div class="p-4 text-white bg-gradient-to-tr from-primary-500 to-purple-500 rounded-t-md">
+            <div>
+              <h6 class="mb-1 text-16">ChatBot</h6>
+              <p class="text-xs text-white/75">Online</p>
+            </div>
+          </div>
+          <div class="p-4 h-80" style="overflow-y: auto;">
+            <div id="messages" class="flex flex-col gap-y-4">
+              <div *ngFor="let message of messages3">
+                <div class="flex items-end" [ngClass]="message.from === 'bot' ? '' : 'justify-end'">
+                  <div class="flex flex-col max-w-sm space-y-2 text-sm"
+                    [ngClass]="message.from === 'bot' ? 'order-2 items-start rtl:mr-2 ltr:ml-2' : 'order-1 items-end mr-2'">
+                    <div>
+                      <span class="inline-block px-3 py-2 rounded-md"
+                        [ngClass]="message.from === 'bot' ? 'ltr:rounded-bl-none rtl:rounded-br-none bg-gray-100 dark:bg-dark-850' : 'ltr:rounded-br-none rtl:rounded-bl-none bg-primary-500 text-white'">
+                        {{ message.text }}
+                      </span>
+                    </div>
+                  </div>
+                  <img
+                    [src]="message.from === 'bot' ? 'assets/images/others/bot.png' : 'assets/images/avatar/user-2.png'"
+                    alt="" class="rounded-full size-6" [ngClass]="message.from === 'bot' ? 'order-1' : 'order-2'">
+                </div>
+              </div>
+              <!-- Bot Typing Indicator -->
+              <div *ngIf="botTyping">
+                <div class="flex items-end">
+                  <div class="flex flex-col items-start order-2 mx-2 space-y-2 text-sm">
+                    <div class="flex items-end">
+                      <img src="assets/images/others/bot.png" alt="" class="rounded-full size-6">
+                      <div class="flex items-center justify-center space-x-1">
+                        <span class="sr-only">Loading...</span>
+                        <div class="size-2 bg-primary-500 rounded-full animate-bounce [animation-delay:-0.3s]"></div>
+                        <div class="size-2 bg-primary-500 rounded-full animate-bounce [animation-delay:-0.15s]"></div>
+                        <div class="rounded-full size-2 bg-primary-500 animate-bounce"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Input Box -->
+          <div class="p-4">
+            <div class="relative flex">
+              <input type="text" placeholder="Say something..." autocomplete="off" autofocus="true"
+                [(ngModel)]="newMessage" (keydown.enter)="updateChatmodal()"
+                class="rounded-full form-input ltr:pr-10 rtl:pl-10" />
+              <div class="absolute inset-y-0 items-center hidden ltr:right-1 rtl:left-1 sm:flex">
+                <button type="button"
+                  class="inline-flex items-center justify-center text-white transition duration-200 ease-in-out rounded-full size-8 bg-primary-500 hover:bg-primary-600 focus:outline-hidden"
+                  (click)="updateChatmodal()">
+                  <lucide-angular name="SendHorizontal" class="size-4"></lucide-angular>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

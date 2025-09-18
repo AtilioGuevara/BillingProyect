@@ -1,0 +1,58 @@
+<app-navbar></app-navbar>
+
+<app-sidebar></app-sidebar>
+
+<div class="relative min-h-screen">
+    <div class="page-wrapper pt-[calc(theme('spacing.topbar')_*_1.2)] group-data-[layout=horizontal]:pt-[calc(theme('spacing.topbar')_*_1.9)]">
+        <app-page-title [pageTitle]="'Apps'" [Title]="'Product List'"></app-page-title>
+
+        <div class="card">
+            <div class="card-header">
+                <div class="flex flex-wrap items-center gap-5">
+                    <div class="grow">
+                        <h6 class="mb-1 card-title">Product List</h6>
+                        <p class="text-gray-500 dark:text-dark-500">Track your store's progress to boost your sales.</p>
+                    </div>
+                    <div class="flex flex-wrap gap-2 shrink-0">
+                        <button class="btn btn-sub-gray" (click)="export()">
+                            <lucide-angular name="download" class="inline-block ltr:mr-1 rtl:ml-1 align-center size-4"></lucide-angular>
+                            Export</button>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="flex flex-wrap justify-between gap-2">
+                    <div>
+                        <div class="relative group/form">
+                            <input type="text" class="ltr:pl-9 rtl:pr-9 form-input ltr:group-[&.right]/form:pr-9 rtl:group-[&.right]/form:pl-9 ltr:group-[&.right]/form:pl-4 rtl:group-[&.right]/form:pr-4" placeholder="Search for ..." (input)="onSearch($event)">
+                            <div class="absolute inset-y-0 flex items-center text-gray-500 dark:text-dark-500 ltr:left-3 rtl:right-3 ltr:group-[&.right]/form:right-3 rtl:group-[&.right]/form:left-3 ltr:group-[&.right]/form:left-auto rtl:group-[&.right]/form:right-auto focus:outline-hidden">
+                                <lucide-angular name="search" class="size-4"></lucide-angular>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex items-center gap-3">
+                            <button class="btn btn-red btn-icon shrink-0" *ngIf="selectedRows.length" (click)="delProd()">
+                                <lucide-angular name="trash" class="inline-block size-4"></lucide-angular>
+                            </button>
+                            <ng-select class="filter-ng-select" [items]="categories" bindLabel="category" [(ngModel)]="selectedCategory" placeholder="Select a category" (change)="catgoryChange()">
+                            </ng-select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pt-0 card-body">
+                <div>
+                    <div>
+                        <app-domix-grid [colDefs]="defs" [rowData]="products" (selectionChanged)="selectedItem($event)" (cellDoubleClicked)="editRecord($event)" [filters]="appliedFilters" [resetAllFilter]="resetAllFilter" [exportCsv]="allowExportCsv"></app-domix-grid>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+    <app-footer></app-footer>
+
+</div>

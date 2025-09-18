@@ -1,0 +1,135 @@
+<app-page-title [pageTitle]="'Ui'" [Title]="'Badge'"></app-page-title>
+
+<div class="grid grid-cols-12 gap-x-space">
+    <div class="col-span-12 card">
+        <div class="card-header">
+            <h6 class="card-title">Base Badge</h6>
+        </div>
+        <div class="card-body">
+            <div class="flex flex-wrap items-center gap-3">
+                <div class="flex flex-wrap gap-4">
+                    <span *ngFor="let badge of baseBadges" [ngClass]="badge.color + ' badge '">{{ badge.text }}</span>
+                </div>
+            </div>
+        </div>
+    </div><!--end-->
+
+    <div class="col-span-12 card">
+        <div class="card-header">
+            <h6 class="card-title">Outline Badge</h6>
+        </div>
+        <div class="card-body">
+            <div class="flex flex-wrap items-center gap-3">
+                <div class="flex flex-wrap gap-4">
+                    <span *ngFor="let badge of outlineBadges" [ngClass]="badge.color + ' badge '">{{ badge.text }}</span>
+                </div>
+            </div>
+        </div>
+    </div><!--end-->
+
+    <div class="col-span-12 card">
+        <div class="card-header">
+            <h6 class="card-title">Soft Badge</h6>
+        </div>
+        <div class="card-body">
+            <div class="flex flex-wrap items-center gap-3">
+                <div class="flex flex-wrap gap-4">
+                    <span *ngFor="let badge of softBadges" [ngClass]="badge.color + ' badge '">{{ badge.text }}</span>
+                </div>
+            </div>
+        </div>
+    </div><!--end-->
+
+    <div class="col-span-12 card">
+        <div class="card-header">
+            <h6 class="card-title">Solid Badge</h6>
+        </div>
+        <div class="card-body">
+            <div class="flex flex-wrap items-center gap-3">
+                <div class="flex flex-wrap gap-4">
+                    <span *ngFor="let badge of solidBadges" [ngClass]="badge.color + ' badge '">{{ badge.text }}</span>
+                </div>
+            </div>
+        </div>
+    </div><!--end-->
+
+    <div class="col-span-12 card">
+        <div class="card-header">
+            <h6 class="card-title">Close Badge</h6>
+        </div>
+        <div class="card-body">
+            <div class="flex flex-wrap items-center gap-3">
+                <div class="flex flex-wrap gap-4">
+                    <span *ngFor="let badge of closeBadges; let i = index" [ngClass]="badge.color + ' badge '">
+                        {{ badge.text }}
+                        <a href="javascript:void(0);" href="javascript:void(0)" (click)="removeBadge(i)"><i class="ml-1 align-middle ri-close-fill"></i></a>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div><!--end Link-->
+
+    <div class="col-span-12 lg:col-span-6 card">
+        <div class="card-header">
+            <h6 class="card-title">Square Badge</h6>
+        </div>
+        <div class="card-body">
+            <div class="flex flex-wrap items-center gap-3">
+                <div class="flex flex-wrap gap-4">
+                    <span *ngFor="let badge of squareBadges; let i = index" [ngClass]="badge.color + ' badge-square '">{{ i+1 }}</span>
+                </div>
+            </div>
+        </div>
+    </div><!--end-->
+
+    <div class="col-span-12 lg:col-span-6 card">
+        <div class="card-header">
+            <h6 class="card-title">Rounded Badge</h6>
+        </div>
+        <div class="card-body">
+            <div class="flex flex-wrap items-center gap-3">
+                <div class="flex flex-wrap gap-4">
+                    <span *ngFor="let badge of roundedBadges" [ngClass]="badge.color + ' inline-block px-1.5 py-0.5 rounded-full text-11 border font-medium '">{{ badge.text }}</span>
+                </div>
+            </div>
+        </div>
+    </div><!--end-->
+
+    <div class="col-span-12 lg:col-span-6 card">
+        <div class="card-header">
+            <h6 class="card-title">Button Badge</h6>
+        </div>
+        <div class="card-body">
+            <div class="flex flex-wrap items-center gap-6">
+                <div class="relative">
+                    <button type="button" class="btn btn-primary">Notification</button>
+                    <span class="absolute !border-2 !border-white rounded-full dark:!border-dark-900 p-0 flex items-center justify-center badge badge-square badge-solid-red -top-2 -right-2">2</span>
+                </div>
+                <div class="relative">
+                    <button type="button" class="btn btn-primary">Notification</button>
+                    <span class="absolute !border-2 !border-white rounded-full dark:!border-dark-900 p-0 flex items-center justify-center badge badge-square badge-solid-green -bottom-2 -right-2">2</span>
+                </div>
+                <div class="relative">
+                    <button type="button" class="btn btn-primary">Notification</button>
+                    <span class="absolute !border-2 !border-white rounded-full dark:!border-dark-900 p-0 flex items-center justify-center badge badge-square badge-solid-yellow -top-2 -left-2">2</span>
+                </div>
+                <div class="relative">
+                    <button type="button" class="btn btn-primary">Notification</button>
+                    <span class="absolute !border-2 !border-white rounded-full dark:!border-dark-900 p-0 flex items-center justify-center badge badge-square badge-solid-sky -bottom-2 -left-2">2</span>
+                </div>
+            </div>
+        </div>
+    </div><!--end-->
+
+    <div class="col-span-12 lg:col-span-6 card">
+        <div class="card-header">
+            <h6 class="card-title">Inside Button Badge</h6>
+        </div>
+        <div class="card-body">
+            <div class="flex flex-wrap items-center gap-4">
+                <button type="button" class="btn btn-primary">Notification <span class="rounded-full badge badge-square badge-solid-red">2</span></button>
+                <button type="button" class="btn btn-primary">Notification <span class="rounded-full badge badge-square badge-solid-green">2</span></button>
+            </div>
+        </div>
+    </div><!--end-->
+</div>

@@ -1,0 +1,65 @@
+<app-page-title [Title]="'Mask Input'" [pageTitle]="'UI Advanced'"></app-page-title>
+
+<div class="grid grid-cols-12 gap-x-space">
+    <div class="col-span-12 lg:col-span-6 card">
+        <div class="card-header">
+            <h6 class="card-title">Date Mask</h6>
+        </div>
+        <div class="card-body">
+            <input mask="00/00/0000" placeholder="MM/DD/YYYY" class="form-input">
+        </div>
+    </div>
+
+    <div class="col-span-12 lg:col-span-6 card">
+        <div class="card-header">
+            <h6 class="card-title">Dynamic Masks</h6>
+        </div>
+        <div class="card-body">
+            <input [mask]="getDynamicMask(input.value)" #input placeholder="0000 0000 0000 0000" class="form-input">
+        </div>
+    </div>
+
+    <div class="col-span-12 lg:col-span-6 card">
+        <div class="card-header">
+            <h6 class="card-title">Pin Code Masks</h6>
+        </div>
+        <div class="card-body">
+            <input mask="0000" placeholder="0000" class="form-input">
+        </div>
+    </div>
+
+    <div class="col-span-12 lg:col-span-6 card">
+        <div class="card-header">
+            <h6 class="card-title">Phone Number Masks</h6>
+        </div>
+        <div class="card-body">
+            <input mask="000 0000 000" placeholder="000 0000 000" class="form-input">
+        </div>
+    </div>
+
+    <div class="col-span-12 card">
+        <div class="card-header">
+            <h6 class="card-title">Money Inputs</h6>
+        </div>
+        <div class="card-body">
+            <div class="grid grid-cols-1 xl:grid-cols-2 gap-space">
+                <div>
+                    <label for="moneyInput1" class="form-label">Here is a fully functioning money input mask:</label>
+                    <input id="moneyInput1" [mask]="moneyMask" placeholder="0" class="form-input">
+                </div>
+                <div>
+                    <label for="moneyInput2" class="form-label">Swap the periods for commas:</label>
+                    <input id="moneyInput2" [mask]="moneyMaskComma" placeholder="0.00" class="form-input">
+                </div>
+                <div>
+                    <label for="moneyInput3" class="form-label">Override the thousands separator:</label>
+                    <input id="moneyInput3" [mask]="moneyMaskWithSpace" placeholder="0.00" class="form-input">
+                </div>
+                <div>
+                    <label for="moneyInput4" class="form-label">Override precision with more digits:</label>
+                    <input id="moneyInput4" [mask]="moneyMaskPrecision" placeholder="0.0000" class="form-input">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

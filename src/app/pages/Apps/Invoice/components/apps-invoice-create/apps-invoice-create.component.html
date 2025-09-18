@@ -1,0 +1,218 @@
+<app-page-title [Title]="'Create Invoice'" [pageTitle]="'Invoices'"></app-page-title>
+
+<div>
+  <div class="card" [formGroup]="invoiceForm">
+    <div class="card-header">
+      <div class="items-center gap-3 md:flex">
+        <h6 class="grow mb-3 md:mb-0">Create Invoice</h6>
+        <div class="flex flex-wrap items-center gap-2 shrink-0">
+          <button class="btn btn-sub-gray">
+            <lucide-angular name="rotate-ccw" class="inline-block size-4"></lucide-angular>Reset
+          </button>
+          <button class="btn btn-sub-green">
+            <lucide-angular name="printer" class="inline-block size-4"></lucide-angular> Print
+            Invoice
+          </button>
+          <button class="btn btn-primary">Save Invoice</button>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div action="javascript: void(0);">
+        <h6 class="mb-3">Company Information</h6>
+        <div class="grid grid-cols-12 gap-5">
+          <div class="col-span-12">
+            <h6 class="form-label">Company Logo</h6>
+            <div>
+              <label for="logo">
+                <span class="inline-flex items-center justify-center w-full h-32 overflow-hidden bg-gray-100 border border-gray-200 rounded-md cursor-pointer dark:bg-dark-850 dark:border-dark-800">
+                  <img *ngIf="invoiceForm.get('image')?.value" [src]="invoiceForm.get('image')?.value" class="object-cover h-24">
+                  <span *ngIf="!invoiceForm.get('image')?.value" class="flex flex-col items-center text-gray-500 dark:text-dark-500">
+                    <lucide-angular name="upload"></lucide-angular>
+                    <span class="block mt-3">Upload Your Company Logo</span>
+                  </span>
+                </span>
+              </label>
+              <div class="hidden">
+                <label class="block">
+                  <span class="sr-only">Choose profile photo</span>
+                  <input type="file" name="logo" id="logo" (change)="onFileChange($event)" class="block w-full text-sm file:rounded-md focus:outline-0 text-slate-500 file:mr-4 file:py-2 file:px-4 file:border-0 file:text-sm file:font-semibold file:bg-violet-50 file:text-violet-700 hover:file:bg-violet-100 " />
+                </label>
+              </div>
+            </div>
+          </div>
+          <div class="col-span-12 md:col-span-6 lg:col-span-4">
+            <label for="companyNameInput" class="form-label">Client Name</label>
+            <input type="text" id="companyNameInput" formControlName="clientName" class="form-input">
+            <p *ngIf="invoiceForm.get('clientName')?.hasError('required')" class="text-red-500">This filed is required
+            </p>
+          </div>
+          <div class="col-span-12 md:col-span-6 lg:col-span-4">
+            <label for="companyEmailInput" class="form-label">Email</label>
+            <input type="email" id="companyEmailInput" formControlName="email" class="form-input">
+            <p *ngIf="invoiceForm.get('email')?.hasError('required')" class="text-red-500">This filed is required</p>
+          </div>
+          <div class="col-span-12 md:col-span-6 lg:col-span-4">
+            <label for="companyPhoneNumberInput" class="form-label">Phone Number</label>
+            <input type="text" id="companyPhoneNumberInput" formControlName="phoneNumber" class="form-input">
+            <p *ngIf="invoiceForm.get('email')?.hasError('phoneNumber')" class="text-red-500">This filed is required</p>
+          </div>
+          <div class="col-span-12 md:col-span-6 lg:col-span-3">
+            <label for="invoiceIDInput" class="form-label">Invoice ID</label>
+            <input type="text" id="invoiceIDInput" class="form-input" formControlName="invoicesID">
+          </div>
+          <div class="col-span-12 md:col-span-6 lg:col-span-3">
+            <label for="invoiceDateInput" class="form-label">Invoice Date</label>
+            <input type="date" id="invoiceDateInput" formControlName="invoiceDate" class="form-input">
+            <p *ngIf="invoiceForm.get('invoiceDate')?.hasError('required')" class="text-red-500">This filed is required
+            </p>
+          </div>
+          <div class="col-span-12 md:col-span-6 lg:col-span-3">
+            <label for="dueDateInput" class="form-label">Payment Due Date</label>
+            <input type="date" id="dueDateInput" formControlName="dueDate" class="form-input">
+            <p *ngIf="invoiceForm.get('dueDate')?.hasError('required')" class="text-red-500">This filed is required</p>
+          </div>
+          <div class="col-span-12 md:col-span-6 lg:col-span-3">
+            <label for="invoiceStatus" class="form-label">Invoice Status</label>
+            <select id="statusSelect" class="form-input" formControlName="status">
+              <option value="Paid">Paid</option>
+              <option value="Unpaid">Unpaid</option>
+              <option value="Overdue">Overdue</option>
+              <option value="Pending">Pending</option>
+            </select>
+            <p *ngIf="invoiceForm.get('status')?.hasError('required')" class="text-red-500">This filed is required</p>
+          </div>
+        </div>
+        <h6 class="mt-5 mb-3">Products Info</h6>
+        <div class="overflow-x-auto">
+          <table class="table flush">
+            <tbody>
+              <tr>
+                <th class="w-12 whitespace-nowrap">#</th>
+                <th class="whitespace-nowrap">Product Name</th>
+                <th class="w-52 whitespace-nowrap">Quantity</th>
+                <th class="w-52 whitespace-nowrap">Unit Price</th>
+                <th class="w-52 whitespace-nowrap">Discount (%)</th>
+                <th class="w-52 whitespace-nowrap">Total Amount</th>
+              </tr>
+              <ng-container *ngFor="let product of productDetailsFA.controls; let i = index">
+                <tr *ngIf="product" [formGroup]="product">
+                  <td>{{ i + 1 }}</td>
+                  <td>
+                    <input type="text" formControlName="productName" class="form-input" placeholder="Enter product name">
+                    <p *ngIf="product.get('productName')?.hasError('required')" class="text-red-500">This field is
+                      required</p>
+
+                    <input type="text" class="mt-2 mb-3 form-input" placeholder="Category" formControlName="category">
+                    <p *ngIf="product.get('category')?.hasError('required')" class="text-red-500">This field is required
+                    </p>
+
+                    <a class="link link-red" (click)="removeProductDetail(i)">
+                      <i class="align-baseline ri-delete-bin-line"></i> Delete Item
+                    </a>
+                  </td>
+                  <td>
+                    <div class="flex input-spin-group">
+                      <button class="input-spin-minus" (click)="decreaseQty(i)">
+                        <i class="ri-subtract-line"></i>
+                      </button>
+                      <input type="text" formControlName="qty" class="input-spin form-input" readonly>
+                      <button class="input-spin-plus" (click)="increaseQty(i)">
+                        <i class="ri-add-line"></i>
+                      </button>
+                    </div>
+                  </td>
+                  <td>
+                    <input type="text" formControlName="unitPrice" class="form-input" placeholder="$0.00" (input)="updateTotalAmount(i)">
+                  </td>
+                  <td>
+                    <input type="text" formControlName="discount" class="form-input" placeholder="0%" (input)="updateTotalAmount(i)">
+                  </td>
+                  <td>
+                    <input type="text" formControlName="totalAmount" class="form-input" readonly placeholder="$0.00">
+                  </td>
+                </tr>
+              </ng-container>
+              <tr>
+                <td colspan="6">
+                  <button class="btn btn-primary" (click)="addProductDetail()">
+                    <i class="align-bottom ri-add-line"></i> Add Item
+                  </button>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="5" class="text-right">Sub Total</td>
+                <td><input type="text" [value]="subtotal | currency" formControlName="subtotal" class="form-input" readonly></td>
+              </tr>
+              <tr>
+                <td colspan="5" class="text-right">Vat Amount (6%)</td>
+                <td><input type="text" [value]="vatAmount | currency" formControlName="vatamount" class="form-input" readonly></td>
+              </tr>
+              <tr>
+                <td colspan="5" class="text-right">Discount (10%)</td>
+                <td>
+                  <input type="number" formControlName="additionalDiscount" class="form-input" (input)="onAdditionalDiscountChange()">
+                </td>
+              </tr>
+              <tr>
+                <td colspan="5" class="text-right">Shipping Charge</td>
+                <td>
+                  <input type="number" formControlName="shippingCharge" class="form-input" (input)="onShippingChargeChange()">
+                </td>
+              </tr>
+              <tr>
+                <td colspan="5" class="text-right">Total Amount</td>
+                <td><input type="text" [value]="grandTotal | currency" class="form-input" readonly formControlName="amount"></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- <h6 class="mt-5 mb-3">Payment Method</h6>
+        <div class="grid grid-cols-12 gap-5">
+          <div class="col-span-12">
+            <label for="cardHolderNameInput" class="form-label">Card Holder Name</label>
+            <input type="text" id="cardHolderNameInput" class="form-input" placeholder="Card holder name"
+              formControlName="cardHolderName">
+            <p *ngIf="invoiceForm.get('cardHolderName')?.hasError('required')" class="text-red-500">This filed is
+              required</p>
+          </div>
+          <div class="col-span-12 md:col-span-6 lg:col-span-4">
+            <label for="cardNumberInput" class="form-label">Card Number</label>
+            <input type="text" id="cardNumberInput" class="form-input" placeholder="0000 0000 0000 0000"
+              formControlName="cardNumber">
+            <p *ngIf="invoiceForm.get('cardNumber')?.hasError('required')" class="text-red-500">This filed is
+              required</p>
+          </div>
+          <div class="col-span-12 md:col-span-6 lg:col-span-4">
+            <label for="expiryInput" class="form-label">Expiry Date</label>
+            <input type="text" id="expiryInput" class="form-input" placeholder="MM/YYYY" formControlName="expiryDate">
+            <p *ngIf="invoiceForm.get('expiryDate')?.hasError('required')" class="text-red-500">This filed is
+              required</p>
+          </div>
+          <div class="col-span-12 md:col-span-6 lg:col-span-4">
+            <label for="cvvInput" class="form-label">CVV</label>
+            <input type="text" id="cvvInput" class="form-input" placeholder="000" formControlName="cvv">
+            <p *ngIf="invoiceForm.get('cvv')?.hasError('required')" class="text-red-500">This filed is required</p>
+          </div>
+        </div>
+        <div class="mt-5">
+          <label for="textareaInput2" class="form-label">Terms & Conditions</label>
+          <textarea name="textareaInput2" id="textareaInput2" rows="3" class="h-auto form-input"
+            placeholder="Enter your terms" formControlName="termstext"></textarea>
+          <p *ngIf="invoiceForm.get('termstext')?.hasError('required')" class="text-red-500">This filed is required</p>
+        </div> -->
+
+        <div class="mt-5">
+          <div class="flex flex-wrap items-center justify-end gap-2">
+            <button class="btn btn-sub-gray" (click)="onReset()">
+              <lucide-angular name="rotate-ccw" class="inline-block size-4"></lucide-angular>
+              Reset
+            </button>
+            <button class="btn btn-primary" (click)="addOrEdit()">Save Invoice</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

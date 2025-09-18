@@ -1,0 +1,83 @@
+<form (ngSubmit)="onSubmit()" #educationalBackgroundForm="ngForm">
+  <h6 class="mb-3">High School</h6>
+  <div class="grid grid-cols-12 gap-space">
+    <div class="col-span-12 sm:col-span-4">
+      <label for="highSchoolNameInput" class="form-label">Name</label>
+      <input type="text" id="highSchoolNameInput" class="form-input" placeholder="High school name"
+        [(ngModel)]="educationForm.highSchoolName" name="highSchoolName" required>
+    </div>
+    <div class="col-span-12 sm:col-span-4">
+      <label for="graduationYearInput" class="form-label">Graduation Year</label>
+      <input type="text" id="graduationYearInput" class="form-input" placeholder="Years"
+        [(ngModel)]="educationForm.graduationYear" name="graduationYear" required>
+    </div>
+    <div class="col-span-12 sm:col-span-4">
+      <label for="gpaInput" class="form-label">GPA</label>
+      <input type="text" id="gpaInput" class="form-input" placeholder="GPA" [(ngModel)]="educationForm.gpa" name="gpa"
+        required>
+    </div>
+    <div class="col-span-12">
+      <label for="majorFocusInput" class="form-label">Major/Focus</label>
+      <input type="text" id="majorFocusInput" class="form-input" placeholder="Major/Focus"
+        [(ngModel)]="educationForm.majorFocus" name="majorFocus" required>
+    </div>
+  </div>
+
+  <h6 class="mt-5 mb-3">Undergraduate Institution</h6>
+  <div class="grid grid-cols-12 gap-space">
+    <div class="col-span-12 sm:col-span-4">
+      <label for="instituteNameInput" class="form-label">Institute Name</label>
+      <input type="text" id="instituteNameInput" class="form-input" placeholder="Institute name"
+        [(ngModel)]="educationForm.instituteName" name="instituteName" required>
+    </div>
+    <div class="col-span-12 sm:col-span-4">
+      <label for="underGraduationYearInput" class="form-label">Graduation Year</label>
+      <input type="text" id="underGraduationYearInput" class="form-input" placeholder="Years"
+        [(ngModel)]="educationForm.underGraduationYear" name="underGraduationYear" required>
+    </div>
+    <div class="col-span-12 sm:col-span-4">
+      <label for="underGpaInput" class="form-label">GPA</label>
+      <input type="text" id="underGpaInput" class="form-input" placeholder="GPA" [(ngModel)]="educationForm.underGpa"
+        name="underGpa" required>
+    </div>
+    <div class="col-span-12">
+      <label for="underMajorFocusInput" class="form-label">Major/Focus</label>
+      <input type="text" id="underMajorFocusInput" class="form-input" placeholder="Major/Focus"
+        [(ngModel)]="educationForm.underMajorFocus" name="underMajorFocus" required>
+    </div>
+  </div>
+
+  <h6 class="mt-5 mb-3">Academic Achievements</h6>
+  <div class="grid grid-cols-12 gap-space">
+    <div class="col-span-12 sm:col-span-4">
+      <label for="honorsAwardsInput" class="form-label">Honors/Awards</label>
+      <input type="text" id="honorsAwardsInput" class="form-input" [(ngModel)]="educationForm.honorsAwards"
+        name="honorsAwards">
+    </div>
+    <div class="col-span-12 sm:col-span-4">
+      <label for="extracurricularActivitiesInput" class="form-label">Extracurricular Activities</label>
+      <input type="text" id="extracurricularActivitiesInput" class="form-input"
+        [(ngModel)]="educationForm.extracurricularActivities" name="extracurricularActivities">
+    </div>
+    <div class="col-span-12 sm:col-span-4">
+      <label for="leadershipRolesInput" class="form-label">Leadership Roles</label>
+      <input type="text" id="leadershipRolesInput" class="form-input" [(ngModel)]="educationForm.leadershipRoles"
+        name="leadershipRoles">
+    </div>
+    <div class="col-span-12">
+      <label for="publicationsResearchInput" class="form-label">Publications/Research</label>
+      <input type="text" id="publicationsResearchInput" class="form-input"
+        [(ngModel)]="educationForm.publicationsResearch" name="publicationsResearch">
+    </div>
+  </div>
+
+  <div class="flex flex-wrap items-center justify-end gap-2 mt-5">
+    <button type="button" class="btn btn-sub-gray" (click)="previousStep()">
+      <lucide-angular name="MoveLeft" class="mr-1 ltr:inline-block rtl:hidden size-4"></lucide-angular> Previous
+    </button>
+    <button type="submit" class="btn btn-primary">
+      Save to Next
+      <lucide-angular name="MoveRight" class="ml-1 ltr:inline-block rtl:hidden size-4"></lucide-angular>
+    </button>
+  </div>
+</form>

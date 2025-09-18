@@ -1,0 +1,105 @@
+<app-page-title [Title]="'File Input'" [pageTitle]="'Forms'"></app-page-title>
+
+<div class="grid grid-cols-12 gap-x-space">
+  <div class="col-span-12 card">
+    <div class="card-header">
+      <h6 class="card-title">Basic</h6>
+    </div>
+    <div class="card-body">
+      <div class="grid grid-cols-12 gap-5">
+        <div class="col-span-12 md:col-span-6">
+          <label for="basicInput1" class="form-label">Light File Input</label>
+          <input type="file" id="basicInput1" class="form-file form-file-light">
+        </div>
+
+        <div class="col-span-12 md:col-span-6">
+          <label for="basicInput2" class="form-label">Dark File Input</label>
+          <input type="file" id="basicInput2" class="form-file">
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <div class="col-span-12 card">
+    <div class="card-header">
+      <h6 class="card-title">Basic</h6>
+    </div>
+    <div class="card-body">
+      <div class="grid grid-cols-12 gap-5">
+        <div class="col-span-12 md:col-span-6">
+          <label for="basicInput3" class="form-label">Small File Input</label>
+          <input type="file" id="basicInput3" class="form-file form-file-sm form-file-light">
+        </div>
+
+        <div class="col-span-12 md:col-span-6">
+          <label for="basicInput4" class="form-label">Medium File Input</label>
+          <input type="file" id="basicInput4" class="form-file form-file-md form-file-light">
+        </div>
+
+        <div class="col-span-12 md:col-span-6">
+          <label for="basicInput4" class="form-label">Default File Input</label>
+          <input type="file" id="basicInput4" class="form-file form-file-light">
+        </div>
+
+        <div class="col-span-12 md:col-span-6">
+          <label for="basicInput4" class="form-label">Large File Input</label>
+          <input type="file" id="basicInput4" class="form-file form-file-lg form-file-light">
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <div class="col-span-12 md:col-span-6 card">
+    <div class="card-header">
+      <h6 class="card-title">Upload User Profile</h6>
+    </div>
+    <div class="card-body">
+      <div class="text-sm">
+        <div class="preview-container">
+          <label for="logo">
+            <div
+              class="inline-flex items-center justify-center overflow-hidden bg-gray-100 border border-gray-200 rounded-sm cursor-pointer dark:bg-dark-850 dark:border-dark-800 size-32">
+              <img *ngIf="imageUrl" [src]="imageUrl" class="object-cover w-full h-full" />
+              <div *ngIf="!imageUrl" class="flex flex-col items-center text-gray-500 dark:text-dark-500">
+                <lucide-angular name="upload"></lucide-angular>
+                <div class="mt-2">User Profile</div>
+              </div>
+            </div>
+          </label>
+          <div class="mt-4">
+            <label class="block">
+              <span class="sr-only">Choose profile photo</span>
+              <input type="file" (change)="onFileChange($event)" id="logo"
+                class="block w-full text-sm file:cursor-pointer file:rounded-md focus:outline-0 text-slate-500 dark:text-dark-500 file:mr-4 file:py-2 file:px-4 file:border-0 file:text-sm file:font-semibold file:bg-violet-500/10 file:text-violet-700 hover:file:bg-violet-500/15" />
+            </label>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="col-span-12 md:col-span-6 card">
+    <div class="card-header">
+      <h6 class="card-title">Upload User Profile</h6>
+    </div>
+    <div class="card-body">
+      <form class="flex items-center space-x-6">
+        <div class="shrink-0">
+          <img class="object-cover w-16 h-16 rounded-full" src="assets/images/avatar/user-13.png"
+            alt="Current profile photo" />
+        </div>
+        <label class="block">
+          <span class="sr-only">Choose profile photo</span>
+          <input type="file"
+            class="block w-full text-sm file:cursor-pointer text-slate-500 dark:text-dark-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-violet-500/10 file:text-violet-700 hover:file:bg-violet-500/15 " />
+        </label>
+      </form>
+    </div>
+  </div>
+
+</div>

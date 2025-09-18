@@ -1,0 +1,37 @@
+<div id="bookOverviewModal" class="modal">
+  <div class="modal-wrap modal-center">
+    <div class="modal-header">
+      <h6>Book Overview</h6>
+      <button data-modal-close="" class="link link-red" (click)="closeaBookOverviewModal()">
+        <lucide-angular name="x" class="size-5"></lucide-angular>
+      </button>
+    </div>
+    <div class="modal-content">
+      <img [src]="inViewBook?.image" alt="{{ inViewBook?.title }}" class="mx-auto rounded-md h-44">
+      <div class="mt-5">
+        <div class="text-yellow-500 flex gap-1.5 mb-2">
+          <ng-container *ngFor="let star of getFullStars(inViewBook?.rating)">
+            <i class="ri-star-fill"></i>
+          </ng-container>
+          <ng-container *ngIf="hasHalfStar(inViewBook?.rating)">
+            <i class="ri-star-half-fill"></i>
+          </ng-container>
+          <ng-container *ngFor="let star of getEmptyStars(inViewBook?.rating)">
+            <i class="ri-star-line"></i>
+          </ng-container>
+          <span class="text-gray-800 dark:text-dark-50">({{ inViewBook?.reviewCount }})</span>
+        </div>
+        <h6 class="mb-1 truncate">
+          <a href="javascript: void(0);" class="text-current link link-primary">
+            {{ inViewBook?.title }}
+          </a>
+        </h6>
+        <p class="mb-2 text-gray-500 dark:text-dark-500">By
+          <a href="javascript:void(0);" class="underline link link-green">{{ inViewBook?.author }}</a>
+        </p>
+        <h5 class="mb-2">${{ inViewBook?.price }}</h5>
+        <button type="button" class="w-full btn btn-sub-red">Buy Now</button>
+      </div>
+    </div>
+  </div>
+</div>

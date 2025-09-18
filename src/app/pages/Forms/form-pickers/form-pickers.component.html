@@ -1,0 +1,159 @@
+<app-page-title [Title]="'Area Charts'" [pageTitle]="'Apexcharts'"></app-page-title>
+
+<!-- <input type="text" placeholder="Select Date" [flatpickr]="dateOptions" /> -->
+
+<div class="grid grid-cols-12 gap-x-space">
+    <div class="col-span-12 lg:col-span-6 card">
+        <div class="card-header">
+            <h6 class="card-title">Basic</h6>
+        </div>
+        <div class="card-body">
+            <div>
+                <input class="form-input" mwlFlatpickr [flatpickrOptions]="basicOptions" placeholder="YYYY-MM-DD" placeholder="Select Time">
+            </div>
+        </div>
+    </div>
+    <div class="col-span-12 lg:col-span-6 card">
+        <div class="card-header">
+            <h6 class="card-title">Human-friendly Dates</h6>
+        </div>
+        <div class="card-body">
+            <div>
+                <input mwlFlatpickr [flatpickrOptions]="humanFriendlyOptions" placeholder="YYYY-MM-DD" class="form-input" />
+            </div>
+        </div>
+    </div>
+    <div class="col-span-12 lg:col-span-6 card">
+        <div class="card-header">
+            <h6 class="card-title">Date Picker with Min and Max Date</h6>
+        </div>
+        <div class="card-body">
+            <div>
+                <input mwlFlatpickr [flatpickrOptions]="minMaxDateOptions" type="text" placeholder="DD MMM, YYYY" class="form-input" />
+            </div>
+        </div>
+    </div>
+    <div class="col-span-12 lg:col-span-6 card">
+        <div class="card-header">
+            <h6 class="card-title">Default Date</h6>
+        </div>
+        <div class="card-body">
+            <div>
+                <input mwlFlatpickr [flatpickrOptions]="defaultDateOptions" class="form-input" />
+            </div>
+        </div>
+    </div>
+    <div class="col-span-12 lg:col-span-6 card">
+        <div class="card-header">
+            <h6 class="card-title">Disabling Date</h6>
+        </div>
+        <div class="card-body">
+            <div>
+                <input mwlFlatpickr [flatpickrOptions]="disableDateOptions" placeholder="DD MMM, YYYY" class="form-input" />
+            </div>
+        </div>
+    </div>
+    <div class="col-span-12 lg:col-span-6 card">
+        <div class="card-header">
+            <h6 class="card-title">Short Date</h6>
+        </div>
+        <div class="card-body">
+            <div>
+                <input mwlFlatpickr [flatpickrOptions]="shortDateOptions" placeholder="MM/DD/YY" class="form-input" />
+            </div>
+        </div>
+    </div>
+    <div class="col-span-12 lg:col-span-6 card">
+        <div class="card-header">
+            <h6 class="card-title">Selecting multiple dates</h6>
+        </div>
+        <div class="card-body">
+            <div>
+                <input mwlFlatpickr [flatpickrOptions]="multipleDatesOptions" placeholder="MM/DD/YY" class="form-input" />
+            </div>
+        </div>
+    </div>
+    <div class="col-span-12 lg:col-span-6 card">
+        <div class="card-header">
+            <h6 class="card-title">Full Date with Time</h6>
+        </div>
+        <div class="card-body">
+            <div>
+                <input mwlFlatpickr [flatpickrOptions]="fullDateTimeOptions" placeholder="DD MMM, YYYY HH:MM" class="form-input" />
+            </div>
+        </div>
+    </div>
+    <div class="col-span-12 lg:col-span-6 card">
+        <div class="card-header">
+            <h6 class="card-title">Range Picker</h6>
+        </div>
+        <div class="card-body">
+            <div>
+                <input mwlFlatpickr [flatpickrOptions]="rangePickerOptions" placeholder="Select Date Range" class="form-input" />
+            </div>
+        </div>
+    </div>
+    <div class="col-span-12 lg:col-span-6 card">
+        <div class="card-header">
+            <h6 class="card-title">Week Numbers</h6>
+        </div>
+        <div class="card-body">
+            <div>
+                <input mwlFlatpickr [flatpickrOptions]="weekNumbersOptions" placeholder="Select a date" class="form-input" />
+            </div>
+        </div>
+    </div>
+    <div class="col-span-12 lg:col-span-6 card">
+        <div class="card-header">
+            <h6 class="card-title">Timepickr </h6>
+        </div>
+        <div class="card-body">
+            <div>
+                <input mwlFlatpickr [flatpickrOptions]="timePickerOptions" placeholder="Select a time" class="form-input" />
+            </div>
+        </div>
+    </div>
+    <div class="col-span-12 lg:col-span-6 card">
+        <div class="card-header">
+            <h6 class="card-title">24 Hours Timepickr </h6>
+        </div>
+        <div class="card-body">
+            <div>
+                <input mwlFlatpickr [flatpickrOptions]="timePicker24hOptions" placeholder="Select a time" class="form-input" />
+            </div>
+        </div>
+    </div>
+    <div class="col-span-12 lg:col-span-6 card">
+        <div class="card-header">
+            <h6 class="card-title">Time Picker w/ Limits </h6>
+        </div>
+        <div class="card-body">
+            <div>
+                <input mwlFlatpickr [flatpickrOptions]="timePickerLimitsOptions" placeholder="Select a time" class="form-input" />
+            </div>
+        </div>
+        <div class=""></div>
+    </div>
+    <div class="col-span-12 lg:col-span-6 card">
+        <div class="card-header">
+            <h6 class="card-title">Preloading Time </h6>
+        </div>
+        <div class="card-body">
+            <div>
+                <input mwlFlatpickr [flatpickrOptions]="preloadingTimeOptions" placeholder="Select a time" class="form-input" />
+            </div>
+        </div>
+    </div>
+    <div class="col-span-12 lg:col-span-6 card">
+        <div class="card-header">
+            <h6 class="card-title">Inline </h6>
+        </div>
+        <div class="card-body">
+            <div>
+                <input mwlFlatpickr [flatpickrOptions]="inlineOptions" placeholder="Select a date" class="form-input" />
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- <div class mwlFlatpickr [flatpickrOptions]="basicOptions"></div> -->

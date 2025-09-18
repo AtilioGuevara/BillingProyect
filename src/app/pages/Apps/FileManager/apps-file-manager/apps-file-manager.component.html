@@ -1,0 +1,260 @@
+<app-page-title [Title]="'File Manager'" [pageTitle]="'Apps'"></app-page-title>
+
+<div class="grid grid-cols-12 gap-x-space" *ngIf="folderData">
+  <div class="col-span-12 xl:col-span-8 2xl:col-span-9">
+    <div class="flex flex-wrap justify-between gap-4">
+      <div class="grow">
+        <div class="relative group/form">
+          <input type="text" class="ltr:pl-9 rtl:pr-9 form-input ltr:group-[&.right]/form:pr-9 rtl:group-[&.right]/form:pl-9 ltr:group-[&.right]/form:pl-4 rtl:group-[&.right]/form:pr-4" placeholder="Search ..." [(ngModel)]="searchText" (ngModelChange)="updateDisplayedData()" />
+          <div class="absolute inset-y-0 flex items-center text-gray-500 dark:text-dark-500 ltr:left-3 rtl:right-3 ltr:group-[&.right]/form:right-3 rtl:group-[&.right]/form:left-3 ltr:group-[&.right]/form:left-auto rtl:group-[&.right]/form:right-auto focus:outline-hidden">
+            <lucide-angular name="search" class="size-4"></lucide-angular>
+          </div>
+        </div>
+      </div>
+      <div class="flex gap-2 shrink-0">
+        <button type="button" class="w-full btn btn-primary" data-modal-target="" (click)="openCreateFolderModal()">
+          <lucide-angular name="plus" class="inline-block ltr:ml-1 rtl:mr-1 size-4"></lucide-angular>
+          Create New
+        </button>
+        <button type="button" title="btn" class="btn btn-sub-gray btn-icon shrink-0">
+          <lucide-angular name="ellipsis" class="size-4"></lucide-angular>
+        </button>
+      </div>
+    </div>
+
+    <div class="mt-space">
+      <h6 class="mb-3">My Folders ({{ folderData.length }})</h6>
+      <div class="grid grid-cols-1 sm:grid-cols-2 2xl:grid-cols-4 gap-x-space">
+        <ng-container *ngFor="let folder of folderData; let i = index">
+          <div class="block card">
+            <div class="card-body">
+              <div class="dropdown float-end">
+                <button title="dropdown-button" class="flex items-center text-gray-500 dark:text-dark-500" domixDropdownToggle [dropdownMenu]="dropdown2">
+                  <i class="ri-more-2-fill size-5"></i>
+                </button>
+                <div #dropdown2 class="!fixed p-2 dropdown-menu">
+                  <ul>
+                    <li>
+                      <a href="javascript: void(0);" class="dropdown-item">
+                        <span>Open Folder</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="javascript: void(0);" class="dropdown-item" (click)="deleteFolderModal(i)">
+                        <span>Delete</span>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <img src="assets/images/file-manager/icons/folder.png" alt="Folders Img">
+              <div class="mt-4">
+                <h6 class="mb-1">
+                  <a href="javascript:void(0);">{{ folder.name }}</a>
+                </h6>
+                <p class="text-sm text-slate-500 dark:text-dark-500">{{ folder.description }}</p>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+      </div>
+      <h6 class="mb-3">Pinned Files</h6>
+      <div class="grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-4 gap-x-space">
+        <a href="javascript: void(0);" class="block overflow-hidden card">
+          <img src="assets/images/avatar/user-17.png" alt="" class="object-cover w-full h-32">
+          <div class="text-center border-t border-gray-200 card-body dark:border-dark-800">
+            <h6 class="mb-1">Profile Images</h6>
+            <p class="text-sm text-slate-500 dark:text-dark-500">245 KB</p>
+          </div>
+        </a>
+        <a href="javascript: void(0);" class="block overflow-hidden card">
+          <iframe class="w-full h-32" title="video" src="https://www.youtube.com/embed/UvF56fPGVt4?si=riMC3DQV0WQeBypD" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+          <div class="text-center border-t border-gray-200 card-body dark:border-dark-800">
+            <h6 class="mb-1">The Utility-First Workflow</h6>
+            <p class="text-sm text-slate-500 dark:text-dark-500">2.7 MB</p>
+          </div>
+        </a>
+        <a href="javascript: void(0);" class="block overflow-hidden card">
+          <img src="assets/images/email/features-2.png" alt="" class="object-cover w-full h-32">
+          <div class="text-center border-t border-gray-200 card-body dark:border-dark-800">
+            <h6 class="mb-1">Email Features PDF</h6>
+            <p class="text-sm text-slate-500 dark:text-dark-500">2.7 MB</p>
+          </div>
+        </a>
+        <a href="javascript: void(0);" class="block overflow-hidden card">
+          <iframe class="w-full h-32" title="video" src="https://www.youtube.com/embed/nOQyWbPO2Ds?si=pTFhrsaGUoSqMJ6g" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+          <div class="text-center border-t border-gray-200 card-body dark:border-dark-800">
+            <h6 class="mb-1">TailwindCSS Setup</h6>
+            <p class="text-sm text-slate-500 dark:text-dark-500">475 MB</p>
+          </div>
+        </a>
+      </div>
+      <div class="card">
+        <div class="flex items-center gap-5 card-header flex-wrap">
+          <h6 class="card-title grow">Recent Files</h6><button class="btn btn-red btn-icon" *ngIf="checkedRows.length" (click)="deleteSelectedItem()">
+            <lucide-angular name="trash" class="inline-block size-4"></lucide-angular>
+          </button>
+          <div class="shrink-0">
+            <input type="file" id="fileInput" class="hidden">
+            <label for="fileInput" class="btn btn-sub-green">
+              <lucide-angular name="cloud-upload" class="inline-block ltr:mr-1 rtl:ml-1 size-4"></lucide-angular> Upload
+              File
+            </label>
+          </div>
+        </div>
+        <div class="pt-0 card-body">
+          <div>
+            <div class="overflow-x-auto table-box whitespace-nowrap">
+              <table class="table flush">
+                <tbody>
+                  <tr class="bg-gray-100 dark:bg-dark-850">
+                    <th *ngFor="let col of columnDefs">
+                      <div class="flex items-center gap-space">
+                        <div class="!font-medium" *ngIf="col.headerCheckbox">
+                          <div class="text-gray-500 input-check-group dark:text-dark-500">
+                            <label for="checkboxAll" class="hidden input-check-label"></label>
+                            <input id="checkboxAll" class="input-check input-check-primary" type="checkbox" [(ngModel)]="headerCheckBox" (change)="headerCheckBoxChange()" />
+                          </div>
+                        </div>
+                        <div (click)="onSortChange(col)">
+                          {{col.headerName}} <span *ngIf="col.sortable">
+                            {{ col.sortDiraction === 'asc' ? '↑' : '↓' }}</span>
+                        </div>
+                      </div>
+                    </th>
+                  </tr>
+                  <ng-container *ngIf="displayedData.length > 0">
+                    <ng-container *ngFor="let file of displayedData; let index = index">
+                      <tr class="*:px-3 *:py-2.5">
+                        <td class="flex items-center gap-space">
+                          <div class="input-check-group">
+                            <label class="hidden input-check-label" *ngIf="hasHeaderCheckbox"></label>
+                            <input class="input-check input-check-primary" type="checkbox" [checked]="file.checked" (change)="onRowCheckboxChange(index)" />
+                          </div>
+                          <img [src]="file.image" alt="" class="h-6">
+                        </td>
+                        <td><a href="javascript:void(0);">{{file.documentName}}</a></td>
+                        <td>{{file.size}}</td>
+                        <td>{{file.lastEdit}}</td>
+                        <td>
+                          <div class="flex items-center gap-2">
+                            <button class="btn btn-sub-gray btn-icon !size-8 rounded-md" title="edit" (click)="openRenameModal(file,index)"><i class="ri-pencil-line"></i></button>
+                            <button class="btn btn-sub-gray btn-icon !size-8 rounded-md" title="delete" (click)="openDeleteModal(index)"><i class="ri-delete-bin-line"></i></button>
+                          </div>
+                        </td>
+                      </tr>
+                    </ng-container>
+                  </ng-container>
+                  <tr>
+                    <ng-container *ngIf="displayedData.length == 0">
+                      <td colspan="10" class="!p-8">
+                        <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" class="mx-auto size-12" viewBox="0 0 48 48">
+                          <linearGradient id="SVGID_1__h35ynqzIJzH4_gr1" x1="34.598" x2="15.982" y1="15.982" y2="34.598" gradientUnits="userSpaceOnUse">
+                            <stop offset="0" stop-color="#60e8fe"></stop>
+                            <stop offset=".033" stop-color="#6ae9fe"></stop>
+                            <stop offset=".197" stop-color="#97f0fe"></stop>
+                            <stop offset=".362" stop-color="#bdf5ff"></stop>
+                            <stop offset=".525" stop-color="#dafaff"></stop>
+                            <stop offset=".687" stop-color="#eefdff"></stop>
+                            <stop offset=".846" stop-color="#fbfeff"></stop>
+                            <stop offset="1" stop-color="#fff"></stop>
+                          </linearGradient>
+                          <path fill="url(#SVGID_1__h35ynqzIJzH4_gr1)" d="M40.036,33.826L31.68,25.6c0.847-1.739,1.335-3.684,1.335-5.748c0-7.27-5.894-13.164-13.164-13.164	S6.688,12.582,6.688,19.852c0,7.27,5.894,13.164,13.164,13.164c2.056,0,3.995-0.485,5.728-1.326l3.914,4.015l4.331,4.331	c1.715,1.715,4.496,1.715,6.211,0C41.751,38.321,41.751,35.541,40.036,33.826z">
+                          </path>
+                          <path fill="none" stroke="#10cfe3" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="3" d="M31.95,25.739l8.086,8.086c1.715,1.715,1.715,4.496,0,6.211l0,0c-1.715,1.715-4.496,1.715-6.211,0	l-4.331-4.331">
+                          </path>
+                          <path fill="none" stroke="#10cfe3" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="3" d="M7.525,24.511c-1.771-4.694-0.767-10.196,3.011-13.975c3.847-3.847,9.48-4.817,14.228-2.912">
+                          </path>
+                          <path fill="none" stroke="#10cfe3" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="3" d="M30.856,12.603c3.376,5.114,2.814,12.063-1.688,16.565c-4.858,4.858-12.565,5.129-17.741,0.814">
+                          </path>
+                        </svg>
+                        <p class="mt-2 text-center text-gray-500 dark:text-dark-500">No matching records found</p>
+                      </td>
+                    </ng-container>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+
+            <app-domix-pagination [currentPage]="currentPage" [totalPages]="totalPages" [showingStart]="showingStart" [showingEnd]="showingEnd" [totalResults]="gridData.length" (pageChanged)="onPageChange($event)">
+            </app-domix-pagination>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-span-12 xl:col-span-4 2xl:col-span-3">
+    <div class="card">
+      <div class="card-body">
+        <app-domix-echart [chartData]="gaugeChart"></app-domix-echart>
+        <p class="text-center text-slate-500 dark:text-dark-500">Get an additional 500 GB of space for your documents
+          and files.</p>
+        <div class="flex flex-col gap-4 mt-space">
+          <a href="javascript: void(0);" class="flex items-center gap-2">
+            <div class="flex items-center justify-center p-2 rounded-md bg-gray-50 size-12 shrink-0 dark:bg-dark-850">
+              <img src="assets/images/file-manager/icons/picture.png" alt="">
+            </div>
+            <div class="grow">
+              <h6 class="mb-1">547 Images</h6>
+              <p class="text-slate-500 dark:text-dark-500">24.8 GB</p>
+            </div>
+            <p class="text-slate-500 dark:text-dark-500 shrink-0">24.7%</p>
+          </a>
+          <a href="javascript: void(0);" class="flex items-center gap-2">
+            <div class="flex items-center justify-center p-2 rounded-md bg-gray-50 size-12 shrink-0 dark:bg-dark-850">
+              <img src="assets/images/file-manager/icons/folder-03.png" alt="">
+            </div>
+            <div class="grow">
+              <h6 class="mb-1">154 My Documents</h6>
+              <p class="text-slate-500 dark:text-dark-500">13.8 GB</p>
+            </div>
+            <p class="text-slate-500 dark:text-dark-500 shrink-0">12.9%</p>
+          </a>
+          <a href="javascript: void(0);" class="flex items-center gap-2">
+            <div class="flex items-center justify-center p-2 rounded-md bg-gray-50 size-12 shrink-0 dark:bg-dark-850">
+              <img src="assets/images/file-manager/icons/video.png" alt="">
+            </div>
+            <div class="grow">
+              <h6 class="mb-1">29 Video</h6>
+              <p class="text-slate-500 dark:text-dark-500">19 GB</p>
+            </div>
+            <p class="text-slate-500 dark:text-dark-500 shrink-0">16.4%</p>
+          </a>
+          <a href="javascript: void(0);" class="flex items-center gap-2">
+            <div class="flex items-center justify-center p-2 rounded-md bg-gray-50 size-12 shrink-0 dark:bg-dark-850">
+              <img src="assets/images/file-manager/icons/mp3.png" alt="">
+            </div>
+            <div class="grow">
+              <h6 class="mb-1">86 Audio</h6>
+              <p class="text-slate-500 dark:text-dark-500">5.9 GB</p>
+            </div>
+            <p class="text-slate-500 dark:text-dark-500 shrink-0">6.7%</p>
+          </a>
+          <a href="javascript: void(0);" class="flex items-center gap-2">
+            <div class="flex items-center justify-center p-2 rounded-md bg-gray-50 size-12 shrink-0 dark:bg-dark-850">
+              <img src="assets/images/file-manager/icons/folder-04.png" alt="">
+            </div>
+            <div class="grow">
+              <h6 class="mb-1">364 Design Templates File</h6>
+              <p class="text-slate-500 dark:text-dark-500">6 GB</p>
+            </div>
+            <p class="text-slate-500 dark:text-dark-500 shrink-0">7.3%</p>
+          </a>
+          <div class="pt-3 overflow-hidden rounded-md">
+            <div class="mx-10">
+              <img src="assets/images/file-manager/upgrade.png" alt="">
+            </div>
+            <div class="text-center p-space bg-primary-500/10">
+              <h6 class="mb-1">Get More space for files</h6>
+              <p class="mb-3 text-sm text-slate-500 dark:text-dark-500">We offer your unlimited storage space for all
+                your needs</p>
+              <button type="button" class="w-full btn btn-primary">Upgrade to Pro</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

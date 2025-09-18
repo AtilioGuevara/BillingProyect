@@ -1,0 +1,49 @@
+<div id="addHolidayModal" class="modal">
+  <div class="modal-wrap modal-center">
+    <div class="modal-header">
+      <h6 class="modal-title">{{!config ? 'Add' : 'Edit' }} Holiday</h6>
+      <button (click)="close()" class="link link-red">
+        <lucide-angular name="x" class="size-5"></lucide-angular>
+      </button>
+    </div>
+    <div class="modal-content" [formGroup]="fromGroup">
+      <form action="javascript: void(0);">
+        <div class="grid grid-cols-12 gap-space">
+          <div class="col-span-12">
+            <label for="holidayInput" class="form-label">Holiday <span class="text-red-500">*</span></label>
+            <input type="text" id="holidayInput" class="form-input" placeholder="Enter holiday name"
+              formControlName="name">
+            <span *ngIf="fromGroup.get('name')?.hasError('required')" class="text-red-500"> This Filed is
+              Required</span>
+          </div>
+          <div class="col-span-12">
+            <label for="dateInput" class="form-label">Date <span class="text-red-500">*</span></label>
+            <input type="text" placeholder="YYYY-MM-DD" id="dateInput" class="form-input" data-provider="flatpickr"
+              formControlName="date" mwlFlatpickr [flatpickrOptions]="{dateFormat: 'Y-m-d'}" formControlName="date">
+            <span *ngIf="fromGroup.get('date')?.hasError('required')" class="text-red-500"> This Filed is
+              Required</span>
+          </div>
+          <div class="col-span-12">
+            <label for="daysInput" class="form-label">Day Name <span class="text-red-500">*</span></label>
+            <input type="text" id="daysInput" class="form-input" placeholder="Enter date name" formControlName="day">
+            <span *ngIf="fromGroup.get('day')?.hasError('required')" class="text-red-500"> This Filed is
+              Required</span>
+          </div>
+          <div class="col-span-12">
+            <div class="flex items-center justify-end gap-2">
+              <button type="button" class="btn btn-active-red" (click)="close()">
+                <lucide-angular name="x" class="inline-block size-4"></lucide-angular> <span
+                  class="align-baseline">Close</span>
+              </button>
+              <a href="javascript: void(0);" class="btn btn-primary" (click)="closeEventModal()">
+                <lucide-angular name="Plus" class="inline-block mr-1 size-4"></lucide-angular>
+                {{!config ? 'Add' : 'Update' }}
+                Holiday
+              </a>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

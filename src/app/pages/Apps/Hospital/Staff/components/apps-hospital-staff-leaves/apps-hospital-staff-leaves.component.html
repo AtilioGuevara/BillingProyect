@@ -1,0 +1,156 @@
+<app-page-title [pageTitle]="'Staff'" [Title]="'Leave Management'"></app-page-title>
+
+<div>
+  <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-5 gap-x-space">
+    <div class="card">
+      <div class="flex items-center gap-4 card-body">
+        <div class="flex items-center justify-center text-xl font-medium text-green-500 rounded-md bg-green-500/10 size-14">
+          {{ availableLeaveCount }}
+        </div>
+        <p class="text-gray-500 dark:text-dark-500">Available Leaves</p>
+      </div>
+    </div>
+    <div class="card">
+      <div class="flex items-center gap-4 card-body">
+        <div class="flex items-center justify-center text-xl font-medium text-purple-500 rounded-md bg-purple-500/10 size-14">
+          {{ usedLeaveCount }}
+        </div>
+        <p class="text-gray-500 dark:text-dark-500">Used Leaves</p>
+      </div>
+    </div>
+    <div class="card">
+      <div class="flex items-center gap-4 card-body">
+        <div class="flex items-center justify-center text-xl font-medium text-yellow-500 rounded-md bg-yellow-500/10 size-14">
+          {{ pendingLeaveCount }}
+        </div>
+        <p class="text-gray-500 dark:text-dark-500">Pending Leaves Request</p>
+      </div>
+    </div>
+    <div class="card">
+      <div class="flex items-center gap-4 card-body">
+        <div class="flex items-center justify-center text-xl font-medium text-red-500 rounded-md bg-red-500/10 size-14">
+          {{ rejectedLeaveCount }}
+        </div>
+        <p class="text-gray-500 dark:text-dark-500">Rejected Leaves</p>
+      </div>
+    </div>
+    <div class="card">
+      <div class="flex items-center gap-4 card-body">
+        <div class="flex items-center justify-center text-xl font-medium rounded-md size-14 bg-sky-500/10 text-sky-500">
+          {{gridData.length}}
+        </div>
+        <p class="text-gray-500 dark:text-dark-500">Total Leaves</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="flex items-center gap-3 card-header">
+      <h6 class="card-title grow">Leaves</h6>
+      <div class="shrink-0">
+        <a href="javascript:void(0);" routerLink="/apps-hospital-staff-leave-add" class="cursor-pointer btn btn-primary">New Request</a>
+      </div>
+    </div>
+    <div class="card-header">
+      <div class="grid grid-cols-12 gap-space">
+        <div class="col-span-12 md:col-span-6 xl:col-span-3 2xl:col-span-4">
+          <div class="relative group/form">
+            <input type="email" class="ltr:pl-9 rtl:pr-9 form-input ltr:group-[&.right]/form:pr-9 rtl:group-[&.right]/form:pl-9 ltr:group-[&.right]/form:pl-4 rtl:group-[&.right]/form:pr-4" placeholder="Leave Type reason" x-model="searchTerm" [(ngModel)]="searchText" (ngModelChange)="updateDisplayedData()">
+            <div class="absolute inset-y-0 flex items-center text-gray-500 dark:text-dark-500 ltr:left-3 rtl:right-3 ltr:group-[&.right]/form:right-3 rtl:group-[&.right]/form:left-3 ltr:group-[&.right]/form:left-auto rtl:group-[&.right]/form:right-auto focus:outline-hidden">
+              <lucide-angular name="search" class="size-4"></lucide-angular>
+            </div>
+          </div>
+        </div>
+        <div class="col-span-12 md:col-span-6 xl:col-span-3 2xl:col-span-3">
+          <input mwlFlatpickr [(ngModel)]="selectedDateRange" [flatpickrOptions]="rangePickerOptions" placeholder="Select Date Range" class="form-input" (ngModelChange)="applyFilters()" />
+        </div>
+        <div class="col-span-12 md:col-span-6 xl:col-span-3 2xl:col-span-3">
+          <ng-select class="filter-ng-select" [items]="categories" bindLabel="text" bindValue="text" [(ngModel)]="selectedCategory" placeholder="Select a category" (change)="catgoryChange()" (clear)="resetFilters()">
+          </ng-select>
+        </div>
+        <div class="col-span-12 md:col-span-6 xl:col-span-3 2xl:col-span-2">
+          <button type="submit" class="w-full btn btn-sub-gray">
+            <lucide-angular name="filter" class="inline-block align-middle size-4"></lucide-angular> Filter Now
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="pt-0 card-body">
+      <div class="overflow-x-auto table-box">
+        <table class="table whitespace-nowrap">
+          <tbody>
+            <tr class="text-gray-500 bg-gray-100 dark:bg-dark-850 dark:text-dark-500">
+              <th *ngFor="let col of columnDefs" class="!font-medium cursor-pointer">
+                <div class="flex items-center gap-space">
+                  <div (click)="onSortChange(col)">
+                    {{col.headerName}} <span *ngIf="col.sortable">
+                      {{ col.sortDiraction === 'asc' ? '↑' : '↓' }}</span>
+                  </div>
+                </div>
+              </th>
+            </tr>
+
+            <ng-container *ngIf="displayedData.length > 0">
+              <ng-container *ngFor="let leave of displayedData; let i = index">
+                <tr class="*:px-3 *:py-2.5">
+                  <td>{{leave.staffleaveId}}</td>
+                  <td>{{leave.leaveType}}</td>
+                  <td>{{leave.startDate}}</td>
+                  <td>{{leave.endDate}}</td>
+                  <td>{{leave.totalDays}}</td>
+                  <td>{{leave.reason}}</td>
+                  <td>{{leave.approvedBy}}</td>
+                  <td>{{leave.dateRequested}}</td>
+                  <td>{{leave.dateApproved}}</td>
+                  <td>
+                    <span class="badge" [ngClass]="{
+                                      'badge-green': leave.status === 'Approved',
+                                      'badge-red': leave.status === 'Rejected',
+                                      'badge-yellow': leave.status === 'Pending'
+                                  }">{{leave.status}}</span>
+                  </td>
+                  <td>
+                    <div class="flex items-center gap-2">
+                      <button title="Approved" class="btn btn-sub-green btn-icon !size-8"><i class="ri-check-line"></i></button>
+                      <button title="edit" class="btn btn-sub-gray btn-icon !size-8" (click)="editstaffLeave(leave)"><i class="ri-pencil-line"></i></button>
+                      <button title="Rejected" class="btn btn-sub-red btn-icon !size-8"><i class="ri-close-line"></i></button>
+                    </div>
+                  </td>
+                </tr>
+              </ng-container>
+            </ng-container>
+            <tr>
+              <ng-container *ngIf="displayedData.length == 0">
+                <td colspan="10" class="!p-8">
+                  <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" class="mx-auto size-12" viewBox="0 0 48 48">
+                    <linearGradient id="SVGID_1__h35ynqzIJzH4_gr1" x1="34.598" x2="15.982" y1="15.982" y2="34.598" gradientUnits="userSpaceOnUse">
+                      <stop offset="0" stop-color="#60e8fe"></stop>
+                      <stop offset=".033" stop-color="#6ae9fe"></stop>
+                      <stop offset=".197" stop-color="#97f0fe"></stop>
+                      <stop offset=".362" stop-color="#bdf5ff"></stop>
+                      <stop offset=".525" stop-color="#dafaff"></stop>
+                      <stop offset=".687" stop-color="#eefdff"></stop>
+                      <stop offset=".846" stop-color="#fbfeff"></stop>
+                      <stop offset="1" stop-color="#fff"></stop>
+                    </linearGradient>
+                    <path fill="url(#SVGID_1__h35ynqzIJzH4_gr1)" d="M40.036,33.826L31.68,25.6c0.847-1.739,1.335-3.684,1.335-5.748c0-7.27-5.894-13.164-13.164-13.164	S6.688,12.582,6.688,19.852c0,7.27,5.894,13.164,13.164,13.164c2.056,0,3.995-0.485,5.728-1.326l3.914,4.015l4.331,4.331	c1.715,1.715,4.496,1.715,6.211,0C41.751,38.321,41.751,35.541,40.036,33.826z">
+                    </path>
+                    <path fill="none" stroke="#10cfe3" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="3" d="M31.95,25.739l8.086,8.086c1.715,1.715,1.715,4.496,0,6.211l0,0c-1.715,1.715-4.496,1.715-6.211,0	l-4.331-4.331">
+                    </path>
+                    <path fill="none" stroke="#10cfe3" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="3" d="M7.525,24.511c-1.771-4.694-0.767-10.196,3.011-13.975c3.847-3.847,9.48-4.817,14.228-2.912">
+                    </path>
+                    <path fill="none" stroke="#10cfe3" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="3" d="M30.856,12.603c3.376,5.114,2.814,12.063-1.688,16.565c-4.858,4.858-12.565,5.129-17.741,0.814">
+                    </path>
+                  </svg>
+                  <p class="mt-2 text-center text-gray-500 dark:text-dark-500">No matching records found</p>
+                </td>
+              </ng-container>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <app-domix-pagination [currentPage]="currentPage" [totalPages]="totalPages" [showingStart]="showingStart" [showingEnd]="showingEnd" [totalResults]="gridData.length" (pageChanged)="onPageChange($event)">
+      </app-domix-pagination>
+    </div>
+  </div>
+</div>

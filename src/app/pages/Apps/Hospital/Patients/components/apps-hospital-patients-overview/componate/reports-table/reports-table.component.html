@@ -1,0 +1,47 @@
+<div class="flex items-center gap-3 card-header">
+  <h6 class="card-title grow">Reports</h6>
+  <a href="javascript: void(0);" (click)="openCreateModal(null,null)"
+    class="font-medium shrink-0 text-primary-500 link hover:text-primary-600">
+    <lucide-angular name="Plus" class="inline-block mb-1 align-middle size-4"></lucide-angular> Add Reports
+  </a>
+</div>
+<div class="pt-0 card-body">
+  <div>
+    <div class="overflow-x-auto table-box">
+      <table class="table flush odd-striped whitespace-nowrap">
+        <tbody>
+          <ng-container *ngIf="displayedData.length > 0">
+            <ng-container *ngFor="let report of displayedData; let i = index">
+              <tr class="*:px-3 *:py-2.5">
+                <td >{{report.name}}</td>
+                <td >{{report.age}}</td>
+                <td >{{report.date}}</td>
+                <td >{{report.doctor}}</td>
+                <td>
+                  <span  class="badge" [ngClass]="{
+                                      'badge-green': report.status === 'Completed',
+                                      'badge-purple': report.status === 'In Progress',
+                                      'badge-yellow': report.status === 'Pending'
+                                  }">{{report.status}}</span>
+                </td>
+                <td>
+                  <div class="flex items-center gap-2">
+                    <button title="Download" class="btn btn-sub-purple btn-icon !size-8 rounded-full"><i
+                        class="ri-download-2-line"></i></button>
+                    <button title="delete" class="btn btn-sub-red btn-icon !size-8 rounded-full"
+                      (click)="deleteModal(i)"><i class="ri-delete-bin-line"></i></button>
+                  </div>
+                </td>
+              </tr>
+            </ng-container>
+          </ng-container>
+        </tbody>
+      </table>
+    </div>
+
+    <app-domix-pagination [currentPage]="currentPage" [totalPages]="totalPages" [showingStart]="showingStart"
+      [showingEnd]="showingEnd" [totalResults]="displayedData.length" (pageChanged)="onPageChange($event)">
+    </app-domix-pagination>
+  </div>
+
+</div>

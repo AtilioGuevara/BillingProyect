@@ -1,0 +1,55 @@
+<div class="flex items-center gap-3 card-header">
+  <h6 class="card-title grow">Medicine History</h6>
+  <a href="javascript: void(0);" data-modal-target="addMedicineModal" (click)="openCreateModal(null,null)"
+    class="font-medium shrink-0 text-primary-500 link hover:text-primary-600">
+    <lucide-angular name="Plus" class="inline-block mb-1 align-middle size-4"></lucide-angular> Add Medicine
+  </a>
+</div>
+<div class="pt-0 card-body">
+  <div>
+    <div class="overflow-x-auto table-box whitespace-nowrap">
+      <table class="table flush whitespace-nowrap">
+        <tbody>
+          <tr class="text-gray-500 bg-gray-100 dark:bg-dark-850 dark:text-dark-500">
+            <th *ngFor="let col of columnDefs" class="!font-medium cursor-pointer">
+              <div class="flex items-center gap-space">
+                <div (click)="onSortChange(col)">
+                  {{col.headerName}} <span *ngIf="col.sortable">
+                    {{ col.sortDiraction === 'asc' ? '↑' : '↓' }}</span>
+                </div>
+              </div>
+            </th>
+          </tr>
+          <ng-container *ngIf="displayedData.length > 0">
+            <ng-container *ngFor="let medicine of displayedData; let i = index">
+              <tr class="*:px-3 *:py-2.5">
+                <td >{{medicine.date}}</td>
+                <td >{{medicine.time}}</td>
+                <td >{{medicine.medicineName}}</td>
+                <td >{{medicine.dosage}}</td>
+                <td >{{medicine.frequency}}</td>
+                <td >{{medicine.startDate}}</td>
+                <td >{{medicine.endDate}}</td>
+                <td >{{medicine.prescribingDoctor}}</td>
+                <td >{{medicine.reasonCondition}}</td>
+                <td >{{medicine.notes}}</td>
+                <td>
+                  <div class="flex items-center gap-2">
+                    <button class="btn btn-sub-purple btn-icon !size-8 rounded-full" title="edit"
+                      (click)="openCreateModal(medicine,i)"><i class="ri-pencil-line"></i></button>
+                    <button class="btn btn-sub-red btn-icon !size-8 rounded-full" title="delete"
+                      (click)="deleteModal(i)"><i class="ri-delete-bin-line"></i></button>
+                  </div>
+                </td>
+              </tr>
+            </ng-container>
+          </ng-container>
+        </tbody>
+      </table>
+    </div>
+
+    <app-domix-pagination [currentPage]="currentPage" [totalPages]="totalPages" [showingStart]="showingStart"
+      [showingEnd]="showingEnd" [totalResults]="displayedData.length" (pageChanged)="onPageChange($event)">
+    </app-domix-pagination>
+  </div>
+</div>

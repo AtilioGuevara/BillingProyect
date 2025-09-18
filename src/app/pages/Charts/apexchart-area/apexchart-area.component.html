@@ -1,0 +1,57 @@
+<app-page-title [Title]="'Area Charts'" [pageTitle]="'Apexcharts'"></app-page-title>
+
+<div class="grid grid-cols-12 gap-x-space">
+  <div class="col-span-12 card">
+    <div class="card-header">
+      <h6 class="card-title">Basic</h6>
+    </div>
+    <div class="card-body">
+      <app-domix-charts [series]="areaChart.series" [chartOptions]="areaChart.chartOptions">
+      </app-domix-charts>
+    </div>
+  </div>
+
+  <div class="col-span-12 card">
+    <div class="card-header">
+      <h6 class="card-title">Spline Area</h6>
+    </div>
+    <div class="card-body">
+      <app-domix-charts [series]="splineAreaChart.series" [chartOptions]="splineAreaChart.chartOptions">
+      </app-domix-charts>
+    </div>
+  </div>
+
+  <div class="col-span-12 card">
+    <div class="card-header">
+      <h6 class="card-title">Negative</h6>
+    </div>
+    <div class="card-body">
+
+      <app-domix-charts [series]="negativeAreaChart.series" [chartOptions]="negativeAreaChart.chartOptions">
+      </app-domix-charts>
+    </div>
+  </div>
+
+  <div class="col-span-12 card">
+    <div class="card-header">
+      <h6 class="card-title">Stacked</h6>
+    </div>
+    <div class="card-body">
+
+      <app-domix-charts [series]="stackedAreaChart.series" [chartOptions]="stackedAreaChart.chartOptions">
+      </app-domix-charts>
+    </div>
+  </div>
+
+  <div class="col-span-12 card">
+    <div class="card-header">
+      <h6 class="card-title">Missing / Null values</h6>
+    </div>
+    <div class="card-body">
+
+      <app-domix-charts [series]="missingAreaChart.series" [chartOptions]="missingAreaChart.chartOptions">
+      </app-domix-charts>
+    </div>
+  </div>
+
+</div>

@@ -1,0 +1,885 @@
+<app-page-title [Title]="'Projects'" [pageTitle]="'Dashboards'"></app-page-title>
+
+
+<div class="grid grid-cols-12 gap-x-space">
+  <div class="order-2 col-span-12 2xl:order-1 lg:col-span-6 2xl:col-span-4 card">
+    <div class="flex items-center gap-3 card-header">
+      <h6 class="card-title grow">Project Status</h6>
+      <div class="dropdown shrink-0">
+        <button x-ref="button" domixDropdownToggle [dropdownMenu]="dropdown1" type="button" class="flex items-center text-gray-500 dark:text-dark-500">
+          <lucide-angular name="Ellipsis" class="size-5"></lucide-angular>
+        </button>
+        <div #dropdown1 class="!fixed p-2 dropdown-menu" dropdown-position="right">
+          <ul>
+            <li>
+              <a href="javascript: void(0);" class="dropdown-item">
+                <span>Weekly</span>
+              </a>
+            </li>
+            <li>
+              <a href="javascript: void(0);" class="dropdown-item">
+                <span>Monthly</span>
+              </a>
+            </li>
+            <li>
+              <a href="javascript: void(0);" class="dropdown-item">
+                <span>Yearly</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="flex gap-3 mb-2">
+        <div class="flex items-center justify-center rounded-md bg-primary-500/15 size-10">
+          <lucide-angular name="Coins" class="size-6 text-primary-500 fill-primary-500/20"></lucide-angular>
+        </div>
+        <div class="grow">
+          <h6>$<span [countUp]="21589" [options]="{decimalPlaces:0}">0</span>
+          </h6>
+          <p class="text-gray-500 dark:text-dark-500">Total Earnings</p>
+        </div>
+        <div class="shrink-0">
+          <span class="font-medium text-green-500"><i class="align-baseline ri-arrow-up-line"></i> 4.5%</span>
+        </div>
+      </div>
+      <app-domix-charts [series]="earningsChart.series" [chartOptions]="earningsChart.chartOptions">
+      </app-domix-charts>
+
+      <div class="flex items-center gap-3 mt-3">
+        <p class="text-gray-500 dark:text-dark-500 grow">Expense</p>
+        <h6>$748.99</h6>
+        <span class="font-medium badge badge-red"><i class="align-baseline ri-arrow-down-line"></i> 4.5%</span>
+      </div>
+      <div class="flex items-center gap-3 mt-3">
+        <p class="text-gray-500 dark:text-dark-500 grow">Profit</p>
+        <h6>$8721.74</h6>
+        <span class="font-medium badge badge-green"><i class="align-baseline ri-arrow-up-line"></i> 11.41%</span>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="order-1 col-span-12 2xl:order-2 lg:col-span-12 2xl:col-span-4">
+    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 2xl:grid-cols-2 gap-x-space">
+      <div class="card">
+        <div class="card-body">
+          <div class="flex items-center justify-center text-purple-500 bg-purple-500/10 rounded-md size-12">
+            <lucide-angular name="PackageOpen"></lucide-angular>
+          </div>
+
+          <h6 class="mt-6 mb-1.5">6 Opened Tasks</h6>
+          <p class="font-medium text-red-500"><i class="align-baseline ri-arrow-down-line"></i> 4.32%</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <div class="flex items-center justify-center text-purple-500 bg-purple-500/10 rounded-md size-12">
+            <lucide-angular name="CircleCheckBig"></lucide-angular>
+          </div>
+
+          <h6 class="mt-6 mb-1.5">15 Completed Tasks</h6>
+          <p class="font-medium text-green-500"><i class="align-baseline ri-arrow-up-line"></i> 47.73%</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <div class="flex items-center justify-center text-purple-500 bg-purple-500/10 rounded-md size-12">
+            <lucide-angular name="LayoutList"></lucide-angular>
+          </div>
+
+          <h6 class="mt-6 mb-1.5">148 Total Tasks</h6>
+          <p class="font-medium text-green-500"><i class="align-baseline ri-arrow-up-line"></i> 21.57%</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-body">
+          <div class="flex items-center justify-center text-purple-500 bg-purple-500/10 rounded-md size-12">
+            <lucide-angular name="PanelsTopLeft"></lucide-angular>
+          </div>
+
+          <h6 class="mt-6 mb-1.5">10 Projects</h6>
+          <p class="font-medium text-green-500"><i class="align-baseline ri-arrow-up-line"></i> 3.91%</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="order-3 col-span-12 lg:col-span-6 2xl:col-span-4 card">
+    <div class="flex items-center gap-3 card-header">
+      <h6 class="card-title grow">Daily Working Reports</h6>
+      <div class="dropdown shrink-0">
+        <button x-ref="button" domixDropdownToggle [dropdownMenu]="dropdown2" type="button" class="flex items-center text-gray-500 dark:text-dark-500">
+          <lucide-angular name="Ellipsis" class="size-5"></lucide-angular>
+        </button>
+        <div #dropdown2 class="!fixed p-2 dropdown-menu" dropdown-position="right">
+          <ul>
+            <li>
+              <a href="javascript: void(0);" class="dropdown-item">
+                <span>Weekly</span>
+              </a>
+            </li>
+            <li>
+              <a href="javascript: void(0);" class="dropdown-item">
+                <span>Monthly</span>
+              </a>
+            </li>
+            <li>
+              <a href="javascript: void(0);" class="dropdown-item">
+                <span>Yearly</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <app-domix-charts [series]="donutChart.series" [chartOptions]="donutChart.chartOptions">
+      </app-domix-charts>
+      <div class="grid grid-cols-12">
+        <div class="col-span-4">
+          <a href="javascript: void(0);" class="flex items-center gap-2">
+            <i class="text-xs align-baseline ri-circle-fill text-primary-500 shrink-0"></i>
+            <div class="grow">
+              <h6 class="font-normal">Afternoon <span class="text-gray-500 dark:text-dark-500">(54%)</span></h6>
+            </div>
+          </a>
+        </div>
+
+        <div class="col-span-4">
+          <a href="javascript: void(0);" class="flex items-center gap-2">
+            <i class="text-xs text-purple-500 align-baseline ri-circle-fill shrink-0"></i>
+            <div class="grow">
+              <h6 class="font-normal">Evening <span class="text-gray-500 dark:text-dark-500">(19%)</span></h6>
+            </div>
+          </a>
+        </div>
+
+        <div class="col-span-4">
+          <a href="javascript: void(0);" class="flex items-center gap-2">
+            <i class="text-xs text-green-500 align-baseline ri-circle-fill shrink-0"></i>
+            <div class="grow">
+              <h6 class="font-normal">Morning <span class="text-gray-500 dark:text-dark-500">(27%)</span></h6>
+            </div>
+          </a>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+
+  <div class="order-4 col-span-12 2xl:col-span-9">
+    <div class="flex items-center gap-3 mb-3">
+      <h6 class="grow">Clients List</h6>
+      <a href="javascript: void(0);" class="link link-primary">
+        View All
+        <i class="align-baseline ri-arrow-right-line ltr:inline-block rtl:hidden"></i>
+        <i class="align-baseline ri-arrow-left-line ltr:hidden rtl:inline-block"></i>
+      </a>
+    </div>
+    <div class="grid grid-cols-12 gap-x-space">
+      <div class="col-span-12 md:col-span-6 xl:col-span-4 card">
+        <div class="card-body">
+          <div class="flex flex-wrap items-center gap-3 p-2 bg-gray-100 rounded-md dark:bg-dark-850">
+            <img src="assets/images/avatar/user-5.png" alt="" class="rounded-full size-10 shrink-0">
+            <div class="grow">
+              <h6>Imelda Dach</h6>
+              <p class="text-gray-500 dark:text-dark-500">imelda&#64;srbthemes.com</p>
+            </div>
+            <div class="dropdown shrink-0">
+              <button x-ref="button" domixDropdownToggle [dropdownMenu]="dropdown3" type="button" class="flex items-center text-gray-500 dark:text-dark-500">
+                <lucide-angular name="Ellipsis" class="size-5"></lucide-angular>
+              </button>
+              <div #dropdown3 class="!fixed p-2 dropdown-menu" dropdown-position="right">
+                <ul>
+                  <li>
+                    <a href="javascript: void(0);" class="dropdown-item">
+                      <span>Edit</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="javascript: void(0);" class="dropdown-item">
+                      <span>Overview</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="javascript: void(0);" class="dropdown-item">
+                      <span>Delete</span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="flex flex-wrap gap-2 my-4">
+            <span class="badge badge-outline-green">Finance Web</span>
+            <span class="badge badge-outline-purple">Business</span>
+          </div>
+          <p>Date Created: <span class="text-gray-500 dark:text-dark-500">20 July, 2024</span></p>
+          <div class="pt-3 mt-3 text-center border-t border-gray-200 dark:border-dark-800">
+            <a href="javascript: void(0);" class="text-primary-500">
+              <lucide-angular name="MessagesSquare" class="inline-block size-4 ltr:mr-1 rtl:ml-1"></lucide-angular> Get
+              a Chat
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-span-12 md:col-span-6 xl:col-span-4 card">
+        <div class="card-body">
+          <div class="flex flex-wrap items-center gap-3 p-2 bg-gray-100 rounded-md dark:bg-dark-850">
+            <img src="assets/images/avatar/user-11.png" alt="" class="rounded-full size-10 shrink-0">
+            <div class="grow">
+              <h6>Adella Hauck</h6>
+              <p class="text-gray-500 dark:text-dark-500">adella&#64;srbthemes.com</p>
+            </div>
+            <div class="dropdown shrink-0">
+              <button x-ref="button" domixDropdownToggle [dropdownMenu]="dropdown4" type="button" class="flex items-center text-gray-500 dark:text-dark-500">
+                <lucide-angular name="Ellipsis" class="size-5"></lucide-angular>
+              </button>
+              <div #dropdown4 class="!fixed p-2 dropdown-menu" dropdown-position="right">
+                <ul>
+                  <li>
+                    <a href="javascript: void(0);" class="dropdown-item">
+                      <span>Edit</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="javascript: void(0);" class="dropdown-item">
+                      <span>Overview</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="javascript: void(0);" class="dropdown-item">
+                      <span>Delete</span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="flex flex-wrap gap-2 my-4">
+            <span class="badge badge-outline-sky">Web Site</span>
+            <span class="badge badge-outline-orange">UI / UX</span>
+          </div>
+          <p>Date Created: <span class="text-gray-500 dark:text-dark-500">10 July, 2024</span></p>
+          <div class="pt-3 mt-3 text-center border-t border-gray-200 dark:border-dark-800">
+            <a href="javascript: void(0);" class="text-primary-500">
+              <lucide-angular name="MessagesSquare" class="inline-block size-4 ltr:mr-1 rtl:ml-1"></lucide-angular> Get
+              a Chat
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-span-12 md:col-span-6 xl:col-span-4 card">
+        <div class="card-body">
+          <div class="flex flex-wrap items-center gap-3 p-2 bg-gray-100 rounded-md dark:bg-dark-850">
+            <img src="assets/images/avatar/user-17.png" alt="" class="rounded-full size-10 shrink-0">
+            <div class="grow">
+              <h6>Shanny Kirlin</h6>
+              <p class="text-gray-500 dark:text-dark-500">shanny&#64;srbthemes.com</p>
+            </div>
+            <div class="dropdown shrink-0">
+              <button x-ref="button" domixDropdownToggle [dropdownMenu]="dropdown5" type="button" class="flex items-center text-gray-500 dark:text-dark-500">
+                <lucide-angular name="Ellipsis" class="size-5"></lucide-angular>
+              </button>
+              <div #dropdown5 class="!fixed p-2 dropdown-menu" dropdown-position="right">
+                <ul>
+                  <li>
+                    <a href="javascript: void(0);" class="dropdown-item">
+                      <span>Edit</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="javascript: void(0);" class="dropdown-item">
+                      <span>Overview</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="javascript: void(0);" class="dropdown-item">
+                      <span>Delete</span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="flex flex-wrap gap-2 my-4">
+            <span class="badge badge-outline-primary">Development</span>
+            <span class="badge badge-outline-gray">API</span>
+          </div>
+          <p>Date Created: <span class="text-gray-500 dark:text-dark-500">27 May, 2024</span></p>
+          <div class="pt-3 mt-3 text-center border-t border-gray-200 dark:border-dark-800">
+            <a href="javascript: void(0);" class="text-primary-500">
+              <lucide-angular name="MessagesSquare" class="inline-block size-4 ltr:mr-1 rtl:ml-1"></lucide-angular> Get
+              a Chat
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <div class="relative order-5 col-span-12 overflow-hidden md:col-span-6 lg:col-span-12 2xl:col-span-3 card">
+    <div class="absolute top-0 ltr:right-0 rtl:left-0 bg-primary-500/20 blur-2xl size-32"></div>
+    <img src="assets/images/dashboards/projects/asssign.png" alt="" class="absolute bottom-0 ltr:right-3 rtl:left-3">
+    <div class="relative card-body">
+      <h6 class="mb-3 card-title">Assign a Project</h6>
+      <div class="mb-3">
+        <h6><span [countUp]="311" [options]="{decimalPlaces:0}">0</span>+
+        </h6>
+        <p class="text-gray-500 dark:text-dark-500">Completed Task</p>
+      </div>
+      <div class="mb-3">
+        <h6><span [countUp]="594" [options]="{decimalPlaces:0}">0</span></h6>
+        <p class="text-gray-500 dark:text-dark-500">Assigned</p>
+      </div>
+      <a href="javascript:void(0);" class="btn btn-primary">Start Now</a>
+    </div>
+  </div>
+
+
+  <div class="order-6 col-span-12 xl:col-span-6 2xl:col-span-4 card">
+    <div class="flex items-center gap-3 card-header">
+      <h6 class="card-title grow">Active Projects</h6>
+      <div class="dropdown shrink-0">
+        <button x-ref="button" domixDropdownToggle [dropdownMenu]="dropdown6" type="button" class="flex items-center text-gray-500 dark:text-dark-500">
+          <lucide-angular name="Ellipsis" class="size-5"></lucide-angular>
+        </button>
+        <div #dropdown6 class="!fixed p-2 dropdown-menu" dropdown-position="right">
+          <ul>
+            <li>
+              <a href="javascript: void(0);" class="dropdown-item">
+                <span>Weekly</span>
+              </a>
+            </li>
+            <li>
+              <a href="javascript: void(0);" class="dropdown-item">
+                <span>Monthly</span>
+              </a>
+            </li>
+            <li>
+              <a href="javascript: void(0);" class="dropdown-item">
+                <span>Yearly</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <p class="mb-3 text-gray-500 dark:text-dark-500">Average 64% completed</p>
+      <div class="flex flex-col gap-4">
+        <div class="flex items-center gap-3">
+          <img src="assets/images/brands/img-02.png" alt="" class="size-8 shrink-0">
+          <div class="overflow-hidden grow">
+            <h6 class="truncate">Domiex Admin & Dashboards</h6>
+            <p class="text-gray-500 dark:text-dark-500">Project Management</p>
+          </div>
+          <div class="flex items-center gap-2 shrink-0">
+            <div class="!w-20 grow progress-bar progress-1">
+              <div class="w-[64%] text-white progress-bar-wrap bg-green-500"></div>
+            </div>
+            <h6 class="shrink-0">64%</h6>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-3">
+          <img src="assets/images/brands/img-08.png" alt="" class="size-8 shrink-0">
+          <div class="overflow-hidden grow">
+            <h6 class="truncate">Shopify Ecommerce</h6>
+            <p class="text-gray-500 dark:text-dark-500">Website</p>
+          </div>
+          <div class="flex items-center gap-2 shrink-0">
+            <div class="!w-20 grow progress-bar progress-1">
+              <div class="w-[27%] text-white progress-bar-wrap bg-red-500"></div>
+            </div>
+            <h6 class="shrink-0">27%</h6>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-3">
+          <img src="assets/images/brands/img-07.png" alt="" class="size-8 shrink-0">
+          <div class="overflow-hidden grow">
+            <h6 class="truncate">Email Management</h6>
+            <p class="text-gray-500 dark:text-dark-500">Apps & Web</p>
+          </div>
+          <div class="flex items-center gap-2 shrink-0">
+            <div class="!w-20 grow progress-bar progress-1">
+              <div class="w-[43%] text-white progress-bar-wrap bg-yellow-500"></div>
+            </div>
+            <h6 class="shrink-0">43%</h6>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-3">
+          <img src="assets/images/brands/img-06.png" alt="" class="size-8 shrink-0">
+          <div class="overflow-hidden grow">
+            <h6 class="truncate">Norton Mobile App</h6>
+            <p class="text-gray-500 dark:text-dark-500">Application</p>
+          </div>
+          <div class="flex items-center gap-2 shrink-0">
+            <div class="!w-20 grow progress-bar progress-1">
+              <div class="w-full text-white bg-purple-500 progress-bar-wrap"></div>
+            </div>
+            <h6 class="shrink-0">100%</h6>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-3">
+          <img src="assets/images/brands/img-11.png" alt="" class="size-8 shrink-0">
+          <div class="overflow-hidden grow">
+            <h6 class="truncate">React</h6>
+            <p class="text-gray-500 dark:text-dark-500">Calender Apps</p>
+          </div>
+          <div class="flex items-center gap-2 shrink-0">
+            <div class="!w-20 grow progress-bar progress-1">
+              <div class="w-[0%] text-white progress-bar-wrap bg-yellow-500"></div>
+            </div>
+            <h6 class="shrink-0">0%</h6>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-3">
+          <img src="assets/images/brands/img-13.png" alt="" class="size-8 shrink-0">
+          <div class="overflow-hidden grow">
+            <h6 class="truncate">Email Management</h6>
+            <p class="text-gray-500 dark:text-dark-500">Apps & Web</p>
+          </div>
+          <div class="flex items-center gap-2 shrink-0">
+            <div class="!w-20 grow progress-bar progress-1">
+              <div class="w-[72%] text-white progress-bar-wrap bg-green-500"></div>
+            </div>
+            <h6 class="shrink-0">72%</h6>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+  <div class="order-7 col-span-12 xl:col-span-6 2xl:col-span-4 card">
+    <div class="flex items-center gap-3 card-header">
+      <h6 class="card-title grow">Team Members</h6>
+      <a href="javascript: void(0);" class="link link-primary shrink-0">
+        See All
+        <i class="align-baseline ri-arrow-right-line ltr:inline-block rtl:hidden"></i>
+        <i class="align-baseline ri-arrow-left-line rtl:inline-block ltr:hidden"></i>
+      </a>
+    </div>
+    <div class="card-body">
+      <div class="h-[375px] -mx-space px-space">
+        <ngx-simplebar class="simplebar -mx-space px-space" [options]="options">
+          <div class="flex flex-col gap-3">
+            <div class="p-3 mb-0 card">
+              <div class="flex items-center gap-2">
+                <img src="assets/images/avatar/user-20.png" alt="" class="rounded-md size-10">
+                <div class="grow">
+                  <h6 class="mb-1"><a href="javascript:void(0);">Savion Bogan</a></h6>
+                  <p class="text-gray-500 dark:text-dark-500">Web Designer
+                  <p>
+                </div>
+                <p class="text-gray-500 dark:text-dark-500">15 Task</p>
+              </div>
+            </div>
+            <div class="p-3 mb-0 card">
+              <div class="flex items-center gap-2">
+                <img src="assets/images/avatar/user-2.png" alt="" class="rounded-md size-10">
+                <div class="grow">
+                  <h6 class="mb-1"><a href="javascript:void(0);">Ella Legros</a></h6>
+                  <p class="text-gray-500 dark:text-dark-500">UI / UX Designer
+                  <p>
+                </div>
+                <p class="text-gray-500 dark:text-dark-500">74 Task</p>
+              </div>
+            </div>
+            <div class="p-3 mb-0 card">
+              <div class="flex items-center gap-2">
+                <img src="assets/images/avatar/user-3.png" alt="" class="rounded-md size-10">
+                <div class="grow">
+                  <h6 class="mb-1"><a href="javascript:void(0);">Jayce Green</a></h6>
+                  <p class="text-gray-500 dark:text-dark-500">React Developer
+                  <p>
+                </div>
+                <p class="text-gray-500 dark:text-dark-500">54 Task</p>
+              </div>
+            </div>
+            <div class="p-3 mb-0 card">
+              <div class="flex items-center gap-2">
+                <img src="assets/images/avatar/user-4.png" alt="" class="rounded-md size-10">
+                <div class="grow">
+                  <h6 class="mb-1"><a href="javascript:void(0);">Americo Donnelly</a></h6>
+                  <p class="text-gray-500 dark:text-dark-500">Asp .Net Developer
+                  <p>
+                </div>
+                <p class="text-gray-500 dark:text-dark-500">98 Task</p>
+              </div>
+            </div>
+            <div class="p-3 mb-0 card">
+              <div class="flex items-center gap-2">
+                <img src="assets/images/avatar/user-5.png" alt="" class="rounded-md size-10">
+                <div class="grow">
+                  <h6 class="mb-1"><a href="javascript:void(0);">Sage Kohler</a></h6>
+                  <p class="text-gray-500 dark:text-dark-500">Laravel Developer
+                  <p>
+                </div>
+                <p class="text-gray-500 dark:text-dark-500">119 Task</p>
+              </div>
+            </div>
+            <div class="p-3 mb-0 card">
+              <div class="flex items-center gap-2">
+                <img src="assets/images/avatar/user-6.png" alt="" class="rounded-md size-10">
+                <div class="grow">
+                  <h6 class="mb-1"><a href="javascript:void(0);">Alvina Powlowski</a></h6>
+                  <p class="text-gray-500 dark:text-dark-500">Web Designer
+                  <p>
+                </div>
+                <p class="text-gray-500 dark:text-dark-500">32 Task</p>
+              </div>
+            </div>
+          </div>
+        </ngx-simplebar>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="order-8 col-span-12 xl:col-span-6 2xl:col-span-4 card">
+    <div class="flex items-center gap-3 card-header">
+      <h6 class="card-title grow">Task Activity</h6>
+      <div class="dropdown shrink-0">
+        <button x-ref="button" domixDropdownToggle [dropdownMenu]="dropdown7" type="button" class="flex items-center text-gray-500 dark:text-dark-500">
+          <lucide-angular name="Ellipsis" class="size-5"></lucide-angular>
+        </button>
+        <div #dropdown7 class="!fixed p-2 dropdown-menu" dropdown-position="right">
+          <ul>
+            <li>
+              <a href="javascript: void(0);" class="dropdown-item">
+                <span>Weekly</span>
+              </a>
+            </li>
+            <li>
+              <a href="javascript: void(0);" class="dropdown-item">
+                <span>Monthly</span>
+              </a>
+            </li>
+            <li>
+              <a href="javascript: void(0);" class="dropdown-item">
+                <span>Yearly</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="relative flex items-center justify-center h-64 gap-4" dir="ltr">
+
+        <div class="absolute left-28 top-12">
+          <svg class="drop-shadow-xl size-40" viewBox="0 0 100 100">
+            <circle cx="50" cy="50" r="50" class="fill-green-500/80" />
+            <text x="50%" y="45%" text-anchor="middle" class="font-semibold fill-green-50" font-size="15px" dy=".3em">56.8%</text>
+            <text x="50%" y="62%" text-anchor="middle" class="fill-green-50" font-size="10px" dy=".3em">UI Design</text>
+          </svg>
+        </div>
+        <div class="absolute left-0 top-5">
+          <svg class="size-32 drop-shadow-xl" viewBox="0 0 100 100">
+            <circle cx="50" cy="50" r="50" class="fill-sky-500/80" />
+            <text x="50%" y="45%" text-anchor="middle" class="font-semibold fill-sky-50" font-size="15px" dy=".3em">29.3%</text>
+            <text x="50%" y="62%" text-anchor="middle" class="fill-sky-50" font-size="10px" dy=".3em">Development</text>
+          </svg>
+        </div>
+
+        <div class="absolute left-28 bottom-2">
+          <svg class="size-24 drop-shadow-xl" viewBox="0 0 100 100">
+            <circle cx="50" cy="50" r="50" class="fill-yellow-500/80" />
+            <text x="50%" y="45%" text-anchor="middle" class="font-semibold fill-yellow-50" font-size="15px" dy=".3em">12%</text>
+            <text x="50%" y="65%" text-anchor="middle" class="fill-yellow-50" font-size="10px" dy=".3em">Web
+              Design</text>
+          </svg>
+        </div>
+      </div>
+      <div class="grid grid-cols-12 mt-4 divide-y divide-gray-200 md:divide-y-0 md:divide-x rtl:divide-x-reverse dark:divide-dark-800 divide-dashed">
+        <div class="col-span-12 p-3 text-center md:col-span-4">
+          <h6 class="mb-1">56.8%</h6>
+          <p class="text-gray-500 dark:text-dark-500">UI Design</p>
+        </div>
+        <div class="col-span-12 p-3 text-center md:col-span-4">
+          <h6 class="mb-1">29.3%</h6>
+          <p class="text-gray-500 dark:text-dark-500">Development</p>
+        </div>
+        <div class="col-span-12 p-3 text-center md:col-span-4">
+          <h6 class="mb-1">12%</h6>
+          <p class="text-gray-500 dark:text-dark-500">Web Design</p>
+        </div>
+      </div>
+      <p class="mt-3 text-center text-gray-500 dark:text-dark-500">This week task activity by department</p>
+    </div>
+  </div>
+
+
+  <div class="order-9 col-span-12 xl:col-span-6 2xl:col-span-4">
+    <h6 class="mb-3">My Tasks</h6>
+    <div class="mb-space">
+      <ul class="flex border-b border-gray-200 mb-space dark:border-dark-800">
+        <li>
+          <a href="javascript:void(0);" (click)="setActiveTab(0)" [ngClass]="{'active': activeTab === 0}" class="relative block px-4 text-center py-2 font-medium after:absolute after:h-[1px] transition duration-200 ease-linear after:w-0 hover:after:w-full after:transition-all after:duration-200 after:opacity-0 after:-bottom-[1px] hover:after:opacity-100 [&.active]:after:opacity-100 [&.active]:after:w-full [&.active]:text-primary-500 after:mx-auto after:bg-primary-500 after:rounded-full after:inset-x-0">
+            Active
+          </a>
+        </li>
+        <li>
+          <a href="javascript:void(0);" (click)="setActiveTab(1)" [ngClass]="{'active': activeTab === 1}" class="relative block px-4 text-center py-2 font-medium after:absolute after:h-[1px] transition duration-200 ease-linear after:w-0 hover:after:w-full after:transition-all after:duration-200 after:opacity-0 after:-bottom-[1px] hover:after:opacity-100 [&.active]:after:opacity-100 [&.active]:after:w-full [&.active]:text-primary-500 after:mx-auto after:bg-primary-500 after:rounded-full after:inset-x-0">
+            Completed
+          </a>
+        </li>
+        <li class="hidden ltr:ml-auto rtl:mr-auto md:inline-block">
+          <a href="javascript:void(0);" class="btn btn-primary py-1.5 px-3.5"><i class="align-baseline ri-add-line ltr:mr-1 rtl:ml-1"></i> Create</a>
+        </li>
+      </ul>
+      <div class="flex flex-col gap-3">
+        <div class="mb-0 card">
+          <div class="flex flex-col gap-3 md:items-center card-body md:flex-row">
+            <div class="flex items-center justify-center rounded-md bg-primary-500/10 size-12 shrink-0">
+              <lucide-angular name="ShoppingBag" class="text-primary-500 fill-primary-500/15"></lucide-angular>
+            </div>
+            <div class="grow">
+              <h6 class="mb-1"><a href="javascript:void(0);">Ecommerce HTML Template</a></h6>
+              <div class="flex divide-x divide-gray-200 divide-dashed dark:divide-dark-800">
+                <a href="javascript:void(0);" class="pr-3 link link-primary"><i class="align-baseline ltr:mr-1 rtl:ml-1 ri-message-3-line"></i> 154 Comments</a>
+                <a href="javascript:void(0);" class="pl-3 link link-primary"><i class="align-baseline ltr:mr-1 rtl:ml-1 ri-file-list-3-line"></i> 2+ Files</a>
+              </div>
+            </div>
+            <div class="shrink-0">
+              <app-domix-charts [series]="radialBarChart.series" [chartOptions]="radialBarChart.chartOptions">
+              </app-domix-charts>
+            </div>
+          </div>
+        </div>
+        <div class="mb-0 card">
+          <div class="flex flex-col gap-3 md:items-center card-body md:flex-row">
+            <div class="flex items-center justify-center rounded-md bg-purple-500/10 size-12 shrink-0">
+              <lucide-angular name="Presentation" class="text-purple-500 fill-purple-500/15"></lucide-angular>
+            </div>
+            <div class="grow">
+              <h6 class="mb-1"><a href="javascript:void(0);">Project Management Admin</a></h6>
+              <div class="flex divide-x divide-gray-200 divide-dashed dark:divide-dark-800">
+                <a href="javascript:void(0);" class="pr-3 link link-primary"><i class="align-baseline ltr:mr-1 rtl:ml-1 ri-message-3-line"></i> 321 Comments</a>
+                <a href="javascript:void(0);" class="pl-3 link link-primary"><i class="align-baseline ltr:mr-1 rtl:ml-1 ri-file-list-3-line"></i> 16+ Files</a>
+              </div>
+            </div>
+            <div class="shrink-0">
+              <app-domix-charts [series]="radialBarChart1.series" [chartOptions]="radialBarChart1.chartOptions">
+              </app-domix-charts>
+            </div>
+          </div>
+        </div>
+        <div class="mb-0 card">
+          <div class="flex flex-col gap-3 md:items-center card-body md:flex-row">
+            <div class="flex items-center justify-center rounded-md bg-green-500/10 size-12 shrink-0">
+              <lucide-angular name="Droplets" class="text-green-500 fill-green-500/15"></lucide-angular>
+            </div>
+            <div class="grow">
+              <h6 class="mb-1"><a href="javascript:void(0);">Dropbox Development</a></h6>
+              <div class="flex divide-x divide-gray-200 divide-dashed dark:divide-dark-800">
+                <a href="javascript:void(0);" class="pr-3 link link-primary"><i class="align-baseline ltr:mr-1 rtl:ml-1 ri-message-3-line"></i> 29 Comments</a>
+                <a href="javascript:void(0);" class="pl-3 link link-primary"><i class="align-baseline ltr:mr-1 rtl:ml-1 ri-file-list-3-line"></i> 3+ Files</a>
+              </div>
+            </div>
+            <div class="shrink-0">
+              <app-domix-charts [series]="radialBarChart2.series" [chartOptions]="radialBarChart2.chartOptions">
+              </app-domix-charts>
+            </div>
+          </div>
+        </div>
+        <div class="mb-0 card">
+          <div class="flex flex-col gap-3 md:items-center card-body md:flex-row">
+            <div class="flex items-center justify-center rounded-md bg-sky-500/10 size-12 shrink-0">
+              <lucide-angular name="MessagesSquare" class="text-sky-500 fill-sky-500/15"></lucide-angular>
+            </div>
+            <div class="grow">
+              <h6 class="mb-1"><a href="javascript:void(0);">Real Chat Application with Socket</a></h6>
+              <div class="flex divide-x divide-gray-200 divide-dashed dark:divide-dark-800">
+                <a href="javascript:void(0);" class="pr-3 link link-primary"><i class="align-baseline ltr:mr-1 rtl:ml-1 ri-message-3-line"></i> 8 Comments</a>
+                <a href="javascript:void(0);" class="pl-3 link link-primary"><i class="align-baseline ltr:mr-1 rtl:ml-1 ri-file-list-3-line"></i> 1+ Files</a>
+              </div>
+            </div>
+            <div class="shrink-0">
+              <app-domix-charts [series]="radialBarChart3.series" [chartOptions]="radialBarChart3.chartOptions">
+              </app-domix-charts>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="order-10 col-span-12 xl:col-span-6 2xl:col-span-4 card">
+    <div class="flex items-center gap-3 card-header">
+      <h6 class="card-title grow">Task Lists</h6>
+      <div class="shrink-0">
+        <a href="javascript: void(0);" class="link link-primary"><i class="align-baseline ltr:mr-1 rtl:ml-1 ri-add-line"></i> Create
+          Task</a>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="flex flex-col gap-2">
+        <div class="relative overflow-hidden">
+          <input id="projectTask1" class="absolute top-2.5 ltr:left-2 rtl:right-2 input-check peer input-check-primary" type="checkbox" />
+          <label for="projectTask1" class="p-2 font-medium truncate rounded-md cursor-pointer ltr:pl-8 rtl:pr-8 bg-gray-50 input-check-group dark:bg-dark-850 peer-checked:bg-primary-500/10">
+            Start work on Shot Dribble
+          </label>
+        </div>
+        <div class="relative overflow-hidden">
+          <input id="projectTask2" class="absolute top-2.5 ltr:left-2 rtl:right-2 input-check peer input-check-primary" type="checkbox" />
+          <label for="projectTask2" class="p-2 font-medium truncate rounded-md cursor-pointer ltr:pl-8 rtl:pr-8 bg-gray-50 input-check-group dark:bg-dark-850 peer-checked:bg-primary-500/10">
+            Create wireframes for the new landing page
+          </label>
+        </div>
+        <div class="relative overflow-hidden">
+          <input id="projectTask3" class="absolute top-2.5 ltr:left-2 rtl:right-2 input-check peer input-check-primary" type="checkbox" checked />
+          <label for="projectTask3" class="p-2 font-medium truncate rounded-md cursor-pointer ltr:pl-8 rtl:pr-8 bg-gray-50 input-check-group dark:bg-dark-850 peer-checked:bg-primary-500/10">
+            Run usability tests on the latest design iteration
+          </label>
+        </div>
+        <div class="relative overflow-hidden">
+          <input id="projectTask4" class="absolute top-2.5 ltr:left-2 rtl:right-2 input-check peer input-check-primary" type="checkbox" />
+          <label for="projectTask4" class="p-2 font-medium truncate rounded-md cursor-pointer ltr:pl-8 rtl:pr-8 bg-gray-50 input-check-group dark:bg-dark-850 peer-checked:bg-primary-500/10">
+            Create more options for navbar
+          </label>
+        </div>
+        <div class="relative overflow-hidden">
+          <input id="projectTask5" class="absolute top-2.5 ltr:left-2 rtl:right-2 input-check peer input-check-primary" type="checkbox" checked />
+          <label for="projectTask5" class="p-2 font-medium truncate rounded-md cursor-pointer ltr:pl-8 rtl:pr-8 bg-gray-50 input-check-group dark:bg-dark-850 peer-checked:bg-primary-500/10">
+            Create foundation color
+          </label>
+        </div>
+        <div class="relative overflow-hidden">
+          <input id="projectTask6" class="absolute top-2.5 ltr:left-2 rtl:right-2 input-check peer input-check-primary" type="checkbox" />
+          <label for="projectTask6" class="p-2 font-medium truncate rounded-md cursor-pointer ltr:pl-8 rtl:pr-8 bg-gray-50 input-check-group dark:bg-dark-850 peer-checked:bg-primary-500/10">
+            Redesign Homepage + details product
+          </label>
+        </div>
+        <div class="relative overflow-hidden">
+          <input id="projectTask7" class="absolute top-2.5 ltr:left-2 rtl:right-2 input-check peer input-check-primary" type="checkbox" />
+          <label for="projectTask7" class="p-2 font-medium truncate rounded-md cursor-pointer ltr:pl-8 rtl:pr-8 bg-gray-50 input-check-group dark:bg-dark-850 peer-checked:bg-primary-500/10">
+            Landing page animations
+          </label>
+        </div>
+        <div class="relative overflow-hidden">
+          <input id="projectTask8" class="absolute top-2.5 ltr:left-2 rtl:right-2 input-check peer input-check-primary" type="checkbox" checked />
+          <label for="projectTask8" class="p-2 font-medium truncate rounded-md cursor-pointer ltr:pl-8 rtl:pr-8 bg-gray-50 input-check-group dark:bg-dark-850 peer-checked:bg-primary-500/10">
+            Update review for Client
+          </label>
+        </div>
+        <div class="relative overflow-hidden">
+          <input id="projectTask8" class="absolute top-2.5 ltr:left-2 rtl:right-2 input-check peer input-check-primary" type="checkbox" />
+          <label for="projectTask8" class="p-2 font-medium truncate rounded-md cursor-pointer ltr:pl-8 rtl:pr-8 bg-gray-50 input-check-group dark:bg-dark-850 peer-checked:bg-primary-500/10">
+            Creating App design System
+          </label>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="order-11 col-span-12 xl:col-span-6 2xl:col-span-4 card">
+    <div class="flex items-center gap-3 card-header">
+      <h6 class="card-title grow">Activities</h6>
+      <div class="dropdown shrink-0">
+        <button x-ref="button" domixDropdownToggle [dropdownMenu]="dropdown8" type="button" class="flex items-center text-gray-500 dark:text-dark-500">
+          <lucide-angular name="Ellipsis" class="size-5"></lucide-angular>
+        </button>
+        <div #dropdown8 class="!fixed p-2 dropdown-menu" dropdown-position="right">
+          <ul>
+            <li>
+              <a href="javascript: void(0);" class="dropdown-item">
+                <span>Weekly</span>
+              </a>
+            </li>
+            <li>
+              <a href="javascript: void(0);" class="dropdown-item">
+                <span>Monthly</span>
+              </a>
+            </li>
+            <li>
+              <a href="javascript: void(0);" class="dropdown-item">
+                <span>Yearly</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="h-[25rem] -mx-space px-space">
+        <ngx-simplebar [options]="options">
+          <ul class="*:before:absolute *:before:w-0.5 *:before:bg-gray-200 dark:*:before:bg-dark-800 *:before:top-5 *:before:-bottom-5 *:relative ltr:*:before:left-[3px] rtl:*:before:right-[3px] flex flex-col *:pb-5 ltr:*:pl-5 rtl:*:pr-5 *:after:absolute *:after:bg-white dark:*:after:bg-dark-900 *:after:size-2 *:after:border *:after:border-gray-300 dark:*:after:border-dark-700 ltr:*:after:left-0 rtl:*:after:right-0 *:after:top-5 *:after:rounded-xs">
+            <li class="last:before:hidden last:pb-0 [&.active]:before:bg-purple-500 [&.active]:after:border-purple-500">
+              <div class="flex items-center gap-3 mb-3">
+                <img src="assets/images/avatar/user-14.png" alt="" class="rounded-md size-10">
+                <div class="grow">
+                  <h6 class="mb-0.5">Josefina Dach</h6>
+                  <p class="text-gray-500 dark:text-dark-500 text-13">09:32 AM - Today</p>
+                </div>
+              </div>
+              <h6 class="mb-1">Client Meeting</h6>
+              <p class="text-gray-500 dark:text-dark-500">Project meeting with sophia &#64;11:00AM</p>
+            </li>
+            <li class="last:before:hidden last:pb-0 [&.active]:before:bg-purple-500 [&.active]:after:border-purple-500">
+              <div class="flex items-center gap-3 mb-3">
+                <img src="assets/images/avatar/user-16.png" alt="" class="rounded-md size-10">
+                <div class="grow">
+                  <h6 class="mb-0.5">Zara Russell</h6>
+                  <p class="text-gray-500 dark:text-dark-500 text-13">11:57 AM - Yesterday</p>
+                </div>
+              </div>
+              <h6 class="mb-1">Commented on <a href="javascript:void(0);" class="text-primary-500">Chat App</a></h6>
+              <p class="text-gray-500">"Great product but only if you end up using the exact examples in the demos
+                provided."</p>
+            </li>
+            <li class="last:before:hidden last:pb-0 [&.active]:before:bg-purple-500 [&.active]:after:border-purple-500">
+              <div class="flex items-center gap-3 mb-3">
+                <img src="assets/images/avatar/user-11.png" alt="" class="rounded-md size-10">
+                <div class="grow">
+                  <h6 class="mb-0.5">Matthew Warner</h6>
+                  <p class="text-gray-500 dark:text-dark-500 text-13">04:55 AM - 19 July, 2024</p>
+                </div>
+              </div>
+              <h6 class="mb-1">Add a file to <a href="javascript:void(0);" class="text-red-500">domiex</a></h6>
+              <div class="flex items-center gap-3 p-3 border border-gray-200 border-dashed rounded-md dark:border-dark-800">
+                <img src="assets/images/brands/img-22.png" alt="" class="size-9 shrink-0">
+                <div class="grow">
+                  <h6 class="mb-1">Domiex Figma File</h6>
+                  <p class="text-xs text-gray-500 dark:text-dark-500">21 MB</p>
+                </div>
+              </div>
+            </li>
+            <li class="last:before:hidden last:pb-0 [&.active]:before:bg-purple-500 [&.active]:after:border-purple-500">
+              <div class="flex items-center gap-3 mb-3">
+                <img src="assets/images/avatar/user-13.png" alt="" class="rounded-md size-10">
+                <div class="grow">
+                  <h6 class="mb-0.5">Nicole Bentley</h6>
+                  <p class="text-gray-500 dark:text-dark-500 text-13">04:11 PM - 16 July, 2024</p>
+                </div>
+              </div>
+              <h6 class="mb-1">Create a new project for client</h6>
+              <p class="text-gray-500 dark:text-dark-500">Add files to new design folder</p>
+            </li>
+          </ul>
+        </ngx-simplebar>
+      </div>
+    </div>
+  </div>
+
+</div>
