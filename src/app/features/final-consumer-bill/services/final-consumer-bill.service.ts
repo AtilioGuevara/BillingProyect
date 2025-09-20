@@ -1,19 +1,19 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { CreateFinalConsumerBillDTO } from '../dtos/final-consumer-bill.dto';
+import { CreateFinalConsumerBillDTO, FinalConsumerBillListDTO } from '../dtos/final-consumer-bill.dto';
 
 @Injectable({ providedIn: 'root' })
 export class FinalConsumerBillService {
-  private apiUrl = '/api/final-consumer/create';
+  private baseUrl = '/api/final-consumer';
 
   constructor(private http: HttpClient) {}
 
   createFinalConsumerBill(bill: CreateFinalConsumerBillDTO): Observable<string> {
-    return this.http.post<string>(this.apiUrl, bill);
+    return this.http.post<string>(`${this.baseUrl}/create`, bill);
   }
 
-  getAllFinalConsumerBills(): Observable<CreateFinalConsumerBillDTO[]> {
-    return this.http.get<CreateFinalConsumerBillDTO[]>('/api/final-consumer/list');
+  getAllFinalConsumerBills(): Observable<FinalConsumerBillListDTO[]> {
+    return this.http.get<FinalConsumerBillListDTO[]>(`${this.baseUrl}/getAll`);
   }
 }

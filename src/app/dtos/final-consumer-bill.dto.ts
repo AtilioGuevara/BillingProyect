@@ -38,3 +38,10 @@ export interface CreateFinalConsumerBillDTO {
   withheldIva: number;
   totalWithIva: number;
 }
+
+// DTO específico para la respuesta del getAll
+export interface FinalConsumerBillListDTO {
+  id: number; // Solo para la base de datos
+  generationCode: string; // Se muestra en la vista
+  controlNumber: string; // Se muestra en la vista
+}

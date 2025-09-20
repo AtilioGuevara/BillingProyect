@@ -1,17 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 import { FinalConsumerBillService } from '../services/final-consumer-bill.service';
-import { CreateFinalConsumerBillDTO } from '../dtos/final-consumer-bill.dto';
+import { FinalConsumerBillListDTO } from '../dtos/final-consumer-bill.dto';
+import { FinalConsumerBillNavComponent } from '../CreateFinalConsumerBill/final-consumer-bill-nav.component';
 
 @Component({
   selector: 'app-final-consumer-bill-list',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule, FinalConsumerBillNavComponent],
   templateUrl: './final-consumer-bill-list.component.html',
   styleUrls: ['./final-consumer-bill-list.component.scss']
 })
 export class FinalConsumerBillListComponent implements OnInit {
-  bills: CreateFinalConsumerBillDTO[] = [];
+  bills: FinalConsumerBillListDTO[] = [];
   loading = false;
   errorMsg = '';
 
@@ -26,7 +28,7 @@ export class FinalConsumerBillListComponent implements OnInit {
     this.errorMsg = '';
     
     this.billService.getAllFinalConsumerBills().subscribe({
-      next: (data: CreateFinalConsumerBillDTO[]) => {
+      next: (data: FinalConsumerBillListDTO[]) => {
         this.bills = data;
         this.loading = false;
       },
@@ -40,5 +42,16 @@ export class FinalConsumerBillListComponent implements OnInit {
 
   refreshBills(): void {
     this.loadBills();
+  }
+
+  getStatusText(status: string): string {
+    const statusMap: { [key: string]: string } = {
+      'DRAFT': 'Borrador',
+      'SENT': 'Enviada',
+      'PENDING': 'Pendiente',
+      'APPROVED': 'Aprobada',
+      'REJECTED': 'Rechazada'
+    };
+    return statusMap[status] || status;
   }
 }

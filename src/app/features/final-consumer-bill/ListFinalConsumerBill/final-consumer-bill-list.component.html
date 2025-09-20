@@ -1,0 +1,118 @@
+<app-final-consumer-bill-nav></app-final-consumer-bill-nav>
+
+<div>
+  <div class="card">
+    <div class="card-header">
+      <div class="items-center gap-3 md:flex">
+        <h6 class="grow mb-3 md:mb-0">Lista de Facturas Consumidor Final</h6>
+        <div class="flex flex-wrap items-center gap-2 shrink-0">
+          <button type="button" class="btn btn-sub-gray" (click)="loadBills()">
+            <i class="align-baseline ri-refresh-line"></i>
+            Actualizar
+          </button>
+          <button type="button" class="btn btn-primary" routerLink="/final-consumer-bill/create">
+            <i class="align-baseline ri-add-line"></i>
+            Nueva Factura
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <!-- Estados de carga y mensajes -->
+      <div *ngIf="loading" class="flex items-center justify-center py-8">
+        <div class="flex items-center space-x-2 text-blue-600">
+          <i class="align-baseline ri-loader-line animate-spin text-xl"></i>
+          <span>Cargando facturas...</span>
+        </div>
+      </div>
+
+      <div *ngIf="errorMsg && !loading" class="alert alert-danger">
+        <i class="align-baseline ri-error-warning-line"></i>
+        {{ errorMsg }}
+      </div>
+
+      <!-- Tabla de facturas -->
+      <div *ngIf="!loading && !errorMsg" class="overflow-x-auto">
+        <table class="table flush" *ngIf="bills.length > 0">
+          <thead>
+            <tr>
+              <th class="whitespace-nowrap">Código de Generación</th>
+              <th class="whitespace-nowrap">Número de Control</th>
+              <th class="w-32 whitespace-nowrap">Fecha</th>
+              <th class="w-32 whitespace-nowrap">Estado</th>
+              <th class="w-24 whitespace-nowrap">Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let bill of bills; let i = index">
+              <td>
+                <span class="font-mono text-sm bg-gray-100 px-2 py-1 rounded dark:bg-gray-800">
+                  {{ bill.generationCode }}
+                </span>
+              </td>
+              <td>
+                <span class="font-mono text-sm text-blue-600 dark:text-blue-400">
+                  {{ bill.controlNumber }}
+                </span>
+              </td>
+              <td>
+                <span class="text-sm text-gray-600 dark:text-gray-400">
+                  {{ bill.createdAt | date:'dd/MM/yyyy' }}
+                </span>
+              </td>
+              <td>
+                <span class="inline-flex items-center px-2 py-1 text-xs font-medium rounded-full" 
+                      [ngClass]="{
+                        'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200': bill.status === 'APPROVED',
+                        'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200': bill.status === 'PENDING',
+                        'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200': bill.status === 'SENT',
+                        'bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-200': bill.status === 'DRAFT'
+                      }">
+                  <i class="align-baseline mr-1" 
+                     [ngClass]="{
+                       'ri-check-circle-line': bill.status === 'APPROVED',
+                       'ri-time-line': bill.status === 'PENDING',
+                       'ri-send-plane-line': bill.status === 'SENT',
+                       'ri-file-line': bill.status === 'DRAFT'
+                     }"></i>
+                  {{ getStatusText(bill.status) }}
+                </span>
+              </td>
+              <td>
+                <div class="flex space-x-1">
+                  <button type="button" class="btn btn-sub-primary btn-sm" title="Ver detalles">
+                    <i class="align-baseline ri-eye-line"></i>
+                  </button>
+                  <button type="button" class="btn btn-sub-secondary btn-sm" title="Descargar">
+                    <i class="align-baseline ri-download-line"></i>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- Estado vacío -->
+        <div *ngIf="bills.length === 0" class="text-center py-12">
+          <div class="mx-auto w-24 h-24 mb-4 flex items-center justify-center bg-gray-100 rounded-full dark:bg-gray-800">
+            <i class="ri-file-list-3-line text-3xl text-gray-400 dark:text-gray-600"></i>
+          </div>
+          <h3 class="text-lg font-medium text-gray-900 dark:text-gray-100 mb-2">No hay facturas registradas</h3>
+          <p class="text-gray-500 dark:text-gray-400 mb-4">Comience creando su primera factura de consumidor final.</p>
+          <button type="button" class="btn btn-primary" routerLink="/final-consumer-bill/create">
+            <i class="align-baseline ri-add-line"></i>
+            Crear Primera Factura
+          </button>
+        </div>
+      </div>
+
+      <!-- Información adicional -->
+      <div *ngIf="bills.length > 0" class="mt-5 p-3 bg-blue-50 rounded-lg border border-blue-200 dark:bg-blue-900/20 dark:border-blue-800">
+        <p class="text-sm text-blue-700 dark:text-blue-300">
+          <i class="align-baseline ri-information-line"></i> 
+          <strong>Total de facturas:</strong> {{ bills.length }}
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

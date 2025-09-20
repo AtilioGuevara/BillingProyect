@@ -1,10 +1,7 @@
 import { Routes } from '@angular/router';
 import { LayoutsComponent } from './layouts/layouts.component';
-import { AppsFacturaNavComponent } from './pages/Apps/Invoice/components/apps-factura/apps-factura-nav.component';
-import { AppsFacturaHomeComponent } from './pages/Apps/Invoice/components/apps-factura/apps-factura-home.component';
-import { AppsFacturaCreateComponent } from './pages/Apps/Invoice/components/apps-factura/apps-factura-create.component';
-import { AppsFacturaListComponent } from './pages/Apps/Invoice/components/apps-factura/apps-factura-list.component';
-import { AppsFacturaSearchComponent } from './pages/Apps/Invoice/components/apps-factura/apps-factura-search.component';
+import { FinalConsumerBillCreateComponent } from './features/final-consumer-bill/CreateFinalConsumerBill/final-consumer-bill-create.component';
+import { FinalConsumerBillListComponent } from './features/final-consumer-bill/ListFinalConsumerBill/final-consumer-bill-list.component';
 import { AuthAccountDeactivationBasicComponent } from './pages/Auth/auth-account-deactivation-basic/auth-account-deactivation-basic.component';
 import { AuthAccountDeactivationCreativeComponent } from './pages/Auth/auth-account-deactivation-creative/auth-account-deactivation-creative.component';
 import { AuthAccountDeactivationModernComponent } from './pages/Auth/auth-account-deactivation-modern/auth-account-deactivation-modern.component';
@@ -49,19 +46,29 @@ import { AgGridProductsListComponent } from './pages/Apps/Products/ag-grid-produ
 import { AppsPosUserLoginComponent } from './pages/Apps/Pos/apps-pos-user-login/apps-pos-user-login.component';
 
 export const routes: Routes = [
+  // Redirección por defecto al crear factura
   {
     path: '',
-    redirectTo: 'final-consumer-bill/create',
+    redirectTo: '/final-consumer-bill/create',
     pathMatch: 'full'
   },
+  // Ruta corta alternativa
+  {
+    path: 'factura',
+    redirectTo: '/final-consumer-bill/create',
+    pathMatch: 'full'
+  },
+  // Rutas de facturación - componentes organizados ✅
   {
     path: 'final-consumer-bill/create',
-    loadComponent: () => import('./features/final-consumer-bill/components/final-consumer-bill-create.component').then(m => m.FinalConsumerBillCreateComponent)
+    loadComponent: () => import('./features/final-consumer-bill/CreateFinalConsumerBill/final-consumer-bill-create.component').then(m => m.FinalConsumerBillCreateComponent),
+    data: { title: 'Crear Factura Consumidor Final' }
   },
-  // {
-  //   path: 'final-consumer-bill/list',
-  //   loadComponent: () => import('./features/final-consumer-bill/components/final-consumer-bill-list.component').then(m => m.FinalConsumerBillListComponent)
-  // },
+  {
+    path: 'final-consumer-bill/list',
+    loadComponent: () => import('./features/final-consumer-bill/ListFinalConsumerBill/final-consumer-bill-list.component').then(m => m.FinalConsumerBillListComponent),
+    data: { title: 'Lista de Facturas' }
+  },
 
 
   //Auth

@@ -1,0 +1,183 @@
+<app-final-consumer-bill-nav></app-final-consumer-bill-nav>
+
+<div>
+  <div class="card">
+    <div class="card-header">
+      <div class="items-center gap-3 md:flex">
+        <h6 class="grow mb-3 md:mb-0">Crear Factura Consumidor Final</h6>
+        <div class="flex flex-wrap items-center gap-2 shrink-0">
+          <button type="button" class="btn btn-sub-gray" (click)="billForm.reset()">
+            <i class="align-baseline ri-refresh-line"></i>
+            Limpiar
+          </button>
+          <button type="submit" class="btn btn-primary" [disabled]="loading || billForm.invalid" (click)="submit()">
+            <i class="align-baseline ri-save-line"></i>
+            <span *ngIf="!loading">Guardar Factura</span>
+            <span *ngIf="loading">Guardando...</span>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <form [formGroup]="billForm" (ngSubmit)="submit()">
+        
+        <!-- Información General -->
+        <div class="mb-8">
+          <h6 class="mb-4 text-lg font-semibold border-b pb-2">Información General</h6>
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Cuenta -->
+            <div>
+              <label for="account" class="form-label">Cuenta *</label>
+              <input type="text" id="account" formControlName="account" class="form-input" placeholder="Número de cuenta">
+              <p *ngIf="billForm.get('account')?.hasError('required') && billForm.get('account')?.touched" class="text-red-500 text-sm mt-1">Este campo es requerido</p>
+            </div>
+            
+            <!-- Condición de pago -->
+            <div>
+              <label for="paymentCondition" class="form-label">Condición de pago *</label>
+              <select id="paymentCondition" formControlName="paymentCondition" class="form-input">
+                <option value="">Seleccione una opción</option>
+                <option value="CONTADO">Contado</option>
+                <option value="CREDITO">Crédito</option>
+              </select>
+              <p *ngIf="billForm.get('paymentCondition')?.hasError('required') && billForm.get('paymentCondition')?.touched" class="text-red-500 text-sm mt-1">Este campo es requerido</p>
+            </div>
+            
+            <!-- Fecha de generación -->
+            <div>
+              <label for="billGenerationDate" class="form-label">Fecha de generación *</label>
+              <input type="datetime-local" id="billGenerationDate" formControlName="billGenerationDate" class="form-input">
+              <p *ngIf="billForm.get('billGenerationDate')?.hasError('required') && billForm.get('billGenerationDate')?.touched" class="text-red-500 text-sm mt-1">Este campo es requerido</p>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Información del Cliente -->
+        <div class="mb-8">
+          <h6 class="mb-4 text-lg font-semibold border-b pb-2">Información del Cliente (Opcional)</h6>
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Nombre del cliente -->
+            <div>
+              <label for="customerName" class="form-label">Nombre del cliente</label>
+              <input type="text" id="customerName" formControlName="customerName" class="form-input" placeholder="Nombre del cliente">
+            </div>
+            
+            <!-- Documento del cliente -->
+            <div>
+              <label for="customerDocument" class="form-label">Documento del cliente</label>
+              <input type="text" id="customerDocument" formControlName="customerDocument" class="form-input" placeholder="DUI del cliente">
+            </div>
+            
+            <!-- Email del cliente -->
+            <div>
+              <label for="customerEmail" class="form-label">Email del cliente</label>
+              <input type="email" id="customerEmail" formControlName="customerEmail" class="form-input" placeholder="cliente@email.com">
+              <p *ngIf="billForm.get('customerEmail')?.hasError('email') && billForm.get('customerEmail')?.touched" class="text-red-500 text-sm mt-1">Ingrese un email válido</p>
+            </div>
+            
+            <!-- Teléfono del cliente -->
+            <div>
+              <label for="customerPhone" class="form-label">Teléfono del cliente</label>
+              <input type="text" id="customerPhone" formControlName="customerPhone" class="form-input" placeholder="7777-7777">
+            </div>
+            
+            <!-- Dirección del cliente -->
+            <div class="md:col-span-2">
+              <label for="customerAddress" class="form-label">Dirección del cliente</label>
+              <input type="text" id="customerAddress" formControlName="customerAddress" class="form-input" placeholder="Dirección del cliente">
+            </div>
+          </div>
+        </div>
+
+        <!-- Productos -->
+        <div class="mb-8">
+          <h6 class="mb-4 text-lg font-semibold border-b pb-2">Productos</h6>
+          <div class="space-y-4">
+            <div *ngFor="let product of products.controls; let i = index" [formGroupName]="i" formArrayName="products" 
+                 class="grid grid-cols-1 md:grid-cols-12 gap-4 p-4 bg-gray-50 rounded-lg border">
+              <!-- Número -->
+              <div class="md:col-span-1 flex items-center">
+                <span class="font-semibold text-gray-600">{{ i + 1 }}</span>
+              </div>
+              
+              <!-- Producto -->
+              <div class="md:col-span-6">
+                <label class="form-label text-sm">Producto</label>
+                <input type="text" formControlName="name" class="form-input" placeholder="Nombre del producto">
+                <p *ngIf="product.get('name')?.hasError('required') && product.get('name')?.touched" class="text-red-500 text-xs mt-1">Este campo es requerido</p>
+              </div>
+              
+              <!-- Cantidad -->
+              <div class="md:col-span-2">
+                <label class="form-label text-sm">Cantidad</label>
+                <input type="number" formControlName="quantity" class="form-input" placeholder="1" min="1">
+                <p *ngIf="product.get('quantity')?.hasError('required') && product.get('quantity')?.touched" class="text-red-500 text-xs mt-1">Requerido</p>
+                <p *ngIf="product.get('quantity')?.hasError('min') && product.get('quantity')?.touched" class="text-red-500 text-xs mt-1">Mínimo 1</p>
+              </div>
+              
+              <!-- Precio -->
+              <div class="md:col-span-2">
+                <label class="form-label text-sm">Precio</label>
+                <input type="number" formControlName="price" class="form-input" placeholder="0.00" step="0.01" min="0">
+                <p *ngIf="product.get('price')?.hasError('required') && product.get('price')?.touched" class="text-red-500 text-xs mt-1">Requerido</p>
+                <p *ngIf="product.get('price')?.hasError('min') && product.get('price')?.touched" class="text-red-500 text-xs mt-1">Mínimo 0</p>
+              </div>
+              
+              <!-- Acciones -->
+              <div class="md:col-span-1 flex items-end">
+                <button type="button" (click)="removeProduct(i)" class="btn btn-outline-danger btn-sm w-full" *ngIf="products.length > 1">
+                  <i class="align-baseline ri-delete-bin-line"></i>
+                </button>
+              </div>
+            </div>
+            
+            <!-- Botón agregar producto -->
+            <div class="flex justify-start">
+              <button type="button" (click)="addProduct()" class="btn btn-primary">
+                <i class="align-bottom ri-add-line"></i> Agregar Producto
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Observaciones -->
+        <div class="mb-8">
+          <h6 class="mb-4 text-lg font-semibold border-b pb-2">Observaciones</h6>
+          <div class="grid grid-cols-1 gap-6">
+            <div>
+              <label for="observations" class="form-label">Observaciones (Opcional)</label>
+              <textarea
+                id="observations"
+                formControlName="observations"
+                class="form-input"
+                rows="3"
+                placeholder="Ingrese observaciones adicionales sobre la factura"
+              ></textarea>
+            </div>
+          </div>
+        </div>
+
+        <!-- Información adicional -->
+        <div class="mb-6 p-4 bg-blue-50 rounded-lg border border-blue-200 dark:bg-blue-900/20 dark:border-blue-800">
+          <p class="text-sm text-blue-700 dark:text-blue-300">
+            <i class="align-baseline ri-information-line"></i> 
+            <strong>Nota:</strong> El código de generación, número de control, información de la empresa y todos los totales (IVA, subtotales, etc.) serán calculados automáticamente por el sistema al guardar la factura.
+          </p>
+        </div>
+
+        <!-- Mensajes de estado -->
+        <div class="mt-4">
+          <div *ngIf="loading" class="alert alert-info">
+            <i class="align-baseline ri-loader-line animate-spin"></i> Enviando factura...
+          </div>
+          <div *ngIf="successMsg" class="alert alert-success">
+            <i class="align-baseline ri-check-circle-line"></i> {{ successMsg }}
+          </div>
+          <div *ngIf="errorMsg" class="alert alert-danger">
+            <i class="align-baseline ri-error-warning-line"></i> {{ errorMsg }}
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
