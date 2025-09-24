@@ -8,10 +8,11 @@ import { TitleService } from './service/title.service';
 import { filter } from 'rxjs';
 import { SettingsModalComponent } from './layouts/navbar/modal/settings-modal/settings-modal.component';
 import { ModalService } from './Core/service/modal/modal.service';
+import { DevBadgeComponent } from './features/dev-badge/dev-badge.component'; // HABILITADO
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, DevBadgeComponent], // Agregado DevBadgeComponent
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })

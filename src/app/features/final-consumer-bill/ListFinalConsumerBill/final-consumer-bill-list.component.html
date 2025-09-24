@@ -66,16 +66,16 @@
                         'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200': bill.status === 'APPROVED',
                         'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200': bill.status === 'PENDING',
                         'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200': bill.status === 'SENT',
-                        'bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-200': bill.status === 'DRAFT'
+                        'bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-200': !bill.status || bill.status === 'DRAFT'
                       }">
                   <i class="align-baseline mr-1" 
                      [ngClass]="{
                        'ri-check-circle-line': bill.status === 'APPROVED',
                        'ri-time-line': bill.status === 'PENDING',
                        'ri-send-plane-line': bill.status === 'SENT',
-                       'ri-file-line': bill.status === 'DRAFT'
+                       'ri-file-line': !bill.status || bill.status === 'DRAFT'
                      }"></i>
-                  {{ getStatusText(bill.status) }}
+                  {{ getStatusText(bill.status || 'DRAFT') }}
                 </span>
               </td>
               <td>

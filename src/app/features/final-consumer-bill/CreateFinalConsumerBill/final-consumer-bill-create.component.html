@@ -6,11 +6,11 @@
       <div class="items-center gap-3 md:flex">
         <h6 class="grow mb-3 md:mb-0">Crear Factura Consumidor Final</h6>
         <div class="flex flex-wrap items-center gap-2 shrink-0">
-          <button type="button" class="btn btn-sub-gray" (click)="billForm.reset()">
+          <button type="button" class="btn btn-sub-gray" (click)="clearForm()">
             <i class="align-baseline ri-refresh-line"></i>
             Limpiar
           </button>
-          <button type="submit" class="btn btn-primary" [disabled]="loading || billForm.invalid" (click)="submit()">
+          <button type="submit" class="btn btn-primary" [disabled]="loading" (click)="submit()">
             <i class="align-baseline ri-save-line"></i>
             <span *ngIf="!loading">Guardar Factura</span>
             <span *ngIf="loading">Guardando...</span>
@@ -24,30 +24,23 @@
         <!-- Información General -->
         <div class="mb-8">
           <h6 class="mb-4 text-lg font-semibold border-b pb-2">Información General</h6>
-          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             <!-- Cuenta -->
             <div>
               <label for="account" class="form-label">Cuenta *</label>
               <input type="text" id="account" formControlName="account" class="form-input" placeholder="Número de cuenta">
-              <p *ngIf="billForm.get('account')?.hasError('required') && billForm.get('account')?.touched" class="text-red-500 text-sm mt-1">Este campo es requerido</p>
+              <!-- Sin validación -->
             </div>
             
             <!-- Condición de pago -->
             <div>
               <label for="paymentCondition" class="form-label">Condición de pago *</label>
               <select id="paymentCondition" formControlName="paymentCondition" class="form-input">
-                <option value="">Seleccione una opción</option>
+                <option value="" disabled selected hidden>Seleccione una opción</option>
                 <option value="CONTADO">Contado</option>
                 <option value="CREDITO">Crédito</option>
               </select>
-              <p *ngIf="billForm.get('paymentCondition')?.hasError('required') && billForm.get('paymentCondition')?.touched" class="text-red-500 text-sm mt-1">Este campo es requerido</p>
-            </div>
-            
-            <!-- Fecha de generación -->
-            <div>
-              <label for="billGenerationDate" class="form-label">Fecha de generación *</label>
-              <input type="datetime-local" id="billGenerationDate" formControlName="billGenerationDate" class="form-input">
-              <p *ngIf="billForm.get('billGenerationDate')?.hasError('required') && billForm.get('billGenerationDate')?.touched" class="text-red-500 text-sm mt-1">Este campo es requerido</p>
+              <!-- Sin validación -->
             </div>
           </div>
         </div>
@@ -92,35 +85,19 @@
         <!-- Productos -->
         <div class="mb-8">
           <h6 class="mb-4 text-lg font-semibold border-b pb-2">Productos</h6>
-          <div class="space-y-4">
-            <div *ngFor="let product of products.controls; let i = index" [formGroupName]="i" formArrayName="products" 
+          <div class="space-y-4" formArrayName="products">
+            <div *ngFor="let product of products.controls; let i = index" [formGroupName]="i"
                  class="grid grid-cols-1 md:grid-cols-12 gap-4 p-4 bg-gray-50 rounded-lg border">
               <!-- Número -->
               <div class="md:col-span-1 flex items-center">
                 <span class="font-semibold text-gray-600">{{ i + 1 }}</span>
               </div>
               
-              <!-- Producto -->
-              <div class="md:col-span-6">
-                <label class="form-label text-sm">Producto</label>
-                <input type="text" formControlName="name" class="form-input" placeholder="Nombre del producto">
-                <p *ngIf="product.get('name')?.hasError('required') && product.get('name')?.touched" class="text-red-500 text-xs mt-1">Este campo es requerido</p>
-              </div>
-              
-              <!-- Cantidad -->
-              <div class="md:col-span-2">
-                <label class="form-label text-sm">Cantidad</label>
-                <input type="number" formControlName="quantity" class="form-input" placeholder="1" min="1">
-                <p *ngIf="product.get('quantity')?.hasError('required') && product.get('quantity')?.touched" class="text-red-500 text-xs mt-1">Requerido</p>
-                <p *ngIf="product.get('quantity')?.hasError('min') && product.get('quantity')?.touched" class="text-red-500 text-xs mt-1">Mínimo 1</p>
-              </div>
-              
-              <!-- Precio -->
-              <div class="md:col-span-2">
-                <label class="form-label text-sm">Precio</label>
-                <input type="number" formControlName="price" class="form-input" placeholder="0.00" step="0.01" min="0">
-                <p *ngIf="product.get('price')?.hasError('required') && product.get('price')?.touched" class="text-red-500 text-xs mt-1">Requerido</p>
-                <p *ngIf="product.get('price')?.hasError('min') && product.get('price')?.touched" class="text-red-500 text-xs mt-1">Mínimo 0</p>
+              <!-- ID del Producto -->
+              <div class="md:col-span-10">
+                <label class="form-label text-sm">ID del Producto *</label>
+                <input type="number" formControlName="id" class="form-input" placeholder="Ej: 1" min="1">
+                <small class="text-gray-500">Ingrese el ID del producto según el catálogo del backend</small>
               </div>
               
               <!-- Acciones -->

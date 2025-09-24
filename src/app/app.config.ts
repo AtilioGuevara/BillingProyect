@@ -10,13 +10,14 @@ export function HttpLoaderFactory(http: HttpClient) {
 }
 import { routes } from './app.routes';
 import { provideClientHydration } from '@angular/platform-browser';
-import { HttpClient, provideHttpClient } from '@angular/common/http';
+import { HttpClient, provideHttpClient, withInterceptors } from '@angular/common/http';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideStore } from '@ngrx/store';
 import { provideEffects } from '@ngrx/effects';
 import { ProductEffects } from './pages/Apps/Ecommerce/Products/store/effects/product.effects';
 import { productReducer } from './pages/Apps/Ecommerce/Products/store/reducers/product.reducer';
 import { NgxMaskOptions, provideEnvironmentNgxMask } from 'ngx-mask';
+import { authInterceptor } from './features/auth/auth.interceptor';
 import {
   Activity,
   Airplay,
@@ -552,7 +553,7 @@ export const appConfig: ApplicationConfig = {
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
     provideClientHydration(),
-    provideHttpClient(),
+    provideHttpClient(withInterceptors([authInterceptor])),
     provideAnimations(),
     provideStore({
       products: productReducer,

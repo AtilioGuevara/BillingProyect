@@ -1,49 +1,95 @@
+// Interface para ENVIAR productos al backend (solo ID)
+export interface ProductBillCreate {
+  id: number; // Solo ID del producto para crear factura
+}
+
+// Interface para MOSTRAR productos completos (para búsquedas y listas)
 export interface ProductBill {
-  // Estructura según tu modelo del backend
-  id?: number; // Opcional para productos nuevos
+  id?: number;
   name: string;
   quantity: number;
   price: number;
 }
 
 export interface CreateFinalConsumerBillDTO {
-  // Campos que el backend genera automáticamente si vienen vacíos
-  generationCode: string; // 36 caracteres - backend lo genera si está vacío
-  controlNumber: string;  // DTE-03-xxxxxxxx-xxxxxxxxxxxxxxx - backend lo genera si está vacío
+  // Campos principales del formulario
+  account: string;               
+  paymentCondition: string;      
+
+  // Datos de la empresa (valores fijos)
+  companyName: string;           
+  companyDocument: string;       
+  companyAddress: string;        
+  companyEmail: string;          
+  companyPhone: string;          
+
+  // Datos del cliente
+  customerName: string;          
+  customerDocument: string;      
+  customerAddress: string;       
+  customerEmail: string;         
+  customerPhone: string;         
+
+  // Productos - array de IDs para crear
+  products: ProductBillCreate[];       
   
-  // Campos obligatorios del formulario
-  billGenerationDate: string; // ISO string para LocalDateTime
-  account: string;           // @NotBlank
-  paymentCondition: string;  // @NotBlank
+  // Totales
+  nonTaxedSales: number;         
+  exemptSales: number;           
+  taxedSales: number;            
+  iva: string;                   
+  perceivedIva: number;          
+  withheldIva: number;           
+  totalWithIva: number;          
+}
 
-  // transmitter (emisor) - SE MANEJA EN EL BACKEND AUTOMÁTICAMENTE
-  // El backend obtendrá esta información de la configuración de la empresa
-  // companyName, companyDocument, companyAddress, companyEmail, companyPhone
-
-  // receiver (receptor) - todos opcionales
+// DTO para la respuesta completa (ShowBillDto del backend)
+// Usado cuando se obtiene UNA factura específica
+export interface FinalConsumerBillDetailDTO {
+  generationCode: string;
+  controlNumber: string;
+  billGenerationDate: string;
+  account: string;
+  paymentCondition: string;
+  
+  // Información de la empresa (viene del backend)
+  companyName: string;
+  companyDocument: string;
+  companyAddress: string;
+  companyEmail: string;
+  companyPhone: string;
+  
+  // Información del cliente
   customerName?: string;
-  customerDocument?: string; // NIT or DUI
+  customerDocument?: string;
   customerAddress?: string;
   customerEmail?: string;
   customerPhone?: string;
-
-  // products - @NotEmpty (el frontend solo envía productos, el backend calcula totales)
+  
+  // Productos completos
   products: ProductBill[];
   
-  // observaciones adicionales - opcional
-  observations?: string;
-  
-  // NOTA: Los totales (nonTaxedSales, exemptSales, taxedSales, iva, etc.) 
-  // se calculan automáticamente en el backend basándose en los productos
+  // Totales calculados por el backend
+  nonTaxedSales: number;
+  exemptSales: number;
+  taxedSales: number;
+  iva: number;
+  perceivedIva: number;
+  withheldIva: number;
+  totalWithIva: number;
 }
 
-// DTO específico para la respuesta del getAll
+// DTO simplificado para la lista (getAll)
+// Solo los datos esenciales para mostrar en tabla
 export interface FinalConsumerBillListDTO {
-  id: number;
   generationCode: string;
   controlNumber: string;
+  billGenerationDate: string;
+  customerName?: string;
   totalWithIva: number;
-  status: string; // DRAFT, SENT, APPROVED, etc.
-  createdAt: string; // Fecha de creación
-  updatedAt: string; // Última actualización
+  account: string;
+  paymentCondition: string;
+  // Campos adicionales útiles para la lista
+  createdAt?: string;
+  status?: string; // Si el backend lo maneja
 }

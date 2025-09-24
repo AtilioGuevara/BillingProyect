@@ -46,19 +46,14 @@ import { AgGridProductsListComponent } from './pages/Apps/Products/ag-grid-produ
 import { AppsPosUserLoginComponent } from './pages/Apps/Pos/apps-pos-user-login/apps-pos-user-login.component';
 
 export const routes: Routes = [
-  // Redirección por defecto al crear factura
+  // 🏠 Redirección por defecto a lista de facturas
   {
     path: '',
-    redirectTo: '/final-consumer-bill/create',
+    redirectTo: '/final-consumer-bill/list',
     pathMatch: 'full'
   },
-  // Ruta corta alternativa
-  {
-    path: 'factura',
-    redirectTo: '/final-consumer-bill/create',
-    pathMatch: 'full'
-  },
-  // Rutas de facturación - componentes organizados ✅
+
+  // � RUTAS DE FACTURACIÓN (sin guards - DevBadge maneja auth)
   {
     path: 'final-consumer-bill/create',
     loadComponent: () => import('./features/final-consumer-bill/CreateFinalConsumerBill/final-consumer-bill-create.component').then(m => m.FinalConsumerBillCreateComponent),
@@ -68,6 +63,18 @@ export const routes: Routes = [
     path: 'final-consumer-bill/list',
     loadComponent: () => import('./features/final-consumer-bill/ListFinalConsumerBill/final-consumer-bill-list.component').then(m => m.FinalConsumerBillListComponent),
     data: { title: 'Lista de Facturas' }
+  },
+  {
+    path: 'final-consumer-bill/search',
+    loadComponent: () => import('./features/final-consumer-bill/SearchFinalConsumerBill/final-consumer-bill-search.component').then(m => m.FinalConsumerBillSearchComponent),
+    data: { title: 'Buscar Factura' }
+  },
+
+  // 🔗 RUTAS DE ACCESO DIRECTO
+  {
+    path: 'factura',
+    redirectTo: '/final-consumer-bill/create',
+    pathMatch: 'full'
   },
 
 

@@ -44,7 +44,7 @@ export class FinalConsumerBillListComponent implements OnInit {
     this.loadBills();
   }
 
-  getStatusText(status: string): string {
+  getStatusText(status: string | undefined | null): string {
     const statusMap: { [key: string]: string } = {
       'DRAFT': 'Borrador',
       'SENT': 'Enviada',
@@ -52,6 +52,6 @@ export class FinalConsumerBillListComponent implements OnInit {
       'APPROVED': 'Aprobada',
       'REJECTED': 'Rechazada'
     };
-    return statusMap[status] || status;
+    return statusMap[status || 'DRAFT'] || 'Sin Estado';
   }
 }

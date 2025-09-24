@@ -1,0 +1,228 @@
+<app-final-consumer-bill-nav></app-final-consumer-bill-nav>
+
+<div>
+  <div class="card">
+    <div class="card-header">
+      <div class="items-center gap-3 md:flex">
+        <h6 class="grow mb-3 md:mb-0">Buscar Factura Consumidor Final</h6>
+        <div class="flex flex-wrap items-center gap-2 shrink-0">
+          <button type="button" class="btn btn-sub-gray" (click)="clearSearch()">
+            <i class="align-baseline ri-refresh-line"></i>
+            Limpiar
+          </button>
+          <button type="button" class="btn btn-primary" *ngIf="searchResult" (click)="printBill()">
+            <i class="align-baseline ri-printer-line"></i>
+            Imprimir
+          </button>
+        </div>
+      </div>
+    </div>
+    
+    <div class="card-body">
+      <!-- Formulario de búsqueda -->
+      <form [formGroup]="searchForm" (ngSubmit)="search()">
+        <div class="mb-8">
+          <h6 class="mb-4 text-lg font-semibold border-b pb-2">Buscar por Código de Generación</h6>
+          <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+            <div class="md:col-span-8">
+              <label for="generationCode" class="form-label">Código de Generación *</label>
+              <input 
+                type="text" 
+                id="generationCode" 
+                formControlName="generationCode" 
+                class="form-input" 
+                placeholder="Ingrese el código de generación de la factura"
+                maxlength="50">
+              <!-- Validaciones temporalmente deshabilitadas para debugging -->
+            </div>
+            
+            <div class="md:col-span-4 flex items-end">
+              <button 
+                type="submit" 
+                class="btn btn-primary w-full" 
+                [disabled]="loading">
+                <i class="align-baseline ri-search-line" *ngIf="!loading"></i>
+                <i class="align-baseline ri-loader-line animate-spin" *ngIf="loading"></i>
+                <span *ngIf="!loading">Buscar Factura</span>
+                <span *ngIf="loading">Buscando...</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </form>
+
+      <!-- Mensajes de estado -->
+      <div class="mb-6" *ngIf="errorMsg || (hasSearched && !searchResult)">
+        <div class="alert alert-danger">
+          <i class="align-baseline ri-error-warning-line"></i> 
+          {{ errorMsg || 'No se encontró ninguna factura con ese código' }}
+        </div>
+      </div>
+
+      <!-- Resultado de la búsqueda -->
+      <div *ngIf="searchResult" class="mt-8">
+        <h6 class="mb-6 text-xl font-bold text-primary-700 border-b pb-3">
+          <i class="align-baseline ri-file-text-line"></i> 
+          Factura Encontrada
+        </h6>
+
+        <!-- Información de la factura -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+          <!-- Información básica -->
+          <div class="card bg-gray-50">
+            <div class="card-header">
+              <h6 class="text-lg font-semibold">Información de la Factura</h6>
+            </div>
+            <div class="card-body space-y-3">
+              <div class="flex justify-between">
+                <span class="font-medium">Código de Generación:</span>
+                <span class="text-primary-700 font-mono">{{ searchResult.generationCode }}</span>
+              </div>
+              <div class="flex justify-between">
+                <span class="font-medium">Número de Control:</span>
+                <span class="font-mono">{{ searchResult.controlNumber }}</span>
+              </div>
+              <div class="flex justify-between">
+                <span class="font-medium">Fecha de Generación:</span>
+                <span>{{ searchResult.billGenerationDate | date:'dd/MM/yyyy HH:mm' }}</span>
+              </div>
+              <div class="flex justify-between">
+                <span class="font-medium">Cuenta:</span>
+                <span>{{ searchResult.account }}</span>
+              </div>
+              <div class="flex justify-between">
+                <span class="font-medium">Condición de Pago:</span>
+                <span>{{ searchResult.paymentCondition }}</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Información de la empresa -->
+          <div class="card bg-blue-50">
+            <div class="card-header">
+              <h6 class="text-lg font-semibold">Información de la Empresa</h6>
+            </div>
+            <div class="card-body space-y-3">
+              <div class="flex justify-between">
+                <span class="font-medium">Nombre:</span>
+                <span>{{ searchResult.companyName }}</span>
+              </div>
+              <div class="flex justify-between">
+                <span class="font-medium">Documento:</span>
+                <span>{{ searchResult.companyDocument }}</span>
+              </div>
+              <div class="flex justify-between">
+                <span class="font-medium">Dirección:</span>
+                <span>{{ searchResult.companyAddress }}</span>
+              </div>
+              <div class="flex justify-between">
+                <span class="font-medium">Email:</span>
+                <span>{{ searchResult.companyEmail }}</span>
+              </div>
+              <div class="flex justify-between">
+                <span class="font-medium">Teléfono:</span>
+                <span>{{ searchResult.companyPhone }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Información del cliente -->
+        <div class="card bg-green-50 mb-8" *ngIf="searchResult.customerName">
+          <div class="card-header">
+            <h6 class="text-lg font-semibold">Información del Cliente</h6>
+          </div>
+          <div class="card-body">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              <div *ngIf="searchResult.customerName">
+                <span class="font-medium">Nombre:</span>
+                <span class="ml-2">{{ searchResult.customerName }}</span>
+              </div>
+              <div *ngIf="searchResult.customerDocument">
+                <span class="font-medium">Documento:</span>
+                <span class="ml-2">{{ searchResult.customerDocument }}</span>
+              </div>
+              <div *ngIf="searchResult.customerEmail">
+                <span class="font-medium">Email:</span>
+                <span class="ml-2">{{ searchResult.customerEmail }}</span>
+              </div>
+              <div *ngIf="searchResult.customerPhone">
+                <span class="font-medium">Teléfono:</span>
+                <span class="ml-2">{{ searchResult.customerPhone }}</span>
+              </div>
+              <div *ngIf="searchResult.customerAddress" class="md:col-span-2">
+                <span class="font-medium">Dirección:</span>
+                <span class="ml-2">{{ searchResult.customerAddress }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Productos -->
+        <div class="card mb-8">
+          <div class="card-header">
+            <h6 class="text-lg font-semibold">Productos</h6>
+          </div>
+          <div class="card-body">
+            <div class="overflow-x-auto">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Producto</th>
+                    <th>Cantidad</th>
+                    <th>Precio Unitario</th>
+                    <th>Subtotal</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let product of searchResult.products; let i = index">
+                    <td>{{ i + 1 }}</td>
+                    <td>{{ product.name }}</td>
+                    <td>{{ product.quantity }}</td>
+                    <td>${{ product.price | number:'1.2-2' }}</td>
+                    <td>${{ (product.quantity * product.price) | number:'1.2-2' }}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- Totales -->
+        <div class="card bg-yellow-50">
+          <div class="card-header">
+            <h6 class="text-lg font-semibold">Resumen de Totales</h6>
+          </div>
+          <div class="card-body">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+              <div class="text-center p-3 bg-white rounded-lg">
+                <div class="text-sm text-gray-600">Ventas No Gravadas</div>
+                <div class="text-lg font-bold">${{ searchResult.nonTaxedSales | number:'1.2-2' }}</div>
+              </div>
+              <div class="text-center p-3 bg-white rounded-lg">
+                <div class="text-sm text-gray-600">Ventas Exentas</div>
+                <div class="text-lg font-bold">${{ searchResult.exemptSales | number:'1.2-2' }}</div>
+              </div>
+              <div class="text-center p-3 bg-white rounded-lg">
+                <div class="text-sm text-gray-600">Ventas Gravadas</div>
+                <div class="text-lg font-bold">${{ searchResult.taxedSales | number:'1.2-2' }}</div>
+              </div>
+              <div class="text-center p-3 bg-white rounded-lg">
+                <div class="text-sm text-gray-600">IVA (13%)</div>
+                <div class="text-lg font-bold">${{ searchResult.iva | number:'1.2-2' }}</div>
+              </div>
+            </div>
+            
+            <div class="mt-6 p-4 bg-primary-100 rounded-lg border-2 border-primary-300">
+              <div class="text-center">
+                <div class="text-lg text-primary-700 font-medium">Total con IVA</div>
+                <div class="text-3xl font-bold text-primary-900">${{ searchResult.totalWithIva | number:'1.2-2' }}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

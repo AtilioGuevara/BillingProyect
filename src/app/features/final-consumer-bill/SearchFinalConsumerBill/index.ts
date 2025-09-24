@@ -1,0 +1,1 @@
+export { FinalConsumerBillSearchComponent } from './final-consumer-bill-search.component';

@@ -30,6 +30,14 @@ import { CommonModule } from '@angular/common';
               <i class="align-baseline ri-file-list-3-line"></i>
               Lista de Facturas
             </button>
+
+            <button 
+              [routerLink]="['/final-consumer-bill/search']"
+              [class]="isSearchActive() ? 'btn btn-primary' : 'btn btn-sub-gray'"
+              class="transition-all duration-300">
+              <i class="align-baseline ri-search-line"></i>
+              Buscar Factura
+            </button>
           </div>
         </div>
       </div>
@@ -72,5 +80,9 @@ export class FinalConsumerBillNavComponent {
   
   isListActive(): boolean {
     return this.router.url.includes('/list');
+  }
+
+  isSearchActive(): boolean {
+    return this.router.url.includes('/search');
   }
 }
