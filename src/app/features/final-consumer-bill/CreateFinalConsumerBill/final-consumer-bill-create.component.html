@@ -25,13 +25,6 @@
         <div class="mb-8">
           <h6 class="mb-4 text-lg font-semibold border-b pb-2">Información General</h6>
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <!-- Cuenta -->
-            <div>
-              <label for="account" class="form-label">Cuenta *</label>
-              <input type="text" id="account" formControlName="account" class="form-input" placeholder="Número de cuenta">
-              <!-- Sin validación -->
-            </div>
-            
             <!-- Condición de pago -->
             <div>
               <label for="paymentCondition" class="form-label">Condición de pago *</label>
@@ -47,7 +40,7 @@
         
         <!-- Información del Cliente -->
         <div class="mb-8">
-          <h6 class="mb-4 text-lg font-semibold border-b pb-2">Información del Cliente (Opcional)</h6>
+          <h6 class="mb-4 text-lg font-semibold border-b pb-2">Información del Cliente</h6>
           <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             <!-- Nombre del cliente -->
             <div>
@@ -132,14 +125,6 @@
               ></textarea>
             </div>
           </div>
-        </div>
-
-        <!-- Información adicional -->
-        <div class="mb-6 p-4 bg-blue-50 rounded-lg border border-blue-200 dark:bg-blue-900/20 dark:border-blue-800">
-          <p class="text-sm text-blue-700 dark:text-blue-300">
-            <i class="align-baseline ri-information-line"></i> 
-            <strong>Nota:</strong> El código de generación, número de control, información de la empresa y todos los totales (IVA, subtotales, etc.) serán calculados automáticamente por el sistema al guardar la factura.
-          </p>
         </div>
 
         <!-- Mensajes de estado -->

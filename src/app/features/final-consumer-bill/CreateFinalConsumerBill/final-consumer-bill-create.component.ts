@@ -22,7 +22,6 @@ export class FinalConsumerBillCreateComponent {
   
   // Placeholders para los campos
   placeholders = {
-    account: 'Ej: ACC-001',
     paymentCondition: 'Ej: efectivo, crédito, transferencia',
     
     // Empresa
@@ -51,7 +50,6 @@ export class FinalConsumerBillCreateComponent {
   constructor(private fb: FormBuilder, private billService: FinalConsumerBillService) {
     this.billForm = this.fb.group({
       // Campos principales
-      account: ['', Validators.required],
       paymentCondition: ['', Validators.required],
       
       // Datos de la empresa
@@ -187,7 +185,6 @@ export class FinalConsumerBillCreateComponent {
     // DTO LIMPIO - SIN campos que genera el backend automáticamente
     const bill: CreateFinalConsumerBillDTO = {
       // Solo los campos que realmente necesita el backend
-      account: formData.account,
       paymentCondition: formData.paymentCondition,
       
       // Datos empresa

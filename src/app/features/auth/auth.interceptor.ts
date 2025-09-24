@@ -7,16 +7,21 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
 
   console.log('🔐 AuthInterceptor - Interceptando petición:', req.url);
 
-  // No agregar token en rutas de autenticación según documentación
-  if (req.url.includes('/authentication/login')) {
-    console.log('🔓 Request sin token (login endpoint):', req.url);
+  // Excluir rutas que no necesitan Bearer token en header HTTP
+  const excludedRoutes = [
+    '/authentication/login'
+    // final-consumer ahora SÍ necesita Bearer token en header
+  ];
+
+  if (excludedRoutes.some(route => req.url.includes(route))) {
+    console.log('🔓 Request sin Bearer token:', req.url);
     return next(req);
   }
 
-  const token = authTokenService.getToken();
+  const token = authTokenService.getTokenValue();
   
   if (token) {
-    console.log('🔑 Agregando Bearer token a la petición');
+    console.log('🔑 Agregando Bearer token al header HTTP');
     const authReq = req.clone({
       setHeaders: {
         'Authorization': `Bearer ${token}`

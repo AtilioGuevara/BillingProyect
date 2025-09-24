@@ -13,7 +13,7 @@ export interface ProductBill {
 
 export interface CreateFinalConsumerBillDTO {
   // Campos principales del formulario
-  account: string;               
+  account?: string;               // Opcional - ya no se usa
   paymentCondition: string;      
 
   // Datos de la empresa (valores fijos)

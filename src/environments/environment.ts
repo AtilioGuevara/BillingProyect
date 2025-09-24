@@ -6,7 +6,7 @@ export const environment = {
   apiCreateUrl: '/api', // Proxy redirige a puerto 8080
   apiReadUrl: '/api',   // Proxy redirige a puerto 8090
   
-  // 🔑 Authentication API (del equipo backend) - Usando proxy
+  // 🔑 Authentication API (del equipo backend) - URL con proxy
   authApiUrl: '/api',
   
   // ⚙️ DevBadge Configuration - HABILITADO para probar login
