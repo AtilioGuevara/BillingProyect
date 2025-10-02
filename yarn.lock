@@ -2958,6 +2958,27 @@ cliui@^9.0.1:
     strip-ansi "^7.1.0"
     wrap-ansi "^9.0.0"
 
+colibrihub-shared-components@0.0.16:
+  version "0.0.16"
+  resolved "https://registry.yarnpkg.com/colibrihub-shared-components/-/colibrihub-shared-components-0.0.16.tgz#384438eb2f3c271619e225fdb32c5063d719acfc"
+  integrity sha512-L0X7D4tj2l9ezJy/jj9oGs/S2ABXfBfwe26hXCz7rlsuUKs+CyNAxCDqOAPQn2Vklk1fNKP8/ICSFQg22bof7w==
+  dependencies:
+    tslib "^2.3.0"
+
+colibrihub-shared-dtos@0.0.4:
+  version "0.0.4"
+  resolved "https://registry.yarnpkg.com/colibrihub-shared-dtos/-/colibrihub-shared-dtos-0.0.4.tgz#bf92be4ad3b0f95f9eb1cac5fc2fb7f3e0083fd1"
+  integrity sha512-35XY0D07jmB+iWkuaBtG5ZmEfNCmKAkkPygcPdKig0wv33WM/zF4/A5Oh+HDCq3fLq8TCYwCsBRV6V5p8pWIww==
+  dependencies:
+    tslib "^2.3.0"
+
+colibrihub-shared-services@0.0.12:
+  version "0.0.12"
+  resolved "https://registry.yarnpkg.com/colibrihub-shared-services/-/colibrihub-shared-services-0.0.12.tgz#1732b458185aec1ebdac9df852668e9196988290"
+  integrity sha512-UFvUWG/RUL2ZExH4cSqpQFeSeAH1B88VOh2btHwsWS/B0ShxBhBKWtQ2HNab963eodOfjoXrHLgMvjSLeqretA==
+  dependencies:
+    tslib "^2.3.0"
+
 color-convert@2.0.1, color-convert@^2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/color-convert/-/color-convert-2.0.1.tgz#72d3a68d598c9bdb3af2ad1e84f21d896abd4de3"

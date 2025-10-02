@@ -2,13 +2,13 @@
 export const environment = {
   production: false,
   
-  // 🌐 API Configuration - URLs con proxy para evitar CORS
-  apiCreateUrl: '/api', // Proxy redirige a puerto 8080
-  apiReadUrl: '/api',   // Proxy redirige a puerto 8090
+  // 🌐 API Configuration - TODO vía proxy para evitar CORS
+  apiCreateUrl: '/api', // CREATE vía proxy (tiene CORS)
+  apiReadUrl: '/api',   // READ vía proxy (cambio importante)
   
-  // 🔑 Authentication API (del equipo backend) - URL con proxy
-  authApiUrl: '/api',
-  
+  // 🔑 Authentication API - También vía proxy
+  authApiUrl: '/api/auth',
+
   // ⚙️ DevBadge Configuration - HABILITADO para probar login
   devBadge: {
     enabled: true, // HABILITADO para probar el nuevo endpoint
@@ -21,21 +21,15 @@ export const environment = {
   // Configuración de autenticación real
   authEnabled: true,
   useVpsForAuth: true,
-  
+
   endpoints: {
     // Endpoints de autenticación - confirmado que funciona
-    auth: {
-      login: '/auth/authentication/login',       // POST confirmado funcionando
-      logout: '/authentication/logout',         // POST según documentación oficial
-      validateCookie: '/validation/cookie',     // GET según documentación oficial
-      validateHeader: '/validation/header'      // GET según documentación oficial - TEMPORALMENTE DESHABILITADO
-    },
     finalConsumerBill: {
-      create: '/final-consumer/create',    // POST para crear facturas
-      getAll: '/final-consumer/all',       // GET para obtener todas las facturas
-      getByGenerationCode: '/final-consumer/generation-code', // GET por código de generación
-      update: '/final-consumer',
-      delete: '/final-consumer'
+      create: '/bill/create/create',              // POST bill.beckysflorist.site/bill/api/create/create
+      getAll: '/bill/get/all',                    // GET bill.beckysflorist.site/bill/api/get/all
+      getByGenerationCode: '/bill/get/generation-code', // GET bill.beckysflorist.site/bill/api/get/generation-code/{codigo}
+      update: '/bill/final-consumer',
+      delete: '/bill/final-consumer'
     }
   }
 };

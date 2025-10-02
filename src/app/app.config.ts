@@ -3,7 +3,9 @@ import {
   importProvidersFrom,
   provideZoneChangeDetection,
 } from '@angular/core';
+import { AUTH_SERVICE_URL } from 'colibrihub-shared-services';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { environment } from '../environments/environment';
 import { provideRouter } from '@angular/router';
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -17,7 +19,7 @@ import { provideEffects } from '@ngrx/effects';
 import { ProductEffects } from './pages/Apps/Ecommerce/Products/store/effects/product.effects';
 import { productReducer } from './pages/Apps/Ecommerce/Products/store/reducers/product.reducer';
 import { NgxMaskOptions, provideEnvironmentNgxMask } from 'ngx-mask';
-import { authInterceptor } from './features/auth/auth.interceptor';
+
 import {
   Activity,
   Airplay,
@@ -550,37 +552,39 @@ const maskConfig: NgxMaskOptions = {
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideZoneChangeDetection({ eventCoalescing: true }),
-    provideRouter(routes),
-    provideClientHydration(),
-    provideHttpClient(withInterceptors([authInterceptor])),
-    provideAnimations(),
-    provideStore({
-      products: productReducer,
-      patients: patientReducer,
-      staffleaves: staffleaveReducer,
-      AppointmentBooks: AppointmentBooksReducer,
-      Invoicedatas: InvoicedatasReducer,
-    }),
-    // Provide all the effects
-    provideEffects(
-      ProductEffects,
-      PatientsEffects,
-      StaffleavesEffects,
-      AppointmentBooksEffects,
-      InvoicedatasEffects
-    ),
-    importProvidersFrom(
-      LucideAngularModule.pick(LucideIcons),
-      TranslateModule.forRoot({
-        loader: {
-          provide: TranslateLoader,
-          useFactory: HttpLoaderFactory,
-          deps: [HttpClient],
-        },
-        defaultLanguage: 'en',
-      })
-    ),
-    provideEnvironmentNgxMask(maskConfig),
+      provideZoneChangeDetection({ eventCoalescing: true }),
+      provideRouter(routes),
+      provideClientHydration(),
+      provideHttpClient(),
+      provideAnimations(),
+      // <-- Provider para AUTH_SERVICE_URL aquí, fuera de provideStore
+      { provide: AUTH_SERVICE_URL, useValue: environment.authApiUrl },
+      provideStore({
+        products: productReducer,
+        patients: patientReducer,
+        staffleaves: staffleaveReducer,
+        AppointmentBooks: AppointmentBooksReducer,
+        Invoicedatas: InvoicedatasReducer,
+      }),
+      // Provide all the effects
+      provideEffects(
+        ProductEffects,
+        PatientsEffects,
+        StaffleavesEffects,
+        AppointmentBooksEffects,
+        InvoicedatasEffects
+      ),
+      importProvidersFrom(
+        LucideAngularModule.pick(LucideIcons),
+        TranslateModule.forRoot({
+          loader: {
+            provide: TranslateLoader,
+            useFactory: HttpLoaderFactory,
+            deps: [HttpClient],
+          },
+          defaultLanguage: 'en',
+        })
+      ),
+      provideEnvironmentNgxMask(maskConfig),
   ],
 };

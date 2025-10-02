@@ -1,35 +1,65 @@
+// Interface para ENVIAR productos al backend (nueva estructura)
+export interface ProductBillCreate {
+  productId: number;
+  requestedQuantity: number;
+}
+
+// Interface para MOSTRAR productos completos (para búsquedas y listas)
 export interface ProductBill {
-  id: number;
+  id?: number;
   name: string;
   quantity: number;
   price: number;
 }
 
 export interface CreateFinalConsumerBillDTO {
-  generationCode: string;
-  controlNumber: string;
-  billGenerationDate: string; // ISO string para LocalDateTime
-  account: string;
   paymentCondition: string;
 
-  // transmitter
+  // Datos del cliente
+  customerName: string;
+  customerDocument: string;
+  customerAddress: string;
+  customerEmail: string;
+  customerPhone: string;
+
+  // Productos - array con ID y cantidad solicitada
+  products: ProductBillCreate[];
+
+  // Campos de impuestos ocultos - siempre se envían con valor 0.0
+  nonTaxedSales: number;
+  exemptSales: number;
+  taxedSales: number;
+  perceivedIva: number;
+  withheldIva: number;
+}
+
+// DTO para la respuesta completa (ShowBillDto del backend)
+// Usado cuando se obtiene UNA factura específica
+export interface FinalConsumerBillDetailDTO {
+  generationCode: string;
+  controlNumber: string;
+  billGenerationDate: string;
+  account: string;
+  paymentCondition: string;
+  
+  // Información de la empresa (viene del backend)
   companyName: string;
   companyDocument: string;
   companyAddress: string;
   companyEmail: string;
   companyPhone: string;
-
-  // receiver
+  
+  // Información del cliente
   customerName?: string;
   customerDocument?: string;
   customerAddress?: string;
   customerEmail?: string;
   customerPhone?: string;
-
-  // products
+  
+  // Productos completos
   products: ProductBill[];
-
-  // totals
+  
+  // Totales calculados por el backend
   nonTaxedSales: number;
   exemptSales: number;
   taxedSales: number;
@@ -39,9 +69,17 @@ export interface CreateFinalConsumerBillDTO {
   totalWithIva: number;
 }
 
-// DTO específico para la respuesta del getAll
+// DTO simplificado para la lista (getAll)
+// Solo los datos esenciales para mostrar en tabla
 export interface FinalConsumerBillListDTO {
-  id: number; // Solo para la base de datos
-  generationCode: string; // Se muestra en la vista
-  controlNumber: string; // Se muestra en la vista
+  generationCode: string;
+  controlNumber: string;
+  billGenerationDate: string;
+  customerName?: string;
+  totalWithIva: number;
+  account: string;
+  paymentCondition: string;
+  // Campos adicionales útiles para la lista
+  createdAt?: string;
+  status?: string; // Si el backend lo maneja
 }

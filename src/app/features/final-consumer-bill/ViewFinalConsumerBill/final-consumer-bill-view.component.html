@@ -1,0 +1,187 @@
+<div class="bill-view-container">
+  <!-- Header -->
+  <div class="bill-header">
+    <h2>Detalle de Factura</h2>
+    <div class="header-actions">
+      <button class="btn btn-secondary" (click)="goBack()">
+        <i class="fas fa-arrow-left"></i> Volver
+      </button>
+      <button class="btn btn-primary" (click)="goToCreate()">
+        <i class="fas fa-plus"></i> Nueva Factura
+      </button>
+    </div>
+  </div>
+
+  <!-- Loading State -->
+  <div *ngIf="loading" class="loading-container">
+    <div class="spinner"></div>
+    <p>Cargando factura...</p>
+  </div>
+
+  <!-- Error State -->
+  <div *ngIf="error && !loading" class="error-container">
+    <div class="error-card">
+      <i class="fas fa-exclamation-triangle"></i>
+      <h3>Error al cargar la factura</h3>
+      <pre class="error-details">{{ error }}</pre>
+      <div class="error-actions">
+        <button class="btn btn-secondary" (click)="goBack()">
+          <i class="fas fa-arrow-left"></i> Volver a Búsqueda
+        </button>
+        <button class="btn btn-primary" (click)="goToCreate()">
+          <i class="fas fa-plus"></i> Crear Nueva Factura
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bill Content -->
+  <div *ngIf="bill && !loading && !error" class="bill-content">
+    <!-- Bill Actions -->
+    <div class="bill-actions">
+      <button class="btn btn-success" (click)="printBill()">
+        <i class="fas fa-print"></i> Imprimir
+      </button>
+    </div>
+
+    <!-- Bill Details Card -->
+    <div class="bill-card">
+      <!-- Basic Information -->
+      <div class="bill-section">
+        <h3>Información General</h3>
+        <div class="info-grid">
+          <div class="info-item">
+            <label>Código de Generación:</label>
+            <span class="generation-code">{{ bill.generationCode }}</span>
+          </div>
+          <div class="info-item">
+            <label>Número de Control:</label>
+            <span>{{ bill.controlNumber }}</span>
+          </div>
+          <div class="info-item">
+            <label>Fecha de Generación:</label>
+            <span>{{ bill.billGenerationDate | date:'dd/MM/yyyy' }}</span>
+          </div>
+          <div class="info-item">
+            <label>Condición de Pago:</label>
+            <span>{{ bill.paymentCondition }}</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Customer Information -->
+      <div class="bill-section" *ngIf="bill.customerName">
+        <h3>Información del Cliente</h3>
+        <div class="info-grid">
+          <div class="info-item" *ngIf="bill.customerName">
+            <label>Nombre:</label>
+            <span>{{ bill.customerName }}</span>
+          </div>
+          <div class="info-item" *ngIf="bill.customerDocument">
+            <label>Documento:</label>
+            <span>{{ bill.customerDocument }}</span>
+          </div>
+          <div class="info-item" *ngIf="bill.customerEmail">
+            <label>Email:</label>
+            <span>{{ bill.customerEmail }}</span>
+          </div>
+          <div class="info-item" *ngIf="bill.customerPhone">
+            <label>Teléfono:</label>
+            <span>{{ bill.customerPhone }}</span>
+          </div>
+          <div class="info-item" *ngIf="bill.customerAddress">
+            <label>Dirección:</label>
+            <span>{{ bill.customerAddress }}</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Company Information -->
+      <div class="bill-section" *ngIf="bill.companyName">
+        <h3>Información de la Empresa</h3>
+        <div class="info-grid">
+          <div class="info-item">
+            <label>Nombre:</label>
+            <span>{{ bill.companyName }}</span>
+          </div>
+          <div class="info-item" *ngIf="bill.companyDocument">
+            <label>Documento:</label>
+            <span>{{ bill.companyDocument }}</span>
+          </div>
+          <div class="info-item" *ngIf="bill.companyEmail">
+            <label>Email:</label>
+            <span>{{ bill.companyEmail }}</span>
+          </div>
+          <div class="info-item" *ngIf="bill.companyPhone">
+            <label>Teléfono:</label>
+            <span>{{ bill.companyPhone }}</span>
+          </div>
+          <div class="info-item" *ngIf="bill.companyAddress">
+            <label>Dirección:</label>
+            <span>{{ bill.companyAddress }}</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Products Table -->
+      <div class="bill-section" *ngIf="bill.products && bill.products.length > 0">
+        <h3>Productos/Servicios</h3>
+        <div class="table-responsive">
+          <table class="items-table">
+            <thead>
+              <tr>
+                <th>Producto</th>
+                <th>Cantidad</th>
+                <th>Precio Unitario</th>
+                <th>Total</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let product of bill.products">
+                <td>{{ product.name }}</td>
+                <td>{{ product.quantity }}</td>
+                <td>{{ product.price | currency:'USD':'symbol':'1.2-2' }}</td>
+                <td>{{ (product.quantity * product.price) | currency:'USD':'symbol':'1.2-2' }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Totals -->
+      <div class="bill-section">
+        <h3>Totales</h3>
+        <div class="totals-grid">
+          <div class="total-item" *ngIf="bill.nonTaxedSales > 0">
+            <label>Ventas No Sujetas:</label>
+            <span>{{ bill.nonTaxedSales | currency:'USD':'symbol':'1.2-2' }}</span>
+          </div>
+          <div class="total-item" *ngIf="bill.exemptSales > 0">
+            <label>Ventas Exentas:</label>
+            <span>{{ bill.exemptSales | currency:'USD':'symbol':'1.2-2' }}</span>
+          </div>
+          <div class="total-item" *ngIf="bill.taxedSales > 0">
+            <label>Ventas Gravadas:</label>
+            <span>{{ bill.taxedSales | currency:'USD':'symbol':'1.2-2' }}</span>
+          </div>
+          <div class="total-item" *ngIf="bill.iva > 0">
+            <label>IVA (13%):</label>
+            <span>{{ bill.iva | currency:'USD':'symbol':'1.2-2' }}</span>
+          </div>
+          <div class="total-item" *ngIf="bill.perceivedIva > 0">
+            <label>IVA Percibido:</label>
+            <span>{{ bill.perceivedIva | currency:'USD':'symbol':'1.2-2' }}</span>
+          </div>
+          <div class="total-item" *ngIf="bill.withheldIva > 0">
+            <label>IVA Retenido:</label>
+            <span>{{ bill.withheldIva | currency:'USD':'symbol':'1.2-2' }}</span>
+          </div>
+          <div class="total-item total-final">
+            <label>Total con IVA:</label>
+            <span>{{ bill.totalWithIva | currency:'USD':'symbol':'1.2-2' }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

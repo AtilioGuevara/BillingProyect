@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, HostListener, inject } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { LucideAngularModule } from 'lucide-angular';
 import { DomixDropdownModule } from '../../module/domix dropdown/domix-dropdown.module';
 import { ToolsAppsModalComponent } from './modal/tools-apps-modal/tools-apps-modal.component';
@@ -11,8 +11,7 @@ import { LayoutSettingService } from '../layout-setting.service';
 import { LanguageService } from '../../Core/service/language.service';
 import { ProductDrawerComponent } from './product-drawer/product-drawer.component';
 import { DrawerConfig, DrawerService } from '../../Core/service/Drawer/drawer.service';
-import { AuthService } from '../../features/auth/auth.service';
-import { Router } from '@angular/router';
+
 interface Language {
   id: string;
   flag: string;
@@ -33,9 +32,7 @@ interface Language {
 export class NavbarComponent {
   scrolled: boolean = false;
   
-  // Inyección de servicios de autenticación
-  private authService = inject(AuthService);
-  private router = inject(Router);
+  // El DevBadge de Colibrihub maneja toda la autenticación
 
   languageData: any = {};
   currantLayout!: string;
@@ -120,27 +117,19 @@ export class NavbarComponent {
 
   /**
    * 🚪 Cerrar sesión del usuario
+   * El DevBadge de Colibrihub maneja el logout automáticamente
    */
   logout(): void {
-    console.log('🚪 Cerrando sesión...');
-    
-    this.authService.logout().subscribe({
-      next: (response) => {
-        console.log('✅ Logout exitoso:', response);
-        // El authService ya maneja la redirección al login
-      },
-      error: (error) => {
-        console.error('❌ Error en logout:', error);
-        // Incluso si hay error, redirigir al login por seguridad
-        this.router.navigate(['/auth/login']);
-      }
-    });
+    console.log('🚪 Logout manejado por DevBadge de Colibrihub');
+    // El DevBadge maneja todo el proceso de logout
   }
 
   /**
    * 🔍 Verificar si el usuario está autenticado
+   * El DevBadge de Colibrihub maneja el estado de autenticación
    */
   isLoggedIn(): boolean {
-    return this.authService.isAuthenticated;
+    // El DevBadge maneja el estado de autenticación
+    return true; // El DevBadge se encarga de mostrar/ocultar elementos según autenticación
   }
 }

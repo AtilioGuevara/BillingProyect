@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FinalConsumerBillService } from '../services/final-consumer-bill.service';
-import { FinalConsumerBillListDTO } from '../dtos/final-consumer-bill.dto';
+import { FinalConsumerBillListDTO } from '../../../dtos/final-consumer-bill.dto';
 import { FinalConsumerBillNavComponent } from '../CreateFinalConsumerBill/final-consumer-bill-nav.component';
 
 @Component({

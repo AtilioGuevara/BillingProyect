@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
-import { CreateFinalConsumerBillDTO, ProductBillCreate } from '../dtos/final-consumer-bill.dto';
+import { CreateFinalConsumerBillDTO, ProductBillCreate } from '../../../dtos/final-consumer-bill.dto';
 import { FinalConsumerBillService } from '../services/final-consumer-bill.service';
 import { FinalConsumerBillNavComponent } from './final-consumer-bill-nav.component';
 
@@ -20,31 +20,20 @@ export class FinalConsumerBillCreateComponent {
   errorMsg = '';
   formSubmitted = false; // Para controlar cuándo mostrar validaciones
   
-  // Placeholders para los campos
+  // Placeholders para los campos con formatos específicos
   placeholders = {
-    paymentCondition: 'Ej: efectivo, crédito, transferencia',
+    paymentCondition: 'Seleccione: CONTADO o CREDITO',
     
-    // Empresa
-    companyName: 'Ej: INNOVATECH S.A.',
-    companyDocument: 'Ej: 0614-240116-102-3',
-    companyAddress: 'Ej: Boulevard de los Héroes #789, San Salvador',
-    companyEmail: 'Ej: facturacion@empresa.com.sv',
-    companyPhone: 'Ej: +503 2234-5678',
+    // Cliente con formatos específicos
+    customerName: 'Ej: José Antonio López (máx. 50 caracteres)',
+    customerDocument: '06873291-2 (DUI de El Salvador)',
+    customerAddress: 'Ej: Col. Escalón, Calle Principal #45, San Salvador (máx. 200 caracteres)',
+    customerEmail: 'ejemplo@correo.com',
+    customerPhone: '7777-8888 (sin código de país)',
     
-    // Cliente
-    customerName: 'Ej: José Antonio López',
-    customerDocument: 'Ej: 12345678-9',
-    customerAddress: 'Ej: Residencial Santa Elena, Calle Principal #123',
-    customerEmail: 'Ej: cliente@email.com',
-    customerPhone: 'Ej: +503 7890-1234',
-    
-    // Totales
-    taxedSales: 'Ej: 2078.98',
-    totalWithIva: 'Ej: 2349.25',
+    // Productos
     productId: 'Ej: 1',
-    
-    // Observaciones
-    observations: 'Ej: Factura procesada con descuento especial'
+    requestedQuantity: 'Ej: 2'
   };
 
   constructor(private fb: FormBuilder, private billService: FinalConsumerBillService) {
@@ -52,41 +41,36 @@ export class FinalConsumerBillCreateComponent {
       // Campos principales
       paymentCondition: ['', Validators.required],
       
-      // Datos de la empresa
-      companyName: ['', Validators.required],
-      companyDocument: ['', [Validators.required, Validators.pattern(/^\d{4}-\d{6}-\d{3}-\d$/)]],
-      companyAddress: ['', Validators.required],
-      companyEmail: ['', [Validators.required, Validators.email]],
-      companyPhone: ['', [Validators.required, Validators.pattern(/^\+503\s\d{4}-\d{4}$/)]],
-      
       // Datos del cliente
-      customerName: ['', Validators.required],
-      customerDocument: ['', [Validators.required, Validators.pattern(/^\d{8}-\d$/)]],
-      customerAddress: ['', Validators.required],
+      customerName: ['', [
+        Validators.required,
+        Validators.maxLength(50) // Máximo 50 caracteres para nombres
+      ]],
+      customerDocument: ['', [
+        Validators.required, 
+        Validators.pattern(/^\d{8}-\d$/) // Formato: 06873291-2
+      ]],
+      customerAddress: ['', [
+        Validators.required,
+        Validators.maxLength(200) // Máximo 200 caracteres para direcciones
+      ]],
       customerEmail: ['', [Validators.required, Validators.email]],
-      customerPhone: ['', [Validators.required, Validators.pattern(/^\+503\s\d{4}-\d{4}$/)]],
+      customerPhone: ['', [
+        Validators.required,
+        Validators.pattern(/^\d{4}-\d{4}$/) // Formato: 7777-8888
+      ]],
       
-      // Productos - solo IDs
+      // Productos con ID y cantidad solicitada
       products: this.fb.array([
         this.fb.group({
-          id: ['', [Validators.required, Validators.min(1)]]
+          productId: ['', [Validators.required, Validators.min(1)]],
+          requestedQuantity: ['', [Validators.required, Validators.min(1)]]
         })
-      ]),
-      
-      // Totales
-      nonTaxedSales: [0.00, [Validators.required, Validators.min(0)]],
-      exemptSales: [0.00, [Validators.required, Validators.min(0)]],
-      taxedSales: ['', [Validators.required, Validators.min(0)]],
-      iva: [''],
-      perceivedIva: [0.00, [Validators.required, Validators.min(0)]],
-      withheldIva: [0.00, [Validators.required, Validators.min(0)]],
-      totalWithIva: ['', [Validators.required, Validators.min(0)]],
-      
-      // Observaciones
-      observations: ['']
+      ])
     });
     
-    console.log('🏗️ Formulario CREATE inicializado - Campos vacíos con validaciones');
+    console.log('🏗️ Formulario CREATE inicializado - Nueva estructura simplificada');
+    console.log('🔔 Sistema de mensajes de éxito configurado - Duración: 20 segundos');
   }
 
   get products(): FormArray {
@@ -95,7 +79,8 @@ export class FinalConsumerBillCreateComponent {
 
   addProduct(): void {
     this.products.push(this.fb.group({
-      id: ['', [Validators.required, Validators.min(1)]] // ID del producto vacío
+      productId: ['', [Validators.required, Validators.min(1)]],
+      requestedQuantity: ['', [Validators.required, Validators.min(1)]]
     }));
   }
 
@@ -105,7 +90,7 @@ export class FinalConsumerBillCreateComponent {
     }
   }
 
-  // Método para limpiar el formulario completamente
+  // Método para limpiar el formulario completamente (incluyendo mensajes)
   clearForm(): void {
     this.successMsg = '';
     this.errorMsg = '';
@@ -121,6 +106,40 @@ export class FinalConsumerBillCreateComponent {
     this.addProduct();
     
     console.log('🧹 Formulario limpiado');
+  }
+
+  // Método para limpiar solo el formulario SIN tocar los mensajes
+  clearFormOnly(): void {
+    this.formSubmitted = false; // Resetear estado de envío
+    
+    // Resetear formulario
+    this.billForm.reset();
+    
+    // Limpiar productos y agregar uno por defecto
+    while (this.products.length > 0) {
+      this.products.removeAt(0);
+    }
+    this.addProduct();
+    
+    console.log('🧹 Solo formulario limpiado - mensajes conservados');
+  }
+
+  // Método para verificar si un campo tiene errores específicos
+  hasFieldError(fieldName: string, errorType: string): boolean {
+    const field = this.billForm.get(fieldName);
+    return !!(field && field.errors && field.errors[errorType] && (field.touched || this.formSubmitted));
+  }
+
+  // Método para verificar si un campo tiene cualquier error
+  hasFieldErrors(fieldName: string): boolean {
+    const field = this.billForm.get(fieldName);
+    return !!(field && field.errors && (field.touched || this.formSubmitted));
+  }
+
+  // Método para verificar si un campo es válido
+  isFieldValid(fieldName: string): boolean {
+    const field = this.billForm.get(fieldName);
+    return !!(field && field.valid && (field.touched || this.formSubmitted));
   }
 
   // Método simple para verificar si un campo de producto está vacío
@@ -142,6 +161,24 @@ export class FinalConsumerBillCreateComponent {
     return this.formSubmitted && (!value || value === '' || value === null || value === undefined);
   }
 
+  // Método para cerrar mensajes manualmente
+  closeSuccessMessage(): void {
+    this.successMsg = '';
+    console.log('💫 Mensaje de éxito cerrado manualmente');
+  }
+
+  closeErrorMessage(): void {
+    this.errorMsg = '';
+    console.log('💫 Mensaje de error cerrado manualmente');
+  }
+
+  // Método para obtener la longitud actual de un campo
+  getFieldLength(fieldName: string): number {
+    const field = this.billForm.get(fieldName);
+    const value = field?.value;
+    return value ? value.length : 0;
+  }
+
   // Método helper para obtener el mensaje de error
   getFieldErrorMessage(fieldName: string): string {
     const field = this.billForm.get(fieldName);
@@ -161,9 +198,20 @@ export class FinalConsumerBillCreateComponent {
           return 'Formato DUI: 12345678-9';
         case 'companyPhone':
         case 'customerPhone':
-          return 'Formato: +503 1234-5678';
+          return 'Formato: 1234-5678';
         default:
           return 'Formato inválido';
+      }
+    }
+    if (field.errors['maxlength']) {
+      const maxLength = field.errors['maxlength'].requiredLength;
+      switch (fieldName) {
+        case 'customerName':
+          return `El nombre no puede exceder ${maxLength} caracteres`;
+        case 'customerAddress':
+          return `La dirección no puede exceder ${maxLength} caracteres`;
+        default:
+          return `Máximo ${maxLength} caracteres permitidos`;
       }
     }
     if (field.errors['min']) {
@@ -174,7 +222,17 @@ export class FinalConsumerBillCreateComponent {
   }
 
   submit(): void {
-    console.log('🔄 Submit iniciado - estructura LIMPIA sin campos auto-generados');
+    console.log('🔄 Submit iniciado - Nueva estructura simplificada');
+    
+    this.formSubmitted = true; // Marcar que se intentó enviar
+    
+    // Validar formulario
+    if (this.billForm.invalid) {
+      this.errorMsg = '❌ Por favor complete todos los campos requeridos correctamente.';
+      this.loading = false;
+      setTimeout(() => this.errorMsg = '', 5000);
+      return;
+    }
     
     this.successMsg = '';
     this.errorMsg = '';
@@ -182,17 +240,9 @@ export class FinalConsumerBillCreateComponent {
     
     const formData = this.billForm.value;
     
-    // DTO LIMPIO - SIN campos que genera el backend automáticamente
+    // DTO con nueva estructura - incluye campos ocultos con valor 0.0
     const bill: CreateFinalConsumerBillDTO = {
-      // Solo los campos que realmente necesita el backend
       paymentCondition: formData.paymentCondition,
-      
-      // Datos empresa
-      companyName: formData.companyName,
-      companyDocument: formData.companyDocument,
-      companyAddress: formData.companyAddress,
-      companyEmail: formData.companyEmail,
-      companyPhone: formData.companyPhone,
       
       // Datos cliente
       customerName: formData.customerName,
@@ -201,34 +251,46 @@ export class FinalConsumerBillCreateComponent {
       customerEmail: formData.customerEmail,
       customerPhone: formData.customerPhone,
       
-      // Productos - solo IDs
+      // Productos con ID y cantidad
       products: formData.products as ProductBillCreate[],
       
-      // Totales
-      nonTaxedSales: formData.nonTaxedSales,
-      exemptSales: formData.exemptSales,
-      taxedSales: formData.taxedSales,
-      iva: formData.iva,
-      perceivedIva: formData.perceivedIva,
-      withheldIva: formData.withheldIva,
-      totalWithIva: formData.totalWithIva
+      // Campos de impuestos ocultos - siempre se envían con valor 0.0
+      nonTaxedSales: 0.0,
+      exemptSales: 0.0,
+      taxedSales: 0.0,
+      perceivedIva: 0.0,
+      withheldIva: 0.0
     };
     
-    console.log('📤 Enviando factura LIMPIA (sin generationCode, controlNumber, etc):', bill);
+    console.log('📤 Enviando factura con nueva estructura:', bill);
     
     this.billService.createFinalConsumerBill(bill).subscribe({
       next: (response: string) => {
-        console.log('✅ Factura creada exitosamente:', response);
-        this.successMsg = `✅ Factura creada exitosamente. Código de generación: ${response}`;
+        console.log('🎉🎉🎉 ===== FACTURA CREADA EXITOSAMENTE ===== 🎉🎉🎉');
+        console.log('✅ Respuesta del servidor:', response);
+        console.log('✅ Estableciendo mensaje de éxito...');
+        
+        this.successMsg = `🎉 ¡Factura creada exitosamente! 
+La factura ha sido procesada correctamente.`;
         this.formSubmitted = false;
         
-        setTimeout(() => this.successMsg = '', 5000);
+        console.log('✅ Mensaje de éxito establecido:', this.successMsg);
+        
+        // Limpiar SOLO el formulario, mantener los mensajes
+        this.clearFormOnly();
+        
+        console.log('✅ Iniciando timer de 20 segundos para ocultar mensaje...');
+        // El mensaje se mantiene por 20 segundos para ser bien visible
+        setTimeout(() => {
+          this.successMsg = '';
+          console.log('⏰ Mensaje de éxito ocultado después de 20 segundos');
+        }, 20000);
       },
       error: (error: any) => {
         console.error('❌ Error al crear factura:', error);
         
         if (error.status === 400) {
-          this.errorMsg = '❌ Error 400: Datos inválidos. Verifique el token JWT y los datos enviados.';
+          this.errorMsg = '❌ Error 400: Datos inválidos. Verifique los datos enviados.';
         } else if (error.status === 401) {
           this.errorMsg = '❌ Error 401: No autorizado. El token JWT puede haber expirado.';
         } else if (error.status === 500) {

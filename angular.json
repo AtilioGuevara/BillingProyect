@@ -115,7 +115,8 @@
               "buildTarget": "domiex:build:production"
             },
             "development": {
-              "buildTarget": "domiex:build:development"
+              "buildTarget": "domiex:build:development",
+              "proxyConfig": "proxy.conf.json"
             }
           },
           "defaultConfiguration": "development"

@@ -1,38 +1,23 @@
 {
-  "/api/final-consumer/create": {
-    "target": "http://37.60.243.227:8080",
-    "secure": false,
-    "changeOrigin": true,
-    "logLevel": "debug"
-  },
-  "/api/final-consumer/*": {
-    "target": "http://37.60.243.227:8090",
-    "secure": false,
-    "changeOrigin": true,
-    "logLevel": "debug"
-  },
-  "/api/auth/authentication/*": {
-    "target": "https://donpollo123.duckdns.org",
+  "/api/auth/**": {
+    "target": "https://accounts.beckysflorist.site",
     "secure": true,
     "changeOrigin": true,
-    "logLevel": "debug"
+    "logLevel": "debug",
+    "headers": {
+      "Host": "accounts.beckysflorist.site"
+    }
   },
-  "/api/auth/*": {
-    "target": "https://donpollo123.duckdns.org",
+  "/api/bill/**": {
+    "target": "https://bill.beckysflorist.site",
     "secure": true,
     "changeOrigin": true,
-    "logLevel": "debug"
-  },
-  "/api/authentication/*": {
-    "target": "https://donpollo123.duckdns.org",
-    "secure": true,
-    "changeOrigin": true,
-    "logLevel": "debug"
-  },
-  "/api/validation/*": {
-    "target": "https://donpollo123.duckdns.org",
-    "secure": true,
-    "changeOrigin": true,
-    "logLevel": "debug"
+    "logLevel": "debug",
+    "pathRewrite": {
+      "^/api/bill": "/bill/api"
+    },
+    "headers": {
+      "Host": "bill.beckysflorist.site"
+    }
   }
 }

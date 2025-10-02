@@ -2,8 +2,12 @@
 export const environment = {
   production: true,
   
-  // Configuración del VPS: 37.60.243.227 - Puerto 8090
-  apiUrl: 'http://37.60.243.227:8090/api', // Backend Spring Boot en el VPS
+  // 🌐 API Configuration - URLs directas con dominio
+  apiCreateUrl: 'https://bill.beckysflorist.site/api', // CREATE directo
+  apiReadUrl: 'https://bill.beckysflorist.site/api',   // READ directo
+  
+  // 🔑 Authentication API - URL directa del microservicio
+  authApiUrl: 'https://accounts.beckysflorist.site/api/auth',
   
   // Configuración de la base de datos (para referencia, no se usa en frontend)
   database: {
@@ -13,13 +17,13 @@ export const environment = {
   },
   
   // Configuración de seguridad para producción
-  enableHttps: false, // Cambiar a true si configuran SSL/TLS
+  enableHttps: true, // SSL/TLS habilitado para bill.beckysflorist.site
   
   endpoints: {
     finalConsumerBill: {
-      create: '/final-consumer', // POST para crear facturas
-      getAll: '/final-consumer/all', // GET para obtener todas las facturas
-      getByGenerationCode: '/final-consumer/generation-code', // GET por código de generación
+      create: '/create/create',                  // POST bill.beckysflorist.site/api/create/create
+      getAll: '/get/all',                        // GET bill.beckysflorist.site/api/get/all
+      getByGenerationCode: '/get/generation-code', // GET bill.beckysflorist.site/api/get/generation-code/{codigo}
       update: '/final-consumer',
       delete: '/final-consumer'
     }

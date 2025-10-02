@@ -49,7 +49,7 @@ export const routes: Routes = [
   // 🏠 Redirección por defecto a lista de facturas
   {
     path: '',
-    redirectTo: '/final-consumer-bill/list',
+    redirectTo: '/final-consumer-bill/create',
     pathMatch: 'full'
   },
 
@@ -75,6 +75,13 @@ export const routes: Routes = [
     path: 'factura',
     redirectTo: '/final-consumer-bill/create',
     pathMatch: 'full'
+  },
+
+  // 📄 RUTA DINÁMICA PARA VER FACTURA INDIVIDUAL (debe ir al final)
+  {
+    path: ':generationCode',
+    loadComponent: () => import('./features/final-consumer-bill/ViewFinalConsumerBill/final-consumer-bill-view.component').then(m => m.FinalConsumerBillViewComponent),
+    data: { title: 'Ver Factura' }
   },
 
 
