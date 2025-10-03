@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CreateFinalConsumerBillDTO, ProductBillCreate } from '../../../dtos/final-consumer-bill.dto';
 import { FinalConsumerBillService } from '../services/final-consumer-bill.service';
-import { FinalConsumerBillNavComponent } from './final-consumer-bill-nav.component';
+import { FinalConsumerBillNavComponent } from '../../NavComponents/final-consumer-bill-nav.component';
 import { Phone } from 'lucide-angular';
 
 @Component({
@@ -131,11 +131,31 @@ export class FinalConsumerBillCreateComponent {
     return !!(field && field.errors && field.errors[errorType] && (field.touched || this.formSubmitted));
   }
 
+
+
   // Método para verificar si un campo tiene cualquier error
   hasFieldErrors(fieldName: string): boolean {
-    const field = this.billForm.get(fieldName);
-    return !!(field && field.errors && (field.touched || this.formSubmitted));
+  const control = this.billForm.get(fieldName);
+  if (!control || !control.errors) {
+    return false;
   }
+
+  // Validar si el documento tiene un formato incorrecto
+  if (fieldName === 'customerDocument') {
+    const value = control.value || '';
+    const regex = /^\d{8}-?\d$/; // Acepta con o sin guion
+    return !regex.test(value);
+  }
+
+  // Validar si el documento tiene un formato incorrecto
+  if (fieldName === 'customerPhone') {
+    const value = control.value || '';
+    const regex = /^\d{4}-?\d{4}$/; // Acepta con o sin guion
+    return !regex.test(value);
+  }
+
+  return control.invalid && (control.dirty || control.touched);
+}
 
   // Método para verificar si un campo es válido
   isFieldValid(fieldName: string): boolean {
@@ -194,10 +214,11 @@ export class FinalConsumerBillCreateComponent {
     if (field.errors['pattern']) {
       switch (fieldName) {
         case 'companyDocument':
-          return 'Formato: 0614-240116-102-3';
-        case 'customerDocument':
-          return 'Formato DUI: 12345678-9';
+          return 'Formato: 24011612-3';
         case 'companyPhone':
+          return 'Formato: 22223333 o 2222-3333';
+        case 'customerDocument':
+          return 'Formato: 123456789 0 12345678-9';
         case 'customerPhone':
           return 'Formato: 1234-5678';
         default:
@@ -220,6 +241,7 @@ export class FinalConsumerBillCreateComponent {
     }
     
     return 'Campo inválido';
+    
   }
 
   submit(): void {

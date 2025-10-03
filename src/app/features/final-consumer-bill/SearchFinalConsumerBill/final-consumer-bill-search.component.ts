@@ -5,7 +5,7 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FinalConsumerBillDetailDTO } from '../../../dtos/final-consumer-bill.dto';
 import { FinalConsumerBillService } from '../services/final-consumer-bill.service';
-import { FinalConsumerBillNavComponent } from '../CreateFinalConsumerBill/final-consumer-bill-nav.component';
+import { FinalConsumerBillNavComponent } from '../../NavComponents/final-consumer-bill-nav.component';
 
 @Component({
   selector: 'app-final-consumer-bill-search',

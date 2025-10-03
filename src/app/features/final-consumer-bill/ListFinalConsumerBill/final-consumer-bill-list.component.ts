@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FinalConsumerBillService } from '../services/final-consumer-bill.service';
 import { FinalConsumerBillListDTO } from '../../../dtos/final-consumer-bill.dto';
-import { FinalConsumerBillNavComponent } from '../CreateFinalConsumerBill/final-consumer-bill-nav.component';
+import { FinalConsumerBillNavComponent } from '../../NavComponents/final-consumer-bill-nav.component';
 
 @Component({
   selector: 'app-final-consumer-bill-list',
