@@ -9,6 +9,11 @@ export const environment = {
   // 🔑 Authentication API - También vía proxy
   authApiUrl: 'https://accounts.beckysflorist.site/api/auth',
 
+  authEndpoints: {
+    login: '/authentication/login',
+    verify: '/authentication/verify',
+    logout: '/authentication/logout'
+  },
   // Configuración de autenticación real
   authEnabled: true,
   useVpsForAuth: true,

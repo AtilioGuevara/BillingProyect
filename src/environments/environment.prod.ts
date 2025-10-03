@@ -19,6 +19,12 @@ export const environment = {
   // Configuración de seguridad para producción
   enableHttps: true, // SSL/TLS habilitado para bill.beckysflorist.site
   
+  authEndpoints: {
+    login: '/authentication/login',
+    verify: '/authentication/verify',
+    logout: '/authentication/logout'
+  },
+
   endpoints: {
     finalConsumerBill: {
       create: '/create/create',                  // POST bill.beckysflorist.site/api/create/create
