@@ -3,8 +3,8 @@ export const environment = {
   production: true,
   
   // 🌐 API Configuration - URLs directas con dominio
-  apiCreateUrl: 'https://bill.beckysflorist.site/api', // CREATE directo
-  apiReadUrl: 'https://bill.beckysflorist.site/api',   // READ directo
+  apiCreateUrl: 'https://bill.beckysflorist.site/bill/api', // CREATE directo
+  apiReadUrl: 'https://bill.beckysflorist.site/bill/api',   // READ directo
   
   // 🔑 Authentication API - URL directa del microservicio
   authApiUrl: 'https://accounts.beckysflorist.site/api/auth',
@@ -24,8 +24,7 @@ export const environment = {
       create: '/create/create',                  // POST bill.beckysflorist.site/api/create/create
       getAll: '/get/all',                        // GET bill.beckysflorist.site/api/get/all
       getByGenerationCode: '/get/generation-code', // GET bill.beckysflorist.site/api/get/generation-code/{codigo}
-      update: '/final-consumer',
-      delete: '/final-consumer'
+
     }
   },
   

@@ -87,10 +87,10 @@ export class AppComponent {
       
       // Probar endpoints reales del backend de facturación
       const testEndpoints = [
-        '/api/bill/get/all',           // Endpoint principal que sabemos que existe
-        '/api/bill/create/create',     // Endpoint de creación
-        '/api/bill/test',              // Endpoint de prueba (si existe)
-        '/api/bill/health'             // Endpoint de salud (si existe)
+        '/bill/api/get/all',           // Endpoint principal que sabemos que existe
+        '/bill/api/create/create',     // Endpoint de creación
+        '/bill/api/test',              // Endpoint de prueba (si existe)
+        '/bill/api/health'             // Endpoint de salud (si existe)
       ];
       
       let validResponse = null;
@@ -531,8 +531,8 @@ export class AppComponent {
       };
       
       // ✅ ENDPOINT CORREGIDO: El endpoint completo que usa DevBadge
-      const loginUrl = '/api/auth/authentication/login';
-      
+      const loginUrl = `${environment.authApiUrl}${environment.authEndpoints.login}`;
+
       console.log('📤 Enviando petición de login a:', loginUrl);
       console.log('📋 Datos de login:', loginData);
       

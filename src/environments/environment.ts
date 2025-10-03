@@ -3,19 +3,16 @@ export const environment = {
   production: false,
   
   // 🌐 API Configuration - TODO vía proxy para evitar CORS
-  apiCreateUrl: '/api', // CREATE vía proxy (tiene CORS)
-  apiReadUrl: '/api',   // READ vía proxy (cambio importante)
-  
-  // 🔑 Authentication API - También vía proxy
-  authApiUrl: '/api/auth',
+  apiCreateUrl: 'https://bill.beckysflorist.site/bill/api', // CREATE vía proxy (tiene CORS)
+  apiReadUrl: 'https://bill.beckysflorist.site/bill/api',   // READ vía proxy (cambio importante)
 
-  // ⚙️ DevBadge Configuration - HABILITADO para probar login
-  devBadge: {
-    enabled: true, // HABILITADO para probar el nuevo endpoint
-    defaultCredentials: {
-      username: 'dev',        
-      password: 'testpa$$'    
-    }
+  // 🔑 Authentication API - También vía proxy
+  authApiUrl: 'https://accounts.beckysflorist.site/api/auth',
+
+  authEndpoints: {
+    login: '/authentication/login',
+    verify: '/authentication/verify',
+    logout: '/authentication/logout'
   },
   
   // Configuración de autenticación real
@@ -25,11 +22,9 @@ export const environment = {
   endpoints: {
     // Endpoints de autenticación - confirmado que funciona
     finalConsumerBill: {
-      create: '/bill/create/create',              // POST bill.beckysflorist.site/bill/api/create/create
-      getAll: '/bill/get/all',                    // GET bill.beckysflorist.site/bill/api/get/all
-      getByGenerationCode: '/bill/get/generation-code', // GET bill.beckysflorist.site/bill/api/get/generation-code/{codigo}
-      update: '/bill/final-consumer',
-      delete: '/bill/final-consumer'
+      create: '/create/create',              // POST bill.beckysflorist.site/bill/api/create/create
+      getAll: '/get/all',                    // GET bill.beckysflorist.site/bill/api/get/all
+      getByGenerationCode: '/get/generation-code', // GET bill.beckysflorist.site/bill/api/get/generation-code/{codigo}
     }
   }
 };
