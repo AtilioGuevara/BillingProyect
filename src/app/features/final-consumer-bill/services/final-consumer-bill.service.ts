@@ -93,15 +93,6 @@ export class FinalConsumerBillService {
     return this.http.get<FinalConsumerBillListDTO[]>(url, this.getHttpOptions()).pipe(
       tap((bills: FinalConsumerBillListDTO[]) => {
         console.log('📋 FACTURAS OBTENIDAS - TOTAL:', bills.length);
-        bills.forEach((bill, index) => {
-          console.log(`📄 Factura ${index + 1}:`);
-          console.log(`   - Código Generación: "${bill.generationCode}"`);
-          console.log(`   - Número Control: ${bill.controlNumber}`);
-          console.log(`   - Cliente: ${bill.customerName || 'Sin nombre'}`);
-          console.log(`   - Fecha: ${bill.billGenerationDate}`);
-          console.log(`   - Total: $${bill.totalWithIva}`);
-          console.log('   ---');
-        });
       }),
       catchError((error: any) => {
         console.error('❌ ERROR DETALLADO EN GET ALL:');
