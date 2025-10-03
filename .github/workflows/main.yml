@@ -3,7 +3,7 @@ name: Deploy Angular Frontend
 on:
   push:
     branches:
-      - main   # o la rama que quieras usar para deploy
+      - main   # o la rama que uses para deploy
 
 jobs:
   build-and-deploy:
@@ -16,15 +16,25 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20  # ajusta si usas otra versión
+          node-version: 20  # ajusta si tu proyecto usa otra versión
 
       - name: Install dependencies
-        run: npm install
+        run: npm install --legacy-peer-deps
 
       - name: Build Angular app
         run: npm run build -- --configuration production
 
-      - name: Deploy to VPS
+      - name: Clean remote directory
+        uses: appleboy/ssh-action@v1.0.0
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: root
+          key: ${{ secrets.VPS_OKAY }}
+          script: |
+            rm -rf /home/bill/bill/front/*
+            mkdir -p /home/bill/bill/front
+
+      - name: Upload build files to VPS
         uses: appleboy/scp-action@v0.1.7
         with:
           host: ${{ secrets.VPS_HOST }}
@@ -33,3 +43,12 @@ jobs:
           source: "dist/**"
           target: "/home/bill/bill/front"
           strip_components: 1
+
+      - name: Fix permissions (make bill owner)
+        uses: appleboy/ssh-action@v1.0.0
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: root
+          key: ${{ secrets.VPS_OKAY }}
+          script: |
+            chown -R bill:bill /home/bill/bill/front
