@@ -5,6 +5,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { CreateFinalConsumerBillDTO, ProductBillCreate } from '../../../dtos/final-consumer-bill.dto';
 import { FinalConsumerBillService } from '../services/final-consumer-bill.service';
 import { FinalConsumerBillNavComponent } from './final-consumer-bill-nav.component';
+import { Phone } from 'lucide-angular';
 
 @Component({
   selector: 'app-final-consumer-bill-create',
@@ -26,7 +27,7 @@ export class FinalConsumerBillCreateComponent {
     
     // Cliente con formatos específicos
     customerName: 'Ej: José Antonio López (máx. 50 caracteres)',
-    customerDocument: '06873291-2 (DUI de El Salvador)',
+    customerDocument: '12345678-9 (DUI de El Salvador)',
     customerAddress: 'Ej: Col. Escalón, Calle Principal #45, San Salvador (máx. 200 caracteres)',
     customerEmail: 'ejemplo@correo.com',
     customerPhone: '7777-8888 (sin código de país)',
@@ -48,7 +49,7 @@ export class FinalConsumerBillCreateComponent {
       ]],
       customerDocument: ['', [
         Validators.required, 
-        Validators.pattern(/^\d{8}-\d$/) // Formato: 06873291-2
+        Validators.pattern(/^\d{8}-?\d$/) // Formato: 06873291-2 con o sin guion
       ]],
       customerAddress: ['', [
         Validators.required,
@@ -57,7 +58,7 @@ export class FinalConsumerBillCreateComponent {
       customerEmail: ['', [Validators.required, Validators.email]],
       customerPhone: ['', [
         Validators.required,
-        Validators.pattern(/^\d{4}-\d{4}$/) // Formato: 7777-8888
+        Validators.pattern(/^\d{4}-?\d{4}$/) // Formato: 7777-8888 con o sin guion
       ]],
       
       // Productos con ID y cantidad solicitada
@@ -239,6 +240,9 @@ export class FinalConsumerBillCreateComponent {
     this.loading = true;
     
     const formData = this.billForm.value;
+
+    formData.customerDocument = this.formatDocument(formData.customerDocument);
+    formData.customerPhone = this.formatPhone(formData.customerPhone);
     
     // DTO con nueva estructura - incluye campos ocultos con valor 0.0
     const bill: CreateFinalConsumerBillDTO = {
@@ -307,5 +311,21 @@ La factura ha sido procesada correctamente.`;
         this.loading = false;
       }
     });
+  }
+
+  // Función para formatear el documento
+  private formatDocument(document: string): string {
+    if (!document.includes('-')) {
+      return document.slice(0, 8) + '-' + document.slice(8);
+    }
+    return document;
+  }
+
+  // Función para formatear el contacto
+  private formatPhone(phone: string): string {
+    if (!phone.includes('-')) {
+      return phone.slice(0, 4) + '-' + phone.slice(4);
+    }
+    return phone;
   }
 }

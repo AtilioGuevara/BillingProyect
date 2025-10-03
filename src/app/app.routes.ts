@@ -84,6 +84,11 @@ export const routes: Routes = [
     data: { title: 'Ver Factura' }
   },
 
+  //RUTA PARA VER LOS DETALLES DE FACTURAS DESDE LA LISTA
+  {
+  path: 'final-consumer-bill/view/:generationCode',
+  loadComponent: () => import('./features/final-consumer-bill/ViewFinalConsumerBill/final-consumer-bill-view.component').then(m => m.FinalConsumerBillViewComponent)
+  },
 
   //Auth
   { path: 'auth-account-deactivation-basic', component: AuthAccountDeactivationBasicComponent, data: { title: 'AccountDeactivation' } },

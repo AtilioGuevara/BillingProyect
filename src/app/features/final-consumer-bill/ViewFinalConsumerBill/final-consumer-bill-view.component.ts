@@ -33,6 +33,31 @@ export class FinalConsumerBillViewComponent implements OnInit {
     } else {
       this.error = 'No se proporcionó un código de generación válido';
     }
+    if (this.bill) {
+    if (this.bill.customerDocument) {
+      this.bill.customerDocument = this.formatDocument(this.bill.customerDocument);
+    }
+    if (this.bill.customerPhone) {
+      this.bill.customerPhone = this.formatPhone(this.bill.customerPhone);
+    }
+  }
+    
+  }
+
+  private formatDocument(document: string): string {
+  const regex = /^\d{8}-\d$/;
+  if (!regex.test(document)) {
+    return document.slice(0, 8) + '-' + document.slice(8);
+  }
+  return document;
+  }
+
+  private formatPhone(phone: string): string {
+  const regex = /^\d{4}-\d{4}$/;
+  if (!regex.test(phone)) {
+    return phone.slice(0, 4) + '-' + phone.slice(4);
+  }
+    return phone;
   }
 
   private loadBill(generationCode: string): void {

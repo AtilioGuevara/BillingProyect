@@ -40,7 +40,7 @@
               <th class="whitespace-nowrap">Número de Control</th>
               <th class="w-32 whitespace-nowrap">Fecha</th>
               <th class="w-32 whitespace-nowrap">Estado</th>
-              <th class="w-24 whitespace-nowrap">Acciones <hr>(Aun en produccion) </th>
+              <th class="w-24 whitespace-nowrap">Acciones</th>
             </tr>
           </thead>
           <tbody>
@@ -78,15 +78,10 @@
                   {{ getStatusText(bill.status || 'DRAFT') }}
                 </span>
               </td>
-              <td>
-                <div class="flex space-x-1">
-                  <button type="button" class="btn btn-sub-primary btn-sm" title="Ver detalles">
-                    <i class="align-baseline ri-eye-line"></i>
+              <td class="text-center">
+                  <button type="button" class="btn btn-sub-primary btn-sm" title="Ver detalles"
+                  (click)="viewBillDetails(bill.generationCode)"><i class="align-baseline ri-eye-line"></i>
                   </button>
-                  <button type="button" class="btn btn-sub-secondary btn-sm" title="Descargar">
-                    <i class="align-baseline ri-download-line"></i>
-                  </button>
-                </div>
               </td>
             </tr>
           </tbody>

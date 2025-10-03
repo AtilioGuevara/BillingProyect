@@ -46,8 +46,7 @@ export class AppComponent {
     // 📡 Monitorear peticiones de red para debug
     this.setupNetworkMonitoring();
     
-    // 🧪 Agregar función de login manual para testing
-    this.addTestLoginFunction();
+
   }
 
   /**
@@ -150,25 +149,21 @@ export class AppComponent {
   }
 
   /**
-   * ✅ Establecer estado de autenticación válido
+   * Establece estado de autenticación válido
    */
   private setAuthenticationState(isAuthenticated: boolean) {
     if (isAuthenticated) {
-      console.log('✅ USUARIO AUTENTICADO - Estado mantenido después del refresh');
-      // Aquí puedes agregar lógica adicional como:
-      // - Actualizar el estado global de autenticación
-      // - Mostrar elementos de UI para usuarios autenticados
-      // - Redirigir a la página principal si está en login
+      console.log(' USUARIO AUTENTICADO - Estado mantenido después del refresh');
     } else {
-      console.log('🚫 Usuario no autenticado - se requiere login');
+      console.log(' Usuario no autenticado - se requiere login');
     }
   }
 
   /**
-   * 🧹 Limpiar estado de autenticación inválido
+   * Limpia estado de autenticación inválido
    */
   private clearAuthenticationState() {
-    console.log('🧹 Limpiando estado de autenticación...');
+    console.log(' Limpiando estado de autenticación...');
     
     // Eliminar token de las cookies
     document.cookie = 'token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
@@ -177,23 +172,15 @@ export class AppComponent {
   }
 
   /**
-   * 🔄 Método alternativo - ya no necesario con la nueva implementación
-   */
-  async tryBillBackendAlternatives(token: string) {
-    // Este método ya no es necesario porque usamos el proxy
-    console.log('ℹ️ Método alternativo no requerido con proxy configurado');
-  }
-
-  /**
-   * 🍪 Monitorear cookies para debug
+   * Monitoreo cookies para debug
    */
   private monitorCookies() {
-    console.log('🍪 ESTADO ACTUAL DE COOKIES:');
-    console.log('📋 Todas las cookies:', document.cookie);
+    console.log('ESTADO ACTUAL DE COOKIES:');
+    console.log('Todas las cookies:', document.cookie);
     
-    // 🔍 ANÁLISIS DETALLADO DE COOKIES
+    // ANÁLISIS DETALLADO DE COOKIES
     const allCookies = document.cookie.split(';');
-    console.log('📊 Cookies individuales:');
+    console.log('Cookies individuales:');
     allCookies.forEach((cookie, index) => {
       const [name, value] = cookie.trim().split('=');
       console.log(`${index + 1}. "${name}" = "${value?.substring(0, 30)}${value?.length > 30 ? '...' : ''}"`);
@@ -202,21 +189,21 @@ export class AppComponent {
     // Verificar específicamente la cookie 'token'
     const token = getCookie('token');
     if (token) {
-      console.log('✅ Cookie token encontrada con getCookie():', token.substring(0, 30) + '...');
+      console.log('Cookie token encontrada con getCookie():', token.substring(0, 30) + '...');
     } else {
-      console.log('❌ Cookie token NO encontrada con getCookie()');
+      console.log('Cookie token NO encontrada con getCookie()');
       
-      // 🔧 Debug adicional: buscar manualmente
-      console.log('🔧 Buscando token manualmente en document.cookie...');
+      //  Debug adicional: buscar manualmente
+      console.log(' Buscando token manualmente en document.cookie...');
       const manualSearch = document.cookie.includes('token');
-      console.log('🔍 ¿Contiene "token"?', manualSearch);
+      console.log('¿Contiene "token"?', manualSearch);
       
       if (manualSearch) {
-        console.log('⚠️ La cookie existe pero getCookie() no la encuentra');
+        console.log('La cookie existe pero getCookie() no la encuentra');
         // Intentar extraer manualmente
         const match = document.cookie.match(/token=([^;]*)/);
         if (match) {
-          console.log('🎯 Token extraído manualmente:', match[1].substring(0, 30) + '...');
+          console.log('Token extraído manualmente:', match[1].substring(0, 30) + '...');
           // Usar este token para verificar
           this.verifyTokenManually(match[1]);
         }
@@ -228,27 +215,27 @@ export class AppComponent {
     setInterval(() => {
       const currentToken = getCookie('token');
       if (currentToken && currentToken !== lastSeenToken) {
-        console.log('🔄 ¡NUEVA COOKIE TOKEN DETECTADA!');
-        console.log('🆕 Nuevo token:', currentToken.substring(0, 30) + '...');
+        console.log('¡NUEVA COOKIE TOKEN DETECTADA!');
+        console.log('Nuevo token:', currentToken.substring(0, 30) + '...');
         lastSeenToken = currentToken; // Actualizar el token visto para evitar loop
         // Solo verificar si realmente es un token diferente
         if (currentToken !== token) {
-          console.log('📝 Token realmente diferente, verificando...');
+          console.log('Token realmente diferente, verificando...');
           this.verifyTokenOnStartup();
         } else {
-          console.log('📋 Token igual al anterior, no verificando');
+          console.log('Token igual al anterior, no verificando');
         }
       }
     }, 10000);
     
-    console.log('🔍 Monitor de cookies iniciado - revisando cada 5 segundos');
+    console.log('Monitor de cookies iniciado - revisando cada 5 segundos');
   }
 
   /**
-   * 📡 Configurar monitoreo de peticiones de red para debug
+   * Configurar monitoreo de peticiones de red para debug
    */
   private setupNetworkMonitoring() {
-    console.log('📡 Configurando monitoreo de peticiones de red...');
+    console.log('Configurando monitoreo de peticiones de red...');
     
     // Interceptar peticiones fetch (si DevBadge usa fetch)
     const originalFetch = window.fetch;
@@ -256,20 +243,20 @@ export class AppComponent {
       const [url, options] = args;
       
       if (typeof url === 'string' && url.includes('/auth')) {
-        console.log('🔍 PETICIÓN DE AUTH DETECTADA:', url);
-        console.log('📤 Opciones de petición:', options);
+        console.log('PETICIÓN DE AUTH DETECTADA:', url);
+        console.log('Opciones de petición:', options);
       }
       
       const response = await originalFetch(...args);
       
       if (typeof url === 'string' && url.includes('/auth')) {
-        console.log('📥 RESPUESTA DE AUTH:', response.status, response.statusText);
+        console.log('RESPUESTA DE AUTH:', response.status, response.statusText);
         
         if (response.ok && url.includes('login')) {
-          console.log('✅ LOGIN EXITOSO DETECTADO!');
+          console.log('LOGIN EXITOSO DETECTADO!');
           // Esperar un poco para que se guarde la cookie y luego verificar
           setTimeout(() => {
-            console.log('🔄 Verificando token después del login...');
+            console.log('Verificando token después del login...');
             this.verifyTokenOnStartup();
           }, 1000);
         }
@@ -278,14 +265,14 @@ export class AppComponent {
       return response;
     };
     
-    console.log('📡 Monitoreo de red configurado');
+    console.log('Monitoreo de red configurado');
   }
 
   /**
    * 🎯 Verificar token extraído manualmente
    */
   async verifyTokenManually(token: string) {
-    console.log('🎯 Verificando token extraído manualmente...');
+    console.log('Verificando token extraído manualmente...');
     
     try {
       const headers = new HttpHeaders({
@@ -293,12 +280,12 @@ export class AppComponent {
         'Content-Type': 'application/json'
       });
 
-      console.log('📡 Enviando petición con token manual...');
+      console.log('Enviando petición con token manual...');
       
       const response = await this.http.get('/api/bill/get/all', { headers }).toPromise();
       
-      console.log('✅ ¡TOKEN MANUAL FUNCIONA! - Usuario autenticado');
-      console.log('📋 Respuesta:', response);
+      console.log('¡TOKEN MANUAL FUNCIONA! - Usuario autenticado');
+      console.log('Respuesta:', response);
       
       this.setAuthenticationState(true);
       
@@ -308,10 +295,10 @@ export class AppComponent {
   }
 
   /**
-   * 🚀 Verificar token desde localStorage
+   *  Verificar token desde localStorage
    */
   async verifyTokenWithLocalStorage(token: string) {
-    console.log('🚀 Verificando token desde localStorage...');
+    console.log('Verificando token desde localStorage...');
     
     try {
       const headers = new HttpHeaders({
@@ -321,13 +308,13 @@ export class AppComponent {
 
       const response = await this.http.get('/api/bill/get/all', { headers }).toPromise();
       
-      console.log('✅ ¡TOKEN DE LOCALSTORAGE FUNCIONA! - Usuario autenticado');
-      console.log('📋 Respuesta:', response);
+      console.log('¡TOKEN DE LOCALSTORAGE FUNCIONA! - Usuario autenticado');
+      console.log('Respuesta:', response);
       
       this.setAuthenticationState(true);
       
     } catch (error: any) {
-      console.error('❌ Token de localStorage también falló:', error);
+      console.error('Token de localStorage también falló:', error);
     }
   }
 
@@ -501,21 +488,6 @@ export class AppComponent {
     this.defaultWishListDatas.forEach(wishlistData => {
       this.store.dispatch(addToWishlist({ product: wishlistData }));
     });
-  }
-
-  /**
-   * 🧪 Agregar función para probar login manual
-   */
-  private addTestLoginFunction() {
-    // Agregar listener global para probar login con Ctrl+L
-    document.addEventListener('keydown', (event) => {
-      if (event.ctrlKey && event.key === 'l') {
-        event.preventDefault();
-        this.testManualLogin();
-      }
-    });
-    
-    console.log('🧪 Presiona Ctrl+L para probar login manual');
   }
 
   /**

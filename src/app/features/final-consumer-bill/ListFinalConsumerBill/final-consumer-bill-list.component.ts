@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {Router} from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FinalConsumerBillService } from '../services/final-consumer-bill.service';
@@ -17,7 +18,22 @@ export class FinalConsumerBillListComponent implements OnInit {
   loading = false;
   errorMsg = '';
 
-  constructor(private billService: FinalConsumerBillService) {}
+  constructor(private billService: FinalConsumerBillService, private router: Router) {}
+
+    // Método para navegar a la vista de detalles
+  viewBillDetails(generationCode: string): void {
+    console.log('🔍 Navegando a detalles de factura:', generationCode);
+    this.router.navigate(['/final-consumer-bill/view', generationCode]);
+  }
+
+  // Método alternativo si tienes el objeto completo de la factura
+  viewBillDetailsFromObject(bill: any): void {
+    if (bill.generationCode) {
+      this.viewBillDetails(bill.generationCode);
+    } else {
+      console.error('❌ La factura no tiene código de generación:', bill);
+    }
+  }
 
   ngOnInit(): void {
     this.loadBills();

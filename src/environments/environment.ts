@@ -14,7 +14,6 @@ export const environment = {
     verify: '/authentication/verify',
     logout: '/authentication/logout'
   },
-  
   // Configuración de autenticación real
   authEnabled: true,
   useVpsForAuth: true,
