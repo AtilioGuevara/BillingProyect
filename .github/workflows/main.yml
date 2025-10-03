@@ -1,0 +1,35 @@
+name: Deploy Angular Frontend
+
+on:
+  push:
+    branches:
+      - main   # o la rama que quieras usar para deploy
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20  # ajusta si usas otra versión
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build Angular app
+        run: npm run build -- --configuration production
+
+      - name: Deploy to VPS
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: root
+          key: ${{ secrets.VPS_OKAY }}
+          source: "dist/**"
+          target: "/home/bill/bill/front"
+          strip_components: 1
