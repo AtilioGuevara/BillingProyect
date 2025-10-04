@@ -3,27 +3,32 @@ name: Deploy Angular Frontend
 on:
   push:
     branches:
-      - main   # o la rama que uses para deploy
+      - main # Cambia si usas otra rama para despliegues
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
+      # 1. Clonar el repositorio
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      # 2. Configurar Node.js
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20  # ajusta si tu proyecto usa otra versión
+          node-version: 20 # Ajusta según la versión de Node.js que uses
 
+      # 3. Instalar dependencias
       - name: Install dependencies
         run: npm install --legacy-peer-deps
 
+      # 4. Construir la aplicación Angular
       - name: Build Angular app
         run: npm run build -- --configuration production
 
+      # 5. Limpiar el directorio remoto en el VPS
       - name: Clean remote directory
         uses: appleboy/ssh-action@v1.0.0
         with:
@@ -34,6 +39,7 @@ jobs:
             rm -rf /home/bill/bill/front/*
             mkdir -p /home/bill/bill/front
 
+      # 6. Subir los archivos generados al VPS
       - name: Upload build files to VPS
         uses: appleboy/scp-action@v0.1.7
         with:
@@ -44,6 +50,7 @@ jobs:
           target: "/home/bill/bill/front"
           strip_components: 1
 
+      # 7. Ajustar permisos en el servidor remoto
       - name: Fix permissions (make bill owner)
         uses: appleboy/ssh-action@v1.0.0
         with:
