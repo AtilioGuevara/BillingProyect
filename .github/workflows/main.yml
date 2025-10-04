@@ -19,14 +19,15 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20 # Ajusta según la versión de Node.js que uses
+          cache: 'yarn' # Habilitar caché para Yarn
 
-      # 3. Instalar dependencias
+      # 3. Instalar dependencias con Yarn
       - name: Install dependencies
-        run: npm install --legacy-peer-deps
+        run: yarn install --frozen-lockfile
 
       # 4. Construir la aplicación Angular
       - name: Build Angular app
-        run: npm run build -- --configuration production
+        run: yarn build --configuration production
 
       # 5. Limpiar el directorio remoto en el VPS
       - name: Clean remote directory
@@ -46,7 +47,7 @@ jobs:
           host: ${{ secrets.VPS_HOST }}
           username: root
           key: ${{ secrets.VPS_OKAY }}
-          source: "dist/**"
+          source: "dist/domiex/**"
           target: "/home/bill/bill/front"
           strip_components: 1
 
