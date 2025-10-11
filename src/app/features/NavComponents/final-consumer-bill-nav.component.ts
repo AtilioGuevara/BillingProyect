@@ -12,7 +12,7 @@ import { CommonModule } from '@angular/common';
         <div class="items-center gap-3 md:flex">
           <div class="grow flex items-center space-x-2">
             <span class="text-xl">📄</span>
-            <h6 class="mb-3 md:mb-0">Gestión de Facturas Consumidor Final</h6>
+            <h6 class="mb-3 md:mb-0">Gestión de Facturas</h6>
           </div>
           <div class="flex flex-wrap items-center gap-2 shrink-0">
             <button 
