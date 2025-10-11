@@ -380,15 +380,13 @@ La factura ha sido procesada correctamente.`;
   }
 
 
-
-
-
   // Cargar todos los productos activos al inicializar
   loadActiveProducts(): void {
     this.billService.getAllActiveProducts().subscribe(
       (products: any[]) => {
         this.productsList = products;
         console.log(`✅ ${products.length} productos activos cargados`);
+        console.log('Productos cargados desde el backend:', products); // Verificar la respuesta
       },
       (error: any) => {
         console.error('Error al cargar productos activos:', error);

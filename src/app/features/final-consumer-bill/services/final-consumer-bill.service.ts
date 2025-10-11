@@ -214,6 +214,8 @@ export class FinalConsumerBillService {
 
   // GET: Obtener todos los productos activos (para cargar inicialmente)
   getAllActiveProducts(): Observable<any[]> {
-    return this.searchActiveProductsByName('');
-  }
+   return this.http.get<any[]>(`${environment.inventoryApiUrl}`).pipe(
+    map(products => products.filter(product => product.active)) // Filtrar solo productos activos
+  );
+}
 }

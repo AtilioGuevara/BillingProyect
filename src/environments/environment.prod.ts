@@ -5,6 +5,9 @@ export const environment = {
   // 🌐 API Configuration - URLs directas con dominio
   apiCreateUrl: 'https://bill.beckysflorist.site/bill/api', // CREATE directo
   apiReadUrl: 'https://bill.beckysflorist.site/bill/api',   // READ directo
+
+  //API de Inventario - Directo sin proxy
+  inventoryApiUrl: 'https://endpoints-production-4a52.up.railway.app/api/productos',
   
   // 🔑 Authentication API - URL directa del microservicio
   authApiUrl: 'https://accounts.beckysflorist.site/api/auth',
