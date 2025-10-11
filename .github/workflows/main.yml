@@ -1,62 +1,29 @@
-name: Deploy Angular Frontend
+name: Deploy to VPS
 
 on:
   push:
     branches:
-      - main # Cambia si usas otra rama para despliegues
+      - main
 
 jobs:
-  build-and-deploy:
+  build:
     runs-on: ubuntu-latest
 
     steps:
-      # 1. Clonar el repositorio
-      - name: Checkout repository
-        uses: actions/checkout@v4
+    - name: Checkout code
+      uses: actions/checkout@v3
 
-      # 2. Configurar Node.js
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20 # Ajusta según la versión de Node.js que uses
-          cache: 'yarn' # Habilitar caché para Yarn
+    - name: Install dependencies
+      run: yarn install
 
-      # 3. Instalar dependencias con Yarn
-      - name: Install dependencies
-        run: yarn install --frozen-lockfile
+    - name: Build Angular app
+      run: yarn build
 
-      # 4. Construir la aplicación Angular
-      - name: Build Angular app
-        run: yarn build --configuration production
-
-      # 5. Limpiar el directorio remoto en el VPS
-      - name: Clean remote directory
-        uses: appleboy/ssh-action@v1.0.0
-        with:
-          host: ${{ secrets.VPS_HOST }}
-          username: root
-          key: ${{ secrets.VPS_OKAY }}
-          script: |
-            rm -rf /home/bill/bill/front/*
-            mkdir -p /home/bill/bill/front
-
-      # 6. Subir los archivos generados al VPS
-      - name: Upload build files to VPS
-        uses: appleboy/scp-action@v0.1.7
-        with:
-          host: ${{ secrets.VPS_HOST }}
-          username: root
-          key: ${{ secrets.VPS_OKAY }}
-          source: "dist/domiex/**"
-          target: "/home/bill/bill/front"
-          strip_components: 1
-
-      # 7. Ajustar permisos en el servidor remoto
-      - name: Fix permissions (make bill owner)
-        uses: appleboy/ssh-action@v1.0.0
-        with:
-          host: ${{ secrets.VPS_HOST }}
-          username: root
-          key: ${{ secrets.VPS_OKAY }}
-          script: |
-            chown -R bill:bill /home/bill/bill/front
+    - name: Deploy to VPS
+      uses: appleboy/scp-action@v0.1.1
+      with:
+        host: ${{ secrets.VPS_HOST }}
+        username: ${{ secrets.VPS_USER }}
+        password: ${{ secrets.VPS_PASSWORD }}
+        source: "dist/"
+        target: "/home/bill/bill/"
