@@ -1,6 +1,6 @@
 import { Injectable, isDevMode } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { Observable, catchError, tap, throwError, of } from 'rxjs';
+import { Observable, catchError, tap, throwError, of, map } from 'rxjs';
 import { 
   CreateFinalConsumerBillDTO, 
   FinalConsumerBillListDTO, 
@@ -174,5 +174,46 @@ export class FinalConsumerBillService {
         return throwError(() => directError);
       })
     );
+  }
+
+  // GET: Buscar productos activos por nombre en el inventario
+  searchActiveProductsByName(name: string = ''): Observable<any[]> {
+    const url = `${environment.inventoryApiUrl}`;
+    let params = new HttpParams();
+    
+    // Solo productos activos
+    params = params.set('active', 'true');
+    
+    // Si hay un nombre para filtrar, agregarlo
+    if (name.trim()) {
+      params = params.set('name', name.trim());
+    }
+
+    console.log('🔍 BUSCANDO PRODUCTOS ACTIVOS EN EL INVENTARIO');
+    console.log('🔍 URL:', url);
+    console.log('🔍 Parámetros:', params.toString());
+    console.log('🔍 Solo productos activos (active=true)');
+
+    return this.http.get<any[]>(url, { 
+      params,
+      ...this.getHttpOptions() 
+    }).pipe(
+      tap((products) => {
+        const activeProducts = products.filter(p => p.active === true);
+        console.log('✅ PRODUCTOS ACTIVOS ENCONTRADOS:', activeProducts.length);
+        console.log('✅ PRODUCTOS:', activeProducts);
+      }),
+      // Filtrar solo productos activos por si el backend no lo hace
+      map((products: any[]) => products.filter((product: any) => product.active === true)),
+      catchError((error) => {
+        console.error('❌ ERROR AL BUSCAR PRODUCTOS ACTIVOS:', error);
+        return throwError(() => error);
+      })
+    );
+  }
+
+  // GET: Obtener todos los productos activos (para cargar inicialmente)
+  getAllActiveProducts(): Observable<any[]> {
+    return this.searchActiveProductsByName('');
   }
 }

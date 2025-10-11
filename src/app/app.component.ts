@@ -88,8 +88,6 @@ export class AppComponent {
       const testEndpoints = [
         '/bill/api/get/all',           // Endpoint principal que sabemos que existe
         '/bill/api/create/create',     // Endpoint de creación
-        '/bill/api/test',              // Endpoint de prueba (si existe)
-        '/bill/api/health'             // Endpoint de salud (si existe)
       ];
       
       let validResponse = null;

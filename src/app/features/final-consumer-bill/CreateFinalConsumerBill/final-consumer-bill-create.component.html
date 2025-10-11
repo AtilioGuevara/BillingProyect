@@ -170,12 +170,21 @@
                 <span class="font-semibold text-gray-600">{{ i + 1 }}</span>
               </div>
               
-              <!-- ID del Producto -->
+              <!-- Lista de Productos de Inventario -->
               <div class="md:col-span-5">
-                <label class="form-label text-sm">ID del Producto *</label>
-                <input type="number" formControlName="productId" class="form-input" [placeholder]="placeholders.productId" min="1">
+                <label class="form-label text-sm">Seleccionar Producto (Solo Activos) *</label>
+                <select 
+                  formControlName="productId" 
+                  class="form-input"
+                  (change)="onProductSelected($event, i)">
+                  <option value="">-- Seleccione un producto --</option>
+                  <option *ngFor="let product of productsList" 
+                          [value]="product.id">
+                    {{ product.name }} - ID: {{ product.id }}{{ product.price ? ' - $' + product.price : '' }}
+                  </option>
+                </select>
                 <div *ngIf="isProductFieldEmpty(i, 'productId')" class="text-red-500 text-sm mt-1">
-                  ID del producto es requerido
+                  Debe seleccionar un producto
                 </div>
               </div>
               

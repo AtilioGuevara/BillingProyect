@@ -20,7 +20,7 @@ import { CommonModule } from '@angular/common';
               [class]="isCreateActive() ? 'btn btn-primary' : 'btn btn-sub-gray'"
               class="transition-all duration-300">
               <i class="align-baseline ri-add-line"></i>
-              Crear Factura
+              Nueva Factura
             </button>
             
             <button 

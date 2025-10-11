@@ -5,7 +5,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { CreateFinalConsumerBillDTO, ProductBillCreate } from '../../../dtos/final-consumer-bill.dto';
 import { FinalConsumerBillService } from '../services/final-consumer-bill.service';
 import { FinalConsumerBillNavComponent } from '../../NavComponents/final-consumer-bill-nav.component';
-import { Phone } from 'lucide-angular';
 
 @Component({
   selector: 'app-final-consumer-bill-create',
@@ -37,6 +36,8 @@ export class FinalConsumerBillCreateComponent {
     requestedQuantity: 'Ej: 2'
   };
 
+  productsList: any[] = [];
+
   constructor(private fb: FormBuilder, private billService: FinalConsumerBillService) {
     this.billForm = this.fb.group({
       // Campos principales
@@ -64,11 +65,13 @@ export class FinalConsumerBillCreateComponent {
       // Productos con ID y cantidad solicitada
       products: this.fb.array([
         this.fb.group({
-          productId: ['', [Validators.required, Validators.min(1)]],
+          productId: ['', [Validators.required]], // ID del producto seleccionado
           requestedQuantity: ['', [Validators.required, Validators.min(1)]]
         })
       ])
     });
+    
+    this.loadActiveProducts();
     
     console.log('🏗️ Formulario CREATE inicializado - Nueva estructura simplificada');
     console.log('🔔 Sistema de mensajes de éxito configurado - Duración: 20 segundos');
@@ -349,5 +352,47 @@ La factura ha sido procesada correctamente.`;
       return phone.slice(0, 4) + '-' + phone.slice(4);
     }
     return phone;
+  }
+
+  // Método para manejar la selección de producto desde el dropdown
+  onProductSelected(event: Event, index: number): void {
+    const target = event.target as HTMLSelectElement;
+    const productId = target.value;
+    
+    if (productId) {
+      // Encontrar el producto seleccionado en la lista
+      const selectedProduct = this.productsList.find(p => p.id.toString() === productId);
+      
+      if (selectedProduct) {
+        console.log('🎯 PRODUCTO SELECCIONADO:', selectedProduct);
+        console.log('✅ ID del producto seleccionado:', selectedProduct.id);
+        console.log('✅ Nombre del producto:', selectedProduct.name);
+        console.log('✅ Precio del producto:', selectedProduct.price || 'No especificado');
+      }
+    } else {
+      console.log('❌ No se seleccionó ningún producto');
+    }
+  }
+
+  handleInputEvent(event: Event): string {
+    const inputElement = event.target as HTMLInputElement;
+    return inputElement?.value || '';
+  }
+
+
+
+
+
+  // Cargar todos los productos activos al inicializar
+  loadActiveProducts(): void {
+    this.billService.getAllActiveProducts().subscribe(
+      (products: any[]) => {
+        this.productsList = products;
+        console.log(`✅ ${products.length} productos activos cargados`);
+      },
+      (error: any) => {
+        console.error('Error al cargar productos activos:', error);
+      }
+    );
   }
 }
