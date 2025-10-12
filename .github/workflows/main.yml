@@ -10,8 +10,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+
     - name: Checkout code
       uses: actions/checkout@v3
+
+    - name: Clear Yarn Cache
+      run: yarn cache clean 
 
     - name: Install dependencies
       run: yarn install
@@ -26,4 +30,4 @@ jobs:
         username: ${{ secrets.VPS_USER }}
         password: ${{ secrets.VPS_PASSWORD }}
         source: "dist/"
-        target: "/home/bill/bill/"
+        target: "/var/www/html/"
