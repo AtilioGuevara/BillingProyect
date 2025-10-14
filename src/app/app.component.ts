@@ -45,7 +45,9 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-    // NO verificar autenticación automáticamente - el usuario usará el botón Login/Logout en navbar
+    // Verificar si regresamos del login exitoso
+    this.checkLoginReturn();
+    
     console.log('🎉 App iniciada - Login manual disponible en navbar');
     
     // Configurar datos de ejemplo
@@ -113,6 +115,36 @@ export class AppComponent implements OnInit {
     // Access the route data (title) and set it using TitleService
     if (route.snapshot.data['title']) {
       this.titleService.setTitle(route.snapshot.data['title']);
+    }
+  }
+
+  /**
+   * Verificar si acabamos de regresar del login exitoso
+   */
+  private checkLoginReturn() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const loginSuccess = urlParams.get('login');
+    
+    if (loginSuccess === 'success') {
+      console.log('🔄 Regresamos del login exitoso - verificando autenticación...');
+      
+      // Dar tiempo para que se procesen las cookies del login externo
+      setTimeout(() => {
+        if (this.authService.isAuthenticated()) {
+          console.log('✅ Login exitoso detectado - redirigiendo a facturación');
+          
+          // Limpiar el parámetro de la URL
+          const cleanUrl = window.location.protocol + "//" + 
+                          window.location.host + 
+                          window.location.pathname;
+          window.history.replaceState({}, document.title, cleanUrl);
+          
+          // Redirigir a la lista de facturas
+          this.router.navigate(['/final-consumer-bill/list']);
+        } else {
+          console.log('❌ No se detectó autenticación válida después del login');
+        }
+      }, 1000); // Dar tiempo para procesar cookies
     }
   }
 
