@@ -10,16 +10,37 @@ export class AuthService {
 
   isAuthenticated(): boolean {
     // Verificar si hay token en localStorage o cookies
-    return !!this.getToken();
+    const token = this.getToken();
+    
+    // Debug: mostrar información sobre cookies disponibles
+    if (!token) {
+      console.log('🔍 Debug - Cookies disponibles:', document.cookie);
+      console.log('🔍 Debug - LocalStorage authToken:', localStorage.getItem('authToken'));
+    }
+    
+    return !!token;
   }
 
   getToken(): string | null {
     // Primero intentar obtener de localStorage
     const localToken = localStorage.getItem('authToken');
-    if (localToken) return localToken;
+    if (localToken && localToken !== 'null' && localToken !== 'undefined') {
+      return localToken;
+    }
     
-    // Luego intentar obtener de cookies
-    return this.getCookie('token');
+    // Luego intentar obtener de cookies con diferentes nombres posibles
+    const cookieNames = ['token', 'authToken', 'auth_token', 'access_token', 'jwt'];
+    
+    for (const cookieName of cookieNames) {
+      const token = this.getCookie(cookieName);
+      if (token && token !== 'null' && token !== 'undefined') {
+        // Si encontramos un token válido en cookies, también guardarlo en localStorage
+        localStorage.setItem('authToken', token);
+        return token;
+      }
+    }
+    
+    return null;
   }
 
   private getCookie(name: string): string | null {
@@ -28,7 +49,10 @@ export class AuthService {
     for(let i = 0; i < ca.length; i++) {
       let c = ca[i];
       while (c.charAt(0) === ' ') c = c.substring(1, c.length);
-      if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
+      if (c.indexOf(nameEQ) === 0) {
+        const value = c.substring(nameEQ.length, c.length);
+        return value && value !== 'undefined' && value !== 'null' ? value : null;
+      }
     }
     return null;
   }

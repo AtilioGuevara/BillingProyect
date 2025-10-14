@@ -67,12 +67,21 @@ export class AppComponent implements OnInit {
    * Verificar si el usuario está autenticado
    */
   private checkAuthentication() {
-    if (!this.authService.isAuthenticated()) {
-      // Solo redirigir en producción, no en desarrollo
-      if (window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1') {
-        this.authService.redirectToLogin();
-      }
+    // No verificar autenticación si estamos en la página de callback
+    const currentPath = window.location.pathname;
+    if (currentPath.includes('/auth/callback')) {
+      return; // Dejar que el callback component maneje la autenticación
     }
+    
+    // Esperar un momento para que se procesen las cookies si acabamos de regresar del login
+    setTimeout(() => {
+      if (!this.authService.isAuthenticated()) {
+        // Solo redirigir en producción, no en desarrollo
+        if (window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1') {
+          this.authService.redirectToLogin();
+        }
+      }
+    }, 500); // Dar tiempo para que se procesen las cookies
   }
 
   private setTitle() {
