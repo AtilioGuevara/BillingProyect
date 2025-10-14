@@ -108,6 +108,68 @@ export class AuthService {
     window.location.href = fullLoginUrl;
   }
 
+  /**
+   * Monitorear cookies después de redirigir al login
+   * Esto detectará cuando tu compañero establezca la cookie
+   */
+  startLoginMonitoring(): void {
+    console.log('🔄 Iniciando monitoreo de login...');
+    
+    // Marcar que estamos esperando un login
+    sessionStorage.setItem('waitingForLogin', 'true');
+    
+    // Redirigir al login de tu compañero
+    this.redirectToLogin();
+  }
+
+  /**
+   * Verificar periódicamente si apareció la cookie del login
+   */
+  checkForLoginSuccess(): void {
+    const waitingForLogin = sessionStorage.getItem('waitingForLogin');
+    
+    if (waitingForLogin === 'true') {
+      console.log('👀 Monitoreando cookies de login...');
+      
+      const interval = setInterval(() => {
+        console.log('🔍 Verificando cookies...', this.getAllCookies());
+        
+        if (this.isAuthenticated()) {
+          console.log('✅ ¡Cookie de login detectada!');
+          
+          // Limpiar el monitoreo
+          sessionStorage.removeItem('waitingForLogin');
+          clearInterval(interval);
+          
+          // Redirigir a facturas
+          window.location.href = '/final-consumer-bill/list';
+        }
+      }, 1000); // Verificar cada segundo
+      
+      // Timeout después de 2 minutos
+      setTimeout(() => {
+        if (sessionStorage.getItem('waitingForLogin') === 'true') {
+          console.log('⏰ Timeout de login - deteniendo monitoreo');
+          sessionStorage.removeItem('waitingForLogin');
+          clearInterval(interval);
+        }
+      }, 120000); // 2 minutos
+    }
+  }
+
+  private getAllCookies(): any {
+    const cookies: any = {};
+    if (document.cookie) {
+      document.cookie.split(';').forEach(cookie => {
+        const [name, value] = cookie.trim().split('=');
+        if (name && value) {
+          cookies[name] = value.substring(0, 20) + '...';
+        }
+      });
+    }
+    return cookies;
+  }
+
   // Método para procesar el token cuando el usuario regrese del login
   processReturnFromLogin(): void {
     console.log('🔄 Procesando retorno del login externo...');

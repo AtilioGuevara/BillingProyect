@@ -45,8 +45,8 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-    // Verificar si regresamos del login exitoso
-    this.checkLoginReturn();
+    // Iniciar verificación de cookies al cargar la app
+    this.authService.checkForLoginSuccess();
     
     console.log('🎉 App iniciada - Login manual disponible en navbar');
     

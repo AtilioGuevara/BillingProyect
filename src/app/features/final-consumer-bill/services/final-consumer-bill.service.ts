@@ -29,9 +29,7 @@ export class FinalConsumerBillService {
   }
 
   /**
-   * Obtiene las opciones HTTP apropiadas según el modo (desarrollo/producción)
-   * En desarrollo: agrega Bearer token desde cookie
-   * En producción: las cookies httpOnly se manejan automáticamente
+   * Obtiene las opciones HTTP con withCredentials siempre activo
    */
   private getHttpOptions(): { headers: HttpHeaders, withCredentials: boolean } {
     let headers = new HttpHeaders({
@@ -39,24 +37,25 @@ export class FinalConsumerBillService {
       'Accept': 'application/json'
     });
 
-    // En producción, las cookies httpOnly se manejan automáticamente
-    if (!isDevMode()) {
-      console.log('🚀 Modo producción - usando cookies httpOnly automáticas');
-      return { headers, withCredentials: true };
-    }
+    // IMPORTANTE: Siempre usar withCredentials para que las cookies se envíen
+    const options = { 
+      headers, 
+      withCredentials: true  // 🎯 ESTO es lo que necesitas
+    };
 
-    // En modo desarrollo, necesitamos agregar Bearer token desde cookie
-    console.log('🔧 Modo desarrollo - agregando Bearer token desde cookie');
-    const token = getCookie('token');
+    console.log('🍪 Configurando petición HTTP con withCredentials: true');
     
-    if (token) {
-      console.log('🍪 Token encontrado en cookie para desarrollo');
-      headers = headers.set('Authorization', `Bearer ${token}`);
-    } else {
-      console.warn('⚠️ No se encontró token en cookie para modo desarrollo');
+    // En modo desarrollo, intentar agregar Bearer token desde cookie si existe
+    if (isDevMode()) {
+      const token = getCookie('token');
+      if (token) {
+        console.log('🔧 Desarrollo: Token encontrado en cookie');
+        headers = headers.set('Authorization', `Bearer ${token}`);
+        options.headers = headers;
+      }
     }
 
-    return { headers, withCredentials: true };
+    return options;
   }
 
 

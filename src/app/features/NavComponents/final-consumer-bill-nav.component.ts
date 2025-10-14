@@ -118,10 +118,11 @@ export class FinalConsumerBillNavComponent {
   }
 
   /**
-   * Iniciar sesión
+   * Iniciar sesión con monitoreo automático
    */
   login(): void {
-    this.authService.redirectToLogin();
+    console.log('🚀 Iniciando proceso de login...');
+    this.authService.startLoginMonitoring();
   }
 
   /**
