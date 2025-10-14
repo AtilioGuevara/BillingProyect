@@ -45,8 +45,8 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-    // Verificar autenticación
-    this.checkAuthentication();
+    // NO verificar autenticación automáticamente - el usuario usará el botón Login/Logout en navbar
+    console.log('🎉 App iniciada - Login manual disponible en navbar');
     
     // Configurar datos de ejemplo
     this.addToCart();
