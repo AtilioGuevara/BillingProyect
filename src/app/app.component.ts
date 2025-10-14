@@ -71,39 +71,31 @@ export class AppComponent implements OnInit {
     
     console.log('🔍 App Component - Verificando autenticación para:', currentPath);
     
-    // No verificar autenticación si estamos en la página de callback
-    if (currentPath.includes('/auth/callback')) {
-      console.log('📍 En página de callback - delegando al callback component');
-      return; // Dejar que el callback component maneje la autenticación
-    }
-    
     // Verificar inmediatamente si ya hay token
     if (this.authService.isAuthenticated()) {
       console.log('✅ Usuario ya autenticado');
       return;
     }
     
-    // Si acabamos de venir del callback, no verificar por un momento
-    const wasInCallback = sessionStorage.getItem('justFromCallback');
-    if (wasInCallback) {
-      console.log('🔄 Acabamos de procesar callback - esperando...');
-      sessionStorage.removeItem('justFromCallback');
+    // Si estamos en la página de lista, podríamos venir del login externo
+    // Dar tiempo para que se procesen las cookies del login externo
+    if (currentPath.includes('/final-consumer-bill/list')) {
+      console.log('� En página de lista - verificando si venimos del login externo');
       
-      // Esperar más tiempo para que se procesen las cookies
       setTimeout(() => {
         if (!this.authService.isAuthenticated()) {
-          console.log('❌ No se encontró autenticación después del callback');
+          console.log('❌ No se encontró autenticación - redirigiendo al login');
           if (window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1') {
             this.authService.redirectToLogin();
           }
         } else {
           console.log('✅ Autenticación encontrada después del delay');
         }
-      }, 2000); // Más tiempo para procesar
+      }, 1500); // Dar tiempo para que se procesen las cookies
       return;
     }
     
-    // Verificación normal para páginas que no vienen de callback
+    // Verificación normal para otras páginas
     console.log('🔒 Usuario no autenticado - redirigiendo al login');
     if (window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1') {
       this.authService.redirectToLogin();

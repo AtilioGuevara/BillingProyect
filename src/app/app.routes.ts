@@ -54,12 +54,12 @@ export const routes: Routes = [
     pathMatch: 'full'
   },
 
-  // 🔐 RUTA DE CALLBACK DE AUTENTICACIÓN
-  {
-    path: 'auth/callback',
-    component: AuthCallbackComponent,
-    data: { title: 'Procesando Autenticación' }
-  },
+  // 🔐 RUTA DE CALLBACK DE AUTENTICACIÓN (YA NO NECESARIA - REDIRECCION DIRECTA)
+  // {
+  //   path: 'auth/callback',
+  //   component: AuthCallbackComponent,
+  //   data: { title: 'Procesando Autenticación' }
+  // },
 
   // 💳 RUTAS DE FACTURACIÓN (sin guards - DevBadge maneja auth)
   {
