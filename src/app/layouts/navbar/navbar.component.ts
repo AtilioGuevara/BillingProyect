@@ -11,6 +11,7 @@ import { LayoutSettingService } from '../layout-setting.service';
 import { LanguageService } from '../../Core/service/language.service';
 import { ProductDrawerComponent } from './product-drawer/product-drawer.component';
 import { DrawerConfig, DrawerService } from '../../Core/service/Drawer/drawer.service';
+import { AuthService } from '../../features/final-consumer-bill/services/authentication-service';
 
 interface Language {
   id: string;
@@ -32,8 +33,6 @@ interface Language {
 export class NavbarComponent {
   scrolled: boolean = false;
   
-  // El DevBadge de Colibrihub maneja toda la autenticación
-
   languageData: any = {};
   currantLayout!: string;
   settings!: {
@@ -46,7 +45,8 @@ export class NavbarComponent {
     private searchService: SearchService,
     private settingService: LayoutSettingService,
     public languageService: LanguageService,
-    public drawerService: DrawerService
+    public drawerService: DrawerService,
+    private authService: AuthService
   ) {
     this.settingService.settings$.subscribe((settings) => {
       this.settings = settings;
@@ -116,20 +116,23 @@ export class NavbarComponent {
   }
 
   /**
-   * 🚪 Cerrar sesión del usuario
-   * El DevBadge de Colibrihub maneja el logout automáticamente
+   * Verificar si el usuario está autenticado
    */
-  logout(): void {
-    console.log('🚪 Logout manejado por DevBadge de Colibrihub');
-    // El DevBadge maneja todo el proceso de logout
+  get isAuthenticated(): boolean {
+    return this.authService.isAuthenticated();
   }
 
   /**
-   * 🔍 Verificar si el usuario está autenticado
-   * El DevBadge de Colibrihub maneja el estado de autenticación
+   * Iniciar sesión
    */
-  isLoggedIn(): boolean {
-    // El DevBadge maneja el estado de autenticación
-    return true; // El DevBadge se encarga de mostrar/ocultar elementos según autenticación
+  login(): void {
+    this.authService.redirectToLogin();
+  }
+
+  /**
+   * Cerrar sesión
+   */
+  logout(): void {
+    this.authService.logout();
   }
 }

@@ -50,7 +50,7 @@ export const routes: Routes = [
   // 🏠 Redirección por defecto a lista de facturas
   {
     path: '',
-    redirectTo: '/final-consumer-bill/create',
+    redirectTo: '/final-consumer-bill/list',
     pathMatch: 'full'
   },
 

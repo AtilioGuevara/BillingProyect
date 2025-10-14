@@ -60,40 +60,22 @@ export class AuthService {
   }
 
   redirectToLogin(): void {
-    console.log('🚀 Redirigiendo al sistema de login de tu compañero...');
-    
     // Determinar la URL de callback según el entorno
     const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
     const callbackUrl = isLocal ? environment.auth.localCallbackUrl : environment.auth.callbackUrl;
     
     const loginUrl = environment.auth.externalLoginUrl;
     
-    console.log('🔗 URL de login:', loginUrl);
-    console.log('🔄 URL de retorno:', callbackUrl);
-    console.log('🏠 Entorno:', isLocal ? 'Local' : 'Producción');
-    
-    // Construir URL completa con parámetros según indicaciones del compañero
+    // Construir URL completa con parámetros
     const params = new URLSearchParams({
-      redirect: callbackUrl, // Cambiado de 'returnUrl' a 'redirect' según compañero
-      clientId: 'billing-app', // Identificador de tu app
+      redirect: callbackUrl,
+      clientId: 'billing-app',
       source: 'billing-system'
     });
     
     const fullLoginUrl = `${loginUrl}?${params.toString()}`;
     
-    console.log('🌐 URL completa de redirección:', fullLoginUrl);
-    console.log('📋 Parámetros enviados:', Object.fromEntries(params));
-    
-    // Guardar información para debugging
-    localStorage.setItem('auth_redirect_info', JSON.stringify({
-      loginUrl,
-      callbackUrl,
-      timestamp: new Date().toISOString(),
-      userAgent: navigator.userAgent
-    }));
-    
     // Redirigir al sistema externo
-    console.log('🔄 Ejecutando redirección...');
     window.location.href = fullLoginUrl;
   }
 

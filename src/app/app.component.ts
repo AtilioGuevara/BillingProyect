@@ -12,7 +12,6 @@ import { DevBadge } from 'colibrihub-shared-components';
 import { SessionService } from 'colibrihub-shared-services';
 import { HttpClient } from '@angular/common/http';
 import { AuthService } from './features/final-consumer-bill/services/authentication-service';
-import { AuthTestService } from './services/auth-test.service';
 
 @Component({
   selector: 'app-root',
@@ -37,8 +36,7 @@ export class AppComponent implements OnInit {
     private titleService: TitleService, 
     private http: HttpClient,
     private activatedRoute: ActivatedRoute,
-    private authService: AuthService,
-    private authTestService: AuthTestService
+    private authService: AuthService
   ) {
     inject(SessionService);
     this.settingService.settings$.subscribe((settings) => {
@@ -70,15 +68,10 @@ export class AppComponent implements OnInit {
    */
   private checkAuthentication() {
     if (!this.authService.isAuthenticated()) {
-      console.log('❌ Usuario no autenticado, redirigiendo a login...');
       // Solo redirigir en producción, no en desarrollo
       if (window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1') {
         this.authService.redirectToLogin();
-      } else {
-        console.log('🔧 Modo desarrollo - saltando redirección de login');
       }
-    } else {
-      console.log('✅ Usuario autenticado');
     }
   }
 

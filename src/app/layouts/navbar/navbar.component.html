@@ -24,6 +24,28 @@
         <button class="hidden topbar-link md:flex" title="topbar-link" type="button" (click)="openSettingsModal()">
           <lucide-angular name="settings" class="size-4"></lucide-angular>
         </button>
+        
+        <!-- Botón Login/Logout -->
+        <button 
+          *ngIf="!isAuthenticated" 
+          class="topbar-link" 
+          title="Iniciar Sesión" 
+          (click)="login()"
+        >
+          <lucide-angular name="LogIn" class="size-4"></lucide-angular>
+          <span class="hidden ml-2 sm:inline">Login</span>
+        </button>
+        
+        <button 
+          *ngIf="isAuthenticated" 
+          class="topbar-link" 
+          title="Cerrar Sesión" 
+          (click)="logout()"
+        >
+          <lucide-angular name="LogOut" class="size-4"></lucide-angular>
+          <span class="hidden ml-2 sm:inline">Logout</span>
+        </button>
+        
         <button class="topbar-link" title="topbar-link" (click)="toggleDarkMode()">
           <lucide-angular name="moon" class="size-4"></lucide-angular>
         </button>

@@ -66,17 +66,6 @@ export class AuthCallbackComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    console.log('🔄 AuthCallback: Procesando retorno del login...');
-    console.log('🌐 URL actual:', window.location.href);
-    console.log('📋 Query params:', window.location.search);
-    console.log('🔗 Hash:', window.location.hash);
-    
-    // Mostrar información de redirección guardada
-    const redirectInfo = localStorage.getItem('auth_redirect_info');
-    if (redirectInfo) {
-      console.log('📋 Info de redirección guardada:', JSON.parse(redirectInfo));
-    }
-    
     this.processAuthCallback();
   }
 
@@ -95,20 +84,12 @@ export class AuthCallbackComponent implements OnInit {
     const tokenFromUrl = urlParams.get('token');
     const tokenFromHash = this.getTokenFromHash();
     
-    console.log('🔍 Buscando token...');
-    console.log('📋 Todos los params de URL:', Object.fromEntries(urlParams));
-    console.log('📋 Token en URL params:', tokenFromUrl ? `Encontrado: ${tokenFromUrl.substring(0, 20)}...` : 'No encontrado');
-    console.log('📋 Token en hash:', tokenFromHash ? `Encontrado: ${tokenFromHash.substring(0, 20)}...` : 'No encontrado');
-    console.log('🍪 Cookies actuales:', document.cookie);
-    
     if (tokenFromUrl) {
-      console.log('✅ Token encontrado en URL params');
       this.handleTokenReceived(tokenFromUrl);
       return;
     }
     
     if (tokenFromHash) {
-      console.log('✅ Token encontrado en hash');
       this.handleTokenReceived(tokenFromHash);
       return;
     }
@@ -119,10 +100,8 @@ export class AuthCallbackComponent implements OnInit {
       const tokenFromCookie = this.authService.getToken();
       
       if (tokenFromCookie) {
-        console.log('✅ Token encontrado en cookies');
         this.handleAuthSuccess();
       } else {
-        console.log('❌ No se encontró token');
         this.handleAuthError('No se recibió token de autenticación');
       }
     }, 1500);
@@ -135,7 +114,6 @@ export class AuthCallbackComponent implements OnInit {
   }
 
   private handleTokenReceived(token: string) {
-    console.log('💾 Guardando token recibido...');
     this.message = 'Guardando credenciales...';
     
     // Guardar token usando el servicio
@@ -151,19 +129,13 @@ export class AuthCallbackComponent implements OnInit {
   private handleAuthSuccess() {
     this.message = 'Autenticación exitosa. Redirigiendo...';
     
-    console.log('✅ Autenticación completada exitosamente');
-    
     setTimeout(() => {
-      // Redirigir al dashboard o página principal
-      this.router.navigate(['/dashboard']).catch(() => {
-        // Si no existe /dashboard, ir a la raíz
-        this.router.navigate(['/']);
-      });
+      // Redirigir directamente a la lista de facturas
+      this.router.navigate(['/final-consumer-bill/list']);
     }, 1000);
   }
 
   private handleAuthError(error: string) {
-    console.error('❌ Error en autenticación:', error);
     this.message = `Error: ${error}`;
     
     setTimeout(() => {
