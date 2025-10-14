@@ -24,6 +24,7 @@ export class AuthService {
     
     return !!token;
   }
+  //para recibir el token
 
   getToken(): string | null {
     // Primero intentar obtener de localStorage
