@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { AuthService } from '../final-consumer-bill/services/authentication-service';
 
 @Component({
   selector: 'app-final-consumer-bill-nav',
@@ -38,6 +39,26 @@ import { CommonModule } from '@angular/common';
               <i class="align-baseline ri-search-line"></i>
               Buscar Factura
             </button>
+
+            <!-- Separador -->
+            <div class="hidden md:block w-px h-6 bg-gray-300 mx-2"></div>
+
+            <!-- Botón Login/Logout -->
+            <button 
+              *ngIf="!isAuthenticated"
+              (click)="login()"
+              class="btn btn-success transition-all duration-300">
+              <i class="align-baseline ri-login-box-line"></i>
+              Iniciar Sesión
+            </button>
+
+            <button 
+              *ngIf="isAuthenticated"
+              (click)="logout()"
+              class="btn btn-outline-danger transition-all duration-300">
+              <i class="align-baseline ri-logout-box-line"></i>
+              Cerrar Sesión
+            </button>
           </div>
         </div>
       </div>
@@ -72,7 +93,10 @@ import { CommonModule } from '@angular/common';
 })
 export class FinalConsumerBillNavComponent {
   
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    private authService: AuthService
+  ) {}
   
   isCreateActive(): boolean {
     return this.router.url.includes('/create');
@@ -84,5 +108,26 @@ export class FinalConsumerBillNavComponent {
 
   isSearchActive(): boolean {
     return this.router.url.includes('/search');
+  }
+
+  /**
+   * Verificar si el usuario está autenticado
+   */
+  get isAuthenticated(): boolean {
+    return this.authService.isAuthenticated();
+  }
+
+  /**
+   * Iniciar sesión
+   */
+  login(): void {
+    this.authService.redirectToLogin();
+  }
+
+  /**
+   * Cerrar sesión
+   */
+  logout(): void {
+    this.authService.logout();
   }
 }
