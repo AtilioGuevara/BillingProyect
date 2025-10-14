@@ -18,6 +18,15 @@ export const environment = {
     logout: '/authentication/logout'
   },
   
+  // Configuración de la base de datos (para referencia, no se usa en frontend)
+  database: {
+    host: 'localhost',
+    name: 'bill_dev', // Base de datos de desarrollo
+  },
+  
+  // Configuración de seguridad para desarrollo
+  enableHttps: false, // HTTP para desarrollo local
+  
   // Configuración de autenticación
   auth: {
     enabled: true,
@@ -36,5 +45,12 @@ export const environment = {
       getAll: '/get/all',                    // GET bill.beckysflorist.site/bill/api/get/all
       getByGenerationCode: '/get/generation-code', // GET bill.beckysflorist.site/bill/api/get/generation-code/{codigo}
     }
+  },
+  
+  // Configuración adicional del VPS (para referencia en desarrollo)
+  vps: {
+    ip: '37.60.243.227',
+    port: 8090,
+    sshCommand: 'ssh bill@37.60.243.227',
   }
 };
