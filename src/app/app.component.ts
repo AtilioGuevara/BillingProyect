@@ -67,21 +67,47 @@ export class AppComponent implements OnInit {
    * Verificar si el usuario está autenticado
    */
   private checkAuthentication() {
-    // No verificar autenticación si estamos en la página de callback
     const currentPath = window.location.pathname;
+    
+    console.log('🔍 App Component - Verificando autenticación para:', currentPath);
+    
+    // No verificar autenticación si estamos en la página de callback
     if (currentPath.includes('/auth/callback')) {
+      console.log('📍 En página de callback - delegando al callback component');
       return; // Dejar que el callback component maneje la autenticación
     }
     
-    // Esperar un momento para que se procesen las cookies si acabamos de regresar del login
-    setTimeout(() => {
-      if (!this.authService.isAuthenticated()) {
-        // Solo redirigir en producción, no en desarrollo
-        if (window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1') {
-          this.authService.redirectToLogin();
+    // Verificar inmediatamente si ya hay token
+    if (this.authService.isAuthenticated()) {
+      console.log('✅ Usuario ya autenticado');
+      return;
+    }
+    
+    // Si acabamos de venir del callback, no verificar por un momento
+    const wasInCallback = sessionStorage.getItem('justFromCallback');
+    if (wasInCallback) {
+      console.log('🔄 Acabamos de procesar callback - esperando...');
+      sessionStorage.removeItem('justFromCallback');
+      
+      // Esperar más tiempo para que se procesen las cookies
+      setTimeout(() => {
+        if (!this.authService.isAuthenticated()) {
+          console.log('❌ No se encontró autenticación después del callback');
+          if (window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1') {
+            this.authService.redirectToLogin();
+          }
+        } else {
+          console.log('✅ Autenticación encontrada después del delay');
         }
-      }
-    }, 500); // Dar tiempo para que se procesen las cookies
+      }, 2000); // Más tiempo para procesar
+      return;
+    }
+    
+    // Verificación normal para páginas que no vienen de callback
+    console.log('🔒 Usuario no autenticado - redirigiendo al login');
+    if (window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1') {
+      this.authService.redirectToLogin();
+    }
   }
 
   private setTitle() {

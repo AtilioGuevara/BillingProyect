@@ -129,6 +129,9 @@ export class AuthCallbackComponent implements OnInit {
   private handleAuthSuccess() {
     this.message = 'Autenticación exitosa. Redirigiendo...';
     
+    // Marcar que acabamos de procesar un callback exitoso
+    sessionStorage.setItem('justFromCallback', 'true');
+    
     setTimeout(() => {
       // Redirigir directamente a la lista de facturas
       this.router.navigate(['/final-consumer-bill/list']);

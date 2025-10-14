@@ -12,10 +12,14 @@ export class AuthService {
     // Verificar si hay token en localStorage o cookies
     const token = this.getToken();
     
+    console.log('🔐 AuthService.isAuthenticated() ->', !!token);
+    
     // Debug: mostrar información sobre cookies disponibles
     if (!token) {
       console.log('🔍 Debug - Cookies disponibles:', document.cookie);
       console.log('🔍 Debug - LocalStorage authToken:', localStorage.getItem('authToken'));
+    } else {
+      console.log('✅ Token encontrado:', token.substring(0, 20) + '...');
     }
     
     return !!token;
