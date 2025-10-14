@@ -72,9 +72,9 @@ export class AuthService {
     console.log('🔄 URL de retorno:', callbackUrl);
     console.log('🏠 Entorno:', isLocal ? 'Local' : 'Producción');
     
-    // Construir URL completa con parámetros
+    // Construir URL completa con parámetros según indicaciones del compañero
     const params = new URLSearchParams({
-      returnUrl: callbackUrl,
+      redirect: callbackUrl, // Cambiado de 'returnUrl' a 'redirect' según compañero
       clientId: 'billing-app', // Identificador de tu app
       source: 'billing-system'
     });
@@ -82,8 +82,18 @@ export class AuthService {
     const fullLoginUrl = `${loginUrl}?${params.toString()}`;
     
     console.log('🌐 URL completa de redirección:', fullLoginUrl);
+    console.log('📋 Parámetros enviados:', Object.fromEntries(params));
+    
+    // Guardar información para debugging
+    localStorage.setItem('auth_redirect_info', JSON.stringify({
+      loginUrl,
+      callbackUrl,
+      timestamp: new Date().toISOString(),
+      userAgent: navigator.userAgent
+    }));
     
     // Redirigir al sistema externo
+    console.log('🔄 Ejecutando redirección...');
     window.location.href = fullLoginUrl;
   }
 

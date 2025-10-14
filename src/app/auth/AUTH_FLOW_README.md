@@ -10,11 +10,11 @@ Esta aplicación usa un sistema de autenticación externa desarrollado por tu co
 - La aplicación verifica si hay token válido
 - Si no hay token → Redirige al login externo
 
-### 2. **Redirección al Login Externo**
+**2. Redirección al Login Externo**
 ```typescript
 URL: https://accounts.beckysflorist.site/login
 Parámetros:
-- returnUrl: https://bill.beckysflorist.site/auth/callback
+- redirect: https://bill.beckysflorist.site/auth/callback (según compañero)
 - clientId: billing-app  
 - source: billing-system
 ```
@@ -101,10 +101,10 @@ console.log('Token en cookies:', document.cookie);
 
 ### Lo que necesita configurar tu compañero:
 
-1. **Validar returnUrl**
+1. **Validar parámetro redirect**
 ```typescript
-// Su sistema debe aceptar estas URLs de retorno:
-const validReturnUrls = [
+// Su sistema debe aceptar el parámetro 'redirect' con estas URLs:
+const validRedirectUrls = [
   'https://bill.beckysflorist.site/auth/callback',
   'http://localhost:4200/auth/callback'  // Para desarrollo
 ];
@@ -113,14 +113,16 @@ const validReturnUrls = [
 2. **Retornar el Token**
 ```typescript
 // Después del login exitoso, debe redirigir a:
+const redirectUrl = urlParams.get('redirect'); // Parámetro 'redirect' en lugar de 'returnUrl'
+
 // Opción 1: Query parameter
-`${returnUrl}?token=${jwtToken}`
+`${redirectUrl}?token=${jwtToken}`
 
 // Opción 2: Hash fragment  
-`${returnUrl}#token=${jwtToken}`
+`${redirectUrl}#token=${jwtToken}`
 
 // Opción 3: Cookie (recomendado)
-// Establecer cookie 'token' y redirigir a returnUrl
+// Establecer cookie 'token' y redirigir a redirectUrl
 ```
 
 3. **Configurar CORS (si es necesario)**

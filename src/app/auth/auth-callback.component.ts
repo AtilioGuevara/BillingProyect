@@ -67,6 +67,16 @@ export class AuthCallbackComponent implements OnInit {
 
   ngOnInit() {
     console.log('🔄 AuthCallback: Procesando retorno del login...');
+    console.log('🌐 URL actual:', window.location.href);
+    console.log('📋 Query params:', window.location.search);
+    console.log('🔗 Hash:', window.location.hash);
+    
+    // Mostrar información de redirección guardada
+    const redirectInfo = localStorage.getItem('auth_redirect_info');
+    if (redirectInfo) {
+      console.log('📋 Info de redirección guardada:', JSON.parse(redirectInfo));
+    }
+    
     this.processAuthCallback();
   }
 
@@ -86,8 +96,10 @@ export class AuthCallbackComponent implements OnInit {
     const tokenFromHash = this.getTokenFromHash();
     
     console.log('🔍 Buscando token...');
-    console.log('📋 Token en URL params:', tokenFromUrl ? 'Encontrado' : 'No encontrado');
-    console.log('📋 Token en hash:', tokenFromHash ? 'Encontrado' : 'No encontrado');
+    console.log('📋 Todos los params de URL:', Object.fromEntries(urlParams));
+    console.log('📋 Token en URL params:', tokenFromUrl ? `Encontrado: ${tokenFromUrl.substring(0, 20)}...` : 'No encontrado');
+    console.log('📋 Token en hash:', tokenFromHash ? `Encontrado: ${tokenFromHash.substring(0, 20)}...` : 'No encontrado');
+    console.log('🍪 Cookies actuales:', document.cookie);
     
     if (tokenFromUrl) {
       console.log('✅ Token encontrado en URL params');
