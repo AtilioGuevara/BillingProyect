@@ -216,6 +216,6 @@ export class FinalConsumerBillService {
   getAllActiveProducts(): Observable<any[]> {
    return this.http.get<any[]>(`${environment.inventoryApiUrl}`).pipe(
     map(products => products.filter(product => product.active)) // Filtrar solo productos activos
-  );
+  );  
 }
 }

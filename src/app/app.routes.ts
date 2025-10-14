@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 import { LayoutsComponent } from './layouts/layouts.component';
 import { FinalConsumerBillCreateComponent } from './features/final-consumer-bill/CreateFinalConsumerBill/final-consumer-bill-create.component';
 import { FinalConsumerBillListComponent } from './features/final-consumer-bill/ListFinalConsumerBill/final-consumer-bill-list.component';
+import { AuthCallbackComponent } from './auth/auth-callback.component';
 import { AuthAccountDeactivationBasicComponent } from './pages/Auth/auth-account-deactivation-basic/auth-account-deactivation-basic.component';
 import { AuthAccountDeactivationCreativeComponent } from './pages/Auth/auth-account-deactivation-creative/auth-account-deactivation-creative.component';
 import { AuthAccountDeactivationModernComponent } from './pages/Auth/auth-account-deactivation-modern/auth-account-deactivation-modern.component';
@@ -53,7 +54,14 @@ export const routes: Routes = [
     pathMatch: 'full'
   },
 
-  // � RUTAS DE FACTURACIÓN (sin guards - DevBadge maneja auth)
+  // 🔐 RUTA DE CALLBACK DE AUTENTICACIÓN
+  {
+    path: 'auth/callback',
+    component: AuthCallbackComponent,
+    data: { title: 'Procesando Autenticación' }
+  },
+
+  // 💳 RUTAS DE FACTURACIÓN (sin guards - DevBadge maneja auth)
   {
     path: 'final-consumer-bill/create',
     loadComponent: () => import('./features/final-consumer-bill/CreateFinalConsumerBill/final-consumer-bill-create.component').then(m => m.FinalConsumerBillCreateComponent),

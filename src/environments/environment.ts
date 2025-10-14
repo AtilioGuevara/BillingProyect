@@ -17,9 +17,17 @@ export const environment = {
     verify: '/authentication/verify',
     logout: '/authentication/logout'
   },
-  // Configuración de autenticación real
-  authEnabled: true,
-  useVpsForAuth: true,
+  
+  // Configuración de autenticación
+  auth: {
+    enabled: true,
+    // URL del sistema de login externo de tu compañero
+    externalLoginUrl: 'https://accounts.beckysflorist.site/login',
+    // URL de retorno después del login exitoso
+    callbackUrl: 'https://bill.beckysflorist.site/auth/callback',
+    // URL local para desarrollo
+    localCallbackUrl: 'http://localhost:4200/auth/callback'
+  },
   
   endpoints: {
     // Endpoints de autenticación - confirmado que funciona

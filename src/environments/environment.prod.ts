@@ -11,6 +11,7 @@ export const environment = {
   
   // 🔑 Authentication API - URL directa del microservicio
   authApiUrl: 'https://accounts.beckysflorist.site/api/auth',
+
   
   // Configuración de la base de datos (para referencia, no se usa en frontend)
   database: {
