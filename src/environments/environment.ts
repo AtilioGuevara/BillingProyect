@@ -30,10 +30,10 @@ export const environment = {
   // Configuración de autenticación
   auth: {
     enabled: true,
-    // URL del sistema de login externo de tu compañero
+    // URL del sistema de login externo
     externalLoginUrl: 'https://accounts.beckysflorist.site/login',
     // URL de retorno después del login exitoso - DIRECTO A LA LISTA
-    callbackUrl: 'https://bill.beckysflorist.site/final-consumer-bill/list',
+    callbackUrl: 'bill.beckysflorist.site/final-consumer-bill/list',
     // URL local para desarrollo
     localCallbackUrl: 'http://localhost:4200/final-consumer-bill/list'
   },
