@@ -63,16 +63,35 @@ export class AuthService {
   }
 
   storeToken(token: string): void {
-    // Guardar en localStorage
+    console.log('💾 Guardando token recibido del login externo...');
+    
+    // Guardar en localStorage (método más confiable)
     localStorage.setItem('authToken', token);
     
-    // También establecer como cookie para el backend
-    const secure = window.location.protocol === 'https:' ? '; Secure' : '';
-    const cookieString = `token=${token}; path=/; SameSite=Lax${secure}`;
-    document.cookie = cookieString;
+    // Establecer cookies para compatibilidad con backend
+    const isHttps = window.location.protocol === 'https:';
+    const secure = isHttps ? '; Secure' : '';
     
-    console.log('💾 Token guardado en localStorage y cookies');
-    console.log('🍪 Cookie string:', cookieString);
+    // Cookie simple para el dominio actual
+    const cookieString1 = `token=${token}; path=/${secure}; SameSite=Lax`;
+    document.cookie = cookieString1;
+    
+    // Cookies adicionales con nombres alternativos
+    document.cookie = `authToken=${token}; path=/${secure}; SameSite=Lax`;
+    document.cookie = `access_token=${token}; path=/${secure}; SameSite=Lax`;
+    
+    // Intentar cookie con dominio compartido si estamos en HTTPS
+    if (isHttps && window.location.hostname.includes('beckysflorist.site')) {
+      const sharedCookie = `token=${token}; path=/; domain=.beckysflorist.site; SameSite=None; Secure`;
+      document.cookie = sharedCookie;
+      console.log('🌐 Cookie dominio compartido:', sharedCookie);
+    }
+    
+    console.log('✅ Token guardado exitosamente:');
+    console.log('  - localStorage: ✅');
+    console.log('  - Cookies locales: ✅');
+    console.log('  - Token length:', token.length);
+    console.log('🔍 Verificando cookies después de guardar:', document.cookie);
   }
 
   logout(): void {

@@ -49,21 +49,48 @@ export class FinalConsumerBillListComponent implements OnInit {
   }
 
   private checkLoginSuccess(): void {
-    // Verificar si acabamos de llegar del login
-    // Esto sucede cuando:
-    // 1. No teníamos autenticación previa (flag en localStorage)
-    // 2. Ahora sí tenemos cookies de autenticación
+    // SOLUCIÓN PRINCIPAL: Detectar token en parámetros URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const tokenFromUrl = urlParams.get('token') || 
+                        urlParams.get('access_token') || 
+                        urlParams.get('authToken') || 
+                        urlParams.get('jwt');
     
+    if (tokenFromUrl) {
+      console.log('🎯 TOKEN RECIBIDO EN URL desde login externo');
+      console.log('🔑 Token:', tokenFromUrl.substring(0, 20) + '...');
+      
+      // Guardar el token usando el AuthService
+      this.authService.storeToken(tokenFromUrl);
+      
+      // Limpiar la URL para mayor seguridad
+      const cleanUrl = window.location.protocol + "//" + 
+                      window.location.host + 
+                      window.location.pathname;
+      window.history.replaceState({}, document.title, cleanUrl);
+      
+      // Mostrar mensaje de éxito
+      this.showLoginSuccessMessage();
+      
+      // Limpiar flags
+      localStorage.removeItem('waitingForAuth');
+      
+      console.log('✅ Login procesado exitosamente via URL');
+      return;
+    }
+    
+    // MÉTODO ALTERNATIVO: Verificar si acabamos de llegar del login (cookies)
     const wasWaitingForAuth = localStorage.getItem('waitingForAuth') === 'true';
     
     if (wasWaitingForAuth) {
-      console.log('🔍 Detectado retorno de login externo - verificando autenticación...');
+      console.log('🔍 Detectado retorno de login externo - verificando cookies...');
+      console.log('⚠️ NOTA: Las cookies cross-domain pueden no funcionar');
       
       // Limpiar el flag
       localStorage.removeItem('waitingForAuth');
       
-      // Verificar cookie con retry
-      this.verifyCookieWithRetry(0, 5);
+      // Verificar cookie con retry (menos confiable entre dominios)
+      this.verifyCookieWithRetry(0, 3); // Reducir intentos ya que es menos probable
     }
   }
 
