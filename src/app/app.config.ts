@@ -3,7 +3,7 @@ import {
   importProvidersFrom,
   provideZoneChangeDetection,
 } from '@angular/core';
-// import { AUTH_SERVICE_URL } from 'colibrihub-shared-services'; // Comentado para evitar peticiones automáticas
+import { AUTH_SERVICE_URL } from 'colibrihub-shared-services';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { environment } from '../environments/environment';
 import { provideRouter } from '@angular/router';
@@ -19,6 +19,7 @@ import { provideEffects } from '@ngrx/effects';
 import { ProductEffects } from './pages/Apps/Ecommerce/Products/store/effects/product.effects';
 import { productReducer } from './pages/Apps/Ecommerce/Products/store/reducers/product.reducer';
 import { NgxMaskOptions, provideEnvironmentNgxMask } from 'ngx-mask';
+import { blockUnwantedRequestsInterceptor } from './interceptors/block-unwanted-requests.interceptor';
 
 import {
   Activity,
@@ -555,10 +556,10 @@ export const appConfig: ApplicationConfig = {
       provideZoneChangeDetection({ eventCoalescing: true }),
       provideRouter(routes),
       provideClientHydration(),
-      provideHttpClient(),
+      provideHttpClient(withInterceptors([blockUnwantedRequestsInterceptor])),
       provideAnimations(),
-      // <-- Provider para AUTH_SERVICE_URL comentado para evitar peticiones automáticas
-      // { provide: AUTH_SERVICE_URL, useValue: environment.authApiUrl },
+      // Provider para AUTH_SERVICE_URL con URL dummy para evitar errores
+      { provide: AUTH_SERVICE_URL, useValue: 'http://localhost:3000/dummy' },
       provideStore({
         products: productReducer,
         patients: patientReducer,

@@ -9,7 +9,7 @@ import { filter } from 'rxjs';
 import { SettingsModalComponent } from './layouts/navbar/modal/settings-modal/settings-modal.component';
 import { ModalService } from './Core/service/modal/modal.service';
 import { DevBadge } from 'colibrihub-shared-components';
-// import { SessionService } from 'colibrihub-shared-services'; // Comentado para evitar validaciones automáticas
+import { SessionService } from 'colibrihub-shared-services';
 import { HttpClient } from '@angular/common/http';
 import { AuthService } from './features/final-consumer-bill/services/authentication-service';
 
@@ -38,7 +38,7 @@ export class AppComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private authService: AuthService
   ) {
-    // inject(SessionService); // Comentado para evitar validaciones automáticas de cookies
+    inject(SessionService);
     this.settingService.settings$.subscribe((settings) => {
       this.settingService.handleSettingsChange(settings);
     });
