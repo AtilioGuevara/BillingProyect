@@ -49,21 +49,22 @@ export class FinalConsumerBillListComponent implements OnInit {
   }
 
   private checkLoginSuccess(): void {
-    this.route.queryParams.subscribe(params => {
-      if (params['login'] === 'success') {
-        console.log('🔍 Detectado parámetro login=success - verificando autenticación...');
-        
-        // Limpiar la URL del parámetro
-        this.router.navigate([], {
-          relativeTo: this.route,
-          queryParams: {},
-          replaceUrl: true
-        });
-
-        // Verificar cookie con retry
-        this.verifyCookieWithRetry(0, 5);
-      }
-    });
+    // Verificar si acabamos de llegar del login
+    // Esto sucede cuando:
+    // 1. No teníamos autenticación previa (flag en localStorage)
+    // 2. Ahora sí tenemos cookies de autenticación
+    
+    const wasWaitingForAuth = localStorage.getItem('waitingForAuth') === 'true';
+    
+    if (wasWaitingForAuth) {
+      console.log('🔍 Detectado retorno de login externo - verificando autenticación...');
+      
+      // Limpiar el flag
+      localStorage.removeItem('waitingForAuth');
+      
+      // Verificar cookie con retry
+      this.verifyCookieWithRetry(0, 5);
+    }
   }
 
   private verifyCookieWithRetry(attempt: number, maxAttempts: number): void {
@@ -86,7 +87,7 @@ export class FinalConsumerBillListComponent implements OnInit {
     // Emitir evento para que el navbar muestre el mensaje
     window.dispatchEvent(new CustomEvent('loginSuccess', {
       detail: { 
-        message: '¡Login exitoso! Cookie recibida correctamente',
+        message: '¡Login exitoso! Sesión iniciada correctamente',
         duration: 10000 // 10 segundos
       }
     }));

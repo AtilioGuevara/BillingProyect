@@ -116,7 +116,7 @@ export class AuthService {
     console.log('🔄 Iniciando monitoreo de login...');
     
     // Marcar que estamos esperando un login
-    sessionStorage.setItem('waitingForLogin', 'true');
+    localStorage.setItem('waitingForAuth', 'true');
     
     // Redirigir al login de tu compañero
     this.redirectToLogin();
