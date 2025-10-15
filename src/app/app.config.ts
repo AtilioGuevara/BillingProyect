@@ -3,7 +3,7 @@ import {
   importProvidersFrom,
   provideZoneChangeDetection,
 } from '@angular/core';
-import { AUTH_SERVICE_URL } from 'colibrihub-shared-services';
+// import { AUTH_SERVICE_URL } from 'colibrihub-shared-services'; // Comentado para evitar peticiones automáticas
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { environment } from '../environments/environment';
 import { provideRouter } from '@angular/router';
@@ -557,8 +557,8 @@ export const appConfig: ApplicationConfig = {
       provideClientHydration(),
       provideHttpClient(),
       provideAnimations(),
-      // <-- Provider para AUTH_SERVICE_URL aquí, fuera de provideStore
-      { provide: AUTH_SERVICE_URL, useValue: environment.authApiUrl },
+      // <-- Provider para AUTH_SERVICE_URL comentado para evitar peticiones automáticas
+      // { provide: AUTH_SERVICE_URL, useValue: environment.authApiUrl },
       provideStore({
         products: productReducer,
         patients: patientReducer,

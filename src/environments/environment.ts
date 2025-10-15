@@ -12,11 +12,11 @@ export const environment = {
   // Authentication API - También vía proxy
   authApiUrl: 'https://accounts.beckysflorist.site/api/auth',
 
-  authEndpoints: {
-    login: '/authentication/login',
-    verify: '/authentication/verify',
-    logout: '/authentication/logout'
-  },
+  // authEndpoints: {
+  //   login: '/authentication/login',
+  //   verify: '/authentication/verify',
+  //   logout: '/authentication/logout'
+  // },
   
   // Configuración de la base de datos (para referencia, no se usa en frontend)
   database: {
@@ -33,7 +33,7 @@ export const environment = {
     // URL del sistema de login externo
     externalLoginUrl: 'https://accounts.beckysflorist.site/login',
     // URL de retorno después del login exitoso - DIRECTO A LA LISTA
-    callbackUrl: 'bill.beckysflorist.site/final-consumer-bill/list',
+    callbackUrl: 'https://bill.beckysflorist.site/final-consumer-bill/list',
     // URL local para desarrollo
     localCallbackUrl: 'http://localhost:4200/final-consumer-bill/list'
   },
