@@ -32,10 +32,10 @@ export const environment = {
     enabled: true,
     // URL del sistema de login externo de tu compañero
     externalLoginUrl: 'https://accounts.beckysflorist.site/login',
-    // URL de retorno después del login exitoso - DETECTAR Y REDIRIGIR NOSOTROS
-    callbackUrl: 'https://bill.beckysflorist.site/?login=success',
+    // URL de retorno después del login exitoso - DIRECTO A LA LISTA
+    callbackUrl: 'https://bill.beckysflorist.site/final-consumer-bill/list?login=success',
     // URL local para desarrollo
-    localCallbackUrl: 'http://localhost:4200/?login=success'
+    localCallbackUrl: 'http://localhost:4200/final-consumer-bill/list?login=success'
   },
   
   endpoints: {

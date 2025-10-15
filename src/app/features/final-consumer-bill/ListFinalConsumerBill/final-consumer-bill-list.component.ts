@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import {Router} from '@angular/router';
+import {Router, ActivatedRoute} from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FinalConsumerBillService } from '../services/final-consumer-bill.service';
 import { FinalConsumerBillListDTO } from '../../../dtos/final-consumer-bill.dto';
 import { FinalConsumerBillNavComponent } from '../../NavComponents/final-consumer-bill-nav.component';
+import { AuthService } from '../services/authentication-service';
 
 @Component({
   selector: 'app-final-consumer-bill-list',
@@ -18,7 +19,12 @@ export class FinalConsumerBillListComponent implements OnInit {
   loading = false;
   errorMsg = '';
 
-  constructor(private billService: FinalConsumerBillService, private router: Router) {}
+  constructor(
+    private billService: FinalConsumerBillService, 
+    private router: Router,
+    private route: ActivatedRoute,
+    private authService: AuthService
+  ) {}
 
     // Método para navegar a la vista de detalles
   viewBillDetails(generationCode: string): void {
@@ -36,7 +42,54 @@ export class FinalConsumerBillListComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    // Verificar si venimos del login exitoso
+    this.checkLoginSuccess();
+    
     this.loadBills();
+  }
+
+  private checkLoginSuccess(): void {
+    this.route.queryParams.subscribe(params => {
+      if (params['login'] === 'success') {
+        console.log('🔍 Detectado parámetro login=success - verificando autenticación...');
+        
+        // Limpiar la URL del parámetro
+        this.router.navigate([], {
+          relativeTo: this.route,
+          queryParams: {},
+          replaceUrl: true
+        });
+
+        // Verificar cookie con retry
+        this.verifyCookieWithRetry(0, 5);
+      }
+    });
+  }
+
+  private verifyCookieWithRetry(attempt: number, maxAttempts: number): void {
+    console.log(`🔄 Intento ${attempt + 1}/${maxAttempts} - Verificando cookie de autenticación...`);
+    
+    setTimeout(() => {
+      if (this.authService.isAuthenticated()) {
+        console.log('✅ ¡Cookie de autenticación detectada correctamente!');
+        this.showLoginSuccessMessage();
+      } else if (attempt < maxAttempts - 1) {
+        // Intentar de nuevo
+        this.verifyCookieWithRetry(attempt + 1, maxAttempts);
+      } else {
+        console.log('❌ No se pudo verificar la cookie de autenticación');
+      }
+    }, 1000); // Esperar 1 segundo entre intentos
+  }
+
+  private showLoginSuccessMessage(): void {
+    // Emitir evento para que el navbar muestre el mensaje
+    window.dispatchEvent(new CustomEvent('loginSuccess', {
+      detail: { 
+        message: '¡Login exitoso! Cookie recibida correctamente',
+        duration: 10000 // 10 segundos
+      }
+    }));
   }
 
   loadBills(): void {
