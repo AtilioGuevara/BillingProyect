@@ -95,6 +95,14 @@ export class AuthService {
     
     const loginUrl = environment.auth.externalLoginUrl;
     
+    // DEBUG: Verificar que no se duplique https://
+    console.log('🔍 DEBUG URLs:');
+    console.log('  - isLocal:', isLocal);
+    console.log('  - environment.auth.localCallbackUrl:', environment.auth.localCallbackUrl);
+    console.log('  - environment.auth.callbackUrl:', environment.auth.callbackUrl);
+    console.log('  - callbackUrl (seleccionado):', callbackUrl);
+    console.log('  - loginUrl:', loginUrl);
+    
     // Construir URL completa con parámetros
     const params = new URLSearchParams({
       redirect: callbackUrl,
@@ -103,6 +111,14 @@ export class AuthService {
     });
     
     const fullLoginUrl = `${loginUrl}?${params.toString()}`;
+    
+    console.log('🔗 URL final completa:', fullLoginUrl);
+    console.log('🔗 Parámetros construidos:', params.toString());
+    
+    // Verificar si hay duplicación
+    if (fullLoginUrl.includes('https://https://')) {
+      console.error('❌ DUPLICACIÓN DETECTADA en fullLoginUrl:', fullLoginUrl);
+    }
     
     // Redirigir al sistema externo
     window.location.href = fullLoginUrl;
