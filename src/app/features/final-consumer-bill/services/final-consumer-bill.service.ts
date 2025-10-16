@@ -1,358 +1,164 @@
-import { Injectable, isDevMode } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { Observable, catchError, tap, throwError, of, map, from } from 'rxjs';
+import { Injectable } from '@angular/core';
+import { Observable, from } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { 
   CreateFinalConsumerBillDTO, 
   FinalConsumerBillListDTO, 
   FinalConsumerBillDetailDTO 
 } from '../../../dtos/final-consumer-bill.dto';
 import { environment } from '../../../../environments/environment';
-import { getCookie } from '../../../utils/cookie';
-// La autenticación ahora es manejada por DevBadge de Colibrihub
+import { ErrorHandlerService } from '../../../services/error-handler.service';
+import { getCookie, isValidToken } from '../../../utils/common.utils';
 
+/**
+ * Servicio optimizado para manejo de facturas usando Fetch API
+ */
 @Injectable({ providedIn: 'root' })
 export class FinalConsumerBillService {
-  // URLs específicas por puerto según configuración del backend
-  private apiCreateUrl = environment.apiCreateUrl; // Puerto 8080 para CREATE
-  private apiReadUrl = environment.apiReadUrl;     // Puerto 8090 para READ
   
+  private readonly apiCreateUrl = environment.apiCreateUrl;
+  private readonly apiReadUrl = environment.apiReadUrl;
 
-
-  constructor(
-    private http: HttpClient
-  ) {
-    console.log('🌐 CONFIGURACIÓN DE SERVICIOS:');
-    console.log('🌐 API CREATE URL configurada:', this.apiCreateUrl);
-    console.log('🌐 API READ URL configurada:', this.apiReadUrl);
-    console.log('🌐 Environment apiCreateUrl:', environment.apiCreateUrl);
-    console.log('🌐 Environment apiReadUrl:', environment.apiReadUrl);
-  }
+  constructor(private errorHandler: ErrorHandlerService) {}
 
   /**
-   * Obtiene las opciones HTTP con withCredentials siempre activo
+   * Obtener todas las facturas
    */
-  private getHttpOptions(): { headers: HttpHeaders, withCredentials: boolean } {
-    let headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Accept': 'application/json'
-    });
-
-    // IMPORTANTE: Siempre usar withCredentials para que las cookies se envíen
-    const options = { 
-      headers, 
-      withCredentials: true  // 🎯 ESTO es lo que necesitas
-    };
-
-    console.log('🍪 Configurando petición HTTP con withCredentials: true');
-    
-    // En modo desarrollo, intentar agregar Bearer token desde cookie si existe
-    if (isDevMode()) {
-      const token = getCookie('token');
-      if (token) {
-        console.log('🔧 Desarrollo: Token encontrado en cookie');
-        headers = headers.set('Authorization', `Bearer ${token}`);
-        options.headers = headers;
-      }
-    }
-
-    return options;
-  }
-
-
-
-  // POST: Crear nueva factura (POST simple con Bearer token via interceptor)
-  // URL: http://37.60.243.227:8080/api/final-consumer/create
-  createFinalConsumerBill(bill: CreateFinalConsumerBillDTO): Observable<string> {
-    const url = `${this.apiCreateUrl}${environment.endpoints.finalConsumerBill.create}`;
-    
-    console.log('📤 CREANDO NUEVA FACTURA:');
-    console.log('📤 URL construida:', url);
-    console.log('📤 Base apiCreateUrl:', this.apiCreateUrl);
-    console.log('📤 Endpoint path:', environment.endpoints.finalConsumerBill.create);
-    console.log('📤 Usando Bearer token via interceptor');
-    console.log('📤 Datos de factura:', bill);
-    
-    // POST simple con datos en body - usando patrón de cookies con isDevMode
-    return this.http.post<string>(url, bill, this.getHttpOptions());
-  }
-
-  // GET: Obtener todas las facturas (GET simple con Bearer token via interceptor)
-  // URL: http://37.60.243.227:8090/api/final-consumer/all
-  // Retorna: Lista simplificada para tabla
   getAllFinalConsumerBills(): Observable<FinalConsumerBillListDTO[]> {
     const url = `${this.apiReadUrl}${environment.endpoints.finalConsumerBill.getAll}`;
-    
-    console.log('📥 OBTENIENDO LISTA DE FACTURAS:');
-    console.log('📥 URL construida:', url);
-    console.log('📥 Base apiReadUrl:', this.apiReadUrl);
-    console.log('📥 Endpoint path:', environment.endpoints.finalConsumerBill.getAll);
-    console.log('📥 Usando Bearer token via interceptor');
-    
-    // GET simple - usando patrón de cookies con isDevMode
-    return this.http.get<FinalConsumerBillListDTO[]>(url, this.getHttpOptions()).pipe(
-      tap((bills: FinalConsumerBillListDTO[]) => {
-        console.log('📋 FACTURAS OBTENIDAS - TOTAL:', bills.length);
-      }),
-      catchError((error: any) => {
-        console.error('❌ ERROR DETALLADO EN GET ALL:');
-        console.error('❌ Status:', error.status);
-        console.error('❌ Status Text:', error.statusText);
-        console.error('❌ URL:', error.url);
-        console.error('❌ Error completo:', error);
-        console.error('❌ Body del error:', error.error);
-        
-        // Si es error 400, podría ser problema de endpoint
-        if (error.status === 400) {
-          console.error('⚠️ Error 400: Posibles causas:');
-          console.error('   1. El endpoint no existe o es incorrecto');
-          console.error('   2. Faltan headers requeridos por el backend');
-          console.error('   3. Se requiere autenticación');
-          console.error('   4. El backend espera parámetros específicos');
-        }
-        
-        return throwError(() => error);
-      })
+    return this.performFetch<FinalConsumerBillListDTO[]>(url, 'GET').pipe(
+      this.errorHandler.createErrorHandler('Error al cargar las facturas')
     );
   }
 
-  // GET: Obtener factura completa por código de generación
-  // URL: http://bill.beckysflorist.site/api/get/generation-code/{generationCode}
-  // Retorna: Factura completa con todos los detalles (JSON del backend)
+  /**
+   * Crear nueva factura
+   */
+  createFinalConsumerBill(bill: CreateFinalConsumerBillDTO): Observable<string> {
+    const url = `${this.apiCreateUrl}${environment.endpoints.finalConsumerBill.create}`;
+    return this.performFetch<string>(url, 'POST', bill).pipe(
+      this.errorHandler.createErrorHandler('Error al crear la factura')
+    );
+  }
+
+  /**
+   * Obtener factura por código de generación
+   */
   getFinalConsumerBillByGenerationCode(generationCode: string): Observable<FinalConsumerBillDetailDTO> {
     const url = `${this.apiReadUrl}${environment.endpoints.finalConsumerBill.getByGenerationCode}/${generationCode}`;
-    
-    console.log('🔍 BÚSQUEDA POR CÓDIGO DE GENERACIÓN');
-    console.log(`🔍 Código buscado: "${generationCode}"`);
-    console.log(`🔍 apiReadUrl: "${this.apiReadUrl}"`);
-    console.log(`🔍 endpoint: "${environment.endpoints.finalConsumerBill.getByGenerationCode}"`);
-    console.log(`🔍 URL completa construida: ${url}`);
-    console.log('🔍 Endpoint actualizado: GET /api/get/generation-code/{code}');
-    console.log('� Dominio nuevo: bill.beckysflorist.site');
-    
-    // GET simple - usando patrón de cookies con isDevMode
-    return this.http.get<FinalConsumerBillDetailDTO>(url, this.getHttpOptions()).pipe(
-      tap((result: FinalConsumerBillDetailDTO) => {
-        console.log('✅ FACTURA ENCONTRADA CON NUEVA CONFIGURACIÓN:', result);
-      }),
-      catchError(error => {
-        console.error('❌ ERROR CON NUEVA CONFIGURACIÓN:');
-        console.error('❌ Status:', error.status);
-        console.error('❌ URL solicitada:', error.url);
-        console.error('❌ Response:', error.error);
-        console.error('❌ Error completo:', error);
-        return throwError(() => error);
-      })
+    return this.performFetch<FinalConsumerBillDetailDTO>(url, 'GET').pipe(
+      this.errorHandler.createErrorHandler('Error al cargar los detalles de la factura')
     );
   }
 
-  // Método de prueba para llamada directa al backend (sin proxy)
-  testDirectBackendCall(generationCode: string): Observable<FinalConsumerBillDetailDTO> {
-    const directUrl = `https://bill.beckysflorist.site/api/get/generation-code/${generationCode}`;
-    
-    console.log('🧪 PROBANDO LLAMADA DIRECTA AL BACKEND:');
-    console.log(`🔗 URL directa: ${directUrl}`);
-    
-    return this.http.get<FinalConsumerBillDetailDTO>(directUrl, this.getHttpOptions()).pipe(
-      tap((result: FinalConsumerBillDetailDTO) => {
-        console.log('✅ ¡ÉXITO CON LLAMADA DIRECTA!');
-        console.log('✅ El backend funciona, el problema es el proxy');
-        console.log('✅ Factura encontrada:', result);
-      }),
-      catchError(directError => {
-        console.error('❌ LLAMADA DIRECTA TAMBIÉN FALLÓ:');
-        console.error('❌ Status:', directError.status);
-        console.error('❌ URL directa:', directError.url);
-        console.error('❌ Response:', directError.error);
-        console.error('');
-        console.error('🔍 Posibles causas:');
-        console.error('   1. Backend no disponible en bill.beckysflorist.site');
-        console.error('   2. Endpoint /api/get/generation-code/{code} incorrecto');
-        console.error('   3. Problemas de CORS desde localhost');
-        console.error('   4. Backend requiere autenticación específica');
-        
-        return throwError(() => directError);
-      })
-    );
-  }
-
-  // GET: Buscar productos activos por nombre en el inventario
-  searchActiveProductsByName(name: string = ''): Observable<any[]> {
-    const url = `${environment.inventoryApiUrl}`;
-    let params = new HttpParams();
-    
-    // Solo productos activos
-    params = params.set('active', 'true');
-    
-    // Si hay un nombre para filtrar, agregarlo
-    if (name.trim()) {
-      params = params.set('name', name.trim());
-    }
-
-    console.log('🔍 BUSCANDO PRODUCTOS ACTIVOS EN EL INVENTARIO');
-    console.log('🔍 URL:', url);
-    console.log('🔍 Parámetros:', params.toString());
-    console.log('🔍 Solo productos activos (active=true)');
-
-    return this.http.get<any[]>(url, { 
-      params,
-      ...this.getHttpOptions() 
-    }).pipe(
-      tap((products) => {
-        const activeProducts = products.filter(p => p.active === true);
-        console.log('✅ PRODUCTOS ACTIVOS ENCONTRADOS:', activeProducts.length);
-        console.log('✅ PRODUCTOS:', activeProducts);
-      }),
-      // Filtrar solo productos activos por si el backend no lo hace
-      map((products: any[]) => products.filter((product: any) => product.active === true)),
-      catchError((error) => {
-        console.error('❌ ERROR AL BUSCAR PRODUCTOS ACTIVOS:', error);
-        return throwError(() => error);
-      })
-    );
-  }
-
-  // GET: Obtener todos los productos activos (para cargar inicialmente)
-  getAllActiveProducts(): Observable<any[]> {
-   return this.http.get<any[]>(`${environment.inventoryApiUrl}`).pipe(
-    map(products => products.filter(product => product.active)) // Filtrar solo productos activos
-  );  
-}
-
-  // ===============================
-  // MÉTODOS CON FETCH (NUEVOS)
-  // ===============================
-  
   /**
-   * Obtiene opciones para fetch con autenticación JWT según documentación del backend
+   * Buscar productos activos por nombre
+   */
+  searchActiveProductsByName(name: string = ''): Observable<any[]> {
+    const url = environment.inventoryApiUrl;
+    const params = new URLSearchParams();
+    params.set('active', 'true');
+    if (name.trim()) {
+      params.set('name', name.trim());
+    }
+    
+    const fullUrl = `${url}?${params.toString()}`;
+    return this.performFetch<any[]>(fullUrl, 'GET').pipe(
+      // Asegurar que solo se retornen productos activos
+      map((products: any[]) => products.filter((product: any) => product.active === true))
+    );
+  }
+
+  /**
+   * Obtener todos los productos activos
+   */
+  getAllActiveProducts(): Observable<any[]> {
+    return this.searchActiveProductsByName();
+  }
+
+  /**
+   * Realizar petición HTTP usando Fetch API
+   */
+  private performFetch<T>(url: string, method: string, body?: any): Observable<T> {
+    const fetchPromise = fetch(url, this.getFetchOptions(method, body))
+      .then(async (response) => {
+        if (!response.ok) {
+          const errorText = await response.text();
+          throw new Error(`HTTP ${response.status}: ${errorText}`);
+        }
+        
+        // Si es método POST para crear factura, retornar como texto
+        if (method === 'POST' && url.includes('create')) {
+          return await response.text() as T;
+        }
+        
+        // Para otros casos, parsear como JSON
+        return await response.json() as T;
+      });
+
+    return from(fetchPromise);
+  }
+
+  /**
+   * Obtener opciones para fetch con autenticación
    */
   private getFetchOptions(method: string = 'GET', body?: any): RequestInit {
     const headers: Record<string, string> = {
       'Content-Type': 'application/json',
-      'Accept': 'application/json',
+      'Accept': 'application/json'
     };
 
-    // Obtener JWT para Authorization header según documentación del backend
-    const jwt = this.getJWTToken();
-    
-    if (jwt) {
-      headers['Authorization'] = `Bearer ${jwt}`;
-      console.log('🔑 JWT agregado a fetch headers para backend - Authorization: Bearer <JWT>');
-    } else {
-      console.warn('⚠️ No se encontró JWT para el header Authorization requerido por el backend');
+    // Agregar token JWT si está disponible
+    const token = this.getJWTToken();
+    if (token) {
+      headers['Authorization'] = `Bearer ${token}`;
     }
 
     const options: RequestInit = {
       method,
       headers,
-      credentials: 'include', // Para cookies adicionales
+      credentials: 'include' // Para enviar cookies
     };
 
     if (body && method !== 'GET') {
       options.body = JSON.stringify(body);
     }
 
-    console.log('🌐 Configurando fetch con credentials: include y Authorization header');
     return options;
   }
 
   /**
-   * Obtiene el JWT token para el header Authorization según la documentación
+   * Obtener JWT token para autorización
    */
   private getJWTToken(): string | null {
-    // Intentar obtener JWT desde múltiples fuentes
+    // Intentar obtener desde múltiples fuentes
     const sources = [
       () => localStorage.getItem('authToken'),
       () => localStorage.getItem('token'),
       () => localStorage.getItem('jwt'),
-      () => localStorage.getItem('access_token'),
       () => getCookie('authToken'),
       () => getCookie('token'),
       () => getCookie('jwt'),
-      () => getCookie('access_token'),
       () => sessionStorage.getItem('authToken'),
-      () => sessionStorage.getItem('token'),
-      () => sessionStorage.getItem('jwt')
+      () => sessionStorage.getItem('token')
     ];
 
     for (const getToken of sources) {
       const token = getToken();
-      if (token && token !== 'null' && token !== 'undefined' && token.length > 20) {
-        console.log('✅ JWT encontrado para Authorization header');
+      if (isValidToken(token) && token!.length > 20) {
         return token;
       }
     }
 
-    console.log('❌ No se encontró JWT válido para Authorization header');
     return null;
   }
 
-  /**
-   * Método de prueba usando fetch para obtener facturas
-   */
+  // Métodos de compatibilidad con nombres anteriores
   getAllFinalConsumerBillsWithFetch(): Observable<FinalConsumerBillListDTO[]> {
-    const url = `${this.apiReadUrl}${environment.endpoints.finalConsumerBill.getAll}`;
-    
-    console.log('🔍 [FETCH] === DEBUGGING URL CONSTRUCTION ===');
-    console.log('🔍 [FETCH] apiReadUrl:', this.apiReadUrl);
-    console.log('🔍 [FETCH] environment.apiReadUrl:', environment.apiReadUrl);
-    console.log('🔍 [FETCH] endpoint path:', environment.endpoints.finalConsumerBill.getAll);
-    console.log('🔍 [FETCH] URL final construida:', url);
-    console.log('🔍 [FETCH] === END DEBUG ===');
-    console.log('🔍 [FETCH] Obteniendo todas las facturas:', url);
-
-    const fetchPromise = fetch(url, this.getFetchOptions('GET'))
-      .then(async (response) => {
-        console.log('📡 [FETCH] Respuesta del servidor:', response.status, response.statusText);
-        console.log('📡 [FETCH] URL solicitada:', response.url);
-        
-        if (!response.ok) {
-          const errorText = await response.text();
-          console.error('❌ [FETCH] Error del servidor:', errorText);
-          console.error('❌ [FETCH] URL que falló:', response.url);
-          throw new Error(`HTTP ${response.status}: ${errorText}`);
-        }
-        
-        const bills: FinalConsumerBillListDTO[] = await response.json();
-        console.log('✅ [FETCH] Facturas obtenidas:', bills.length, 'registros');
-        return bills;
-      })
-      .catch((error) => {
-        console.error('❌ [FETCH] Error al obtener facturas:', error);
-        console.error('❌ [FETCH] URL que causó el error:', url);
-        throw error;
-      });
-
-    return from(fetchPromise);
+    return this.getAllFinalConsumerBills();
   }
 
-  /**
-   * Método de prueba usando fetch para crear facturas
-   */
   createFinalConsumerBillWithFetch(bill: CreateFinalConsumerBillDTO): Observable<string> {
-    const url = `${this.apiCreateUrl}${environment.endpoints.finalConsumerBill.create}`;
-    
-    console.log('🚀 [FETCH] Creando factura:', url);
-    console.log('📦 [FETCH] Datos a enviar:', bill);
-
-    const fetchPromise = fetch(url, this.getFetchOptions('POST', bill))
-      .then(async (response) => {
-        console.log('📡 [FETCH] Respuesta del servidor:', response.status, response.statusText);
-        
-        if (!response.ok) {
-          const errorText = await response.text();
-          console.error('❌ [FETCH] Error del servidor:', errorText);
-          throw new Error(`HTTP ${response.status}: ${errorText}`);
-        }
-        
-        const result = await response.text();
-        console.log('✅ [FETCH] Factura creada exitosamente:', result);
-        return result;
-      })
-      .catch((error) => {
-        console.error('❌ [FETCH] Error al crear factura:', error);
-        throw error;
-      });
-
-    return from(fetchPromise);
+    return this.createFinalConsumerBill(bill);
   }
 }

@@ -1,12 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-import {Router, ActivatedRoute} from '@angular/router';
+import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { takeUntil, finalize } from 'rxjs';
 import { FinalConsumerBillService } from '../services/final-consumer-bill.service';
 import { FinalConsumerBillListDTO } from '../../../dtos/final-consumer-bill.dto';
 import { FinalConsumerBillNavComponent } from '../../NavComponents/final-consumer-bill-nav.component';
 import { AuthService } from '../services/authentication-service';
+import { BaseComponent, LoadingState, ComponentState } from '../../../types/common.types';
 
+/**
+ * Componente optimizado para la lista de facturas
+ */
 @Component({
   selector: 'app-final-consumer-bill-list',
   standalone: true,
@@ -14,142 +19,149 @@ import { AuthService } from '../services/authentication-service';
   templateUrl: './final-consumer-bill-list.component.html',
   styleUrls: ['./final-consumer-bill-list.component.scss']
 })
-export class FinalConsumerBillListComponent implements OnInit {
+export class FinalConsumerBillListComponent extends BaseComponent implements OnInit {
   bills: FinalConsumerBillListDTO[] = [];
-  loading = false;
-  errorMsg = '';
+  state: ComponentState = {
+    loadingState: LoadingState.IDLE,
+    error: null,
+    data: null
+  };
+
+  // Getter para compatibilidad con template
+  get loading(): boolean {
+    return this.state.loadingState === LoadingState.LOADING;
+  }
+
+  get errorMsg(): string {
+    return this.state.error || '';
+  }
 
   constructor(
     private billService: FinalConsumerBillService, 
     private router: Router,
-    private route: ActivatedRoute,
     private authService: AuthService
-  ) {}
-
-    // Método para navegar a la vista de detalles
-  viewBillDetails(generationCode: string): void {
-    console.log('🔍 Navegando a detalles de factura:', generationCode);
-    this.router.navigate(['/final-consumer-bill/view', generationCode]);
-  }
-
-  // Método alternativo si tienes el objeto completo de la factura
-  viewBillDetailsFromObject(bill: any): void {
-    if (bill.generationCode) {
-      this.viewBillDetails(bill.generationCode);
-    } else {
-      console.error('❌ La factura no tiene código de generación:', bill);
-    }
+  ) {
+    super();
   }
 
   ngOnInit(): void {
-    // Verificar si venimos del login exitoso
-    this.checkLoginSuccess();
+    // Manejar retorno del login si aplica
+    this.handleLoginReturn();
     
+    // Cargar facturas
     this.loadBills();
   }
 
-  private checkLoginSuccess(): void {
-    // SOLUCIÓN PRINCIPAL: Detectar token en parámetros URL
-    const urlParams = new URLSearchParams(window.location.search);
-    const tokenFromUrl = urlParams.get('token') || 
-                        urlParams.get('access_token') || 
-                        urlParams.get('authToken') || 
-                        urlParams.get('jwt');
-    
-    if (tokenFromUrl) {
-      console.log('🎯 TOKEN RECIBIDO EN URL desde login externo');
-      console.log('🔑 Token:', tokenFromUrl.substring(0, 20) + '...');
-      
-      // Guardar el token usando el AuthService
-      this.authService.storeToken(tokenFromUrl);
-      
-      // Limpiar la URL para mayor seguridad
-      const cleanUrl = window.location.protocol + "//" + 
-                      window.location.host + 
-                      window.location.pathname;
-      window.history.replaceState({}, document.title, cleanUrl);
-      
-      // Mostrar mensaje de éxito
-      this.showLoginSuccessMessage();
-      
-      // Limpiar flags
-      localStorage.removeItem('waitingForAuth');
-      
-      console.log('✅ Login procesado exitosamente via URL');
-      return;
-    }
-    
-    // MÉTODO ALTERNATIVO: Verificar si acabamos de llegar del login (cookies)
-    const wasWaitingForAuth = localStorage.getItem('waitingForAuth') === 'true';
-    
-    if (wasWaitingForAuth) {
-      console.log('🔍 Detectado retorno de login externo - verificando cookies...');
-      console.log('⚠️ NOTA: Las cookies cross-domain pueden no funcionar');
-      
-      // Limpiar el flag
-      localStorage.removeItem('waitingForAuth');
-      
-      // Verificar cookie con retry (menos confiable entre dominios)
-      this.verifyCookieWithRetry(0, 3); // Reducir intentos ya que es menos probable
-    }
+
+
+  /**
+   * Manejar retorno del login externo
+   */
+  private handleLoginReturn(): void {
+    this.authService.handleLoginReturn();
   }
 
-  private verifyCookieWithRetry(attempt: number, maxAttempts: number): void {
-    console.log(`🔄 Intento ${attempt + 1}/${maxAttempts} - Verificando cookie de autenticación...`);
-    
-    setTimeout(() => {
-      if (this.authService.isAuthenticated()) {
-        console.log('✅ ¡Cookie de autenticación detectada correctamente!');
-        this.showLoginSuccessMessage();
-      } else if (attempt < maxAttempts - 1) {
-        // Intentar de nuevo
-        this.verifyCookieWithRetry(attempt + 1, maxAttempts);
-      } else {
-        console.log('❌ No se pudo verificar la cookie de autenticación');
-      }
-    }, 1000); // Esperar 1 segundo entre intentos
-  }
-
-  private showLoginSuccessMessage(): void {
-    // Emitir evento para que el navbar muestre el mensaje
-    window.dispatchEvent(new CustomEvent('loginSuccess', {
-      detail: { 
-        message: '¡Login exitoso! Sesión iniciada correctamente',
-        duration: 10000 // 10 segundos
-      }
-    }));
-  }
-
+  /**
+   * Cargar lista de facturas
+   */
   loadBills(): void {
-    this.loading = true;
-    this.errorMsg = '';
-    
-    console.log('📋 Cargando facturas usando FETCH según solicitud del compañero');
-    this.billService.getAllFinalConsumerBillsWithFetch().subscribe({
-      next: (data: FinalConsumerBillListDTO[]) => {
-        this.bills = data;
-        this.loading = false;
-      },
-      error: (error) => {
-        console.error('Error loading bills:', error);
-        this.errorMsg = 'Error al cargar las facturas. Verifique que el endpoint del backend esté disponible.';
-        this.loading = false;
-      }
-    });
+    this.state.loadingState = LoadingState.LOADING;
+    this.state.error = null;
+
+    this.billService.getAllFinalConsumerBills()
+      .pipe(
+        takeUntil(this.destroy$),
+        finalize(() => {
+          if (this.state.loadingState === LoadingState.LOADING) {
+            this.state.loadingState = LoadingState.IDLE;
+          }
+        })
+      )
+      .subscribe({
+        next: (bills) => {
+          this.bills = bills;
+          this.state.loadingState = LoadingState.SUCCESS;
+          this.state.data = bills;
+        },
+        error: (error) => {
+          this.state.loadingState = LoadingState.ERROR;
+          this.handleError(error);
+        }
+      });
   }
 
+  /**
+   * Refrescar lista de facturas
+   */
   refreshBills(): void {
     this.loadBills();
   }
 
+  /**
+   * Navegar a los detalles de una factura
+   */
+  viewBillDetails(generationCode: string): void {
+    if (!generationCode) {
+      console.error('❌ Código de generación no proporcionado');
+      return;
+    }
+    
+    this.router.navigate(['/final-consumer-bill/view', generationCode]);
+  }
+
+  /**
+   * Navegar a detalles desde objeto factura
+   */
+  viewBillDetailsFromObject(bill: FinalConsumerBillListDTO): void {
+    if (bill?.generationCode) {
+      this.viewBillDetails(bill.generationCode);
+    } else {
+      console.error('❌ La factura no tiene código de generación válido');
+    }
+  }
+
+  /**
+   * Obtener texto del estado de la factura
+   */
   getStatusText(status: string | undefined | null): string {
-    const statusMap: { [key: string]: string } = {
-      'DRAFT': 'Borrador',
-      'SENT': 'Enviada',
+    if (!status) return 'Sin estado';
+    
+    const statusMap: Record<string, string> = {
       'PENDING': 'Pendiente',
-      'APPROVED': 'Aprobada',
-      'REJECTED': 'Rechazada'
+      'PAID': 'Pagada',
+      'CANCELLED': 'Cancelada',
+      'PROCESSING': 'Procesando'
     };
-    return statusMap[status || 'DRAFT'] || 'Sin Estado';
+    
+    return statusMap[status.toUpperCase()] || status;
+  }
+
+  /**
+   * Manejar errores de forma centralizada
+   */
+  private handleError(error: any): void {
+    console.error('❌ Error en lista de facturas:', error);
+    
+    let errorMessage: string;
+    
+    if (error.message?.includes('401') || error.message?.includes('403')) {
+      errorMessage = 'No autorizado. Redirigiendo al login...';
+      setTimeout(() => this.authService.redirectToLogin(), 2000);
+    } else if (error.message?.includes('404')) {
+      errorMessage = 'Servicio no encontrado. Verifique la configuración.';
+    } else if (error.message?.includes('500')) {
+      errorMessage = 'Error interno del servidor. Intente más tarde.';
+    } else if (error.message?.includes('NetworkError') || !navigator.onLine) {
+      errorMessage = 'Sin conexión a internet. Verifique su conexión.';
+    } else {
+      errorMessage = 'Error al cargar las facturas. Intente nuevamente.';
+    }
+
+    this.state.error = errorMessage;
+
+    // Limpiar mensaje después de 10 segundos
+    setTimeout(() => {
+      this.state.error = null;
+    }, 10000);
   }
 }

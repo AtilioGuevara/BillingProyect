@@ -1,298 +1,197 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { environment } from '../../../../environments/environment';
+import { getCookie, isValidToken, getTokenFromUrl, cleanUrlFromToken, isLocalEnvironment } from '../../../utils/common.utils';
 
+/**
+ * Servicio optimizado de autenticación para manejo del login externo
+ */
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
+  
+  private readonly TOKEN_KEY = 'authToken';
+  private readonly POSSIBLE_COOKIE_NAMES = [
+    'token', 'authToken', 'auth_token', 'access_token', 'jwt', 'session',
+    'session_token', 'auth', 'authentication', 'login_token',
+    'colibrihub_token', 'colibrihub_auth', 'accounts_token'
+  ];
+
   constructor(private router: Router) {}
 
+  /**
+   * Verificar si el usuario está autenticado
+   */
   isAuthenticated(): boolean {
-    // Verificar si hay token en localStorage o cookies
-    const token = this.getToken();
-    
-    console.log('🔐 AuthService.isAuthenticated() ->', !!token);
-    
-    // Debug: mostrar información sobre cookies disponibles
-    if (!token) {
-      console.log('🔍 Debug - Cookies disponibles:', document.cookie);
-      console.log('🔍 Debug - LocalStorage authToken:', localStorage.getItem('authToken'));
-    } else {
-      console.log('✅ Token encontrado:', token.substring(0, 20) + '...');
-    }
-    
-    return !!token;
+    return !!this.getToken();
   }
-  //para recibir el token
 
+  /**
+   * Obtener token de autenticación desde múltiples fuentes
+   */
   getToken(): string | null {
-    console.log('🔍 Buscando token de autenticación...');
-    console.log('🔍 URL actual:', window.location.href);
-    console.log('🔍 Cookies disponibles:', document.cookie);
-    
-    // 1. Primero intentar obtener de localStorage
-    const localToken = localStorage.getItem('authToken');
-    if (localToken && localToken !== 'null' && localToken !== 'undefined') {
-      console.log('✅ Token encontrado en localStorage');
+    // 1. LocalStorage (más confiable)
+    const localToken = localStorage.getItem(this.TOKEN_KEY);
+    if (isValidToken(localToken)) {
       return localToken;
     }
     
-    // 2. Verificar parámetros de URL (para cuando viene del login externo)
-    const urlParams = new URLSearchParams(window.location.search);
-    const urlToken = urlParams.get('token') || urlParams.get('access_token') || 
-                     urlParams.get('authToken') || urlParams.get('jwt');
-    
-    if (urlToken && urlToken !== 'null' && urlToken !== 'undefined') {
-      console.log('✅ Token encontrado en URL params');
-      // Guardarlo en localStorage para próximas verificaciones
-      localStorage.setItem('authToken', urlToken);
+    // 2. URL Parameters (para retorno del login)
+    const urlToken = getTokenFromUrl();
+    if (isValidToken(urlToken)) {
+      this.storeToken(urlToken!);
+      cleanUrlFromToken();
       return urlToken;
     }
     
-    // 3. Verificar todas las cookies posibles del sistema de tu compañero
-    const cookieNames = [
-      'token', 'authToken', 'auth_token', 'access_token', 'jwt', 'session',
-      'session_token', 'auth', 'authentication', 'login_token',
-      'colibrihub_token', 'colibrihub_auth', 'accounts_token'  // Posibles nombres de tu compañero
-    ];
-    
-    for (const cookieName of cookieNames) {
-      const token = this.getCookie(cookieName);
-      if (token && token !== 'null' && token !== 'undefined') {
-        console.log(`✅ Token encontrado en cookie: ${cookieName}`);
-        // Si encontramos un token válido en cookies, también guardarlo en localStorage
-        localStorage.setItem('authToken', token);
-        return token;
-      }
+    // 3. Cookies (múltiples nombres posibles)
+    const cookieToken = this.getTokenFromCookies();
+    if (isValidToken(cookieToken)) {
+      localStorage.setItem(this.TOKEN_KEY, cookieToken!);
+      return cookieToken;
     }
     
-    // 4. Verificar si hay algún token en sessionStorage
-    const sessionToken = sessionStorage.getItem('authToken') || 
-                          sessionStorage.getItem('token') || 
-                          sessionStorage.getItem('access_token');
-    
-    if (sessionToken && sessionToken !== 'null' && sessionToken !== 'undefined') {
-      console.log('✅ Token encontrado en sessionStorage');
-      localStorage.setItem('authToken', sessionToken);
+    // 4. SessionStorage (fallback)
+    const sessionToken = this.getTokenFromSessionStorage();
+    if (isValidToken(sessionToken)) {
+      localStorage.setItem(this.TOKEN_KEY, sessionToken!);
       return sessionToken;
     }
     
-    // 5. Intentar leer desde el dominio compartido de accounts
-    try {
-      // Verificar si podemos acceder al dominio padre
-      if (window.location.hostname.includes('beckysflorist.site')) {
-        console.log('🌐 Intentando leer cookies del dominio beckysflorist.site');
-        // Las cookies del dominio compartido deberían estar disponibles
-      }
-    } catch (error) {
-      console.log('⚠️ No se puede acceder a cookies del dominio padre:', error);
-    }
-    
-    console.log('❌ No se encontró token en ningún lado');
-    console.log('🔍 Cookies disponibles:', document.cookie);
-    console.log('🔍 LocalStorage authToken:', localStorage.getItem('authToken'));
-    console.log('🔍 URL actual:', window.location.href);
-    
     return null;
   }
 
-  private getCookie(name: string): string | null {
-    const nameEQ = name + "=";
-    const ca = document.cookie.split(';');
-    for(let i = 0; i < ca.length; i++) {
-      let c = ca[i];
-      while (c.charAt(0) === ' ') c = c.substring(1, c.length);
-      if (c.indexOf(nameEQ) === 0) {
-        const value = c.substring(nameEQ.length, c.length);
-        return value && value !== 'undefined' && value !== 'null' ? value : null;
-      }
+
+
+  /**
+   * Obtener token de cookies
+   */
+  private getTokenFromCookies(): string | null {
+    for (const cookieName of this.POSSIBLE_COOKIE_NAMES) {
+      const token = getCookie(cookieName);
+      if (token) return token;
     }
     return null;
   }
 
+  /**
+   * Obtener token de sessionStorage
+   */
+  private getTokenFromSessionStorage(): string | null {
+    return sessionStorage.getItem(this.TOKEN_KEY) || 
+           sessionStorage.getItem('token') || 
+           sessionStorage.getItem('access_token');
+  }
+
+
+
+  /**
+   * Almacenar token en múltiples ubicaciones
+   */
   storeToken(token: string): void {
-    console.log('💾 Guardando token recibido del login externo...');
+    if (!isValidToken(token)) return;
+
+    // Guardar en localStorage (método principal)
+    localStorage.setItem(this.TOKEN_KEY, token);
     
-    // Guardar en localStorage (método más confiable)
-    localStorage.setItem('authToken', token);
-    
-    // Establecer cookies para compatibilidad con backend
+    // Guardar cookies para compatibilidad
     const isHttps = window.location.protocol === 'https:';
     const secure = isHttps ? '; Secure' : '';
+    const sameSite = '; SameSite=Lax';
     
-    // Cookie simple para el dominio actual
-    const cookieString1 = `token=${token}; path=/${secure}; SameSite=Lax`;
-    document.cookie = cookieString1;
+    // Cookies principales
+    document.cookie = `token=${token}; path=/${secure}${sameSite}`;
+    document.cookie = `authToken=${token}; path=/${secure}${sameSite}`;
     
-    // Cookies adicionales con nombres alternativos
-    document.cookie = `authToken=${token}; path=/${secure}; SameSite=Lax`;
-    document.cookie = `access_token=${token}; path=/${secure}; SameSite=Lax`;
-    
-    // Intentar cookie con dominio compartido si estamos en HTTPS
+    // Cookie compartida para subdominios en producción
     if (isHttps && window.location.hostname.includes('beckysflorist.site')) {
-      const sharedCookie = `token=${token}; path=/; domain=.beckysflorist.site; SameSite=None; Secure`;
-      document.cookie = sharedCookie;
-      console.log('🌐 Cookie dominio compartido:', sharedCookie);
+      document.cookie = `token=${token}; path=/; domain=.beckysflorist.site; SameSite=None; Secure`;
     }
-    
-    console.log('✅ Token guardado exitosamente:');
-    console.log('  - localStorage: ✅');
-    console.log('  - Cookies locales: ✅');
-    console.log('  - Token length:', token.length);
-    console.log('🔍 Verificando cookies después de guardar:', document.cookie);
   }
 
+  /**
+   * Limpiar todas las ubicaciones del token
+   */
   logout(): void {
-    console.log('👋 Cerrando sesión...');
-    
     // Limpiar localStorage
-    localStorage.removeItem('authToken');
+    localStorage.removeItem(this.TOKEN_KEY);
     
-    // Limpiar cookies
+    // Limpiar cookies principales
     document.cookie = 'token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+    document.cookie = 'authToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
     
     // Redirigir al login
     this.redirectToLogin();
   }
 
-  redirectToLogin(): void {
-    // Determinar la URL de callback según el entorno
-    const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
-    let callbackUrl = isLocal ? environment.auth.localCallbackUrl : environment.auth.callbackUrl;
-    
-    // SOLUCIÓN: Remover https:// del callback para evitar duplicación
-    // El sistema del compañero parece agregar https:// automáticamente
-    callbackUrl = callbackUrl.replace('https://', '').replace('http://', '');
-    
-    const loginUrl = environment.auth.externalLoginUrl;
-    
-    console.log('🔧 SOLUCIÓN - URLs sin protocolo:');
-    console.log('  - callbackUrl original:', isLocal ? environment.auth.localCallbackUrl : environment.auth.callbackUrl);
-    console.log('  - callbackUrl SIN protocolo:', callbackUrl);
-    console.log('  - loginUrl:', loginUrl);
-    
-    // Construir URL completa con parámetros
-    const params = new URLSearchParams({
-      redirect: callbackUrl,  // Ahora sin https://
-      clientId: 'billing-app',
-      source: 'billing-system'
-    });
-    
-    const fullLoginUrl = `${loginUrl}?${params.toString()}`;
-    
-    console.log('🔗 URL final (sin duplicación):', fullLoginUrl);
-    console.log('🔗 Parámetro redirect:', callbackUrl);
-    
-    // Redirigir al sistema externo
-    window.location.href = fullLoginUrl;
-  }
-
   /**
-   * Monitorear cookies después de redirigir al login
-   * Esto detectará cuando tu compañero establezca la cookie
+   * Redirigir al sistema de login externo
    */
-  startLoginMonitoring(): void {
-    console.log('🔄 Iniciando monitoreo de login...');
+  redirectToLogin(): void {
+    let callbackUrl = isLocalEnvironment() ? environment.auth.localCallbackUrl : environment.auth.callbackUrl;
     
-    // Marcar que estamos esperando un login
+    // Remover protocolo para evitar duplicación
+    callbackUrl = callbackUrl.replace(/^https?:\/\//, '');
+    
+    const loginUrl = `${environment.auth.externalLoginUrl}?redirect=${encodeURIComponent(callbackUrl)}`;
+    
+    // Marcar que estamos esperando auth
     localStorage.setItem('waitingForAuth', 'true');
     
-    // Redirigir al login de tu compañero
-    this.redirectToLogin();
+    // Redirigir
+    window.location.href = loginUrl;
   }
 
   /**
-   * Verificar periódicamente si apareció la cookie del login
+   * Procesar retorno del login externo
    */
-  checkForLoginSuccess(): void {
-    const waitingForLogin = sessionStorage.getItem('waitingForLogin');
+  handleLoginReturn(): void {
+    const token = getTokenFromUrl();
     
-    if (waitingForLogin === 'true') {
-      console.log('👀 Monitoreando cookies de login...');
-      
-      const interval = setInterval(() => {
-        console.log('🔍 Verificando cookies...', this.getAllCookies());
-        
-        if (this.isAuthenticated()) {
-          console.log('✅ ¡Cookie de login detectada!');
-          
-          // Limpiar el monitoreo
-          sessionStorage.removeItem('waitingForLogin');
-          clearInterval(interval);
-          
-          // Redirigir a facturas
-          window.location.href = '/final-consumer-bill/list';
-        }
-      }, 1000); // Verificar cada segundo
-      
-      // Timeout después de 2 minutos
-      setTimeout(() => {
-        if (sessionStorage.getItem('waitingForLogin') === 'true') {
-          console.log('⏰ Timeout de login - deteniendo monitoreo');
-          sessionStorage.removeItem('waitingForLogin');
-          clearInterval(interval);
-        }
-      }, 120000); // 2 minutos
+    if (token) {
+      this.storeToken(token);
+      cleanUrlFromToken();
+      localStorage.removeItem('waitingForAuth');
     }
   }
 
-  private getAllCookies(): any {
-    const cookies: any = {};
-    if (document.cookie) {
-      document.cookie.split(';').forEach(cookie => {
-        const [name, value] = cookie.trim().split('=');
-        if (name && value) {
-          cookies[name] = value.substring(0, 20) + '...';
-        }
-      });
-    }
-    return cookies;
-  }
-
-  // Método para procesar el token cuando el usuario regrese del login
-  processReturnFromLogin(): void {
-    console.log('🔄 Procesando retorno del login externo...');
-    
-    // Verificar si hay token en la URL (query params)
-    const urlParams = new URLSearchParams(window.location.search);
-    const tokenFromUrl = urlParams.get('token');
-    
-    if (tokenFromUrl) {
-      console.log('🔑 Token recibido del login externo via URL');
-      this.storeToken(tokenFromUrl);
-      
-      // Limpiar la URL removiendo el token
-      const cleanUrl = window.location.protocol + "//" + window.location.host + window.location.pathname;
-      window.history.replaceState({}, document.title, cleanUrl);
-      
-      console.log('✅ Login procesado exitosamente');
-      return;
-    }
-
-    // Verificar si hay token en cookies (método alternativo)
-    const tokenFromCookie = this.getCookie('authToken') || this.getCookie('token');
-    
-    if (tokenFromCookie) {
-      console.log('🔑 Token encontrado en cookies después del login');
-      console.log('✅ Login procesado exitosamente');
-      return;
-    }
-    
-    console.log('⚠️ No se encontró token después del login');
-  }
-  
   /**
-   * Manejar callback específico del login externo
-   */
-  handleLoginCallback(): void {
-    this.processReturnFromLogin();
-  }
-  
-  /**
-   * Obtener token para usar en peticiones HTTP
+   * Método de compatibilidad - alias para getToken()
    */
   getAuthToken(): string | null {
     return this.getToken();
+  }
+
+  /**
+   * Método de compatibilidad - alias para handleLoginReturn()
+   */
+  processReturnFromLogin(): void {
+    this.handleLoginReturn();
+  }
+
+  /**
+   * Método de compatibilidad - alias para handleLoginReturn()
+   */
+  handleLoginCallback(): void {
+    this.handleLoginReturn();
+  }
+
+  /**
+   * Método de compatibilidad - verificar éxito de login
+   */
+  checkForLoginSuccess(): void {
+    const token = this.getToken();
+    if (token) {
+      console.log('✅ Login verificado exitosamente');
+    }
+  }
+
+  /**
+   * Método de compatibilidad - iniciar monitoreo de login
+   */
+  startLoginMonitoring(): void {
+    // Implementación simplificada - solo verificar una vez
+    this.checkForLoginSuccess();
   }
 }
