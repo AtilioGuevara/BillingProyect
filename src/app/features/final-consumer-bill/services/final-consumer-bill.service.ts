@@ -292,15 +292,23 @@ export class FinalConsumerBillService {
   getAllFinalConsumerBillsWithFetch(): Observable<FinalConsumerBillListDTO[]> {
     const url = `${this.apiReadUrl}${environment.endpoints.finalConsumerBill.getAll}`;
     
+    console.log('🔍 [FETCH] === DEBUGGING URL CONSTRUCTION ===');
+    console.log('🔍 [FETCH] apiReadUrl:', this.apiReadUrl);
+    console.log('🔍 [FETCH] environment.apiReadUrl:', environment.apiReadUrl);
+    console.log('🔍 [FETCH] endpoint path:', environment.endpoints.finalConsumerBill.getAll);
+    console.log('🔍 [FETCH] URL final construida:', url);
+    console.log('🔍 [FETCH] === END DEBUG ===');
     console.log('🔍 [FETCH] Obteniendo todas las facturas:', url);
 
     const fetchPromise = fetch(url, this.getFetchOptions('GET'))
       .then(async (response) => {
         console.log('📡 [FETCH] Respuesta del servidor:', response.status, response.statusText);
+        console.log('📡 [FETCH] URL solicitada:', response.url);
         
         if (!response.ok) {
           const errorText = await response.text();
           console.error('❌ [FETCH] Error del servidor:', errorText);
+          console.error('❌ [FETCH] URL que falló:', response.url);
           throw new Error(`HTTP ${response.status}: ${errorText}`);
         }
         
@@ -310,6 +318,7 @@ export class FinalConsumerBillService {
       })
       .catch((error) => {
         console.error('❌ [FETCH] Error al obtener facturas:', error);
+        console.error('❌ [FETCH] URL que causó el error:', url);
         throw error;
       });
 

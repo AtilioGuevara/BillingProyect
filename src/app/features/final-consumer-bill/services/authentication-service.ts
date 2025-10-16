@@ -28,6 +28,8 @@ export class AuthService {
 
   getToken(): string | null {
     console.log('🔍 Buscando token de autenticación...');
+    console.log('🔍 URL actual:', window.location.href);
+    console.log('🔍 Cookies disponibles:', document.cookie);
     
     // 1. Primero intentar obtener de localStorage
     const localToken = localStorage.getItem('authToken');
@@ -48,8 +50,12 @@ export class AuthService {
       return urlToken;
     }
     
-    // 3. Luego intentar obtener de cookies con diferentes nombres posibles
-    const cookieNames = ['token', 'authToken', 'auth_token', 'access_token', 'jwt', 'session'];
+    // 3. Verificar todas las cookies posibles del sistema de tu compañero
+    const cookieNames = [
+      'token', 'authToken', 'auth_token', 'access_token', 'jwt', 'session',
+      'session_token', 'auth', 'authentication', 'login_token',
+      'colibrihub_token', 'colibrihub_auth', 'accounts_token'  // Posibles nombres de tu compañero
+    ];
     
     for (const cookieName of cookieNames) {
       const token = this.getCookie(cookieName);
@@ -70,6 +76,17 @@ export class AuthService {
       console.log('✅ Token encontrado en sessionStorage');
       localStorage.setItem('authToken', sessionToken);
       return sessionToken;
+    }
+    
+    // 5. Intentar leer desde el dominio compartido de accounts
+    try {
+      // Verificar si podemos acceder al dominio padre
+      if (window.location.hostname.includes('beckysflorist.site')) {
+        console.log('🌐 Intentando leer cookies del dominio beckysflorist.site');
+        // Las cookies del dominio compartido deberían estar disponibles
+      }
+    } catch (error) {
+      console.log('⚠️ No se puede acceder a cookies del dominio padre:', error);
     }
     
     console.log('❌ No se encontró token en ningún lado');
