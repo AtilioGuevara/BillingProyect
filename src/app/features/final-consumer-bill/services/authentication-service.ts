@@ -13,9 +13,14 @@ export class AuthService {
   
   private readonly TOKEN_KEY = 'authToken';
   private readonly POSSIBLE_COOKIE_NAMES = [
-    'token', 'authToken', 'auth_token', 'access_token', 'jwt', 'session',
-    'session_token', 'auth', 'authentication', 'login_token',
-    'colibrihub_token', 'colibrihub_auth', 'accounts_token'
+    'token',          // Prioridad alta - la que se ve en tu screenshot
+    'authToken',      // Prioridad alta - la que guardamos
+    'access_token',   // Estándar OAuth
+    'jwt',           // JSON Web Token estándar
+    'auth_token',    // Variante común
+    'session_token', // Token de sesión
+    'auth',          // Token simple
+    'authentication' // Token de autenticación
   ];
 
   constructor(private router: Router) {}
@@ -28,50 +33,76 @@ export class AuthService {
   }
 
   /**
-   * Obtener token de autenticación desde múltiples fuentes
+   * Obtener token de autenticación desde múltiples fuentes con debug mejorado
    */
   getToken(): string | null {
+    console.log('🔍 Buscando token de autenticación...');
+    
     // 1. LocalStorage (más confiable)
     const localToken = localStorage.getItem(this.TOKEN_KEY);
+    console.log(`📱 LocalStorage (${this.TOKEN_KEY}):`, localToken ? `${localToken.substring(0, 20)}...` : 'No encontrado');
     if (isValidToken(localToken)) {
+      console.log('✅ Token válido encontrado en localStorage');
       return localToken;
     }
     
-    // 2. URL Parameters (para retorno del login)
+    // 2. LocalStorage con nombre 'token'
+    const simpleLocalToken = localStorage.getItem('token');
+    console.log('📱 LocalStorage (token):', simpleLocalToken ? `${simpleLocalToken.substring(0, 20)}...` : 'No encontrado');
+    if (isValidToken(simpleLocalToken)) {
+      console.log('✅ Token válido encontrado en localStorage como "token"');
+      // Sincronizar con la clave principal
+      localStorage.setItem(this.TOKEN_KEY, simpleLocalToken!);
+      return simpleLocalToken;
+    }
+    
+    // 3. URL Parameters (para retorno del login)
     const urlToken = getTokenFromUrl();
     if (isValidToken(urlToken)) {
+      console.log('✅ Token válido encontrado en URL');
       this.storeToken(urlToken!);
       cleanUrlFromToken();
       return urlToken;
     }
     
-    // 3. Cookies (múltiples nombres posibles)
+    // 4. Cookies (múltiples nombres posibles)
+    console.log('🍪 Buscando en cookies...');
     const cookieToken = this.getTokenFromCookies();
     if (isValidToken(cookieToken)) {
+      console.log('✅ Token válido encontrado en cookies, sincronizando con localStorage');
       localStorage.setItem(this.TOKEN_KEY, cookieToken!);
       return cookieToken;
     }
     
-    // 4. SessionStorage (fallback)
+    // 5. SessionStorage (fallback)
     const sessionToken = this.getTokenFromSessionStorage();
     if (isValidToken(sessionToken)) {
+      console.log('✅ Token válido encontrado en sessionStorage');
       localStorage.setItem(this.TOKEN_KEY, sessionToken!);
       return sessionToken;
     }
     
+    console.log('❌ No se encontró token válido en ninguna ubicación');
     return null;
   }
 
 
 
   /**
-   * Obtener token de cookies
+   * Obtener token de cookies con búsqueda optimizada
    */
   private getTokenFromCookies(): string | null {
+    console.log('🍪 Revisando cookies disponibles...');
+    
     for (const cookieName of this.POSSIBLE_COOKIE_NAMES) {
       const token = getCookie(cookieName);
-      if (token) return token;
+      if (isValidToken(token)) {
+        console.log(`✅ Token válido encontrado en cookie: ${cookieName}`);
+        return token;
+      }
     }
+    
+    console.log('❌ No se encontró token válido en ninguna cookie');
     return null;
   }
 
