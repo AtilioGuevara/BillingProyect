@@ -3,19 +3,26 @@
  */
 
 /**
- * Obtener cookie por nombre
+ * Obtener cookie por nombre con logging mejorado
  */
 export function getCookie(name: string): string | null {
+  console.log(`🍪 Buscando cookie: ${name}`);
+  console.log(`🍪 Cookies disponibles: ${document.cookie}`);
+  
   const nameEQ = name + "=";
   const ca = document.cookie.split(';');
+  
   for(let i = 0; i < ca.length; i++) {
     let c = ca[i];
     while (c.charAt(0) === ' ') c = c.substring(1, c.length);
     if (c.indexOf(nameEQ) === 0) {
       const value = c.substring(nameEQ.length, c.length);
+      console.log(`✅ Cookie ${name} encontrada: ${value ? `${value.substring(0, 20)}...` : 'vacía'}`);
       return value && value !== 'undefined' && value !== 'null' ? value : null;
     }
   }
+  
+  console.log(`❌ Cookie ${name} no encontrada`);
   return null;
 }
 
@@ -35,14 +42,42 @@ export function cleanUrlFromToken(): void {
 }
 
 /**
- * Obtener token de parámetros URL
+ * Obtener token de parámetros URL con logging mejorado
  */
 export function getTokenFromUrl(): string | null {
+  console.log('🔍 Buscando token en URL...');
+  console.log('📍 URL completa:', window.location.href);
+  console.log('🔗 Query string:', window.location.search);
+  
   const urlParams = new URLSearchParams(window.location.search);
-  return urlParams.get('token') || 
-         urlParams.get('access_token') || 
-         urlParams.get('authToken') || 
-         urlParams.get('jwt');
+  
+  // Intentar múltiples nombres de parámetro
+  const possibleParams = ['token', 'access_token', 'authToken', 'jwt', 'auth', 'authorization'];
+  
+  for (const param of possibleParams) {
+    const value = urlParams.get(param);
+    if (value) {
+      console.log(`✅ Token encontrado en parámetro '${param}': ${value.substring(0, 20)}...`);
+      return value;
+    }
+  }
+  
+  // También buscar en el hash (por si viene como fragment)
+  const hash = window.location.hash.substring(1);
+  if (hash) {
+    console.log('🔍 Revisando hash:', hash);
+    const hashParams = new URLSearchParams(hash);
+    for (const param of possibleParams) {
+      const value = hashParams.get(param);
+      if (value) {
+        console.log(`✅ Token encontrado en hash '${param}': ${value.substring(0, 20)}...`);
+        return value;
+      }
+    }
+  }
+  
+  console.log('❌ No se encontró token en la URL');
+  return null;
 }
 
 /**

@@ -186,11 +186,12 @@ export class FinalConsumerBillNavComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * Iniciar sesión con monitoreo automático
+   * Iniciar sesión - redirigir al login externo
    */
   login(): void {
     console.log('🚀 Iniciando proceso de login...');
-    this.authService.startLoginMonitoring();
+    console.log('🔗 Redirigiendo al sistema de login externo...');
+    this.authService.redirectToLogin();
   }
 
   /**

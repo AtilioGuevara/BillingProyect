@@ -92,22 +92,40 @@ export class AuthService {
   storeToken(token: string): void {
     if (!isValidToken(token)) return;
 
+    console.log('💾 Guardando token en múltiples ubicaciones...');
+    console.log('🔍 Token length:', token.length);
+    console.log('🌐 Hostname:', window.location.hostname);
+    console.log('🔒 Protocol:', window.location.protocol);
+
     // Guardar en localStorage (método principal)
     localStorage.setItem(this.TOKEN_KEY, token);
+    console.log('✅ Token guardado en localStorage');
     
-    // Guardar cookies para compatibilidad
+    // Configurar cookies
     const isHttps = window.location.protocol === 'https:';
     const secure = isHttps ? '; Secure' : '';
-    const sameSite = '; SameSite=Lax';
     
-    // Cookies principales
-    document.cookie = `token=${token}; path=/${secure}${sameSite}`;
-    document.cookie = `authToken=${token}; path=/${secure}${sameSite}`;
+    // Cookies para dominio actual
+    document.cookie = `token=${token}; path=/${secure}; SameSite=Lax`;
+    document.cookie = `authToken=${token}; path=/${secure}; SameSite=Lax`;
+    console.log('✅ Cookies locales establecidas');
     
-    // Cookie compartida para subdominios en producción
-    if (isHttps && window.location.hostname.includes('beckysflorist.site')) {
-      document.cookie = `token=${token}; path=/; domain=.beckysflorist.site; SameSite=None; Secure`;
+    // Cookie compartida para subdominios de beckysflorist.site
+    if (window.location.hostname.includes('beckysflorist.site')) {
+      // Para subdominios, usar dominio compartido
+      document.cookie = `token=${token}; path=/; domain=.beckysflorist.site${secure}; SameSite=Lax`;
+      document.cookie = `authToken=${token}; path=/; domain=.beckysflorist.site${secure}; SameSite=Lax`;
+      
+      // Si es HTTPS, también crear cookies más permisivas
+      if (isHttps) {
+        document.cookie = `token=${token}; path=/; domain=.beckysflorist.site; SameSite=None; Secure`;
+        document.cookie = `authToken=${token}; path=/; domain=.beckysflorist.site; SameSite=None; Secure`;
+      }
+      console.log('✅ Cookies de subdominio establecidas para .beckysflorist.site');
     }
+    
+    // Verificar que las cookies se establecieron
+    console.log('🍪 Cookies después de guardar:', document.cookie);
   }
 
   /**
@@ -129,17 +147,28 @@ export class AuthService {
    * Redirigir al sistema de login externo
    */
   redirectToLogin(): void {
+    console.log('🚀 Iniciando redirección a login...');
+    
+    // Limpiar cualquier token anterior
+    localStorage.removeItem(this.TOKEN_KEY);
+    console.log('🗑️ Token anterior limpiado');
+    
     let callbackUrl = isLocalEnvironment() ? environment.auth.localCallbackUrl : environment.auth.callbackUrl;
+    console.log('🔄 URL de callback original:', callbackUrl);
     
     // Remover protocolo para evitar duplicación
     callbackUrl = callbackUrl.replace(/^https?:\/\//, '');
+    console.log('🔄 URL de callback procesada:', callbackUrl);
     
     const loginUrl = `${environment.auth.externalLoginUrl}?redirect=${encodeURIComponent(callbackUrl)}`;
+    console.log('🔗 URL de login completa:', loginUrl);
     
     // Marcar que estamos esperando auth
     localStorage.setItem('waitingForAuth', 'true');
+    console.log('⏳ Marcado como esperando autenticación');
     
     // Redirigir
+    console.log('🌐 Redirigiendo a sistema de autenticación externo...');
     window.location.href = loginUrl;
   }
 
@@ -147,12 +176,29 @@ export class AuthService {
    * Procesar retorno del login externo
    */
   handleLoginReturn(): void {
+    console.log('🔄 Procesando retorno del login externo...');
+    console.log('📍 URL actual:', window.location.href);
+    
     const token = getTokenFromUrl();
+    console.log('🔍 Token extraído de URL:', token ? `${token.substring(0, 20)}...` : 'No encontrado');
     
     if (token) {
+      console.log('✅ Token encontrado, almacenando...');
       this.storeToken(token);
       cleanUrlFromToken();
       localStorage.removeItem('waitingForAuth');
+      console.log('🎉 Autenticación completada exitosamente');
+    } else {
+      console.log('❌ No se encontró token en la URL');
+      
+      // Verificar si hay token en cookies después de login
+      const cookieToken = this.getTokenFromCookies();
+      if (cookieToken) {
+        console.log('🍪 Token encontrado en cookies, almacenando...');
+        this.storeToken(cookieToken);
+        localStorage.removeItem('waitingForAuth');
+        console.log('🎉 Autenticación completada desde cookies');
+      }
     }
   }
 
@@ -189,9 +235,18 @@ export class AuthService {
 
   /**
    * Método de compatibilidad - iniciar monitoreo de login
+   * Redirige al login externo y configura monitoreo
    */
   startLoginMonitoring(): void {
-    // Implementación simplificada - solo verificar una vez
-    this.checkForLoginSuccess();
+    console.log('🔄 Iniciando monitoreo de login...');
+    
+    // Si ya está autenticado, no hacer nada
+    if (this.isAuthenticated()) {
+      console.log('✅ Usuario ya autenticado');
+      return;
+    }
+    
+    // Redirigir al login externo
+    this.redirectToLogin();
   }
 }
