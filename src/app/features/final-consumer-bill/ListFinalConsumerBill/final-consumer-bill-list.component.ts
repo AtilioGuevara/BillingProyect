@@ -124,7 +124,8 @@ export class FinalConsumerBillListComponent implements OnInit {
     this.loading = true;
     this.errorMsg = '';
     
-    this.billService.getAllFinalConsumerBills().subscribe({
+    console.log('📋 Cargando facturas usando FETCH según solicitud del compañero');
+    this.billService.getAllFinalConsumerBillsWithFetch().subscribe({
       next: (data: FinalConsumerBillListDTO[]) => {
         this.bills = data;
         this.loading = false;

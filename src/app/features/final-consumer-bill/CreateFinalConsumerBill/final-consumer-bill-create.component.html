@@ -42,16 +42,16 @@
         <div class="mb-8">
           <h6 class="mb-4 text-lg font-semibold border-b pb-2">Información General</h6>
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <!-- Condición de pago -->
+            <!-- Método de pago -->
             <div>
-              <label for="paymentCondition" class="form-label">Condición de pago *</label>
+              <label for="paymentCondition" class="form-label">Método de pago *</label>
               <select id="paymentCondition" formControlName="paymentCondition" class="form-input">
-                <option value="" disabled selected hidden>Seleccione una opción</option>
-                <option value="CONTADO">Contado</option>
-                <option value="CREDITO">Crédito</option>
+                <option value="" disabled selected hidden>Seleccione método de pago</option>
+                <option value="EFECTIVO">Efectivo</option>
+                <option value="TARJETA">Tarjeta de crédito/débito</option>
               </select>
               <div *ngIf="isFieldEmpty('paymentCondition')" class="text-red-500 text-sm mt-1">
-                Condición de pago es requerida
+                Método de pago es requerido
               </div>
             </div>
           </div>
@@ -81,6 +81,26 @@
                 </div>
                 <div class="text-xs text-gray-500">
                   {{ getFieldLength('customerName') }}/50
+                </div>
+              </div>
+            </div>
+
+            <!-- Apellido del cliente -->
+            <div>
+              <label for="customerLastname" class="form-label">Apellido del cliente</label>
+              <input type="text" id="customerLastname" formControlName="customerLastname" 
+                     class="form-input" 
+                     maxlength="50"
+                     [class.border-green-500]="isFieldValid('customerLastname')"
+                     placeholder="Ej: García Martínez (opcional)">
+              <div class="flex justify-between items-center mt-1">
+                <div>
+                  <div *ngIf="isFieldValid('customerLastname')" class="text-green-500 text-sm">
+                    <i class="ri-check-line"></i> Apellido válido
+                  </div>
+                </div>
+                <div class="text-xs text-gray-500">
+                  {{ getFieldLength('customerLastname') }}/50
                 </div>
               </div>
             </div>

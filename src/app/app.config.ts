@@ -558,8 +558,8 @@ export const appConfig: ApplicationConfig = {
       provideClientHydration(),
       provideHttpClient(withInterceptors([blockUnwantedRequestsInterceptor])),
       provideAnimations(),
-      // Provider para AUTH_SERVICE_URL con URL dummy para evitar errores
-      { provide: AUTH_SERVICE_URL, useValue: 'http://localhost:3000/dummy' },
+      // Provider para AUTH_SERVICE_URL - URL del microservicio de autenticación en producción
+      { provide: AUTH_SERVICE_URL, useValue: environment.authApiUrl },
       provideStore({
         products: productReducer,
         patients: patientReducer,

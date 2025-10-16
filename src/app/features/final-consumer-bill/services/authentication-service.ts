@@ -27,23 +27,55 @@ export class AuthService {
   //para recibir el token
 
   getToken(): string | null {
-    // Primero intentar obtener de localStorage
+    console.log('🔍 Buscando token de autenticación...');
+    
+    // 1. Primero intentar obtener de localStorage
     const localToken = localStorage.getItem('authToken');
     if (localToken && localToken !== 'null' && localToken !== 'undefined') {
+      console.log('✅ Token encontrado en localStorage');
       return localToken;
     }
     
-    // Luego intentar obtener de cookies con diferentes nombres posibles
-    const cookieNames = ['token', 'authToken', 'auth_token', 'access_token', 'jwt'];
+    // 2. Verificar parámetros de URL (para cuando viene del login externo)
+    const urlParams = new URLSearchParams(window.location.search);
+    const urlToken = urlParams.get('token') || urlParams.get('access_token') || 
+                     urlParams.get('authToken') || urlParams.get('jwt');
+    
+    if (urlToken && urlToken !== 'null' && urlToken !== 'undefined') {
+      console.log('✅ Token encontrado en URL params');
+      // Guardarlo en localStorage para próximas verificaciones
+      localStorage.setItem('authToken', urlToken);
+      return urlToken;
+    }
+    
+    // 3. Luego intentar obtener de cookies con diferentes nombres posibles
+    const cookieNames = ['token', 'authToken', 'auth_token', 'access_token', 'jwt', 'session'];
     
     for (const cookieName of cookieNames) {
       const token = this.getCookie(cookieName);
       if (token && token !== 'null' && token !== 'undefined') {
+        console.log(`✅ Token encontrado en cookie: ${cookieName}`);
         // Si encontramos un token válido en cookies, también guardarlo en localStorage
         localStorage.setItem('authToken', token);
         return token;
       }
     }
+    
+    // 4. Verificar si hay algún token en sessionStorage
+    const sessionToken = sessionStorage.getItem('authToken') || 
+                          sessionStorage.getItem('token') || 
+                          sessionStorage.getItem('access_token');
+    
+    if (sessionToken && sessionToken !== 'null' && sessionToken !== 'undefined') {
+      console.log('✅ Token encontrado en sessionStorage');
+      localStorage.setItem('authToken', sessionToken);
+      return sessionToken;
+    }
+    
+    console.log('❌ No se encontró token en ningún lado');
+    console.log('🔍 Cookies disponibles:', document.cookie);
+    console.log('🔍 LocalStorage authToken:', localStorage.getItem('authToken'));
+    console.log('🔍 URL actual:', window.location.href);
     
     return null;
   }

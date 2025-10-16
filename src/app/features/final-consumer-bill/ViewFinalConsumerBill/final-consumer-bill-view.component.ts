@@ -33,15 +33,23 @@ export class FinalConsumerBillViewComponent implements OnInit {
     } else {
       this.error = 'No se proporcionó un código de generación válido';
     }
-    if (this.bill) {
-    if (this.bill.customerDocument) {
-      this.bill.customerDocument = this.formatDocument(this.bill.customerDocument);
-    }
-    if (this.bill.customerPhone) {
-      this.bill.customerPhone = this.formatPhone(this.bill.customerPhone);
-    }
   }
-    
+
+  private formatBillData(): void {
+    if (this.bill) {
+      if (this.bill.receiver?.customerDocument) {
+        this.bill.receiver.customerDocument = this.formatDocument(this.bill.receiver.customerDocument);
+      }
+      if (this.bill.receiver?.customerPhone) {
+        this.bill.receiver.customerPhone = this.formatPhone(this.bill.receiver.customerPhone);
+      }
+      if (this.bill.transmitter?.companyDocument) {
+        this.bill.transmitter.companyDocument = this.formatDocument(this.bill.transmitter.companyDocument);
+      }
+      if (this.bill.transmitter?.companyPhone) {
+        this.bill.transmitter.companyPhone = this.formatPhone(this.bill.transmitter.companyPhone);
+      }
+    }
   }
 
   private formatDocument(document: string): string {
@@ -78,6 +86,7 @@ export class FinalConsumerBillViewComponent implements OnInit {
       .subscribe({
         next: (bill) => {
           this.bill = bill;
+          this.formatBillData();
         },
         error: (error) => {
           console.error('❌ Error al cargar factura:', error);

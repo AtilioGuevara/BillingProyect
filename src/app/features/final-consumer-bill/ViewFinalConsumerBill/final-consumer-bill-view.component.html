@@ -70,55 +70,55 @@
       </div>
 
       <!-- Customer Information -->
-      <div class="bill-section" *ngIf="bill.customerName">
+      <div class="bill-section" *ngIf="bill.receiver?.customerName">
         <h3>Información del Cliente</h3>
         <div class="info-grid">
-          <div class="info-item" *ngIf="bill.customerName">
+          <div class="info-item" *ngIf="bill.receiver.customerName">
             <label>Nombre:</label>
-            <span>{{ bill.customerName }}</span>
+            <span>{{ bill.receiver.customerName }} {{ bill.receiver.customerLastname }}</span>
           </div>
-          <div class="info-item" *ngIf="bill.customerDocument">
+          <div class="info-item" *ngIf="bill.receiver.customerDocument">
             <label>Documento:</label>
-            <span>{{ bill.customerDocument }}</span>
+            <span>{{ bill.receiver.customerDocument }}</span>
           </div>
-          <div class="info-item" *ngIf="bill.customerEmail">
+          <div class="info-item" *ngIf="bill.receiver.customerEmail">
             <label>Email:</label>
-            <span>{{ bill.customerEmail }}</span>
+            <span>{{ bill.receiver.customerEmail }}</span>
           </div>
-          <div class="info-item" *ngIf="bill.customerPhone">
+          <div class="info-item" *ngIf="bill.receiver.customerPhone">
             <label>Teléfono:</label>
-            <span>{{ bill.customerPhone }}</span>
+            <span>{{ bill.receiver.customerPhone }}</span>
           </div>
-          <div class="info-item" *ngIf="bill.customerAddress">
+          <div class="info-item" *ngIf="bill.receiver.customerAddress">
             <label>Dirección:</label>
-            <span>{{ bill.customerAddress }}</span>
+            <span>{{ bill.receiver.customerAddress }}</span>
           </div>
         </div>
       </div>
 
       <!-- Company Information -->
-      <div class="bill-section" *ngIf="bill.companyName">
+      <div class="bill-section" *ngIf="bill.transmitter?.companyName">
         <h3>Información de la Empresa</h3>
         <div class="info-grid">
           <div class="info-item">
             <label>Nombre:</label>
-            <span>{{ bill.companyName }}</span>
+            <span>{{ bill.transmitter.companyName }}</span>
           </div>
-          <div class="info-item" *ngIf="bill.companyDocument">
+          <div class="info-item" *ngIf="bill.transmitter.companyDocument">
             <label>Documento:</label>
-            <span>{{ bill.companyDocument }}</span>
+            <span>{{ bill.transmitter.companyDocument }}</span>
           </div>
-          <div class="info-item" *ngIf="bill.companyEmail">
+          <div class="info-item" *ngIf="bill.transmitter.companyEmail">
             <label>Email:</label>
-            <span>{{ bill.companyEmail }}</span>
+            <span>{{ bill.transmitter.companyEmail }}</span>
           </div>
-          <div class="info-item" *ngIf="bill.companyPhone">
+          <div class="info-item" *ngIf="bill.transmitter.companyPhone">
             <label>Teléfono:</label>
-            <span>{{ bill.companyPhone }}</span>
+            <span>{{ bill.transmitter.companyPhone }}</span>
           </div>
-          <div class="info-item" *ngIf="bill.companyAddress">
+          <div class="info-item" *ngIf="bill.transmitter.companyAddress">
             <label>Dirección:</label>
-            <span>{{ bill.companyAddress }}</span>
+            <span>{{ bill.transmitter.companyAddress }}</span>
           </div>
         </div>
       </div>
@@ -139,9 +139,9 @@
             <tbody>
               <tr *ngFor="let product of bill.products">
                 <td>{{ product.name }}</td>
-                <td>{{ product.quantity }}</td>
+                <td>{{ product.requestedQuantity }}</td>
                 <td>{{ product.price | currency:'USD':'symbol':'1.2-2' }}</td>
-                <td>{{ (product.quantity * product.price) | currency:'USD':'symbol':'1.2-2' }}</td>
+                <td>{{ product.subTotal | currency:'USD':'symbol':'1.2-2' }}</td>
               </tr>
             </tbody>
           </table>

@@ -36,7 +36,8 @@ export class AppComponent implements OnInit {
     private titleService: TitleService, 
     private http: HttpClient,
     private activatedRoute: ActivatedRoute,
-    private authService: AuthService
+    private authService: AuthService,
+    private sessionService: SessionService
   ) {
     inject(SessionService);
     this.settingService.settings$.subscribe((settings) => {
@@ -66,12 +67,13 @@ export class AppComponent implements OnInit {
   }
 
   /**
-   * Verificar si el usuario está autenticado
+   * Verificar si el usuario está autenticado - versión mejorada para producción
    */
   private checkAuthentication() {
     const currentPath = window.location.pathname;
     
     console.log('🔍 App Component - Verificando autenticación para:', currentPath);
+    console.log('� SessionService disponible:', !!this.sessionService);
     
     // Verificar inmediatamente si ya hay token
     if (this.authService.isAuthenticated()) {
@@ -82,7 +84,7 @@ export class AppComponent implements OnInit {
     // Si estamos en la página de lista, podríamos venir del login externo
     // Dar tiempo para que se procesen las cookies del login externo
     if (currentPath.includes('/final-consumer-bill/list')) {
-      console.log('� En página de lista - verificando si venimos del login externo');
+      console.log('📄 En página de lista - verificando si venimos del login externo');
       
       setTimeout(() => {
         if (!this.authService.isAuthenticated()) {

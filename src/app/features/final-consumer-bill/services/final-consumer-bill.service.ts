@@ -1,6 +1,6 @@
 import { Injectable, isDevMode } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { Observable, catchError, tap, throwError, of, map } from 'rxjs';
+import { Observable, catchError, tap, throwError, of, map, from } from 'rxjs';
 import { 
   CreateFinalConsumerBillDTO, 
   FinalConsumerBillListDTO, 
@@ -217,4 +217,133 @@ export class FinalConsumerBillService {
     map(products => products.filter(product => product.active)) // Filtrar solo productos activos
   );  
 }
+
+  // ===============================
+  // MÉTODOS CON FETCH (NUEVOS)
+  // ===============================
+  
+  /**
+   * Obtiene opciones para fetch con autenticación JWT según documentación del backend
+   */
+  private getFetchOptions(method: string = 'GET', body?: any): RequestInit {
+    const headers: Record<string, string> = {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+    };
+
+    // Obtener JWT para Authorization header según documentación del backend
+    const jwt = this.getJWTToken();
+    
+    if (jwt) {
+      headers['Authorization'] = `Bearer ${jwt}`;
+      console.log('🔑 JWT agregado a fetch headers para backend - Authorization: Bearer <JWT>');
+    } else {
+      console.warn('⚠️ No se encontró JWT para el header Authorization requerido por el backend');
+    }
+
+    const options: RequestInit = {
+      method,
+      headers,
+      credentials: 'include', // Para cookies adicionales
+    };
+
+    if (body && method !== 'GET') {
+      options.body = JSON.stringify(body);
+    }
+
+    console.log('🌐 Configurando fetch con credentials: include y Authorization header');
+    return options;
+  }
+
+  /**
+   * Obtiene el JWT token para el header Authorization según la documentación
+   */
+  private getJWTToken(): string | null {
+    // Intentar obtener JWT desde múltiples fuentes
+    const sources = [
+      () => localStorage.getItem('authToken'),
+      () => localStorage.getItem('token'),
+      () => localStorage.getItem('jwt'),
+      () => localStorage.getItem('access_token'),
+      () => getCookie('authToken'),
+      () => getCookie('token'),
+      () => getCookie('jwt'),
+      () => getCookie('access_token'),
+      () => sessionStorage.getItem('authToken'),
+      () => sessionStorage.getItem('token'),
+      () => sessionStorage.getItem('jwt')
+    ];
+
+    for (const getToken of sources) {
+      const token = getToken();
+      if (token && token !== 'null' && token !== 'undefined' && token.length > 20) {
+        console.log('✅ JWT encontrado para Authorization header');
+        return token;
+      }
+    }
+
+    console.log('❌ No se encontró JWT válido para Authorization header');
+    return null;
+  }
+
+  /**
+   * Método de prueba usando fetch para obtener facturas
+   */
+  getAllFinalConsumerBillsWithFetch(): Observable<FinalConsumerBillListDTO[]> {
+    const url = `${this.apiReadUrl}${environment.endpoints.finalConsumerBill.getAll}`;
+    
+    console.log('🔍 [FETCH] Obteniendo todas las facturas:', url);
+
+    const fetchPromise = fetch(url, this.getFetchOptions('GET'))
+      .then(async (response) => {
+        console.log('📡 [FETCH] Respuesta del servidor:', response.status, response.statusText);
+        
+        if (!response.ok) {
+          const errorText = await response.text();
+          console.error('❌ [FETCH] Error del servidor:', errorText);
+          throw new Error(`HTTP ${response.status}: ${errorText}`);
+        }
+        
+        const bills: FinalConsumerBillListDTO[] = await response.json();
+        console.log('✅ [FETCH] Facturas obtenidas:', bills.length, 'registros');
+        return bills;
+      })
+      .catch((error) => {
+        console.error('❌ [FETCH] Error al obtener facturas:', error);
+        throw error;
+      });
+
+    return from(fetchPromise);
+  }
+
+  /**
+   * Método de prueba usando fetch para crear facturas
+   */
+  createFinalConsumerBillWithFetch(bill: CreateFinalConsumerBillDTO): Observable<string> {
+    const url = `${this.apiCreateUrl}${environment.endpoints.finalConsumerBill.create}`;
+    
+    console.log('🚀 [FETCH] Creando factura:', url);
+    console.log('📦 [FETCH] Datos a enviar:', bill);
+
+    const fetchPromise = fetch(url, this.getFetchOptions('POST', bill))
+      .then(async (response) => {
+        console.log('📡 [FETCH] Respuesta del servidor:', response.status, response.statusText);
+        
+        if (!response.ok) {
+          const errorText = await response.text();
+          console.error('❌ [FETCH] Error del servidor:', errorText);
+          throw new Error(`HTTP ${response.status}: ${errorText}`);
+        }
+        
+        const result = await response.text();
+        console.log('✅ [FETCH] Factura creada exitosamente:', result);
+        return result;
+      })
+      .catch((error) => {
+        console.error('❌ [FETCH] Error al crear factura:', error);
+        throw error;
+      });
+
+    return from(fetchPromise);
+  }
 }

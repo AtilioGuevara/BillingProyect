@@ -22,7 +22,7 @@ export class FinalConsumerBillCreateComponent {
   
   // Placeholders para los campos con formatos específicos
   placeholders = {
-    paymentCondition: 'Seleccione: CONTADO o CREDITO',
+    paymentCondition: 'Seleccione método de pago: EFECTIVO, TARJETA, TRANSFERENCIA, etc.',
     
     // Cliente con formatos específicos
     customerName: 'Ej: José Antonio López (máx. 50 caracteres)',
@@ -46,7 +46,10 @@ export class FinalConsumerBillCreateComponent {
       // Datos del cliente
       customerName: ['', [
         Validators.required,
-        Validators.maxLength(50) // Máximo 50 caracteres para nombres
+        Validators.maxLength(50)
+      ]],
+      customerLastname: ['', [
+        Validators.maxLength(50)
       ]],
       customerDocument: ['', [
         Validators.required, 
@@ -269,31 +272,24 @@ export class FinalConsumerBillCreateComponent {
     formData.customerDocument = this.formatDocument(formData.customerDocument);
     formData.customerPhone = this.formatPhone(formData.customerPhone);
     
-    // DTO con nueva estructura - incluye campos ocultos con valor 0.0
     const bill: CreateFinalConsumerBillDTO = {
       paymentCondition: formData.paymentCondition,
-      
-      // Datos cliente
-      customerName: formData.customerName,
-      customerDocument: formData.customerDocument,
-      customerAddress: formData.customerAddress,
-      customerEmail: formData.customerEmail,
-      customerPhone: formData.customerPhone,
-      
-      // Productos con ID y cantidad
+      receiver: {
+        customerName: formData.customerName,
+        customerLastname: formData.customerLastname || '',
+        customerDocument: formData.customerDocument,
+        customerAddress: formData.customerAddress,
+        customerEmail: formData.customerEmail,
+        customerPhone: formData.customerPhone
+      },
       products: formData.products as ProductBillCreate[],
-      
-      // Campos de impuestos ocultos - siempre se envían con valor 0.0
-      nonTaxedSales: 0.0,
-      exemptSales: 0.0,
-      taxedSales: 0.0,
-      perceivedIva: 0.0,
       withheldIva: 0.0
     };
     
     console.log('📤 Enviando factura con nueva estructura:', bill);
     
-    this.billService.createFinalConsumerBill(bill).subscribe({
+    console.log('🚀 Usando método con FETCH según solicitud del compañero');
+    this.billService.createFinalConsumerBillWithFetch(bill).subscribe({
       next: (response: string) => {
         console.log('🎉🎉🎉 ===== FACTURA CREADA EXITOSAMENTE ===== 🎉🎉🎉');
         console.log('✅ Respuesta del servidor:', response);

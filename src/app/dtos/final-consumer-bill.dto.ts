@@ -14,23 +14,23 @@ export interface ProductBill {
 
 export interface CreateFinalConsumerBillDTO {
   paymentCondition: string;
-
-  // Datos del cliente
-  customerName: string;
-  customerDocument: string;
-  customerAddress: string;
-  customerEmail: string;
-  customerPhone: string;
-
-  // Productos - array con ID y cantidad solicitada
+  receiver: {
+    customerName: string;
+    customerLastname: string;
+    customerDocument: string;
+    customerAddress: string;
+    customerEmail: string;
+    customerPhone: string;
+  };
   products: ProductBillCreate[];
-
-  // Campos de impuestos ocultos - siempre se envían con valor 0.0
-  nonTaxedSales: number;
-  exemptSales: number;
-  taxedSales: number;
-  perceivedIva: number;
   withheldIva: number;
+  payment?: {
+    paymentType: string;
+    cardType: string;
+    maskedCardNumber: string;
+    cardHolder: string;
+    authorizationCode: string;
+  };
 }
 
 // DTO para la respuesta completa (ShowBillDto del backend)
@@ -42,24 +42,32 @@ export interface FinalConsumerBillDetailDTO {
   account: string;
   paymentCondition: string;
   
-  // Información de la empresa (viene del backend)
-  companyName: string;
-  companyDocument: string;
-  companyAddress: string;
-  companyEmail: string;
-  companyPhone: string;
+  transmitter: {
+    companyName: string;
+    companyDocument: string;
+    companyAddress: string;
+    companyEmail: string;
+    companyPhone: string;
+  };
   
-  // Información del cliente
-  customerName?: string;
-  customerDocument?: string;
-  customerAddress?: string;
-  customerEmail?: string;
-  customerPhone?: string;
+  receiver: {
+    customerName: string;
+    customerLastname: string;
+    customerDocument: string;
+    customerAddress: string;
+    customerEmail: string;
+    customerPhone: string;
+  };
   
-  // Productos completos
-  products: ProductBill[];
+  products: Array<{
+    id: number;
+    productId: number;
+    name: string;
+    requestedQuantity: number;
+    price: number;
+    subTotal: number;
+  }>;
   
-  // Totales calculados por el backend
   nonTaxedSales: number;
   exemptSales: number;
   taxedSales: number;
