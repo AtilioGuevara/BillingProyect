@@ -98,7 +98,8 @@ export class FinalConsumerBillService {
     const fetchPromise = fetch(url, options)
       .then(async (response) => {
         console.log(`📡 Respuesta recibida - Status: ${response.status}`);
-        console.log('📋 Headers de respuesta:', Object.fromEntries(response.headers.entries()));
+        console.log('📋 Content-Type:', response.headers.get('content-type'));
+        console.log('📋 Headers disponibles:', response.headers);
         
         if (!response.ok) {
           const errorText = await response.text();
