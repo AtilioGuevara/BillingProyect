@@ -45,28 +45,72 @@ export class FinalConsumerBillListComponent extends BaseComponent implements OnI
   }
 
   ngOnInit(): void {
+    console.log('🚀 Inicializando componente FinalConsumerBillListComponent');
+    
     // Manejar retorno del login si aplica
     this.handleLoginReturn();
     
-    // Cargar facturas
-    this.loadBills();
+    // Verificar autenticación antes de cargar datos
+    if (this.authService.isAuthenticated()) {
+      console.log('✅ Usuario autenticado, cargando facturas...');
+      this.loadBills();
+    } else {
+      console.log('❌ Usuario no autenticado');
+      this.state.error = 'Necesita iniciar sesión para ver las facturas';
+    }
   }
 
-
-
   /**
-   * Manejar retorno del login externo
+   * Manejar retorno del login externo con verificación mejorada
    */
   private handleLoginReturn(): void {
+    console.log('🔄 Verificando retorno del login...');
+    
+    // Procesar cualquier token en la URL
     this.authService.handleLoginReturn();
+    
+    // Verificar si acabamos de completar un login
+    if (localStorage.getItem('waitingForAuth') === 'true') {
+      console.log('⏳ Esperando autenticación...');
+      
+      // Dar tiempo para que se procese el token
+      setTimeout(() => {
+        if (this.authService.isAuthenticated()) {
+          console.log('🎉 Login completado exitosamente!');
+          localStorage.removeItem('waitingForAuth');
+          
+          // Disparar evento de login exitoso
+          window.dispatchEvent(new CustomEvent('loginSuccess', {
+            detail: {
+              message: '¡Sesión iniciada correctamente!',
+              duration: 3000
+            }
+          }));
+          
+          // Recargar facturas
+          this.loadBills();
+        }
+      }, 1000);
+    }
   }
 
   /**
-   * Cargar lista de facturas
+   * Cargar lista de facturas con verificación de autenticación
    */
   loadBills(): void {
+    console.log('📋 Iniciando carga de facturas...');
+    
+    // Verificar autenticación antes de hacer la petición
+    if (!this.authService.isAuthenticated()) {
+      console.log('❌ No autenticado, no se puede cargar facturas');
+      this.state.error = 'Debe iniciar sesión para ver las facturas';
+      this.state.loadingState = LoadingState.ERROR;
+      return;
+    }
+
     this.state.loadingState = LoadingState.LOADING;
     this.state.error = null;
+    console.log('⏳ Estado de carga activado');
 
     this.billService.getAllFinalConsumerBills()
       .pipe(
@@ -74,18 +118,28 @@ export class FinalConsumerBillListComponent extends BaseComponent implements OnI
         finalize(() => {
           if (this.state.loadingState === LoadingState.LOADING) {
             this.state.loadingState = LoadingState.IDLE;
+            console.log('✅ Estado de carga finalizado');
           }
         })
       )
       .subscribe({
         next: (bills) => {
+          console.log('🎉 Facturas cargadas exitosamente:', bills.length);
           this.bills = bills;
           this.state.loadingState = LoadingState.SUCCESS;
           this.state.data = bills;
         },
         error: (error) => {
+          console.error('❌ Error al cargar facturas:', error);
           this.state.loadingState = LoadingState.ERROR;
-          this.handleError(error);
+          
+          // Si es error de autenticación, redirigir al login
+          if (error.message?.includes('401') || error.message?.includes('Unauthorized')) {
+            console.log('🔐 Error de autenticación detectado, limpiando sesión...');
+            this.authService.logout();
+          } else {
+            this.handleError(error);
+          }
         }
       });
   }

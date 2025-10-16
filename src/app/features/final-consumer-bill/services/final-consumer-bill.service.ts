@@ -8,6 +8,7 @@ import {
 } from '../../../dtos/final-consumer-bill.dto';
 import { environment } from '../../../../environments/environment';
 import { ErrorHandlerService } from '../../../services/error-handler.service';
+import { AuthService } from './authentication-service';
 import { getCookie, isValidToken } from '../../../utils/common.utils';
 
 /**
@@ -19,7 +20,10 @@ export class FinalConsumerBillService {
   private readonly apiCreateUrl = environment.apiCreateUrl;
   private readonly apiReadUrl = environment.apiReadUrl;
 
-  constructor(private errorHandler: ErrorHandlerService) {}
+  constructor(
+    private errorHandler: ErrorHandlerService,
+    private authService: AuthService
+  ) {}
 
   /**
    * Obtener todas las facturas
@@ -77,47 +81,77 @@ export class FinalConsumerBillService {
   }
 
   /**
-   * Realizar petición HTTP usando Fetch API
+   * Realizar petición HTTP usando Fetch API con logging mejorado
    */
   private performFetch<T>(url: string, method: string, body?: any): Observable<T> {
-    const fetchPromise = fetch(url, this.getFetchOptions(method, body))
+    console.log(`🌐 Iniciando ${method} request a:`, url);
+    console.log('🍪 Cookies actuales:', document.cookie);
+    
+    const options = this.getFetchOptions(method, body);
+    console.log('📋 Opciones de fetch:', {
+      method,
+      headers: options.headers,
+      credentials: options.credentials,
+      hasBody: !!options.body
+    });
+    
+    const fetchPromise = fetch(url, options)
       .then(async (response) => {
+        console.log(`📡 Respuesta recibida - Status: ${response.status}`);
+        console.log('📋 Headers de respuesta:', Object.fromEntries(response.headers.entries()));
+        
         if (!response.ok) {
           const errorText = await response.text();
+          console.error(`❌ Error HTTP ${response.status}:`, errorText);
           throw new Error(`HTTP ${response.status}: ${errorText}`);
         }
         
         // Si es método POST para crear factura, retornar como texto
         if (method === 'POST' && url.includes('create')) {
-          return await response.text() as T;
+          const result = await response.text();
+          console.log('✅ Respuesta exitosa (texto):', result);
+          return result as T;
         }
         
         // Para otros casos, parsear como JSON
-        return await response.json() as T;
+        const result = await response.json();
+        console.log('✅ Respuesta exitosa (JSON):', result);
+        return result as T;
+      })
+      .catch((error) => {
+        console.error('🚨 Error en fetch:', error);
+        throw error;
       });
 
     return from(fetchPromise);
   }
 
   /**
-   * Obtener opciones para fetch con autenticación
+   * Obtener opciones para fetch con autenticación mejorada
    */
   private getFetchOptions(method: string = 'GET', body?: any): RequestInit {
+    console.log(`🔧 Configurando petición ${method} a API...`);
+    
     const headers: Record<string, string> = {
       'Content-Type': 'application/json',
       'Accept': 'application/json'
     };
 
-    // Agregar token JWT si está disponible
-    const token = this.getJWTToken();
+    // Usar AuthService para obtener el token (más confiable)
+    const token = this.authService.getToken();
+    console.log(`🔍 Token obtenido del AuthService: ${token ? `${token.substring(0, 20)}...` : 'No encontrado'}`);
+    
     if (token) {
       headers['Authorization'] = `Bearer ${token}`;
+      console.log('✅ Header Authorization agregado');
+    } else {
+      console.log('⚠️ No se encontró token - request sin autorización');
     }
 
     const options: RequestInit = {
       method,
       headers,
-      credentials: 'include' // Para enviar cookies
+      credentials: 'include' // Para enviar cookies automáticamente
     };
 
     if (body && method !== 'GET') {
