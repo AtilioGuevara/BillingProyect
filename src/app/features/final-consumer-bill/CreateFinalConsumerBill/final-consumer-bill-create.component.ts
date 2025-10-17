@@ -37,6 +37,88 @@ export class FinalConsumerBillCreateComponent {
   };
 
   productsList: any[] = [];
+  selectedPaymentMethod: string = '';
+
+  // Configuración de métodos de pago
+  paymentMethods = {
+    // Efectivo
+    'EFECTIVO': {
+      name: 'Efectivo',
+      icon: 'ri-money-dollar-circle-line',
+      description: 'Pago en efectivo al momento de la entrega. No requiere procesamiento adicional.',
+      requiresProcessing: false
+    },
+    
+    // Tarjetas
+    'TARJETA_DEBITO': {
+      name: 'Tarjeta de Débito',
+      icon: 'ri-bank-card-line',
+      description: 'Pago con tarjeta de débito. El monto se descontará inmediatamente de su cuenta.',
+      requiresProcessing: true
+    },
+    'TARJETA_CREDITO': {
+      name: 'Tarjeta de Crédito',
+      icon: 'ri-bank-card-2-line',
+      description: 'Pago con tarjeta de crédito. Procesamiento seguro a través de nuestra pasarela de pagos.',
+      requiresProcessing: true
+    },
+    
+    // Transferencias
+    'TRANSFERENCIA_BANCARIA': {
+      name: 'Transferencia Bancaria',
+      icon: 'ri-exchange-funds-line',
+      description: 'Transferencia directa entre cuentas bancarias. Requiere confirmación del banco.',
+      requiresProcessing: true
+    },
+    'ACH': {
+      name: 'ACH (Transferencia Automática)',
+      icon: 'ri-secure-payment-line',
+      description: 'Transferencia automática ACH. Procesamiento de 1-3 días hábiles.',
+      requiresProcessing: true
+    },
+    
+    // Pagos móviles
+    'TIGO_MONEY': {
+      name: 'Tigo Money',
+      icon: 'ri-smartphone-line',
+      description: 'Pago a través de Tigo Money. Disponible las 24 horas.',
+      requiresProcessing: true
+    },
+    'CLARO_PAY': {
+      name: 'Claro Pay',
+      icon: 'ri-phone-line',
+      description: 'Pago móvil con Claro Pay. Rápido y seguro.',
+      requiresProcessing: true
+    },
+    
+    // Pagos digitales
+    'PAYPAL': {
+      name: 'PayPal',
+      icon: 'ri-paypal-line',
+      description: 'Pago seguro a través de PayPal. Acepta tarjetas y saldo PayPal.',
+      requiresProcessing: true
+    },
+    'STRIPE': {
+      name: 'Stripe (Tarjeta Online)',
+      icon: 'ri-secure-payment-line',
+      description: 'Procesamiento seguro de tarjetas online. Encriptación de nivel bancario.',
+      requiresProcessing: true
+    },
+    
+    // Otros
+    'CHEQUE': {
+      name: 'Cheque',
+      icon: 'ri-file-paper-line',
+      description: 'Pago con cheque. Requiere verificación y puede tomar varios días hábiles.',
+      requiresProcessing: true
+    },
+    'CREDITO_EMPRESA': {
+      name: 'Crédito Empresarial',
+      icon: 'ri-building-line',
+      description: 'Línea de crédito empresarial. Solo para clientes corporativos aprobados.',
+      requiresProcessing: false
+    }
+  };
 
   constructor(private fb: FormBuilder, private billService: FinalConsumerBillService) {
     this.billForm = this.fb.group({
@@ -206,6 +288,92 @@ export class FinalConsumerBillCreateComponent {
     return value ? value.length : 0;
   }
 
+  // ============ MÉTODOS DE PAGO ============
+
+  /**
+   * Maneja el cambio de método de pago
+   */
+  onPaymentMethodChange(): void {
+    this.selectedPaymentMethod = this.billForm.get('paymentCondition')?.value || '';
+    console.log('💳 Método de pago seleccionado:', this.selectedPaymentMethod);
+    
+    if (this.selectedPaymentMethod && this.paymentMethods[this.selectedPaymentMethod as keyof typeof this.paymentMethods]) {
+      const method = this.paymentMethods[this.selectedPaymentMethod as keyof typeof this.paymentMethods];
+      console.log('📋 Detalles del método:', method);
+    }
+  }
+
+  /**
+   * Obtiene el ícono del método de pago
+   */
+  getPaymentMethodIcon(paymentMethod: string): string {
+    const method = this.paymentMethods[paymentMethod as keyof typeof this.paymentMethods];
+    return method?.icon || 'ri-question-line';
+  }
+
+  /**
+   * Obtiene el nombre legible del método de pago
+   */
+  getPaymentMethodName(paymentMethod: string): string {
+    const method = this.paymentMethods[paymentMethod as keyof typeof this.paymentMethods];
+    return method?.name || paymentMethod;
+  }
+
+  /**
+   * Obtiene la descripción del método de pago
+   */
+  getPaymentMethodDescription(paymentMethod: string): string {
+    const method = this.paymentMethods[paymentMethod as keyof typeof this.paymentMethods];
+    return method?.description || 'Método de pago seleccionado';
+  }
+
+  /**
+   * Verifica si el método de pago requiere procesamiento adicional
+   */
+  requiresPaymentProcessing(): boolean {
+    if (!this.selectedPaymentMethod) return false;
+    const method = this.paymentMethods[this.selectedPaymentMethod as keyof typeof this.paymentMethods];
+    return method?.requiresProcessing || false;
+  }
+
+  /**
+   * Simula el procesamiento de pago (a implementar con pasarela real)
+   */
+  async processPayment(billData: any): Promise<{ success: boolean; transactionId?: string; error?: string }> {
+    console.log('💰 Procesando pago para método:', this.selectedPaymentMethod);
+    console.log('💵 Datos de facturación:', billData);
+
+    // Si es efectivo, no requiere procesamiento
+    if (this.selectedPaymentMethod === 'EFECTIVO' || this.selectedPaymentMethod === 'CREDITO_EMPRESA') {
+      return {
+        success: true,
+        transactionId: `CASH_${Date.now()}`
+      };
+    }
+
+    // Para otros métodos, simular procesamiento (aquí iría la integración real)
+    try {
+      // Simular delay de procesamiento
+      await new Promise(resolve => setTimeout(resolve, 2000));
+      
+      // Simular éxito (90% de éxito)
+      if (Math.random() > 0.1) {
+        return {
+          success: true,
+          transactionId: `PAY_${Date.now()}_${this.selectedPaymentMethod}`
+        };
+      } else {
+        throw new Error('Pago rechazado por el proveedor');
+      }
+    } catch (error) {
+      console.error('❌ Error procesando pago:', error);
+      return {
+        success: false,
+        error: error instanceof Error ? error.message : 'Error desconocido en el pago'
+      };
+    }
+  }
+
   // Método helper para obtener el mensaje de error
   getFieldErrorMessage(fieldName: string): string {
     const field = this.billForm.get(fieldName);
@@ -250,8 +418,8 @@ export class FinalConsumerBillCreateComponent {
     
   }
 
-  submit(): void {
-    console.log('🔄 Submit iniciado - Nueva estructura simplificada');
+  async submit(): Promise<void> {
+    console.log('🔄 Submit iniciado - Con procesamiento de pagos');
     
     this.formSubmitted = true; // Marcar que se intentó enviar
     
@@ -266,6 +434,9 @@ export class FinalConsumerBillCreateComponent {
     this.successMsg = '';
     this.errorMsg = '';
     this.loading = true;
+
+    // Actualizar método de pago seleccionado
+    this.onPaymentMethodChange();
     
     const formData = this.billForm.value;
 
@@ -288,15 +459,47 @@ export class FinalConsumerBillCreateComponent {
     
     console.log('📤 Enviando factura con nueva estructura:', bill);
     
-    console.log('🚀 Usando método con FETCH según solicitud del compañero');
+    // PROCESAR PAGO ANTES DE CREAR LA FACTURA
+    if (this.requiresPaymentProcessing()) {
+      console.log('� Procesando pago para método:', this.selectedPaymentMethod);
+      
+      try {
+        const paymentResult = await this.processPayment(bill);
+        
+        if (!paymentResult.success) {
+          this.errorMsg = `❌ Error en el pago: ${paymentResult.error}`;
+          this.loading = false;
+          setTimeout(() => this.errorMsg = '', 10000);
+          return;
+        }
+        
+        console.log('✅ Pago procesado exitosamente. ID:', paymentResult.transactionId);
+        // Agregar ID de transacción a la factura
+        (bill as any).transactionId = paymentResult.transactionId;
+      } catch (error) {
+        console.error('❌ Error crítico procesando pago:', error);
+        this.errorMsg = '❌ Error crítico en el procesamiento del pago. Intente nuevamente.';
+        this.loading = false;
+        setTimeout(() => this.errorMsg = '', 10000);
+        return;
+      }
+    } else {
+      console.log('💵 Método de pago no requiere procesamiento:', this.selectedPaymentMethod);
+    }
+    
+    console.log('🚀 Creando factura con método seleccionado:', this.selectedPaymentMethod);
     this.billService.createFinalConsumerBillWithFetch(bill).subscribe({
       next: (response: string) => {
         console.log('🎉🎉🎉 ===== FACTURA CREADA EXITOSAMENTE ===== 🎉🎉🎉');
         console.log('✅ Respuesta del servidor:', response);
         console.log('✅ Estableciendo mensaje de éxito...');
         
+        const paymentMethodName = this.getPaymentMethodName(this.selectedPaymentMethod);
+        const transactionInfo = (bill as any).transactionId ? `\n🔖 ID de transacción: ${(bill as any).transactionId}` : '';
+        
         this.successMsg = `🎉 ¡Factura creada exitosamente! 
-La factura ha sido procesada correctamente.`;
+💳 Método de pago: ${paymentMethodName}${transactionInfo}
+📄 La factura ha sido procesada correctamente.`;
         this.formSubmitted = false;
         
         console.log('✅ Mensaje de éxito establecido:', this.successMsg);

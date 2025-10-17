@@ -24,9 +24,36 @@ export class AuthService {
   ) {}
 
   /**
+   * Debug completo de cookies - método de diagnóstico
+   */
+  private debugAllCookies(): void {
+    console.log('🔍 === DEBUG COMPLETO DE COOKIES ===');
+    console.log('🌐 URL actual:', window.location.href);
+    console.log('🏠 Dominio actual:', window.location.hostname);
+    console.log('📋 document.cookie completo:', document.cookie);
+    
+    if (document.cookie) {
+      const cookies = document.cookie.split(';');
+      console.log('📊 Total de cookies:', cookies.length);
+      
+      cookies.forEach((cookie, index) => {
+        const trimmed = cookie.trim();
+        const [name, value] = trimmed.split('=');
+        console.log(`🍪 ${index + 1}. "${name}" = "${value || '(vacío)'}"`);
+      });
+    } else {
+      console.log('❌ NO HAY COOKIES EN DOCUMENT.COOKIE');
+    }
+    console.log('=================================');
+  }
+
+  /**
    * Verificar si el usuario está autenticado usando SessionService (como DevBadge)
    */
   isAuthenticated(): boolean {
+    // Debug completo de cookies primero
+    this.debugAllCookies();
+    
     // Detectar métodos disponibles en SessionService
     console.log('SessionService métodos disponibles:', Object.getOwnPropertyNames(Object.getPrototypeOf(this.sessionService)));
     console.log('SessionService propiedades:', Object.keys(this.sessionService));
@@ -52,23 +79,42 @@ export class AuthService {
   }
 
   /**
-   * Obtener token directamente de la cookie 'token' como DevBadge
+   * Obtener token directamente de las cookies del navegador - MÉTODO DIRECTO
    */
   private getTokenFromCookieDirectly(): string | null {
-    console.log('Buscando cookie token directamente...');
-    console.log('document.cookie:', document.cookie);
+    console.log('🍪 === ACCESO DIRECTO A COOKIES DEL NAVEGADOR ===');
+    console.log('📋 Todas las cookies:', document.cookie);
     
-    // Buscar específicamente la cookie 'token'
+    if (!document.cookie) {
+      console.log('❌ No hay cookies en document.cookie');
+      return null;
+    }
+    
+    // Buscar múltiples nombres de cookie posibles
+    const possibleTokenNames = ['token', 'auth_token', 'authToken', 'jwt', 'access_token'];
+    
     const cookies = document.cookie.split(';');
+    console.log('🔍 Cookies individuales:', cookies);
+    
     for (const cookie of cookies) {
-      const [name, value] = cookie.split('=').map(c => c.trim());
-      if (name === 'token' && value && value !== 'undefined' && value !== 'null') {
-        console.log('Cookie token encontrada:', value.substring(0, 20) + '...');
+      const trimmedCookie = cookie.trim();
+      console.log('🔎 Analizando cookie:', trimmedCookie);
+      
+      const equalIndex = trimmedCookie.indexOf('=');
+      if (equalIndex === -1) continue;
+      
+      const name = trimmedCookie.substring(0, equalIndex).trim();
+      const value = trimmedCookie.substring(equalIndex + 1).trim();
+      
+      console.log(`📝 Cookie encontrada: ${name} = ${value.substring(0, 20)}${value.length > 20 ? '...' : ''}`);
+      
+      if (possibleTokenNames.includes(name) && value && value !== 'undefined' && value !== 'null' && value !== '') {
+        console.log(`✅ TOKEN ENCONTRADO en cookie "${name}":`, value.substring(0, 30) + '...');
         return value;
       }
     }
     
-    console.log('Cookie token no encontrada');
+    console.log('❌ No se encontró token en ninguna cookie');
     return null;
   }
 

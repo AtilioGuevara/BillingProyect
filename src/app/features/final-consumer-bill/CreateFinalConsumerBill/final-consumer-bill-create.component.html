@@ -43,15 +43,58 @@
           <h6 class="mb-4 text-lg font-semibold border-b pb-2">Información General</h6>
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             <!-- Método de pago -->
-            <div>
+            <div class="col-span-2">
               <label for="paymentCondition" class="form-label">Método de pago *</label>
-              <select id="paymentCondition" formControlName="paymentCondition" class="form-input">
+              <select id="paymentCondition" formControlName="paymentCondition" class="form-input" (change)="onPaymentMethodChange()">
                 <option value="" disabled selected hidden>Seleccione método de pago</option>
-                <option value="EFECTIVO">Efectivo</option>
-                <option value="TARJETA">Tarjeta de crédito/débito</option>
+                
+                <!-- Pagos en efectivo -->
+                <optgroup label="💵 Pagos en Efectivo">
+                  <option value="EFECTIVO">Efectivo</option>
+                </optgroup>
+                
+                <!-- Pagos con tarjeta -->
+                <optgroup label="💳 Tarjetas">
+                  <option value="TARJETA_DEBITO">Tarjeta de Débito</option>
+                  <option value="TARJETA_CREDITO">Tarjeta de Crédito</option>
+                </optgroup>
+                
+                <!-- Transferencias -->
+                <optgroup label="🏦 Transferencias Bancarias">
+                  <option value="TRANSFERENCIA_BANCARIA">Transferencia Bancaria</option>
+                  <option value="ACH">ACH (Transferencia Automática)</option>
+                </optgroup>
+                
+                <!-- Pagos móviles (El Salvador) -->
+                <optgroup label="📱 Pagos Móviles">
+                  <option value="TIGO_MONEY">Tigo Money</option>
+                  <option value="CLARO_PAY">Claro Pay</option>
+                </optgroup>
+                
+                <!-- Pagos digitales -->
+                <optgroup label="🌐 Pagos Digitales">
+                  <option value="PAYPAL">PayPal</option>
+                  <option value="STRIPE">Stripe (Tarjeta Online)</option>
+                </optgroup>
+                
+                <!-- Otros -->
+                <optgroup label="📄 Otros">
+                  <option value="CHEQUE">Cheque</option>
+                  <option value="CREDITO_EMPRESA">Crédito Empresarial</option>
+                </optgroup>
               </select>
+              
+              <!-- Información del método seleccionado -->
+              <div *ngIf="selectedPaymentMethod" class="mt-3 p-3 bg-blue-50 border border-blue-200 rounded-lg">
+                <div class="flex items-center gap-2 mb-2">
+                  <i [class]="getPaymentMethodIcon(selectedPaymentMethod)" class="text-blue-600"></i>
+                  <span class="font-semibold text-blue-800">{{ getPaymentMethodName(selectedPaymentMethod) }}</span>
+                </div>
+                <p class="text-sm text-blue-700">{{ getPaymentMethodDescription(selectedPaymentMethod) }}</p>
+              </div>
+              
               <div *ngIf="isFieldEmpty('paymentCondition')" class="text-red-500 text-sm mt-1">
-                Método de pago es requerido
+                <i class="ri-error-warning-line"></i> Método de pago es requerido
               </div>
             </div>
           </div>
