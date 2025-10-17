@@ -58,31 +58,6 @@
                   <option value="TARJETA_DEBITO">Tarjeta de Débito</option>
                   <option value="TARJETA_CREDITO">Tarjeta de Crédito</option>
                 </optgroup>
-                
-                <!-- Transferencias -->
-                <optgroup label="🏦 Transferencias Bancarias">
-                  <option value="TRANSFERENCIA_BANCARIA">Transferencia Bancaria</option>
-                  <option value="ACH">ACH (Transferencia Automática)</option>
-                </optgroup>
-                
-                <!-- Pagos móviles (El Salvador) -->
-                <optgroup label="📱 Pagos Móviles">
-                  <option value="TIGO_MONEY">Tigo Money</option>
-                  <option value="CLARO_PAY">Claro Pay</option>
-                </optgroup>
-                
-                <!-- Pagos digitales -->
-                <optgroup label="🌐 Pagos Digitales">
-                  <option value="PAYPAL">PayPal</option>
-                  <option value="STRIPE">Stripe (Tarjeta Online)</option>
-                </optgroup>
-                
-                <!-- Otros -->
-                <optgroup label="📄 Otros">
-                  <option value="CHEQUE">Cheque</option>
-                  <option value="CREDITO_EMPRESA">Crédito Empresarial</option>
-                </optgroup>
-              </select>
               
               <!-- Información del método seleccionado -->
               <div *ngIf="selectedPaymentMethod" class="mt-3 p-3 bg-blue-50 border border-blue-200 rounded-lg">
