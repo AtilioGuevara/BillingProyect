@@ -30,25 +30,24 @@ export class AuthService {
   }
 
   /**
-   * 🔄 LOGIN CON REDIRECCIÓN - Método corregido
+   * 🔄 LOGIN CON REDIRECCIÓN - Enviar solo dominio/path sin protocolo
    */
   loginWithRedirect(): void {
-    console.log('🚀 Iniciando login con redirección...');
-    
-    // URL actual para regresar después del login (sin protocolo duplicado)
-    const currentUrl = window.location.href;
-    const returnUrl = encodeURIComponent(currentUrl);
-    
-    // URL de login con redirección automática de vuelta
-    const loginUrl = `https://accounts.beckysflorist.site/login?redirect=${returnUrl}`;
-    
-    console.log('🔗 URL actual:', currentUrl);
-    console.log('🔗 Return URL encoded:', returnUrl);
-    console.log('🔗 Redirigiendo a:', loginUrl);
-    
-    // Redireccionar al sistema de autenticación externo
-    window.location.href = loginUrl;
-  }
+  console.log('🚀 Iniciando login con redirección...');
+  
+  // ✅ ENVIAR DOMINIO SIN PROTOCOLO - para evitar que el servidor añada https://
+  const returnUrl = encodeURIComponent('https://bill.beckysflorist.site/final-consumer-bill/list');
+  
+  // URL de login con redirección automática de vuelta
+  const loginUrl = `https://accounts.beckysflorist.site/login?redirect=${returnUrl}`;
+  
+  console.log('🔗 Return URL (sin protocolo):', 'bill.beckysflorist.site/final-consumer-bill/list');
+  console.log('🔗 Return URL encoded:', returnUrl);
+  console.log('🔗 Login URL completa:', loginUrl);
+  
+  // Redireccionar al sistema de autenticación externo
+  window.location.href = loginUrl;
+} 
 
   logout(): void {
     console.log('🚪 Cerrando sesión...');
@@ -173,7 +172,54 @@ export class AuthService {
 
   // Métodos de compatibilidad
   getAuthToken(): string | null { return this.getToken(); }
-  checkForLoginSuccess(): void { }
+  
+  /**
+   * ✅ VALIDACIÓN DE SESIÓN - Usando nueva IP de validación
+   */
+  async validateSession(): Promise<boolean> {
+    try {
+      console.log('🔍 Validando sesión con servidor...');
+      
+      const token = this.getToken();
+      if (!token) {
+        console.log('❌ No hay token para validar');
+        return false;
+      }
+
+      // ✅ NUEVA URL DE VALIDACIÓN con IP específica
+      const validationUrl = 'http://173.249.17.80/api/auth/authentication/validate';
+      
+      const response = await this.http.post<any>(validationUrl, {}, {
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        }
+      }).toPromise();
+
+      if (response && response.valid) {
+        console.log('✅ Sesión válida confirmada por servidor');
+        return true;
+      } else {
+        console.log('❌ Sesión no válida según servidor');
+        return false;
+      }
+    } catch (error) {
+      console.error('❌ Error validando sesión:', error);
+      return false;
+    }
+  }
+  
+  checkForLoginSuccess(): void { 
+    // Ejecutar validación de sesión automáticamente
+    this.validateSession().then(isValid => {
+      if (isValid) {
+        console.log('✅ Sesión automática válida');
+      } else {
+        console.log('❌ Sesión automática no válida');
+      }
+    });
+  }
+  
   async isAuthenticatedAsync(): Promise<boolean> { return this.isAuthenticated(); }
   async handleLoginReturn(): Promise<void> { }
   handleLoginCallback(): void { }

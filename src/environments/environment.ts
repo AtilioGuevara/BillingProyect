@@ -7,7 +7,7 @@ export const environment = {
   apiReadUrl: 'https://bill.beckysflorist.site/bill/api',   // READ directo
 
   //API de Inventario - Directo sin proxy
-  inventoryApiUrl: 'https://endpoints-production-4a52.up.railway.app/api/productos',
+  inventoryApiUrl: 'http://37.60.243.227:8080/api/productos',
 
   // Authentication API - También vía proxy
   authApiUrl: 'https://accounts.beckysflorist.site/api/auth',
