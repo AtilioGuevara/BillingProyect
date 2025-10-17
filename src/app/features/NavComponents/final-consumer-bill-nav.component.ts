@@ -1,9 +1,8 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { AuthService, User } from '../final-consumer-bill/services/authentication-service';
-import { Subscription } from 'rxjs';
+import { AuthService } from '../final-consumer-bill/services/authentication-service';
 
 @Component({
   selector: 'app-final-consumer-bill-nav',
@@ -45,7 +44,7 @@ import { Subscription } from 'rxjs';
             <!-- Separador -->
             <div class="hidden md:block w-px h-6 bg-gray-300 mx-2"></div>
 
-            <!-- Mensaje de Login Exitoso -->
+            <!-- Mensaje de éxito temporal -->
             <div *ngIf="showSuccessMessage" 
                  class="flex items-center bg-green-100 text-green-800 px-3 py-2 rounded-lg border border-green-200 animate-fade-in">
               <i class="align-baseline ri-checkbox-circle-line mr-2 text-green-600"></i>
@@ -57,16 +56,16 @@ import { Subscription } from 'rxjs';
               </button>
             </div>
 
-            <!-- Usuario Logueado -->
-            <div *ngIf="isLoggedIn && currentUser && !showSuccessMessage" 
+            <!-- Indicador de token (opcional) -->
+            <div *ngIf="hasToken() && !showSuccessMessage" 
                  class="flex items-center bg-blue-100 text-blue-800 px-3 py-2 rounded-lg border border-blue-200">
-              <i class="align-baseline ri-user-line mr-2 text-blue-600"></i>
-              <span class="text-sm font-medium">{{ currentUser.username }}</span>
+              <i class="align-baseline ri-shield-check-line mr-2 text-blue-600"></i>
+              <span class="text-sm font-medium">Autenticado</span>
             </div>
 
-            <!-- Botón Login con Redirección -->
+            <!-- Botón Login -->
             <button 
-              *ngIf="!isLoggedIn && !showSuccessMessage"
+              *ngIf="!hasToken() && !showSuccessMessage"
               (click)="loginWithRedirect()"
               class="btn btn-success transition-all duration-300">
               <i class="align-baseline ri-login-box-line"></i>
@@ -75,7 +74,7 @@ import { Subscription } from 'rxjs';
 
             <!-- Botón Logout -->
             <button 
-              *ngIf="isLoggedIn && !showSuccessMessage"
+              *ngIf="hasToken() && !showSuccessMessage"
               (click)="logout()"
               class="btn btn-outline-danger transition-all duration-300">
               <i class="align-baseline ri-logout-box-line"></i>
@@ -115,15 +114,6 @@ import { Subscription } from 'rxjs';
       animation: fadeIn 0.3s ease-out forwards;
     }
     
-    @keyframes spin {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
-    }
-    
-    .animate-spin {
-      animation: spin 1s linear infinite;
-    }
-    
     .max-w-90vw {
       max-width: 90vw;
     }
@@ -146,70 +136,60 @@ import { Subscription } from 'rxjs';
     }
   `]
 })
-export class FinalConsumerBillNavComponent implements OnInit, OnDestroy {
+export class FinalConsumerBillNavComponent {
   showSuccessMessage = false;
   successMessage = '';
-  isLoggedIn = false;
-  currentUser: User | null = null;
-  
   private messageTimeout: any;
-  private subscriptions: Subscription[] = [];
   
   constructor(
     private router: Router,
     private authService: AuthService
   ) {}
 
-  ngOnInit(): void {
-    // Suscribirse al estado de autenticación
-    this.subscriptions.push(
-      this.authService.isLoggedIn$.subscribe(isLoggedIn => {
-        this.isLoggedIn = isLoggedIn;
-        console.log('🔄 Estado de login actualizado:', isLoggedIn);
-      })
-    );
-    
-    // Suscribirse al usuario actual
-    this.subscriptions.push(
-      this.authService.currentUser$.subscribe(user => {
-        this.currentUser = user;
-        console.log('👤 Usuario actual:', user);
-      })
-    );
-  }
-
-  ngOnDestroy(): void {
-    // Limpiar suscripciones
-    this.subscriptions.forEach(sub => sub.unsubscribe());
-    
-    if (this.messageTimeout) {
-      clearTimeout(this.messageTimeout);
-    }
-  }
-
   /**
-   * 🔄 LOGIN CON REDIRECCIÓN - Método simplificado
+   * LOGIN CON REDIRECCIÓN - Solo redirigir
    */
   loginWithRedirect(): void {
     console.log('🔄 Iniciando login con redirección...');
     this.authService.loginWithRedirect();
   }
 
+  /**
+   * LOGOUT - Solo limpiar token
+   */
   logout(): void {
     console.log('🚪 Cerrando sesión...');
     this.authService.logout();
     this.showSuccessMessageTemp('Sesión cerrada correctamente', 2000);
   }
 
+  /**
+   * VERIFICAR SI HAY TOKEN - Sin validar, solo verificar existencia
+   */
+  hasToken(): boolean {
+    const token = this.authService.getToken();
+    return !!token && token !== 'undefined' && token !== 'null';
+  }
+
+  /**
+   * MOSTRAR MENSAJE TEMPORAL
+   */
   private showSuccessMessageTemp(message: string, duration: number): void {
     this.successMessage = message;
     this.showSuccessMessage = true;
+
+    if (this.messageTimeout) {
+      clearTimeout(this.messageTimeout);
+    }
 
     this.messageTimeout = setTimeout(() => {
       this.hideSuccessMessage();
     }, duration);
   }
 
+  /**
+   * OCULTAR MENSAJE
+   */
   hideSuccessMessage(): void {
     this.showSuccessMessage = false;
     if (this.messageTimeout) {
@@ -217,6 +197,9 @@ export class FinalConsumerBillNavComponent implements OnInit, OnDestroy {
     }
   }
   
+  /**
+   * MÉTODOS DE NAVEGACIÓN
+   */
   isCreateActive(): boolean {
     return this.router.url.includes('/create');
   }
@@ -227,5 +210,14 @@ export class FinalConsumerBillNavComponent implements OnInit, OnDestroy {
 
   isSearchActive(): boolean {
     return this.router.url.includes('/search');
+  }
+
+  /**
+   * CLEANUP
+   */
+  ngOnDestroy(): void {
+    if (this.messageTimeout) {
+      clearTimeout(this.messageTimeout);
+    }
   }
 }

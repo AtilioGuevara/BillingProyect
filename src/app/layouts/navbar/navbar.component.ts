@@ -118,9 +118,6 @@ export class NavbarComponent {
   /**
    * Verificar si el usuario está autenticado
    */
-  get isAuthenticated(): boolean {
-    return this.authService.isAuthenticated();
-  }
 
   /**
    * Iniciar sesión

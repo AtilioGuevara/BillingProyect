@@ -57,7 +57,7 @@ export class FinalConsumerBillListComponent extends BaseComponent implements OnI
    */
   private async handleLoginReturn(): Promise<void> {
     // Procesar cualquier token en la URL
-    await this.authService.handleLoginReturn();
+    
     
     // Verificar si acabamos de completar un login
     if (localStorage.getItem('waitingForAuth') === 'true') {
@@ -82,9 +82,7 @@ export class FinalConsumerBillListComponent extends BaseComponent implements OnI
   async loadBills(): Promise<void> {
     console.log('📋 Iniciando carga de facturas...');
     console.log('🔑 Estado AuthService:', {
-      isAuthenticated: this.authService.isAuthenticated(),
       hasToken: !!this.authService.getToken(),
-      currentUser: this.authService.getCurrentUser()
     });
     console.log('🍪 Cookies del navegador:', document.cookie);
     
@@ -196,23 +194,5 @@ export class FinalConsumerBillListComponent extends BaseComponent implements OnI
     setTimeout(() => {
       this.state.error = null;
     }, 10000);
-  }
-
-  // 🧪 MÉTODO DE DEBUGGING - Para establecer token manualmente
-  setTestToken(): void {
-    const testToken = prompt('Ingresa el token para pruebas:');
-    if (testToken && testToken.trim()) {
-      this.authService.setTestToken(testToken.trim());
-      // Recargar facturas después de establecer el token
-      setTimeout(() => {
-        this.loadBills();
-      }, 1000);
-    }
-  }
-
-  // 🧪 MÉTODO DE DEBUGGING - Verificar cookies enviadas al backend
-  debugAuth(): void {
-    console.log('🔍 DEBUG - Cookies que se enviarán al backend:');
-    console.log('  - cookies:', document.cookie);
   }
 }

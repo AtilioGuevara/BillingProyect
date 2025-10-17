@@ -10,10 +10,6 @@ import { environment } from '../../../../environments/environment';
 import { ErrorHandlerService } from '../../../services/error-handler.service';
 import { AuthService } from './authentication-service';
 
-
-/**
- * Servicio optimizado para manejo de facturas usando Fetch API
- */
 @Injectable({ providedIn: 'root' })
 export class FinalConsumerBillService {
   
@@ -56,69 +52,39 @@ export class FinalConsumerBillService {
   }
 
   /**
-   * Buscar productos activos por nombre
+   * Obtener todos los productos activos
    */
-  searchActiveProductsByName(nombre: string = ''): Observable<any[]> {
+  getAllActiveProducts(): Observable<any[]> {
     const url = environment.inventoryApiUrl;
     const params = new URLSearchParams();
     params.set('activo', 'true');
-    if (nombre.trim()) {
-      params.set('nombre', nombre.trim());
-    }
-
     const fullUrl = `${url}?${params.toString()}`;
+    
     return this.performFetch<any[]>(fullUrl, 'GET').pipe(
-      // Asegurar que solo se retornen productos activos
-      map((products: any[]) => products.filter((product: any) => product.activo === true)) // Cambiar "active" a "activo"
+      map((products: any[]) => products.filter((product: any) => product.activo === true))
     );
   }
 
   /**
-   * Obtener todos los productos activos
-   */
-  getAllActiveProducts(): Observable<any[]> {
-    return this.searchActiveProductsByName();
-  }
-
-  /**
-   * Realizar petición HTTP usando Fetch API
+   * Realizar petición HTTP usando Fetch API - SOLO ENVIAR TOKEN, SIN VALIDAR
    */
   private performFetch<T>(url: string, method: string, body?: any): Observable<T> {
-    console.log('🚀 === INICIANDO PETICIÓN AL BACKEND DE FACTURACIÓN ===');
-    console.log('� URL:', url);
-    console.log('📝 Método:', method);
-    if (body) {
-      console.log('📦 Body:', body);
-    }
+    console.log('🚀 Enviando petición:', method, url);
     
     const options = this.getFetchOptions(url, method, body);
     
-    console.log('📋 === RESUMEN DE LA PETICIÓN ===');
-    console.log('  - Método:', options.method);
-    console.log('  - Credentials:', options.credentials);
-    console.log('  - Content-Type:', (options.headers as any)['Content-Type']);
-    console.log('  - Authorization:', (options.headers as any)['Authorization'] ? '✅ Bearer token incluido' : '❌ SIN token');
-    console.log('  - Cookies enviadas automáticamente:', document.cookie ? '✅ Sí' : '❌ No');
-    
     const fetchPromise = fetch(url, options)
       .then(async (response) => {
-        console.log('📡 === RESPUESTA DEL SERVIDOR ===');
-        console.log('  - Status:', response.status, response.statusText);
-        console.log('  - Content-Type:', response.headers.get('content-type'));
-        console.log('  - Headers respuesta disponibles:', response.headers);
+        console.log('📡 Respuesta:', response.status, response.statusText);
 
         if (!response.ok) {
           const errorText = await response.text();
-          console.error('❌ Error del servidor:', {
-            status: response.status,
-            statusText: response.statusText,
-            errorBody: errorText
-          });
+          console.error('❌ Error del servidor:', response.status, errorText);
           throw new Error(`HTTP ${response.status}: ${errorText}`);
         }
 
         const result = await response.json();
-        console.log('✅ Respuesta exitosa (JSON):', result);
+        console.log('✅ Respuesta exitosa');
         return result as T;
       });
 
@@ -126,8 +92,7 @@ export class FinalConsumerBillService {
   }
 
   /**
-   * Obtener opciones para fetch - envía token como Authorization Bearer + cookies
-   * Excluye el token para el endpoint de inventario
+   * SOLO ENVIAR TOKEN EN HEADER - SIN VALIDACIONES
    */
   private getFetchOptions(url: string, method: string = 'GET', body?: any): RequestInit {
     const headers: Record<string, string> = {
@@ -135,38 +100,27 @@ export class FinalConsumerBillService {
       'Accept': 'application/json'
     };
 
-    // URL específica donde NO se debe enviar el Bearer token
+    // Solo agregar token para endpoints de facturación (no para inventario)
     const inventoryApiUrl = 'http://37.60.243.227:8080/api/productos';
-
-    // Solo agregar el token si NO es el endpoint de inventario
+    
     if (!url.startsWith(inventoryApiUrl)) {
       const token = this.authService.getToken();
-      console.log('🔍 DEBUG - Token obtenido del AuthService:', token ? `${token.substring(0, 20)}...` : 'NO HAY TOKEN');
-      
       if (token) {
         headers['Authorization'] = `Bearer ${token}`;
-        console.log('✅ Authorization header agregado para URL:', url);
+        console.log('✅ Token enviado en header Authorization');
       } else {
-        console.warn('⚠️ No se encontró token - petición sin Authorization header');
+        console.log('⚠️ No hay token disponible');
       }
-    } else {
-      console.log('🚫 NO se agrega Authorization header para endpoint de inventario:', url);
     }
-
-    // 🍪 Log de cookies disponibles
-    console.log('🍪 Cookies disponibles para envío automático:', document.cookie || 'SIN COOKIES');
 
     const options: RequestInit = {
       method,
       headers
     };
 
-    // Solo incluir credenciales si NO es el endpoint de inventario
-    if (!url.startsWith('http://37.60.243.227:8080/api/productos')) {
-      options.credentials = 'include'; // Enviar cookies automáticamente solo para otros endpoints
-      console.log('🍪 Credenciales incluidas para:', url);
-    } else {
-      console.log('🚫 NO se incluyen credenciales para endpoint de inventario:', url);
+    // Solo incluir credenciales para endpoints de facturación
+    if (!url.startsWith(inventoryApiUrl)) {
+      options.credentials = 'include';
     }
 
     if (body && method !== 'GET') {
@@ -176,9 +130,7 @@ export class FinalConsumerBillService {
     return options;
   }
 
-
-
-  // Métodos de compatibilidad con nombres anteriores
+  // Métodos de compatibilidad
   getAllFinalConsumerBillsWithFetch(): Observable<FinalConsumerBillListDTO[]> {
     return this.getAllFinalConsumerBills();
   }

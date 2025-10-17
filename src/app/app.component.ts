@@ -46,8 +46,7 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-    // Iniciar verificación de cookies al cargar la app
-    this.authService.checkForLoginSuccess();
+    // Iniciar verificación de cookies al cargar la ap
     
     console.log('🎉 App iniciada - Login manual disponible en navbar');
     
@@ -76,27 +75,12 @@ export class AppComponent implements OnInit {
     console.log('� SessionService disponible:', !!this.sessionService);
     
     // Verificar inmediatamente si ya hay token
-    if (this.authService.isAuthenticated()) {
-      console.log('✅ Usuario ya autenticado');
-      return;
-    }
     
     // Si estamos en la página de lista, podríamos venir del login externo
     // Dar tiempo para que se procesen las cookies del login externo
     if (currentPath.includes('/final-consumer-bill/list')) {
       console.log('📄 En página de lista - verificando si venimos del login externo');
       
-      setTimeout(() => {
-        if (!this.authService.isAuthenticated()) {
-          console.log('❌ No se encontró autenticación - redirigiendo al login');
-          if (window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1') {
-            this.authService.redirectToLogin();
-          }
-        } else {
-          console.log('✅ Autenticación encontrada después del delay');
-        }
-      }, 1500); // Dar tiempo para que se procesen las cookies
-      return;
     }
     
     // Verificación normal para otras páginas
@@ -131,22 +115,6 @@ export class AppComponent implements OnInit {
       console.log('🔄 Regresamos del login exitoso - verificando autenticación...');
       
       // Dar tiempo para que se procesen las cookies del login externo
-      setTimeout(() => {
-        if (this.authService.isAuthenticated()) {
-          console.log('✅ Login exitoso detectado - redirigiendo a facturación');
-          
-          // Limpiar el parámetro de la URL
-          const cleanUrl = window.location.protocol + "//" + 
-                          window.location.host + 
-                          window.location.pathname;
-          window.history.replaceState({}, document.title, cleanUrl);
-          
-          // Redirigir a la lista de facturas
-          this.router.navigate(['/final-consumer-bill/list']);
-        } else {
-          console.log('❌ No se detectó autenticación válida después del login');
-        }
-      }, 1000); // Dar tiempo para procesar cookies
     }
   }
 

@@ -26,8 +26,7 @@
         </button>
         
         <!-- Botón Login/Logout -->
-        <button 
-          *ngIf="!isAuthenticated" 
+        <button  
           class="topbar-link" 
           title="Iniciar Sesión" 
           (click)="login()"
@@ -36,8 +35,7 @@
           <span class="hidden ml-2 sm:inline">Login</span>
         </button>
         
-        <button 
-          *ngIf="isAuthenticated" 
+        <button  
           class="topbar-link" 
           title="Cerrar Sesión" 
           (click)="logout()"
