@@ -247,7 +247,7 @@
         <!-- Campos para el pago con tarjeta -->
         <div *ngIf="billForm.get('paymentCondition')?.value === 'TARJETA_DEBITO' || billForm.get('paymentCondition')?.value === 'TARJETA_CREDITO'" formGroupName="payment" class="mt-4">
           <div>
-            <label for="cardType" class="form-label">Tipo de Tarjeta</label>
+            <label for="cardType" class="form-label">Tipo de Tarjeta *</label>
             <select id="cardType" formControlName="cardType" class="form-input">
               <option value="">-- Seleccione el tipo de tarjeta --</option>
               <option value="VISA">VISA</option>
@@ -255,10 +255,13 @@
               <option value="AMEX">American Express</option>
               <option value="DISCOVER">Discover</option>
             </select>
+            <div *ngIf="hasFieldErrors('payment.cardType')" class="text-red-500 text-sm mt-1">
+              <i class="ri-error-warning-line"></i> Tipo de tarjeta es requerido
+            </div>
           </div>
 
           <div>
-            <label for="maskedCardNumber" class="form-label">Número de Tarjeta</label>
+            <label for="maskedCardNumber" class="form-label">Número de Tarjeta *</label>
             <input
               id="maskedCardNumber"
               type="text"
@@ -266,10 +269,13 @@
               class="form-input"
               placeholder="4512345678901234"
             />
+            <div *ngIf="hasFieldErrors('payment.maskedCardNumber')" class="text-red-500 text-sm mt-1">
+              <i class="ri-error-warning-line"></i> Número de tarjeta es requerido y debe ser válido
+            </div>
           </div>
 
           <div>
-            <label for="cardHolder" class="form-label">Titular de la Tarjeta</label>
+            <label for="cardHolder" class="form-label">Titular de la Tarjeta *</label>
             <input
               id="cardHolder"
               type="text"
@@ -277,10 +283,13 @@
               class="form-input"
               placeholder="Nombre completo del titular"
             />
+            <div *ngIf="hasFieldErrors('payment.cardHolder')" class="text-red-500 text-sm mt-1">
+              <i class="ri-error-warning-line"></i> Titular de la tarjeta es requerido
+            </div>
           </div>
 
           <div>
-            <label for="authorizationCode" class="form-label">Código de Autorización</label>
+            <label for="authorizationCode" class="form-label">Código de Autorización *</label>
             <input
               id="authorizationCode"
               type="text"
@@ -288,6 +297,9 @@
               class="form-input"
               placeholder="AUTH-xxxx"
             />
+            <div *ngIf="hasFieldErrors('payment.authorizationCode')" class="text-red-500 text-sm mt-1">
+              <i class="ri-error-warning-line"></i> Código de autorización es requerido
+            </div>
           </div>
         </div>
 

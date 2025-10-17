@@ -244,6 +244,28 @@ export class FinalConsumerBillCreateComponent {
   onPaymentMethodChange(): void {
     this.selectedPaymentMethod = this.billForm.get('paymentCondition')?.value || '';
     console.log('💳 Método de pago seleccionado:', this.selectedPaymentMethod);
+
+    const paymentGroup = this.billForm.get('payment') as FormGroup;
+
+    if (this.selectedPaymentMethod === 'TARJETA_DEBITO' || this.selectedPaymentMethod === 'TARJETA_CREDITO') {
+      // Hacer que los campos de tarjeta sean requeridos
+      paymentGroup.get('cardType')?.setValidators([Validators.required]);
+      paymentGroup.get('maskedCardNumber')?.setValidators([Validators.required, Validators.pattern(/^\d{4}(\d{8}|\d{12})\d{4}$/)]);
+      paymentGroup.get('cardHolder')?.setValidators([Validators.required, Validators.maxLength(50)]);
+      paymentGroup.get('authorizationCode')?.setValidators([Validators.required]);
+    } else {
+      // Quitar validaciones de los campos de tarjeta
+      paymentGroup.get('cardType')?.clearValidators();
+      paymentGroup.get('maskedCardNumber')?.clearValidators();
+      paymentGroup.get('cardHolder')?.clearValidators();
+      paymentGroup.get('authorizationCode')?.clearValidators();
+    }
+
+    // Actualizar el estado de los controles
+    paymentGroup.get('cardType')?.updateValueAndValidity();
+    paymentGroup.get('maskedCardNumber')?.updateValueAndValidity();
+    paymentGroup.get('cardHolder')?.updateValueAndValidity();
+    paymentGroup.get('authorizationCode')?.updateValueAndValidity();
   }
 
   /**
@@ -383,7 +405,7 @@ export class FinalConsumerBillCreateComponent {
       },
       products: formData.products as ProductBillCreate[],
       withheldIva: 0.0,
-      payment: formData.paymentCondition === 'TARJETA' ? formData.payment : undefined // Solo incluir si es TARJETA
+      payment: formData.paymentCondition === 'EFECTIVO' ? undefined : formData.payment // Solo incluir si no es EFECTIVO
     };
 
     console.log('📤 Enviando factura:', bill);
