@@ -71,36 +71,32 @@ export class FinalConsumerBillCreateComponent {
     this.billForm = this.fb.group({
       // Campos principales
       paymentCondition: ['', Validators.required],
-      
+
       // Datos del cliente
-      customerName: ['', [
-        Validators.required,
-        Validators.maxLength(50)
-      ]],
-      customerLastname: ['', [
-        Validators.maxLength(50)
-      ]],
-      customerDocument: ['', [
-        Validators.required, 
-        Validators.pattern(/^\d{8}-?\d$/) // Formato: 06873291-2 con o sin guion
-      ]],
-      customerAddress: ['', [
-        Validators.required,
-        Validators.maxLength(200) // Máximo 200 caracteres para direcciones
-      ]],
+      customerName: ['', [Validators.required, Validators.maxLength(50)]],
+      customerLastname: ['', [Validators.maxLength(50)]],
+      customerDocument: ['', [Validators.required, Validators.pattern(/^\d{8}-?\d$/)]],
+      customerAddress: ['', [Validators.required, Validators.maxLength(200)]],
       customerEmail: ['', [Validators.required, Validators.email]],
-      customerPhone: ['', [
-        Validators.required,
-        Validators.pattern(/^\d{4}-?\d{4}$/) // Formato: 7777-8888 con o sin guion
-      ]],
-      
-      // Productos con ID y cantidad solicitada
+      customerPhone: ['', [Validators.required, Validators.pattern(/^\d{4}-?\d{4}$/)]],
+
+      // Productos
       products: this.fb.array([
         this.fb.group({
-          productId: ['', [Validators.required]], // ID del producto seleccionado
-          requestedQuantity: ['', [Validators.required, Validators.min(1)]]
+          productId: ['', [Validators.required]],
+          requestedQuantity: ['', [Validators.required, Validators.min(1)]],
+          precio: [{ value: '', disabled: true }]
         })
-      ])
+      ]),
+      
+      // Campos para el pago con tarjeta
+      payment: this.fb.group({
+        paymentType: [''], // EFECTIVO | TARJETA
+        cardType: [''], // VISA | MASTERCARD | AMEX | DISCOVER
+        maskedCardNumber: ['', [Validators.pattern(/^\d{4}(\d{8}|\d{12})\d{4}$/)]], // Validar formato de tarjeta
+        cardHolder: ['', [Validators.maxLength(50)]], // Nombre del titular
+        authorizationCode: [''] // Código de autorización (opcional)
+      })
     });
     
     this.addProduct(); // Agregar un producto inicial
@@ -248,11 +244,6 @@ export class FinalConsumerBillCreateComponent {
   onPaymentMethodChange(): void {
     this.selectedPaymentMethod = this.billForm.get('paymentCondition')?.value || '';
     console.log('💳 Método de pago seleccionado:', this.selectedPaymentMethod);
-    
-    if (this.selectedPaymentMethod && this.paymentMethods[this.selectedPaymentMethod as keyof typeof this.paymentMethods]) {
-      const method = this.paymentMethods[this.selectedPaymentMethod as keyof typeof this.paymentMethods];
-      console.log('📋 Detalles del método:', method);
-    }
   }
 
   /**
@@ -371,120 +362,39 @@ export class FinalConsumerBillCreateComponent {
   }
 
   async submit(): Promise<void> {
-    console.log('🔄 Submit iniciado - Con procesamiento de pagos');
-    
-    this.formSubmitted = true; // Marcar que se intentó enviar
-    
-    // Validar formulario
+    this.formSubmitted = true;
+
     if (this.billForm.invalid) {
       this.errorMsg = '❌ Por favor complete todos los campos requeridos correctamente.';
-      this.loading = false;
-      setTimeout(() => this.errorMsg = '', 5000);
       return;
     }
-    
-    this.successMsg = '';
-    this.errorMsg = '';
-    this.loading = true;
 
-    // Actualizar método de pago seleccionado
-    this.onPaymentMethodChange();
-    
     const formData = this.billForm.value;
 
-    formData.customerDocument = this.formatDocument(formData.customerDocument);
-    formData.customerPhone = this.formatPhone(formData.customerPhone);
-    
     const bill: CreateFinalConsumerBillDTO = {
       paymentCondition: formData.paymentCondition,
       receiver: {
         customerName: formData.customerName,
         customerLastname: formData.customerLastname || '',
-        customerDocument: formData.customerDocument,
+        customerDocument: this.formatDocument(formData.customerDocument),
         customerAddress: formData.customerAddress,
         customerEmail: formData.customerEmail,
-        customerPhone: formData.customerPhone
+        customerPhone: this.formatPhone(formData.customerPhone)
       },
       products: formData.products as ProductBillCreate[],
-      withheldIva: 0.0
+      withheldIva: 0.0,
+      payment: formData.paymentCondition === 'TARJETA' ? formData.payment : undefined // Solo incluir si es TARJETA
     };
-    
-    console.log('📤 Enviando factura con nueva estructura:', bill);
-    
-    // PROCESAR PAGO ANTES DE CREAR LA FACTURA
-    if (this.requiresPaymentProcessing()) {
-      console.log('� Procesando pago para método:', this.selectedPaymentMethod);
-      
-      try {
-        const paymentResult = await this.processPayment(bill);
-        
-        if (!paymentResult.success) {
-          this.errorMsg = `❌ Error en el pago: ${paymentResult.error}`;
-          this.loading = false;
-          setTimeout(() => this.errorMsg = '', 10000);
-          return;
-        }
-        
-        console.log('✅ Pago procesado exitosamente. ID:', paymentResult.transactionId);
-        // Agregar ID de transacción a la factura
-        (bill as any).transactionId = paymentResult.transactionId;
-      } catch (error) {
-        console.error('❌ Error crítico procesando pago:', error);
-        this.errorMsg = '❌ Error crítico en el procesamiento del pago. Intente nuevamente.';
-        this.loading = false;
-        setTimeout(() => this.errorMsg = '', 10000);
-        return;
-      }
-    } else {
-      console.log('💵 Método de pago no requiere procesamiento:', this.selectedPaymentMethod);
-    }
-    
-    console.log('🚀 Creando factura con método seleccionado:', this.selectedPaymentMethod);
+
+    console.log('📤 Enviando factura:', bill);
+
     this.billService.createFinalConsumerBillWithFetch(bill).subscribe({
       next: (response: string) => {
-        console.log('🎉🎉🎉 ===== FACTURA CREADA EXITOSAMENTE ===== 🎉🎉🎉');
-        console.log('✅ Respuesta del servidor:', response);
-        console.log('✅ Estableciendo mensaje de éxito...');
-        
-        const paymentMethodName = this.getPaymentMethodName(this.selectedPaymentMethod);
-        const transactionInfo = (bill as any).transactionId ? `\n🔖 ID de transacción: ${(bill as any).transactionId}` : '';
-        
-        this.successMsg = `🎉 ¡Factura creada exitosamente! 
-💳 Método de pago: ${paymentMethodName}${transactionInfo}
-📄 La factura ha sido procesada correctamente.`;
-        this.formSubmitted = false;
-        
-        console.log('✅ Mensaje de éxito establecido:', this.successMsg);
-        
-        // Limpiar SOLO el formulario, mantener los mensajes
+        this.successMsg = '🎉 ¡Factura creada exitosamente!';
         this.clearFormOnly();
-        
-        console.log('✅ Iniciando timer de 20 segundos para ocultar mensaje...');
-        // El mensaje se mantiene por 20 segundos para ser bien visible
-        setTimeout(() => {
-          this.successMsg = '';
-          console.log('⏰ Mensaje de éxito ocultado después de 20 segundos');
-        }, 20000);
       },
       error: (error: any) => {
-        console.error('❌ Error al crear factura:', error);
-        
-        if (error.status === 400) {
-          this.errorMsg = '❌ Error 400: Datos inválidos. Verifique los datos enviados.';
-        } else if (error.status === 401) {
-          this.errorMsg = '❌ Error 401: No autorizado.';
-        } else if (error.status === 500) {
-          this.errorMsg = '❌ Error 500: Error interno del servidor.';
-        } else if (error.status === 0) {
-          this.errorMsg = '❌ Sin conexión al servidor.';
-        } else {
-          this.errorMsg = `❌ Error: ${error.message || 'Error desconocido'}`;
-        }
-        
-        setTimeout(() => this.errorMsg = '', 10000);
-      },
-      complete: () => {
-        this.loading = false;
+        this.errorMsg = '❌ Error al crear la factura.';
       }
     });
   }

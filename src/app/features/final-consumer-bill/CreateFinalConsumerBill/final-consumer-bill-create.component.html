@@ -43,31 +43,27 @@
           <h6 class="mb-4 text-lg font-semibold border-b pb-2">Información General</h6>
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             <!-- Método de pago -->
-            <div class="col-span-2">
-              <label for="paymentCondition" class="form-label">Método de pago *</label>
+            <div>
+              <label for="paymentCondition" class="form-label">Método de Pago *</label>
               <select id="paymentCondition" formControlName="paymentCondition" class="form-input" (change)="onPaymentMethodChange()">
-                <option value="" disabled selected hidden>Seleccione método de pago</option>
-                
-                <!-- Pagos en efectivo -->
-                <optgroup >
-                  <option value="EFECTIVO">Efectivo</option>
-                  <option value="TARJETA_DEBITO">Tarjeta de Débito</option>
-                  <option value="TARJETA_CREDITO">Tarjeta de Crédito</option>
-                </optgroup>
+                <option value="">-- Seleccione método de pago --</option>
+                <option value="EFECTIVO">Efectivo</option>
+                <option value="TARJETA_DEBITO">Tarjeta de Débito</option>
+                <option value="TARJETA_CREDITO">Tarjeta de Crédito</option>
               </select>
-              
-              <!-- Información del método seleccionado -->
-              <div *ngIf="selectedPaymentMethod" class="mt-3 p-3 bg-blue-50 border border-blue-200 rounded-lg">
-                <div class="flex items-center gap-2 mb-2">
-                  <i [class]="getPaymentMethodIcon(selectedPaymentMethod)" class="text-blue-600"></i>
-                  <span class="font-semibold text-blue-800">{{ getPaymentMethodName(selectedPaymentMethod) }}</span>
-                </div>
-                <p class="text-sm text-blue-700">{{ getPaymentMethodDescription(selectedPaymentMethod) }}</p>
+            </div>
+
+            <!-- Información del método seleccionado -->
+            <div *ngIf="selectedPaymentMethod" class="mt-3 p-3 bg-blue-50 border border-blue-200 rounded-lg">
+              <div class="flex items-center gap-2 mb-2">
+                <i [class]="getPaymentMethodIcon(selectedPaymentMethod)" class="text-blue-600"></i>
+                <span class="font-semibold text-blue-800">{{ getPaymentMethodName(selectedPaymentMethod) }}</span>
               </div>
-              
-              <div *ngIf="isFieldEmpty('paymentCondition')" class="text-red-500 text-sm mt-1">
-                <i class="ri-error-warning-line"></i> Método de pago es requerido
-              </div>
+              <p class="text-sm text-blue-700">{{ getPaymentMethodDescription(selectedPaymentMethod) }}</p>
+            </div>
+            
+            <div *ngIf="isFieldEmpty('paymentCondition')" class="text-red-500 text-sm mt-1">
+              <i class="ri-error-warning-line"></i> Método de pago es requerido
             </div>
           </div>
         </div>
@@ -248,7 +244,52 @@
           </div>
         </div>
 
+        <!-- Campos para el pago con tarjeta -->
+        <div *ngIf="billForm.get('paymentCondition')?.value === 'TARJETA_DEBITO' || billForm.get('paymentCondition')?.value === 'TARJETA_CREDITO'" formGroupName="payment" class="mt-4">
+          <div>
+            <label for="cardType" class="form-label">Tipo de Tarjeta</label>
+            <select id="cardType" formControlName="cardType" class="form-input">
+              <option value="">-- Seleccione el tipo de tarjeta --</option>
+              <option value="VISA">VISA</option>
+              <option value="MASTERCARD">MasterCard</option>
+              <option value="AMEX">American Express</option>
+              <option value="DISCOVER">Discover</option>
+            </select>
+          </div>
 
+          <div>
+            <label for="maskedCardNumber" class="form-label">Número de Tarjeta</label>
+            <input
+              id="maskedCardNumber"
+              type="text"
+              formControlName="maskedCardNumber"
+              class="form-input"
+              placeholder="4512345678901234"
+            />
+          </div>
+
+          <div>
+            <label for="cardHolder" class="form-label">Titular de la Tarjeta</label>
+            <input
+              id="cardHolder"
+              type="text"
+              formControlName="cardHolder"
+              class="form-input"
+              placeholder="Nombre completo del titular"
+            />
+          </div>
+
+          <div>
+            <label for="authorizationCode" class="form-label">Código de Autorización</label>
+            <input
+              id="authorizationCode"
+              type="text"
+              formControlName="authorizationCode"
+              class="form-input"
+              placeholder="AUTH-xxxx"
+            />
+          </div>
+        </div>
 
         <!-- Mensajes de estado -->
         <div class="mt-6">
