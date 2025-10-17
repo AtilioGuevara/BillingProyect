@@ -25,5 +25,5 @@ export interface FinalConsumerBillListDTO {
   totalWithIva: number;
   status: string; // DRAFT, SENT, APPROVED, etc.
   createdAt: string; // Fecha de creación
-  updatedAt: string; // Última actualización
+  updatedAt?: string; // Última actualización (opcional)
 }

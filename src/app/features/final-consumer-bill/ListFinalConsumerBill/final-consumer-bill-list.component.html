@@ -38,7 +38,7 @@
             <tr>
               <th class="whitespace-nowrap">Código de Generación</th>
               <th class="whitespace-nowrap">Número de Control</th>
-              <th class="w-32 whitespace-nowrap">Fecha</th>
+              <th class="w-40 whitespace-nowrap">Fecha de Generación</th>
               <th class="w-32 whitespace-nowrap">Estado</th>
               <th class="w-24 whitespace-nowrap">Acciones</th>
             </tr>
@@ -56,9 +56,14 @@
                 </span>
               </td>
               <td>
-                <span class="text-sm text-gray-600 dark:text-gray-400">
-                  {{ bill.createdAt | date:'dd/MM/yyyy' }}
-                </span>
+                <div class="flex flex-col">
+                  <span class="text-sm font-medium text-gray-900 dark:text-gray-100">
+                    {{ getDateDisplay(bill) }}
+                  </span>
+                  <span class="text-xs text-gray-500 dark:text-gray-400">
+                    {{ getTimeDisplay(bill) }}
+                  </span>
+                </div>
               </td>
               <td>
                 <span class="inline-flex items-center px-2 py-1 text-xs font-medium rounded-full" 

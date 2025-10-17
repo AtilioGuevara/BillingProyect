@@ -179,3 +179,134 @@
     padding: 1rem 1.5rem;
   }
 }
+
+/* ========================================
+   ESTILOS PARA LA COLUMNA DE FECHA
+   ======================================== */
+
+/* Contenedor de fecha mejorado */
+.table-auto td {
+  &:nth-child(3) {
+    background: linear-gradient(135deg, rgba(109, 40, 217, 0.05) 0%, rgba(99, 102, 241, 0.05) 100%);
+    border-left: 3px solid rgba(109, 40, 217, 0.2);
+  }
+}
+
+.table-auto tbody tr:hover td:nth-child(3) {
+  background: linear-gradient(135deg, rgba(109, 40, 217, 0.1) 0%, rgba(99, 102, 241, 0.1) 100%);
+  border-left-color: #6d28d9;
+}
+
+/* Estilos para las fechas */
+.flex-col {
+  gap: 0.25rem;
+}
+
+.flex-col span:first-child {
+  font-weight: 600;
+  color: #1e293b;
+  font-size: 0.95rem;
+}
+
+.flex-col span:last-child {
+  color: #64748b;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.table-auto tbody tr:hover .flex-col span:first-child {
+  color: #6d28d9;
+}
+
+.table-auto tbody tr:hover .flex-col span:last-child {
+  color: #7c3aed;
+}
+
+/* ========================================
+   MODO OSCURO - LISTA DE FACTURAS
+   ======================================== */
+
+:host-context([data-mode="dark"]) {
+  .card {
+    background: linear-gradient(145deg, #1e293b 0%, #0f172a 100%);
+    border-color: rgba(124, 58, 237, 0.2);
+    box-shadow: 
+      0 20px 40px rgba(124, 58, 237, 0.1),
+      0 10px 20px rgba(0, 0, 0, 0.3),
+      inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  }
+
+  .card h2 {
+    background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 50%, #1e293b 100%);
+    box-shadow: 0 4px 8px rgba(124, 58, 237, 0.2);
+  }
+
+  .table-auto {
+    background: rgba(30, 41, 59, 0.9);
+    box-shadow: 0 8px 16px rgba(124, 58, 237, 0.1);
+  }
+
+  .table-auto th {
+    background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 50%, #5b21b6 100%);
+  }
+
+  .table-auto td {
+    background: rgba(30, 41, 59, 0.8);
+    border-bottom-color: rgba(124, 58, 237, 0.1);
+    color: #e2e8f0;
+  }
+
+  .table-auto td:nth-child(3) {
+    background: linear-gradient(135deg, rgba(124, 58, 237, 0.1) 0%, rgba(99, 102, 241, 0.05) 100%);
+    border-left-color: rgba(124, 58, 237, 0.3);
+  }
+
+  .table-auto tbody tr:hover {
+    background: linear-gradient(90deg, rgba(124, 58, 237, 0.15) 0%, rgba(99, 102, 241, 0.08) 100%);
+  }
+
+  .table-auto tbody tr:hover td {
+    background: transparent;
+  }
+
+  .table-auto tbody tr:hover td:nth-child(3) {
+    background: linear-gradient(135deg, rgba(124, 58, 237, 0.2) 0%, rgba(99, 102, 241, 0.1) 100%);
+    border-left-color: #7c3aed;
+  }
+
+  .flex-col span:first-child {
+    color: #f1f5f9;
+  }
+
+  .flex-col span:last-child {
+    color: #94a3b8;
+  }
+
+  .table-auto tbody tr:hover .flex-col span:first-child {
+    color: #a78bfa;
+  }
+
+  .table-auto tbody tr:hover .flex-col span:last-child {
+    color: #cbd5e1;
+  }
+
+  .text-blue-900 {
+    background: rgba(124, 58, 237, 0.1);
+    border-color: rgba(124, 58, 237, 0.3);
+    color: #cbd5e1 !important;
+  }
+
+  .text-red-600 {
+    background: rgba(239, 68, 68, 0.1);
+    border-left-color: #ef4444;
+    color: #fca5a5 !important;
+  }
+
+  .text-purple-700 {
+    color: #a78bfa !important;
+  }
+
+  .card .p-4 {
+    background: rgba(30, 41, 59, 0.7);
+  }
+}

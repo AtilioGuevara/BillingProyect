@@ -102,9 +102,16 @@ export class FinalConsumerBillListComponent extends BaseComponent implements OnI
       .subscribe({
         next: (bills) => {
           console.log('🎉 Facturas cargadas exitosamente:', bills.length);
+          console.log('📊 Datos de facturas:', bills);
+          console.log('📅 Primera factura:', bills[0]);
+          
+          // Cargar detalles de cada factura para obtener las fechas
           this.bills = bills;
           this.state.loadingState = LoadingState.SUCCESS;
           this.state.data = bills;
+          
+          // Cargar fechas para cada factura en background
+          this.loadBillDatesInBackground(bills);
         },
         error: (error) => {
           console.error('❌ Error al cargar facturas:', error);
@@ -119,6 +126,30 @@ export class FinalConsumerBillListComponent extends BaseComponent implements OnI
           }
         }
       });
+  }
+
+  /**
+   * Cargar fechas de facturas en background sin bloquear la UI
+   */
+  private loadBillDatesInBackground(bills: FinalConsumerBillListDTO[]): void {
+    bills.forEach((bill, index) => {
+      setTimeout(() => {
+        this.billService.getFinalConsumerBillByGenerationCode(bill.generationCode)
+          .pipe(takeUntil(this.destroy$))
+          .subscribe({
+            next: (detail) => {
+              console.log(`📅 Fecha cargada para factura ${index + 1}:`, detail.billGenerationDate);
+              // Actualizar la factura con la fecha
+              if (detail.billGenerationDate) {
+                bill.createdAt = detail.billGenerationDate;
+              }
+            },
+            error: (error) => {
+              console.warn(`⚠️ Error cargando fecha para factura ${index + 1}:`, error);
+            }
+          });
+      }, index * 200); // Espaciar las peticiones para no sobrecargar
+    });
   }
 
   /**
@@ -165,6 +196,41 @@ export class FinalConsumerBillListComponent extends BaseComponent implements OnI
     };
     
     return statusMap[status.toUpperCase()] || status;
+  }
+
+  /**
+   * Obtener fecha válida de la factura
+   */
+  getDateDisplay(bill: FinalConsumerBillListDTO): string {
+    const dateStr = bill.createdAt;
+    if (!dateStr) return 'Sin fecha';
+    
+    // Intentar parsear la fecha
+    const date = new Date(dateStr);
+    if (isNaN(date.getTime())) return 'Fecha inválida';
+    
+    return date.toLocaleDateString('es-SV', {
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit'
+    });
+  }
+
+  /**
+   * Obtener hora válida de la factura
+   */
+  getTimeDisplay(bill: FinalConsumerBillListDTO): string {
+    const dateStr = bill.createdAt;
+    if (!dateStr) return '--:--:--';
+    
+    const date = new Date(dateStr);
+    if (isNaN(date.getTime())) return '--:--:--';
+    
+    return date.toLocaleTimeString('es-SV', {
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit'
+    });
   }
 
   /**
