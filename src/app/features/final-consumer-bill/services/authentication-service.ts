@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { environment } from '../../../../environments/environment';
 import { getCookie, isValidToken, getTokenFromUrl, cleanUrlFromToken, isLocalEnvironment } from '../../../utils/common.utils';
+import { SessionService } from 'colibrihub-shared-services';
 
 /**
  * Servicio optimizado de autenticación para manejo del login externo
@@ -17,46 +18,89 @@ export class AuthService {
     'authToken',      // Prioridad alta - la que guardamos
   ];
 
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    private sessionService: SessionService
+  ) {}
 
   /**
-   * Verificar si el usuario está autenticado (incluye validación de sesión)
+   * Verificar si el usuario está autenticado usando SessionService (como DevBadge)
    */
   isAuthenticated(): boolean {
-    const token = this.getToken();
-    if (token) {
+    // Detectar métodos disponibles en SessionService
+    console.log('SessionService métodos disponibles:', Object.getOwnPropertyNames(Object.getPrototypeOf(this.sessionService)));
+    console.log('SessionService propiedades:', Object.keys(this.sessionService));
+    
+    // Intentar detectar token directamente de la cookie como DevBadge
+    const cookieToken = this.getTokenFromCookieDirectly();
+    if (cookieToken) {
+      console.log('Token encontrado directamente de cookie:', cookieToken.substring(0, 20) + '...');
+      // Sincronizar con localStorage
+      localStorage.setItem(this.TOKEN_KEY, cookieToken);
       return true;
     }
-    
-    // Si no hay token, verificar si hay una sesión válida
-    // Esto es útil después del login cuando la cookie existe pero no el token local
+
+    // Fallback: verificar con nuestro método
+    const localToken = this.getToken();
+    if (localToken) {
+      console.log('Token encontrado via método local:', localToken.substring(0, 20) + '...');
+      return true;
+    }
+
+    console.log('No se encontró token en ninguna ubicación');
     return false;
+  }
+
+  /**
+   * Obtener token directamente de la cookie 'token' como DevBadge
+   */
+  private getTokenFromCookieDirectly(): string | null {
+    console.log('Buscando cookie token directamente...');
+    console.log('document.cookie:', document.cookie);
+    
+    // Buscar específicamente la cookie 'token'
+    const cookies = document.cookie.split(';');
+    for (const cookie of cookies) {
+      const [name, value] = cookie.split('=').map(c => c.trim());
+      if (name === 'token' && value && value !== 'undefined' && value !== 'null') {
+        console.log('Cookie token encontrada:', value.substring(0, 20) + '...');
+        return value;
+      }
+    }
+    
+    console.log('Cookie token no encontrada');
+    return null;
   }
 
   /**
    * Verificar autenticación incluyendo validación de sesión
    */
   async isAuthenticatedAsync(): Promise<boolean> {
-    // Primero verificar token local
-    const token = this.getToken();
-    if (token) {
+    // Primero intentar detección directa como DevBadge
+    if (this.isAuthenticated()) {
       return true;
     }
     
-    // Si no hay token local, validar sesión con backend
-    const isSessionValid = await this.validateSession();
-    if (isSessionValid) {
-      // Si la sesión es válida, intentar obtener token de cookies
-      const cookieToken = this.getTokenFromCookies();
-      if (cookieToken) {
-        this.storeToken(cookieToken);
-        return true;
-      } else {
-        // Crear token temporal si la sesión es válida
-        const tempToken = 'session_valid_' + Date.now();
-        localStorage.setItem(this.TOKEN_KEY, tempToken);
-        return true;
+    // Si no hay token local, validar sesión con backend (solo si endpoint existe)
+    console.log('Intentando validación de sesión con backend...');
+    try {
+      const isSessionValid = await this.validateSession();
+      if (isSessionValid) {
+        // Si la sesión es válida, intentar obtener token de cookies nuevamente
+        const cookieToken = this.getTokenFromCookieDirectly();
+        if (cookieToken) {
+          localStorage.setItem(this.TOKEN_KEY, cookieToken);
+          return true;
+        } else {
+          // Crear token temporal si la sesión es válida
+          const tempToken = 'session_valid_' + Date.now();
+          localStorage.setItem(this.TOKEN_KEY, tempToken);
+          return true;
+        }
       }
+    } catch (error) {
+      console.log('Validación de sesión falló (probablemente CORS):', error);
+      // Ignorar error de CORS y continuar con lógica local
     }
     
     return false;
@@ -66,7 +110,7 @@ export class AuthService {
    * Obtener token de autenticación desde múltiples fuentes con debug mejorado
    */
   getToken(): string | null {
-    console.log('🔍 Buscando token de autenticación...');
+    console.log('🔍 Buscando token de autenticación (método DevBadge)...');
     
     // 1. LocalStorage (más confiable)
     const localToken = localStorage.getItem(this.TOKEN_KEY);
@@ -85,23 +129,22 @@ export class AuthService {
       localStorage.setItem(this.TOKEN_KEY, simpleLocalToken!);
       return simpleLocalToken;
     }
+
+    // 3. Cookie directa (método DevBadge) - PRIORIDAD
+    const cookieToken = this.getTokenFromCookieDirectly();
+    if (isValidToken(cookieToken)) {
+      console.log('✅ Token válido encontrado en cookie directa, sincronizando con localStorage');
+      localStorage.setItem(this.TOKEN_KEY, cookieToken!);
+      return cookieToken;
+    }
     
-    // 3. URL Parameters (para retorno del login)
+    // 4. URL Parameters (para retorno del login)
     const urlToken = getTokenFromUrl();
     if (isValidToken(urlToken)) {
       console.log('✅ Token válido encontrado en URL');
       this.storeToken(urlToken!);
       cleanUrlFromToken();
       return urlToken;
-    }
-    
-    // 4. Cookies (múltiples nombres posibles)
-    console.log('🍪 Buscando en cookies...');
-    const cookieToken = this.getTokenFromCookies();
-    if (isValidToken(cookieToken)) {
-      console.log('✅ Token válido encontrado en cookies, sincronizando con localStorage');
-      localStorage.setItem(this.TOKEN_KEY, cookieToken!);
-      return cookieToken;
     }
     
     // 5. SessionStorage (fallback)
