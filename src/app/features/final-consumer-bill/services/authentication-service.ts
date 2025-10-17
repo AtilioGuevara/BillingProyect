@@ -281,9 +281,9 @@ export class AuthService {
    */
   async validateSession(): Promise<boolean> {
     console.log('Validando sesión con el backend...');
-    
+
     try {
-      const response = await fetch(`${environment.auth.externalLoginUrl}/validate`, {
+      const response = await fetch(`${environment.auth.externalLoginUrl.replace('/login', '')}/authentication/validate`, {
         method: 'GET',
         credentials: 'include', // Enviar cookies automáticamente
         headers: {
