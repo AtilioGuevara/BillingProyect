@@ -29,43 +29,21 @@ export class AuthService {
     console.log('🔧 AuthService iniciado');
   }
 
-  async login(username: string, password: string): Promise<{ success: boolean; message: string }> {
-    try {
-      console.log('🔐 Iniciando sesión directa...');
-      
-      const loginData = { username, password };
-      const response = await this.http.post<any>('https://accounts.beckysflorist.site/authentication/login', loginData).toPromise();
-      
-      if (response && response.token) {
-        console.log('✅ Login directo exitoso');
-        this.storeAuthData(response.token, response.user || { id: username, username });
-        return { success: true, message: 'Sesión iniciada correctamente' };
-      } else {
-        return { success: false, message: 'Credenciales inválidas' };
-      }
-      
-    } catch (error: any) {
-      console.error('❌ Error en login directo:', error);
-      let message = 'Error al iniciar sesión';
-      if (error.status === 401) {
-        message = 'Credenciales incorrectas';
-      }
-      return { success: false, message };
-    }
-  }
-
   /**
-   * 🔄 LOGIN CON REDIRECCIÓN - Método original restaurado
+   * 🔄 LOGIN CON REDIRECCIÓN - Método corregido
    */
   loginWithRedirect(): void {
     console.log('🚀 Iniciando login con redirección...');
     
-    // URL actual para regresar después del login
-    const returnUrl = encodeURIComponent(window.location.href);
+    // URL actual para regresar después del login (sin protocolo duplicado)
+    const currentUrl = window.location.href;
+    const returnUrl = encodeURIComponent(currentUrl);
     
     // URL de login con redirección automática de vuelta
-    const loginUrl = `https://accounts.beckysflorist.site/authentication/login?redirect=${returnUrl}`;
+    const loginUrl = `https://accounts.beckysflorist.site/login?redirect=${returnUrl}`;
     
+    console.log('🔗 URL actual:', currentUrl);
+    console.log('🔗 Return URL encoded:', returnUrl);
     console.log('🔗 Redirigiendo a:', loginUrl);
     
     // Redireccionar al sistema de autenticación externo

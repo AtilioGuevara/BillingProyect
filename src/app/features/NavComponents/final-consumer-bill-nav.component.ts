@@ -64,29 +64,13 @@ import { Subscription } from 'rxjs';
               <span class="text-sm font-medium">{{ currentUser.username }}</span>
             </div>
 
-            <!-- Botón Login Automático (estilo DevBadge) -->
-            <button 
-              *ngIf="!isLoggedIn && !showSuccessMessage"
-              (click)="autoLogin()"
-              [disabled]="isLoggingIn"
-              class="btn btn-success transition-all duration-300">
-              <span *ngIf="!isLoggingIn">
-                <i class="align-baseline ri-login-box-line"></i>
-                🔐 Auto-Login
-              </span>
-              <span *ngIf="isLoggingIn" class="flex items-center">
-                <i class="ri-loader-line animate-spin mr-2"></i>
-                Iniciando...
-              </span>
-            </button>
-
-            <!-- Botón Login con Redirección (método original) -->
+            <!-- Botón Login con Redirección -->
             <button 
               *ngIf="!isLoggedIn && !showSuccessMessage"
               (click)="loginWithRedirect()"
-              class="btn btn-info transition-all duration-300 ml-2">
-              <i class="align-baseline ri-external-link-line"></i>
-              🔄 Login Redirect
+              class="btn btn-success transition-all duration-300">
+              <i class="align-baseline ri-login-box-line"></i>
+              Iniciar Sesión
             </button>
 
             <!-- Botón Logout -->
@@ -165,7 +149,6 @@ import { Subscription } from 'rxjs';
 export class FinalConsumerBillNavComponent implements OnInit, OnDestroy {
   showSuccessMessage = false;
   successMessage = '';
-  isLoggingIn = false;
   isLoggedIn = false;
   currentUser: User | null = null;
   
@@ -205,34 +188,7 @@ export class FinalConsumerBillNavComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * AUTO-LOGIN - Estilo DevBadge con credenciales hardcodeadas
-   */
-  async autoLogin(): Promise<void> {
-    this.isLoggingIn = true;
-
-    try {
-      console.log('🔐 Iniciando auto-login estilo DevBadge...');
-      
-      // Credenciales hardcodeadas como DevBadge
-      const result = await this.authService.login('dev', 'testpa$$');
-
-      if (result.success) {
-        console.log('✅ Auto-login exitoso');
-        this.showSuccessMessageTemp('¡Sesión iniciada automáticamente!', 3000);
-      } else {
-        console.log('❌ Auto-login fallido:', result.message);
-        this.showSuccessMessageTemp(`Error: ${result.message}`, 5000);
-      }
-    } catch (error) {
-      console.error('❌ Error inesperado en auto-login:', error);
-      this.showSuccessMessageTemp('Error de conexión. Verifica el servidor.', 5000);
-    } finally {
-      this.isLoggingIn = false;
-    }
-  }
-
-  /**
-   * 🔄 LOGIN CON REDIRECCIÓN - Método original restaurado para pruebas
+   * 🔄 LOGIN CON REDIRECCIÓN - Método simplificado
    */
   loginWithRedirect(): void {
     console.log('🔄 Iniciando login con redirección...');
