@@ -58,18 +58,18 @@ export class FinalConsumerBillService {
   /**
    * Buscar productos activos por nombre
    */
-  searchActiveProductsByName(name: string = ''): Observable<any[]> {
+  searchActiveProductsByName(nombre: string = ''): Observable<any[]> {
     const url = environment.inventoryApiUrl;
     const params = new URLSearchParams();
-    params.set('active', 'true');
-    if (name.trim()) {
-      params.set('name', name.trim());
+    params.set('activo', 'true');
+    if (nombre.trim()) {
+      params.set('nombre', nombre.trim());
     }
-    
+
     const fullUrl = `${url}?${params.toString()}`;
     return this.performFetch<any[]>(fullUrl, 'GET').pipe(
       // Asegurar que solo se retornen productos activos
-      map((products: any[]) => products.filter((product: any) => product.active === true))
+      map((products: any[]) => products.filter((product: any) => product.activo === true)) // Cambiar "active" a "activo"
     );
   }
 
@@ -91,7 +91,7 @@ export class FinalConsumerBillService {
       console.log('📦 Body:', body);
     }
     
-    const options = this.getFetchOptions(method, body);
+    const options = this.getFetchOptions(url, method, body);
     
     console.log('📋 === RESUMEN DE LA PETICIÓN ===');
     console.log('  - Método:', options.method);
@@ -106,7 +106,7 @@ export class FinalConsumerBillService {
         console.log('  - Status:', response.status, response.statusText);
         console.log('  - Content-Type:', response.headers.get('content-type'));
         console.log('  - Headers respuesta disponibles:', response.headers);
-        
+
         if (!response.ok) {
           const errorText = await response.text();
           console.error('❌ Error del servidor:', {
@@ -116,15 +116,7 @@ export class FinalConsumerBillService {
           });
           throw new Error(`HTTP ${response.status}: ${errorText}`);
         }
-        
-        // Si es método POST para crear factura, retornar como texto
-        if (method === 'POST' && url.includes('create')) {
-          const result = await response.text();
-          console.log('✅ Respuesta exitosa (texto):', result);
-          return result as T;
-        }
-        
-        // Para otros casos, parsear como JSON
+
         const result = await response.json();
         console.log('✅ Respuesta exitosa (JSON):', result);
         return result as T;
@@ -135,22 +127,30 @@ export class FinalConsumerBillService {
 
   /**
    * Obtener opciones para fetch - envía token como Authorization Bearer + cookies
+   * Excluye el token para el endpoint de inventario
    */
-  private getFetchOptions(method: string = 'GET', body?: any): RequestInit {
+  private getFetchOptions(url: string, method: string = 'GET', body?: any): RequestInit {
     const headers: Record<string, string> = {
       'Content-Type': 'application/json',
       'Accept': 'application/json'
     };
 
-    // 🔑 Obtener y agregar token como Authorization Bearer
-    const token = this.authService.getToken();
-    console.log('🔍 DEBUG - Token obtenido del AuthService:', token ? `${token.substring(0, 20)}...` : 'NO HAY TOKEN');
-    
-    if (token) {
-      headers['Authorization'] = `Bearer ${token}`;
-      console.log('✅ Authorization header agregado:', `Bearer ${token.substring(0, 20)}...`);
+    // URL específica donde NO se debe enviar el Bearer token
+    const inventoryApiUrl = 'http://37.60.243.227:8080/api/productos';
+
+    // Solo agregar el token si NO es el endpoint de inventario
+    if (!url.startsWith(inventoryApiUrl)) {
+      const token = this.authService.getToken();
+      console.log('🔍 DEBUG - Token obtenido del AuthService:', token ? `${token.substring(0, 20)}...` : 'NO HAY TOKEN');
+      
+      if (token) {
+        headers['Authorization'] = `Bearer ${token}`;
+        console.log('✅ Authorization header agregado para URL:', url);
+      } else {
+        console.warn('⚠️ No se encontró token - petición sin Authorization header');
+      }
     } else {
-      console.warn('⚠️ No se encontró token - petición sin Authorization header');
+      console.log('🚫 NO se agrega Authorization header para endpoint de inventario:', url);
     }
 
     // 🍪 Log de cookies disponibles
@@ -158,16 +158,20 @@ export class FinalConsumerBillService {
 
     const options: RequestInit = {
       method,
-      headers,
-      credentials: 'include' // Enviar cookies automáticamente
+      headers
     };
+
+    // Solo incluir credenciales si NO es el endpoint de inventario
+    if (!url.startsWith('http://37.60.243.227:8080/api/productos')) {
+      options.credentials = 'include'; // Enviar cookies automáticamente solo para otros endpoints
+      console.log('🍪 Credenciales incluidas para:', url);
+    } else {
+      console.log('🚫 NO se incluyen credenciales para endpoint de inventario:', url);
+    }
 
     if (body && method !== 'GET') {
       options.body = JSON.stringify(body);
     }
-
-    // 📋 Log final de headers que se enviarán
-    console.log('📤 Headers finales que se enviarán:', headers);
 
     return options;
   }

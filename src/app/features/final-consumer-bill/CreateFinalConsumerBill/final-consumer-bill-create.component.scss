@@ -2,9 +2,25 @@
 body {
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
+/* Contenedor del grid */
+.grid {
+  display: grid;
+  gap: 0.25rem; /* REDUCIDO de 0.5rem a 0.25rem */
+  grid-template-columns: 2fr 1fr 1fr;
+  align-items: center;
+  justify-items: start;
+  padding: 0.5rem;
+}
+
+/* Contenedor principal */
 .card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
   background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
   border-radius: 1.5rem;
   box-shadow: 
@@ -29,7 +45,7 @@ body {
 .card-header {
   background: linear-gradient(135deg, #6d28d9 0%, #5b21b6 50%, #1e293b 100%);
   color: #fff;
-  padding: 1.5rem;
+  padding: 1rem; /* Reducido de 1.5rem */
   margin: -1px -1px 0 -1px;
   border-radius: 1.5rem 1.5rem 0 0;
 }
@@ -43,7 +59,7 @@ body {
 }
 
 .card-body {
-  padding: 2rem;
+  padding: 1rem; /* Reducido de 2rem */
   background: rgba(248, 250, 252, 0.7);
   backdrop-filter: blur(10px);
 }
@@ -54,8 +70,9 @@ body {
   background: linear-gradient(145deg, #ffffff 0%, #f1f5f9 100%);
   color: #1e293b;
   border-radius: 0.75rem;
-  padding: 0.75rem 1rem;
-  font-size: 0.95rem;
+  padding: 0.4rem 0.6rem; /* REDUCIDO aún más */
+  font-size: 0.9rem;
+  margin: 0;
   transition: all 0.3s ease;
   box-shadow: 
     0 4px 8px rgba(109, 40, 217, 0.1),
@@ -83,11 +100,11 @@ body {
 .form-label {
   color: #1e293b;
   font-weight: 600;
-  font-size: 0.9rem;
-  margin-bottom: 0.5rem;
+  font-size: 0.8rem; /* REDUCIDO de 0.85rem */
+  margin-bottom: 0.15rem; /* REDUCIDO de 0.25rem */
   display: block;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.3px; /* REDUCIDO de 0.5px */
 }
 
 /* Botones mejorados */
@@ -96,9 +113,10 @@ body {
   color: #fff !important;
   border: none;
   border-radius: 0.75rem;
-  padding: 0.75rem 1.5rem;
+  padding: 0.5rem 1rem; /* Reducido de 0.75rem 1.5rem */
   font-weight: 600;
-  font-size: 0.95rem;
+  font-size: 0.9rem; /* Reducido de 0.95rem */
+  margin-top: 0.5rem; /* Añadido para separación controlada */
   transition: all 0.3s ease;
   box-shadow: 
     0 6px 12px rgba(109, 40, 217, 0.3),
@@ -124,7 +142,7 @@ body {
   border: 2px solid #64748b;
   color: #64748b;
   border-radius: 0.75rem;
-  padding: 0.75rem 1.5rem;
+  padding: 0.5rem 1rem; /* Reducido */
   font-weight: 600;
   transition: all 0.3s ease;
 }
@@ -162,28 +180,27 @@ body {
 .border-t, hr {
   border-color: rgba(109, 40, 217, 0.2) !important;
   border-width: 2px;
-  margin: 2rem 0;
+  margin: 1rem 0; /* Reducido de 2rem */
 }
 
-/* Grid con espaciado mejorado */
-.grid {
-  gap: 1.5rem;
-}
-
-/* Secciones con fondos sutiles */
+/* Secciones con fondos sutiles - CAMBIO PRINCIPAL */
 .form-section {
   background: rgba(255, 255, 255, 0.5);
   border-radius: 1rem;
-  padding: 1.5rem;
-  margin-bottom: 1.5rem;
+  padding: 0.75rem;
+  margin-bottom: 0.75rem;
   border: 1px solid rgba(109, 40, 217, 0.1);
+  display: grid;
+  gap: 0.25rem; /* REDUCIDO de 0.5rem a 0.25rem */
+  grid-template-columns: repeat(3, 1fr);
+  align-items: start;
 }
 
 /* Mensajes de estado */
 .text-green-600 {
   color: #059669 !important;
   background: rgba(5, 150, 105, 0.1);
-  padding: 0.75rem;
+  padding: 0.5rem; /* Reducido de 0.75rem */
   border-radius: 0.5rem;
   border-left: 4px solid #059669;
 }
@@ -191,7 +208,7 @@ body {
 .text-red-600 {
   color: #dc2626 !important;
   background: rgba(220, 38, 38, 0.1);
-  padding: 0.75rem;
+  padding: 0.5rem; /* Reducido de 0.75rem */
   border-radius: 0.5rem;
   border-left: 4px solid #dc2626;
 }
@@ -200,8 +217,8 @@ body {
 .product-item {
   background: rgba(255, 255, 255, 0.8);
   border-radius: 1rem;
-  padding: 1.5rem;
-  margin-bottom: 1rem;
+  padding: 1rem; /* Reducido de 1.5rem */
+  margin-bottom: 0.5rem; /* Reducido de 1rem */
   border: 1px solid rgba(109, 40, 217, 0.1);
   transition: all 0.3s ease;
 }
@@ -209,4 +226,85 @@ body {
 .product-item:hover {
   transform: translateY(-2px);
   box-shadow: 0 8px 16px rgba(109, 40, 217, 0.15);
+}
+
+/* Elementos del grid */
+.grid-item {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding: 0.5rem 0.75rem; /* Ajustado */
+  border: 1px solid rgba(109, 40, 217, 0.1);
+  border-radius: 0.5rem;
+  background: rgba(255, 255, 255, 0.8);
+  box-shadow: 0 2px 4px rgba(109, 40, 217, 0.1);
+  min-height: auto;
+  line-height: 1.2;
+  margin: 0; /* Añadido */
+}
+
+/* Ajustar el select */
+select {
+  height: auto;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.9rem;
+  line-height: 1.2;
+  margin: 0; /* Añadido */
+}
+
+/* Grupos de formulario - NUEVO */
+.form-group {
+  margin-bottom: 0.5rem; /* Espacio reducido entre grupos */
+}
+
+/* Campos individuales del formulario - NUEVO */
+.form-field {
+  margin-bottom: 0.25rem; /* Espacio mínimo entre campos */
+}
+
+/* Contenedores de input - NUEVO */
+.input-container {
+  margin-bottom: 0.5rem;
+}
+
+/* Grid específico para información del cliente - ACTUALIZADO */
+.client-info-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.25rem; /* REDUCIDO de 0.5rem a 0.25rem */
+  margin-bottom: 0.75rem;
+}
+
+/* Grid específico para productos - ACTUALIZADO */
+.products-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 0.25rem; /* REDUCIDO de 0.5rem a 0.25rem */
+  align-items: end;
+  margin-bottom: 0.5rem;
+}
+
+/* Contenedor del grid - ACTUALIZADO */
+.grid {
+  display: grid;
+  gap: 0.25rem; /* REDUCIDO de 0.5rem a 0.25rem */
+  grid-template-columns: 2fr 1fr 1fr;
+  align-items: center;
+  justify-items: start;
+  padding: 0.5rem;
+}
+
+/* NUEVO: Clase específica para campos muy compactos */
+.compact-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.15rem; /* Espacio mínimo */
+  align-items: start;
+  margin-bottom: 0.5rem;
+}
+
+/* NUEVO: Para campos que necesitan estar muy juntos */
+.tight-spacing {
+  margin-right: 0.25rem;
+  margin-left: 0;
 }

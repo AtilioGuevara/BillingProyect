@@ -14,11 +14,14 @@ import { FinalConsumerBillNavComponent } from '../../NavComponents/final-consume
   styleUrls: ['./final-consumer-bill-create.component.scss']
 })
 export class FinalConsumerBillCreateComponent {
+  productsList: any[] = []; // Lista de productos cargados
   billForm: FormGroup;
   loading = false;
   successMsg = '';
   errorMsg = '';
   formSubmitted = false; // Para controlar cuándo mostrar validaciones
+
+  
   
   // Placeholders para los campos con formatos específicos
   placeholders = {
@@ -36,7 +39,7 @@ export class FinalConsumerBillCreateComponent {
     requestedQuantity: 'Ej: 2'
   };
 
-  productsList: any[] = [];
+  selectedPrice: number | null = null; // Precio del producto seleccionado
   selectedPaymentMethod: string = '';
 
   // Configuración de métodos de pago
@@ -62,62 +65,6 @@ export class FinalConsumerBillCreateComponent {
       description: 'Pago con tarjeta de crédito. Procesamiento seguro a través de nuestra pasarela de pagos.',
       requiresProcessing: true
     },
-    
-    // Transferencias
-    'TRANSFERENCIA_BANCARIA': {
-      name: 'Transferencia Bancaria',
-      icon: 'ri-exchange-funds-line',
-      description: 'Transferencia directa entre cuentas bancarias. Requiere confirmación del banco.',
-      requiresProcessing: true
-    },
-    'ACH': {
-      name: 'ACH (Transferencia Automática)',
-      icon: 'ri-secure-payment-line',
-      description: 'Transferencia automática ACH. Procesamiento de 1-3 días hábiles.',
-      requiresProcessing: true
-    },
-    
-    // Pagos móviles
-    'TIGO_MONEY': {
-      name: 'Tigo Money',
-      icon: 'ri-smartphone-line',
-      description: 'Pago a través de Tigo Money. Disponible las 24 horas.',
-      requiresProcessing: true
-    },
-    'CLARO_PAY': {
-      name: 'Claro Pay',
-      icon: 'ri-phone-line',
-      description: 'Pago móvil con Claro Pay. Rápido y seguro.',
-      requiresProcessing: true
-    },
-    
-    // Pagos digitales
-    'PAYPAL': {
-      name: 'PayPal',
-      icon: 'ri-paypal-line',
-      description: 'Pago seguro a través de PayPal. Acepta tarjetas y saldo PayPal.',
-      requiresProcessing: true
-    },
-    'STRIPE': {
-      name: 'Stripe (Tarjeta Online)',
-      icon: 'ri-secure-payment-line',
-      description: 'Procesamiento seguro de tarjetas online. Encriptación de nivel bancario.',
-      requiresProcessing: true
-    },
-    
-    // Otros
-    'CHEQUE': {
-      name: 'Cheque',
-      icon: 'ri-file-paper-line',
-      description: 'Pago con cheque. Requiere verificación y puede tomar varios días hábiles.',
-      requiresProcessing: true
-    },
-    'CREDITO_EMPRESA': {
-      name: 'Crédito Empresarial',
-      icon: 'ri-building-line',
-      description: 'Línea de crédito empresarial. Solo para clientes corporativos aprobados.',
-      requiresProcessing: false
-    }
   };
 
   constructor(private fb: FormBuilder, private billService: FinalConsumerBillService) {
@@ -156,10 +103,16 @@ export class FinalConsumerBillCreateComponent {
       ])
     });
     
-    this.loadActiveProducts();
+    this.addProduct(); // Agregar un producto inicial
+    this.loadActiveProducts(); // Cargar productos al inicializar
     
     console.log('🏗️ Formulario CREATE inicializado - Nueva estructura simplificada');
     console.log('🔔 Sistema de mensajes de éxito configurado - Duración: 20 segundos');
+  }
+
+  ngOnInit(): void {
+    this.addProduct(); // Agregar un producto inicial al cargar el componente
+    this.loadActiveProducts(); // Cargar productos al inicializar
   }
 
   get products(): FormArray {
@@ -168,15 +121,14 @@ export class FinalConsumerBillCreateComponent {
 
   addProduct(): void {
     this.products.push(this.fb.group({
-      productId: ['', [Validators.required, Validators.min(1)]],
-      requestedQuantity: ['', [Validators.required, Validators.min(1)]]
+      productId: ['', Validators.required],
+      requestedQuantity: ['', Validators.required],
+      precio: [{ value: '', disabled: true }] // Campo para almacenar el precio del producto seleccionado
     }));
   }
 
   removeProduct(index: number): void {
-    if (this.products.length > 1) {
-      this.products.removeAt(index);
-    }
+    this.products.removeAt(index);
   }
 
   // Método para limpiar el formulario completamente (incluyendo mensajes)
@@ -554,22 +506,27 @@ export class FinalConsumerBillCreateComponent {
   }
 
   // Método para manejar la selección de producto desde el dropdown
-  onProductSelected(event: Event, index: number): void {
-    const target = event.target as HTMLSelectElement;
-    const productId = target.value;
-    
-    if (productId) {
-      // Encontrar el producto seleccionado en la lista
-      const selectedProduct = this.productsList.find(p => p.id.toString() === productId);
-      
-      if (selectedProduct) {
-        console.log('🎯 PRODUCTO SELECCIONADO:', selectedProduct);
-        console.log('✅ ID del producto seleccionado:', selectedProduct.id);
-        console.log('✅ Nombre del producto:', selectedProduct.name);
-        console.log('✅ Precio del producto:', selectedProduct.price || 'No especificado');
-      }
+  onProductSelected(event: any, index: number): void {
+    const productId = +event.target.value; // Convertir el valor a número
+
+    // Buscar el producto seleccionado en la lista de productos
+    const selectedProduct = this.productsList.find(product => product.productoId === productId);
+
+    console.log('Producto seleccionado:', selectedProduct); // Verificar el producto seleccionado
+
+    if (selectedProduct) {
+      // Actualizar el precio del producto en el formulario
+      const productGroup = this.products.at(index);
+      productGroup.patchValue({
+        precio: selectedProduct.precio // Asignar el precio del producto
+      });
+
+      console.log('Precio actualizado en el formulario:', productGroup.get('precio')?.value); // Verificar el precio actualizado
     } else {
-      console.log('❌ No se seleccionó ningún producto');
+      // Si no hay producto seleccionado, limpiar el precio
+      this.products.at(index).patchValue({
+        precio: '' // Cambiar "price" a "precio"
+      });
     }
   }
 

@@ -49,12 +49,8 @@
                 <option value="" disabled selected hidden>Seleccione método de pago</option>
                 
                 <!-- Pagos en efectivo -->
-                <optgroup label="💵 Pagos en Efectivo">
+                <optgroup >
                   <option value="EFECTIVO">Efectivo</option>
-                </optgroup>
-                
-                <!-- Pagos con tarjeta -->
-                <optgroup label="💳 Tarjetas">
                   <option value="TARJETA_DEBITO">Tarjeta de Débito</option>
                   <option value="TARJETA_CREDITO">Tarjeta de Crédito</option>
                 </optgroup>
@@ -211,29 +207,28 @@
               
               <!-- Lista de Productos de Inventario -->
               <div class="md:col-span-5">
-                <label class="form-label text-sm">Seleccionar Producto (Solo Activos) *</label>
+                <label class="form-label text-sm">Seleccionar Producto *</label>
                 <select 
                   formControlName="productId" 
                   class="form-input"
                   (change)="onProductSelected($event, i)">
                   <option value="">-- Seleccione un producto --</option>
-                  <option *ngFor="let product of productsList" 
-                          [value]="product.id">
-                    {{ product.name }} - ID: {{ product.id }}{{ product.price ? ' - $' + product.price : '' }}
+                  <option *ngFor="let product of productsList" [value]="product.productoId">
+                    {{ product.nombre }}
                   </option>
                 </select>
-                <div *ngIf="isProductFieldEmpty(i, 'productId')" class="text-red-500 text-sm mt-1">
-                  Debe seleccionar un producto
-                </div>
+              </div>
+
+              <!-- Mostrar el precio del producto seleccionado -->
+              <div class="md:col-span-2">
+                <label class="form-label text-sm">Precio Unitario</label>
+                <input type="text" formControlName="precio" class="form-input">
               </div>
               
               <!-- Cantidad Solicitada -->
               <div class="md:col-span-5">
                 <label class="form-label text-sm">Cantidad Solicitada *</label>
-                <input type="number" formControlName="requestedQuantity" class="form-input" [placeholder]="placeholders.requestedQuantity" min="1">
-                <div *ngIf="isProductFieldEmpty(i, 'requestedQuantity')" class="text-red-500 text-sm mt-1">
-                  Cantidad es requerida
-                </div>
+                <input type="number" formControlName="requestedQuantity" class="form-input" min="1">
               </div>
               
               <!-- Acciones -->
