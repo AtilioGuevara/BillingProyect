@@ -64,10 +64,10 @@ export class AuthService {
     localStorage.setItem(this.TOKEN_KEY, token);
     const isHttps = window.location.protocol === 'https:';
     const secure = isHttps ? '; Secure' : '';
-    document.cookie = `token=${token}; path=/; SameSite=Lax${secure}`;
+    document.cookie = `token=${token}; path=/; SameSite=None${secure}`;
     
     if (window.location.hostname.includes('beckysflorist.site')) {
-      document.cookie = `token=${token}; path=/; domain=.beckysflorist.site${secure}; SameSite=Lax`;
+      document.cookie = `token=${token}; path=/; domain=.beckysflorist.site${secure}; SameSite=None`;
     }
 
     console.log('✅ Token almacenado');

@@ -98,8 +98,6 @@ export class FinalConsumerBillCreateComponent {
         authorizationCode: [''] // Código de autorización (opcional)
       })
     });
-    
-    this.addProduct(); // Agregar un producto inicial
     this.loadActiveProducts(); // Cargar productos al inicializar
     
     console.log('🏗️ Formulario CREATE inicializado - Nueva estructura simplificada');
@@ -107,8 +105,6 @@ export class FinalConsumerBillCreateComponent {
   }
 
   ngOnInit(): void {
-    this.addProduct(); // Agregar un producto inicial al cargar el componente
-    this.loadActiveProducts(); // Cargar productos al inicializar
   }
 
   get products(): FormArray {
@@ -301,43 +297,6 @@ export class FinalConsumerBillCreateComponent {
     return method?.requiresProcessing || false;
   }
 
-  /**
-   * Simula el procesamiento de pago (a implementar con pasarela real)
-   */
-  async processPayment(billData: any): Promise<{ success: boolean; transactionId?: string; error?: string }> {
-    console.log('💰 Procesando pago para método:', this.selectedPaymentMethod);
-    console.log('💵 Datos de facturación:', billData);
-
-    // Si es efectivo, no requiere procesamiento
-    if (this.selectedPaymentMethod === 'EFECTIVO' || this.selectedPaymentMethod === 'CREDITO_EMPRESA') {
-      return {
-        success: true,
-        transactionId: `CASH_${Date.now()}`
-      };
-    }
-
-    // Para otros métodos, simular procesamiento (aquí iría la integración real)
-    try {
-      // Simular delay de procesamiento
-      await new Promise(resolve => setTimeout(resolve, 2000));
-      
-      // Simular éxito (90% de éxito)
-      if (Math.random() > 0.1) {
-        return {
-          success: true,
-          transactionId: `PAY_${Date.now()}_${this.selectedPaymentMethod}`
-        };
-      } else {
-        throw new Error('Pago rechazado por el proveedor');
-      }
-    } catch (error) {
-      console.error('❌ Error procesando pago:', error);
-      return {
-        success: false,
-        error: error instanceof Error ? error.message : 'Error desconocido en el pago'
-      };
-    }
-  }
 
   // Método helper para obtener el mensaje de error
   getFieldErrorMessage(fieldName: string): string {

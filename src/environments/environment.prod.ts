@@ -35,7 +35,7 @@ export const environment = {
     // URL del sistema de login externo de tu compañero
     externalLoginUrl: 'https://accounts.beckysflorist.site/login',
     // URL de retorno después del login exitoso (producción) - DIRECTO A LA LISTA
-    callbackUrl: 'https://bill.beckysflorist.site/final-consumer-bill/list',
+    callbackUrl: 'bill.beckysflorist.site/final-consumer-bill/list',
     // URL local para desarrollo
     localCallbackUrl: 'http://localhost:4200/final-consumer-bill/list'
   },
