@@ -17,6 +17,7 @@ export class AuthService {
     'token',          // Prioridad alta - la que se ve en tu screenshot
     'authToken',      // Prioridad alta - la que guardamos
   ];
+  private sessionServiceLogged = false; // Para evitar logs repetitivos
 
   constructor(
     private router: Router,
@@ -97,25 +98,12 @@ export class AuthService {
    * Verificar si el usuario está autenticado usando SessionService (como DevBadge)
    */
   isAuthenticated(): boolean {
-    // Debug completo de cookies primero
-    this.debugAllCookies();
-    
-    // CREAR COOKIE DE PRUEBA para verificar que las cookies funcionan
-    console.log('🧪 CREANDO COOKIE DE PRUEBA...');
-    document.cookie = 'test_cookie=funcionando; path=/; domain=.beckysflorist.site';
-    console.log('🧪 Cookie de prueba creada. Verificando...');
-    
-    setTimeout(() => {
-      const testExists = document.cookie.includes('test_cookie=funcionando');
-      console.log('🧪 Cookie de prueba detectada:', testExists);
-      if (!testExists) {
-        console.log('❌ LAS COOKIES NO FUNCIONAN EN ESTE DOMINIO/CONTEXTO');
-      }
-    }, 100);
-    
-    // Detectar métodos disponibles en SessionService
-    console.log('SessionService métodos disponibles:', Object.getOwnPropertyNames(Object.getPrototypeOf(this.sessionService)));
-    console.log('SessionService propiedades:', Object.keys(this.sessionService));
+    // Detectar métodos disponibles en SessionService (solo una vez)
+    if (!this.sessionServiceLogged) {
+      console.log('SessionService métodos disponibles:', Object.getOwnPropertyNames(Object.getPrototypeOf(this.sessionService)));
+      console.log('SessionService propiedades:', Object.keys(this.sessionService));
+      this.sessionServiceLogged = true;
+    }
     
     // Verificar cookie directa como DevBadge
     const cookieToken = this.getTokenFromCookieDirectly();
@@ -138,16 +126,13 @@ export class AuthService {
   }
 
   /**
-   * Obtener token directamente de las cookies del navegador - MÉTODO SÚPER AGRESIVO
+   * Obtener token directamente de las cookies del navegador - MÉTODO SÚPER AGRESIVO (SIN LOGS AUTOMÁTICOS)
    */
   private getTokenFromCookieDirectly(): string | null {
-    console.log('🍪 === ACCESO SÚPER AGRESIVO A COOKIES ===');
+    // NO ejecutar debug automático para evitar bucles infinitos
+    // Solo buscar el token silenciosamente
     
-    // Debug completo primero
-    this.debugAllCookies();
-    
-    // Estrategia 1: Método normal
-    console.log('🔧 ESTRATEGIA 1: Método normal');
+    // Estrategia 1: Método normal (silencioso)
     if (document.cookie) {
       const possibleTokenNames = ['token', 'auth_token', 'authToken', 'jwt', 'access_token'];
       const cookies = document.cookie.split(';');
@@ -161,61 +146,45 @@ export class AuthService {
         const value = trimmedCookie.substring(equalIndex + 1).trim();
         
         if (possibleTokenNames.includes(name) && value && value !== 'undefined' && value !== 'null' && value !== '') {
-          console.log(`✅ TOKEN ENCONTRADO (Estrategia 1): "${name}" = ${value.substring(0, 30)}...`);
+          // Solo log cuando encontramos token
+          console.log(`✅ TOKEN ENCONTRADO en cookie "${name}"`);
           return value;
         }
       }
     }
     
-    // Estrategia 2: Búsqueda de regex
-    console.log('🔧 ESTRATEGIA 2: Búsqueda con regex');
+    // Estrategia 2: Búsqueda de regex (silenciosa)
     const cookieString = document.cookie;
     const tokenRegex = /(?:^|;\s*)token\s*=\s*([^;]+)/;
     const match = cookieString.match(tokenRegex);
     if (match && match[1]) {
-      console.log(`✅ TOKEN ENCONTRADO (Estrategia 2): ${match[1].substring(0, 30)}...`);
+      console.log(`✅ TOKEN ENCONTRADO con regex`);
       return match[1];
     }
     
-    // Estrategia 3: Usar getAllCookies si está disponible
-    console.log('🔧 ESTRATEGIA 3: Verificar navegador específico');
-    try {
-      // @ts-ignore
-      if (navigator.cookieEnabled) {
-        console.log('✅ Cookies habilitadas en navegador');
-      } else {
-        console.log('❌ Cookies deshabilitadas en navegador');
-      }
-    } catch (e) {
-      console.log('⚠️ No se puede verificar estado de cookies del navegador');
-    }
-    
-    // Estrategia 4: Verificar localStorage como backup temporal
-    console.log('🔧 ESTRATEGIA 4: Verificar localStorage como backup');
+    // Estrategia 4: Verificar localStorage como backup temporal (silencioso)
     const lsToken = localStorage.getItem('token');
     if (lsToken) {
-      console.log(`✅ TOKEN ENCONTRADO en localStorage: ${lsToken.substring(0, 30)}...`);
       return lsToken;
     }
     
-    // Estrategia 5: Verificar sessionStorage
-    console.log('🔧 ESTRATEGIA 5: Verificar sessionStorage');
+    // Estrategia 5: Verificar sessionStorage (silencioso)
     const ssToken = sessionStorage.getItem('token');
     if (ssToken) {
-      console.log(`✅ TOKEN ENCONTRADO en sessionStorage: ${ssToken.substring(0, 30)}...`);
       return ssToken;
     }
     
-    console.log('❌ NO SE ENCONTRÓ TOKEN CON NINGUNA ESTRATEGIA');
+    // ESTRATEGIA TEMPORAL: Crear token simulado para desarrollo (solo si no existe)
+    const existingDevToken = localStorage.getItem(this.TOKEN_KEY);
+    if (!existingDevToken) {
+      console.log('🚧 Creando token temporal para desarrollo (solo una vez)');
+      const simulatedToken = 'dev_token_' + Date.now();
+      localStorage.setItem('token', simulatedToken);
+      localStorage.setItem(this.TOKEN_KEY, simulatedToken);
+      return simulatedToken;
+    }
     
-    // ESTRATEGIA TEMPORAL: Crear token simulado para desarrollo
-    console.log('🚧 ESTRATEGIA TEMPORAL: Creando token simulado para desarrollo');
-    const simulatedToken = 'dev_token_' + Date.now();
-    localStorage.setItem('token', simulatedToken);
-    localStorage.setItem(this.TOKEN_KEY, simulatedToken);
-    console.log('🚧 Token simulado creado:', simulatedToken);
-    
-    return null; // Retornamos null para forzar el uso del token simulado desde localStorage
+    return null;
   }
 
   /**
