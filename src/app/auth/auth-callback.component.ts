@@ -58,7 +58,7 @@ import { AuthService } from '../features/final-consumer-bill/services/authentica
   standalone: true
 })
 export class AuthCallbackComponent implements OnInit {
-  message: string = 'Guardando token...';
+  message: string = 'Verificando credenciales...';
 
   constructor(
     private authService: AuthService,
@@ -85,16 +85,36 @@ export class AuthCallbackComponent implements OnInit {
       return;
     }
     
-    // Si no hay token en URL, verificar cookies
+    // Si no hay token en URL o hash, manejar error directamente
+    this.handleError();
+  }
+
+  private checkForToken() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const tokenFromUrl = urlParams.get('token');
+    const tokenFromHash = this.getTokenFromHash();
+    
+    if (tokenFromUrl) {
+      this.handleTokenReceived(tokenFromUrl);
+      return;
+    }
+    
+    if (tokenFromHash) {
+      this.handleTokenReceived(tokenFromHash);
+      return;
+    }
+    
+    // Verificar cookies después de un momento
+    this.message = 'Verificando cookies...';
     setTimeout(() => {
       const tokenFromCookie = this.authService.getToken();
       
       if (tokenFromCookie) {
-        this.redirectToApp();
+        this.handleAuthSuccess();
       } else {
-        this.handleError();
+        this.handleAuthError('No se recibió token de autenticación');
       }
-    }, 1000);
+    }, 1500);
   }
 
   private getTokenFromHash(): string | null {
@@ -106,36 +126,54 @@ export class AuthCallbackComponent implements OnInit {
   private handleTokenReceived(token: string) {
     this.message = 'Guardando token...';
     
-    // Solo guardar el token, sin validaciones
+    // Guardar el token sin validaciones
     this.authService.storeToken(token);
     
     // Limpiar la URL
     this.cleanUrl();
     
-    // Redirigir
+    // Redirigir al usuario
     this.redirectToApp();
   }
 
-  private redirectToApp() {
-    this.message = 'Redirigiendo...';
+  private handleAuthSuccess() {
+    this.message = 'Autenticación exitosa. Redirigiendo...';
+    
+    // Marcar que acabamos de procesar un callback exitoso
+    sessionStorage.setItem('justFromCallback', 'true');
     
     setTimeout(() => {
+      // Redirigir directamente a la lista de facturas
       this.router.navigate(['/final-consumer-bill/list']);
     }, 1000);
   }
 
-  private handleError() {
-    this.message = 'Error: No se recibió token';
+  private handleAuthError(error: string) {
+    this.message = `Error: ${error}`;
     
     setTimeout(() => {
+      // Volver a intentar el login
       this.authService.redirectToLogin();
     }, 3000);
   }
 
   private cleanUrl() {
+    // Limpiar parámetros de la URL sin recargar la página
     const cleanUrl = window.location.protocol + "//" + 
                     window.location.host + 
                     window.location.pathname;
     window.history.replaceState({}, document.title, cleanUrl);
+  }
+
+  private handleError() {
+    this.message = 'No se recibió token de autenticación';
+    setTimeout(() => {
+      this.authService.redirectToLogin();
+    }, 3000);
+  }
+
+  private redirectToApp() {
+    // Redirigir al usuario
+    this.router.navigate(['/final-consumer-bill/list']);
   }
 }

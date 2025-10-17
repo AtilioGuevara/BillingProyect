@@ -1,3 +1,4 @@
+/** 
 import { HttpInterceptorFn } from '@angular/common/http';
 import { inject } from '@angular/core';
 import { of, throwError } from 'rxjs';
@@ -5,7 +6,7 @@ import { of, throwError } from 'rxjs';
 /**
  * Interceptor para bloquear peticiones automáticas no deseadas
  * Específicamente para evitar llamadas a endpoints de validación que no existen
- */
+ 
 export const blockUnwantedRequestsInterceptor: HttpInterceptorFn = (req, next) => {
   const url = req.url.toLowerCase();
   
@@ -41,3 +42,4 @@ export const blockUnwantedRequestsInterceptor: HttpInterceptorFn = (req, next) =
   console.log('🔄 Interceptor: Permitiendo petición a:', req.url);
   return next(req);
 };
+**/
