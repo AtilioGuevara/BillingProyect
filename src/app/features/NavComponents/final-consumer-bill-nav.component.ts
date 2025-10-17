@@ -1,12 +1,14 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { AuthService } from '../final-consumer-bill/services/authentication-service';
+import { FormsModule } from '@angular/forms';
+import { AuthService, User } from '../final-consumer-bill/services/authentication-service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-final-consumer-bill-nav',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, FormsModule],
   template: `
     <div class="card mb-6">
       <div class="card-header">
@@ -55,17 +57,25 @@ import { AuthService } from '../final-consumer-bill/services/authentication-serv
               </button>
             </div>
 
-            <!-- Botón Login/Logout -->
+            <!-- Usuario Logueado -->
+            <div *ngIf="isLoggedIn && currentUser && !showSuccessMessage" 
+                 class="flex items-center bg-blue-100 text-blue-800 px-3 py-2 rounded-lg border border-blue-200">
+              <i class="align-baseline ri-user-line mr-2 text-blue-600"></i>
+              <span class="text-sm font-medium">{{ currentUser.username }}</span>
+            </div>
+
+            <!-- Botón Login -->
             <button 
-              *ngIf="!isAuthenticated && !showSuccessMessage"
-              (click)="login()"
+              *ngIf="!isLoggedIn && !showSuccessMessage"
+              (click)="openLoginModal()"
               class="btn btn-success transition-all duration-300">
               <i class="align-baseline ri-login-box-line"></i>
               Iniciar Sesión
             </button>
 
+            <!-- Botón Logout -->
             <button 
-              *ngIf="isAuthenticated && !showSuccessMessage"
+              *ngIf="isLoggedIn && !showSuccessMessage"
               (click)="logout()"
               class="btn btn-outline-danger transition-all duration-300">
               <i class="align-baseline ri-logout-box-line"></i>
@@ -73,6 +83,68 @@ import { AuthService } from '../final-consumer-bill/services/authentication-serv
             </button>
           </div>
         </div>
+      </div>
+    </div>
+
+    <!-- Modal de Login -->
+    <div *ngIf="showLoginModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+      <div class="bg-white rounded-lg p-6 w-96 max-w-90vw">
+        <div class="flex justify-between items-center mb-4">
+          <h3 class="text-lg font-semibold">Iniciar Sesión</h3>
+          <button (click)="closeLoginModal()" class="text-gray-400 hover:text-gray-600">
+            <i class="ri-close-line text-xl"></i>
+          </button>
+        </div>
+        
+        <form (ngSubmit)="login()" #loginForm="ngForm">
+          <div class="mb-4">
+            <label for="username" class="block text-sm font-medium text-gray-700 mb-2">Usuario</label>
+            <input 
+              type="text" 
+              id="username"
+              name="username"
+              [(ngModel)]="loginCredentials.username"
+              required
+              class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              placeholder="Ingresa tu usuario">
+          </div>
+          
+          <div class="mb-4">
+            <label for="password" class="block text-sm font-medium text-gray-700 mb-2">Contraseña</label>
+            <input 
+              type="password" 
+              id="password"
+              name="password"
+              [(ngModel)]="loginCredentials.password"
+              required
+              class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              placeholder="Ingresa tu contraseña">
+          </div>
+          
+          <!-- Mensaje de Error -->
+          <div *ngIf="loginError" class="mb-4 p-3 bg-red-100 border border-red-400 text-red-700 rounded">
+            {{ loginError }}
+          </div>
+          
+          <div class="flex gap-3">
+            <button 
+              type="button"
+              (click)="closeLoginModal()"
+              class="flex-1 btn btn-outline-gray">
+              Cancelar
+            </button>
+            <button 
+              type="submit"
+              [disabled]="loginForm.invalid || isLoggingIn"
+              class="flex-1 btn btn-primary">
+              <span *ngIf="!isLoggingIn">Ingresar</span>
+              <span *ngIf="isLoggingIn" class="flex items-center">
+                <i class="ri-loader-line animate-spin mr-2"></i>
+                Ingresando...
+              </span>
+            </button>
+          </div>
+        </form>
       </div>
     </div>
   `,
@@ -105,6 +177,19 @@ import { AuthService } from '../final-consumer-bill/services/authentication-serv
       animation: fadeIn 0.3s ease-out forwards;
     }
     
+    @keyframes spin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+    
+    .animate-spin {
+      animation: spin 1s linear infinite;
+    }
+    
+    .max-w-90vw {
+      max-width: 90vw;
+    }
+    
     @media (max-width: 768px) {
       .flex-wrap {
         flex-direction: column;
@@ -126,7 +211,19 @@ import { AuthService } from '../final-consumer-bill/services/authentication-serv
 export class FinalConsumerBillNavComponent implements OnInit, OnDestroy {
   showSuccessMessage = false;
   successMessage = '';
+  showLoginModal = false;
+  isLoggingIn = false;
+  loginError = '';
+  isLoggedIn = false;
+  currentUser: User | null = null;
+  
+  loginCredentials = {
+    username: '',
+    password: ''
+  };
+  
   private messageTimeout: any;
+  private subscriptions: Subscription[] = [];
   
   constructor(
     private router: Router,
@@ -134,26 +231,87 @@ export class FinalConsumerBillNavComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    // Escuchar eventos de login exitoso
-    window.addEventListener('loginSuccess', this.handleLoginSuccess.bind(this));
+    // Suscribirse al estado de autenticación
+    this.subscriptions.push(
+      this.authService.isLoggedIn$.subscribe(isLoggedIn => {
+        this.isLoggedIn = isLoggedIn;
+        console.log('🔄 Estado de login actualizado:', isLoggedIn);
+      })
+    );
+    
+    // Suscribirse al usuario actual
+    this.subscriptions.push(
+      this.authService.currentUser$.subscribe(user => {
+        this.currentUser = user;
+        console.log('👤 Usuario actual:', user);
+      })
+    );
   }
 
   ngOnDestroy(): void {
-    // Limpiar event listener y timeout
-    window.removeEventListener('loginSuccess', this.handleLoginSuccess.bind(this));
+    // Limpiar suscripciones
+    this.subscriptions.forEach(sub => sub.unsubscribe());
+    
     if (this.messageTimeout) {
       clearTimeout(this.messageTimeout);
     }
   }
 
-  private handleLoginSuccess(event: any): void {
-    const { message, duration } = event.detail;
+  openLoginModal(): void {
+    this.showLoginModal = true;
+    this.loginError = '';
+    this.loginCredentials = { username: '', password: '' };
+  }
+
+  closeLoginModal(): void {
+    this.showLoginModal = false;
+    this.loginError = '';
+    this.isLoggingIn = false;
+  }
+
+  async login(): Promise<void> {
+    if (!this.loginCredentials.username || !this.loginCredentials.password) {
+      this.loginError = 'Por favor ingresa usuario y contraseña';
+      return;
+    }
+
+    this.isLoggingIn = true;
+    this.loginError = '';
+
+    try {
+      console.log('🔐 Intentando login con:', this.loginCredentials.username);
+      
+      const result = await this.authService.login(
+        this.loginCredentials.username, 
+        this.loginCredentials.password
+      );
+
+      if (result.success) {
+        console.log('✅ Login exitoso');
+        this.closeLoginModal();
+        this.showSuccessMessageTemp('¡Sesión iniciada correctamente!', 3000);
+      } else {
+        console.log('❌ Login fallido:', result.message);
+        this.loginError = result.message;
+      }
+    } catch (error) {
+      console.error('❌ Error inesperado en login:', error);
+      this.loginError = 'Error inesperado. Inténtalo nuevamente.';
+    } finally {
+      this.isLoggingIn = false;
+    }
+  }
+
+  logout(): void {
+    console.log('🚪 Cerrando sesión...');
+    this.authService.logout();
+    this.showSuccessMessageTemp('Sesión cerrada correctamente', 2000);
+  }
+
+  private showSuccessMessageTemp(message: string, duration: number): void {
     this.successMessage = message;
     this.showSuccessMessage = true;
 
-    console.log('📢 Mostrando mensaje de login exitoso:', message);
-
-    // Ocultar mensaje después del tiempo especificado
     this.messageTimeout = setTimeout(() => {
       this.hideSuccessMessage();
     }, duration);
@@ -176,28 +334,5 @@ export class FinalConsumerBillNavComponent implements OnInit, OnDestroy {
 
   isSearchActive(): boolean {
     return this.router.url.includes('/search');
-  }
-
-  /**
-   * Verificar si el usuario está autenticado
-   */
-  get isAuthenticated(): boolean {
-    return this.authService.isAuthenticated();
-  }
-
-  /**
-   * Iniciar sesión - redirigir al login externo
-   */
-  login(): void {
-    console.log('🚀 Iniciando proceso de login...');
-    console.log('🔗 Redirigiendo al sistema de login externo...');
-    this.authService.redirectToLogin();
-  }
-
-  /**
-   * Cerrar sesión
-   */
-  logout(): void {
-    this.authService.logout();
   }
 }
