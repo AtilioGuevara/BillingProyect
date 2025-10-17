@@ -31,13 +31,13 @@ export class AuthService {
 
   async login(username: string, password: string): Promise<{ success: boolean; message: string }> {
     try {
-      console.log('🔐 Iniciando sesión...');
+      console.log('🔐 Iniciando sesión directa...');
       
       const loginData = { username, password };
       const response = await this.http.post<any>('https://accounts.beckysflorist.site/authentication/login', loginData).toPromise();
       
       if (response && response.token) {
-        console.log('✅ Login exitoso');
+        console.log('✅ Login directo exitoso');
         this.storeAuthData(response.token, response.user || { id: username, username });
         return { success: true, message: 'Sesión iniciada correctamente' };
       } else {
@@ -45,13 +45,31 @@ export class AuthService {
       }
       
     } catch (error: any) {
-      console.error('❌ Error en login:', error);
+      console.error('❌ Error en login directo:', error);
       let message = 'Error al iniciar sesión';
       if (error.status === 401) {
         message = 'Credenciales incorrectas';
       }
       return { success: false, message };
     }
+  }
+
+  /**
+   * 🔄 LOGIN CON REDIRECCIÓN - Método original restaurado
+   */
+  loginWithRedirect(): void {
+    console.log('🚀 Iniciando login con redirección...');
+    
+    // URL actual para regresar después del login
+    const returnUrl = encodeURIComponent(window.location.href);
+    
+    // URL de login con redirección automática de vuelta
+    const loginUrl = `https://accounts.beckysflorist.site/authentication/login?redirect=${returnUrl}`;
+    
+    console.log('🔗 Redirigiendo a:', loginUrl);
+    
+    // Redireccionar al sistema de autenticación externo
+    window.location.href = loginUrl;
   }
 
   logout(): void {
@@ -147,6 +165,34 @@ export class AuthService {
     console.log('✅ Autenticado:', this.isAuthenticated());
   }
 
+  // Método para compatibilidad con auth-callback.component.ts
+  storeToken(token: string): void {
+    if (!token || token === 'undefined' || token === 'null') {
+      console.log('❌ Token inválido');
+      return;
+    }
+
+    // Crear un usuario básico si no tenemos información del usuario
+    const basicUser: User = {
+      id: 'user_' + Date.now(),
+      username: 'Usuario'
+    };
+
+    this.storeAuthData(token, basicUser);
+    console.log('✅ Token almacenado desde auth-callback');
+  }
+
+  // Método para compatibilidad con auth-callback.component.ts
+  redirectToLogin(): void {
+    console.log('🚀 Redirigiendo al login (desde callback)...');
+    
+    // Limpiar datos de autenticación
+    this.logout();
+    
+    // Usar el nuevo método de redirección
+    this.loginWithRedirect();
+  }
+
   // Métodos de compatibilidad
   getAuthToken(): string | null { return this.getToken(); }
   checkForLoginSuccess(): void { }
@@ -154,5 +200,4 @@ export class AuthService {
   async handleLoginReturn(): Promise<void> { }
   handleLoginCallback(): void { }
   startLoginMonitoring(): void { }
-  redirectToLogin(): void { }
 }

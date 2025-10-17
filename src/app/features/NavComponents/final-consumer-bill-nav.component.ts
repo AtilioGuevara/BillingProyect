@@ -64,13 +64,29 @@ import { Subscription } from 'rxjs';
               <span class="text-sm font-medium">{{ currentUser.username }}</span>
             </div>
 
-            <!-- Botón Login -->
+            <!-- Botón Login Automático (estilo DevBadge) -->
             <button 
               *ngIf="!isLoggedIn && !showSuccessMessage"
-              (click)="openLoginModal()"
+              (click)="autoLogin()"
+              [disabled]="isLoggingIn"
               class="btn btn-success transition-all duration-300">
-              <i class="align-baseline ri-login-box-line"></i>
-              Iniciar Sesión
+              <span *ngIf="!isLoggingIn">
+                <i class="align-baseline ri-login-box-line"></i>
+                🔐 Auto-Login
+              </span>
+              <span *ngIf="isLoggingIn" class="flex items-center">
+                <i class="ri-loader-line animate-spin mr-2"></i>
+                Iniciando...
+              </span>
+            </button>
+
+            <!-- Botón Login con Redirección (método original) -->
+            <button 
+              *ngIf="!isLoggedIn && !showSuccessMessage"
+              (click)="loginWithRedirect()"
+              class="btn btn-info transition-all duration-300 ml-2">
+              <i class="align-baseline ri-external-link-line"></i>
+              🔄 Login Redirect
             </button>
 
             <!-- Botón Logout -->
@@ -83,68 +99,6 @@ import { Subscription } from 'rxjs';
             </button>
           </div>
         </div>
-      </div>
-    </div>
-
-    <!-- Modal de Login -->
-    <div *ngIf="showLoginModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-      <div class="bg-white rounded-lg p-6 w-96 max-w-90vw">
-        <div class="flex justify-between items-center mb-4">
-          <h3 class="text-lg font-semibold">Iniciar Sesión</h3>
-          <button (click)="closeLoginModal()" class="text-gray-400 hover:text-gray-600">
-            <i class="ri-close-line text-xl"></i>
-          </button>
-        </div>
-        
-        <form (ngSubmit)="login()" #loginForm="ngForm">
-          <div class="mb-4">
-            <label for="username" class="block text-sm font-medium text-gray-700 mb-2">Usuario</label>
-            <input 
-              type="text" 
-              id="username"
-              name="username"
-              [(ngModel)]="loginCredentials.username"
-              required
-              class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-              placeholder="Ingresa tu usuario">
-          </div>
-          
-          <div class="mb-4">
-            <label for="password" class="block text-sm font-medium text-gray-700 mb-2">Contraseña</label>
-            <input 
-              type="password" 
-              id="password"
-              name="password"
-              [(ngModel)]="loginCredentials.password"
-              required
-              class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-              placeholder="Ingresa tu contraseña">
-          </div>
-          
-          <!-- Mensaje de Error -->
-          <div *ngIf="loginError" class="mb-4 p-3 bg-red-100 border border-red-400 text-red-700 rounded">
-            {{ loginError }}
-          </div>
-          
-          <div class="flex gap-3">
-            <button 
-              type="button"
-              (click)="closeLoginModal()"
-              class="flex-1 btn btn-outline-gray">
-              Cancelar
-            </button>
-            <button 
-              type="submit"
-              [disabled]="loginForm.invalid || isLoggingIn"
-              class="flex-1 btn btn-primary">
-              <span *ngIf="!isLoggingIn">Ingresar</span>
-              <span *ngIf="isLoggingIn" class="flex items-center">
-                <i class="ri-loader-line animate-spin mr-2"></i>
-                Ingresando...
-              </span>
-            </button>
-          </div>
-        </form>
       </div>
     </div>
   `,
@@ -211,16 +165,9 @@ import { Subscription } from 'rxjs';
 export class FinalConsumerBillNavComponent implements OnInit, OnDestroy {
   showSuccessMessage = false;
   successMessage = '';
-  showLoginModal = false;
   isLoggingIn = false;
-  loginError = '';
   isLoggedIn = false;
   currentUser: User | null = null;
-  
-  loginCredentials = {
-    username: '',
-    password: ''
-  };
   
   private messageTimeout: any;
   private subscriptions: Subscription[] = [];
@@ -257,49 +204,39 @@ export class FinalConsumerBillNavComponent implements OnInit, OnDestroy {
     }
   }
 
-  openLoginModal(): void {
-    this.showLoginModal = true;
-    this.loginError = '';
-    this.loginCredentials = { username: '', password: '' };
-  }
-
-  closeLoginModal(): void {
-    this.showLoginModal = false;
-    this.loginError = '';
-    this.isLoggingIn = false;
-  }
-
-  async login(): Promise<void> {
-    if (!this.loginCredentials.username || !this.loginCredentials.password) {
-      this.loginError = 'Por favor ingresa usuario y contraseña';
-      return;
-    }
-
+  /**
+   * AUTO-LOGIN - Estilo DevBadge con credenciales hardcodeadas
+   */
+  async autoLogin(): Promise<void> {
     this.isLoggingIn = true;
-    this.loginError = '';
 
     try {
-      console.log('🔐 Intentando login con:', this.loginCredentials.username);
+      console.log('🔐 Iniciando auto-login estilo DevBadge...');
       
-      const result = await this.authService.login(
-        this.loginCredentials.username, 
-        this.loginCredentials.password
-      );
+      // Credenciales hardcodeadas como DevBadge
+      const result = await this.authService.login('dev', 'testpa$$');
 
       if (result.success) {
-        console.log('✅ Login exitoso');
-        this.closeLoginModal();
-        this.showSuccessMessageTemp('¡Sesión iniciada correctamente!', 3000);
+        console.log('✅ Auto-login exitoso');
+        this.showSuccessMessageTemp('¡Sesión iniciada automáticamente!', 3000);
       } else {
-        console.log('❌ Login fallido:', result.message);
-        this.loginError = result.message;
+        console.log('❌ Auto-login fallido:', result.message);
+        this.showSuccessMessageTemp(`Error: ${result.message}`, 5000);
       }
     } catch (error) {
-      console.error('❌ Error inesperado en login:', error);
-      this.loginError = 'Error inesperado. Inténtalo nuevamente.';
+      console.error('❌ Error inesperado en auto-login:', error);
+      this.showSuccessMessageTemp('Error de conexión. Verifica el servidor.', 5000);
     } finally {
       this.isLoggingIn = false;
     }
+  }
+
+  /**
+   * 🔄 LOGIN CON REDIRECCIÓN - Método original restaurado para pruebas
+   */
+  loginWithRedirect(): void {
+    console.log('🔄 Iniciando login con redirección...');
+    this.authService.loginWithRedirect();
   }
 
   logout(): void {

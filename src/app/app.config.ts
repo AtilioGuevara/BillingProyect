@@ -12,14 +12,14 @@ export function HttpLoaderFactory(http: HttpClient) {
 }
 import { routes } from './app.routes';
 import { provideClientHydration } from '@angular/platform-browser';
-import { HttpClient, provideHttpClient, withInterceptors } from '@angular/common/http';
+import { HttpClient, provideHttpClient } from '@angular/common/http';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideStore } from '@ngrx/store';
 import { provideEffects } from '@ngrx/effects';
 import { ProductEffects } from './pages/Apps/Ecommerce/Products/store/effects/product.effects';
 import { productReducer } from './pages/Apps/Ecommerce/Products/store/reducers/product.reducer';
 import { NgxMaskOptions, provideEnvironmentNgxMask } from 'ngx-mask';
-import { blockUnwantedRequestsInterceptor } from './interceptors/block-unwanted-requests.interceptor';
+// import { blockUnwantedRequestsInterceptor } from './interceptors/block-unwanted-requests.interceptor'; // ❌ DESACTIVADO PARA PRUEBAS
 
 import {
   Activity,
@@ -556,7 +556,7 @@ export const appConfig: ApplicationConfig = {
       provideZoneChangeDetection({ eventCoalescing: true }),
       provideRouter(routes),
       provideClientHydration(),
-      provideHttpClient(withInterceptors([blockUnwantedRequestsInterceptor])),
+      provideHttpClient(), // ✅ SIN INTERCEPTOR para probar
       provideAnimations(),
       // Provider para AUTH_SERVICE_URL - URL del microservicio de autenticación en producción
       { provide: AUTH_SERVICE_URL, useValue: environment.authApiUrl },

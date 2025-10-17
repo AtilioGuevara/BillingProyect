@@ -9,6 +9,12 @@ import { of, throwError } from 'rxjs';
 export const blockUnwantedRequestsInterceptor: HttpInterceptorFn = (req, next) => {
   const url = req.url.toLowerCase();
   
+  // ✅ PERMITIR SIEMPRE: Endpoint de login de accounts.beckysflorist.site
+  if (url.includes('accounts.beckysflorist.site/authentication/login')) {
+    console.log('✅ Interceptor: Permitiendo login a accounts.beckysflorist.site');
+    return next(req);
+  }
+  
   // Bloquear peticiones a endpoints de validación automática
   const blockedEndpoints = [
     '/validation/cookie',
@@ -32,5 +38,6 @@ export const blockUnwantedRequestsInterceptor: HttpInterceptorFn = (req, next) =
   }
   
   // Permitir todas las demás peticiones
+  console.log('🔄 Interceptor: Permitiendo petición a:', req.url);
   return next(req);
 };
