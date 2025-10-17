@@ -11,15 +11,17 @@ export class AuthService {
   }
 
   /**
-   * LOGIN CON REDIRECCIÓN
+   * LOGIN CON REDIRECCIÓN - CORREGIDO: URL sin duplicar protocolo
    */
   loginWithRedirect(): void {
     console.log('🚀 Iniciando login con redirección...');
     
-    const returnUrl = encodeURIComponent('https://bill.beckysflorist.site/final-consumer-bill/list');
+    // URL de retorno SIN protocolo duplicado
+    const returnUrl = encodeURIComponent('bill.beckysflorist.site/final-consumer-bill/list');
     const loginUrl = `https://accounts.beckysflorist.site/login?redirect=${returnUrl}`;
     
     console.log('🔗 Login URL completa:', loginUrl);
+    console.log('📍 Return URL:', returnUrl);
     window.location.href = loginUrl;
   }
 
