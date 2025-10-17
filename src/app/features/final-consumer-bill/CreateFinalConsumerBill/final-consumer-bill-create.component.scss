@@ -308,3 +308,190 @@ select {
   margin-right: 0.25rem;
   margin-left: 0;
 }
+
+/* ========================================
+   MODO OSCURO - NUEVA FACTURA
+   ======================================== */
+
+:host-context([data-mode="dark"]) {
+  /* Fondo en modo oscuro */
+  body {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  }
+
+  /* Card en modo oscuro */
+  .card {
+    background: linear-gradient(145deg, #1e293b 0%, #0f172a 100%) !important;
+    border-color: rgba(124, 58, 237, 0.2) !important;
+    box-shadow: 
+      0 20px 40px rgba(109, 40, 217, 0.2),
+      0 10px 20px rgba(0, 0, 0, 0.3),
+      inset 0 1px 0 rgba(255, 255, 255, 0.05) !important;
+  }
+
+  .card::before {
+    background: linear-gradient(90deg, #7c3aed 0%, #1e293b 50%, #7c3aed 100%) !important;
+  }
+
+  /* Card header en modo oscuro */
+  .card-header {
+    background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 50%, #1e293b 100%) !important;
+    color: #fff !important;
+    box-shadow: 0 4px 8px rgba(124, 58, 237, 0.2) !important;
+  }
+
+  .card-header h6 {
+    color: #f1f5f9 !important;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5) !important;
+  }
+
+  /* Card body en modo oscuro */
+  .card-body {
+    background: rgba(30, 41, 59, 0.9) !important;
+    backdrop-filter: blur(10px);
+    color: #e2e8f0 !important;
+  }
+
+  /* Inputs en modo oscuro */
+  .form-input,
+  .input,
+  select,
+  textarea {
+    background: linear-gradient(145deg, #0f172a 0%, #1a1f35 100%) !important;
+    border: 2px solid rgba(124, 58, 237, 0.3) !important;
+    color: #e2e8f0 !important;
+    box-shadow: 
+      0 4px 8px rgba(124, 58, 237, 0.1),
+      inset 0 1px 2px rgba(0, 0, 0, 0.3) !important;
+  }
+
+  .form-input:focus,
+  .input:focus,
+  select:focus,
+  textarea:focus {
+    border-color: #7c3aed !important;
+    box-shadow: 
+      0 0 0 3px rgba(124, 58, 237, 0.3),
+      0 8px 16px rgba(124, 58, 237, 0.2),
+      inset 0 1px 2px rgba(0, 0, 0, 0.3) !important;
+  }
+
+  .form-input:hover,
+  .input:hover {
+    border-color: rgba(124, 58, 237, 0.5) !important;
+    background: linear-gradient(145deg, #1a1f35 0%, #0f172a 100%) !important;
+  }
+
+  /* Labels en modo oscuro */
+  .form-label {
+    color: #cbd5e1 !important;
+  }
+
+  /* Secciones del formulario en modo oscuro */
+  .form-section {
+    background: rgba(30, 41, 59, 0.5) !important;
+    border: 1px solid rgba(124, 58, 237, 0.15) !important;
+  }
+
+  /* Items de productos en modo oscuro */
+  .product-item {
+    background: rgba(30, 41, 59, 0.8) !important;
+    border: 1px solid rgba(124, 58, 237, 0.15) !important;
+    color: #e2e8f0 !important;
+  }
+
+  .product-item:hover {
+    box-shadow: 0 8px 16px rgba(124, 58, 237, 0.2) !important;
+  }
+
+  /* Grid items en modo oscuro */
+  .grid-item {
+    background: rgba(30, 41, 59, 0.8) !important;
+    border: 1px solid rgba(124, 58, 237, 0.15) !important;
+    color: #e2e8f0 !important;
+  }
+
+  /* Textos y headings en modo oscuro */
+  h1, h2, h3, h4, h5, h6, p {
+    color: #e2e8f0 !important;
+  }
+
+  /* Separadores en modo oscuro */
+  .border-t, hr {
+    border-color: rgba(124, 58, 237, 0.15) !important;
+  }
+
+  /* Mensajes de estado en modo oscuro */
+  .text-green-600 {
+    color: #86efac !important;
+    background: rgba(132, 204, 22, 0.1) !important;
+    border-left-color: #86efac !important;
+  }
+
+  .text-red-600 {
+    color: #fca5a5 !important;
+    background: rgba(252, 165, 165, 0.1) !important;
+    border-left-color: #fca5a5 !important;
+  }
+
+  /* Botones primarios en modo oscuro */
+  .btn-primary,
+  .bg-purple-700 {
+    background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 50%, #5b21b6 100%) !important;
+    box-shadow: 
+      0 6px 12px rgba(124, 58, 237, 0.4),
+      inset 0 1px 2px rgba(255, 255, 255, 0.15) !important;
+  }
+
+  .btn-primary:hover,
+  .bg-purple-700:hover {
+    background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 50%, #6d28d9 100%) !important;
+    box-shadow: 
+      0 8px 16px rgba(124, 58, 237, 0.5),
+      inset 0 1px 2px rgba(255, 255, 255, 0.2) !important;
+  }
+
+  /* Botones secundarios en modo oscuro */
+  .btn-outline-secondary {
+    background: transparent !important;
+    border: 2px solid rgba(124, 58, 237, 0.5) !important;
+    color: #cbd5e1 !important;
+  }
+
+  .btn-outline-secondary:hover {
+    background: rgba(124, 58, 237, 0.1) !important;
+    color: #e2e8f0 !important;
+    box-shadow: 0 6px 12px rgba(124, 58, 237, 0.2) !important;
+  }
+
+  /* Espacios de productos en modo oscuro */
+  .space-y-4 > div {
+    background: rgba(30, 41, 59, 0.8) !important;
+    border: 1px solid rgba(124, 58, 237, 0.15) !important;
+    color: #e2e8f0 !important;
+  }
+
+  /* Contenedores bg-gray-50 (productos, etc) */
+  .bg-gray-50 {
+    background: rgba(30, 41, 59, 0.8) !important;
+    color: #e2e8f0 !important;
+    border-color: rgba(124, 58, 237, 0.15) !important;
+  }
+
+  /* Grid de productos con fondo claro por defecto */
+  .grid.md\:grid-cols-12 {
+    background: rgba(30, 41, 59, 0.8) !important;
+    border-color: rgba(124, 58, 237, 0.15) !important;
+  }
+
+  /* Etiquetas de span en productos */
+  .font-semibold.text-gray-600 {
+    color: #cbd5e1 !important;
+  }
+
+  /* Hover en filas de productos */
+  .space-y-4 > div:hover {
+    background: rgba(30, 41, 59, 0.95) !important;
+    border-color: rgba(124, 58, 237, 0.3) !important;
+  }
+}

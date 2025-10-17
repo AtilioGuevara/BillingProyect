@@ -375,3 +375,182 @@
     border-radius: 0;
   }
 }
+
+/* ========================================
+   MODO OSCURO - VISTA DE FACTURA
+   ======================================== */
+
+:host-context([data-mode="dark"]) {
+  .bill-view-container {
+    background: linear-gradient(135deg, #0b1220 0%, #071028 100%);
+    color: #e2e8f0;
+  }
+
+  .bill-header {
+    border-bottom-color: rgba(124, 58, 237, 0.15);
+
+    h2 {
+      color: #f1f5f9;
+    }
+  }
+
+  .btn {
+    &.btn-primary {
+      background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%);
+      color: white;
+
+      &:hover {
+        background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+        box-shadow: 0 6px 12px rgba(124, 58, 237, 0.3);
+      }
+    }
+
+    &.btn-secondary {
+      background: rgba(124, 58, 237, 0.3);
+      color: #cbd5e1;
+      border: 1px solid rgba(124, 58, 237, 0.5);
+
+      &:hover {
+        background: rgba(124, 58, 237, 0.5);
+        color: #e2e8f0;
+      }
+    }
+
+    &.btn-success {
+      background: #10b981;
+      color: white;
+
+      &:hover {
+        background: #059669;
+      }
+    }
+  }
+
+  .loading-container {
+    p {
+      color: #cbd5e1;
+    }
+
+    .spinner {
+      border-color: rgba(124, 58, 237, 0.2);
+      border-top-color: #7c3aed;
+    }
+  }
+
+  .error-container {
+    .error-card {
+      background: linear-gradient(145deg, #1e293b 0%, #0f172a 100%);
+      border-left-color: #ef4444;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+
+      i {
+        color: #ef4444;
+      }
+
+      h3 {
+        color: #f1f5f9;
+      }
+
+      .error-details {
+        background: rgba(30, 41, 59, 0.8);
+        border-color: rgba(124, 58, 237, 0.15);
+        color: #cbd5e1;
+      }
+    }
+  }
+
+  .bill-content {
+    .bill-card {
+      background: linear-gradient(145deg, #1e293b 0%, #0f172a 100%);
+      box-shadow: 0 4px 16px rgba(124, 58, 237, 0.1);
+    }
+
+    .bill-section {
+      border-bottom-color: rgba(124, 58, 237, 0.1);
+
+      h3 {
+        color: #f1f5f9;
+      }
+    }
+
+    .info-grid {
+      .info-item {
+        label {
+          color: #cbd5e1;
+        }
+
+        span {
+          color: #e2e8f0;
+
+          &.generation-code {
+            background: rgba(124, 58, 237, 0.2);
+            color: #cbd5e1;
+            border: 1px solid rgba(124, 58, 237, 0.3);
+          }
+
+          &.status {
+            &.status-active {
+              background: rgba(16, 185, 129, 0.2);
+              color: #86efac;
+            }
+
+            &.status-pending {
+              background: rgba(217, 119, 6, 0.2);
+              color: #fcd34d;
+            }
+
+            &.status-cancelled {
+              background: rgba(239, 68, 68, 0.2);
+              color: #fca5a5;
+            }
+          }
+        }
+      }
+    }
+
+    .table-responsive {
+      .items-table {
+        th {
+          background: rgba(124, 58, 237, 0.1);
+          color: #cbd5e1;
+          border-bottom-color: rgba(124, 58, 237, 0.2);
+        }
+
+        td {
+          border-bottom-color: rgba(124, 58, 237, 0.1);
+          color: #e2e8f0;
+        }
+
+        tr:hover {
+          background: rgba(124, 58, 237, 0.08);
+        }
+      }
+    }
+
+    .totals-grid {
+      .total-item {
+        label {
+          color: #cbd5e1;
+        }
+
+        span {
+          color: #e2e8f0;
+        }
+
+        &.total-final {
+          border-top-color: rgba(124, 58, 237, 0.2);
+
+          label, span {
+            color: #f1f5f9;
+          }
+        }
+      }
+    }
+
+    .notes {
+      background: rgba(124, 58, 237, 0.1);
+      border-left-color: #7c3aed;
+      color: #cbd5e1;
+    }
+  }
+}

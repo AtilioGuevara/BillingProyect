@@ -71,11 +71,191 @@
 /* Asegurar que el degradado se aplique en modo oscuro */
 [data-mode="dark"] .btn-primary,
 [data-mode="dark"] .btn.btn-primary {
-  background: linear-gradient(135deg, #6d28d9 0%, #5b21b6 50%, #4c1d95 100%) !important;
+  background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 50%, #5b21b6 100%) !important;
   color: #fff !important;
+  box-shadow: 
+    0 6px 12px rgba(124, 58, 237, 0.4),
+    inset 0 1px 2px rgba(255, 255, 255, 0.15) !important;
 }
 
 [data-mode="dark"] .btn-primary:hover,
 [data-mode="dark"] .btn.btn-primary:hover {
-  background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 50%, #5b21b6 100%) !important;
+  background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 50%, #6d28d9 100%) !important;
+  box-shadow: 
+    0 8px 16px rgba(124, 58, 237, 0.5),
+    inset 0 1px 2px rgba(255, 255, 255, 0.2) !important;
+}
+
+[data-mode="dark"] .btn-primary:focus,
+[data-mode="dark"] .btn.btn-primary:focus {
+  box-shadow: 
+    0 0 0 3px rgba(124, 58, 237, 0.4),
+    0 6px 12px rgba(124, 58, 237, 0.4),
+    inset 0 1px 2px rgba(255, 255, 255, 0.15) !important;
+}
+
+/* ========================================
+   ESTILOS DE MODO OSCURO MEJORADOS
+   ======================================== */
+
+/* Mejoras generales para el modo oscuro */
+[data-mode="dark"] {
+  /* Cards y contenedores */
+  .card {
+    background: linear-gradient(145deg, #1e293b 0%, #0f172a 100%) !important;
+    border-color: rgba(124, 58, 237, 0.2) !important;
+  }
+
+  .card-header {
+    background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 50%, #1e293b 100%) !important;
+    border-bottom-color: rgba(124, 58, 237, 0.3) !important;
+  }
+
+  /* Inputs en modo oscuro */
+  .form-input, .input, select, textarea {
+    background: linear-gradient(145deg, #1e293b 0%, #0f172a 100%) !important;
+    border-color: rgba(124, 58, 237, 0.3) !important;
+    color: #e2e8f0 !important;
+  }
+
+  .form-input:focus, .input:focus, select:focus, textarea:focus {
+    border-color: #7c3aed !important;
+    box-shadow: 
+      0 0 0 3px rgba(124, 58, 237, 0.3),
+      0 8px 16px rgba(124, 58, 237, 0.2) !important;
+  }
+
+  /* Labels en modo oscuro */
+  .form-label {
+    color: #e2e8f0 !important;
+  }
+
+  /* Textos en modo oscuro */
+  h1, h2, h3, h4, h5, h6 {
+    color: #f1f5f9 !important;
+  }
+
+  p {
+    color: #cbd5e1 !important;
+  }
+}
+
+/* ========================================
+   EXTENSION: COMPONENTES COMUNES EN MODO OSCURO
+   ======================================== */
+
+/* Tablas */
+[data-mode="dark"] table,
+[data-mode="dark"] thead,
+[data-mode="dark"] tbody,
+[data-mode="dark"] tr,
+[data-mode="dark"] th,
+[data-mode="dark"] td {
+  background: transparent !important;
+  color: #e2e8f0 !important;
+  border-color: rgba(148, 163, 184, 0.08) !important;
+}
+
+[data-mode="dark"] .table thead th {
+  color: #c7d2fe !important;
+  border-bottom: 1px solid rgba(124, 58, 237, 0.12) !important;
+}
+
+/* Badges y labels */
+[data-mode="dark"] .badge,
+[data-mode="dark"] .badge-primary,
+[data-mode="dark"] .badge-solid-red {
+  color: #fff !important;
+  background-color: rgba(124, 58, 237, 0.9) !important;
+  box-shadow: 0 4px 8px rgba(124,58,237,0.15) !important;
+}
+
+/* Dropdowns & Menús */
+[data-mode="dark"] .dropdown-menu,
+[data-mode="dark"] .notification-dropdown,
+[data-mode="dark"] .dropdown-item {
+  background: linear-gradient(180deg, #0b1220 0%, #0f172a 100%) !important;
+  color: #cbd5e1 !important;
+  border: 1px solid rgba(124,58,237,0.08) !important;
+}
+
+/* Sidebar */
+[data-mode="dark"] .sidebar {
+  background: linear-gradient(180deg, #071028 0%, #0b1220 100%) !important;
+  color: #cbd5e1 !important;
+  border-right: 1px solid rgba(124,58,237,0.06) !important;
+}
+
+/* Menú lateral (links) */
+[data-mode="dark"] .sidebar a,
+[data-mode="dark"] .sidebar .nav-item {
+  color: #cbd5e1 !important;
+}
+
+/* Formularios: selects y opciones */
+[data-mode="dark"] select option {
+  background: #0f172a !important;
+  color: #e2e8f0 !important;
+}
+
+/* Tooltips */
+[data-mode="dark"] .tippy-box {
+  background: rgba(17,24,39,0.95) !important;
+  color: #e2e8f0 !important;
+  border: 1px solid rgba(124,58,237,0.08) !important;
+}
+
+/* ========================================
+   BOTÓN TOGGLE MODO OSCURO
+   ======================================== */
+
+/* Estilo mejorado para el botón de cambio de modo */
+.topbar-link {
+  position: relative;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 2.5rem;
+  min-height: 2.5rem;
+}
+
+.topbar-link:hover {
+  transform: scale(1.1);
+  background-color: rgba(109, 40, 217, 0.1);
+  border-radius: 0.5rem;
+}
+
+/* Animación para el icono de luna/sol */
+.topbar-link lucide-angular {
+  transition: all 0.3s ease;
+}
+
+.topbar-link:hover lucide-angular {
+  transform: rotate(20deg);
+}
+
+/* Modo oscuro para el topbar */
+[data-mode="dark"] .topbar-link {
+  color: #e2e8f0;
+}
+
+[data-mode="dark"] .topbar-link:hover {
+  color: #a78bfa;
+}
+
+/* Animación de entrada para los iconos */
+@keyframes fadeInRotate {
+  from {
+    opacity: 0;
+    transform: rotate(-90deg) scale(0.5);
+  }
+  to {
+    opacity: 1;
+    transform: rotate(0deg) scale(1);
+  }
+}
+
+.topbar-link lucide-angular {
+  animation: fadeInRotate 0.3s ease-out;
 }

@@ -49,6 +49,9 @@ export class LayoutSettingService {
   constructor() {
     window.addEventListener('resize', this.checkScreenSize.bind(this));
     this.checkScreenSize();
+    // Apply current settings to the document on service initialization so
+    // dark/light mode and other attributes are present on first render.
+    this.handleSettingsChange(this.settingsSubject.value);
   }
 
   getSettings(): ILayoutSettings {

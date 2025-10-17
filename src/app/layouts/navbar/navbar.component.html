@@ -44,8 +44,10 @@
           <span class="hidden ml-2 sm:inline">Logout</span>
         </button>
         
-        <button class="topbar-link" title="topbar-link" (click)="toggleDarkMode()">
-          <lucide-angular name="moon" class="size-4"></lucide-angular>
+        <!-- Toggle Dark/Light Mode -->
+        <button class="topbar-link flex items-center justify-center" title="Cambiar modo oscuro/claro" (click)="toggleDarkMode()">
+          <lucide-angular *ngIf="settings?.mode === 'light' || !settings?.mode" name="moon" class="size-4"></lucide-angular>
+          <lucide-angular *ngIf="settings?.mode === 'dark'" name="sun" class="size-4"></lucide-angular>
         </button>
         <button class="hidden topbar-link sm:flex" title="tools-apps-modal" (click)="openToolsModal()">
           <lucide-angular name="LayoutGrid" class="size-4"></lucide-angular>

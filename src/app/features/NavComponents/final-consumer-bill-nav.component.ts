@@ -3,11 +3,13 @@ import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from '../final-consumer-bill/services/authentication-service';
+import { LayoutSettingService } from '../../layouts/layout-setting.service';
+import { LucideAngularModule } from 'lucide-angular';
 
 @Component({
   selector: 'app-final-consumer-bill-nav',
   standalone: true,
-  imports: [CommonModule, RouterModule, FormsModule],
+  imports: [CommonModule, RouterModule, FormsModule, LucideAngularModule],
   template: `
     <div class="card mb-6">
       <div class="card-header">
@@ -80,6 +82,16 @@ import { AuthService } from '../final-consumer-bill/services/authentication-serv
               <i class="align-baseline ri-logout-box-line"></i>
               Cerrar Sesión
             </button>
+
+            <!-- Toggle modo oscuro/claro (local en la navegación de facturas) -->
+            <button
+              class="topbar-link"
+              title="Alternar modo oscuro/claro"
+              aria-label="Alternar modo oscuro/claro"
+              (click)="toggleMode()">
+              <lucide-angular *ngIf="currentMode === 'light' || !currentMode" name="moon" class="size-4"></lucide-angular>
+              <lucide-angular *ngIf="currentMode === 'dark'" name="sun" class="size-4"></lucide-angular>
+            </button>
           </div>
         </div>
       </div>
@@ -140,10 +152,12 @@ export class FinalConsumerBillNavComponent {
   showSuccessMessage = false;
   successMessage = '';
   private messageTimeout: any;
+  currentMode: 'light' | 'dark' | 'auto' = 'light';
   
   constructor(
     private router: Router,
     private authService: AuthService
+    , private settingService: LayoutSettingService
   ) {}
 
   /**
@@ -195,6 +209,25 @@ export class FinalConsumerBillNavComponent {
     if (this.messageTimeout) {
       clearTimeout(this.messageTimeout);
     }
+  }
+  
+  ngOnInit(): void {
+    // Inicializar el modo actual desde el servicio
+    const settings = this.settingService.getSettings();
+    this.currentMode = (settings && settings.mode) ? (settings.mode as 'light'|'dark'|'auto') : 'light';
+
+    // Suscribirse a futuros cambios
+    this.settingService.settings$.subscribe(s => {
+      if (s && s.mode) {
+        this.currentMode = s.mode as 'light'|'dark'|'auto';
+      }
+    });
+  }
+
+  toggleMode(): void {
+    const newMode = this.currentMode === 'dark' ? 'light' : 'dark';
+    this.settingService.updateSettings({ mode: newMode });
+    this.currentMode = newMode as 'light'|'dark'|'auto';
   }
   
   /**

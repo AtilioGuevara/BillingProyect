@@ -35,10 +35,13 @@ export class NavbarComponent {
   
   languageData: any = {};
   currantLayout!: string;
-  settings!: {
+  settings: {
     mode: string;
     sidebarSize: string;
-  }
+  } = {
+    mode: 'light',
+    sidebarSize: 'default'
+  };
 
   constructor(
     private modalService: ModalService,
@@ -48,6 +51,10 @@ export class NavbarComponent {
     public drawerService: DrawerService,
     private authService: AuthService
   ) {
+    // Inicializar con los valores actuales del servicio
+    this.settings = this.settingService.getSettings();
+    
+    // Suscribirse a cambios futuros
     this.settingService.settings$.subscribe((settings) => {
       this.settings = settings;
     });
