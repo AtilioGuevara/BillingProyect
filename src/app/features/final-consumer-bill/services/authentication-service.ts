@@ -21,7 +21,17 @@ export class AuthService {
   constructor(
     private router: Router,
     private sessionService: SessionService
-  ) {}
+  ) {
+    // Agregar función global para debug manual en consola del navegador
+    (window as any).debugCookies = this.debugCookiesManually.bind(this);
+    (window as any).searchToken = this.searchTokenManually.bind(this);
+    (window as any).forceDetectToken = this.forceDetectTokenManually.bind(this);
+    
+    console.log('🔧 Funciones de debug agregadas al objeto window:');
+    console.log('   - debugCookies() - Ver todas las cookies');
+    console.log('   - searchToken() - Buscar token específicamente');
+    console.log('   - forceDetectToken() - Forzar detección y almacenamiento');
+  }
 
   /**
    * Debug completo de cookies - método de diagnóstico SUPER DETALLADO
@@ -549,5 +559,118 @@ export class AuthService {
     
     // Redirigir al login externo
     this.redirectToLogin();
+  }
+
+  // ============ FUNCIONES PARA DEBUG MANUAL EN CONSOLA ============
+
+  /**
+   * Función para debug manual en consola del navegador
+   * Uso: debugCookies() en la consola
+   */
+  debugCookiesManually(): void {
+    console.log('🔍 === DEBUG MANUAL DE COOKIES ===');
+    console.log('📍 Ejecutado desde consola del navegador');
+    console.log('🌐 URL actual:', window.location.href);
+    console.log('🏠 Dominio:', window.location.hostname);
+    
+    console.log('📋 document.cookie RAW:', JSON.stringify(document.cookie));
+    console.log('📏 Longitud de document.cookie:', document.cookie.length);
+    
+    if (document.cookie) {
+      const cookies = document.cookie.split(';');
+      console.log('📊 Total cookies encontradas:', cookies.length);
+      
+      cookies.forEach((cookie, index) => {
+        const trimmed = cookie.trim();
+        const equalIndex = trimmed.indexOf('=');
+        if (equalIndex !== -1) {
+          const name = trimmed.substring(0, equalIndex);
+          const value = trimmed.substring(equalIndex + 1);
+          console.log(`🍪 ${index + 1}. "${name}" = "${value}"`);
+          
+          if (name === 'token') {
+            console.log(`🎯 ¡TOKEN ENCONTRADO MANUALMENTE!`);
+            console.log(`🎯 Nombre: "${name}"`);
+            console.log(`🎯 Valor: "${value}"`);
+            console.log(`🎯 Longitud: ${value.length} caracteres`);
+          }
+        }
+      });
+    } else {
+      console.log('❌ document.cookie está vacío');
+    }
+    
+    console.log('=== FIN DEBUG MANUAL ===');
+  }
+
+  /**
+   * Buscar token específicamente en consola
+   * Uso: searchToken() en la consola
+   */
+  searchTokenManually(): string | null {
+    console.log('🔍 BÚSQUEDA MANUAL DE TOKEN');
+    
+    // Método 1: Split normal
+    const cookies = document.cookie.split(';');
+    for (const cookie of cookies) {
+      const trimmed = cookie.trim();
+      if (trimmed.startsWith('token=')) {
+        const value = trimmed.substring(6); // 'token='.length = 6
+        console.log(`✅ TOKEN ENCONTRADO (Método 1): "${value}"`);
+        return value;
+      }
+    }
+    
+    // Método 2: Regex
+    const match = document.cookie.match(/(?:^|;\s*)token\s*=\s*([^;]+)/);
+    if (match && match[1]) {
+      console.log(`✅ TOKEN ENCONTRADO (Método 2): "${match[1]}"`);
+      return match[1];
+    }
+    
+    // Método 3: Búsqueda manual caracter por caracter
+    const cookieStr = document.cookie;
+    const tokenIndex = cookieStr.indexOf('token=');
+    if (tokenIndex !== -1) {
+      const startIndex = tokenIndex + 6; // 'token='.length
+      let endIndex = cookieStr.indexOf(';', startIndex);
+      if (endIndex === -1) endIndex = cookieStr.length;
+      
+      const value = cookieStr.substring(startIndex, endIndex);
+      console.log(`✅ TOKEN ENCONTRADO (Método 3): "${value}"`);
+      return value;
+    }
+    
+    console.log('❌ TOKEN NO ENCONTRADO con ningún método manual');
+    return null;
+  }
+
+  /**
+   * Forzar detección y almacenamiento del token
+   * Uso: forceDetectToken() en la consola
+   */
+  forceDetectTokenManually(): boolean {
+    console.log('💪 FORZANDO DETECCIÓN DE TOKEN');
+    
+    const token = this.searchTokenManually();
+    if (token) {
+      console.log('💾 Almacenando token en localStorage...');
+      localStorage.setItem('token', token);
+      localStorage.setItem(this.TOKEN_KEY, token);
+      
+      console.log('✅ Token almacenado exitosamente');
+      console.log('🔄 Verificando almacenamiento...');
+      
+      const storedToken = localStorage.getItem('token');
+      const storedTokenKey = localStorage.getItem(this.TOKEN_KEY);
+      
+      console.log('✅ localStorage["token"]:', storedToken ? 'OK' : 'FALLO');
+      console.log('✅ localStorage["' + this.TOKEN_KEY + '"]:', storedTokenKey ? 'OK' : 'FALLO');
+      
+      return true;
+    }
+    
+    console.log('❌ No se pudo forzar la detección - token no encontrado');
+    return false;
   }
 }
