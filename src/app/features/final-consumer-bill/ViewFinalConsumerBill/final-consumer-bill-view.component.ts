@@ -120,7 +120,7 @@ Sugerencias:
   }
 
   goBack(): void {
-    this.router.navigate(['/final-consumer-bill/search']);
+    this.router.navigate(['/final-consumer-bill/list']);
   }
 
   goToCreate(): void {
