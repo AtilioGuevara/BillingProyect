@@ -174,54 +174,64 @@ export class AuthService {
   getAuthToken(): string | null { return this.getToken(); }
   
   /**
-   * ✅ VALIDACIÓN DE SESIÓN - Usando nueva IP de validación
+   * Validación de sesión simplificada - El backend se encarga de la validación real
    */
   async validateSession(): Promise<boolean> {
-    try {
-      console.log('🔍 Validando sesión con servidor...');
-      
-      const token = this.getToken();
-      if (!token) {
-        console.log('❌ No hay token para validar');
-        return false;
-      }
-
-      // ✅ NUEVA URL DE VALIDACIÓN con IP específica
-      const validationUrl = 'http://173.249.17.80/api/auth/authentication/validate';
-      
-      const response = await this.http.post<any>(validationUrl, {}, {
-        headers: {
-          'Authorization': `Bearer ${token}`,
-          'Content-Type': 'application/json'
-        }
-      }).toPromise();
-
-      if (response && response.valid) {
-        console.log('✅ Sesión válida confirmada por servidor');
-        return true;
-      } else {
-        console.log('❌ Sesión no válida según servidor');
-        return false;
-      }
-    } catch (error) {
-      console.error('❌ Error validando sesión:', error);
-      return false;
-    }
+    // Ya no validamos aquí, el backend de facturación se encarga
+    return true;
   }
   
   checkForLoginSuccess(): void { 
-    // Ejecutar validación de sesión automáticamente
-    this.validateSession().then(isValid => {
-      if (isValid) {
-        console.log('✅ Sesión automática válida');
-      } else {
-        console.log('❌ Sesión automática no válida');
-      }
-    });
+    // Ya no necesitamos validación automática, el backend se encarga
+    console.log('✅ AuthService listo - validación delegada al backend');
   }
   
   async isAuthenticatedAsync(): Promise<boolean> { return this.isAuthenticated(); }
   async handleLoginReturn(): Promise<void> { }
   handleLoginCallback(): void { }
   startLoginMonitoring(): void { }
+
+  /**
+   * 🧪 FUNCIÓN DE DEBUGGING: Establecer token manualmente para pruebas
+   * ¡SOLO USAR EN DESARROLLO!
+   */
+  setTestToken(token: string): void {
+    console.log('🧪 MODO DEBUG: Estableciendo token de prueba...');
+    localStorage.setItem(this.TOKEN_KEY, token);
+    
+    // También establecer como cookie
+    const isHttps = window.location.protocol === 'https:';
+    const secure = isHttps ? '; Secure' : '';
+    const cookieString = `token=${token}; path=/; SameSite=Lax${secure}`;
+    document.cookie = cookieString;
+    
+    console.log('✅ Token de prueba establecido');
+    console.log('  - localStorage:', localStorage.getItem(this.TOKEN_KEY));
+    console.log('  - isAuthenticated():', this.isAuthenticated());
+  }
+
+  private getFetchOptions(method: string = 'GET', body?: any): RequestInit {
+    const headers: Record<string, string> = {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json'
+    };
+
+    // Agregar token como Authorization Bearer
+    const token = this.getToken();
+    if (token) {
+      headers['Authorization'] = `Bearer ${token}`;
+    }
+
+    const options: RequestInit = {
+      method,
+      headers,
+      credentials: 'include' // También enviar cookies
+    };
+
+    if (body && method !== 'GET') {
+      options.body = JSON.stringify(body);
+    }
+
+    return options;
+  }
 }

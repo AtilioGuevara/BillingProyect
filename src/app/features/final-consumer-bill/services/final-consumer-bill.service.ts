@@ -9,7 +9,7 @@ import {
 import { environment } from '../../../../environments/environment';
 import { ErrorHandlerService } from '../../../services/error-handler.service';
 import { AuthService } from './authentication-service';
-import { getCookie, isValidToken } from '../../../utils/common.utils';
+
 
 /**
  * Servicio optimizado para manejo de facturas usando Fetch API
@@ -81,29 +81,39 @@ export class FinalConsumerBillService {
   }
 
   /**
-   * Realizar petición HTTP usando Fetch API con logging mejorado
+   * Realizar petición HTTP usando Fetch API
    */
   private performFetch<T>(url: string, method: string, body?: any): Observable<T> {
-    console.log(`🌐 Iniciando ${method} request a:`, url);
-    console.log('🍪 Cookies actuales:', document.cookie);
+    console.log('🚀 === INICIANDO PETICIÓN AL BACKEND DE FACTURACIÓN ===');
+    console.log('� URL:', url);
+    console.log('📝 Método:', method);
+    if (body) {
+      console.log('📦 Body:', body);
+    }
     
     const options = this.getFetchOptions(method, body);
-    console.log('📋 Opciones de fetch:', {
-      method,
-      headers: options.headers,
-      credentials: options.credentials,
-      hasBody: !!options.body
-    });
+    
+    console.log('📋 === RESUMEN DE LA PETICIÓN ===');
+    console.log('  - Método:', options.method);
+    console.log('  - Credentials:', options.credentials);
+    console.log('  - Content-Type:', (options.headers as any)['Content-Type']);
+    console.log('  - Authorization:', (options.headers as any)['Authorization'] ? '✅ Bearer token incluido' : '❌ SIN token');
+    console.log('  - Cookies enviadas automáticamente:', document.cookie ? '✅ Sí' : '❌ No');
     
     const fetchPromise = fetch(url, options)
       .then(async (response) => {
-        console.log(`📡 Respuesta recibida - Status: ${response.status}`);
-        console.log('📋 Content-Type:', response.headers.get('content-type'));
-        console.log('📋 Headers disponibles:', response.headers);
+        console.log('📡 === RESPUESTA DEL SERVIDOR ===');
+        console.log('  - Status:', response.status, response.statusText);
+        console.log('  - Content-Type:', response.headers.get('content-type'));
+        console.log('  - Headers respuesta disponibles:', response.headers);
         
         if (!response.ok) {
           const errorText = await response.text();
-          console.error(`❌ Error HTTP ${response.status}:`, errorText);
+          console.error('❌ Error del servidor:', {
+            status: response.status,
+            statusText: response.statusText,
+            errorBody: errorText
+          });
           throw new Error(`HTTP ${response.status}: ${errorText}`);
         }
         
@@ -118,75 +128,51 @@ export class FinalConsumerBillService {
         const result = await response.json();
         console.log('✅ Respuesta exitosa (JSON):', result);
         return result as T;
-      })
-      .catch((error) => {
-        console.error('🚨 Error en fetch:', error);
-        throw error;
       });
 
     return from(fetchPromise);
   }
 
   /**
-   * Obtener opciones para fetch con autenticación mejorada
+   * Obtener opciones para fetch - envía token como Authorization Bearer + cookies
    */
   private getFetchOptions(method: string = 'GET', body?: any): RequestInit {
-    console.log(`🔧 Configurando petición ${method} a API...`);
-    
     const headers: Record<string, string> = {
       'Content-Type': 'application/json',
       'Accept': 'application/json'
     };
 
-    // Usar AuthService para obtener el token (más confiable)
+    // 🔑 Obtener y agregar token como Authorization Bearer
     const token = this.authService.getToken();
-    console.log(`🔍 Token obtenido del AuthService: ${token ? `${token.substring(0, 20)}...` : 'No encontrado'}`);
+    console.log('🔍 DEBUG - Token obtenido del AuthService:', token ? `${token.substring(0, 20)}...` : 'NO HAY TOKEN');
     
     if (token) {
       headers['Authorization'] = `Bearer ${token}`;
-      console.log('✅ Header Authorization agregado');
+      console.log('✅ Authorization header agregado:', `Bearer ${token.substring(0, 20)}...`);
     } else {
-      console.log('⚠️ No se encontró token - request sin autorización');
+      console.warn('⚠️ No se encontró token - petición sin Authorization header');
     }
+
+    // 🍪 Log de cookies disponibles
+    console.log('🍪 Cookies disponibles para envío automático:', document.cookie || 'SIN COOKIES');
 
     const options: RequestInit = {
       method,
       headers,
-      credentials: 'include' // Para enviar cookies automáticamente
+      credentials: 'include' // Enviar cookies automáticamente
     };
 
     if (body && method !== 'GET') {
       options.body = JSON.stringify(body);
     }
 
+    // 📋 Log final de headers que se enviarán
+    console.log('📤 Headers finales que se enviarán:', headers);
+
     return options;
   }
 
-  /**
-   * Obtener JWT token para autorización
-   */
-  private getJWTToken(): string | null {
-    // Intentar obtener desde múltiples fuentes
-    const sources = [
-      () => localStorage.getItem('authToken'),
-      () => localStorage.getItem('token'),
-      () => localStorage.getItem('jwt'),
-      () => getCookie('authToken'),
-      () => getCookie('token'),
-      () => getCookie('jwt'),
-      () => sessionStorage.getItem('authToken'),
-      () => sessionStorage.getItem('token')
-    ];
 
-    for (const getToken of sources) {
-      const token = getToken();
-      if (isValidToken(token) && token!.length > 20) {
-        return token;
-      }
-    }
-
-    return null;
-  }
 
   // Métodos de compatibilidad con nombres anteriores
   getAllFinalConsumerBillsWithFetch(): Observable<FinalConsumerBillListDTO[]> {

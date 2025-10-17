@@ -520,7 +520,7 @@ export class FinalConsumerBillCreateComponent {
         if (error.status === 400) {
           this.errorMsg = '❌ Error 400: Datos inválidos. Verifique los datos enviados.';
         } else if (error.status === 401) {
-          this.errorMsg = '❌ Error 401: No autorizado. El token JWT puede haber expirado.';
+          this.errorMsg = '❌ Error 401: No autorizado.';
         } else if (error.status === 500) {
           this.errorMsg = '❌ Error 500: Error interno del servidor.';
         } else if (error.status === 0) {

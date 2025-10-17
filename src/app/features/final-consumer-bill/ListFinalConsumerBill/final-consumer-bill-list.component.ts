@@ -45,77 +45,51 @@ export class FinalConsumerBillListComponent extends BaseComponent implements OnI
   }
 
   async ngOnInit(): Promise<void> {
-    console.log('Inicializando componente FinalConsumerBillListComponent');
-    
     // Manejar retorno del login si aplica
     await this.handleLoginReturn();
     
-    // Verificar autenticación antes de cargar datos (incluyendo validación de sesión)
-    const isAuthenticated = await this.authService.isAuthenticatedAsync();
-    
-    if (isAuthenticated) {
-      console.log('Usuario autenticado, cargando facturas...');
-      this.loadBills();
-    } else {
-      console.log('Usuario no autenticado');
-      this.state.error = 'Necesita iniciar sesión para ver las facturas';
-    }
+    // Cargar facturas directamente, la validación la hace el backend
+    this.loadBills();
   }
 
   /**
-   * Manejar retorno del login externo con verificación mejorada
+   * Manejar retorno del login externo
    */
   private async handleLoginReturn(): Promise<void> {
-    console.log('Verificando retorno del login...');
-    
     // Procesar cualquier token en la URL
     await this.authService.handleLoginReturn();
     
     // Verificar si acabamos de completar un login
     if (localStorage.getItem('waitingForAuth') === 'true') {
-      console.log('Esperando autenticación...');
+      localStorage.removeItem('waitingForAuth');
       
-      // Dar tiempo para que se procese el token y validar sesión
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      // Disparar evento de login exitoso
+      window.dispatchEvent(new CustomEvent('loginSuccess', {
+        detail: {
+          message: 'Sesión iniciada correctamente',
+          duration: 3000
+        }
+      }));
       
-      const isAuthenticated = await this.authService.isAuthenticatedAsync();
-      if (isAuthenticated) {
-        console.log('Login completado exitosamente');
-        localStorage.removeItem('waitingForAuth');
-        
-        // Disparar evento de login exitoso
-        window.dispatchEvent(new CustomEvent('loginSuccess', {
-          detail: {
-            message: 'Sesión iniciada correctamente',
-            duration: 3000
-          }
-        }));
-        
-        // Recargar facturas
-        this.loadBills();
-      }
+      // Recargar facturas
+      this.loadBills();
     }
   }
 
   /**
-   * Cargar lista de facturas con verificación de autenticación
+   * Cargar lista de facturas - La validación la hace el backend
    */
   async loadBills(): Promise<void> {
-    console.log('Iniciando carga de facturas...');
+    console.log('📋 Iniciando carga de facturas...');
+    console.log('🔑 Estado AuthService:', {
+      isAuthenticated: this.authService.isAuthenticated(),
+      hasToken: !!this.authService.getToken(),
+      currentUser: this.authService.getCurrentUser()
+    });
+    console.log('🍪 Cookies del navegador:', document.cookie);
     
-    // Verificar autenticación antes de hacer la petición (incluyendo validación de sesión)
-    const isAuthenticated = await this.authService.isAuthenticatedAsync();
-    
-    if (!isAuthenticated) {
-      console.log('No autenticado, no se puede cargar facturas');
-      this.state.error = 'Debe iniciar sesión para ver las facturas';
-      this.state.loadingState = LoadingState.ERROR;
-      return;
-    }
-
     this.state.loadingState = LoadingState.LOADING;
     this.state.error = null;
-    console.log('⏳ Estado de carga activado');
 
     this.billService.getAllFinalConsumerBills()
       .pipe(
@@ -222,5 +196,23 @@ export class FinalConsumerBillListComponent extends BaseComponent implements OnI
     setTimeout(() => {
       this.state.error = null;
     }, 10000);
+  }
+
+  // 🧪 MÉTODO DE DEBUGGING - Para establecer token manualmente
+  setTestToken(): void {
+    const testToken = prompt('Ingresa el token para pruebas:');
+    if (testToken && testToken.trim()) {
+      this.authService.setTestToken(testToken.trim());
+      // Recargar facturas después de establecer el token
+      setTimeout(() => {
+        this.loadBills();
+      }, 1000);
+    }
+  }
+
+  // 🧪 MÉTODO DE DEBUGGING - Verificar cookies enviadas al backend
+  debugAuth(): void {
+    console.log('🔍 DEBUG - Cookies que se enviarán al backend:');
+    console.log('  - cookies:', document.cookie);
   }
 }
