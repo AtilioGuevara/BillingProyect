@@ -27,11 +27,15 @@ export class AuthService {
     (window as any).debugCookies = this.debugCookiesManually.bind(this);
     (window as any).searchToken = this.searchTokenManually.bind(this);
     (window as any).forceDetectToken = this.forceDetectTokenManually.bind(this);
+    (window as any).fetchTokenFromAccounts = this.fetchTokenFromAccountsManually.bind(this);
+    (window as any).fetchTokenViaPopup = this.fetchTokenViaPopupManually.bind(this);
     
     console.log('🔧 Funciones de debug agregadas al objeto window:');
     console.log('   - debugCookies() - Ver todas las cookies');
     console.log('   - searchToken() - Buscar token específicamente');
     console.log('   - forceDetectToken() - Forzar detección y almacenamiento');
+    console.log('   - fetchTokenFromAccounts() - Obtener token del dominio accounts');
+    console.log('   - fetchTokenViaPopup() - Obtener token via popup');
   }
 
   /**
@@ -641,5 +645,148 @@ export class AuthService {
     
     console.log('❌ No se pudo forzar la detección - token no encontrado');
     return false;
+  }
+
+  /**
+   * Obtener token del dominio de accounts via API
+   * Uso: fetchTokenFromAccounts() en la consola
+   */
+  async fetchTokenFromAccountsManually(): Promise<boolean> {
+    console.log('🌐 OBTENIENDO TOKEN DEL DOMINIO ACCOUNTS');
+    console.log('📍 Dominio actual:', window.location.hostname);
+    console.log('🎯 Dominio objetivo: accounts.beckysflorist.site');
+    
+    try {
+      // Intentar obtener el token del dominio accounts
+      const accountsDomain = 'https://accounts.beckysflorist.site';
+      const tokenEndpoint = `${accountsDomain}/authentication/current-token`;
+      
+      console.log('📡 Haciendo petición a:', tokenEndpoint);
+      
+      const response = await fetch(tokenEndpoint, {
+        method: 'GET',
+        credentials: 'include', // Incluir cookies del dominio accounts
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        }
+      });
+      
+      if (response.ok) {
+        const data = await response.json();
+        console.log('✅ Respuesta exitosa del servidor accounts');
+        console.log('📦 Datos recibidos:', data);
+        
+        if (data.token) {
+          console.log('🎯 Token encontrado en respuesta del servidor');
+          console.log('💾 Almacenando token con configuración cross-domain...');
+          
+          // Usar nuestro método storeToken para configurar cookies cross-domain
+          this.storeToken(data.token);
+          
+          console.log('✅ Token almacenado exitosamente');
+          console.log('🔄 Verificando que las cookies se crearon...');
+          
+          // Verificar cookies
+          setTimeout(() => {
+            const newCookies = document.cookie;
+            console.log('🍪 Cookies después de almacenar:', newCookies);
+            
+            const storedToken = localStorage.getItem('token');
+            console.log('💾 localStorage verificado:', storedToken ? 'OK' : 'FALLO');
+          }, 100);
+          
+          return true;
+        } else {
+          console.log('❌ No se encontró token en la respuesta del servidor');
+          console.log('📦 Estructura de respuesta:', Object.keys(data));
+          return false;
+        }
+      } else {
+        console.log('❌ Error en la respuesta del servidor');
+        console.log('📟 Status:', response.status);
+        console.log('📝 Status Text:', response.statusText);
+        
+        const errorText = await response.text();
+        console.log('💬 Error del servidor:', errorText);
+        return false;
+      }
+    } catch (error) {
+      console.error('❌ Error de red al obtener token:', error);
+      console.log('🔧 Esto puede indicar:');
+      console.log('   - CORS no configurado en accounts.beckysflorist.site');
+      console.log('   - El endpoint /authentication/current-token no existe');
+      console.log('   - Problema de conectividad');
+      return false;
+    }
+  }
+
+  /**
+   * Método alternativo: Crear ventana popup para obtener token
+   * Uso: fetchTokenViaPopup() en la consola
+   */
+  async fetchTokenViaPopupManually(): Promise<boolean> {
+    console.log('🪟 OBTENIENDO TOKEN VIA POPUP');
+    
+    try {
+      // Crear popup hacia accounts domain
+      const accountsUrl = 'https://accounts.beckysflorist.site/authentication/token-bridge';
+      console.log('🚪 Abriendo popup a:', accountsUrl);
+      
+      const popup = window.open(accountsUrl, 'tokenBridge', 'width=400,height=300');
+      
+      if (!popup) {
+        console.log('❌ No se pudo abrir popup (bloqueado por el navegador)');
+        return false;
+      }
+      
+      // Escuchar mensaje del popup
+      const tokenPromise = new Promise<string | null>((resolve) => {
+        const messageHandler = (event: MessageEvent) => {
+          if (event.origin !== 'https://accounts.beckysflorist.site') {
+            console.log('❌ Mensaje de origen no confiable:', event.origin);
+            return;
+          }
+          
+          console.log('📩 Mensaje recibido del popup:', event.data);
+          
+          if (event.data.type === 'TOKEN_RESPONSE' && event.data.token) {
+            console.log('🎯 Token recibido via popup');
+            window.removeEventListener('message', messageHandler);
+            popup.close();
+            resolve(event.data.token);
+          } else {
+            console.log('❌ Mensaje sin token válido');
+            resolve(null);
+          }
+        };
+        
+        window.addEventListener('message', messageHandler);
+        
+        // Timeout después de 10 segundos
+        setTimeout(() => {
+          console.log('⏰ Timeout del popup');
+          window.removeEventListener('message', messageHandler);
+          popup.close();
+          resolve(null);
+        }, 10000);
+      });
+      
+      const token = await tokenPromise;
+      
+      if (token) {
+        console.log('💾 Almacenando token obtenido via popup...');
+        this.storeToken(token);
+        console.log('✅ Token almacenado exitosamente via popup');
+        return true;
+      } else {
+        console.log('❌ No se obtuvo token via popup');
+        return false;
+      }
+      
+    } catch (error) {
+      console.error('❌ Error en método popup:', error);
+      return false;
+    }
   }
 }
