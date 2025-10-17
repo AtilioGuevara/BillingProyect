@@ -132,4 +132,9 @@ Sugerencias:
       window.print();
     }
   }
+
+  getProductNameById(productId: number): string {
+    const product = this.bill?.products?.find(p => p.productId === productId);
+    return product ? product.name : `Producto ID: ${productId}`;
+  }
 }

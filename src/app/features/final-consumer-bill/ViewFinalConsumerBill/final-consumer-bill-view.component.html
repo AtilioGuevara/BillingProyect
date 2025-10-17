@@ -148,6 +148,33 @@
         </div>
       </div>
 
+      <!-- Promotions Section -->
+      <div class="bill-section" *ngIf="bill?.promotionApplied">
+        <h3>Promoción Aplicada</h3>
+        <div class="info-grid">
+          <div class="info-item">
+            <label>Código de Promoción:</label>
+            <span>{{ bill.promotionCode || 'N/A' }}</span>
+          </div>
+          <div class="info-item">
+            <label>Nombre de Promoción:</label>
+            <span>{{ bill.promotionName || 'N/A' }}</span>
+          </div>
+          <div class="info-item">
+            <label>Descuento Aplicado:</label>
+            <span>{{ (bill.promotionDiscount || 0) | currency:'USD':'symbol':'1.2-2' }}</span>
+          </div>
+          <div class="info-item" *ngIf="bill.productsWithPromotion && bill.productsWithPromotion.length > 0">
+            <label>Productos con Promoción:</label>
+            <span>
+              <span *ngFor="let productId of bill.productsWithPromotion; let i = index">
+                {{ getProductNameById(productId) }}<span *ngIf="i < (bill.productsWithPromotion?.length || 0) - 1">, </span>
+              </span>
+            </span>
+          </div>
+        </div>
+      </div>
+
       <!-- Totals -->
       <div class="bill-section">
         <h3>Totales</h3>

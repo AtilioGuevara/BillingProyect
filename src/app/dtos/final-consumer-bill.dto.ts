@@ -75,6 +75,13 @@ export interface FinalConsumerBillDetailDTO {
   perceivedIva: number;
   withheldIva: number;
   totalWithIva: number;
+
+  // Promoción
+  promotionApplied?: boolean;
+  promotionCode?: string;
+  promotionName?: string;
+  promotionDiscount?: number;
+  productsWithPromotion?: number[];
 }
 
 // DTO simplificado para la lista (getAll)
