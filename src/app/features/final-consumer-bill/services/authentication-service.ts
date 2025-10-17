@@ -15,21 +15,51 @@ export class AuthService {
   private readonly POSSIBLE_COOKIE_NAMES = [
     'token',          // Prioridad alta - la que se ve en tu screenshot
     'authToken',      // Prioridad alta - la que guardamos
-    'access_token',   // Estándar OAuth
-    'jwt',           // JSON Web Token estándar
-    'auth_token',    // Variante común
-    'session_token', // Token de sesión
-    'auth',          // Token simple
-    'authentication' // Token de autenticación
   ];
 
   constructor(private router: Router) {}
 
   /**
-   * Verificar si el usuario está autenticado
+   * Verificar si el usuario está autenticado (incluye validación de sesión)
    */
   isAuthenticated(): boolean {
-    return !!this.getToken();
+    const token = this.getToken();
+    if (token) {
+      return true;
+    }
+    
+    // Si no hay token, verificar si hay una sesión válida
+    // Esto es útil después del login cuando la cookie existe pero no el token local
+    return false;
+  }
+
+  /**
+   * Verificar autenticación incluyendo validación de sesión
+   */
+  async isAuthenticatedAsync(): Promise<boolean> {
+    // Primero verificar token local
+    const token = this.getToken();
+    if (token) {
+      return true;
+    }
+    
+    // Si no hay token local, validar sesión con backend
+    const isSessionValid = await this.validateSession();
+    if (isSessionValid) {
+      // Si la sesión es válida, intentar obtener token de cookies
+      const cookieToken = this.getTokenFromCookies();
+      if (cookieToken) {
+        this.storeToken(cookieToken);
+        return true;
+      } else {
+        // Crear token temporal si la sesión es válida
+        const tempToken = 'session_valid_' + Date.now();
+        localStorage.setItem(this.TOKEN_KEY, tempToken);
+        return true;
+      }
+    }
+    
+    return false;
   }
 
   /**
@@ -92,17 +122,17 @@ export class AuthService {
    * Obtener token de cookies con búsqueda optimizada
    */
   private getTokenFromCookies(): string | null {
-    console.log('🍪 Revisando cookies disponibles...');
+    console.log('Revisando cookies disponibles...');
     
     for (const cookieName of this.POSSIBLE_COOKIE_NAMES) {
       const token = getCookie(cookieName);
       if (isValidToken(token)) {
-        console.log(`✅ Token válido encontrado en cookie: ${cookieName}`);
+        console.log(`Token válido encontrado en cookie: ${cookieName}`);
         return token;
       }
     }
     
-    console.log('❌ No se encontró token válido en ninguna cookie');
+    console.log('No se encontró token válido en ninguna cookie');
     return null;
   }
 
@@ -130,7 +160,7 @@ export class AuthService {
 
     // Guardar en localStorage (método principal)
     localStorage.setItem(this.TOKEN_KEY, token);
-    console.log('✅ Token guardado en localStorage');
+    console.log('Token guardado en localStorage');
     
     // Configurar cookies
     const isHttps = window.location.protocol === 'https:';
@@ -139,7 +169,7 @@ export class AuthService {
     // Cookies para dominio actual
     document.cookie = `token=${token}; path=/${secure}; SameSite=Lax`;
     document.cookie = `authToken=${token}; path=/${secure}; SameSite=Lax`;
-    console.log('✅ Cookies locales establecidas');
+    console.log('Cookies locales establecidas');
     
     // Cookie compartida para subdominios de beckysflorist.site
     if (window.location.hostname.includes('beckysflorist.site')) {
@@ -152,11 +182,11 @@ export class AuthService {
         document.cookie = `token=${token}; path=/; domain=.beckysflorist.site; SameSite=None; Secure`;
         document.cookie = `authToken=${token}; path=/; domain=.beckysflorist.site; SameSite=None; Secure`;
       }
-      console.log('✅ Cookies de subdominio establecidas para .beckysflorist.site');
+      console.log('Cookies de subdominio establecidas para .beckysflorist.site');
     }
     
     // Verificar que las cookies se establecieron
-    console.log('🍪 Cookies después de guardar:', document.cookie);
+    console.log('Cookies después de guardar:', document.cookie);
   }
 
   /**
@@ -196,39 +226,85 @@ export class AuthService {
     
     // Marcar que estamos esperando auth
     localStorage.setItem('waitingForAuth', 'true');
-    console.log('⏳ Marcado como esperando autenticación');
+    console.log('Marcado como esperando autenticación');
     
     // Redirigir
-    console.log('🌐 Redirigiendo a sistema de autenticación externo...');
+    console.log('Redirigiendo a sistema de autenticación externo...');
     window.location.href = loginUrl;
   }
 
   /**
-   * Procesar retorno del login externo
+   * Validar sesión con el backend
    */
-  handleLoginReturn(): void {
-    console.log('🔄 Procesando retorno del login externo...');
-    console.log('📍 URL actual:', window.location.href);
+  async validateSession(): Promise<boolean> {
+    console.log('Validando sesión con el backend...');
+    
+    try {
+      const response = await fetch(`${environment.auth.externalLoginUrl}/validate`, {
+        method: 'GET',
+        credentials: 'include', // Enviar cookies automáticamente
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        }
+      });
+
+      if (response.ok) {
+        console.log('Sesión validada exitosamente');
+        return true;
+      } else {
+        console.log('Sesión no válida - Status:', response.status);
+        return false;
+      }
+    } catch (error) {
+      console.error('Error de red al validar sesión:', error);
+      return false;
+    }
+  }
+
+  /**
+   * Procesar retorno del login externo con validación de sesión
+   */
+  async handleLoginReturn(): Promise<void> {
+    console.log('Procesando retorno del login externo...');
+    console.log('URL actual:', window.location.href);
     
     const token = getTokenFromUrl();
-    console.log('🔍 Token extraído de URL:', token ? `${token.substring(0, 20)}...` : 'No encontrado');
+    console.log('Token extraído de URL:', token ? `${token.substring(0, 20)}...` : 'No encontrado');
     
     if (token) {
-      console.log('✅ Token encontrado, almacenando...');
+      console.log('Token encontrado, almacenando...');
       this.storeToken(token);
       cleanUrlFromToken();
       localStorage.removeItem('waitingForAuth');
-      console.log('🎉 Autenticación completada exitosamente');
+      console.log('Autenticación completada exitosamente');
     } else {
-      console.log('❌ No se encontró token en la URL');
+      console.log('No se encontró token en la URL, validando sesión con backend...');
       
-      // Verificar si hay token en cookies después de login
-      const cookieToken = this.getTokenFromCookies();
-      if (cookieToken) {
-        console.log('🍪 Token encontrado en cookies, almacenando...');
-        this.storeToken(cookieToken);
+      // Validar sesión con el backend
+      const isSessionValid = await this.validateSession();
+      
+      if (isSessionValid) {
+        console.log('Sesión validada, buscando token en cookies...');
+        
+        // Verificar si hay token en cookies después de login
+        const cookieToken = this.getTokenFromCookies();
+        if (cookieToken) {
+          console.log('Token encontrado en cookies, almacenando...');
+          this.storeToken(cookieToken);
+          localStorage.removeItem('waitingForAuth');
+          console.log('Autenticación completada desde cookies');
+        } else {
+          console.log('Sesión válida pero no se encontró token, creando token temporal...');
+          // Si la sesión es válida pero no hay token, crear uno temporal
+          const tempToken = 'session_valid_' + Date.now();
+          localStorage.setItem(this.TOKEN_KEY, tempToken);
+          localStorage.removeItem('waitingForAuth');
+        }
+      } else {
+        console.log('Sesión no válida, limpiando estado...');
         localStorage.removeItem('waitingForAuth');
-        console.log('🎉 Autenticación completada desde cookies');
+        // No redirigir automáticamente aquí, dejar que el componente maneje el error
       }
     }
   }

@@ -15,7 +15,7 @@ export function getCookie(name: string): string | null {
     if (c.indexOf(nameEQ) === 0) {
       const value = c.substring(nameEQ.length, c.length);
       if (value && value !== 'undefined' && value !== 'null') {
-        console.log(`🍪 Cookie ${name} encontrada: ${value.substring(0, 20)}...`);
+        console.log(`Cookie ${name} encontrada: ${value.substring(0, 20)}...`);
         return value;
       }
     }
@@ -23,8 +23,8 @@ export function getCookie(name: string): string | null {
   
   // Solo log si no encontramos la cookie esperada (token o authToken)
   if (name === 'token' || name === 'authToken') {
-    console.log(`❌ Cookie ${name} no encontrada`);
-    console.log(`🍪 Cookies disponibles: ${document.cookie}`);
+    console.log(`Cookie ${name} no encontrada`);
+    console.log(`Cookies disponibles: ${document.cookie}`);
   }
   
   return null;

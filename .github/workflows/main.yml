@@ -18,7 +18,7 @@ jobs:
       run: yarn cache clean 
 
     - name: Install dependencies
-      run: yarn install --ignore-engines
+      run: yarn install
 
     - name: Build Angular app
       run: yarn build

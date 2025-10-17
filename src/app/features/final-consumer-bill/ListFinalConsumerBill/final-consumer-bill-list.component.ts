@@ -44,18 +44,20 @@ export class FinalConsumerBillListComponent extends BaseComponent implements OnI
     super();
   }
 
-  ngOnInit(): void {
-    console.log('🚀 Inicializando componente FinalConsumerBillListComponent');
+  async ngOnInit(): Promise<void> {
+    console.log('Inicializando componente FinalConsumerBillListComponent');
     
     // Manejar retorno del login si aplica
-    this.handleLoginReturn();
+    await this.handleLoginReturn();
     
-    // Verificar autenticación antes de cargar datos
-    if (this.authService.isAuthenticated()) {
-      console.log('✅ Usuario autenticado, cargando facturas...');
+    // Verificar autenticación antes de cargar datos (incluyendo validación de sesión)
+    const isAuthenticated = await this.authService.isAuthenticatedAsync();
+    
+    if (isAuthenticated) {
+      console.log('Usuario autenticado, cargando facturas...');
       this.loadBills();
     } else {
-      console.log('❌ Usuario no autenticado');
+      console.log('Usuario no autenticado');
       this.state.error = 'Necesita iniciar sesión para ver las facturas';
     }
   }
@@ -63,46 +65,49 @@ export class FinalConsumerBillListComponent extends BaseComponent implements OnI
   /**
    * Manejar retorno del login externo con verificación mejorada
    */
-  private handleLoginReturn(): void {
-    console.log('🔄 Verificando retorno del login...');
+  private async handleLoginReturn(): Promise<void> {
+    console.log('Verificando retorno del login...');
     
     // Procesar cualquier token en la URL
-    this.authService.handleLoginReturn();
+    await this.authService.handleLoginReturn();
     
     // Verificar si acabamos de completar un login
     if (localStorage.getItem('waitingForAuth') === 'true') {
-      console.log('⏳ Esperando autenticación...');
+      console.log('Esperando autenticación...');
       
-      // Dar tiempo para que se procese el token
-      setTimeout(() => {
-        if (this.authService.isAuthenticated()) {
-          console.log('🎉 Login completado exitosamente!');
-          localStorage.removeItem('waitingForAuth');
-          
-          // Disparar evento de login exitoso
-          window.dispatchEvent(new CustomEvent('loginSuccess', {
-            detail: {
-              message: '¡Sesión iniciada correctamente!',
-              duration: 3000
-            }
-          }));
-          
-          // Recargar facturas
-          this.loadBills();
-        }
-      }, 1000);
+      // Dar tiempo para que se procese el token y validar sesión
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      
+      const isAuthenticated = await this.authService.isAuthenticatedAsync();
+      if (isAuthenticated) {
+        console.log('Login completado exitosamente');
+        localStorage.removeItem('waitingForAuth');
+        
+        // Disparar evento de login exitoso
+        window.dispatchEvent(new CustomEvent('loginSuccess', {
+          detail: {
+            message: 'Sesión iniciada correctamente',
+            duration: 3000
+          }
+        }));
+        
+        // Recargar facturas
+        this.loadBills();
+      }
     }
   }
 
   /**
    * Cargar lista de facturas con verificación de autenticación
    */
-  loadBills(): void {
-    console.log('📋 Iniciando carga de facturas...');
+  async loadBills(): Promise<void> {
+    console.log('Iniciando carga de facturas...');
     
-    // Verificar autenticación antes de hacer la petición
-    if (!this.authService.isAuthenticated()) {
-      console.log('❌ No autenticado, no se puede cargar facturas');
+    // Verificar autenticación antes de hacer la petición (incluyendo validación de sesión)
+    const isAuthenticated = await this.authService.isAuthenticatedAsync();
+    
+    if (!isAuthenticated) {
+      console.log('No autenticado, no se puede cargar facturas');
       this.state.error = 'Debe iniciar sesión para ver las facturas';
       this.state.loadingState = LoadingState.ERROR;
       return;
