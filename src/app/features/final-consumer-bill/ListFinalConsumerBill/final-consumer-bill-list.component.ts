@@ -93,6 +93,26 @@ export class FinalConsumerBillListComponent implements OnInit {
     }));
   }
 
+  // 🧪 MÉTODO DE DEBUGGING - Para establecer token manualmente
+  setTestToken(): void {
+    const testToken = prompt('Ingresa el token para pruebas:');
+    if (testToken && testToken.trim()) {
+      this.authService.setTestToken(testToken.trim());
+      // Recargar facturas después de establecer el token
+      setTimeout(() => {
+        this.loadBills();
+      }, 1000);
+    }
+  }
+
+  // 🧪 MÉTODO DE DEBUGGING - Verificar estado de autenticación
+  debugAuth(): void {
+    console.log('🔍 DEBUG - Estado de autenticación:');
+    console.log('  - isAuthenticated():', this.authService.isAuthenticated());
+    console.log('  - localStorage token:', localStorage.getItem('authToken'));
+    console.log('  - cookies:', document.cookie);
+  }
+
   loadBills(): void {
     this.loading = true;
     this.errorMsg = '';

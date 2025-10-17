@@ -29,33 +29,17 @@ export class FinalConsumerBillService {
   }
 
   /**
-   * Obtiene las opciones HTTP con withCredentials siempre activo
+   * Obtiene las opciones HTTP básicas - las credenciales se manejan en el interceptor
    */
-  private getHttpOptions(): { headers: HttpHeaders, withCredentials: boolean } {
-    let headers = new HttpHeaders({
+  private getHttpOptions(): { headers: HttpHeaders } {
+    const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       'Accept': 'application/json'
     });
 
-    // IMPORTANTE: Siempre usar withCredentials para que las cookies se envíen
-    const options = { 
-      headers, 
-      withCredentials: true  // 🎯 ESTO es lo que necesitas
-    };
-
-    console.log('🍪 Configurando petición HTTP con withCredentials: true');
+    console.log('🍪 Configurando petición HTTP (credenciales manejadas por interceptor)');
     
-    // En modo desarrollo, intentar agregar Bearer token desde cookie si existe
-    if (isDevMode()) {
-      const token = getCookie('token');
-      if (token) {
-        console.log('🔧 Desarrollo: Token encontrado en cookie');
-        headers = headers.set('Authorization', `Bearer ${token}`);
-        options.headers = headers;
-      }
-    }
-
-    return options;
+    return { headers };
   }
 
 

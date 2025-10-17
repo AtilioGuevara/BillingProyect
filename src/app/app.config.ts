@@ -12,14 +12,15 @@ export function HttpLoaderFactory(http: HttpClient) {
 }
 import { routes } from './app.routes';
 import { provideClientHydration } from '@angular/platform-browser';
-import { HttpClient, provideHttpClient, withInterceptors } from '@angular/common/http';
+import { HttpClient, provideHttpClient, withFetch, withInterceptors } from '@angular/common/http';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideStore } from '@ngrx/store';
 import { provideEffects } from '@ngrx/effects';
 import { ProductEffects } from './pages/Apps/Ecommerce/Products/store/effects/product.effects';
 import { productReducer } from './pages/Apps/Ecommerce/Products/store/reducers/product.reducer';
 import { NgxMaskOptions, provideEnvironmentNgxMask } from 'ngx-mask';
-import { blockUnwantedRequestsInterceptor } from './interceptors/block-unwanted-requests.interceptor';
+// Interceptor específico para autenticación con el backend de facturación
+import { authInterceptor } from './interceptors/auth.interceptor';
 
 import {
   Activity,
@@ -556,7 +557,11 @@ export const appConfig: ApplicationConfig = {
       provideZoneChangeDetection({ eventCoalescing: true }),
       provideRouter(routes),
       provideClientHydration(),
-      provideHttpClient(withInterceptors([blockUnwantedRequestsInterceptor])),
+      // HttpClient con interceptor específico para autenticación del backend de facturación
+      provideHttpClient(
+        withFetch(),
+        withInterceptors([authInterceptor])
+      ),
       provideAnimations(),
       // Provider para AUTH_SERVICE_URL con URL dummy para evitar errores
       { provide: AUTH_SERVICE_URL, useValue: 'http://localhost:3000/dummy' },

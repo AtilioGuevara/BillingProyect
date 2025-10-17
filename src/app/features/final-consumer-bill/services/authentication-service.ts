@@ -75,6 +75,18 @@ export class AuthService {
     console.log('🍪 Cookie string:', cookieString);
   }
 
+  /**
+   * FUNCIÓN DE DEBUGGING: Establecer token manualmente para pruebas
+   * ¡SOLO USAR EN DESARROLLO!
+   */
+  setTestToken(token: string): void {
+    console.log('🧪 MODO DEBUG: Estableciendo token de prueba...');
+    this.storeToken(token);
+    console.log('✅ Token de prueba establecido. Verificando...');
+    console.log('  - localStorage:', localStorage.getItem('authToken'));
+    console.log('  - isAuthenticated():', this.isAuthenticated());
+  }
+
   logout(): void {
     console.log('👋 Cerrando sesión...');
     
