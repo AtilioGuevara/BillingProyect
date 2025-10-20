@@ -115,7 +115,8 @@ export class FinalConsumerBillService {
 
     const options: RequestInit = {
       method,
-      headers
+      headers,
+      credentials: 'include'
     };
 
     // Solo incluir credenciales para endpoints de facturación
