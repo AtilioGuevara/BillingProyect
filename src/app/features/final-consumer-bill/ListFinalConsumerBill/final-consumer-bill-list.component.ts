@@ -128,6 +128,49 @@ export class FinalConsumerBillListComponent extends BaseComponent implements OnI
       });
   }
 
+  public filterByDate(dateStr: string): void {
+    const target = this.parseDateDMY(dateStr);
+    if (!target) {
+      console.warn('Fecha inválida para filtrar:', dateStr);
+      return;
+    }
+
+    // Rango del día (inclusivo)
+    const startOfDay = new Date(target.getFullYear(), target.getMonth(), target.getDate(), 0, 0, 0, 0);
+    const endOfDay = new Date(target.getFullYear(), target.getMonth(), target.getDate(), 23, 59, 59, 999);
+
+    this.bills = this.bills.filter(bill => {
+      const billDate = new Date(bill.createdAt ?? '');
+      if (isNaN(billDate.getTime())) return false;
+      return billDate >= startOfDay && billDate <= endOfDay;
+    });
+  }
+
+  private parseDateDMY(input: string): Date | null {
+    if (!input) return null;
+    const s = input.trim();
+
+    // ISO-like YYYY-MM-DD
+    const isoMatch = s.match(/^(\d{4})-(\d{2})-(\d{2})$/);
+    if (isoMatch) {
+      const y = Number(isoMatch[1]), m = Number(isoMatch[2]) - 1, d = Number(isoMatch[3]);
+      const dt = new Date(y, m, d);
+      return isNaN(dt.getTime()) ? null : dt;
+    }
+
+    // DD/MM/YYYY or DD-MM-YYYY or DD.MM.YYYY
+    const parts = s.split(/[\/\-\.\s]/).filter(Boolean);
+    if (parts.length === 3) {
+      const day = Number(parts[0]), month = Number(parts[1]) - 1, year = Number(parts[2]);
+      if (!Number.isFinite(day) || !Number.isFinite(month) || !Number.isFinite(year)) return null;
+      const dt = new Date(year, month, day);
+      return isNaN(dt.getTime()) ? null : dt;
+    }
+
+    return null;
+  }
+
+  
   /**
    * Cargar fechas de facturas en background sin bloquear la UI
    */

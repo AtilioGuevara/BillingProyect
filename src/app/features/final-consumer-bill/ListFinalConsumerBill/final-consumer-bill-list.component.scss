@@ -222,6 +222,82 @@
   color: #7c3aed;
 }
 
+/* eliminar comportamiento problema de .form-input global y asegurar interactividad */
+.form-input {
+  border: 1px solid rgba(109, 40, 217, 0.3);
+  box-shadow: inset 0 2px 4px rgba(109, 40, 217, 0.1);
+  width: auto; /* override del width:20px problemático */
+  min-width: 0;
+}
+
+/* Ajustes para el header: evitar que el date input sea demasiado pequeño y mantener los botones en una línea */
+.card .card-header .flex.flex-wrap.items-center.gap-2.shrink-0 {
+  flex-wrap: nowrap; /* evitar wrap en pantallas grandes */
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Sobrescribir ancho del input en el header y asegurar que reciba clicks */
+.card .card-header input.form-input,
+.card .card-header .form-input {
+  min-width: 160px;   /* tamaño por defecto confortable */
+  width: 160px !important; /* forzar override si hay reglas conflictivas */
+  max-width: 220px;
+  padding: 0.45rem 0.6rem;
+  box-sizing: border-box;
+  pointer-events: auto; /* asegurar que reciba eventos de mouse/teclado */
+  z-index: 2; /* evitar que otros elementos lo tapen */
+  background-clip: padding-box;
+}
+
+/* Asegurar que el date input sea interactivo y no esté cubierto */
+.card .card-header input[type="date"].form-input {
+  width: 180px !important;
+  min-width: 140px !important;
+  padding: 0.35rem 0.5rem !important;
+  pointer-events: auto !important; /* permitir clicks/teclado */
+  z-index: 50 !important;          /* situarlo por encima de overlays */
+  position: relative !important;
+  background: transparent;
+}
+
+/* Si algún elemento contenedor tiene pointer-events: none o un overlay, resetear */
+.card .card-header .flex > * {
+  position: relative;
+  z-index: 2;
+}
+
+/* Reducir z-index de iconos o botones que pudieran cubrir el input */
+.card .card-header .flex .btn,
+.card .card-header .flex i {
+  z-index: 3;
+}
+
+/* Ajustes estéticos para botones cercanos al input */
+.card .card-header .btn {
+  white-space: nowrap;
+}
+
+/* Responsive: permitir wrap y que el input ocupe toda la línea en pantallas pequeñas */
+@media (max-width: 768px) {
+  .card .card-header .flex.flex-wrap.items-center.gap-2.shrink-0 {
+    flex-wrap: wrap;
+  }
+
+  .card .card-header .form-input {
+    width: 100% !important;
+    min-width: 0;
+    max-width: none;
+    margin-bottom: 0.5rem;
+  }
+
+  .card .card-header input[type="date"].form-input {
+    width: 100% !important;
+    min-width: 0 !important;
+    margin-bottom: 0.5rem;
+  }
+}
+
 /* ========================================
    MODO OSCURO - LISTA DE FACTURAS
    ======================================== */
@@ -308,5 +384,230 @@
 
   .card .p-4 {
     background: rgba(30, 41, 59, 0.7);
+  }
+}
+
+/* Ajustes para el header: evitar que el date input sea demasiado pequeño y mantener los botones en una línea */
+.card .card-header .flex.flex-wrap.items-center.gap-2.shrink-0 {
+  flex-wrap: nowrap; /* evitar wrap en pantallas grandes */
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Sobrescribir ancho del input en el header y asegurar que reciba clicks */
+.card .card-header input.form-input,
+.card .card-header .form-input {
+  min-width: 160px;   /* tamaño por defecto confortable */
+  width: 160px !important; /* forzar override si hay reglas conflictivas */
+  max-width: 220px;
+  padding: 0.45rem 0.6rem;
+  box-sizing: border-box;
+  pointer-events: auto; /* asegurar que reciba eventos de mouse/teclado */
+  z-index: 2; /* evitar que otros elementos lo tapen */
+  background-clip: padding-box;
+}
+
+/* Asegurar que el date input sea interactivo y no esté cubierto */
+.card .card-header input[type="date"].form-input {
+  width: 180px !important;
+  min-width: 140px !important;
+  padding: 0.35rem 0.5rem !important;
+  pointer-events: auto !important; /* permitir clicks/teclado */
+  z-index: 50 !important;          /* situarlo por encima de overlays */
+  position: relative !important;
+  background: transparent;
+}
+
+/* Si algún elemento contenedor tiene pointer-events: none o un overlay, resetear */
+.card .card-header .flex > * {
+  position: relative;
+  z-index: 2;
+}
+
+/* Reducir z-index de iconos o botones que pudieran cubrir el input */
+.card .card-header .flex .btn,
+.card .card-header .flex i {
+  z-index: 3;
+}
+
+/* Ajustes estéticos para botones cercanos al input */
+.card .card-header .btn {
+  white-space: nowrap;
+}
+
+/* Responsive: permitir wrap y que el input ocupe toda la línea en pantallas pequeñas */
+@media (max-width: 768px) {
+  .card .card-header .flex.flex-wrap.items-center.gap-2.shrink-0 {
+    flex-wrap: wrap;
+  }
+
+  .card .card-header .form-input {
+    width: 100% !important;
+    min-width: 0;
+    max-width: none;
+    margin-bottom: 0.5rem;
+  }
+
+  .card .card-header input[type="date"].form-input {
+    width: 100% !important;
+    min-width: 0 !important;
+    margin-bottom: 0.5rem;
+  }
+}
+
+/* ========================================
+   MODO OSCURO - LISTA DE FACTURAS
+   ======================================== */
+
+:host-context([data-mode="dark"]) {
+  .card {
+    background: linear-gradient(145deg, #1e293b 0%, #0f172a 100%);
+    border-color: rgba(124, 58, 237, 0.2);
+    box-shadow: 
+      0 20px 40px rgba(124, 58, 237, 0.1),
+      0 10px 20px rgba(0, 0, 0, 0.3),
+      inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  }
+
+  .card h2 {
+    background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 50%, #1e293b 100%);
+    box-shadow: 0 4px 8px rgba(124, 58, 237, 0.2);
+  }
+
+  .table-auto {
+    background: rgba(30, 41, 59, 0.9);
+    box-shadow: 0 8px 16px rgba(124, 58, 237, 0.1);
+  }
+
+  .table-auto th {
+    background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 50%, #5b21b6 100%);
+  }
+
+  .table-auto td {
+    background: rgba(30, 41, 59, 0.8);
+    border-bottom-color: rgba(124, 58, 237, 0.1);
+    color: #e2e8f0;
+  }
+
+  .table-auto td:nth-child(3) {
+    background: linear-gradient(135deg, rgba(124, 58, 237, 0.1) 0%, rgba(99, 102, 241, 0.05) 100%);
+    border-left-color: rgba(124, 58, 237, 0.3);
+  }
+
+  .table-auto tbody tr:hover {
+    background: linear-gradient(90deg, rgba(124, 58, 237, 0.15) 0%, rgba(99, 102, 241, 0.08) 100%);
+  }
+
+  .table-auto tbody tr:hover td {
+    background: transparent;
+  }
+
+  .table-auto tbody tr:hover td:nth-child(3) {
+    background: linear-gradient(135deg, rgba(124, 58, 237, 0.2) 0%, rgba(99, 102, 241, 0.1) 100%);
+    border-left-color: #7c3aed;
+  }
+
+  .flex-col span:first-child {
+    color: #f1f5f9;
+  }
+
+  .flex-col span:last-child {
+    color: #94a3b8;
+  }
+
+  .table-auto tbody tr:hover .flex-col span:first-child {
+    color: #a78bfa;
+  }
+
+  .table-auto tbody tr:hover .flex-col span:last-child {
+    color: #cbd5e1;
+  }
+
+  .text-blue-900 {
+    background: rgba(124, 58, 237, 0.1);
+    border-color: rgba(124, 58, 237, 0.3);
+    color: #cbd5e1 !important;
+  }
+
+  .text-red-600 {
+    background: rgba(239, 68, 68, 0.1);
+    border-left-color: #ef4444;
+    color: #fca5a5 !important;
+  }
+
+  .text-purple-700 {
+    color: #a78bfa !important;
+  }
+
+  .card .p-4 {
+    background: rgba(30, 41, 59, 0.7);
+  }
+}
+
+/* Ajustes para el header: evitar que el date input sea demasiado pequeño y mantener los botones en una línea */
+.card .card-header .flex.flex-wrap.items-center.gap-2.shrink-0 {
+  flex-wrap: nowrap; /* evitar wrap en pantallas grandes */
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Sobrescribir ancho del input en el header y asegurar que reciba clicks */
+.card .card-header input.form-input,
+.card .card-header .form-input {
+  min-width: 160px;   /* tamaño por defecto confortable */
+  width: 160px !important; /* forzar override si hay reglas conflictivas */
+  max-width: 220px;
+  padding: 0.45rem 0.6rem;
+  box-sizing: border-box;
+  pointer-events: auto; /* asegurar que reciba eventos de mouse/teclado */
+  z-index: 2; /* evitar que otros elementos lo tapen */
+  background-clip: padding-box;
+}
+
+/* Asegurar que el date input sea interactivo y no esté cubierto */
+.card .card-header input[type="date"].form-input {
+  width: 180px !important;
+  min-width: 140px !important;
+  padding: 0.35rem 0.5rem !important;
+  pointer-events: auto !important; /* permitir clicks/teclado */
+  z-index: 50 !important;          /* situarlo por encima de overlays */
+  position: relative !important;
+  background: transparent;
+}
+
+/* Si algún elemento contenedor tiene pointer-events: none o un overlay, resetear */
+.card .card-header .flex > * {
+  position: relative;
+  z-index: 2;
+}
+
+/* Reducir z-index de iconos o botones que pudieran cubrir el input */
+.card .card-header .flex .btn,
+.card .card-header .flex i {
+  z-index: 3;
+}
+
+/* Ajustes estéticos para botones cercanos al input */
+.card .card-header .btn {
+  white-space: nowrap;
+}
+
+/* Responsive: permitir wrap y que el input ocupe toda la línea en pantallas pequeñas */
+@media (max-width: 768px) {
+  .card .card-header .flex.flex-wrap.items-center.gap-2.shrink-0 {
+    flex-wrap: wrap;
+  }
+
+  .card .card-header .form-input {
+    width: 100% !important;
+    min-width: 0;
+    max-width: none;
+    margin-bottom: 0.5rem;
+  }
+
+  .card .card-header input[type="date"].form-input {
+    width: 100% !important;
+    min-width: 0 !important;
+    margin-bottom: 0.5rem;
   }
 }

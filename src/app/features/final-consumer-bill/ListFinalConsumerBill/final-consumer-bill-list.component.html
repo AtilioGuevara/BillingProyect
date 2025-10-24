@@ -10,6 +10,23 @@
             <i class="align-baseline ri-refresh-line"></i>
             Actualizar
           </button>
+            <!-- date picker (returns YYYY-MM-DD, compatible con parseDateDMY) -->
+            <input
+              type="date"
+              #filterDate
+              class="form-input"
+              title="Buscar por fecha (selecciona una fecha)"
+              aria-label="Buscar por fecha"
+            />
+            <button
+              type="button" class="btn btn-sub-gray"
+              (click)="filterByDate(filterDate.value)"
+              [disabled]="!filterDate.value"
+              title="Filtrar por fecha seleccionada"
+            >
+              <i class="align-baseline ri-search-line"></i>
+              Buscar
+            </button>
           <button type="button" class="btn btn-primary" routerLink="/final-consumer-bill/create">
             <i class="align-baseline ri-add-line"></i>
             Nueva Factura
