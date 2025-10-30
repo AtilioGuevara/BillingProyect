@@ -10,13 +10,13 @@ export const environment = {
   inventoryApiUrl: 'http://37.60.243.227:8080/api/productos',
 
   // Authentication API - También vía proxy
-  authApiUrl: 'https://accounts.beckysflorist.site/api/auth',
+  authApiUrl: 'https://accounts.beckysflorist.site/api',
 
-  // authEndpoints: {
-  //   login: '/authentication/login',
-  //   verify: '/authentication/verify',
-  //   logout: '/authentication/logout'
-  // },
+   authEndpoints: {
+     login: '/authentication/login',
+     verify: '/authentication/verify',
+     logout: '/authentication/logout'
+  },
   
   // Configuración de la base de datos (para referencia, no se usa en frontend)
   database: {

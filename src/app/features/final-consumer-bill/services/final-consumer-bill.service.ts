@@ -1,3 +1,4 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, from } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -15,10 +16,12 @@ export class FinalConsumerBillService {
   
   private readonly apiCreateUrl = environment.apiCreateUrl;
   private readonly apiReadUrl = environment.apiReadUrl;
+  private readonly inventoryApiUrl = environment.inventoryApiUrl;
 
   constructor(
     private errorHandler: ErrorHandlerService,
-    private authService: AuthService
+    private authService: AuthService,
+    private http: HttpClient
   ) {}
 
   /**
@@ -26,7 +29,9 @@ export class FinalConsumerBillService {
    */
   getAllFinalConsumerBills(): Observable<FinalConsumerBillListDTO[]> {
     const url = `${this.apiReadUrl}${environment.endpoints.finalConsumerBill.getAll}`;
-    return this.performFetch<FinalConsumerBillListDTO[]>(url, 'GET').pipe(
+    console.log('📋 Obteniendo todas las facturas desde:', url);
+    
+    return this.performBillingRequest<FinalConsumerBillListDTO[]>(url, 'GET').pipe(
       this.errorHandler.createErrorHandler('Error al cargar las facturas')
     );
   }
@@ -36,7 +41,9 @@ export class FinalConsumerBillService {
    */
   createFinalConsumerBill(bill: CreateFinalConsumerBillDTO): Observable<string> {
     const url = `${this.apiCreateUrl}${environment.endpoints.finalConsumerBill.create}`;
-    return this.performFetch<string>(url, 'POST', bill).pipe(
+    console.log('💾 Creando factura en:', url);
+    
+    return this.performBillingRequest<string>(url, 'POST', bill).pipe(
       this.errorHandler.createErrorHandler('Error al crear la factura')
     );
   }
@@ -46,92 +53,99 @@ export class FinalConsumerBillService {
    */
   getFinalConsumerBillByGenerationCode(generationCode: string): Observable<FinalConsumerBillDetailDTO> {
     const url = `${this.apiReadUrl}${environment.endpoints.finalConsumerBill.getByGenerationCode}/${generationCode}`;
-    return this.performFetch<FinalConsumerBillDetailDTO>(url, 'GET').pipe(
+    console.log('🔍 Obteniendo factura por código:', generationCode, 'desde:', url);
+    
+    return this.performBillingRequest<FinalConsumerBillDetailDTO>(url, 'GET').pipe(
       this.errorHandler.createErrorHandler('Error al cargar los detalles de la factura')
     );
   }
 
   /**
    * Obtener todos los productos activos
+   * ⚠️ IMPORTANTE: La API de inventario NO necesita autenticación - SIEMPRE SIN credenciales
    */
   getAllActiveProducts(): Observable<any[]> {
-    const url = environment.inventoryApiUrl;
+    const url = this.inventoryApiUrl;
     const params = new URLSearchParams();
     params.set('activo', 'true');
     const fullUrl = `${url}?${params.toString()}`;
     
-    return this.performFetch<any[]>(fullUrl, 'GET').pipe(
+    console.log('📦 Obteniendo productos activos desde:', fullUrl, '(SIN credenciales)');
+    
+    return from(
+      fetch(fullUrl, {
+        method: 'GET',
+        headers: { 'Accept': 'application/json' },
+        credentials: 'omit' // EXPLÍCITAMENTE sin credenciales
+      }).then(response => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.json();
+      })
+    ).pipe(
       map((products: any[]) => products.filter((product: any) => product.activo === true))
     );
   }
 
   /**
-   * Realizar petición HTTP usando Fetch API - SOLO ENVIAR TOKEN, SIN VALIDAR
+   * 🏭 FACTURACIÓN: HttpClient con AMBOS - Bearer token Y withCredentials
+   * El backend puede usar cualquiera de los dos (OR lógico)
    */
-  private performFetch<T>(url: string, method: string, body?: any): Observable<T> {
-    console.log('🚀 Enviando petición:', method, url);
+  private performBillingRequest<T>(
+    url: string,
+    method: 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH' = 'GET',
+    body?: any
+  ): Observable<T> {
     
-    const options = this.getFetchOptions(url, method, body);
+    console.log('🏭 FACTURACIÓN: Enviando Bearer token Y cookie httpOnly');
     
-    const fetchPromise = fetch(url, options)
-      .then(async (response) => {
-        console.log('📡 Respuesta:', response.status, response.statusText);
+    const token = this.authService.getToken();
+    let headers = new HttpHeaders({
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    });
 
-        if (!response.ok) {
-          const errorText = await response.text();
-          console.error('❌ Error del servidor:', response.status, errorText);
-          throw new Error(`HTTP ${response.status}: ${errorText}`);
-        }
-
-        const result = await response.json();
-        console.log('✅ Respuesta exitosa');
-        return result as T;
-      });
-
-    return from(fetchPromise);
-  }
-
-  /**
-   * SOLO ENVIAR TOKEN EN HEADER - SIN VALIDACIONES
-   */
-  private getFetchOptions(url: string, method: string = 'GET', body?: any): RequestInit {
-    const headers: Record<string, string> = {
-      'Content-Type': 'application/json',
-      'Accept': 'application/json'
-    };
-
-    // Solo agregar token para endpoints de facturación (no para inventario)
-    const inventoryApiUrl = 'http://37.60.243.227:8080/api/productos';
-    
-    if (!url.startsWith(inventoryApiUrl)) {
-      const token = this.authService.getToken();
-      if (token) {
-        headers['Authorization'] = `Bearer ${token}`;
-        console.log('✅ Token enviado en header Authorization');
-      } else {
-        console.log('⚠️ No hay token disponible');
-      }
+    // SIEMPRE agregar Authorization header si existe token
+    if (token) {
+      headers = headers.set('Authorization', `Bearer ${token}`);
+      console.log('🔑 Bearer token agregado al header');
+    } else {
+      console.warn('⚠️ No se encontró token local para Bearer header');
     }
 
-    const options: RequestInit = {
-      method,
+    const requestOptions = {
       headers,
-      credentials: 'include'
+      withCredentials: true, // SIEMPRE enviar cookies para facturación
+      observe: 'body' as const,
+      responseType: 'json' as const
     };
 
-    // Solo incluir credenciales para endpoints de facturación
-    if (!url.startsWith(inventoryApiUrl)) {
-      options.credentials = 'include';
-    }
+    console.log('📋 Facturación - opciones completas:', {
+      method,
+      withCredentials: true,
+      hasBearerToken: !!token,
+      url,
+      strategy: 'Bearer + Cookie (el backend decide cuál usar)'
+    });
 
-    if (body && method !== 'GET') {
-      options.body = JSON.stringify(body);
+    switch (method) {
+      case 'GET':
+        return this.http.get<T>(url, requestOptions);
+      case 'DELETE':
+        return this.http.delete<T>(url, requestOptions);
+      case 'POST':
+        return this.http.post<T>(url, body, requestOptions);
+      case 'PUT':
+        return this.http.put<T>(url, body, requestOptions);
+      case 'PATCH':
+        return this.http.patch<T>(url, body, requestOptions);
+      default:
+        return this.http.get<T>(url, requestOptions);
     }
-
-    return options;
   }
 
-  // Métodos de compatibilidad
+  // ✅ Métodos de compatibilidad
   getAllFinalConsumerBillsWithFetch(): Observable<FinalConsumerBillListDTO[]> {
     return this.getAllFinalConsumerBills();
   }

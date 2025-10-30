@@ -10,7 +10,7 @@ export const environment = {
   inventoryApiUrl: 'https://endpoints-production-4a52.up.railway.app/api/productos',
   
   // 🔑 Authentication API - URL directa del microservicio
-  authApiUrl: 'https://accounts.beckysflorist.site/api/auth',
+  authApiUrl: 'https://accounts.beckysflorist.site/api',
 
   
   // Configuración de la base de datos (para referencia, no se usa en frontend)
@@ -23,11 +23,11 @@ export const environment = {
   // Configuración de seguridad para producción
   enableHttps: true, // SSL/TLS habilitado para bill.beckysflorist.site
   
-  // authEndpoints: {
-  //   login: '/authentication/login',
-  //   verify: '/authentication/verify',
-  //   logout: '/authentication/logout'
-  // },
+   authEndpoints: {
+     login: '/authentication/login',
+     verify: '/authentication/verify',
+     logout: '/authentication/logout'
+   },
   
   // Configuración de autenticación externa
   auth: {

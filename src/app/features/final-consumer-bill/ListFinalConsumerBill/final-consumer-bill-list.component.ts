@@ -95,7 +95,6 @@ export class FinalConsumerBillListComponent extends BaseComponent implements OnI
         finalize(() => {
           if (this.state.loadingState === LoadingState.LOADING) {
             this.state.loadingState = LoadingState.IDLE;
-            console.log('✅ Estado de carga finalizado');
           }
         })
       )
@@ -103,7 +102,6 @@ export class FinalConsumerBillListComponent extends BaseComponent implements OnI
         next: (bills) => {
           console.log('🎉 Facturas cargadas exitosamente:', bills.length);
           console.log('📊 Datos de facturas:', bills);
-          console.log('📅 Primera factura:', bills[0]);
           
           // Cargar detalles de cada factura para obtener las fechas
           this.bills = bills;
@@ -181,7 +179,6 @@ export class FinalConsumerBillListComponent extends BaseComponent implements OnI
           .pipe(takeUntil(this.destroy$))
           .subscribe({
             next: (detail) => {
-              console.log(`📅 Fecha cargada para factura ${index + 1}:`, detail.billGenerationDate);
               // Actualizar la factura con la fecha
               if (detail.billGenerationDate) {
                 bill.createdAt = detail.billGenerationDate;
