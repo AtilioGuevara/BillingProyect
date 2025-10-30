@@ -7,10 +7,10 @@ export const environment = {
   apiReadUrl: 'https://bill.beckysflorist.site/bill/api',   // READ directo
 
   //API de Inventario - Directo sin proxy
-  inventoryApiUrl: 'https://37.60.243.227:8080/api/productos',
+  inventoryApiUrl: 'http://37.60.243.227:8080/api/productos',
   
   // 🔑 Authentication API - URL directa del microservicio
-  authApiUrl: 'https://accounts.beckysflorist.site/api',
+  authApiUrl: 'https://accounts.beckysflorist.site/api/',
 
   
   // Configuración de la base de datos (para referencia, no se usa en frontend)
