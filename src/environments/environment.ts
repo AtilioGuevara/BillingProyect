@@ -7,7 +7,7 @@ export const environment = {
   apiReadUrl: 'https://bill.beckysflorist.site/bill/api',   // READ directo
 
   //API de Inventario - Directo sin proxy
-  inventoryApiUrl: 'http://37.60.243.227:8080/api/productos',
+  inventoryApiUrl: 'https://37.60.243.227:8080/api/productos',
 
   // Authentication API - También vía proxy
   authApiUrl: 'https://accounts.beckysflorist.site/api',
@@ -33,7 +33,7 @@ export const environment = {
     // URL del sistema de login externo
     externalLoginUrl: 'https://accounts.beckysflorist.site/login',
     // URL de retorno después del login exitoso - DIRECTO A LA LISTA
-    callbackUrl: 'bill.beckysflorist.site/final-consumer-bill/list',
+    callbackUrl: 'https://bill.beckysflorist.site/final-consumer-bill/list',
     // URL local para desarrollo
     localCallbackUrl: 'http://localhost:4200/final-consumer-bill/list'
   },
