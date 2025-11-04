@@ -5,11 +5,12 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { CreateFinalConsumerBillDTO, ProductBillCreate } from '../../../dtos/final-consumer-bill.dto';
 import { FinalConsumerBillService } from '../services/final-consumer-bill.service';
 import { FinalConsumerBillNavComponent } from '../../NavComponents/final-consumer-bill-nav.component';
+import { DebugCookieComponent } from '../DebugCookie/debug-cookie.component';
 
 @Component({
   selector: 'app-final-consumer-bill-create',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, FinalConsumerBillNavComponent],
+  imports: [CommonModule, ReactiveFormsModule, FinalConsumerBillNavComponent, DebugCookieComponent],
   templateUrl: './final-consumer-bill-create.component.html',
   styleUrls: ['./final-consumer-bill-create.component.scss']
 })

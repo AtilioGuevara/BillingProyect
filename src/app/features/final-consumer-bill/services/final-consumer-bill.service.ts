@@ -71,7 +71,13 @@ export class FinalConsumerBillService {
   private performFetch<T>(url: string, method: string, body?: any): Observable<T> {
     console.log('🚀 Enviando petición:', method, url);
     
+    // DEBUG TEMPORAL - Verificar qué se está enviando
+    console.log('🍪 Document cookies:', document.cookie);
+    console.log('🔑 Token desde AuthService:', this.authService.getToken());
+    console.log('🌐 Es endpoint de inventario?', url.startsWith(environment.inventoryApiUrl));
+    
     const options = this.getFetchOptions(url, method, body);
+    console.log('⚙️ Opciones finales:', options);
     
     const fetchPromise = fetch(url, options)
       .then(async (response) => {
