@@ -101,7 +101,7 @@ export class FinalConsumerBillService {
     };
 
     // Solo agregar token para endpoints de facturación (no para inventario)
-    const inventoryApiUrl = 'http://37.60.243.227:8080/api/productos';
+    const inventoryApiUrl = environment.inventoryApiUrl;
     
     if (!url.startsWith(inventoryApiUrl)) {
       const token = this.authService.getToken();
