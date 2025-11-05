@@ -12,6 +12,7 @@ import { DevBadge } from 'colibrihub-shared-components';
 import { SessionService } from 'colibrihub-shared-services';
 import { HttpClient } from '@angular/common/http';
 import { AuthService } from './features/final-consumer-bill/services/authentication-service';
+import { DebugConsoleService } from './services/debug-console.service';
 
 @Component({
   selector: 'app-root',
@@ -37,7 +38,8 @@ export class AppComponent implements OnInit {
     private http: HttpClient,
     private activatedRoute: ActivatedRoute,
     private authService: AuthService,
-    private sessionService: SessionService
+    private sessionService: SessionService,
+    private debugService: DebugConsoleService
   ) {
     inject(SessionService);
     this.settingService.settings$.subscribe((settings) => {

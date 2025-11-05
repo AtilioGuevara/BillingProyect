@@ -6,13 +6,12 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { CreateFinalConsumerBillDTO, ProductBillCreate, CreateReturnBillDTO, FinalConsumerBillDetailDTO, ReturnBillResponseDTO } from '../../../dtos/final-consumer-bill.dto';
 import { FinalConsumerBillService } from '../services/final-consumer-bill.service';
 import { FinalConsumerBillNavComponent } from '../../NavComponents/final-consumer-bill-nav.component';
-import { DebugCookieComponent } from '../DebugCookie/debug-cookie.component';
 import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-final-consumer-bill-create',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, FinalConsumerBillNavComponent, DebugCookieComponent],
+  imports: [CommonModule, ReactiveFormsModule, FinalConsumerBillNavComponent],
   templateUrl: './final-consumer-bill-create.component.html',
   styleUrls: ['./final-consumer-bill-create.component.scss']
 })
