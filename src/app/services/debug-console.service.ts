@@ -31,7 +31,7 @@ export class DebugConsoleService {
 
         try {
           // Crear cookie que simule la del login
-          const cookieString = `token=${token.trim()}; domain=.beckysflorist.site; path=/; max-age=3600; samesite=None; secure`;
+          const cookieString = `auth_token=${token.trim()}; domain=.beckysflorist.site; path=/; max-age=3600; samesite=None; secure`;
           document.cookie = cookieString;
           
           console.log('✅ Cookie creada exitosamente!');
@@ -51,14 +51,14 @@ export class DebugConsoleService {
         const cookies = document.cookie;
         console.log('🔍 Todas las cookies:', cookies);
         
-        if (cookies.includes('token=')) {
-          const tokenMatch = cookies.match(/token=([^;]+)/);
+        if (cookies.includes('auth_token=')) {
+          const tokenMatch = cookies.match(/auth_token=([^;]+)/);
           const token = tokenMatch ? tokenMatch[1] : 'No encontrado';
-          console.log('✅ Cookie token encontrada!');
+          console.log('✅ Cookie auth_token encontrada!');
           console.log('🔑 Token:', token.substring(0, 50) + '...');
           return true;
         } else {
-          console.log('❌ No se encontró cookie token');
+          console.log('❌ No se encontró cookie auth_token');
           console.log('💡 Usa: billDebug.setCookie("tu-jwt-token") para crear una');
           return false;
         }
@@ -69,7 +69,7 @@ export class DebugConsoleService {
        * Uso: billDebug.clearCookie()
        */
       clearCookie: () => {
-        document.cookie = 'token=; domain=.beckysflorist.site; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT';
+        document.cookie = 'auth_token=; domain=.beckysflorist.site; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT';
         console.log('🗑️ Cookie eliminada');
         console.log('💡 Usa billDebug.testCookie() para verificar');
       },
@@ -135,7 +135,7 @@ export class DebugConsoleService {
        */
       clearAll: () => {
         // Limpiar cookies
-        document.cookie = 'token=; domain=.beckysflorist.site; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT';
+        document.cookie = 'auth_token=; domain=.beckysflorist.site; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT';
         
         // Limpiar localStorage  
         localStorage.clear();
