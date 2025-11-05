@@ -52,7 +52,7 @@ export class DomixChartsComponent implements OnDestroy {
           ? this.colorsService.getColorCodes(this.chartOptions.dataSet || [])
           : this.chartOptions.colors || []
       }),
-      series: this.series,
+      series: this.series as any,
     };
 
     this.chart = new ApexCharts(this.chartContainer.nativeElement, options);

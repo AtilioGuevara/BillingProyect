@@ -1,0 +1,184 @@
+/* Importar estilos base del create component */
+@import '../CreateFinalConsumerBill/final-consumer-bill-create.component.scss';
+
+/* Estilos específicos para devoluciones */
+.badge-success { 
+  background-color: #10b981; 
+  color: white; 
+  padding: 4px 12px; 
+  border-radius: 6px; 
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.badge-danger { 
+  background-color: #ef4444; 
+  color: white; 
+  padding: 4px 12px; 
+  border-radius: 6px; 
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+/* Productos seleccionados */
+.border-blue-300 {
+  border-color: #93c5fd !important;
+  box-shadow: 0 0 0 1px rgba(59, 130, 246, 0.1);
+}
+
+.bg-blue-50 {
+  background-color: #eff6ff !important;
+}
+
+/* Campos deshabilitados específicos para devoluciones */
+.form-input[readonly] {
+  background-color: #f9fafb;
+  border-color: #e5e7eb;
+  color: #6b7280;
+  cursor: not-allowed;
+}
+
+.form-input:disabled {
+  background-color: #f3f4f6;
+  border-color: #d1d5db;
+  color: #9ca3af;
+  cursor: not-allowed;
+}
+
+/* Checkbox personalizado */
+.form-check-input {
+  width: 1.125rem;
+  height: 1.125rem;
+  border: 2px solid #d1d5db;
+  border-radius: 0.375rem;
+  background-color: #ffffff;
+  cursor: pointer;
+  transition: all 0.15s ease-in-out;
+}
+
+.form-check-input:checked {
+  background-color: #6366f1;
+  border-color: #6366f1;
+}
+
+.form-check-input:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+}
+
+/* Alertas específicas */
+.alert {
+  border-radius: 0.75rem;
+  border-width: 1px;
+}
+
+.alert-warning {
+  background-color: #fef3c7;
+  border-color: #f59e0b;
+  color: #92400e;
+}
+
+.alert-info {
+  background-color: #dbeafe;
+  border-color: #3b82f6;
+  color: #1e40af;
+}
+
+.alert-danger {
+  background-color: #fee2e2;
+  border-color: #ef4444;
+  color: #991b1b;
+}
+
+/* Animaciones */
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-fade-in-scale {
+  animation: fadeInScale 0.3s ease-out forwards;
+}
+
+/* Responsive para móviles */
+@media (max-width: 768px) {
+  .grid.md\:grid-cols-12 {
+    display: block;
+  }
+  
+  .grid.md\:grid-cols-12 > div {
+    margin-bottom: 1rem;
+  }
+  
+  .form-check-input {
+    width: 1rem;
+    height: 1rem;
+  }
+}
+
+/* Modo oscuro específico para devoluciones */
+:host-context([data-mode="dark"]) {
+  .badge-success {
+    background-color: #065f46;
+    color: #d1fae5;
+  }
+  
+  .badge-danger {
+    background-color: #991b1b;
+    color: #fecaca;
+  }
+  
+  .border-blue-300 {
+    border-color: #1e40af !important;
+  }
+  
+  .bg-blue-50 {
+    background-color: rgba(30, 64, 175, 0.1) !important;
+  }
+  
+  .form-input[readonly] {
+    background-color: #1f2937;
+    border-color: #374151;
+    color: #9ca3af;
+  }
+  
+  .form-input:disabled {
+    background-color: #111827;
+    border-color: #1f2937;
+    color: #6b7280;
+  }
+  
+  .form-check-input {
+    background-color: #1f2937;
+    border-color: #374151;
+  }
+  
+  .form-check-input:checked {
+    background-color: #4f46e5;
+    border-color: #4f46e5;
+  }
+  
+  .alert-warning {
+    background-color: rgba(245, 158, 11, 0.1);
+    border-color: rgba(245, 158, 11, 0.2);
+    color: #fbbf24;
+  }
+  
+  .alert-info {
+    background-color: rgba(59, 130, 246, 0.1);
+    border-color: rgba(59, 130, 246, 0.2);
+    color: #93c5fd;
+  }
+  
+  .alert-danger {
+    background-color: rgba(239, 68, 68, 0.1);
+    border-color: rgba(239, 68, 68, 0.2);
+    color: #fca5a5;
+  }
+}

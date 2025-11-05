@@ -1,0 +1,302 @@
+<app-final-consumer-bill-nav></app-final-consumer-bill-nav>
+
+<div>
+  <div class="card">
+    <div class="card-header">
+      <div class="items-center gap-3 md:flex">
+        <h6 class="grow mb-3 md:mb-0">🔄 Crear Factura de Devolución</h6>
+        <div class="flex flex-wrap items-center gap-2 shrink-0">
+          <button type="button" class="btn btn-sub-gray" (click)="clearForm()">
+            <i class="align-baseline ri-refresh-line"></i>
+            Limpiar
+          </button>
+          <button type="button" class="btn btn-secondary" (click)="goBack()">
+            <i class="align-baseline ri-arrow-left-line"></i>
+            Volver
+          </button>
+          <button type="submit" class="btn btn-primary" [disabled]="submitting" (click)="onSubmit()">
+            <i class="align-baseline ri-save-line"></i>
+            <span *ngIf="!submitting">Crear Devolución</span>
+            <span *ngIf="submitting">Procesando...</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="card-body">
+      <!-- Mensaje de éxito prominente al inicio -->
+      <div *ngIf="successMessage" class="mb-6 p-6 bg-gradient-to-r from-green-50 to-emerald-50 border-l-4 border-green-500 rounded-lg shadow-sm relative">
+        <div class="flex items-center">
+          <div class="flex-shrink-0">
+            <i class="ri-check-circle-fill text-3xl text-green-500"></i>
+          </div>
+          <div class="ml-4 flex-grow">
+            <h3 class="text-lg font-bold text-green-800">¡Devolución Creada Exitosamente! 🎉</h3>
+            <p class="text-green-700 mt-1 whitespace-pre-line">{{ successMessage }}</p>
+            <small class="text-green-600 mt-2 block">Este mensaje se ocultará automáticamente en 20 segundos</small>
+          </div>
+          <button type="button" (click)="closeSuccessMessage()" class="absolute top-2 right-2 text-green-600 hover:text-green-800 text-xl" title="Cerrar mensaje">
+            <i class="ri-close-line"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Información de la factura original -->
+      <div class="mb-8">
+        <h6 class="mb-4 text-lg font-semibold border-b pb-2">📋 Información de la Factura Original</h6>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="bg-blue-50 p-4 rounded-lg border border-blue-200">
+            <label class="form-label text-blue-800">Código de Generación Original:</label>
+            <p class="font-mono text-blue-900 font-semibold">{{ originalGenerationCode }}</p>
+          </div>
+          
+          <div *ngIf="returnInfo" class="bg-gray-50 p-4 rounded-lg border border-gray-200">
+            <label class="form-label text-gray-800">Estado de Devolución:</label>
+            <div class="flex items-center gap-2 mt-2">
+              <span class="badge" [class]="returnInfo.canBeReturned ? 'badge-success' : 'badge-danger'">
+                {{ returnInfo.canBeReturned ? '✅ Puede ser devuelta' : '❌ No puede ser devuelta' }}
+              </span>
+            </div>
+            <div *ngIf="returnInfo.isReversed" class="mt-2 text-orange-600 text-sm">
+              ⚠️ Esta factura ya fue devuelta anteriormente
+            </div>
+            <div *ngIf="returnInfo.isReturnBill" class="mt-2 text-orange-600 text-sm">
+              ⚠️ Esta es una factura de devolución
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Loading State -->
+      <div *ngIf="loading" class="text-center p-8">
+        <div class="inline-flex items-center gap-3">
+          <i class="ri-loader-line animate-spin text-2xl text-blue-600"></i>
+          <span class="text-lg text-gray-700">Cargando información de devolución...</span>
+        </div>
+      </div>
+
+      <!-- Mensaje si no se puede devolver -->
+      <div *ngIf="returnInfo && !returnInfo.canBeReturned && !loading" class="alert alert-warning p-6 mb-6">
+        <div class="flex items-start gap-3">
+          <i class="ri-alert-line text-2xl text-orange-600"></i>
+          <div>
+            <h5 class="font-bold text-orange-800 mb-2">⚠️ No se puede crear devolución</h5>
+            <p class="text-orange-700 mb-3">Esta factura no puede ser devuelta por las siguientes razones:</p>
+            <ul class="list-disc list-inside text-orange-700 space-y-1">
+              <li *ngIf="returnInfo.isReversed">Ya fue devuelta anteriormente</li>
+              <li *ngIf="returnInfo.isReturnBill">Es una factura de devolución (no se puede devolver una devolución)</li>
+              <li *ngIf="!returnInfo.availableProducts?.length">No tiene productos disponibles para devolución</li>
+            </ul>
+            <div class="mt-4 flex gap-2">
+              <button type="button" class="btn btn-secondary" (click)="goBack()">
+                <i class="align-baseline ri-arrow-left-line"></i>
+                Volver a la Lista
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Formulario de devolución -->
+      <form [formGroup]="returnForm" (ngSubmit)="onSubmit()" *ngIf="returnInfo?.canBeReturned && !loading">
+        
+        <!-- Información General -->
+        <div class="mb-8">
+          <h6 class="mb-4 text-lg font-semibold border-b pb-2">Información General</h6>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- Método de pago -->
+            <div>
+              <label for="paymentCondition" class="form-label">Método de Devolución *</label>
+              <select id="paymentCondition" formControlName="paymentCondition" class="form-input" (change)="onPaymentMethodChange()">
+                <option value="">-- Seleccione método de devolución --</option>
+                <option value="EFECTIVO">Efectivo</option>
+                <option value="TARJETA_DEBITO">Tarjeta de Débito</option>
+                <option value="TARJETA_CREDITO">Tarjeta de Crédito</option>
+              </select>
+              <div *ngIf="isFieldEmpty('paymentCondition')" class="text-red-500 text-sm mt-1">
+                <i class="ri-error-warning-line"></i> Método de devolución es requerido
+              </div>
+            </div>
+
+            <!-- Información del método seleccionado -->
+            <div *ngIf="selectedPaymentMethod" class="mt-3 p-3 bg-blue-50 border border-blue-200 rounded-lg">
+              <div class="flex items-center gap-2 mb-2">
+                <i [class]="getPaymentMethodIcon(selectedPaymentMethod)" class="text-blue-600"></i>
+                <span class="font-semibold text-blue-800">{{ getPaymentMethodName(selectedPaymentMethod) }}</span>
+              </div>
+              <p class="text-sm text-blue-700">{{ getPaymentMethodDescription(selectedPaymentMethod) }}</p>
+            </div>
+
+            <!-- ID del Cliente -->
+            <div>
+              <label for="customerId" class="form-label">ID del Cliente *</label>
+              <input type="number" id="customerId" formControlName="customerId" 
+                     class="form-input" 
+                     [class.border-red-500]="hasFieldErrors('customerId')"
+                     [class.border-green-500]="isFieldValid('customerId')"
+                     placeholder="Ingrese el ID del cliente">
+              <div *ngIf="hasFieldErrors('customerId')" class="text-red-500 text-sm mt-1">
+                <i class="ri-error-warning-line"></i> ID del cliente es requerido
+              </div>
+              <div *ngIf="isFieldValid('customerId')" class="text-green-500 text-sm mt-1">
+                <i class="ri-check-line"></i> ID válido
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Productos disponibles para devolución -->
+        <div class="mb-8" *ngIf="returnInfo?.availableProducts?.length">
+          <h6 class="mb-4 text-lg font-semibold border-b pb-2">📦 Productos Disponibles para Devolución</h6>
+          <div formArrayName="selectedProducts" class="space-y-4">
+            <div *ngFor="let productGroup of selectedProductsArray.controls; let i = index" 
+                 [formGroupName]="i"
+                 class="grid grid-cols-1 md:grid-cols-12 gap-4 p-4 bg-gray-50 rounded-lg border"
+                 [class.border-blue-300]="productGroup.get('selected')?.value"
+                 [class.bg-blue-50]="productGroup.get('selected')?.value">
+              
+              <!-- Checkbox de selección -->
+              <div class="md:col-span-1 flex items-center justify-center">
+                <input 
+                  type="checkbox" 
+                  formControlName="selected"
+                  (change)="toggleProductSelection(i, returnInfo!.availableProducts[i])"
+                  class="form-check-input"
+                  id="product-{{ i }}">
+              </div>
+
+              <!-- Información del producto -->
+              <div class="md:col-span-4">
+                <label class="form-label text-sm">Producto</label>
+                <input formControlName="productName" class="form-input" readonly>
+                <small class="text-gray-500">ID: {{ productGroup.get('productId')?.value }}</small>
+              </div>
+
+              <!-- Cantidad original -->
+              <div class="md:col-span-2">
+                <label class="form-label text-sm">Cantidad Original</label>
+                <input formControlName="originalQuantity" class="form-input" readonly>
+              </div>
+
+              <!-- Disponible para devolución -->
+              <div class="md:col-span-2">
+                <label class="form-label text-sm">Disponible</label>
+                <input formControlName="availableForReturn" class="form-input" readonly>
+              </div>
+
+              <!-- Precio unitario -->
+              <div class="md:col-span-2">
+                <label class="form-label text-sm">Precio Unitario</label>
+                <div class="form-input bg-gray-100">
+                  ${{ productGroup.get('unitPrice')?.value | number:'1.2-2' }}
+                </div>
+              </div>
+
+              <!-- Cantidad a devolver -->
+              <div class="md:col-span-1">
+                <label class="form-label text-sm">Cantidad a Devolver</label>
+                <input 
+                  type="number" 
+                  formControlName="requestedQuantity"
+                  class="form-input"
+                  [max]="productGroup.get('availableForReturn')?.value"
+                  min="0"
+                  [disabled]="!productGroup.get('selected')?.value"
+                  placeholder="0">
+              </div>
+            </div>
+          </div>
+          
+          <!-- Mensaje si no hay productos seleccionados -->
+          <div *ngIf="formSubmitted && getSelectedProducts().length === 0" class="text-red-500 text-sm mt-2">
+            <i class="ri-error-warning-line"></i> Debe seleccionar al menos un producto para la devolución
+          </div>
+        </div>
+
+        <!-- Campos para el pago con tarjeta -->
+        <div *ngIf="selectedPaymentMethod === 'TARJETA_DEBITO' || selectedPaymentMethod === 'TARJETA_CREDITO'" 
+             formGroupName="payment" class="mb-8">
+          <h6 class="mb-4 text-lg font-semibold border-b pb-2">💳 Información de la Tarjeta</h6>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            
+            <div>
+              <label for="cardType" class="form-label">Tipo de Tarjeta *</label>
+              <select id="cardType" formControlName="cardType" class="form-input">
+                <option value="">-- Seleccione el tipo de tarjeta --</option>
+                <option value="VISA">VISA</option>
+                <option value="MASTERCARD">MasterCard</option>
+                <option value="AMEX">American Express</option>
+                <option value="DISCOVER">Discover</option>
+              </select>
+              <div *ngIf="hasFieldErrors('payment.cardType')" class="text-red-500 text-sm mt-1">
+                <i class="ri-error-warning-line"></i> Tipo de tarjeta es requerido
+              </div>
+            </div>
+
+            <div>
+              <label for="maskedCardNumber" class="form-label">Número de Tarjeta *</label>
+              <input
+                id="maskedCardNumber"
+                type="text"
+                formControlName="maskedCardNumber"
+                class="form-input"
+                placeholder="4512345678901234"
+              />
+              <div *ngIf="hasFieldErrors('payment.maskedCardNumber')" class="text-red-500 text-sm mt-1">
+                <i class="ri-error-warning-line"></i> Número de tarjeta válido es requerido
+              </div>
+            </div>
+
+            <div>
+              <label for="cardHolder" class="form-label">Titular de la Tarjeta *</label>
+              <input
+                id="cardHolder"
+                type="text"
+                formControlName="cardHolder"
+                class="form-input"
+                placeholder="Nombre completo del titular"
+              />
+              <div *ngIf="hasFieldErrors('payment.cardHolder')" class="text-red-500 text-sm mt-1">
+                <i class="ri-error-warning-line"></i> Titular de la tarjeta es requerido
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- IVA retenido -->
+        <div class="mb-8">
+          <h6 class="mb-4 text-lg font-semibold border-b pb-2">💰 Información Fiscal</h6>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <label for="withheldIva" class="form-label">IVA Retenido</label>
+              <input type="number" id="withheldIva" formControlName="withheldIva" 
+                     class="form-input" 
+                     step="0.01" min="0" placeholder="0.00">
+              <small class="text-gray-500 mt-1 block">Ingrese el monto de IVA retenido si aplica</small>
+            </div>
+          </div>
+        </div>
+
+        <!-- Mensajes de estado -->
+        <div class="mt-6">
+          <!-- Mensaje de carga -->
+          <div *ngIf="submitting" class="alert alert-info flex items-center p-4 mb-4 text-blue-800 border border-blue-300 rounded-lg bg-blue-50">
+            <i class="align-baseline ri-loader-line animate-spin mr-3 text-lg"></i>
+            <span class="font-medium">Procesando devolución...</span>
+          </div>
+          
+          <!-- Mensaje de error -->
+          <div *ngIf="errorMessage" class="alert alert-danger flex items-start p-4 mb-4 text-red-800 border border-red-300 rounded-lg bg-red-50 relative">
+            <i class="align-baseline ri-error-warning-line mr-3 text-xl text-red-600"></i>
+            <div class="flex-grow">
+              <p class="whitespace-pre-line">{{ errorMessage }}</p>
+            </div>
+            <button type="button" (click)="closeErrorMessage()" class="absolute top-2 right-2 text-red-600 hover:text-red-800 text-lg" title="Cerrar mensaje">
+              <i class="ri-close-line"></i>
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
