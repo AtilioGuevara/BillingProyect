@@ -138,7 +138,6 @@ export class FinalConsumerBillListComponent extends BaseComponent implements OnI
           .pipe(takeUntil(this.destroy$))
           .subscribe({
             next: (detail) => {
-              console.log(`📅 Fecha cargada para factura ${index + 1}:`, detail.billGenerationDate);
               // Actualizar la factura con la fecha
               if (detail.billGenerationDate) {
                 bill.createdAt = detail.billGenerationDate;
@@ -190,9 +189,13 @@ export class FinalConsumerBillListComponent extends BaseComponent implements OnI
     
     const statusMap: Record<string, string> = {
       'PENDING': 'Pendiente',
-      'PAID': 'Pagada',
+      'PAID': 'Pagada', 
       'CANCELLED': 'Cancelada',
-      'PROCESSING': 'Procesando'
+      'PROCESSING': 'Procesando',
+      'APPROVED': 'Aprobada',
+      'SENT': 'Enviada',
+      'DRAFT': 'Borrador',
+      'ACTIVE': 'Activa'
     };
     
     return statusMap[status.toUpperCase()] || status;
@@ -231,6 +234,36 @@ export class FinalConsumerBillListComponent extends BaseComponent implements OnI
       minute: '2-digit',
       second: '2-digit'
     });
+  }
+
+  /**
+   * Crear devolución - redirige al create con modo devolución
+   */
+  createReturn(generationCode: string): void {
+    this.router.navigate(['/final-consumer-bill/create'], {
+      queryParams: { 
+        mode: 'return', 
+        returnFrom: generationCode 
+      }
+    });
+  }
+
+  /**
+   * Obtener texto del estado considerando devoluciones
+   */
+  getBillStatusText(bill: FinalConsumerBillListDTO): string {
+    // Si esta ES una factura de devolución (creada a partir de otra)
+    if (bill.originBillCode) {
+      return `DEVOLUCIÓN DE: ${bill.originBillCode}`;
+    }
+    
+    // Si la factura original fue devuelta
+    if (bill.isReversed) {
+      return 'DEVUELTA';
+    }
+    
+    // Estado normal de la factura
+    return this.getStatusText(bill.status || 'APPROVED');
   }
 
   /**

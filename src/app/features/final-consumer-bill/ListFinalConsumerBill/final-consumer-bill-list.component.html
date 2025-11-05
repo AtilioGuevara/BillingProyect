@@ -68,25 +68,41 @@
               <td>
                 <span class="inline-flex items-center px-2 py-1 text-xs font-medium rounded-full" 
                       [ngClass]="{
-                        'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200': bill.status === 'APPROVED',
+                        'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200': bill.isReversed,
+                        'bg-orange-100 text-orange-800 dark:bg-orange-900 dark:text-orange-200': bill.originBillCode,
+                        'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200': bill.status === 'APPROVED' && !bill.isReversed && !bill.originBillCode,
                         'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200': bill.status === 'PENDING',
                         'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200': bill.status === 'SENT',
                         'bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-200': !bill.status || bill.status === 'DRAFT'
                       }">
                   <i class="align-baseline mr-1" 
                      [ngClass]="{
-                       'ri-check-circle-line': bill.status === 'APPROVED',
+                       'ri-arrow-go-back-line': bill.isReversed,
+                       'ri-file-copy-line': bill.originBillCode,
+                       'ri-check-circle-line': bill.status === 'APPROVED' && !bill.isReversed && !bill.originBillCode,
                        'ri-time-line': bill.status === 'PENDING',
                        'ri-send-plane-line': bill.status === 'SENT',
                        'ri-file-line': !bill.status || bill.status === 'DRAFT'
                      }"></i>
-                  {{ getStatusText(bill.status || 'DRAFT') }}
+                  {{ getBillStatusText(bill) }}
                 </span>
               </td>
               <td class="text-center">
+                <div class="flex justify-center gap-2">
                   <button type="button" class="btn btn-sub-primary btn-sm" title="Ver detalles"
-                  (click)="viewBillDetails(bill.generationCode)"><i class="align-baseline ri-eye-line"></i>
+                  (click)="viewBillDetails(bill.generationCode)">
+                    <i class="align-baseline ri-eye-line"></i>
                   </button>
+                  
+                  <!-- Botón de devolución -->
+                  <button type="button" 
+                          class="btn btn-warning btn-sm" 
+                          title="Crear devolución"
+                          (click)="createReturn(bill.generationCode)"
+                          [disabled]="bill.isReversed || bill.originBillCode">
+                    <i class="align-baseline ri-arrow-go-back-line"></i>
+                  </button>
+                </div>
               </td>
             </tr>
           </tbody>

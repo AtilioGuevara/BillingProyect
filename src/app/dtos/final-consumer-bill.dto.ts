@@ -33,6 +33,21 @@ export interface CreateFinalConsumerBillDTO {
   };
 }
 
+// DTO para crear devoluciones (diferente estructura según API)
+export interface CreateReturnBillDTO {
+  paymentCondition: string;
+  receiver: {
+    customerId: number;
+  };
+  products: ProductBillCreate[];
+  withheldIva: number;
+  payment?: {
+    cardType: string;
+    maskedCardNumber: string;
+    cardHolder: string;
+  };
+}
+
 // DTO para la respuesta completa (ShowBillDto del backend)
 // Usado cuando se obtiene UNA factura específica
 export interface FinalConsumerBillDetailDTO {
@@ -51,6 +66,7 @@ export interface FinalConsumerBillDetailDTO {
   };
   
   receiver: {
+    customerId?: number;      // ID del cliente (para devoluciones)
     customerName: string;
     customerLastname: string;
     customerDocument: string;
@@ -82,6 +98,11 @@ export interface FinalConsumerBillDetailDTO {
   promotionName?: string;
   promotionDiscount?: number;
   productsWithPromotion?: number[];
+
+  // Campos para devoluciones (detalle)
+  isReversed?: boolean;     // true si ya fue devuelta
+  returnBillCode?: string;  // código de la factura de devolución generada
+  originBillCode?: string;  // código de la factura original (si esta ES una devolución)
 }
 
 // DTO simplificado para la lista (getAll)
@@ -97,4 +118,18 @@ export interface FinalConsumerBillListDTO {
   // Campos adicionales útiles para la lista
   createdAt?: string;
   status?: string; // Si el backend lo maneja
+  // Campos para devoluciones
+  isReversed?: boolean;     // true si ya fue devuelta
+  returnBillCode?: string;  // código de la factura de devolución generada
+  originBillCode?: string;  // código de la factura original (si esta ES una devolución)
+}
+
+// DTO para respuesta de devolución creada
+export interface ReturnBillResponseDTO {
+  id: number;
+  generationCode: string;
+  controlNumber: string;
+  totalWithIva: number;
+  status: string;
+  createdAt: string;
 }

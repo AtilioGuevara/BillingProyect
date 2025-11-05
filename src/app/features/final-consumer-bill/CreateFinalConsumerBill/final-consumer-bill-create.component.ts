@@ -1,11 +1,13 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
-import { CreateFinalConsumerBillDTO, ProductBillCreate } from '../../../dtos/final-consumer-bill.dto';
+import { ActivatedRoute, Router } from '@angular/router';
+import { CreateFinalConsumerBillDTO, ProductBillCreate, CreateReturnBillDTO, FinalConsumerBillDetailDTO, ReturnBillResponseDTO } from '../../../dtos/final-consumer-bill.dto';
 import { FinalConsumerBillService } from '../services/final-consumer-bill.service';
 import { FinalConsumerBillNavComponent } from '../../NavComponents/final-consumer-bill-nav.component';
 import { DebugCookieComponent } from '../DebugCookie/debug-cookie.component';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-final-consumer-bill-create',
@@ -14,13 +16,18 @@ import { DebugCookieComponent } from '../DebugCookie/debug-cookie.component';
   templateUrl: './final-consumer-bill-create.component.html',
   styleUrls: ['./final-consumer-bill-create.component.scss']
 })
-export class FinalConsumerBillCreateComponent {
+export class FinalConsumerBillCreateComponent implements OnInit {
   productsList: any[] = []; // Lista de productos cargados
   billForm: FormGroup;
   loading = false;
   successMsg = '';
   errorMsg = '';
   formSubmitted = false; // Para controlar cuándo mostrar validaciones
+
+  // Variables para modo devolución
+  isReturnMode = false;
+  originalBillCode = '';
+  originalBillDetails: FinalConsumerBillDetailDTO | null = null;
 
   
   
@@ -68,7 +75,12 @@ export class FinalConsumerBillCreateComponent {
     },
   };
 
-  constructor(private fb: FormBuilder, private billService: FinalConsumerBillService) {
+  constructor(
+    private fb: FormBuilder, 
+    private billService: FinalConsumerBillService,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {
     this.billForm = this.fb.group({
       // Campos principales
       paymentCondition: ['', Validators.required],
@@ -106,6 +118,16 @@ export class FinalConsumerBillCreateComponent {
   }
 
   ngOnInit(): void {
+    // Verificar si estamos en modo devolución
+    const mode = this.route.snapshot.queryParams['mode'];
+    const returnFrom = this.route.snapshot.queryParams['returnFrom'];
+    
+    if (mode === 'return' && returnFrom) {
+      this.isReturnMode = true;
+      this.originalBillCode = returnFrom;
+      this.loadOriginalBillData(returnFrom);
+      console.log('🔄 Modo DEVOLUCIÓN activado para factura:', returnFrom);
+    }
   }
 
   get products(): FormArray {
@@ -340,7 +362,188 @@ export class FinalConsumerBillCreateComponent {
     }
     
     return 'Campo inválido';
+  }
+
+  /**
+   * Cargar datos de la factura original para devolución
+   */
+  private loadOriginalBillData(generationCode: string): void {
+    this.billService.getFinalConsumerBillByGenerationCode(generationCode).subscribe({
+      next: (billDetails) => {
+        this.originalBillDetails = billDetails;
+        this.preFilLFormWithOriginalData(billDetails);
+        console.log('✅ Datos de factura original cargados:', billDetails);
+      },
+      error: (error) => {
+        console.error('❌ Error al cargar datos de factura original:', error);
+        this.errorMsg = 'Error al cargar los datos de la factura original';
+      }
+    });
+  }
+
+  /**
+   * Pre-llenar formulario con datos de la factura original
+   */
+  private preFilLFormWithOriginalData(billDetails: FinalConsumerBillDetailDTO): void {
+    // Pre-llenar datos del cliente
+    this.billForm.patchValue({
+      customerName: billDetails.receiver.customerName,
+      customerLastname: billDetails.receiver.customerLastname,
+      customerDocument: billDetails.receiver.customerDocument,
+      customerAddress: billDetails.receiver.customerAddress,
+      customerEmail: billDetails.receiver.customerEmail,
+      customerPhone: billDetails.receiver.customerPhone,
+      paymentCondition: billDetails.paymentCondition
+    });
+
+    // Limpiar productos existentes
+    while (this.products.length > 0) {
+      this.products.removeAt(0);
+    }
+
+    // Agregar productos de la factura original
+    billDetails.products.forEach((product) => {
+      const productGroup = this.fb.group({
+        productId: [product.productId, Validators.required],
+        requestedQuantity: [product.requestedQuantity, Validators.required],
+        precio: [{ value: product.price, disabled: true }]
+      });
+      this.products.push(productGroup);
+    });
+
+    console.log('📝 Formulario pre-llenado con datos de la factura original');
+  }
+
+  /**
+   * Obtener token de autorización
+   */
+  private getAuthToken(): string | null {
+    console.log('🔍 Buscando token de autorización...');
     
+    // Buscar en localStorage
+    const possibleKeys = ['authToken', 'accessToken', 'token', 'Authorization', 'jwt'];
+    console.log('📋 Keys en localStorage:', Object.keys(localStorage));
+    
+    for (const key of possibleKeys) {
+      const value = localStorage.getItem(key);
+      if (value && value !== 'null' && value !== 'undefined') {
+        console.log(`🔑 Token encontrado en localStorage[${key}]:`, value.substring(0, 20) + '...');
+        return value;
+      }
+    }
+
+    // Buscar en cookies
+    console.log('🍪 Cookies disponibles:', document.cookie);
+    try {
+      const cookieNames = ['authToken', 'accessToken', 'token', 'Authorization', 'jwt'];
+      for (const cookieName of cookieNames) {
+        const match = document.cookie.match(new RegExp(`(?:^|; )${cookieName}=([^;]+)`));
+        if (match && match[1]) {
+          console.log(`🔑 Token encontrado en cookie[${cookieName}]:`, match[1].substring(0, 20) + '...');
+          return decodeURIComponent(match[1]);
+        }
+      }
+    } catch (e) {
+      console.warn('Error leyendo cookies:', e);
+    }
+
+    console.warn('⚠️ No se encontró token de autorización en ninguna ubicación');
+    return null;
+  }
+
+
+
+  /**
+   * Crear devolución usando el servicio existente (que ya funcionaba antes)
+   */
+  private createReturnInvoice(): void {
+    if (!this.originalBillCode) {
+      this.errorMsg = 'Código de factura original no disponible';
+      return;
+    }
+
+    console.log('🔍 DEBUG: Iniciando creación de devolución con servicio');
+    console.log('📋 Código original:', this.originalBillCode);
+    console.log('📝 Datos de factura original:', this.originalBillDetails);
+
+    const formData = this.billForm.value;
+    console.log('📄 Datos del formulario:', formData);
+
+    // Verificar que tenemos productos
+    if (!formData.products || formData.products.length === 0) {
+      this.errorMsg = 'No hay productos seleccionados para la devolución';
+      return;
+    }
+
+    // Crear DTO según la documentación exacta de la API
+    const returnData: CreateReturnBillDTO = {
+      paymentCondition: formData.paymentCondition || "EFECTIVO",
+      receiver: {
+        customerId: this.originalBillDetails?.receiver?.customerId || 1
+      },
+      products: formData.products
+        ?.filter((product: any) => product.requestedQuantity > 0)
+        ?.map((product: any) => ({
+          productId: product.productId,
+          requestedQuantity: product.requestedQuantity
+        })) || [],
+      withheldIva: parseFloat(formData.withheldIva || '0'),
+      payment: formData.paymentCondition === 'EFECTIVO' ? undefined : {
+        cardType: formData.payment?.cardType || "VISA",
+        maskedCardNumber: formData.payment?.maskedCardNumber || "****",
+        cardHolder: formData.payment?.cardHolder || "CLIENTE"
+      }
+    };
+
+    // Limpiar campos undefined
+    const cleanReturnData = JSON.parse(JSON.stringify(returnData));
+
+    console.log('🔍 CustomerId usado:', cleanReturnData.receiver.customerId);
+    console.log('📦 Productos a devolver:', cleanReturnData.products);
+    console.log('💰 Condición de pago:', cleanReturnData.paymentCondition);
+    console.log('🔄 Usando servicio para crear devolución...');
+
+    this.loading = true;
+    this.errorMsg = '';
+    this.successMsg = '';
+
+    // Usar el servicio existente que ya funcionaba antes
+    this.billService.createReturnBill(this.originalBillCode, cleanReturnData).subscribe({
+      next: (response) => {
+        console.log('✅ Devolución creada exitosamente:', response);
+        
+        this.successMsg = `🎉 ¡Devolución creada exitosamente! Código: ${response.generationCode || 'N/A'}`;
+        this.errorMsg = '';
+        this.loading = false;
+
+        // Redirigir después de 2 segundos
+        setTimeout(() => {
+          this.router.navigate(['/final-consumer-bill/list']);
+        }, 2000);
+      },
+      error: (error) => {
+        console.error('❌ Error al crear devolución:', error);
+        
+        // Mensaje más amigable para el usuario
+        let userMessage = '❌ No se pudo crear la devolución.';
+        
+        if (error.message?.includes('validation service') || error.status === 500) {
+          userMessage = '⚠️ El sistema está experimentando problemas temporales. Por favor, intente más tarde.';
+        } else if (error.status === 400) {
+          userMessage = '❌ Los datos enviados no son válidos. Verifique la información.';
+        } else if (error.status === 401 || error.status === 403) {
+          userMessage = '🔑 Error de autenticación. Por favor, inicie sesión nuevamente.';
+        } else if (error.status === 404) {
+          userMessage = '❌ La factura original no fue encontrada.';
+        } else if (error.message?.includes('Network')) {
+          userMessage = '📡 Error de conexión a internet. Verifique su conexión.';
+        }
+        
+        this.errorMsg = userMessage;
+        this.successMsg = '';
+        this.loading = false;
+      }
+    });
   }
 
   async submit(): Promise<void> {
@@ -351,6 +554,13 @@ export class FinalConsumerBillCreateComponent {
       return;
     }
 
+    // Si estamos en modo devolución, usar endpoint específico
+    if (this.isReturnMode) {
+      this.createReturnInvoice();
+      return;
+    }
+
+    // Flujo normal de creación de factura
     const formData = this.billForm.value;
 
     const bill: CreateFinalConsumerBillDTO = {

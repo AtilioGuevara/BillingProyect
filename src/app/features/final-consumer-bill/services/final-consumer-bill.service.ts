@@ -1,14 +1,19 @@
 import { Injectable } from '@angular/core';
 import { Observable, from } from 'rxjs';
-import { map } from 'rxjs/operators';
-import { 
-  CreateFinalConsumerBillDTO, 
-  FinalConsumerBillListDTO, 
-  FinalConsumerBillDetailDTO 
-} from '../../../dtos/final-consumer-bill.dto';
+import { map, switchMap, catchError } from 'rxjs/operators';
 import { environment } from '../../../../environments/environment';
 import { ErrorHandlerService } from '../../../services/error-handler.service';
 import { AuthService } from './authentication-service';
+import { 
+  FinalConsumerBillListDTO, 
+  CreateFinalConsumerBillDTO, 
+  FinalConsumerBillDetailDTO,
+  CreateReturnBillDTO,
+  ReturnBillResponseDTO
+} from '../../../dtos/final-consumer-bill.dto';
+import { 
+  ReturnBillInfo
+} from '../../../dtos/final-consumer-bill.return.dto';
 
 @Injectable({ providedIn: 'root' })
 export class FinalConsumerBillService {
@@ -69,20 +74,10 @@ export class FinalConsumerBillService {
    * Realizar petición HTTP usando Fetch API - SOLO ENVIAR TOKEN, SIN VALIDAR
    */
   private performFetch<T>(url: string, method: string, body?: any): Observable<T> {
-    console.log('🚀 Enviando petición:', method, url);
-    
-    // DEBUG TEMPORAL - Verificar qué se está enviando
-    console.log('🍪 Document cookies:', document.cookie);
-    console.log('🔑 Token desde AuthService:', this.authService.getToken());
-    console.log('🌐 Es endpoint de inventario?', url.startsWith(environment.inventoryApiUrl));
-    
     const options = this.getFetchOptions(url, method, body);
-    console.log('⚙️ Opciones finales:', options);
     
     const fetchPromise = fetch(url, options)
       .then(async (response) => {
-        console.log('📡 Respuesta:', response.status, response.statusText);
-
         if (!response.ok) {
           const errorText = await response.text();
           console.error('❌ Error del servidor:', response.status, errorText);
@@ -90,7 +85,6 @@ export class FinalConsumerBillService {
         }
 
         const result = await response.json();
-        console.log('✅ Respuesta exitosa');
         return result as T;
       });
 
@@ -113,9 +107,6 @@ export class FinalConsumerBillService {
       const token = this.authService.getToken();
       if (token) {
         headers['Authorization'] = `Bearer ${token}`;
-        console.log('✅ Token enviado en header Authorization');
-      } else {
-        console.log('⚠️ No hay token disponible');
       }
     }
 
@@ -143,5 +134,35 @@ export class FinalConsumerBillService {
 
   createFinalConsumerBillWithFetch(bill: CreateFinalConsumerBillDTO): Observable<string> {
     return this.createFinalConsumerBill(bill);
+  }
+
+  /**
+   * Obtener información de devolución para una factura
+   */
+  getReturnInfo(generationCode: string): Observable<ReturnBillInfo> {
+    const url = `${this.apiReadUrl}${environment.endpoints.finalConsumerBill.getReturnInfo}/${generationCode}`;
+    return this.performFetch<ReturnBillInfo>(url, 'GET').pipe(
+      this.errorHandler.createErrorHandler('Error al obtener información de devolución')
+    );
+  }
+
+  /**
+   * Crear factura de devolución
+   */
+  createReturnBill(originalGenerationCode: string, returnData: CreateReturnBillDTO): Observable<ReturnBillResponseDTO> {
+    const url = `${this.apiCreateUrl}${environment.endpoints.finalConsumerBill.createReturn}/${originalGenerationCode}`;
+    return this.performFetch<ReturnBillResponseDTO>(url, 'POST', returnData).pipe(
+      this.errorHandler.createErrorHandler('Error al crear la factura de devolución')
+    );
+  }
+
+  /**
+   * Verificar si una factura puede ser devuelta
+   */
+  canBillBeReturned(generationCode: string): Observable<boolean> {
+    return this.getReturnInfo(generationCode).pipe(
+      map(info => info.canBeReturned),
+      catchError(() => from([false]))
+    );
   }
 }

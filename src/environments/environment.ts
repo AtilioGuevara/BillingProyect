@@ -44,6 +44,10 @@ export const environment = {
       create: '/create/create',              // POST bill.beckysflorist.site/bill/api/create/create
       getAll: '/get/all',                    // GET bill.beckysflorist.site/bill/api/get/all
       getByGenerationCode: '/get/generation-code', // GET bill.beckysflorist.site/bill/api/get/generation-code/{codigo}
+      
+      // Endpoints de devoluciones
+      getReturnInfo: '/get/return/info',     // GET bill.beckysflorist.site/bill/api/get/return/info/{codigo}
+      createReturn: '/create/return'         // POST bill.beckysflorist.site/bill/api/create/return/{codigo}
     }
   },
   

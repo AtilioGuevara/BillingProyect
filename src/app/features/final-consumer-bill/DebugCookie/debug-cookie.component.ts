@@ -104,7 +104,7 @@ export class DebugCookieComponent {
 
     try {
       // Crear cookie que simule la del login
-      const cookieString = `auth_token=${this.cookieValue.trim()}; domain=.beckysflorist.site; path=/; max-age=3600; samesite=None; secure`;
+      const cookieString = `token=${this.cookieValue.trim()}; domain=.beckysflorist.site; path=/; max-age=3600; samesite=None; secure`;
       
       document.cookie = cookieString;
       
@@ -123,16 +123,16 @@ export class DebugCookieComponent {
     const cookies = document.cookie;
     console.log('🔍 Testing cookies:', cookies);
     
-    if (cookies.includes('auth_token=')) {
+    if (cookies.includes('token=')) {
       this.showMessage('✅ Cookie encontrada! Cookies: ' + cookies, 'alert-success');
     } else {
-      this.showMessage('❌ No se encontró la cookie auth_token', 'alert-danger');
+      this.showMessage('❌ No se encontró la cookie token', 'alert-danger');
     }
   }
 
   clearCookie(): void {
     // Eliminar cookie estableciendo fecha pasada
-    document.cookie = 'auth_token=; domain=.beckysflorist.site; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT';
+    document.cookie = 'token=; domain=.beckysflorist.site; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT';
     
     console.log('🗑️ Cookie eliminada');
     this.showMessage('🗑️ Cookie eliminada', 'alert-info');

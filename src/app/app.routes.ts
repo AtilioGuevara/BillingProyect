@@ -77,25 +77,17 @@ export const routes: Routes = [
     loadComponent: () => import('./features/final-consumer-bill/SearchFinalConsumerBill/final-consumer-bill-search.component').then(m => m.FinalConsumerBillSearchComponent),
     data: { title: 'Buscar Factura' }
   },
+  //RUTA PARA VER LOS DETALLES DE FACTURAS DESDE LA LISTA
+  {
+    path: 'final-consumer-bill/view/:generationCode',
+    loadComponent: () => import('./features/final-consumer-bill/ViewFinalConsumerBill/final-consumer-bill-view.component').then(m => m.FinalConsumerBillViewComponent)
+  },
 
-  // 🔗 RUTAS DE ACCESO DIRECTO
+  //  RUTAS DE ACCESO DIRECTO
   {
     path: 'factura',
     redirectTo: '/final-consumer-bill/create',
     pathMatch: 'full'
-  },
-
-  // 📄 RUTA DINÁMICA PARA VER FACTURA INDIVIDUAL (debe ir al final)
-  {
-    path: ':generationCode',
-    loadComponent: () => import('./features/final-consumer-bill/ViewFinalConsumerBill/final-consumer-bill-view.component').then(m => m.FinalConsumerBillViewComponent),
-    data: { title: 'Ver Factura' }
-  },
-
-  //RUTA PARA VER LOS DETALLES DE FACTURAS DESDE LA LISTA
-  {
-  path: 'final-consumer-bill/view/:generationCode',
-  loadComponent: () => import('./features/final-consumer-bill/ViewFinalConsumerBill/final-consumer-bill-view.component').then(m => m.FinalConsumerBillViewComponent)
   },
 
   //Auth
@@ -152,4 +144,10 @@ export const routes: Routes = [
   { path: 'apps-ecommerce-customer-user', component: AppsEcommerceCustomerUserComponent, data: { title: 'CustomerUser' } },
   { path: 'apps-pos-user-login', component: AppsPosUserLoginComponent, data: { title: 'Pos User Login' } },
 
+  // 📄 RUTA GENÉRICA PARA VER FACTURA INDIVIDUAL (DEBE IR AL FINAL)
+  {
+    path: ':generationCode',
+    loadComponent: () => import('./features/final-consumer-bill/ViewFinalConsumerBill/final-consumer-bill-view.component').then(m => m.FinalConsumerBillViewComponent),
+    data: { title: 'Ver Factura' }
+  }
 ];
