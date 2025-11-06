@@ -150,7 +150,7 @@ export class FinalConsumerBillService {
    * Crear factura de devolución
    */
   createReturnBill(originalGenerationCode: string, returnData: CreateReturnBillDTO): Observable<ReturnBillResponseDTO> {
-        const url = `${environment.apiCreateUrl}${(environment.endpoints.finalConsumerBill as any).createReturn}/${originalGenerationCode}`;
+    const url = `${environment.apiCreateUrl}${(environment.endpoints.finalConsumerBill as any).createReturn}/${originalGenerationCode}`;
     return this.performFetch<ReturnBillResponseDTO>(url, 'POST', returnData).pipe(
       this.errorHandler.createErrorHandler('Error al crear la factura de devolución')
     );
