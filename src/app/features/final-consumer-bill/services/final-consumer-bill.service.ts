@@ -140,7 +140,13 @@ export class FinalConsumerBillService {
    * Obtener información de devolución para una factura
    */
   getReturnInfo(generationCode: string): Observable<ReturnBillInfo> {
-        const url = `${environment.apiReadUrl}${(environment.endpoints.finalConsumerBill as any).getReturnInfo}/${generationCode}`;
+    // Verificar endpoint con fallback para producción
+    let endpoint = (environment.endpoints.finalConsumerBill as any).getReturnInfo;
+    if (!endpoint || endpoint === undefined) {
+      endpoint = '/get/return/info'; // Fallback si el endpoint está undefined
+    }
+    
+    const url = `${environment.apiReadUrl}${endpoint}/${generationCode}`;
     return this.performFetch<ReturnBillInfo>(url, 'GET').pipe(
       this.errorHandler.createErrorHandler('Error al obtener información de devolución')
     );
@@ -150,7 +156,13 @@ export class FinalConsumerBillService {
    * Crear factura de devolución
    */
   createReturnBill(originalGenerationCode: string, returnData: CreateReturnBillDTO): Observable<ReturnBillResponseDTO> {
-    const url = `${environment.apiCreateUrl}${(environment.endpoints.finalConsumerBill as any).createReturn}/${originalGenerationCode}`;
+    // Verificar endpoint con fallback para producción
+    let endpoint = (environment.endpoints.finalConsumerBill as any).createReturn;
+    if (!endpoint || endpoint === undefined) {
+      endpoint = '/create/return'; // Fallback si el endpoint está undefined
+    }
+    
+    const url = `${environment.apiCreateUrl}${endpoint}/${originalGenerationCode}`;
     return this.performFetch<ReturnBillResponseDTO>(url, 'POST', returnData).pipe(
       this.errorHandler.createErrorHandler('Error al crear la factura de devolución')
     );
