@@ -1,21 +1,23 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Subject, takeUntil } from 'rxjs';
 import { CreateFinalConsumerBillDTO, ProductBillCreate, CreateReturnBillDTO, FinalConsumerBillDetailDTO, ReturnBillResponseDTO } from '../../../dtos/final-consumer-bill.dto';
 import { FinalConsumerBillService } from '../services/final-consumer-bill.service';
+import { ClientSearchService, Cliente } from '../services/client-search.service';
 import { FinalConsumerBillNavComponent } from '../../NavComponents/final-consumer-bill-nav.component';
 import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-final-consumer-bill-create',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, FinalConsumerBillNavComponent],
+  imports: [CommonModule, ReactiveFormsModule, FormsModule, FinalConsumerBillNavComponent],
   templateUrl: './final-consumer-bill-create.component.html',
   styleUrls: ['./final-consumer-bill-create.component.scss']
 })
-export class FinalConsumerBillCreateComponent implements OnInit {
+export class FinalConsumerBillCreateComponent implements OnInit, OnDestroy {
   productsList: any[] = []; // Lista de productos cargados
   billForm: FormGroup;
   loading = false;
@@ -27,6 +29,13 @@ export class FinalConsumerBillCreateComponent implements OnInit {
   isReturnMode = false;
   originalBillCode = '';
   originalBillDetails: FinalConsumerBillDetailDTO | null = null;
+
+  // Variables para búsqueda de clientes
+  clientSearchTerm = '';
+  clientSearchResults: Cliente[] = [];
+  showClientDropdown = false;
+  loadingClients = false;
+  private destroy$ = new Subject<void>();
 
   
   
@@ -77,6 +86,7 @@ export class FinalConsumerBillCreateComponent implements OnInit {
   constructor(
     private fb: FormBuilder, 
     private billService: FinalConsumerBillService,
+    private clientSearchService: ClientSearchService,
     private route: ActivatedRoute,
     private router: Router
   ) {
@@ -127,6 +137,29 @@ export class FinalConsumerBillCreateComponent implements OnInit {
       this.loadOriginalBillData(returnFrom);
       console.log('🔄 Modo DEVOLUCIÓN activado para factura:', returnFrom);
     }
+
+    // Suscribirse a los resultados de búsqueda de clientes
+    this.clientSearchService.getSearchResults()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: (clients) => {
+          this.clientSearchResults = clients;
+          this.showClientDropdown = clients.length > 0 && this.clientSearchTerm.length >= 2;
+          this.loadingClients = false;
+        },
+        error: (error) => {
+          console.error('Error searching clients:', error);
+          this.clientSearchResults = [];
+          this.showClientDropdown = false;
+          this.loadingClients = false;
+        }
+      });
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+    this.clientSearchService.clearSearch();
   }
 
   get products(): FormArray {
@@ -649,5 +682,77 @@ export class FinalConsumerBillCreateComponent implements OnInit {
         console.error('Error al cargar productos activos:', error);
       }
     );
+  }
+
+  // ============================================
+  // MÉTODOS PARA BÚSQUEDA DE CLIENTES
+  // ============================================
+
+  /**
+   * Maneja el cambio en el campo de búsqueda de clientes
+   */
+  onClientSearchChange(searchTerm: string): void {
+    this.clientSearchTerm = searchTerm;
+    
+    if (searchTerm.length >= 2) {
+      this.loadingClients = true;
+      this.clientSearchService.updateSearchTerm(searchTerm);
+    } else {
+      this.showClientDropdown = false;
+      this.clientSearchResults = [];
+      this.clientSearchService.clearSearch();
+    }
+  }
+
+  /**
+   * Selecciona un cliente de la lista y rellena los campos del formulario
+   */
+  selectClient(client: Cliente): void {
+    // Rellenar los campos del formulario con los datos del cliente
+    this.billForm.patchValue({
+      customerName: client.nombre,
+      customerLastname: client.apellido || '',
+      customerDocument: client.dui,
+      customerEmail: client.correo,
+      customerPhone: client.telefono,
+      // La dirección no está en la respuesta del API, mantener vacía
+      customerAddress: ''
+    });
+
+    // Actualizar el término de búsqueda para mostrar el nombre completo
+    this.clientSearchTerm = `${client.nombre} ${client.apellido || ''}`.trim();
+    
+    // Ocultar el dropdown
+    this.showClientDropdown = false;
+    this.clientSearchResults = [];
+    
+    console.log('Cliente seleccionado:', client);
+  }
+
+  /**
+   * Cierra el dropdown de clientes
+   */
+  closeClientDropdown(): void {
+    // Delay para permitir que el click en un cliente se procese primero
+    setTimeout(() => {
+      this.showClientDropdown = false;
+    }, 200);
+  }
+
+  /**
+   * Limpia la búsqueda de clientes
+   */
+  clearClientSearch(): void {
+    this.clientSearchTerm = '';
+    this.showClientDropdown = false;
+    this.clientSearchResults = [];
+    this.clientSearchService.clearSearch();
+  }
+
+  /**
+   * TrackBy function para mejorar el rendimiento del ngFor
+   */
+  trackByClientId(index: number, client: Cliente): number {
+    return client.id;
   }
 }

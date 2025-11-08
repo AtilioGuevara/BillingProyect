@@ -25,7 +25,7 @@ export class DebugConsoleService {
        */
       setCookie: (token: string) => {
         if (!token || token.trim() === '') {
-          console.error('❌ Error: Token vacío. Uso: billDebug.setCookie("tu-jwt-token")');
+          console.error('Error: Token vacío. Uso: billDebug.setCookie("tu-jwt-token")');
           return;
         }
 
@@ -34,12 +34,12 @@ export class DebugConsoleService {
           const cookieString = `auth_token=${token.trim()}; domain=.beckysflorist.site; path=/; max-age=3600; samesite=None; secure`;
           document.cookie = cookieString;
           
-          console.log('✅ Cookie creada exitosamente!');
-          console.log('🍪 Cookie:', cookieString);
-          console.log('📋 Para verificar usa: billDebug.testCookie()');
+          console.log('Cookie creada exitosamente!');
+          console.log('Cookie:', cookieString);
+          console.log('Para verificar usa: billDebug.testCookie()');
           
         } catch (error) {
-          console.error('❌ Error creando cookie:', error);
+          console.error('Error creando cookie:', error);
         }
       },
 
@@ -49,17 +49,17 @@ export class DebugConsoleService {
        */
       testCookie: () => {
         const cookies = document.cookie;
-        console.log('🔍 Todas las cookies:', cookies);
+        console.log(' Todas las cookies:', cookies);
         
         if (cookies.includes('auth_token=')) {
           const tokenMatch = cookies.match(/auth_token=([^;]+)/);
           const token = tokenMatch ? tokenMatch[1] : 'No encontrado';
-          console.log('✅ Cookie auth_token encontrada!');
-          console.log('🔑 Token:', token.substring(0, 50) + '...');
+          console.log('Cookie auth_token encontrada!');
+          console.log('Token:', token.substring(0, 50) + '...');
           return true;
         } else {
-          console.log('❌ No se encontró cookie auth_token');
-          console.log('💡 Usa: billDebug.setCookie("tu-jwt-token") para crear una');
+          console.log('No se encontró cookie auth_token');
+          console.log('Usa: billDebug.setCookie("tu-jwt-token") para crear una');
           return false;
         }
       },
@@ -70,8 +70,8 @@ export class DebugConsoleService {
        */
       clearCookie: () => {
         document.cookie = 'auth_token=; domain=.beckysflorist.site; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT';
-        console.log('🗑️ Cookie eliminada');
-        console.log('💡 Usa billDebug.testCookie() para verificar');
+        console.log('Cookie eliminada');
+        console.log('Usa billDebug.testCookie() para verificar');
       },
 
       /**
@@ -80,33 +80,7 @@ export class DebugConsoleService {
        */
       help: () => {
         console.log(`
-🧪 === BILL DEBUG CONSOLE ===
-
-📋 Comandos disponibles:
-
-🍪 billDebug.setCookie("jwt-token")
-   → Crear cookie de autenticación con tu JWT token
-
-🔍 billDebug.testCookie()  
-   → Verificar si existe la cookie token
-
-🗑️ billDebug.clearCookie()
-   → Eliminar cookie de autenticación
-
-📊 billDebug.showLocalStorage()
-   → Ver contenido del localStorage
-
-🧹 billDebug.clearAll()
-   → Limpiar cookies y localStorage
-
-❓ billDebug.help()
-   → Mostrar esta ayuda
-
-📝 Ejemplo de uso:
-   1. Haz login y copia el JWT token
-   2. billDebug.setCookie("eyJhbGciOiJIUzI1NiIs...")
-   3. billDebug.testCookie()
-   4. ¡Ahora puedes crear facturas!
+ 
         `);
       },
 
@@ -115,17 +89,17 @@ export class DebugConsoleService {
        * Uso: billDebug.showLocalStorage()
        */
       showLocalStorage: () => {
-        console.log('📊 === LOCAL STORAGE ===');
+        console.log(' === LOCAL STORAGE ===');
         for (let i = 0; i < localStorage.length; i++) {
           const key = localStorage.key(i);
           if (key) {
             const value = localStorage.getItem(key);
-            console.log(`🔑 ${key}:`, value);
+            console.log(` ${key}:`, value);
           }
         }
         
         if (localStorage.length === 0) {
-          console.log('📭 LocalStorage está vacío');
+          console.log('📭LocalStorage está vacío');
         }
       },
 
@@ -140,17 +114,17 @@ export class DebugConsoleService {
         // Limpiar localStorage  
         localStorage.clear();
         
-        console.log('🧹 Todo limpiado (cookies + localStorage)');
+        console.log(' Todo limpiado (cookies + localStorage)');
       }
     };
 
     // Mostrar mensaje de bienvenida en consola
     console.log(`
-🧪 === BILL DEBUG ACTIVADO ===
+ === BILL DEBUG ACTIVADO ===
 
-💡 Escribe "billDebug.help()" para ver todos los comandos disponibles.
+ Escribe "billDebug.help()" para ver todos los comandos disponibles.
 
-🚀 Comando rápido: billDebug.setCookie("tu-jwt-token")
+ Comando rápido: billDebug.setCookie("tu-jwt-token")
     `);
   }
 }

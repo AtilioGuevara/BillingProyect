@@ -181,4 +181,43 @@
     border-color: rgba(239, 68, 68, 0.2);
     color: #fca5a5;
   }
+
+  // Mensajes de éxito específicos para modo oscuro
+  .bg-gradient-to-r.from-green-50.to-emerald-50 {
+    background: linear-gradient(to right, #064e3b, #065f46) !important;
+  }
+
+  .border-green-500 {
+    border-color: #10b981 !important;
+  }
+
+  .text-green-800 {
+    color:purple !important;
+  }
+
+  .text-green-700 {
+    color: purple !important;
+  }
+
+  // Código de generación original en modo devolución
+  .text-orange-600 {
+    color: #fb923c !important;
+  }
+
+  .text-orange-700 {
+    color: #ea580c !important;
+  }
+
+  // Mensajes informativos de métodos de pago
+  .text-blue-700 {
+    color: #93c5fd !important;
+  }
+
+  .text-yellow-700 {
+    color: #fbbf24 !important;
+  }
+
+  .text-indigo-700 {
+    color: #a5b4fc !important;
+  }
 }

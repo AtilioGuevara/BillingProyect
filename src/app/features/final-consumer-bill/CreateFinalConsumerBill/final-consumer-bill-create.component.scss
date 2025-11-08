@@ -494,4 +494,132 @@ select {
     background: rgba(30, 41, 59, 0.95) !important;
     border-color: rgba(124, 58, 237, 0.3) !important;
   }
+
+  // Mensajes de éxito específicos para modo oscuro  
+  .bg-gradient-to-r.from-green-50.to-emerald-50 {
+    background: linear-gradient(to right, #064e3b, #065f46) !important;
+  }
+
+  .border-green-500 {
+    border-color: #10b981 !important;
+  }
+
+  .text-green-800 {
+    color: #a7f3d0 !important;
+  }
+
+  .text-green-700 {
+    color: #86efac !important;
+  }
+
+  // Mensajes informativos de métodos de pago
+  .text-blue-700 {
+    color: whitesmoke !important;
+  }
+
+  .text-yellow-700 {
+    color: #fbbf24 !important;
+  }
+
+  .text-indigo-700 {
+    color: #a5b4fc !important;
+  }
+
+  // Header con gradiente en modo oscuro
+  .bg-gradient-to-r.from-blue-50.to-indigo-50 {
+    background: linear-gradient(to right, #1e293b, #334155) !important;
+  }
+
+  .border-blue-100 {
+    border-color: #475569 !important;
+  }
+
+  .text-gray-800 {
+    color: #e2e8f0 !important;
+  }
+
+  .text-gray-600 {
+    color: #cbd5e1 !important;
+  }
+
+  // Contenedor del método de pago seleccionado en modo oscuro
+  .bg-blue-50 {
+    background-color: rgba(30, 64, 175, 0.15) !important;
+  }
+
+  .border-blue-200 {
+    border-color: rgba(59, 130, 246, 0.3) !important;
+  }
+
+  .text-blue-600 {
+    color: #93c5fd !important;
+  }
+
+  .text-blue-800 {
+    color: #dbeafe !important;
+  }
+
+  // Código de generación en modo devolución (ahora gris normal)
+  .bg-gray-100 {
+    background-color: #374151 !important;
+  }
+
+  .text-gray-700 {
+    color: #d1d5db !important;
+  }
+
+  // Botones al final de la página en modo oscuro
+  .border-gray-200 {
+    border-color: #4b5563 !important;
+  }
+
+  // Sección de búsqueda de clientes en modo oscuro
+  .bg-gradient-to-r.from-blue-50.to-indigo-50 {
+    background: linear-gradient(to right, rgba(30, 58, 138, 0.2), rgba(67, 56, 202, 0.2)) !important;
+  }
+
+  .border-blue-200 {
+    border-color: #1e40af !important;
+  }
+
+  .text-blue-800 {
+    color: #93c5fd !important;
+  }
+
+  .text-blue-600 {
+    color: #60a5fa !important;
+  }
+
+  // Dropdown de resultados en modo oscuro
+  .bg-white {
+    background-color: #374151 !important;
+  }
+
+  .border-gray-300 {
+    border-color: #4b5563 !important;
+  }
+
+  .hover\:bg-blue-50:hover {
+    background-color: rgba(30, 58, 138, 0.2) !important;
+  }
+
+  .border-gray-100 {
+    border-color: #4b5563 !important;
+  }
+
+  .text-gray-800 {
+    color: #f9fafb !important;
+  }
+
+  .text-gray-600 {
+    color: #d1d5db !important;
+  }
+
+  .text-gray-500 {
+    color: #9ca3af !important;
+  }
+
+  .text-gray-400 {
+    color: #6b7280 !important;
+  }
 }

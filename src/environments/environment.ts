@@ -1,5 +1,7 @@
+import { Environment } from './environment.interface';
+
 // Configuración para desarrollo - Backend con puertos específicos
-export const environment = {
+export const environment: Environment = {
   production: false,
   
   //  API de facturación - Directo sin proxy
@@ -11,6 +13,9 @@ export const environment = {
 
   // Authentication API - También vía proxy
   authApiUrl: 'https://accounts.beckysflorist.site/api/auth',
+
+  //API de Clientes
+  clientApiUrl: 'http://31.220.87.189:8080/api/clientes/buscar?filtro=',
 
   authEndpoints: {
     login: '/authentication/login',
@@ -57,4 +62,6 @@ export const environment = {
     port: 8090,
     sshCommand: 'ssh bill@37.60.243.227',
   }
+
+
 };

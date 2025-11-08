@@ -359,3 +359,116 @@
     color: #6b7280;
   }
 }
+
+/* ========================================
+   ESTILOS PARA FILTROS DE FECHA - MODO OSCURO
+   ======================================== */
+
+:host-context([data-mode="dark"]) {
+  /* Sección de filtros con gradiente oscuro */
+  .bg-gradient-to-r.from-blue-500.to-purple-600 {
+    background: linear-gradient(to right, #1e40af, #7c3aed) !important;
+  }
+
+  /* Textos en modo oscuro */
+  .text-white {
+    color: #f8fafc !important;
+  }
+
+  .text-gray-700 {
+    color: #e2e8f0 !important;
+  }
+
+  .text-gray-600 {
+    color: #cbd5e1 !important;
+  }
+
+  .text-gray-500 {
+    color: #94a3b8 !important;
+  }
+
+  .text-blue-700 {
+    color: #93c5fd !important;
+  }
+
+  /* Inputs de fecha en modo oscuro */
+  input[type="date"] {
+    background-color: #374151 !important;
+    border-color: #4b5563 !important;
+    color: #f9fafb !important;
+  }
+
+  input[type="date"]:focus {
+    border-color: #3b82f6 !important;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1) !important;
+  }
+
+  input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+  }
+
+  /* Botones de filtro en modo oscuro */
+  .bg-blue-600 {
+    background-color: #2563eb !important;
+  }
+
+  .hover\:bg-blue-700:hover {
+    background-color: #1d4ed8 !important;
+  }
+
+  .bg-gray-500 {
+    background-color: #6b7280 !important;
+  }
+
+  .hover\:bg-gray-600:hover {
+    background-color: #4b5563 !important;
+  }
+
+  /* Paneles informativos en modo oscuro */
+  .bg-blue-50 {
+    background-color: rgba(30, 58, 138, 0.2) !important;
+  }
+
+  .border-blue-200 {
+    border-color: #1e40af !important;
+  }
+
+  .bg-blue-900\/20 {
+    background-color: rgba(30, 58, 138, 0.2) !important;
+  }
+
+  .text-blue-300 {
+    color: #93c5fd !important;
+  }
+
+  .border-blue-800 {
+    border-color: #1e40af !important;
+  }
+
+  /* Estados vacíos con gradiente oscuro */
+  .bg-gradient-to-br.from-gray-50.to-blue-50 {
+    background: linear-gradient(to bottom right, #374151, rgba(30, 58, 138, 0.2)) !important;
+  }
+
+  .text-gray-400 {
+    color: #9ca3af !important;
+  }
+
+  .text-gray-800 {
+    color: #f9fafb !important;
+  }
+
+  /* Sombras mejoradas para modo oscuro */
+  .shadow-lg {
+    box-shadow: 
+      0 25px 50px rgba(0, 0, 0, 0.4),
+      0 10px 20px rgba(124, 58, 237, 0.2),
+      inset 0 1px 0 rgba(255, 255, 255, 0.05) !important;
+  }
+
+  .shadow-md {
+    box-shadow: 
+      0 4px 6px -1px rgba(0, 0, 0, 0.3), 
+      0 2px 4px -1px rgba(0, 0, 0, 0.2) !important;
+  }
+}

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 import { takeUntil, finalize } from 'rxjs';
 import { FinalConsumerBillService } from '../services/final-consumer-bill.service';
 import { FinalConsumerBillListDTO } from '../../../dtos/final-consumer-bill.dto';
@@ -15,17 +16,22 @@ import { BaseComponent, LoadingState, ComponentState } from '../../../types/comm
 @Component({
   selector: 'app-final-consumer-bill-list',
   standalone: true,
-  imports: [CommonModule, RouterModule, FinalConsumerBillNavComponent],
+  imports: [CommonModule, RouterModule, FormsModule, FinalConsumerBillNavComponent],
   templateUrl: './final-consumer-bill-list.component.html',
   styleUrls: ['./final-consumer-bill-list.component.scss']
 })
 export class FinalConsumerBillListComponent extends BaseComponent implements OnInit {
   bills: FinalConsumerBillListDTO[] = [];
+  filteredBills: FinalConsumerBillListDTO[] = []; // Lista filtrada
   state: ComponentState = {
     loadingState: LoadingState.IDLE,
     error: null,
     data: null
   };
+
+  // Filtros de fecha
+  startDate: string = '';
+  endDate: string = '';
 
   // Getter para compatibilidad con template
   get loading(): boolean {
@@ -107,6 +113,7 @@ export class FinalConsumerBillListComponent extends BaseComponent implements OnI
           
           // Cargar detalles de cada factura para obtener las fechas
           this.bills = bills;
+          this.filteredBills = [...bills]; // Inicializar lista filtrada
           this.state.loadingState = LoadingState.SUCCESS;
           this.state.data = bills;
           
@@ -293,5 +300,55 @@ export class FinalConsumerBillListComponent extends BaseComponent implements OnI
     setTimeout(() => {
       this.state.error = null;
     }, 10000);
+  }
+
+  /**
+   * Filtrar facturas por rango de fechas
+   */
+  filterByDateRange(): void {
+    if (!this.startDate && !this.endDate) {
+      this.filteredBills = [...this.bills];
+      return;
+    }
+
+    this.filteredBills = this.bills.filter(bill => {
+      const billDate = this.getBillDateForFilter(bill);
+      if (!billDate) return false;
+
+      const billDateObj = new Date(billDate);
+      const startDateObj = this.startDate ? new Date(this.startDate) : null;
+      const endDateObj = this.endDate ? new Date(this.endDate + 'T23:59:59') : null;
+
+      if (startDateObj && billDateObj < startDateObj) return false;
+      if (endDateObj && billDateObj > endDateObj) return false;
+
+      return true;
+    });
+  }
+
+  /**
+   * Limpiar filtros de fecha
+   */
+  clearDateFilters(): void {
+    this.startDate = '';
+    this.endDate = '';
+    this.filteredBills = [...this.bills];
+  }
+
+  /**
+   * Obtener fecha de la factura para filtrado
+   */
+  private getBillDateForFilter(bill: FinalConsumerBillListDTO): string | null {
+    // Intentar usar billGenerationDate si está disponible
+    if (bill.billGenerationDate) {
+      return bill.billGenerationDate;
+    }
+    
+    // Fallback a otras fechas disponibles
+    if (bill.createdAt) {
+      return bill.createdAt;
+    }
+
+    return null;
   }
 }

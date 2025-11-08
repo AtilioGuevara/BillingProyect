@@ -18,6 +18,49 @@
       </div>
     </div>
     <div class="card-body">
+      <!-- Filtros por fecha -->
+      <div class="mb-6 p-4 bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 rounded-lg">
+        <h6 class="mb-3 text-lg font-semibold text-gray-800 flex items-center">
+          <i class="ri-calendar-line text-blue-600 mr-2"></i>
+          Filtrar por Fecha
+        </h6>
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 items-end">
+          <div>
+            <label for="startDate" class="form-label text-sm font-medium text-gray-700">Fecha Desde</label>
+            <input 
+              type="date" 
+              id="startDate" 
+              [(ngModel)]="startDate"
+              (change)="filterByDateRange()"
+              class="form-input">
+          </div>
+          <div>
+            <label for="endDate" class="form-label text-sm font-medium text-gray-700">Fecha Hasta</label>
+            <input 
+              type="date" 
+              id="endDate" 
+              [(ngModel)]="endDate"
+              (change)="filterByDateRange()"
+              class="form-input">
+          </div>
+          <div>
+            <button 
+              type="button" 
+              (click)="clearDateFilters()" 
+              class="btn btn-outline-secondary w-full">
+              <i class="ri-close-line mr-1"></i>
+              Limpiar Filtros
+            </button>
+          </div>
+          <div>
+            <div class="text-sm text-gray-600">
+              <i class="ri-information-line mr-1"></i>
+              Mostrando {{ filteredBills.length }} de {{ bills.length }} facturas
+            </div>
+          </div>
+        </div>
+      </div>
+
       <!-- Estados de carga y mensajes -->
       <div *ngIf="loading" class="flex items-center justify-center py-8">
         <div class="flex items-center space-x-2 text-blue-600">
@@ -33,7 +76,7 @@
 
       <!-- Tabla de facturas -->
       <div *ngIf="!loading && !errorMsg" class="overflow-x-auto">
-        <table class="table flush" *ngIf="bills.length > 0">
+        <table class="table flush" *ngIf="filteredBills.length > 0">
           <thead>
             <tr>
               <th class="whitespace-nowrap">Código de Generación</th>
@@ -44,7 +87,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let bill of bills; let i = index">
+            <tr *ngFor="let bill of filteredBills; let i = index">
               <td>
                 <span class="font-mono text-sm bg-gray-100 px-2 py-1 rounded dark:bg-gray-800">
                   {{ bill.generationCode }}
@@ -109,6 +152,19 @@
         </table>
 
         <!-- Estado vacío -->
+        <div *ngIf="filteredBills.length === 0 && bills.length > 0" class="text-center py-12">
+          <div class="mx-auto w-24 h-24 mb-4 flex items-center justify-center bg-yellow-100 rounded-full dark:bg-yellow-900">
+            <i class="ri-search-line text-3xl text-yellow-600 dark:text-yellow-400"></i>
+          </div>
+          <h3 class="text-lg font-medium text-gray-900 dark:text-gray-100 mb-2">No se encontraron facturas</h3>
+          <p class="text-gray-500 dark:text-gray-400 mb-4">No hay facturas que coincidan con los filtros seleccionados.</p>
+          <button type="button" (click)="clearDateFilters()" class="btn btn-primary">
+            <i class="ri-refresh-line mr-1"></i>
+            Limpiar Filtros
+          </button>
+        </div>
+
+        <!-- Estado completamente vacío -->
         <div *ngIf="bills.length === 0" class="text-center py-12">
           <div class="mx-auto w-24 h-24 mb-4 flex items-center justify-center bg-gray-100 rounded-full dark:bg-gray-800">
             <i class="ri-file-list-3-line text-3xl text-gray-400 dark:text-gray-600"></i>

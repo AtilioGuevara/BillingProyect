@@ -4,7 +4,7 @@
   <div class="card">
     <div class="card-header">
       <div class="items-center gap-3 md:flex">
-        <h6 class="grow mb-3 md:mb-0">🔄 Crear Factura de Devolución</h6>
+        <h6 class="grow mb-3 md:mb-0">Crear Factura de Devolución</h6>
         <div class="flex flex-wrap items-center gap-2 shrink-0">
           <button type="button" class="btn btn-sub-gray" (click)="clearForm()">
             <i class="align-baseline ri-refresh-line"></i>
@@ -43,9 +43,9 @@
 
       <!-- Información de la factura original -->
       <div class="mb-8">
-        <h6 class="mb-4 text-lg font-semibold border-b pb-2">📋 Información de la Factura Original</h6>
+        <h6 class="mb-4 text-lg font-semibold border-b pb-2">Información de la Factura Original</h6>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div class="bg-blue-50 p-4 rounded-lg border border-blue-200">
+          <div>
             <label class="form-label text-blue-800">Código de Generación Original:</label>
             <p class="font-mono text-blue-900 font-semibold">{{ originalGenerationCode }}</p>
           </div>
@@ -147,7 +147,7 @@
 
         <!-- Productos disponibles para devolución -->
         <div class="mb-8" *ngIf="returnInfo?.availableProducts?.length">
-          <h6 class="mb-4 text-lg font-semibold border-b pb-2">📦 Productos Disponibles para Devolución</h6>
+          <h6 class="mb-4 text-lg font-semibold border-b pb-2">Productos Disponibles para Devolución</h6>
           <div formArrayName="selectedProducts" class="space-y-4">
             <div *ngFor="let productGroup of selectedProductsArray.controls; let i = index" 
                  [formGroupName]="i"
@@ -216,7 +216,7 @@
         <!-- Campos para el pago con tarjeta -->
         <div *ngIf="selectedPaymentMethod === 'TARJETA_DEBITO' || selectedPaymentMethod === 'TARJETA_CREDITO'" 
              formGroupName="payment" class="mb-8">
-          <h6 class="mb-4 text-lg font-semibold border-b pb-2">💳 Información de la Tarjeta</h6>
+          <h6 class="mb-4 text-lg font-semibold border-b pb-2">Información de la Tarjeta</h6>
           <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
             
             <div>
@@ -265,7 +265,7 @@
 
         <!-- IVA retenido -->
         <div class="mb-8">
-          <h6 class="mb-4 text-lg font-semibold border-b pb-2">💰 Información Fiscal</h6>
+          <h6 class="mb-4 text-lg font-semibold border-b pb-2">Información Fiscal</h6>
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
               <label for="withheldIva" class="form-label">IVA Retenido</label>
