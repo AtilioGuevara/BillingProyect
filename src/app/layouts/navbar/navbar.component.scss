@@ -1,0 +1,24 @@
+// Estilos para el botón de logout
+.topbar-link {
+  &.text-red-600 {
+    color: #dc2626 !important;
+    transition: color 0.3s ease;
+    
+    &:hover {
+      color: #b91c1c !important;
+    }
+  }
+}
+
+// Modo oscuro
+:host-context([data-mode="dark"]) {
+  .topbar-link {
+    &.text-red-600 {
+      color: #f87171 !important;
+      
+      &:hover {
+        color: #fca5a5 !important;
+      }
+    }
+  }
+}

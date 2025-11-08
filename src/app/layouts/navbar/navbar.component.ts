@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, HostListener } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { LucideAngularModule } from 'lucide-angular';
 import { DomixDropdownModule } from '../../module/domix dropdown/domix-dropdown.module';
 import { ToolsAppsModalComponent } from './modal/tools-apps-modal/tools-apps-modal.component';
@@ -30,8 +30,9 @@ interface Language {
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss'
 })
-export class NavbarComponent {
+export class NavbarComponent implements OnInit {
   scrolled: boolean = false;
+  isAuthenticated: boolean = false;
   
   languageData: any = {};
   currantLayout!: string;
@@ -60,7 +61,9 @@ export class NavbarComponent {
     });
   }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    this.checkAuthStatus();
+  }
 
   setSidebar() {
     if (this.isMobile) {
@@ -125,6 +128,31 @@ export class NavbarComponent {
   /**
    * Verificar si el usuario está autenticado
    */
+  checkAuthStatus(): void {
+    const authToken = this.getCookie('auth_token');
+    this.isAuthenticated = !!authToken;
+  }
+
+  /**
+   * Obtener una cookie por nombre
+   */
+  private getCookie(name: string): string | null {
+    const nameEQ = name + "=";
+    const ca = document.cookie.split(';');
+    for (let i = 0; i < ca.length; i++) {
+      let c = ca[i];
+      while (c.charAt(0) === ' ') c = c.substring(1, c.length);
+      if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
+    }
+    return null;
+  }
+
+  /**
+   * Eliminar una cookie
+   */
+  private deleteCookie(name: string): void {
+    document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/; domain=.beckysflorist.site';
+  }
 
   /**
    * Iniciar sesión
@@ -137,6 +165,13 @@ export class NavbarComponent {
    * Cerrar sesión
    */
   logout(): void {
-    this.authService.logout();
+    // Eliminar la cookie de autenticación
+    this.deleteCookie('auth_token');
+    
+    // Actualizar el estado
+    this.isAuthenticated = false;
+    
+    // Recargar la página para limpiar el estado
+    window.location.reload();
   }
 }
